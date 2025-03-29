@@ -1,0 +1,48 @@
+---
+title: "DSA 604 – Bayesian Computation"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 2
+    theme: cosmo
+    highlight: tango
+---
+
+# 🧮 DSA 604 – Bayesian Computation  
+**Batch:** 2024 / 2026  
+**Schedule:** Saturdays, 8.00 a.m. – 12.00 noon  
+**Venue:** STAT Lab 1  
+**Instructor:** Dr. Rajitha M. Silva  
+**Department of Statistics, University of Sri Jayewardenepura**
+
+---
+
+## 📘 Introduction
+
+This course offers a practical and computational approach to Bayesian inference, focusing on simulation-based techniques for solving complex models.
+
+Students will learn:
+- The foundations of Bayesian thinking
+- Posterior analysis using simulation
+- Markov Chain Monte Carlo (MCMC) methods
+- Model comparison and convergence diagnostics
+
+We will work primarily in **R**, using packages such as `rstan`, `rjags`, and `brms`. However, **Python** codes will also be provided for your convenience. 
+
+All course materials will be published on this page.
+
+---
+
+## 📅 Lecture Notes
+
+> Click on each link to view the lecture content and downloadable code/handouts.
+
+- [Chapter 1: The Big (Bayesian) Picture](chapter1_notes.html)
+
+
+---
+
+## 🧑‍🏫 Contact
+
+For questions or clarifications, please reach out via email.
+

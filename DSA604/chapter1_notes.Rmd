@@ -1,0 +1,240 @@
+
+---
+title: "Chapter 1: The Big (Bayesian) Picture"
+author: "Simplified by Dr. Rajitha M. Silva"
+output: html_document
+---
+
+# Introduction
+
+Welcome to our first lecture in Bayesian Computation for Data Science and AI. In this session, we introduce the fundamental ideas of Bayesian thinking and probabilistic reasoning—concepts that underpin modern data science and artificial intelligence. Our discussion is based on Chapter 1 of the [BayesRules book](https://www.bayesrulesbook.com/chapter-1). You will see, in this note, simple examples implemented in both R and Python.
+
+# The Big Picture: Frequentist vs Bayesian Worlds
+
+In statistics, there are two major philosophical approaches to reasoning with data:
+
+## Frequentist World
+
+- **Philosophy**: Probability is the long-run frequency of events under repeated sampling.
+- **Prior Beliefs**: Not incorporated in the model.
+- **Inference**: Based on sampling distributions; p-values and confidence intervals dominate.
+- **Interpretation**: Results are interpreted over hypothetical repetitions.
+
+**Example**: In a sports study, if you want to know whether a training method improves player performance, a frequentist might run a t-test and report a p-value to decide if the effect is statistically significant.
+
+## Bayesian World
+
+- **Philosophy**: Probability represents a degree of belief, updated as evidence accumulates.
+- **Prior Beliefs**: Explicitly incorporated into the model.
+- **Inference**: Posterior distributions provide full uncertainty about parameters.
+- **Interpretation**: Results are direct statements about the probability of hypotheses.
+
+
+**Example**: A Bayesian would start with a belief about the training method's effectiveness (prior), collect player performance data (likelihood), and update the belief (posterior).
+
+Bayesian thinking aligns more naturally with how people make decisions under uncertainty.
+
+## Data Analysis, Analytics, and Data Science: A Sports Scenario
+
+Let's break down three commonly used terms through a sports analytics example.
+
+## Data Analysis
+
+> Focuses on summarizing and exploring raw data to find patterns.
+
+**Example**: Summarizing a football player’s shot accuracy over 10 games using tables, histograms, and average metrics.
+
+## Data Analytics
+
+> Involves using statistical models and tools to find relationships and make predictions.
+
+**Example**: Building a logistic regression model to predict the probability of a player scoring based on distance and angle of shot.
+
+## Data Science
+
+> Encompasses the entire pipeline - from collecting and cleaning data, to modeling and deploying solutions using code and infrastructure.
+
+**Example**: Creating a complete AI system to track players via video, extract movement features, and recommend substitution strategies to coaches in real-time.
+
+In this course, we focus on Bayesian computation - a tool that can be used across all these levels, specially in the modeling and decision-making stages.
+
+
+# Why Learn Bayesian Computation?
+
+In data science and AI, uncertainty is omnipresent.
+
+Here are a few examples of such uncertainty in real-world data science and AI:
+
+- **Predictive models:** Even the best model might misclassify or mispredict because of unseen data patterns.
+- **Missing or noisy data:** Data collected from sensors, surveys, or logs may be incomplete or inaccurate.
+- **Changing user behavior:** In recommendation systems, user preferences can shift over time, leading to model drift.
+- **Ambiguous outcomes:** In natural language processing (NLP), a sentence's meaning might depend on context, making classification uncertain.
+- **Medical diagnostics:** A patient’s symptoms may not clearly indicate a disease, requiring probabilistic reasoning to support diagnosis.
+
+Bayesian computation provides a flexible framework to:
+
+- **Update Beliefs:** Continuously refine your understanding as new data arrives.
+- **Quantify Uncertainty:** Obtain full probability distributions over predictions instead of single point estimates.
+- **Incorporate Prior Knowledge:** Combine previous experience or domain expertise with current data.
+
+**Example: Italian Restaurant Rating**  
+Imagine reading rave reviews for a new Italian restaurant. Expecting an excellent meal, you are disappointed by a soggy pasta dish on your first visit. As you gather more data from subsequent visits, you update your rating of the restaurant. This process—updating beliefs with each new experience—is the essence of Bayesian updating.
+
+# Probabilistic Reasoning and Bayes' Theorem
+
+Probabilistic reasoning models uncertainty using probability. Unlike the frequentist interpretation (which views probability as a long-run frequency), Bayesian probability measures the degree of belief in an event.
+
+## Bayes' Theorem
+
+Bayes' theorem formalizes the process of updating beliefs. It is expressed as:
+
+$$
+P(\text{Hypothesis} \mid \text{Data}) = \frac{P(\text{Data} \mid \text{Hypothesis}) \cdot P(\text{Hypothesis})}{P(\text{Data})}
+$$
+
+Where:
+- **Prior (\(P(\text{Hypothesis})\))**: Your initial belief before seeing the data.
+- **Likelihood (\(P(\text{Data} \mid \text{Hypothesis})\))**: The probability of observing the data if the hypothesis is true.
+- **Evidence (\(P(\text{Data})\))**: The overall probability of the data.
+- **Posterior (\(P(\text{Hypothesis} \mid \text{Data})\))**: Your updated belief after considering the data.
+
+## R Example: Posterior Calculation
+
+The following R code calculates the posterior probability of having a rare disease given a positive test result.
+
+```{r}
+# Define parameters:
+prior <- 0.01            # 1% prior probability of having the disease
+sensitivity <- 0.95      # 95% chance the test is positive if the disease is present
+false_positive <- 0.05   # 5% chance of a positive test if the disease is absent
+
+# Compute the evidence:
+evidence <- (sensitivity * prior) + (false_positive * (1 - prior))
+
+# Compute the posterior probability:
+posterior <- (sensitivity * prior) / evidence
+
+posterior  # This prints the updated probability of having the disease.
+```
+
+## Python Example: Posterior Calculation
+
+Below is the equivalent Python code.
+
+```{python}
+# Define parameters:
+prior = 0.01           # 1% prior probability of having the disease
+sensitivity = 0.95     # 95% chance the test is positive if the disease is present
+false_positive = 0.05  # 5% chance of a positive test if the disease is absent
+
+# Compute the evidence:
+evidence = (sensitivity * prior) + (false_positive * (1 - prior))
+
+# Compute the posterior probability:
+posterior = (sensitivity * prior) / evidence
+
+print("Posterior probability:", posterior)
+```
+
+## The Problem with P-Values and How Bayesians Look at It
+
+In statistics, both Bayesian and frequentist methods aim to help us assess hypotheses based on observed data. However, they differ fundamentally in their approach to uncertainty and the questions they seek to answer. Consider the scenario where you test positive for a rare disease. You are faced with two possible questions:
+
+1. **Bayesian Question**: What is the probability that I actually have the disease, given my positive test result?
+2. **Frequentist Question**: If I don't have the disease, what's the chance I would've received this positive test result?
+
+The authors argue that we'd prefer to understand the uncertainty of our disease status (the Bayesian question) rather than the probability of observing the data under the assumption that we do not have the disease (the frequentist question). The key difference lies in how the two frameworks handle uncertainty:
+
+- **Frequentist Hypothesis Test**: It asks, "If the hypothesis is incorrect, what's the chance I'd have observed this, or even more extreme, data?"
+- **Bayesian Hypothesis Test**: It asks, "Given the observed data, what's the chance that the hypothesis is correct?"
+
+### Example 1: Disease Testing (Table 1.1)
+
+Consider the table below that shows test outcomes for a population of 100 people, where only 4 people have the disease. 
+
+\[
+\begin{array}{|c|c|c|c|}
+\hline
+\textbf{} & \textbf{Test Positive} & \textbf{Test Negative} & \textbf{Total} \\
+\hline
+\textbf{Disease} & 3 & 1 & 4 \\
+\hline
+\textbf{No Disease} & 9 & 87 & 96 \\
+\hline
+\textbf{Total} & 12 & 88 & 100 \\
+\hline
+\end{array}
+\]
+
+
+
+#### Bayesian Approach:
+A Bayesian would ask, "Given my positive test result, what is the probability that I have the disease?" From the table, we know that 3 out of 12 people who tested positive actually have the disease. Therefore, the probability is:
+
+\[
+P(\text{Disease} \mid \text{Test Positive}) = \frac{3}{12} = 0.25 \quad \text{or 25%}
+\]
+
+This means there's only a 25% chance you actually have the disease, despite testing positive. This incorporates both the rarity of the disease and the false positive rate of the test.
+
+#### Frequentist Approach:
+A frequentist would ask, "If I do not have the disease, what's the chance I would've tested positive?" From the table, 9 out of 96 people without the disease tested positive, so the probability is:
+
+\[
+P(\text{Test Positive} \mid \text{No Disease}) = \frac{9}{96} = 0.09375 \quad \text{or 9.38%}
+\]
+
+This is the false positive rate of the test, similar to a P-value calculation, showing the chance of a positive result assuming you do not have the disease.
+
+### Example 2: Predicting a Player's Performance in Sports
+
+Let's apply this thinking to a sports example. Suppose we are analyzing the shooting percentage of a basketball player and testing whether their shooting percentage is greater than 40%. After several games, the player's shooting percentage fluctuates.
+
+- **Frequentist Approach**: A frequentist would run a hypothesis test (e.g., t-test) to determine if the player's shooting percentage is statistically significantly greater than 40%. This would simply compare observed data against a fixed hypothesis with no prior consideration of the player's past performance.
+
+- **Bayesian Approach**: A Bayesian would start with a prior belief about the player's shooting percentage (say, 45%, based on their previous performance or expert judgment). As the player plays more games, the Bayesian would update this belief with new data, continuously refining the probability that the player's true shooting percentage is greater than 40%.
+
+
+# Thinking Like a Bayesian
+
+Thinking like a Bayesian means understanding that learning is an iterative process:
+
+- **Prior Knowledge:** You start with an initial belief about a situation.
+- **Data Collection:** New data are gathered through observation or experiments.
+- **Belief Updating:** You update your initial belief (the prior) with the new data (the likelihood) to form an updated belief (the posterior).
+
+**Example: Restaurant Rating**  
+- **Prior:** Stellar online reviews lead you to expect a great meal.
+- **Data:** Your actual dining experience, which may be disappointing.
+- **Posterior:** Your revised rating of the restaurant after considering the evidence.
+
+This natural process of updating beliefs is formalized by Bayes' theorem, enabling us to combine intuition with rigorous computation.
+
+# The Bayesian Balancing Act
+
+Bayesian analysis balances prior knowledge with new data. Consider two scenarios discussed in Chapter 1:
+
+- **Zuofu’s Coin-Flipping Claim:** Even if Zuofu achieves a perfect score (10/10), our strong prior belief tells us that coin flips are random, so we remain skeptical.
+- **Kavya’s Sweetener Test:** A perfect score here aligns with our prior understanding that some people can distinguish between sweeteners, so our posterior belief supports her claim.
+
+# A Quick History Lesson
+
+Bayesian methods trace back to Reverend Thomas Bayes in the 1740s, but became widely applicable only with advances in computing in the late 20th century. Key milestones:
+
+- **MCMC (1953):** Enabled practical Bayesian computation. The story of MCMC begins in the early 1950s at the Los Alamos National Laboratory, where scientists working on nuclear weapons simulations faced challenges in performing high-dimensional integrals. This led to the development of the Markov Chain Monte Carlo (MCMC) method, which allowed them to generate random samples from complex probability distributions. MCMC made it possible to approximate integrals and perform Bayesian inference in a way that was previously unimaginable.For more in-depth history, see the paper ["The history of MCMC"](https://arxiv.org/pdf/0808.2902) that discusses its development, and for a fun overview of MCMC's origins, you can watch a YouTube video [here](https://www.youtube.com/watch?v=TtcB1MOlNiY) that offers an engaging look at its history and impact.
+
+- **Broader acceptance (post-1990s):** Bayesian models became more widely used in AI, epidemiology, and other fields.
+
+# A Look Ahead
+
+In this course, we will explore:
+
+- **Unit 1: Bayesian Foundations**
+- **Unit 2: Posterior Simulation & Analysis**
+- **Unit 3: Bayesian Regression & Classification**
+- **Unit 4: Hierarchical Bayesian Models**
+
+Each unit will teach you how to build and interpret Bayesian models in real-world applications.
+
+
+

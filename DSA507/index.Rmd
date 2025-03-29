@@ -1,0 +1,42 @@
+---
+title: "DSA 507 – Statistics for Data Science & AI"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 2
+    theme: flatly
+    highlight: tango
+---
+
+# 🤖 DSA 507 – Statistics for Data Science & AI  
+**Batch:** 2025 / 2027  
+**Schedule:** Saturdays, 1.00 p.m. – 5.00 p.m.  
+**Venue:** Blended Learning Centre (BLC)  
+**Instructor:** Dr. Rajitha M. Silva  
+**Department of Statistics, University of Sri Jayewardenepura**
+
+---
+
+## 📘 Introduction
+
+This course is designed to provide postgraduate students in Data Science and Artificial Intelligence with a strong foundation in modern statistical methods.
+
+
+
+All lecture materials will be published including code demonstrations in **R**, and **Python** applied examples, and readings.
+
+---
+
+## 📅 Lecture Notes
+
+> Links will be activated as content becomes available.
+
+- [Chapter 1: Exploratory Data Analysis](chapter1_notes.html)
+
+
+---
+
+## 🧑‍🏫 Contact
+
+For queries, please use the email to contact me.
+
