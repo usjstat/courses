@@ -4,12 +4,13 @@ output:
   html_document:
     toc: true
     toc_depth: 2
-    theme: flatly
+    theme: lumen
     highlight: tango
 ---
 
-# 🤖 DSA 507 – Statistics for Data Science & AI  
+# 🤖 DSA 507 – Statistics for Data Science & Artificial Intelligence  
 **Batch:** 2025 / 2027  
+**Credit Value:** 3.0  
 **Schedule:** Saturdays, 1.00 p.m. – 5.00 p.m.  
 **Venue:** Blended Learning Centre (BLC)  
 **Instructor:** Dr. Rajitha M. Silva  
@@ -17,26 +18,59 @@ output:
 
 ---
 
-## 📘 Introduction
+## 📘 Course Introduction
 
-This course is designed to provide postgraduate students in Data Science and Artificial Intelligence with a strong foundation in modern statistical methods.
+The aim of this course is to introduce postgraduate students in Data Science and AI to the essential concepts and techniques of statistics. The course balances theoretical foundations with practical applications using R and Python, including data collection, descriptive and inferential analysis, and probabilistic modeling.
+
+Upon successful completion, students will be able to:
+- Understand the role and limitations of statistics in data science
+- Classify variables and identify suitable scales of measurement
+- Apply effective data collection and sampling methods
+- Perform descriptive and inferential statistical analyses
+- Calculate and interpret probabilities for real-world scenarios
+
+---
+
+## 📚 Course Content
+
+- **1. Exploratory Data Analysis**  
 
 
+- **2. Data and Sampling Distributions**  
 
-All lecture materials will be published including code demonstrations in **R**, and **Python** applied examples, and readings.
+- **3. Statistical Experiments and Significance Testing**  
+
+
+---
+
+## 📝 Teaching & Assessment
+
+- **Teaching Methods:**  
+  - Lectures via direct instruction  
+  - Practical sessions focused on self-learning and inquiry-based learning
+
+- **Assessment Strategy:**  
+  - Continuous Assessment: 40%   
+  - Final Assessment: 60%  
+
+
+---
+
+## 📖 References
+
+Peter Bruce, Andrew Bruce, Peter Gedeck - Practical Statistics for Data Scientists_ 50+ Essential Concepts Using R and Python (2020, O'Reilly Media)
 
 ---
 
 ## 📅 Lecture Notes
 
-> Links will be activated as content becomes available.
+> Lecture materials will be uploaded here during the semester.
 
 - [Chapter 1: Exploratory Data Analysis](chapter1_notes.html)
-
 
 ---
 
 ## 🧑‍🏫 Contact
 
-For queries, please use the email to contact me.
+For questions and feedback, please contact me via email(rsilva@sjp.ac.lk).
 
