@@ -60,6 +60,13 @@ Upon successful completion, students will be able to:
 
 Peter Bruce, Andrew Bruce, Peter Gedeck - Practical Statistics for Data Scientists_ 50+ Essential Concepts Using R and Python (2020, O'Reilly Media)
 
+## 🎥 Recommended Video Playlist
+
+For supplementary learning and revision, please refer to the following YouTube playlist:
+
+👉 [Statistics for Data Science – YouTube Playlist](https://youtube.com/playlist?list=PL-u09-6gP5ZNd6AhULnQHr6ZsF15qy4D0&feature=shared)
+
+
 ---
 
 ## 📅 Lecture Notes
