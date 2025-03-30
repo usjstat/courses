@@ -359,9 +359,9 @@ display: none;
 <h1>Introduction</h1>
 <p>Welcome to our first lecture in Bayesian Computation for Data Science
 and AI. In this session, we introduce the fundamental ideas of Bayesian
-thinking and probabilistic reasoningâconcepts that underpin modern data
+thinking and probabilistic reasoning concepts that underpin modern data
 science and artificial intelligence. Our discussion is based on
-ChapterÂ 1 of the <a href="https://www.bayesrulesbook.com/chapter-1">BayesRules book</a>. You
+Chapter-1 of the <a href="https://www.bayesrulesbook.com/chapter-1">BayesRules book</a>. You
 will see, in this note, simple examples implemented in both R and
 Python.</p>
 </div>
@@ -413,7 +413,7 @@ example.</p>
 <blockquote>
 <p>Focuses on summarizing and exploring raw data to find patterns.</p>
 </blockquote>
-<p><strong>Example</strong>: Summarizing a football playerâs shot
+<p><strong>Example</strong>: Summarizing a football player’s shot
 accuracy over 10 games using tables, histograms, and average
 metrics.</p>
 </div>
@@ -456,7 +456,7 @@ user preferences can shift over time, leading to model drift.</li>
 <li><strong>Ambiguous outcomes:</strong> In natural language processing
 (NLP), a sentence’s meaning might depend on context, making
 classification uncertain.</li>
-<li><strong>Medical diagnostics:</strong> A patientâs symptoms may not
+<li><strong>Medical diagnostics:</strong> A patient’s symptoms may not
 clearly indicate a disease, requiring probabilistic reasoning to support
 diagnosis.</li>
 </ul>
@@ -503,31 +503,25 @@ probability of the data.</p></li>
 \text{Data})\)</span>)</strong>: Your updated belief after considering
 the data.</p></li>
 </ul>
-<p><strong>R Example: Posterior Calculation</strong></p>
-</div>
-<div id="problem" class="section level2">
-<h2>Problem</h2>
+<p><strong>Example: Posterior Calculation</strong></p>
 <p>We want to compute the posterior probability that a person has a rare
 disease given a positive test result.</p>
-<div id="given" class="section level3">
-<h3>Given:</h3>
 <ul>
-<li>Prior probability of having the disease:
-<code>P(D) = 0.01</code></li>
-<li>Sensitivity (True positive rate):
-<code>P(T^+ | D) = 0.95</code></li>
-<li>False positive rate: <code>P(T^+ | ¬D) = 0.05</code></li>
+<li>Prior probability of having the disease: <span class="math inline">\(P(D) = 0.01\)</span></li>
+<li>Sensitivity (True positive rate): <span class="math inline">\(P(T^+
+| D) = 0.95\)</span></li>
+<li>False positive rate: <span class="math inline">\(P(T^+ | ?D) =
+0.05\)</span></li>
 </ul>
-<p>Let: - <span class="math inline">\(D\)</span>: Event that the person
-has the disease<br />
-- <span class="math inline">\(\neg D\)</span>: Event that the person
-does <strong>not</strong> have the disease<br />
-- <span class="math inline">\(T^+\)</span>: Event that the test result
-is positive</p>
-</div>
-</div>
-<div id="bayes-theorem-1" class="section level2">
-<h2>Bayes’ Theorem</h2>
+<p>Let:</p>
+<ul>
+<li><p><span class="math inline">\(D\)</span>: Event that the person has
+the disease</p></li>
+<li><p><span class="math inline">\(\neg D\)</span>: Event that the
+person does <strong>not</strong> have the disease</p></li>
+<li><p><span class="math inline">\(T^+\)</span>: Event that the test
+result is positive</p></li>
+</ul>
 <p>Using Bayes’ Theorem, the posterior probability is calculated as:</p>
 <p><span class="math display">\[
 P(D \mid T^+) = \frac{P(T^+ \mid D) \cdot P(D)}{P(T^+)}
@@ -536,6 +530,7 @@ P(D \mid T^+) = \frac{P(T^+ \mid D) \cdot P(D)}{P(T^+)}
 <p><span class="math display">\[
 P(T^+) = P(T^+ \mid D) \cdot P(D) + P(T^+ \mid \neg D) \cdot P(\neg D)
 \]</span></p>
+<p><strong>R code</strong></p>
 <p>The following R code calculates the posterior probability of having a
 rare disease given a positive test result.</p>
 <pre class="r"><code># Define parameters:
@@ -551,7 +546,7 @@ posterior &lt;- (sensitivity * prior) / evidence
 
 posterior  # This prints the updated probability of having the disease.</code></pre>
 <pre><code>## [1] 0.1610169</code></pre>
-<p><strong>Python Example: Posterior Calculation</strong></p>
+<p><strong>Python code</strong></p>
 <p>Below is the equivalent Python code.</p>
 <pre class="python"><code># Define parameters:
 prior = 0.01           # 1% prior probability of having the disease
@@ -642,18 +637,21 @@ analyzing the shooting percentage of a basketball player and testing
 whether their shooting percentage is greater than 40%. After several
 games, the player’s shooting percentage fluctuates.</p>
 <ul>
-<li><p><strong>Frequentist Approach</strong>: A frequentist would run a
-hypothesis test (e.g., t-test) to determine if the player’s shooting
-percentage is statistically significantly greater than 40%. This would
-simply compare observed data against a fixed hypothesis with no prior
-consideration of the player’s past performance.</p></li>
-<li><p><strong>Bayesian Approach</strong>: A Bayesian would start with a
-prior belief about the player’s shooting percentage (say, 45%, based on
-their previous performance or expert judgment). As the player plays more
-games, the Bayesian would update this belief with new data, continuously
-refining the probability that the player’s true shooting percentage is
-greater than 40%.</p></li>
+<li><strong>Frequentist Approach</strong>:</li>
 </ul>
+<p>A frequentist would run a hypothesis test (e.g., t-test) to determine
+if the player’s shooting percentage is statistically significantly
+greater than 40%. This would simply compare observed data against a
+fixed hypothesis with no prior consideration of the player’s past
+performance.</p>
+<ul>
+<li><strong>Bayesian Approach</strong>:</li>
+</ul>
+<p>A Bayesian would start with a prior belief about the player’s
+shooting percentage (say, 45%, based on their previous performance or
+expert judgment). As the player plays more games, the Bayesian would
+update this belief with new data, continuously refining the probability
+that the player’s true shooting percentage is greater than 40%.</p>
 </div>
 </div>
 </div>
@@ -685,7 +683,7 @@ theorem, enabling us to combine intuition with rigorous computation.</p>
 <div id="the-bayesian-balancing-act" class="section level1">
 <h1>The Bayesian Balancing Act</h1>
 <p>Bayesian analysis balances prior knowledge with new data. Consider
-two scenarios discussed in ChapterÂ 1:</p>
+two scenarios discussed in Chapter 1:</p>
 <ul>
 <li><p><strong>Zuofu’s Coin-Flipping Claim:</strong> Even if Zuofu
 achieves a perfect score (10/10), our strong prior belief tells us that

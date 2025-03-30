@@ -7,7 +7,7 @@ output: html_document
 
 # Introduction
 
-Welcome to our first lecture in Bayesian Computation for Data Science and AI. In this session, we introduce the fundamental ideas of Bayesian thinking and probabilistic reasoning—concepts that underpin modern data science and artificial intelligence. Our discussion is based on Chapter 1 of the [BayesRules book](https://www.bayesrulesbook.com/chapter-1). You will see, in this note, simple examples implemented in both R and Python.
+Welcome to our first lecture in Bayesian Computation for Data Science and AI. In this session, we introduce the fundamental ideas of Bayesian thinking and probabilistic reasoning concepts that underpin modern data science and artificial intelligence. Our discussion is based on Chapter-1 of the [BayesRules book](https://www.bayesrulesbook.com/chapter-1). You will see, in this note, simple examples implemented in both R and Python.
 
 # The Big Picture: Frequentist vs Bayesian Worlds
 
@@ -42,7 +42,7 @@ Let's break down three commonly used terms through a sports analytics example.
 
 > Focuses on summarizing and exploring raw data to find patterns.
 
-**Example**: Summarizing a football player’s shot accuracy over 10 games using tables, histograms, and average metrics.
+**Example**: Summarizing a football player's shot accuracy over 10 games using tables, histograms, and average metrics.
 
 ## Data Analytics
 
@@ -69,7 +69,7 @@ Here are a few examples of such uncertainty in real-world data science and AI:
 - **Missing or noisy data:** Data collected from sensors, surveys, or logs may be incomplete or inaccurate.
 - **Changing user behavior:** In recommendation systems, user preferences can shift over time, leading to model drift.
 - **Ambiguous outcomes:** In natural language processing (NLP), a sentence's meaning might depend on context, making classification uncertain.
-- **Medical diagnostics:** A patient’s symptoms may not clearly indicate a disease, requiring probabilistic reasoning to support diagnosis.
+- **Medical diagnostics:** A patient's symptoms may not clearly indicate a disease, requiring probabilistic reasoning to support diagnosis.
 
 Bayesian computation provides a flexible framework to:
 
@@ -102,24 +102,22 @@ Where:
 
 - **Posterior (\(P(\text{Hypothesis} \mid \text{Data})\))**: Your updated belief after considering the data.
 
-**R Example: Posterior Calculation**
-
-## Problem
+**Example: Posterior Calculation**
 
 We want to compute the posterior probability that a person has a rare disease given a positive test result.
 
-### Given:
-
-- Prior probability of having the disease: `P(D) = 0.01`
-- Sensitivity (True positive rate): `P(T^+ | D) = 0.95`
-- False positive rate: `P(T^+ | �D) = 0.05`
+- Prior probability of having the disease: $P(D) = 0.01$
+- Sensitivity (True positive rate): $P(T^+ | D) = 0.95$
+- False positive rate: $P(T^+ | ?D) = 0.05$
 
 Let:
-- \( D \): Event that the person has the disease  
-- \( \neg D \): Event that the person does **not** have the disease  
+
+- \( D \): Event that the person has the disease 
+
+- \( \neg D \): Event that the person does **not** have the disease 
+
 - \( T^+ \): Event that the test result is positive
 
-## Bayes' Theorem
 
 Using Bayes' Theorem, the posterior probability is calculated as:
 
@@ -133,6 +131,7 @@ Where the total probability of a positive test is:
 P(T^+) = P(T^+ \mid D) \cdot P(D) + P(T^+ \mid \neg D) \cdot P(\neg D)
 \]
 
+**R code**
 
 The following R code calculates the posterior probability of having a rare disease given a positive test result.
 
@@ -151,7 +150,7 @@ posterior <- (sensitivity * prior) / evidence
 posterior  # This prints the updated probability of having the disease.
 ```
 
-**Python Example: Posterior Calculation**
+**Python code**
 
 Below is the equivalent Python code.
 
@@ -203,6 +202,7 @@ Consider the table below that shows test outcomes for a population of 100 people
 
 
 #### Bayesian Approach:
+
 A Bayesian would ask, "Given my positive test result, what is the probability that I have the disease?" From the table, we know that 3 out of 12 people who tested positive actually have the disease. Therefore, the probability is:
 
 \[
@@ -212,6 +212,7 @@ P(\text{Disease} \mid \text{Test Positive}) = \frac{3}{12} = 0.25 \quad \text{or
 This means there's only a 25% chance you actually have the disease, despite testing positive. This incorporates both the rarity of the disease and the false positive rate of the test.
 
 #### Frequentist Approach:
+
 A frequentist would ask, "If I do not have the disease, what's the chance I would've tested positive?" From the table, 9 out of 96 people without the disease tested positive, so the probability is:
 
 \[
@@ -224,9 +225,13 @@ This is the false positive rate of the test, similar to a P-value calculation, s
 
 Let's apply this thinking to a sports example. Suppose we are analyzing the shooting percentage of a basketball player and testing whether their shooting percentage is greater than 40%. After several games, the player's shooting percentage fluctuates.
 
-- **Frequentist Approach**: A frequentist would run a hypothesis test (e.g., t-test) to determine if the player's shooting percentage is statistically significantly greater than 40%. This would simply compare observed data against a fixed hypothesis with no prior consideration of the player's past performance.
+- **Frequentist Approach**: 
 
-- **Bayesian Approach**: A Bayesian would start with a prior belief about the player's shooting percentage (say, 45%, based on their previous performance or expert judgment). As the player plays more games, the Bayesian would update this belief with new data, continuously refining the probability that the player's true shooting percentage is greater than 40%.
+A frequentist would run a hypothesis test (e.g., t-test) to determine if the player's shooting percentage is statistically significantly greater than 40%. This would simply compare observed data against a fixed hypothesis with no prior consideration of the player's past performance.
+
+- **Bayesian Approach**: 
+
+A Bayesian would start with a prior belief about the player's shooting percentage (say, 45%, based on their previous performance or expert judgment). As the player plays more games, the Bayesian would update this belief with new data, continuously refining the probability that the player's true shooting percentage is greater than 40%.
 
 
 # Thinking Like a Bayesian
