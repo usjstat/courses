@@ -78,7 +78,7 @@ Bayesian computation provides a flexible framework to:
 - **Incorporate Prior Knowledge:** Combine previous experience or domain expertise with current data.
 
 **Example: Italian Restaurant Rating**  
-Imagine reading rave reviews for a new Italian restaurant. Expecting an excellent meal, you are disappointed by a soggy pasta dish on your first visit. As you gather more data from subsequent visits, you update your rating of the restaurant. This process—updating beliefs with each new experience—is the essence of Bayesian updating.
+Imagine reading rave reviews for a new Italian restaurant. Expecting an excellent meal, you are disappointed by a soggy pasta dish on your first visit. As you gather more data from subsequent visits, you update your rating of the restaurant. This process - updating beliefs with each new experience - is the essence of Bayesian updating.
 
 # Probabilistic Reasoning and Bayes' Theorem
 
@@ -93,12 +93,46 @@ P(\text{Hypothesis} \mid \text{Data}) = \frac{P(\text{Data} \mid \text{Hypothesi
 $$
 
 Where:
+
 - **Prior (\(P(\text{Hypothesis})\))**: Your initial belief before seeing the data.
+
 - **Likelihood (\(P(\text{Data} \mid \text{Hypothesis})\))**: The probability of observing the data if the hypothesis is true.
+
 - **Evidence (\(P(\text{Data})\))**: The overall probability of the data.
+
 - **Posterior (\(P(\text{Hypothesis} \mid \text{Data})\))**: Your updated belief after considering the data.
 
-## R Example: Posterior Calculation
+**R Example: Posterior Calculation**
+
+## Problem
+
+We want to compute the posterior probability that a person has a rare disease given a positive test result.
+
+### Given:
+
+- Prior probability of having the disease: `P(D) = 0.01`
+- Sensitivity (True positive rate): `P(T^+ | D) = 0.95`
+- False positive rate: `P(T^+ | �D) = 0.05`
+
+Let:
+- \( D \): Event that the person has the disease  
+- \( \neg D \): Event that the person does **not** have the disease  
+- \( T^+ \): Event that the test result is positive
+
+## Bayes' Theorem
+
+Using Bayes' Theorem, the posterior probability is calculated as:
+
+\[
+P(D \mid T^+) = \frac{P(T^+ \mid D) \cdot P(D)}{P(T^+)}
+\]
+
+Where the total probability of a positive test is:
+
+\[
+P(T^+) = P(T^+ \mid D) \cdot P(D) + P(T^+ \mid \neg D) \cdot P(\neg D)
+\]
+
 
 The following R code calculates the posterior probability of having a rare disease given a positive test result.
 
@@ -117,7 +151,7 @@ posterior <- (sensitivity * prior) / evidence
 posterior  # This prints the updated probability of having the disease.
 ```
 
-## Python Example: Posterior Calculation
+**Python Example: Posterior Calculation**
 
 Below is the equivalent Python code.
 
@@ -148,7 +182,7 @@ The authors argue that we'd prefer to understand the uncertainty of our disease 
 - **Frequentist Hypothesis Test**: It asks, "If the hypothesis is incorrect, what's the chance I'd have observed this, or even more extreme, data?"
 - **Bayesian Hypothesis Test**: It asks, "Given the observed data, what's the chance that the hypothesis is correct?"
 
-### Example 1: Disease Testing (Table 1.1)
+**Example: Disease Testing**
 
 Consider the table below that shows test outcomes for a population of 100 people, where only 4 people have the disease. 
 
@@ -186,7 +220,7 @@ P(\text{Test Positive} \mid \text{No Disease}) = \frac{9}{96} = 0.09375 \quad \t
 
 This is the false positive rate of the test, similar to a P-value calculation, showing the chance of a positive result assuming you do not have the disease.
 
-### Example 2: Predicting a Player's Performance in Sports
+**Example: Predicting a Player's Performance in Sports**
 
 Let's apply this thinking to a sports example. Suppose we are analyzing the shooting percentage of a basketball player and testing whether their shooting percentage is greater than 40%. After several games, the player's shooting percentage fluctuates.
 
@@ -204,8 +238,11 @@ Thinking like a Bayesian means understanding that learning is an iterative proce
 - **Belief Updating:** You update your initial belief (the prior) with the new data (the likelihood) to form an updated belief (the posterior).
 
 **Example: Restaurant Rating**  
+
 - **Prior:** Stellar online reviews lead you to expect a great meal.
+
 - **Data:** Your actual dining experience, which may be disappointing.
+
 - **Posterior:** Your revised rating of the restaurant after considering the evidence.
 
 This natural process of updating beliefs is formalized by Bayes' theorem, enabling us to combine intuition with rigorous computation.
@@ -214,8 +251,9 @@ This natural process of updating beliefs is formalized by Bayes' theorem, enabli
 
 Bayesian analysis balances prior knowledge with new data. Consider two scenarios discussed in Chapter 1:
 
-- **Zuofu’s Coin-Flipping Claim:** Even if Zuofu achieves a perfect score (10/10), our strong prior belief tells us that coin flips are random, so we remain skeptical.
-- **Kavya’s Sweetener Test:** A perfect score here aligns with our prior understanding that some people can distinguish between sweeteners, so our posterior belief supports her claim.
+- **Zuofu's Coin-Flipping Claim:** Even if Zuofu achieves a perfect score (10/10), our strong prior belief tells us that coin flips are random, so we remain skeptical.
+
+- **Kavya's Sweetener Test:** A perfect score here aligns with our prior understanding that some people can distinguish between sweeteners, so our posterior belief supports her claim.
 
 # A Quick History Lesson
 

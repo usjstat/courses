@@ -359,9 +359,9 @@ display: none;
 <h1>Introduction</h1>
 <p>Welcome to our first lecture in Bayesian Computation for Data Science
 and AI. In this session, we introduce the fundamental ideas of Bayesian
-thinking and probabilistic reasoning—concepts that underpin modern data
+thinking and probabilistic reasoningâconcepts that underpin modern data
 science and artificial intelligence. Our discussion is based on
-Chapter 1 of the <a href="https://www.bayesrulesbook.com/chapter-1">BayesRules book</a>. You
+ChapterÂ 1 of the <a href="https://www.bayesrulesbook.com/chapter-1">BayesRules book</a>. You
 will see, in this note, simple examples implemented in both R and
 Python.</p>
 </div>
@@ -413,7 +413,7 @@ example.</p>
 <blockquote>
 <p>Focuses on summarizing and exploring raw data to find patterns.</p>
 </blockquote>
-<p><strong>Example</strong>: Summarizing a football player’s shot
+<p><strong>Example</strong>: Summarizing a football playerâs shot
 accuracy over 10 games using tables, histograms, and average
 metrics.</p>
 </div>
@@ -456,7 +456,7 @@ user preferences can shift over time, leading to model drift.</li>
 <li><strong>Ambiguous outcomes:</strong> In natural language processing
 (NLP), a sentence’s meaning might depend on context, making
 classification uncertain.</li>
-<li><strong>Medical diagnostics:</strong> A patient’s symptoms may not
+<li><strong>Medical diagnostics:</strong> A patientâs symptoms may not
 clearly indicate a disease, requiring probabilistic reasoning to support
 diagnosis.</li>
 </ul>
@@ -473,8 +473,8 @@ experience or domain expertise with current data.</li>
 Imagine reading rave reviews for a new Italian restaurant. Expecting an
 excellent meal, you are disappointed by a soggy pasta dish on your first
 visit. As you gather more data from subsequent visits, you update your
-rating of the restaurant. This process—updating beliefs with each new
-experience—is the essence of Bayesian updating.</p>
+rating of the restaurant. This process - updating beliefs with each new
+experience - is the essence of Bayesian updating.</p>
 </div>
 <div id="probabilistic-reasoning-and-bayes-theorem" class="section level1">
 <h1>Probabilistic Reasoning and Bayes’ Theorem</h1>
@@ -490,16 +490,52 @@ expressed as:</p>
 P(\text{Hypothesis} \mid \text{Data}) = \frac{P(\text{Data} \mid
 \text{Hypothesis}) \cdot P(\text{Hypothesis})}{P(\text{Data})}
 \]</span></p>
-<p>Where: - <strong>Prior (<span class="math inline">\(P(\text{Hypothesis})\)</span>)</strong>: Your
-initial belief before seeing the data. - <strong>Likelihood (<span class="math inline">\(P(\text{Data} \mid
-\text{Hypothesis})\)</span>)</strong>: The probability of observing the
-data if the hypothesis is true. - <strong>Evidence (<span class="math inline">\(P(\text{Data})\)</span>)</strong>: The overall
-probability of the data. - <strong>Posterior (<span class="math inline">\(P(\text{Hypothesis} \mid
+<p>Where:</p>
+<ul>
+<li><p><strong>Prior (<span class="math inline">\(P(\text{Hypothesis})\)</span>)</strong>: Your
+initial belief before seeing the data.</p></li>
+<li><p><strong>Likelihood (<span class="math inline">\(P(\text{Data}
+\mid \text{Hypothesis})\)</span>)</strong>: The probability of observing
+the data if the hypothesis is true.</p></li>
+<li><p><strong>Evidence (<span class="math inline">\(P(\text{Data})\)</span>)</strong>: The overall
+probability of the data.</p></li>
+<li><p><strong>Posterior (<span class="math inline">\(P(\text{Hypothesis} \mid
 \text{Data})\)</span>)</strong>: Your updated belief after considering
-the data.</p>
+the data.</p></li>
+</ul>
+<p><strong>R Example: Posterior Calculation</strong></p>
 </div>
-<div id="r-example-posterior-calculation" class="section level2">
-<h2>R Example: Posterior Calculation</h2>
+<div id="problem" class="section level2">
+<h2>Problem</h2>
+<p>We want to compute the posterior probability that a person has a rare
+disease given a positive test result.</p>
+<div id="given" class="section level3">
+<h3>Given:</h3>
+<ul>
+<li>Prior probability of having the disease:
+<code>P(D) = 0.01</code></li>
+<li>Sensitivity (True positive rate):
+<code>P(T^+ | D) = 0.95</code></li>
+<li>False positive rate: <code>P(T^+ | ¬D) = 0.05</code></li>
+</ul>
+<p>Let: - <span class="math inline">\(D\)</span>: Event that the person
+has the disease<br />
+- <span class="math inline">\(\neg D\)</span>: Event that the person
+does <strong>not</strong> have the disease<br />
+- <span class="math inline">\(T^+\)</span>: Event that the test result
+is positive</p>
+</div>
+</div>
+<div id="bayes-theorem-1" class="section level2">
+<h2>Bayes’ Theorem</h2>
+<p>Using Bayes’ Theorem, the posterior probability is calculated as:</p>
+<p><span class="math display">\[
+P(D \mid T^+) = \frac{P(T^+ \mid D) \cdot P(D)}{P(T^+)}
+\]</span></p>
+<p>Where the total probability of a positive test is:</p>
+<p><span class="math display">\[
+P(T^+) = P(T^+ \mid D) \cdot P(D) + P(T^+ \mid \neg D) \cdot P(\neg D)
+\]</span></p>
 <p>The following R code calculates the posterior probability of having a
 rare disease given a positive test result.</p>
 <pre class="r"><code># Define parameters:
@@ -515,9 +551,7 @@ posterior &lt;- (sensitivity * prior) / evidence
 
 posterior  # This prints the updated probability of having the disease.</code></pre>
 <pre><code>## [1] 0.1610169</code></pre>
-</div>
-<div id="python-example-posterior-calculation" class="section level2">
-<h2>Python Example: Posterior Calculation</h2>
+<p><strong>Python Example: Posterior Calculation</strong></p>
 <p>Below is the equivalent Python code.</p>
 <pre class="python"><code># Define parameters:
 prior = 0.01           # 1% prior probability of having the disease
@@ -558,8 +592,7 @@ even more extreme, data?”</li>
 <li><strong>Bayesian Hypothesis Test</strong>: It asks, “Given the
 observed data, what’s the chance that the hypothesis is correct?”</li>
 </ul>
-<div id="example-1-disease-testing-table-1.1" class="section level3">
-<h3>Example 1: Disease Testing (Table 1.1)</h3>
+<p><strong>Example: Disease Testing</strong></p>
 <p>Consider the table below that shows test outcomes for a population of
 100 people, where only 4 people have the disease.</p>
 <p><span class="math display">\[
@@ -602,10 +635,8 @@ P(\text{Test Positive} \mid \text{No Disease}) = \frac{9}{96} = 0.09375
 <p>This is the false positive rate of the test, similar to a P-value
 calculation, showing the chance of a positive result assuming you do not
 have the disease.</p>
-</div>
-</div>
-<div id="example-2-predicting-a-players-performance-in-sports" class="section level3">
-<h3>Example 2: Predicting a Player’s Performance in Sports</h3>
+<p><strong>Example: Predicting a Player’s Performance in
+Sports</strong></p>
 <p>Let’s apply this thinking to a sports example. Suppose we are
 analyzing the shooting percentage of a basketball player and testing
 whether their shooting percentage is greater than 40%. After several
@@ -639,25 +670,29 @@ observation or experiments.</li>
 (the prior) with the new data (the likelihood) to form an updated belief
 (the posterior).</li>
 </ul>
-<p><strong>Example: Restaurant Rating</strong><br />
-- <strong>Prior:</strong> Stellar online reviews lead you to expect a
-great meal. - <strong>Data:</strong> Your actual dining experience,
-which may be disappointing. - <strong>Posterior:</strong> Your revised
-rating of the restaurant after considering the evidence.</p>
+<p><strong>Example: Restaurant Rating</strong></p>
+<ul>
+<li><p><strong>Prior:</strong> Stellar online reviews lead you to expect
+a great meal.</p></li>
+<li><p><strong>Data:</strong> Your actual dining experience, which may
+be disappointing.</p></li>
+<li><p><strong>Posterior:</strong> Your revised rating of the restaurant
+after considering the evidence.</p></li>
+</ul>
 <p>This natural process of updating beliefs is formalized by Bayes’
 theorem, enabling us to combine intuition with rigorous computation.</p>
 </div>
 <div id="the-bayesian-balancing-act" class="section level1">
 <h1>The Bayesian Balancing Act</h1>
 <p>Bayesian analysis balances prior knowledge with new data. Consider
-two scenarios discussed in Chapter 1:</p>
+two scenarios discussed in ChapterÂ 1:</p>
 <ul>
-<li><strong>Zuofu’s Coin-Flipping Claim:</strong> Even if Zuofu achieves
-a perfect score (10/10), our strong prior belief tells us that coin
-flips are random, so we remain skeptical.</li>
-<li><strong>Kavya’s Sweetener Test:</strong> A perfect score here aligns
-with our prior understanding that some people can distinguish between
-sweeteners, so our posterior belief supports her claim.</li>
+<li><p><strong>Zuofu’s Coin-Flipping Claim:</strong> Even if Zuofu
+achieves a perfect score (10/10), our strong prior belief tells us that
+coin flips are random, so we remain skeptical.</p></li>
+<li><p><strong>Kavya’s Sweetener Test:</strong> A perfect score here
+aligns with our prior understanding that some people can distinguish
+between sweeteners, so our posterior belief supports her claim.</p></li>
 </ul>
 </div>
 <div id="a-quick-history-lesson" class="section level1">
