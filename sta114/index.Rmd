@@ -1,0 +1,115 @@
+---
+title: "STA 114 2.0 - Probability and Distribution Theory I"
+author: "Dr. Rajitha M. Silva"
+output: html_document
+---
+
+# Course Information
+
++--------------------+---------------------------------------+
+| **Course Title:**  | Probability and Distribution Theory I |
++--------------------+---------------------------------------+
+| **Course Code:**   | STA114                                |
++--------------------+---------------------------------------+
+| **Credit Value:**  | 2.0                                   |
++--------------------+---------------------------------------+
+| **Status:**        | Core                                  |
++--------------------+---------------------------------------+
+| **Year/Level:**    | 2025/First Year                       |
++--------------------+---------------------------------------+
+| **Semester:**      | 1 (First Semester)                    |
++--------------------+---------------------------------------+
+| **Pre-requisite:** | A/L Combined Mathematics              |
++--------------------+---------------------------------------+
+
+------------------------------------------------------------------------
+
+# Aim of the Course
+
+This course establishes the fundamentals of probability theory. It supports learning in statistical inference, risk evaluation, actuarial modeling, and various forecasting fields such as weather prediction, sports outcomes, and finance. It is also a prerequisite for advanced modules in probability and statistics.
+
+------------------------------------------------------------------------
+
+# Learning Activities & Weekly Breakdown
+
+::: {style="text-align: center;"}
++-------------+------------------------------+--------------------------------------------------------------------------+--------------+-----------------+
+| **Week**    | **Topic**                    | **Description**                                                          | **Hours**    | **Assessment**  |
++:===========:+:=============================+:=========================================================================+:============:+:===============:+
+| 1           | Elements of Probability      | Introduction, experiments, outcomes, sample spaces, events               | 6 (2T + 4IL) |                 |
++-------------+------------------------------+--------------------------------------------------------------------------+--------------+-----------------+
+| 2           | Event Operations             | Complements, unions, intersections, mutually exclusive/exhaustive events | 4 (2T + 2IL) |                 |
++-------------+------------------------------+--------------------------------------------------------------------------+--------------+-----------------+
+| 3           | Methods of Probability       | Classical, relative frequency, axioms, interpretation                    | 4 (2T + 2IL) | Assignment 1    |
++-------------+------------------------------+--------------------------------------------------------------------------+--------------+-----------------+
+| 4           | Conditional Probability      | Independent events                                                       | 4 (2T + 2IL) | Assignment 2    |
++-------------+------------------------------+--------------------------------------------------------------------------+--------------+-----------------+
+| 5           | Probability Rules            | Addition, multiplication, total probability, Bayes' theorem              | 4 (2T + 2IL) |                 |
++-------------+------------------------------+--------------------------------------------------------------------------+--------------+-----------------+
+| 6           | Random Variables             | Definitions, discrete and continuous variables                           | 4 (2T + 2IL) | Assignment 3    |
++-------------+------------------------------+--------------------------------------------------------------------------+--------------+-----------------+
+| 7           | Events with Random Variables | Event representation and revision                                        | 4 (2T + 2IL) | Assignment 4    |
++-------------+------------------------------+--------------------------------------------------------------------------+--------------+-----------------+
+| 8           | Distributions                | pmf, pdf, cdf                                                            | 5 (2T + 3IL) | Assignment 5    |
++-------------+------------------------------+--------------------------------------------------------------------------+--------------+-----------------+
+| 9           | Probability Calculations     | Quantiles, quartiles, percentiles                                        | 4 (2T + 2IL) | Assignment 6    |
++-------------+------------------------------+--------------------------------------------------------------------------+--------------+-----------------+
+| 10          | Mean & Variance              | Mean and variance of r.v.s and functions                                 | 5 (2T + 3IL) | Assignment 7    |
++-------------+------------------------------+--------------------------------------------------------------------------+--------------+-----------------+
+| 11          | Moments                      | MGF and properties                                                       | 4 (2T + 2IL) |                 |
++-------------+------------------------------+--------------------------------------------------------------------------+--------------+-----------------+
+| 12–15       | Revision & Integration       | All Topics                                                               | 6 IL         | Problem Solving |
++-------------+------------------------------+--------------------------------------------------------------------------+--------------+-----------------+
+:::
+
+*T = Theory, IL = Independent Learning*
+
+------------------------------------------------------------------------
+
+# Intended Learning Outcomes (ILOs)
+
+By the end of this course, students will be able to:
+
+1.  Describe events using set notation and sample spaces.\
+2.  Formulate and identify events of interest.\
+3.  Apply classical and empirical methods for calculating probability.\
+4.  Explain and apply probability axioms.\
+5.  Distinguish conditional from unconditional events.\
+6.  Use rules of probability effectively.\
+7.  Define and identify types of random variables.\
+8.  Relate events to random variables.\
+9.  Use pmf, pdf, cdf correctly.\
+10. Calculate probabilities and descriptive measures from distributions.\
+11. Define and interpret mean, median, variance, etc.\
+12. Use moment generating functions.\
+13. Use correct notation and terminology.\
+14. Communicate clearly and coherently.\
+15. Present clear and accurate solutions to problems.
+
+------------------------------------------------------------------------
+
+# Mode of Assessment
+
+-   **Assignments** (best 5 of total): 30% (Formative Assessment)\
+-   **Final Exam** (2 hours): 70% (Summative Assessment)
+
+------------------------------------------------------------------------
+
+# References
+
+-   Mood, A. M., Graybill, F. A., and Boes, D. *Introduction to the Theory of Statistics*, McGraw Hill.\
+-   Jay L. Devore, *Probability and Statistics for Engineering and Sciences*, Brooks/Cole.\
+-   B.M.S.G. Banneheka, *Statistical Distribution Theory*, Open University of Sri Lanka.\
+-   Class handouts and lecture notes.
+
+------------------------------------------------------------------------
+
+# Instructor & Office Hours
+
+**Lecturer:** Dr. Rajitha M. Silva\
+**Email:** [rsilva\@sjp.ac.lk](mailto:rsilva@sjp.ac.lk){.email}\
+**Office Hours:** One hour after lectures or by appointment
+
+------------------------------------------------------------------------
+
+*This course is effective from 19th May 2025.*

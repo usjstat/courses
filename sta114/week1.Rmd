@@ -1,0 +1,342 @@
+---
+title: "STA 114 2.0 - Probability Theory"
+author: "Dr. Rajitha M. Silva"
+output: html_document
+---
+
+
+Probability is not just about dice and cards—it's the foundation of decision-making under uncertainty. Whether you are studying Mathematics or Statistics, probability theory opens the door to analyzing everything from games and genetics to finance and machine learning.
+
+> Imagine trying to decide if a new medicine is effective, predicting the next big sports upset, or even optimizing a delivery route—**probability is behind it all.**
+
+Let us warm up with a story that is not only historically important but also surprisingly intuitive.
+
+**A Note from the History of Probability**
+
+Probability theory as a mathematical discipline was significantly shaped by games of chance. A well-known example comes from **Chevalier de Méré**, a 17th-century French nobleman and gambler.
+
+He posed a paradox:  
+
+> Which is more likely?  
+> (a) Getting **at least one six** in **four rolls** of a single die  
+> (b) Getting **at least one double six** in **24 rolls** of **two dice**  
+
+Intuition may suggest these events are equally probable, but de Méré’s observations hinted otherwise.
+
+- [Chevalier de Méré's Paradox](https://www.youtube.com/watch?v=LIRG3aMQ55k) - A YouTube lecture explaining the paradox.
+
+---
+
+### Analytical Solutions
+
+Let’s calculate the probabilities:
+
+```{r}
+# (a) Probability of at least one six in 4 rolls of one die
+prob_a <- 1 - (5/6)^4
+
+# (b) Probability of at least one double six in 24 rolls of two dice
+prob_b <- 1 - (35/36)^24
+
+prob_a
+prob_b
+```
+
+---
+
+**Why Use Complements?**
+
+In many problems involving the phrase **"at least one"**, it’s actually easier to compute the **complement** of the event and subtract from 1.
+
+For example:
+- The event "at least one six in 4 rolls" is complex because there are many ways it can happen.
+- But the complement "no six in 4 rolls" is a single, clean event.
+
+So we compute:  
+\[
+P(\text{at least one six in 4 rolls}) = 1 - P(\text{no six in 4 rolls}) = 1 - \left( \frac{5}{6} \right)^4
+\]
+
+
+This method is more efficient, reduces errors, and helps us break down complex outcomes.
+
+**Why de Méré's Intuition Was Wrong**
+
+De Méré believed that the chances of getting at least one six in 4 rolls of a die should be similar to getting at least one double six in 24 rolls of two dice, since the probability of one six is 1/6 and that of double sixes is 1/36.
+
+However, probabilities don’t scale linearly across repeated trials. In simple words, doubling the number of trials doesn’t mean the probability doubles too. The increase slows down. The event of getting double sixes is rarer, and even after 24 tries, its cumulative chance is still slightly less than that of getting a six in 4 rolls.
+
+This small but important gap shows why relying on intuition—without proper calculation—can be misleading in probability.
+
+---
+
+### Monte Carlo Simulation
+
+Before we simulate, a quick note:
+
+**Why is it called "Monte Carlo" Simulation?**
+
+The term **Monte Carlo simulation** originated in the 1940s during work on nuclear weapons at the Los Alamos National Laboratory. The method was named by physicist **Stanislaw Ulam** and mathematician **John von Neumann** after the Monte Carlo Casino in Monaco—famous for games of chance.
+
+Why the name? Because this simulation technique relies on **random sampling**, much like casino games rely on random outcomes (e.g., roulette, dice). Monte Carlo simulations help us estimate probabilities or solve problems that may be analytically complex or unsolvable.
+
+In our case, we're simulating dice rolls to estimate probabilities through **repeated random experiments**—the core idea behind Monte Carlo methods.
+
+
+Let’s simulate both scenarios to confirm.
+
+
+```{r}
+set.seed(123)
+
+n <- 100000
+
+# Scenario (a): One die, 4 rolls
+sim_a <- replicate(n, any(sample(1:6, 4, replace = TRUE) == 6))
+mean(sim_a)
+
+# Scenario (b): Two dice, 24 trials
+sim_b <- replicate(n, any(replicate(24, all(sample(1:6, 2, replace = TRUE) == 6))))
+mean(sim_b)
+```
+
+---
+
+
+- The **probability of at least one six** in four rolls of a single die is approximately `r round(prob_a, 4)`.
+- The **probability of at least one double six** in 24 rolls of two dice is approximately `r round(prob_b, 4)`.
+
+Though the number 24 in (b) was chosen to mirror the relative frequency in (a), empirical evidence and theory both show that **the second event is less likely**, aligning with de Méré's concern.
+
+---
+
+
+## Quick Challenge for You
+
+Before moving on, try answering this:  
+> What is the probability of getting **at least one head** in **three tosses** of a fair coin?
+
+Hint: Think about the complement event—getting no heads!
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+Let’s find the probability of **no heads** in three tosses. That means all tails:
+
+- Probability of tail on each toss = 0.5
+- So, probability of all tails = (0.5)^3 = 0.125
+
+Therefore, probability of **at least one head** = 1 - 0.125 = **0.875**
+
+</details>
+
+# 1. Elements of Probability
+
+
+## 1.1 Events
+
+The ‘probability’ is a measure of the possibility of occurring an event. To compute probabilities, we first need to define **events** clearly.
+
+- We use the word **experiment** for any action, process, or procedure that  generates observations.
+
+- An experiment that is repeatable in an identical fashion is called a **random experiment** or a **probability experiment**.
+
+- An **outcome** is the result of a single experiment.
+
+- The **sample space** \( S \) is the set of all possible outcomes.
+
+- **Any subset of a sample space is called an ‘event’.**  
+  This means if you take the full list of possible outcomes (the sample space), you can define an event by choosing one or more outcomes from it. For example, if you toss a die, and define event A as “getting an even number,” then A is the subset \( \{2, 4, 6\} \) of the sample space \( S = \{1, 2, 3, 4, 5, 6\} \).
+
+- **Any event is a subset of some sample space.**  
+  In reverse, every event you define must be based on a known sample space. You can’t have a meaningful probability unless you know all the possible outcomes it comes from. This ensures that events are logically consistent and measurable.
+
+Events are often denoted by capital letters: \( A, B, C \), etc. Some key types:
+
+- A **null event** has no outcomes.
+- A **simple event** contains only one outcome.
+- A **compound event** contains more than one outcome.
+
+---
+
+### Activity 1.1: Rolling a Die
+
+
+**Experiment:** rolling a fair six-sided die (or a dice) and observing the number faced up. Let:
+
+1. \( S \) = the sample space  
+2. \( A \) = the event of getting the number 1  
+3. \( B \) = the event of getting a number less than 3  
+4. \( C \) = the event of getting an even number  
+5. \( D \) = the event of getting a number larger than 5  
+6. \( E \) = the event of getting a number larger than 6
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+- \( S = \{1, 2, 3, 4, 5, 6\} \)  
+- \( A = \{1\} \)  
+- \( B = \{1, 2\} \)  
+- \( C = \{2, 4, 6\} \)  
+- \( D = \{6\} \)  
+- \( E = \{\} \) (null event, since there’s no number > 6 on the die)
+
+</details>
+
+---
+
+### Activity 1.2: Drawing a Ticket from a Box
+
+**Experiment:** A box contains one ticket with number 6 on it, 2 tickets with number 5, 3 tickets with number 4, 4 tickets with number 3, 5 tickets with number 2, and 6 tickets with number 1. Consider the experiment of taking a ticket from this box randomly and observing the number on it. Let:
+
+1. \( S \) = the sample space  
+2. \( A \) = the event of getting the number 1  
+3. \( B \) = the event of getting a number less than 3  
+4. \( C \) = the event of getting an even number  
+5. \( D \) = the event of getting a number larger than 5  
+6. \( E \) = the event of getting a number larger than 6
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+- \( S = \{1, 2, 3, 4, 5, 6\} \)  
+- \( A = \{1\} \)  
+- \( B = \{1, 2\} \)  
+- \( C = \{2, 4, 6\} \)  
+- \( D = \{6\} \)  
+- \( E = \{\} \)
+
+</details>
+
+---
+
+### Activity 1.3
+A box contains 3 white balls and 2 black balls. Consider the experiment of taking 3 balls randomly and observing the colors of the balls. Assume the 3 balls are drawn simultaneously (i.e., order does not matter). Let
+
+1. S = the sample space  
+2. A = the event of getting exactly one white ball.  
+3. B = the event of getting more than 1 white ball  
+4. C = the event of getting no white balls
+
+Denoting the white color by \( w \) and the black color by \( b \), write the above events as sets.
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+- S = {www, wwb, wbb}  
+- A = {wbb}  
+- B = {wwb, www}  
+- C = {} (empty set; getting 3 black balls is impossible with only 2 black balls in the box)
+
+</details>
+
+
+### Activity 1.4
+A box contains 3 white balls and 2 black balls. Consider the experiment of taking 3 balls randomly and counting the number of white balls. Assume the 3 balls are drawn simultaneously. Let
+
+1. S = the sample space  
+2. A = the event of getting exactly one white ball.  
+3. B = the event of getting more than 1 white ball  
+4. C = the event of getting no white balls
+
+Write the above events as sets.
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+- S = {1, 2, 3}  
+- A = {1}  
+- B = {2, 3}  
+- C = {}
+
+</details>
+
+### Activity 1.5
+Experiment: A coin is tossed until a ‘head’ is received and the number of tosses up to that point is counted. Let
+
+1. S = the sample space  
+2. A = the event that the number of tosses is 5  
+3. B = the event that the number of tosses is less than 5  
+4. C = the event that the number of tosses is more than 10
+
+Write the above events as sets.
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+- S = {1, 2, 3, 4, 5, 6, 7, ...}  
+- A = {5}  
+- B = {1, 2, 3, 4}  
+- C = {11, 12, 13, ...}
+
+</details>
+
+### Activity 1.6
+Consider the conceptual experiment of recording the actual time \( T \) (in hours) that a randomly selected student of USJ spent in social media in the last week. Let
+
+1. S = the sample space  
+2. A = the event that \( T \) is less than 5.5 hours
+
+Write the above events as sets.
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+- S = {x ∈ ℝ : x ≥ 0}  
+- A = {x ∈ ℝ : x < 5.5}
+
+</details>
+
+### Activity 1.7
+Consider the conceptual experiment of recording the actual weight (in kg) of a randomly selected student of USJ. Let
+
+1. S = the sample space  
+2. A = the event that the weight is less than 70 kg
+
+Write the above events as sets.
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+- S = {x ∈ ℝ : x > 0}  
+- A = {x ∈ ℝ : x < 70}
+
+</details>
+
+---
+
+### Activity 1.8
+
+Consider an experiment where a fair coin is tossed repeatedly until a head appears. Let:
+
+- \( S = \{1, 2, 3, \ldots\} \), where each number represents the trial on which the first head occurs.  
+- \( A = \{1, 2, 3\} \) — the event that the first head occurs within the first three tosses.  
+- \( B = \{3, 4, 5, \ldots\} \) — the event that the first head occurs on or after the third toss.  
+- \( C = \{1, 3, 5, \ldots\} \) — the event that the first head occurs on an odd-numbered toss.
+
+Write the following events as sets and express them in words:
+
+1. \( A' \)  
+2. \( A \cup C \)  
+3. \( B \cap C \)  
+4. \( A \cap B \)
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+1. \( A' = \{4, 5, 6, \ldots\} \) — the first head occurs after the third toss.  
+2. \( A \cup C = \{1, 2, 3, 5, 7, \ldots\} \) — the first head occurs in the first three tosses or on an odd-numbered toss.  
+3. \( B \cap C = \{3, 5, 7, \ldots\} \) — the first head occurs on or after the third toss and on an odd-numbered toss.  
+4. \( A \cap B = \{3\} \) — the only outcome common to both A and B is when the first head occurs on the third toss.
+
+</details>
+
+---
+
+Think about the nature of the sample spaces above:
+
+- Some are **discrete** (die roll, ticket draw).
+- Some are **infinite** (coin tosses until head).
+- Some are **continuous** (weight, time).
+
+Understanding the sample space and structure of events helps us compute probabilities accurately.
