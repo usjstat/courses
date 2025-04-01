@@ -37,18 +37,7 @@ Consider Activity 1.1. Write the following events as sets and express them in wo
 3. \( B \cup D \)  
 4. \( B \cap D \)
 
-<details>
-<summary><strong>Solution</strong></summary>
 
-Let \( S = \{1, 2, 3, 4, 5, 6\} \),  
-\( B = \{1, 2\} \), \( C = \{2, 4, 6\} \), \( D = \{6\} \).
-
-1. \( B' = \{3, 4, 5, 6\} \) — outcomes not less than 3.  
-2. \( C \cap D = \{6\} \) — number that is both even and larger than 5.  
-3. \( B \cup D = \{1, 2, 6\} \) — outcomes less than 3 or larger than 5.  
-4. \( B \cap D = \emptyset \) — no number is both less than 3 and greater than 5.
-
-</details>
 
 ---
 
@@ -60,18 +49,7 @@ Consider Activity 1.5. Write the following events as sets and express them in wo
 3. \( B \cap C \)  
 4. \( B \cup C \)
 
-<details>
-<summary><strong>Solution</strong></summary>
 
-Let \( S = \{1, 2, 3, \ldots\} \),  
-\( A = \{5\} \), \( B = \{1, 2, 3, 4\} \), \( C = \{11, 12, 13, \ldots\} \)
-
-1. \( B' = \{5, 6, 7, 8, \ldots\} \) — tosses 5 and above.  
-2. \( A \cup B = \{1, 2, 3, 4, 5\} \) — tosses 5 or less.  
-3. \( B \cap C = \emptyset \) — tosses can’t be both less than 5 and more than 10.  
-4. \( B \cup C = \{1, 2, 3, 4, 11, 12, 13, \ldots\} \)
-
-</details>
 
 ---
 
@@ -85,16 +63,10 @@ Three products are selected at random, one after the other, from a production li
 
 Express \( E \) in terms of \( D_1, D_2, D_3 \) using event operations.
 
-<details>
-<summary><strong>Solution</strong></summary>
-
-\( E = (D_1 \cap D_2 \cap D_3') \cup (D_1 \cap D_2' \cap D_3) \cup (D_1' \cap D_2 \cap D_3) \)
-
-</details>
 
 ---
 
-## Activity 1.12
+### Activity 1.12
 
 Three components are connected to form a system in such a way that components 1 and 2 are connected in **parallel**, and this parallel arrangement is connected in **series** with component 3.
 
@@ -110,11 +82,4 @@ Let:
 
 Express \( W \) in terms of \( W_1, W_2, W_3 \) using event operations.
 
-<details>
-<summary><strong>Solution</strong></summary>
-
-Assuming components 1 and 2 are in parallel and component 3 is in series:  
-\( W = (W_1 \cup W_2) \cap W_3 \)
-
-</details>
 

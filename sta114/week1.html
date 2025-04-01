@@ -355,14 +355,14 @@ display: none;
 </div>
 
 
-<p>Probability is not just about dice and cards—it’s the foundation of
+<p>Probability is not just about dice and cards - it’s the foundation of
 decision-making under uncertainty. Whether you are studying Mathematics
 or Statistics, probability theory opens the door to analyzing everything
 from games and genetics to finance and machine learning.</p>
 <blockquote>
 <p>Imagine trying to decide if a new medicine is effective, predicting
 the next big sports upset, or even optimizing a delivery
-route—<strong>probability is behind it all.</strong></p>
+route-<strong>probability is behind it all.</strong></p>
 </blockquote>
 <p>Let us warm up with a story that is not only historically important
 but also surprisingly intuitive.</p>
@@ -388,7 +388,7 @@ Méré’s Paradox</a> - A YouTube lecture explaining the paradox.</li>
 <hr />
 <div id="analytical-solutions" class="section level3">
 <h3>Analytical Solutions</h3>
-<p>Let’s calculate the probabilities:</p>
+<p>Let us calculate the probabilities:</p>
 <pre class="r"><code># (a) Probability of at least one six in 4 rolls of one die
 prob_a &lt;- 1 - (5/6)^4
 
@@ -399,34 +399,74 @@ prob_a</code></pre>
 <pre><code>## [1] 0.5177469</code></pre>
 <pre class="r"><code>prob_b</code></pre>
 <pre><code>## [1] 0.4914039</code></pre>
-<hr />
-<p><strong>Why Use Complements?</strong></p>
-<p>In many problems involving the phrase <strong>“at least
-one”</strong>, it’s actually easier to compute the
-<strong>complement</strong> of the event and subtract from 1.</p>
-<p>For example: - The event “at least one six in 4 rolls” is complex
-because there are many ways it can happen. - But the complement “no six
-in 4 rolls” is a single, clean event.</p>
-<p>So we compute:<br />
-<span class="math display">\[
-P(\text{at least one six in 4 rolls}) = 1 - P(\text{no six in 4 rolls})
-= 1 - \left( \frac{5}{6} \right)^4
+<details>
+<summary>
+<strong>Why de Méré’s Intuition Was Wrong</strong>
+</summary>
+<p>Chevalier de Méré believed that the chance of rolling at least one
+six in four rolls of a single die should be similar to the chance of
+rolling at least one double six (i.e., both dice show a six) in 24 rolls
+of two dice. This was based on the idea that the chance of rolling a six
+on one die is <span class="math inline">\(\frac{1}{6}\)</span>, and the
+chance of rolling double sixes with two dice is <span class="math inline">\(\frac{1}{36}\)</span>, and since <span class="math inline">\(4 \times \frac{1}{6} = \frac{2}{3}\)</span> and
+<span class="math inline">\(24 \times \frac{1}{36} =
+\frac{2}{3}\)</span>, the overall chances should be roughly equal.</p>
+<p>But this is <strong>not how probability works</strong> when events
+are repeated.</p>
+<p>In reality, the probability of getting <strong>at least one
+success</strong> in multiple independent trials is calculated using the
+complement:</p>
+<p><span class="math display">\[
+P(\text{at least one success}) = 1 - (1 - p)^n
 \]</span></p>
-<p>This method is more efficient, reduces errors, and helps us break
-down complex outcomes.</p>
-<p><strong>Why de Méré’s Intuition Was Wrong</strong></p>
-<p>De Méré believed that the chances of getting at least one six in 4
-rolls of a die should be similar to getting at least one double six in
-24 rolls of two dice, since the probability of one six is 1/6 and that
-of double sixes is 1/36.</p>
-<p>However, probabilities don’t scale linearly across repeated trials.
-In simple words, doubling the number of trials doesn’t mean the
-probability doubles too. The increase slows down. The event of getting
-double sixes is rarer, and even after 24 tries, its cumulative chance is
-still slightly less than that of getting a six in 4 rolls.</p>
-<p>This small but important gap shows why relying on intuition—without
-proper calculation—can be misleading in probability.</p>
-<hr />
+<p>So: - For one six in 4 rolls:<br />
+<span class="math display">\[
+P = 1 - \left(\frac{5}{6}\right)^4 \approx 0.5177
+\]</span> - For one double six in 24 rolls:<br />
+<span class="math display">\[
+P = 1 - \left(\frac{35}{36}\right)^{24} \approx 0.4914
+\]</span></p>
+<p>Even though the expected number of successes in both cases is about
+<span class="math inline">\(\frac{2}{3}\)</span>, the
+<strong>probability</strong> of getting at least one success differs.
+The mistake in de Méré’s reasoning was treating expected number of
+successes as equivalent to the probability of getting at least one
+success, which they are not.</p>
+<p><strong>Example: At Least One Six in 4 Rolls of a Die</strong></p>
+<p>We want to calculate the probability of getting <strong>at least one
+six</strong> when rolling a fair six-sided die 4 times.</p>
+<p>Sample Space: Each roll has 6 outcomes, so the total number of
+outcomes over 4 rolls is:</p>
+<p><span class="math display">\[
+6^4 = 1296
+\]</span></p>
+<p><strong>Brute-force Enumeration (Without Using
+Complement)</strong></p>
+<p>Let’s count how many outcomes include at least one six:</p>
+<ul>
+<li><strong>Exactly 1 six:</strong> <span class="math inline">\(\binom{4}{1} = 4\)</span> positions × <span class="math inline">\(5^3 = 125\)</span> outcomes for other rolls ???
+<span class="math inline">\(4 \times 125 = 500\)</span></li>
+<li><strong>Exactly 2 sixes:</strong> <span class="math inline">\(\binom{4}{2} = 6\)</span> × <span class="math inline">\(5^2 = 25\)</span> ??? <span class="math inline">\(6 \times 25 = 150\)</span></li>
+<li><strong>Exactly 3 sixes:</strong> <span class="math inline">\(\binom{4}{3} = 4\)</span> × <span class="math inline">\(5 = 20\)</span></li>
+<li><strong>Exactly 4 sixes:</strong> 1 outcome: (6,6,6,6)</li>
+</ul>
+<p><strong>Total favorable outcomes:</strong></p>
+<p><span class="math display">\[
+500 + 150 + 20 + 1 = 671
+\]</span></p>
+<p><strong>Probability:</strong></p>
+<p><span class="math display">\[
+P(\text{at least one six}) = \frac{671}{1296} \approx 0.5177
+\]</span></p>
+<p><strong>Using Complement</strong></p>
+<p><span class="math display">\[
+P(\text{at least one six}) = 1 - P(\text{no six}) = 1 - \left(
+\frac{5}{6} \right)^4 = 1 - \frac{625}{1296} = \frac{671}{1296}
+\]</span></p>
+<p>Both methods yield the same result, but the <strong>complement
+method</strong> is easier and more scalable, especially for larger
+values of <span class="math inline">\(n\)</span>.</p>
+</details>
 </div>
 <div id="monte-carlo-simulation" class="section level3">
 <h3>Monte Carlo Simulation</h3>
@@ -436,16 +476,16 @@ proper calculation—can be misleading in probability.</p>
 1940s during work on nuclear weapons at the Los Alamos National
 Laboratory. The method was named by physicist <strong>Stanislaw
 Ulam</strong> and mathematician <strong>John von Neumann</strong> after
-the Monte Carlo Casino in Monaco—famous for games of chance.</p>
+the Monte Carlo Casino in Monaco-famous for games of chance.</p>
 <p>Why the name? Because this simulation technique relies on
 <strong>random sampling</strong>, much like casino games rely on random
 outcomes (e.g., roulette, dice). Monte Carlo simulations help us
 estimate probabilities or solve problems that may be analytically
 complex or unsolvable.</p>
 <p>In our case, we’re simulating dice rolls to estimate probabilities
-through <strong>repeated random experiments</strong>—the core idea
+through <strong>repeated random experiments</strong>-the core idea
 behind Monte Carlo methods.</p>
-<p>Let’s simulate both scenarios to confirm.</p>
+<p>Let us simulate both scenarios to confirm.</p>
 <pre class="r"><code>set.seed(123)
 
 n &lt;- 100000
@@ -465,10 +505,6 @@ of a single die is approximately 0.5177.</li>
 <li>The <strong>probability of at least one double six</strong> in 24
 rolls of two dice is approximately 0.4914.</li>
 </ul>
-<p>Though the number 24 in (b) was chosen to mirror the relative
-frequency in (a), empirical evidence and theory both show that
-<strong>the second event is less likely</strong>, aligning with de
-Méré’s concern.</p>
 <hr />
 </div>
 <div id="quick-challenge-for-you" class="section level2">
@@ -476,27 +512,14 @@ Méré’s concern.</p>
 <p>Before moving on, try answering this:<br />
 &gt; What is the probability of getting <strong>at least one
 head</strong> in <strong>three tosses</strong> of a fair coin?</p>
-<p>Hint: Think about the complement event—getting no heads!</p>
-<details>
-<summary>
-<strong>Solution</strong>
-</summary>
-<p>Let’s find the probability of <strong>no heads</strong> in three
-tosses. That means all tails:</p>
-<ul>
-<li>Probability of tail on each toss = 0.5</li>
-<li>So, probability of all tails = (0.5)^3 = 0.125</li>
-</ul>
-<p>Therefore, probability of <strong>at least one head</strong> = 1 -
-0.125 = <strong>0.875</strong></p>
-</details>
+<p>Hint: Think about the complement event-getting no heads!</p>
 </div>
 <div id="elements-of-probability" class="section level1">
 <h1>1. Elements of Probability</h1>
 <div id="events" class="section level2">
 <h2>1.1 Events</h2>
-<p>The ‘probability’ is a measure of the possibility of occurring an
-event. To compute probabilities, we first need to define
+<p>The <strong>probability</strong> is a measure of the possibility of
+occurring an event. To compute probabilities, we first need to define
 <strong>events</strong> clearly.</p>
 <ul>
 <li><p>We use the word <strong>experiment</strong> for any action,
@@ -509,17 +532,15 @@ experiment.</p></li>
 <li><p>The <strong>sample space</strong> <span class="math inline">\(S\)</span> is the set of all possible
 outcomes.</p></li>
 <li><p><strong>Any subset of a sample space is called an
-‘event’.</strong><br />
+event.</strong><br />
 This means if you take the full list of possible outcomes (the sample
 space), you can define an event by choosing one or more outcomes from
-it. For example, if you toss a die, and define event A as “getting an
-even number,” then A is the subset <span class="math inline">\(\{2, 4,
-6\}\)</span> of the sample space <span class="math inline">\(S = \{1, 2,
-3, 4, 5, 6\}\)</span>.</p></li>
+it. For example, if you toss a die, and define event A as
+<strong>getting an even number,</strong> then A is the subset <span class="math inline">\(\{2, 4, 6\}\)</span> of the sample space <span class="math inline">\(S = \{1, 2, 3, 4, 5, 6\}\)</span>.</p></li>
 <li><p><strong>Any event is a subset of some sample
 space.</strong><br />
 In reverse, every event you define must be based on a known sample
-space. You can’t have a meaningful probability unless you know all the
+space. You can not have a meaningful probability unless you know all the
 possible outcomes it comes from. This ensures that events are logically
 consistent and measurable.</p></li>
 </ul>
@@ -553,25 +574,6 @@ number larger than 5<br />
 <li><span class="math inline">\(E\)</span> = the event of getting a
 number larger than 6</li>
 </ol>
-<details>
-<summary>
-<strong>Solution</strong>
-</summary>
-<ul>
-<li><span class="math inline">\(S = \{1, 2, 3, 4, 5, 6\}\)</span><br />
-</li>
-<li><span class="math inline">\(A = \{1\}\)</span><br />
-</li>
-<li><span class="math inline">\(B = \{1, 2\}\)</span><br />
-</li>
-<li><span class="math inline">\(C = \{2, 4, 6\}\)</span><br />
-</li>
-<li><span class="math inline">\(D = \{6\}\)</span><br />
-</li>
-<li><span class="math inline">\(E = \{\}\)</span> (null event, since
-there’s no number &gt; 6 on the die)</li>
-</ul>
-</details>
 <hr />
 </div>
 <div id="activity-1.2-drawing-a-ticket-from-a-box" class="section level3">
@@ -599,24 +601,6 @@ number larger than 5<br />
 <li><span class="math inline">\(E\)</span> = the event of getting a
 number larger than 6</li>
 </ol>
-<details>
-<summary>
-<strong>Solution</strong>
-</summary>
-<ul>
-<li><span class="math inline">\(S = \{1, 2, 3, 4, 5, 6\}\)</span><br />
-</li>
-<li><span class="math inline">\(A = \{1\}\)</span><br />
-</li>
-<li><span class="math inline">\(B = \{1, 2\}\)</span><br />
-</li>
-<li><span class="math inline">\(C = \{2, 4, 6\}\)</span><br />
-</li>
-<li><span class="math inline">\(D = \{6\}\)</span><br />
-</li>
-<li><span class="math inline">\(E = \{\}\)</span></li>
-</ul>
-</details>
 <hr />
 </div>
 <div id="activity-1.3" class="section level3">
@@ -637,21 +621,6 @@ matter). Let</p>
 <p>Denoting the white color by <span class="math inline">\(w\)</span>
 and the black color by <span class="math inline">\(b\)</span>, write the
 above events as sets.</p>
-<details>
-<summary>
-<strong>Solution</strong>
-</summary>
-<ul>
-<li>S = {www, wwb, wbb}<br />
-</li>
-<li>A = {wbb}<br />
-</li>
-<li>B = {wwb, www}<br />
-</li>
-<li>C = {} (empty set; getting 3 black balls is impossible with only 2
-black balls in the box)</li>
-</ul>
-</details>
 </div>
 <div id="activity-1.4" class="section level3">
 <h3>Activity 1.4</h3>
@@ -668,20 +637,6 @@ balls. Assume the 3 balls are drawn simultaneously. Let</p>
 <li>C = the event of getting no white balls</li>
 </ol>
 <p>Write the above events as sets.</p>
-<details>
-<summary>
-<strong>Solution</strong>
-</summary>
-<ul>
-<li>S = {1, 2, 3}<br />
-</li>
-<li>A = {1}<br />
-</li>
-<li>B = {2, 3}<br />
-</li>
-<li>C = {}</li>
-</ul>
-</details>
 </div>
 <div id="activity-1.5" class="section level3">
 <h3>Activity 1.5</h3>
@@ -697,20 +652,6 @@ number of tosses up to that point is counted. Let</p>
 <li>C = the event that the number of tosses is more than 10</li>
 </ol>
 <p>Write the above events as sets.</p>
-<details>
-<summary>
-<strong>Solution</strong>
-</summary>
-<ul>
-<li>S = {1, 2, 3, 4, 5, 6, 7, …}<br />
-</li>
-<li>A = {5}<br />
-</li>
-<li>B = {1, 2, 3, 4}<br />
-</li>
-<li>C = {11, 12, 13, …}</li>
-</ul>
-</details>
 </div>
 <div id="activity-1.6" class="section level3">
 <h3>Activity 1.6</h3>
@@ -723,37 +664,16 @@ student of USJ spent in social media in the last week. Let</p>
 than 5.5 hours</li>
 </ol>
 <p>Write the above events as sets.</p>
-<details>
-<summary>
-<strong>Solution</strong>
-</summary>
-<ul>
-<li>S = {x ∈ ℝ : x ≥ 0}<br />
-</li>
-<li>A = {x ∈ ℝ : x &lt; 5.5}</li>
-</ul>
-</details>
 </div>
 <div id="activity-1.7" class="section level3">
 <h3>Activity 1.7</h3>
 <p>Consider the conceptual experiment of recording the actual weight (in
 kg) of a randomly selected student of USJ. Let</p>
 <ol style="list-style-type: decimal">
-<li>S = the sample space<br />
-</li>
+<li>S = the sample space</li>
 <li>A = the event that the weight is less than 70 kg</li>
 </ol>
 <p>Write the above events as sets.</p>
-<details>
-<summary>
-<strong>Solution</strong>
-</summary>
-<ul>
-<li>S = {x ∈ ℝ : x &gt; 0}<br />
-</li>
-<li>A = {x ∈ ℝ : x &lt; 70}</li>
-</ul>
-</details>
 <hr />
 </div>
 <div id="activity-1.8" class="section level3">
@@ -764,13 +684,13 @@ head appears. Let:</p>
 <li><span class="math inline">\(S = \{1, 2, 3, \ldots\}\)</span>, where
 each number represents the trial on which the first head occurs.<br />
 </li>
-<li><span class="math inline">\(A = \{1, 2, 3\}\)</span> — the event
-that the first head occurs within the first three tosses.<br />
+<li><span class="math inline">\(A = \{1, 2, 3\}\)</span> the event that
+the first head occurs within the first three tosses.<br />
 </li>
-<li><span class="math inline">\(B = \{3, 4, 5, \ldots\}\)</span> — the
+<li><span class="math inline">\(B = \{3, 4, 5, \ldots\}\)</span> - the
 event that the first head occurs on or after the third toss.<br />
 </li>
-<li><span class="math inline">\(C = \{1, 3, 5, \ldots\}\)</span> — the
+<li><span class="math inline">\(C = \{1, 3, 5, \ldots\}\)</span> - the
 event that the first head occurs on an odd-numbered toss.</li>
 </ul>
 <p>Write the following events as sets and express them in words:</p>
@@ -783,27 +703,6 @@ event that the first head occurs on an odd-numbered toss.</li>
 </li>
 <li><span class="math inline">\(A \cap B\)</span></li>
 </ol>
-<details>
-<summary>
-<strong>Solution</strong>
-</summary>
-<ol style="list-style-type: decimal">
-<li><span class="math inline">\(A&#39; = \{4, 5, 6, \ldots\}\)</span> —
-the first head occurs after the third toss.<br />
-</li>
-<li><span class="math inline">\(A \cup C = \{1, 2, 3, 5, 7,
-\ldots\}\)</span> — the first head occurs in the first three tosses or
-on an odd-numbered toss.<br />
-</li>
-<li><span class="math inline">\(B \cap C = \{3, 5, 7, \ldots\}\)</span>
-— the first head occurs on or after the third toss and on an
-odd-numbered toss.<br />
-</li>
-<li><span class="math inline">\(A \cap B = \{3\}\)</span> — the only
-outcome common to both A and B is when the first head occurs on the
-third toss.</li>
-</ol>
-</details>
 <hr />
 <p>Think about the nature of the sample spaces above:</p>
 <ul>

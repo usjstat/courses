@@ -4,32 +4,31 @@ author: "Dr. Rajitha M. Silva"
 output: html_document
 ---
 
+Probability is not just about dice and cards - it's the foundation of decision-making under uncertainty. Whether you are studying Mathematics or Statistics, probability theory opens the door to analyzing everything from games and genetics to finance and machine learning.
 
-Probability is not just about dice and cards—it's the foundation of decision-making under uncertainty. Whether you are studying Mathematics or Statistics, probability theory opens the door to analyzing everything from games and genetics to finance and machine learning.
-
-> Imagine trying to decide if a new medicine is effective, predicting the next big sports upset, or even optimizing a delivery route—**probability is behind it all.**
+> Imagine trying to decide if a new medicine is effective, predicting the next big sports upset, or even optimizing a delivery route-**probability is behind it all.**
 
 Let us warm up with a story that is not only historically important but also surprisingly intuitive.
 
 **A Note from the History of Probability**
 
-Probability theory as a mathematical discipline was significantly shaped by games of chance. A well-known example comes from **Chevalier de Méré**, a 17th-century French nobleman and gambler.
+Probability theory as a mathematical discipline was significantly shaped by games of chance. A well-known example comes from **Chevalier de M�r�**, a 17th-century French nobleman and gambler.
 
-He posed a paradox:  
+He posed a paradox:
 
-> Which is more likely?  
-> (a) Getting **at least one six** in **four rolls** of a single die  
-> (b) Getting **at least one double six** in **24 rolls** of **two dice**  
+> Which is more likely?\
+> (a) Getting **at least one six** in **four rolls** of a single die\
+> (b) Getting **at least one double six** in **24 rolls** of **two dice**
 
-Intuition may suggest these events are equally probable, but de Méré’s observations hinted otherwise.
+Intuition may suggest these events are equally probable, but de M�r�'s observations hinted otherwise.
 
-- [Chevalier de Méré's Paradox](https://www.youtube.com/watch?v=LIRG3aMQ55k) - A YouTube lecture explaining the paradox.
+-   [Chevalier de M�r�'s Paradox](https://www.youtube.com/watch?v=LIRG3aMQ55k) - A YouTube lecture explaining the paradox.
 
 ---
 
 ### Analytical Solutions
 
-Let’s calculate the probabilities:
+Let us calculate the probabilities:
 
 ```{r}
 # (a) Probability of at least one six in 4 rolls of one die
@@ -42,33 +41,77 @@ prob_a
 prob_b
 ```
 
----
 
-**Why Use Complements?**
+<details>
 
-In many problems involving the phrase **"at least one"**, it’s actually easier to compute the **complement** of the event and subtract from 1.
+<summary><strong>Why de M�r�'s Intuition Was Wrong</strong></summary>
 
-For example:
-- The event "at least one six in 4 rolls" is complex because there are many ways it can happen.
-- But the complement "no six in 4 rolls" is a single, clean event.
+Chevalier de M�r� believed that the chance of rolling at least one six in four rolls of a single die should be similar to the chance of rolling at least one double six (i.e., both dice show a six) in 24 rolls of two dice. This was based on the idea that the chance of rolling a six on one die is \( \frac{1}{6} \), and the chance of rolling double sixes with two dice is \( \frac{1}{36} \), and since \( 4 \times \frac{1}{6} = \frac{2}{3} \) and \( 24 \times \frac{1}{36} = \frac{2}{3} \), the overall chances should be roughly equal.
 
-So we compute:  
+But this is **not how probability works** when events are repeated.
+
+In reality, the probability of getting **at least one success** in multiple independent trials is calculated using the complement:
+
 \[
-P(\text{at least one six in 4 rolls}) = 1 - P(\text{no six in 4 rolls}) = 1 - \left( \frac{5}{6} \right)^4
+P(\text{at least one success}) = 1 - (1 - p)^n
+\]
+
+So:
+- For one six in 4 rolls:  
+\[
+P = 1 - \left(\frac{5}{6}\right)^4 \approx 0.5177
+\]
+- For one double six in 24 rolls:  
+\[
+P = 1 - \left(\frac{35}{36}\right)^{24} \approx 0.4914
+\]
+
+Even though the expected number of successes in both cases is about \( \frac{2}{3} \), the **probability** of getting at least one success differs. The mistake in de M�r�'s reasoning was treating expected number of successes as equivalent to the probability of getting at least one success, which they are not.
+
+
+**Example: At Least One Six in 4 Rolls of a Die**
+
+We want to calculate the probability of getting **at least one six** when rolling a fair six-sided die 4 times.
+
+Sample Space: 
+Each roll has 6 outcomes, so the total number of outcomes over 4 rolls is:
+
+\[
+6^4 = 1296
+\]
+
+**Brute-force Enumeration (Without Using Complement)**
+
+Let's count how many outcomes include at least one six:
+
+- **Exactly 1 six:** \( \binom{4}{1} = 4 \) positions � \( 5^3 = 125 \) outcomes for other rolls ??? \( 4 \times 125 = 500 \)
+- **Exactly 2 sixes:** \( \binom{4}{2} = 6 \) � \( 5^2 = 25 \) ??? \( 6 \times 25 = 150 \)
+- **Exactly 3 sixes:** \( \binom{4}{3} = 4 \) � \( 5 = 20 \)
+- **Exactly 4 sixes:** 1 outcome: (6,6,6,6)
+
+**Total favorable outcomes:**
+
+\[
+500 + 150 + 20 + 1 = 671
+\]
+
+**Probability:**
+
+\[
+P(\text{at least one six}) = \frac{671}{1296} \approx 0.5177
+\]
+
+**Using Complement**
+
+\[
+P(\text{at least one six}) = 1 - P(\text{no six}) = 1 - \left( \frac{5}{6} \right)^4 = 1 - \frac{625}{1296} = \frac{671}{1296}
 \]
 
 
-This method is more efficient, reduces errors, and helps us break down complex outcomes.
+Both methods yield the same result, but the **complement method** is easier and more scalable, especially for larger values of \( n \).
 
-**Why de Méré's Intuition Was Wrong**
+</details>
 
-De Méré believed that the chances of getting at least one six in 4 rolls of a die should be similar to getting at least one double six in 24 rolls of two dice, since the probability of one six is 1/6 and that of double sixes is 1/36.
-
-However, probabilities don’t scale linearly across repeated trials. In simple words, doubling the number of trials doesn’t mean the probability doubles too. The increase slows down. The event of getting double sixes is rarer, and even after 24 tries, its cumulative chance is still slightly less than that of getting a six in 4 rolls.
-
-This small but important gap shows why relying on intuition—without proper calculation—can be misleading in probability.
-
----
 
 ### Monte Carlo Simulation
 
@@ -76,15 +119,13 @@ Before we simulate, a quick note:
 
 **Why is it called "Monte Carlo" Simulation?**
 
-The term **Monte Carlo simulation** originated in the 1940s during work on nuclear weapons at the Los Alamos National Laboratory. The method was named by physicist **Stanislaw Ulam** and mathematician **John von Neumann** after the Monte Carlo Casino in Monaco—famous for games of chance.
+The term **Monte Carlo simulation** originated in the 1940s during work on nuclear weapons at the Los Alamos National Laboratory. The method was named by physicist **Stanislaw Ulam** and mathematician **John von Neumann** after the Monte Carlo Casino in Monaco-famous for games of chance.
 
 Why the name? Because this simulation technique relies on **random sampling**, much like casino games rely on random outcomes (e.g., roulette, dice). Monte Carlo simulations help us estimate probabilities or solve problems that may be analytically complex or unsolvable.
 
-In our case, we're simulating dice rolls to estimate probabilities through **repeated random experiments**—the core idea behind Monte Carlo methods.
+In our case, we're simulating dice rolls to estimate probabilities through **repeated random experiments**-the core idea behind Monte Carlo methods.
 
-
-Let’s simulate both scenarios to confirm.
-
+Let us simulate both scenarios to confirm.
 
 ```{r}
 set.seed(123)
@@ -100,243 +141,167 @@ sim_b <- replicate(n, any(replicate(24, all(sample(1:6, 2, replace = TRUE) == 6)
 mean(sim_b)
 ```
 
----
+------------------------------------------------------------------------
 
+-   The **probability of at least one six** in four rolls of a single die is approximately 0.5177.
+-   The **probability of at least one double six** in 24 rolls of two dice is approximately 0.4914.
 
-- The **probability of at least one six** in four rolls of a single die is approximately `r round(prob_a, 4)`.
-- The **probability of at least one double six** in 24 rolls of two dice is approximately `r round(prob_b, 4)`.
-
-Though the number 24 in (b) was chosen to mirror the relative frequency in (a), empirical evidence and theory both show that **the second event is less likely**, aligning with de Méré's concern.
-
----
-
+------------------------------------------------------------------------
 
 ## Quick Challenge for You
 
-Before moving on, try answering this:  
-> What is the probability of getting **at least one head** in **three tosses** of a fair coin?
+Before moving on, try answering this:\
+\> What is the probability of getting **at least one head** in **three tosses** of a fair coin?
 
-Hint: Think about the complement event—getting no heads!
+Hint: Think about the complement event-getting no heads!
 
-<details>
-<summary><strong>Solution</strong></summary>
 
-Let’s find the probability of **no heads** in three tosses. That means all tails:
-
-- Probability of tail on each toss = 0.5
-- So, probability of all tails = (0.5)^3 = 0.125
-
-Therefore, probability of **at least one head** = 1 - 0.125 = **0.875**
-
-</details>
 
 # 1. Elements of Probability
 
-
 ## 1.1 Events
 
-The ‘probability’ is a measure of the possibility of occurring an event. To compute probabilities, we first need to define **events** clearly.
+The **probability** is a measure of the possibility of occurring an event. To compute probabilities, we first need to define **events** clearly.
 
-- We use the word **experiment** for any action, process, or procedure that  generates observations.
+-   We use the word **experiment** for any action, process, or procedure that generates observations.
 
-- An experiment that is repeatable in an identical fashion is called a **random experiment** or a **probability experiment**.
+-   An experiment that is repeatable in an identical fashion is called a **random experiment** or a **probability experiment**.
 
-- An **outcome** is the result of a single experiment.
+-   An **outcome** is the result of a single experiment.
 
-- The **sample space** \( S \) is the set of all possible outcomes.
+-   The **sample space** $S$ is the set of all possible outcomes.
 
-- **Any subset of a sample space is called an ‘event’.**  
-  This means if you take the full list of possible outcomes (the sample space), you can define an event by choosing one or more outcomes from it. For example, if you toss a die, and define event A as “getting an even number,” then A is the subset \( \{2, 4, 6\} \) of the sample space \( S = \{1, 2, 3, 4, 5, 6\} \).
+-   **Any subset of a sample space is called an event.**\
+    This means if you take the full list of possible outcomes (the sample space), you can define an event by choosing one or more outcomes from it. For example, if you toss a die, and define event A as **getting an even number,** then A is the subset $\{2, 4, 6\}$ of the sample space $S = \{1, 2, 3, 4, 5, 6\}$.
 
-- **Any event is a subset of some sample space.**  
-  In reverse, every event you define must be based on a known sample space. You can’t have a meaningful probability unless you know all the possible outcomes it comes from. This ensures that events are logically consistent and measurable.
+-   **Any event is a subset of some sample space.**\
+    In reverse, every event you define must be based on a known sample space. You can not have a meaningful probability unless you know all the possible outcomes it comes from. This ensures that events are logically consistent and measurable.
 
-Events are often denoted by capital letters: \( A, B, C \), etc. Some key types:
+Events are often denoted by capital letters: $A, B, C$, etc. Some key types:
 
-- A **null event** has no outcomes.
-- A **simple event** contains only one outcome.
-- A **compound event** contains more than one outcome.
+-   A **null event** has no outcomes.
+-   A **simple event** contains only one outcome.
+-   A **compound event** contains more than one outcome.
 
----
+------------------------------------------------------------------------
 
 ### Activity 1.1: Rolling a Die
 
-
 **Experiment:** rolling a fair six-sided die (or a dice) and observing the number faced up. Let:
 
-1. \( S \) = the sample space  
-2. \( A \) = the event of getting the number 1  
-3. \( B \) = the event of getting a number less than 3  
-4. \( C \) = the event of getting an even number  
-5. \( D \) = the event of getting a number larger than 5  
-6. \( E \) = the event of getting a number larger than 6
+1.  $S$ = the sample space\
+2.  $A$ = the event of getting the number 1\
+3.  $B$ = the event of getting a number less than 3\
+4.  $C$ = the event of getting an even number\
+5.  $D$ = the event of getting a number larger than 5\
+6.  $E$ = the event of getting a number larger than 6
 
-<details>
-<summary><strong>Solution</strong></summary>
 
-- \( S = \{1, 2, 3, 4, 5, 6\} \)  
-- \( A = \{1\} \)  
-- \( B = \{1, 2\} \)  
-- \( C = \{2, 4, 6\} \)  
-- \( D = \{6\} \)  
-- \( E = \{\} \) (null event, since there’s no number > 6 on the die)
 
-</details>
-
----
+------------------------------------------------------------------------
 
 ### Activity 1.2: Drawing a Ticket from a Box
 
 **Experiment:** A box contains one ticket with number 6 on it, 2 tickets with number 5, 3 tickets with number 4, 4 tickets with number 3, 5 tickets with number 2, and 6 tickets with number 1. Consider the experiment of taking a ticket from this box randomly and observing the number on it. Let:
 
-1. \( S \) = the sample space  
-2. \( A \) = the event of getting the number 1  
-3. \( B \) = the event of getting a number less than 3  
-4. \( C \) = the event of getting an even number  
-5. \( D \) = the event of getting a number larger than 5  
-6. \( E \) = the event of getting a number larger than 6
+1.  $S$ = the sample space\
+2.  $A$ = the event of getting the number 1\
+3.  $B$ = the event of getting a number less than 3\
+4.  $C$ = the event of getting an even number\
+5.  $D$ = the event of getting a number larger than 5\
+6.  $E$ = the event of getting a number larger than 6
 
-<details>
-<summary><strong>Solution</strong></summary>
 
-- \( S = \{1, 2, 3, 4, 5, 6\} \)  
-- \( A = \{1\} \)  
-- \( B = \{1, 2\} \)  
-- \( C = \{2, 4, 6\} \)  
-- \( D = \{6\} \)  
-- \( E = \{\} \)
 
-</details>
-
----
+------------------------------------------------------------------------
 
 ### Activity 1.3
+
 A box contains 3 white balls and 2 black balls. Consider the experiment of taking 3 balls randomly and observing the colors of the balls. Assume the 3 balls are drawn simultaneously (i.e., order does not matter). Let
 
-1. S = the sample space  
-2. A = the event of getting exactly one white ball.  
-3. B = the event of getting more than 1 white ball  
-4. C = the event of getting no white balls
+1.  S = the sample space\
+2.  A = the event of getting exactly one white ball.\
+3.  B = the event of getting more than 1 white ball\
+4.  C = the event of getting no white balls
 
-Denoting the white color by \( w \) and the black color by \( b \), write the above events as sets.
+Denoting the white color by $w$ and the black color by $b$, write the above events as sets.
 
-<details>
-<summary><strong>Solution</strong></summary>
-
-- S = {www, wwb, wbb}  
-- A = {wbb}  
-- B = {wwb, www}  
-- C = {} (empty set; getting 3 black balls is impossible with only 2 black balls in the box)
-
-</details>
 
 
 ### Activity 1.4
+
 A box contains 3 white balls and 2 black balls. Consider the experiment of taking 3 balls randomly and counting the number of white balls. Assume the 3 balls are drawn simultaneously. Let
 
-1. S = the sample space  
-2. A = the event of getting exactly one white ball.  
-3. B = the event of getting more than 1 white ball  
-4. C = the event of getting no white balls
+1.  S = the sample space\
+2.  A = the event of getting exactly one white ball.\
+3.  B = the event of getting more than 1 white ball\
+4.  C = the event of getting no white balls
 
 Write the above events as sets.
 
-<details>
-<summary><strong>Solution</strong></summary>
 
-- S = {1, 2, 3}  
-- A = {1}  
-- B = {2, 3}  
-- C = {}
-
-</details>
 
 ### Activity 1.5
-Experiment: A coin is tossed until a ‘head’ is received and the number of tosses up to that point is counted. Let
 
-1. S = the sample space  
-2. A = the event that the number of tosses is 5  
-3. B = the event that the number of tosses is less than 5  
-4. C = the event that the number of tosses is more than 10
+Experiment: A coin is tossed until a 'head' is received and the number of tosses up to that point is counted. Let
+
+1.  S = the sample space\
+2.  A = the event that the number of tosses is 5\
+3.  B = the event that the number of tosses is less than 5\
+4.  C = the event that the number of tosses is more than 10
 
 Write the above events as sets.
 
-<details>
-<summary><strong>Solution</strong></summary>
 
-- S = {1, 2, 3, 4, 5, 6, 7, ...}  
-- A = {5}  
-- B = {1, 2, 3, 4}  
-- C = {11, 12, 13, ...}
-
-</details>
 
 ### Activity 1.6
-Consider the conceptual experiment of recording the actual time \( T \) (in hours) that a randomly selected student of USJ spent in social media in the last week. Let
 
-1. S = the sample space  
-2. A = the event that \( T \) is less than 5.5 hours
+Consider the conceptual experiment of recording the actual time $T$ (in hours) that a randomly selected student of USJ spent in social media in the last week. Let
+
+1.  S = the sample space\
+2.  A = the event that $T$ is less than 5.5 hours
 
 Write the above events as sets.
 
-<details>
-<summary><strong>Solution</strong></summary>
 
-- S = {x ∈ ℝ : x ≥ 0}  
-- A = {x ∈ ℝ : x < 5.5}
-
-</details>
 
 ### Activity 1.7
+
 Consider the conceptual experiment of recording the actual weight (in kg) of a randomly selected student of USJ. Let
 
-1. S = the sample space  
-2. A = the event that the weight is less than 70 kg
+1.  S = the sample space
+2.  A = the event that the weight is less than 70 kg
 
 Write the above events as sets.
 
-<details>
-<summary><strong>Solution</strong></summary>
 
-- S = {x ∈ ℝ : x > 0}  
-- A = {x ∈ ℝ : x < 70}
 
-</details>
-
----
+------------------------------------------------------------------------
 
 ### Activity 1.8
 
 Consider an experiment where a fair coin is tossed repeatedly until a head appears. Let:
 
-- \( S = \{1, 2, 3, \ldots\} \), where each number represents the trial on which the first head occurs.  
-- \( A = \{1, 2, 3\} \) — the event that the first head occurs within the first three tosses.  
-- \( B = \{3, 4, 5, \ldots\} \) — the event that the first head occurs on or after the third toss.  
-- \( C = \{1, 3, 5, \ldots\} \) — the event that the first head occurs on an odd-numbered toss.
+-   $S = \{1, 2, 3, \ldots\}$, where each number represents the trial on which the first head occurs.\
+-   $A = \{1, 2, 3\}$  the event that the first head occurs within the first three tosses.\
+-   $B = \{3, 4, 5, \ldots\}$ - the event that the first head occurs on or after the third toss.\
+-   $C = \{1, 3, 5, \ldots\}$ - the event that the first head occurs on an odd-numbered toss.
 
 Write the following events as sets and express them in words:
 
-1. \( A' \)  
-2. \( A \cup C \)  
-3. \( B \cap C \)  
-4. \( A \cap B \)
+1.  $A'$\
+2.  $A \cup C$\
+3.  $B \cap C$\
+4.  $A \cap B$
 
-<details>
-<summary><strong>Solution</strong></summary>
 
-1. \( A' = \{4, 5, 6, \ldots\} \) — the first head occurs after the third toss.  
-2. \( A \cup C = \{1, 2, 3, 5, 7, \ldots\} \) — the first head occurs in the first three tosses or on an odd-numbered toss.  
-3. \( B \cap C = \{3, 5, 7, \ldots\} \) — the first head occurs on or after the third toss and on an odd-numbered toss.  
-4. \( A \cap B = \{3\} \) — the only outcome common to both A and B is when the first head occurs on the third toss.
 
-</details>
-
----
+------------------------------------------------------------------------
 
 Think about the nature of the sample spaces above:
 
-- Some are **discrete** (die roll, ticket draw).
-- Some are **infinite** (coin tosses until head).
-- Some are **continuous** (weight, time).
+-   Some are **discrete** (die roll, ticket draw).
+-   Some are **infinite** (coin tosses until head).
+-   Some are **continuous** (weight, time).
 
 Understanding the sample space and structure of events helps us compute probabilities accurately.
