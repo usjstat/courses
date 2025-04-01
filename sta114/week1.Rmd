@@ -300,8 +300,8 @@ Write the following events as sets and express them in words:
 
 Think about the nature of the sample spaces above:
 
--   Some are **discrete** (die roll, ticket draw).
--   Some are **infinite** (coin tosses until head).
+-   Some are **countable** (die roll, ticket draw).
+-   Some are **countably infinite** (coin tosses until head).
 -   Some are **continuous** (weight, time).
 
 Understanding the sample space and structure of events helps us compute probabilities accurately.
