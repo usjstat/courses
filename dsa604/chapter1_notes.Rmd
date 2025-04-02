@@ -106,10 +106,6 @@ Where:
 
 We want to compute the posterior probability that a person has a rare disease given a positive test result.
 
-- Prior probability of having the disease: $P(D) = 0.01$
-- Sensitivity (True positive rate): $P(T^+ | D) = 0.95$
-- False positive rate: $P(T^+ | ?D) = 0.05$
-
 Let:
 
 - \( D \): Event that the person has the disease 
@@ -118,6 +114,9 @@ Let:
 
 - \( T^+ \): Event that the test result is positive
 
+- Prior probability of having the disease: $P(D) = 0.01$
+- Sensitivity (True positive rate): $P(T^+ | D) = 0.95$
+- False positive rate: $P(T^+ | \neg D) = 0.05$
 
 Using Bayes' Theorem, the posterior probability is calculated as:
 

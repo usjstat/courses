@@ -506,13 +506,6 @@ the data.</p></li>
 <p><strong>Example: Posterior Calculation</strong></p>
 <p>We want to compute the posterior probability that a person has a rare
 disease given a positive test result.</p>
-<ul>
-<li>Prior probability of having the disease: <span class="math inline">\(P(D) = 0.01\)</span></li>
-<li>Sensitivity (True positive rate): <span class="math inline">\(P(T^+
-| D) = 0.95\)</span></li>
-<li>False positive rate: <span class="math inline">\(P(T^+ | ?D) =
-0.05\)</span></li>
-</ul>
 <p>Let:</p>
 <ul>
 <li><p><span class="math inline">\(D\)</span>: Event that the person has
@@ -521,6 +514,10 @@ the disease</p></li>
 person does <strong>not</strong> have the disease</p></li>
 <li><p><span class="math inline">\(T^+\)</span>: Event that the test
 result is positive</p></li>
+<li><p>Prior probability of having the disease: <span class="math inline">\(P(D) = 0.01\)</span></p></li>
+<li><p>Sensitivity (True positive rate): <span class="math inline">\(P(T^+ | D) = 0.95\)</span></p></li>
+<li><p>False positive rate: <span class="math inline">\(P(T^+ | \neg D)
+= 0.05\)</span></p></li>
 </ul>
 <p>Using Bayes’ Theorem, the posterior probability is calculated as:</p>
 <p><span class="math display">\[
