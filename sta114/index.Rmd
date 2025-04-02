@@ -40,7 +40,7 @@ This course establishes the fundamentals of probability theory. It supports lear
 | 9 | Probability Calculations | Quantiles, quartiles, percentiles | 4 (2T + 2IL) | Assignment 6 |
 | 10 | Mean & Variance | Mean and variance of r.v.s and functions | 5 (2T + 3IL) | Assignment 7 |
 | 11 | Moments | MGF and properties | 4 (2T + 2IL) |  |
-| 12–15 | Revision & Integration | All Topics | 6 IL | Problem Solving |
+| 12-13 | Revision & Integration | All Topics | 6 IL | Problem Solving |
 :::
 
 *T = Theory, IL = Independent Learning*
