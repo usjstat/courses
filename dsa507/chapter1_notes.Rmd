@@ -2,6 +2,7 @@
 title: "Chapter 1: Exploratory Data Analysis - Practical Statistics for Data Science"
 author: Simplified by Dr. Rajitha M. Silva
 output: html_document
+encoding: UTF-8
 ---
 
 ```{r setup, include=FALSE}
@@ -10,12 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introduction
 
-This chapter introduces the concept of Exploratory Data Analysis (EDA), a foundational practice in Data Science for understanding data before any formal modeling. EDA was popularized by John Tukey in 1962 and emphasizes visualization and summary statistics.
-
-<a href="https://en.wikipedia.org/wiki/Traffic_light" target="_blank">
-  <img src="traffic_light.jpg" width="300"/>
-</a>
-
+This chapter introduces the concept of Exploratory Data Analysis (EDA), a foundational practice in Data Science for understanding data before any formal modeling. EDA was popularized by [John Tukey](Tukey.html) in 1962 and emphasizes visualization and summary statistics.
 
 ## Elements of Structured Data
 
@@ -23,8 +19,8 @@ Data can be structured or unstructured. To analyze using statistical tools, we o
 
 There are two major data types:
 
-- **Numeric**: Continuous (e.g., height), Discrete (e.g., number of children)
-- **Categorical**: Ordinal (e.g., education level), Nominal (e.g., gender), Binary (e.g., yes/no)
+-   **Numeric**: Continuous (e.g., height), Discrete (e.g., number of children)
+-   **Categorical**: Ordinal (e.g., education level), Nominal (e.g., gender), Binary (e.g., yes/no)
 
 ```{r}
 # Example of structured cricket data in R
@@ -41,8 +37,8 @@ str(cricket_data)
 
 Rectangular data structures (tables) are standard for analysis, with:
 
-- **Rows** = records/observations
-- **Columns** = variables/features
+-   **Rows** = records/observations
+-   **Columns** = variables/features
 
 ```{r}
 # Example of a data frame with cricket match summary
@@ -82,7 +78,7 @@ team_data
 
 In Python, pandas DataFrames are the equivalent structure. They also use row indexes by default and support user-defined and hierarchical indexes:
 
-```python
+``` python
 import pandas as pd
 
 data_tbl = pd.DataFrame({'ID': [1, 2, 3], 'Name': ['A', 'B', 'C']})
@@ -93,12 +89,12 @@ print(data_tbl)
 
 There are terminology differences depending on the background:
 
-| Concept         | Statistics         | Data Science / Python | R                |
-|----------------|--------------------|------------------------|------------------|
-| Row            | Observation, Case  | Sample, Record         | Observation       |
-| Column         | Variable           | Feature, Attribute     | Variable          |
-| Dependent Var  | Response           | Target                 | Response          |
-| Independent Var| Predictor          | Feature                | Predictor         |
+| Concept         | Statistics        | Data Science / Python | R           |
+|-----------------|-------------------|-----------------------|-------------|
+| Row             | Observation, Case | Sample, Record        | Observation |
+| Column          | Variable          | Feature, Attribute    | Variable    |
+| Dependent Var   | Response          | Target                | Response    |
+| Independent Var | Predictor         | Feature               | Predictor   |
 
 This confusion can lead to misunderstandings. For example, a "sample" in statistics means a set of observations from a population, while in data science, a "sample" may refer to a single observation (row).
 
@@ -106,9 +102,9 @@ This confusion can lead to misunderstandings. For example, a "sample" in statist
 
 Not all data is rectangular. Other forms include:
 
-- **Time Series**: measurements over time
-- **Spatial Data**: data with geographic components
-- **Graphs/Networks**: nodes and edges (e.g., social networks)
+-   **Time Series**: measurements over time
+-   **Spatial Data**: data with geographic components
+-   **Graphs/Networks**: nodes and edges (e.g., social networks)
 
 ```{r}
 # Simulate a time series of runs scored per over
@@ -119,7 +115,7 @@ runs_per_over
 
 Python (using pandas):
 
-```python
+``` python
 import numpy as np
 import pandas as pd
 
@@ -134,10 +130,10 @@ These formats require special tools and packages (e.g., `xts`, `sf`, or `igraph`
 
 To understand where most data values lie:
 
-- **Mean**: Average
-- **Median**: Middle value
-- **Trimmed Mean**: Removes extremes before averaging
-- **Weighted Mean**: Mean adjusted by weights
+-   **Mean**: Average
+-   **Median**: Middle value
+-   **Trimmed Mean**: Removes extremes before averaging
+-   **Weighted Mean**: Mean adjusted by weights
 
 ```{r}
 # Runs scored by a player in 4 matches
@@ -156,7 +152,7 @@ weighted.mean(runs, w = balls_faced)
 
 In Python:
 
-```python
+``` python
 import numpy as np
 x = np.array([5, 10, 15])
 wts = np.array([1, 2, 1])
@@ -181,7 +177,7 @@ weightedMedian(x = c(5, 10, 15), w = c(1, 2, 1))
 
 In Python:
 
-```python
+``` python
 import wquantiles
 wquantiles.median(x, weights=wts)
 ```
@@ -190,11 +186,11 @@ wquantiles.median(x, weights=wts)
 
 Variability measures how spread out the values are in a dataset. Key measures include:
 
-- **Variance**: average of squared deviations from the mean
-- **Standard Deviation**: square root of variance
-- **Mean Absolute Deviation (MAD)**: mean of absolute deviations from the mean
-- **Median Absolute Deviation**: median of absolute deviations from the median (robust)
-- **Interquartile Range (IQR)**: difference between 75th and 25th percentiles
+-   **Variance**: average of squared deviations from the mean
+-   **Standard Deviation**: square root of variance
+-   **Mean Absolute Deviation (MAD)**: mean of absolute deviations from the mean
+-   **Median Absolute Deviation**: median of absolute deviations from the median (robust)
+-   **Interquartile Range (IQR)**: difference between 75th and 25th percentiles
 
 ```{r}
 # Bowling economy rates across matches
@@ -216,7 +212,7 @@ IQR(economy)
 
 In Python:
 
-```python
+``` python
 import numpy as np
 import pandas as pd
 from statsmodels import robust
@@ -239,8 +235,8 @@ Each metric gives us different insights. Standard deviation is most commonly rep
 
 When calculating variance from a **sample**, we divide by `n - 1` instead of `n` to avoid **underestimating** the population variance. This adjustment is known as using the **degrees of freedom**.
 
-- Dividing by `n` results in a **biased** (too small) estimate of the population variance.
-- Dividing by `n - 1` gives an **unbiased** estimate.
+-   Dividing by `n` results in a **biased** (too small) estimate of the population variance.
+-   Dividing by `n - 1` gives an **unbiased** estimate.
 
 ```{r}
 # Variance in delivery speeds (in km/h)
@@ -257,16 +253,16 @@ var(delivery_speeds)            # Unbiased (default in R)
 
 This difference is usually minor for large datasets but can be important in small samples. The reason for dividing by `n - 1` has to do with how much freedom the data has to vary when we already used some of that information (e.g., when we first calculated the mean). Since we use the sample mean in the variance formula, we lose 1 degree of freedom. That’s why we divide by `n - 1` instead of `n`. Fortunately, in practice, most data science problems don’t require worrying deeply about this unless you're working with very small datasets.
 
----
+------------------------------------------------------------------------
 
 ## Estimates Based on Percentiles
 
 Percentiles are useful for understanding the distribution of player performance. A **percentile** is a value below which a given percentage of observations fall.
 
-- The **25th percentile** is the value below which 25% of the data lie.
-- The **50th percentile** is the **median**.
-- The **75th percentile** shows the value below which 75% of the data lie.
-- The **interquartile range (IQR)** is the range between the 75th and 25th percentiles.
+-   The **25th percentile** is the value below which 25% of the data lie.
+-   The **50th percentile** is the **median**.
+-   The **75th percentile** shows the value below which 75% of the data lie.
+-   The **interquartile range (IQR)** is the range between the 75th and 25th percentiles.
 
 Percentiles are especially helpful in cricket when analyzing batting scores or bowling figures with potential outliers.
 
@@ -279,7 +275,7 @@ IQR(runs)  # Interquartile range
 
 In Python:
 
-```python
+``` python
 import numpy as np
 runs = np.array([15, 30, 45, 60, 75, 90, 105, 120])
 np.percentile(runs, [25, 50, 75])
@@ -290,7 +286,7 @@ np.percentile(runs, 75) - np.percentile(runs, 25)  # IQR
 
 Percentiles and IQR are **robust**—less sensitive to outliers than standard deviation.
 
----
+------------------------------------------------------------------------
 
 ## Exploring the Data Distribution
 
@@ -325,13 +321,14 @@ boxplot(scores,
 ```
 
 ### Key Terms
-- **Histogram**: Displays how frequently each range of values appears.
-- **Density Plot**: A smooth curve that estimates the distribution of the data.
-- **Boxplot**: Highlights the **median**, **interquartile range (IQR)**, and **potential outliers**. Useful for comparing across players or formats.
+
+-   **Histogram**: Displays how frequently each range of values appears.
+-   **Density Plot**: A smooth curve that estimates the distribution of the data.
+-   **Boxplot**: Highlights the **median**, **interquartile range (IQR)**, and **potential outliers**. Useful for comparing across players or formats.
 
 These visualizations are essential for understanding player performance, identifying outliers (like a century among low scores), or checking consistency (tight IQR).
 
----
+------------------------------------------------------------------------
 
 ## Exploring Binary and Categorical Data
 
@@ -356,6 +353,7 @@ barplot(table(roles),
         ylab = "Number of Players",
         col = rainbow(3))
 ```
+
 ```{r}
 # Mode: Most frequent player role
 roles <- c("Batsman", "Bowler", "All-Rounder", "Batsman", "Bowler", "Bowler")
@@ -370,7 +368,7 @@ outcome_counts <- table(match_outcomes)
 pie(outcome_counts, main = "Match Outcomes", col = c("green", "red"))
 ```
 
-```
+```         
 match_outcomes <- c("Win", "Win", "Loss", "Win", "Loss", "Loss", "Win")
 outcome_counts <- table(match_outcomes)
 pie(outcome_counts, main = "Match Outcomes", col = c("green", "red"))
@@ -399,7 +397,7 @@ probabilities <- prop.table(outcomes)
 probabilities
 ```
 
-- The result tells us the estimated chance of a win or loss based on historical match data.
+-   The result tells us the estimated chance of a win or loss based on historical match data.
 
 ## Correlation
 
@@ -456,25 +454,23 @@ ggplot(data = melted_cor, aes(Var1, Var2, fill = value)) +
   labs(title = "Correlation Heatmap: Player Stats", x = "", y = "")
 ```
 
-This heatmap shows how different player performance metrics are related to each other. For instance:
-- **Runs** and **StrikeRate** have a strong positive correlation, meaning players who score more tend to have higher strike rates.
-- **Runs** and **BallsFaced** also show a positive correlation—longer innings usually lead to higher scores.
-- **Sixes** may not correlate strongly with **BallsFaced**, which can indicate aggressive hitting in shorter time.
+This heatmap shows how different player performance metrics are related to each other. For instance: - **Runs** and **StrikeRate** have a strong positive correlation, meaning players who score more tend to have higher strike rates. - **Runs** and **BallsFaced** also show a positive correlation—longer innings usually lead to higher scores. - **Sixes** may not correlate strongly with **BallsFaced**, which can indicate aggressive hitting in shorter time.
 
-Blue colors represent negative or weak correlations, while red colors represent strong positive ones. This helps analysts quickly spot which stats tend to move together. For example, strong positive correlation between Runs and StrikeRate or BallsFaced can be expected, while weaker or negative correlations may indicate independent or inverse relationships. 
+Blue colors represent negative or weak correlations, while red colors represent strong positive ones. This helps analysts quickly spot which stats tend to move together. For example, strong positive correlation between Runs and StrikeRate or BallsFaced can be expected, while weaker or negative correlations may indicate independent or inverse relationships.
 
 ## Exploring Two or More Variables
 
 While estimators like mean and variance describe single variables (**univariate analysis**), exploring relationships between two or more variables offers deeper insight.
 
-- **Bivariate analysis** compares two variables (e.g., runs vs. strike rate).
-- **Multivariate analysis** explores interactions among three or more variables.
+-   **Bivariate analysis** compares two variables (e.g., runs vs. strike rate).
+-   **Multivariate analysis** explores interactions among three or more variables.
 
 ### Key Terms for Exploring Two or More Variables
-- **Contingency table**: A tally of counts between two or more categorical variables.
-- **Hexagonal binning**: A scatterplot with numeric variables grouped into hexagonal bins.
-- **Contour plot**: A density-based topographical view of two numeric variables.
-- **Violin plot**: Combines boxplot with a density plot to show distribution shape.
+
+-   **Contingency table**: A tally of counts between two or more categorical variables.
+-   **Hexagonal binning**: A scatterplot with numeric variables grouped into hexagonal bins.
+-   **Contour plot**: A density-based topographical view of two numeric variables.
+-   **Violin plot**: Combines boxplot with a density plot to show distribution shape.
 
 ```{r}
 # Contingency table: Player position vs match result
@@ -483,13 +479,14 @@ result <- c("Win", "Loss", "Win", "Win", "Loss", "Loss", "Win")
 table(position, result)
 ```
 
-```python
+``` python
 import pandas as pd
 position = ["Forward", "Midfielder", "Forward", "Defender", "Midfielder", "Defender", "Forward"]
 result = ["Win", "Loss", "Win", "Win", "Loss", "Loss", "Win"]
 df = pd.DataFrame({'Position': position, 'Result': result})
 print(pd.crosstab(df['Position'], df['Result']))
 ```
+
 ```{r}
 library(hexbin)
 library(ggplot2)
@@ -516,12 +513,11 @@ ggplot(batting, aes(x = BallsFaced, y = Runs)) +
 
 he hexbin plot above visualizes the relationship between **Runs** and **Balls Faced** across 50 matches. Each hexagon represents a bin, and its color indicates the number of observations that fall within that bin.
 
-- **Darker blue hexagons** indicate more frequent combinations of Runs and Balls Faced.
-- You’ll notice that most observations fall around the 35–45 ball range and 30–50 run range.
-- This suggests players commonly score in that zone, and longer innings (more balls faced) often lead to more runs.
+-   **Darker blue hexagons** indicate more frequent combinations of Runs and Balls Faced.
+-   You’ll notice that most observations fall around the 35–45 ball range and 30–50 run range.
+-   This suggests players commonly score in that zone, and longer innings (more balls faced) often lead to more runs.
 
-
-```python
+``` python
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
@@ -536,7 +532,6 @@ plt.colorbar()
 plt.show()
 ```
 
-
 ```{r}
 # Contour plot: Batting average vs Strike Rate
 library(MASS)
@@ -549,14 +544,13 @@ contour(dens, xlab = "Batting Average", ylab = "Strike Rate",
 
 The contour plot visualizes the **joint density** of two continuous variables—in this case, **Batting Average** and **Strike Rate**.
 
-- Lines on the plot represent areas of equal density (like elevation contours on a topographic map).
-- **Tightly packed lines** indicate areas with higher concentration of observations.
-- The plot suggests that most players have a batting average between 45 and 55 and a strike rate between 75 and 95.
+-   Lines on the plot represent areas of equal density (like elevation contours on a topographic map).
+-   **Tightly packed lines** indicate areas with higher concentration of observations.
+-   The plot suggests that most players have a batting average between 45 and 55 and a strike rate between 75 and 95.
 
 Contour plots are especially useful for detecting patterns or clusters in two-dimensional numeric data and for identifying regions of high density.
 
-
-```python
+``` python
 from scipy.stats import gaussian_kde
 import numpy as np
 import matplotlib.pyplot as plt
@@ -589,7 +583,7 @@ ggplot(sprint_data, aes(x = Gender, y = Time, fill = Gender)) +
   theme_minimal()
 ```
 
-```python
+``` python
 import seaborn as sns
 import pandas as pd
 import numpy as np
@@ -604,6 +598,3 @@ plt.show()
 ```
 
 These tools help uncover patterns and interactions among variables, like performance differences by player position, role, gender, or physical metrics.
-
-
- 
