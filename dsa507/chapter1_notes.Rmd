@@ -13,6 +13,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 This chapter introduces the concept of Exploratory Data Analysis (EDA), a foundational practice in Data Science for understanding data before any formal modeling. EDA was popularized by [John Tukey](Tukey.html) in 1962 and emphasizes visualization and summary statistics.
 
+###### ([My connection with Tukey](academic_geneology_of_Rajitha_Silva.pdf))
+
 ## Elements of Structured Data
 
 Data can be structured or unstructured. To analyze using statistical tools, we often convert unstructured data into a structured, tabular format (like spreadsheets or data frames).
