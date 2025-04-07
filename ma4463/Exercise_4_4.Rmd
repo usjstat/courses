@@ -1,0 +1,131 @@
+---
+title: "Exercise 4.4: Bayesian Inference for Learning from Rounded Data"
+author: "Rajitha M. Silva"
+date: 
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+In many practical scenarios, measurements are recorded in **rounded form** rather than exact values. Here, we analyze such data using **Bayesian inference**, assuming a normal distribution with an **unknown mean** \( \mu \) and **variance** \( \sigma^2 \).
+
+We compare the inference obtained by:
+1. **Ignoring rounding and treating values as exact.**
+2. **Correctly incorporating the rounding process in the likelihood.**
+
+# Data
+
+The observed (rounded) weight measurements (in pounds) are:
+
+```{r}
+weights <- c(10, 11, 12, 11, 9)
+```
+
+We assume these observations are **normally distributed**:
+
+\[
+Y_i \sim N(\mu, \sigma^2)
+\]
+
+# Bayesian Model
+
+We use a **noninformative prior**:
+
+\[
+p(\mu, \sigma^2) \propto \frac{1}{\sigma^2}
+\]
+
+which expresses no strong prior belief about \( \mu \) and \( \sigma^2 \).
+
+# Posterior Simulation (Ignoring Rounding)
+
+Assuming the data is exact, we sample from the joint posterior distribution of \( (\mu, \sigma^2) \):
+
+```{r}
+set.seed(123)
+
+# Compute summary statistics
+n <- length(weights)
+y_bar <- mean(weights)
+S <- sum((weights - y_bar)^2)
+
+# Simulate from posterior distribution
+sigma2_samples <- S / rchisq(1000, df = n - 1)
+mu_samples <- rnorm(1000, mean = y_bar, sd = sqrt(sigma2_samples) / sqrt(n))
+```
+
+# 90% Credible Intervals (Ignoring Rounding)
+
+```{r}
+ci_mu <- quantile(mu_samples, c(0.05, 0.95))
+ci_sigma <- quantile(sqrt(sigma2_samples), c(0.05, 0.95))
+
+list(mu_CI = ci_mu, sigma_CI = ci_sigma)
+```
+
+# Posterior Distribution with Correct Rounding Likelihood
+
+We correctly account for the rounding process by modeling the likelihood as:
+
+\[
+P(Y_i = y) = P(y - 0.5 \leq X_i < y + 0.5)
+\]
+
+where \( X_i \sim N(\mu, \sigma^2) \). The likelihood is computed using the **cumulative normal distribution**:
+
+\[
+P(Y_i = y) = \Phi\left(\frac{y+0.5 - \mu}{\sigma}\right) - \Phi\left(\frac{y-0.5 - \mu}{\sigma}\right)
+\]
+
+We now compute the **posterior distribution using a grid approach**:
+
+```{r}
+library(LearnBayes)
+
+grid_mu <- seq(8, 12, length.out = 100)
+grid_sigma <- seq(0.1, 5, length.out = 100)
+grid <- expand.grid(mu = grid_mu, sigma = grid_sigma)
+
+grid$log_likelihood <- apply(grid, 1, function(params) {
+  mu <- params["mu"]
+  sigma <- params["sigma"]
+  sum(log(pnorm(weights + 0.5, mu, sigma) - pnorm(weights - 0.5, mu, sigma)))
+})
+
+grid$log_posterior <- grid$log_likelihood - max(grid$log_likelihood)
+grid$posterior <- exp(grid$log_posterior)
+grid$posterior <- grid$posterior / sum(grid$posterior)
+```
+
+# Simulating from the Correct Posterior
+
+```{r}
+set.seed(123)
+posterior_samples <- grid[sample(1:nrow(grid), size = 1000, prob = grid$posterior, replace = TRUE), ]
+```
+
+# 90% Credible Intervals (Correct Posterior)
+
+```{r}
+ci_correct_mu <- quantile(posterior_samples$mu, c(0.05, 0.95))
+ci_correct_sigma <- quantile(posterior_samples$sigma, c(0.05, 0.95))
+
+list(correct_mu_CI = ci_correct_mu, correct_sigma_CI = ci_correct_sigma)
+```
+
+# Comparing the Results
+
+```{r}
+comparison <- data.frame(
+  Model = c("Ignoring Rounding", "Correct Rounding"),
+  Mu_Lower = c(ci_mu[1], ci_correct_mu[1]),
+  Mu_Upper = c(ci_mu[2], ci_correct_mu[2]),
+  Sigma_Lower = c(ci_sigma[1], ci_correct_sigma[1]),
+  Sigma_Upper = c(ci_sigma[2], ci_correct_sigma[2])
+)
+comparison
+```

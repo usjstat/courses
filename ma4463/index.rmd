@@ -1,0 +1,47 @@
+---
+title: "MA4463 Bayesian Statistics"
+output: 
+  html_document:
+    theme: cosmo
+    highlight: tango
+---
+
+# MA4463 Bayesian Statistics  
+  
+**Schedule:** Monday, 8.30 a.m. 11.30 a.m.
+**Venue:** SLIIT
+**Instructor:** Dr. Rajitha M. Silva  
+
+
+---
+
+## Introduction
+
+This course offers a practical and computational approach to Bayesian inference, focusing on simulation-based techniques for solving complex models.
+
+Students will learn:
+- The foundations of Bayesian thinking
+- Posterior analysis using simulation
+- Markov Chain Monte Carlo (MCMC) methods
+- Model comparison and convergence diagnostics
+
+We will work primarily in **R**, using packages such as `rstan`, `rjags`, and `brms`.  
+
+All course materials will be published on this page.
+
+---
+
+## Lecture Notes
+
+> Click on each link to view the lecture content and downloadable code/handouts.
+
+- [Multiparameter Models](multiparameter-models.html)
+ - - [Exercise_4_1](Exercise_4_1.html)
+
+
+---
+
+## Contact
+
+For questions or clarifications, please reach out via email.
+

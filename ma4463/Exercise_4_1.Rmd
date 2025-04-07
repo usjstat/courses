@@ -1,0 +1,145 @@
+---
+title: "Exercise 4.1. Bayesian Inference for Normal Population with Unknown Mean and Variance"
+author: "Rajitha M. Silva"
+date: 
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+In this analysis, we examine the **sleeping habits of students** at a college using **Bayesian inference**. We assume that the collected data represent a **random sample** from a **normal population** with unknown **mean** \( \mu \) and **variance** \( \sigma^2 \).
+
+# Data
+
+We use the following observed sleeping times (in hours) from 20 students:
+
+```{r}
+sleep_times <- c(9.0, 8.5, 7.0, 8.5, 6.0, 12.5, 6.0, 9.0, 8.5, 7.5, 
+                 8.0, 6.0, 9.0, 8.0, 7.0, 10.0, 9.0, 7.5, 5.0, 6.5)
+```
+
+# Bayesian Model
+
+We assume:
+
+\[
+Y_i \sim N(\mu, \sigma^2)
+\]
+
+where \( \mu \) and \( \sigma^2 \) are **unknown parameters**.
+
+## Prior Distribution
+
+We use a **noninformative prior**:
+
+\[
+p(\mu, \sigma^2) \propto \frac{1}{\sigma^2}
+\]
+
+This expresses **no strong prior knowledge** about \( \mu \) and \( \sigma^2 \), allowing the data to dominate inference.
+
+## Posterior Distribution
+
+Using **Bayes' Theorem**, the posterior distribution is:
+
+\[
+p(\mu, \sigma^2 | y) \propto \frac{1}{(\sigma^2)^{n/2 + 1}} 
+\exp \left( -\frac{1}{2\sigma^2} (S + n(\mu - \bar{y})^2) \right)
+\]
+
+where:
+- \( n = 20 \) (sample size),
+- \( \bar{y} \) is the sample mean,
+- \( S \) is the sum of squared deviations from the mean:
+
+\[
+S = \sum_{i=1}^{n} (y_i - \bar{y})^2
+\]
+
+From this, we derive:
+1. The **conditional posterior** of \( \mu \) given \( \sigma^2 \):
+
+\[
+\mu | \sigma^2, y \sim N(\bar{y}, \frac{\sigma}{\sqrt{n}})
+\]
+
+2. The **marginal posterior** of \( \sigma^2 \):
+
+\[
+\sigma^2 | y \sim S \cdot \chi^{-2}_{n-1}
+\]
+
+where \( \chi^{-2}_{n-1} \) is an **inverse chi-square** distribution with \( n-1 \) degrees of freedom.
+
+# Posterior Simulation
+
+To generate samples from the **joint posterior** of \( (\mu, \sigma^2) \), we:
+1. Sample \( \sigma^2 \) from an **inverse chi-square** distribution.
+2. Given each sampled \( \sigma^2 \), sample \( \mu \) from a normal distribution.
+
+```{r}
+set.seed(123)
+
+# Compute summary statistics
+n <- length(sleep_times)
+y_bar <- mean(sleep_times)
+S <- sum((sleep_times - y_bar)^2)
+
+# Simulate from posterior distribution
+sigma2_samples <- S / rchisq(1000, df = n - 1)
+mu_samples <- rnorm(1000, mean = y_bar, sd = sqrt(sigma2_samples) / sqrt(n))
+```
+
+# 90% Credible Intervals
+
+## 90% Credible Interval for \( \mu \)
+
+```{r}
+ci_mu <- quantile(mu_samples, c(0.05, 0.95))
+ci_mu
+```
+
+## 90% Credible Interval for \( \sigma \)
+
+Since we need the **standard deviation** \( \sigma \), we take the **square root** of the \( \sigma^2 \) samples:
+
+```{r}
+sigma_samples <- sqrt(sigma2_samples)
+ci_sigma <- quantile(sigma_samples, c(0.05, 0.95))
+ci_sigma
+```
+
+# Estimating the Upper Quartile (\( p_{75} \))
+
+The upper quartile \( p_{75} \) of a normal distribution is:
+
+\[
+p_{75} = \mu + 0.674\sigma
+\]
+
+We compute its posterior distribution:
+
+```{r}
+p75_samples <- mu_samples + 0.674 * sigma_samples
+
+# Posterior mean and standard deviation
+p75_mean <- mean(p75_samples)
+p75_sd <- sd(p75_samples)
+
+# 90% credible interval for p75
+ci_p75 <- quantile(p75_samples, c(0.05, 0.95))
+
+list(mean = p75_mean, sd = p75_sd, ci = ci_p75)
+```
+
+# Summary of Results
+
+- **90% Credible Interval for \( \mu \)**: `r round(ci_mu, 2)`
+- **90% Credible Interval for \( \sigma \)**: `r round(ci_sigma, 2)`
+- **Posterior Mean of \( p_{75} \)**: `r round(p75_mean, 2)`
+- **Posterior SD of \( p_{75} \)**: `r round(p75_sd, 2)`
+- **90% Credible Interval for \( p_{75} \)**: `r round(ci_p75, 2)`

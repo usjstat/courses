@@ -1,0 +1,139 @@
+---
+title: "Exercise 4.2: Bayesian Inference for the Behrens-Fisher Problem"
+author: "Rajitha M. Silva"
+date: 
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+The **Behrens-Fisher problem** involves comparing the means of two independent normal distributions when their variances are unknown. 
+This is relevant in various scientific applications, such as comparing measurements from different populations.
+
+Here, we analyze the **mandible lengths of male and female golden jackals** to determine whether the means differ significantly.
+
+# Data
+
+The observed mandible lengths (in mm) are:
+
+```{r}
+male_lengths <- c(120, 107, 110, 116, 114, 111, 113, 117, 114, 112)
+female_lengths <- c(110, 111, 107, 108, 110, 105, 107, 106, 111, 111)
+```
+
+# Bayesian Model
+
+We assume:
+
+\[
+X_i \sim N(\mu_1, \sigma_1^2), \quad Y_j \sim N(\mu_2, \sigma_2^2)
+\]
+
+for two independent normal populations.
+
+## Prior Distribution
+
+We use the **noninformative prior**:
+
+\[
+p(\mu_1, \sigma_1^2, \mu_2, \sigma_2^2) \propto \frac{1}{\sigma_1^2 \sigma_2^2}
+\]
+
+which expresses **no strong prior knowledge** about the parameters.
+
+## Posterior Distribution
+
+From Bayesian theory, we derive the posterior distributions:
+
+1. **Conditional posterior** of \( \mu_1 \) given \( \sigma_1^2 \):
+   
+   \[
+   \mu_1 | \sigma_1^2, X \sim N(\bar{X}, \frac{\sigma_1}{\sqrt{m}})
+   \]
+
+2. **Marginal posterior** of \( \sigma_1^2 \):
+   
+   \[
+   \sigma_1^2 | X \sim S_1 \cdot \chi^{-2}_{m-1}
+   \]
+
+where \( S_1 \) is the sum of squared deviations from the mean.
+
+The same holds for \( \mu_2 \) and \( \sigma_2^2 \) in the second population.
+
+# Posterior Simulation
+
+To generate samples from the **joint posterior** of \( (\mu_1, \sigma_1^2, \mu_2, \sigma_2^2) \), we:
+1. Compute summary statistics.
+2. Sample \( \sigma_1^2 \) and \( \sigma_2^2 \) from inverse chi-square distributions.
+3. Sample \( \mu_1 \) and \( \mu_2 \) from normal distributions.
+
+```{r}
+set.seed(123)
+
+# Compute summary statistics
+m <- length(male_lengths)
+n <- length(female_lengths)
+
+x_bar <- mean(male_lengths)
+y_bar <- mean(female_lengths)
+
+S1 <- sum((male_lengths - x_bar)^2)
+S2 <- sum((female_lengths - y_bar)^2)
+
+# Simulate from posterior distribution
+sigma1_sq_samples <- S1 / rchisq(1000, df = m - 1)
+sigma2_sq_samples <- S2 / rchisq(1000, df = n - 1)
+
+mu1_samples <- rnorm(1000, mean = x_bar, sd = sqrt(sigma1_sq_samples) / sqrt(m))
+mu2_samples <- rnorm(1000, mean = y_bar, sd = sqrt(sigma2_sq_samples) / sqrt(n))
+```
+
+# Difference in Means
+
+We estimate the difference in population means:
+
+```{r}
+diff_mu_samples <- mu1_samples - mu2_samples
+
+# Compute posterior mean and 95% credible interval
+posterior_mean_diff <- mean(diff_mu_samples)
+ci_diff <- quantile(diff_mu_samples, c(0.025, 0.975))
+
+list(mean_diff = posterior_mean_diff, credible_interval = ci_diff)
+```
+
+# 90% Credible Intervals
+
+## 90% Credible Interval for \( \mu_1 \) and \( \mu_2 \)
+
+```{r}
+ci_mu1 <- quantile(mu1_samples, c(0.05, 0.95))
+ci_mu2 <- quantile(mu2_samples, c(0.05, 0.95))
+
+list(mu1_ci = ci_mu1, mu2_ci = ci_mu2)
+```
+
+## 90% Credible Interval for \( \sigma_1 \) and \( \sigma_2 \)
+
+```{r}
+sigma1_samples <- sqrt(sigma1_sq_samples)
+sigma2_samples <- sqrt(sigma2_sq_samples)
+
+ci_sigma1 <- quantile(sigma1_samples, c(0.05, 0.95))
+ci_sigma2 <- quantile(sigma2_samples, c(0.05, 0.95))
+
+list(sigma1_ci = ci_sigma1, sigma2_ci = ci_sigma2)
+```
+
+# Summary of Results
+
+- **95% Credible Interval for Difference in Means**: `r round(ci_diff, 2)`
+- **90% Credible Interval for \( \mu_1 \)**: `r round(ci_mu1, 2)`
+- **90% Credible Interval for \( \mu_2 \)**: `r round(ci_mu2, 2)`
+- **90% Credible Interval for \( \sigma_1 \)**: `r round(ci_sigma1, 2)`
+- **90% Credible Interval for \( \sigma_2 \)**: `r round(ci_sigma2, 2)`
