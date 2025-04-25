@@ -38,6 +38,8 @@ All course materials will be published on this page.
 
 - [Chapter 1: The Big (Bayesian) Picture](chapter1_notes.html)
 
+- [Chapter 2: Bayes Rule](chapter2.html)
+
 
 ---
 
