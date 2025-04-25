@@ -1,0 +1,1148 @@
+
+---
+title: "Chapter 2: Bayes' Rule - Simplified"
+author: "Simplified by Dr. Rajitha M. Silva"
+output: html_document
+---
+
+# Introduction
+
+In this lecture, we focus on **Bayes' Rule**, the heart of Bayesian statistics. We'll use real-world examples-like detecting fake news based on punctuation-to understand how we update beliefs based on new evidence.
+
+This chapter introduces essential tools for Bayesian thinking: **marginal, conditional, joint probabilities**, and culminates in **Bayes' Rule**. All examples and calculations use both R and Python.
+
+---
+
+# The Fake News Example
+
+We're examining whether a news article is **fake** or **real** based on whether its **title contains an exclamation mark**.
+
+Based on the dataset:
+
+<div style="text-align:center">
+
+| title_has_excl | Fake | Real |
+|:---------------|-----:|-----:|
+| FALSE          |   44 |   88 |
+| TRUE           |   16 |    2 |
+| **Total**      |   60 |   90 |
+
+</div>
+
+From this we know:
+- 16 fake and 2 real articles contain an exclamation mark.
+- Total number of articles is 150.
+
+---
+
+# Step 1: Conditional Probability
+
+We first calculate two important conditional probabilities:
+
+- \( P(! \mid Fake) = \frac{16}{60} \)
+- \( P(Fake \mid !) = \frac{16}{18} \)
+
+These help us understand how often fake articles include exclamations and how likely an article is fake, **given** it contains one.
+
+```{r}
+p_exclamation_given_fake <- 16 / 60
+p_fake_given_exclaim <- 16 / 18
+
+p_exclamation_given_fake
+p_fake_given_exclaim
+```
+
+```{python}
+p_exclamation_given_fake = 16 / 60
+p_fake_given_exclaim = 16 / 18
+
+print("P(! | Fake):", round(p_exclamation_given_fake, 3))
+print("P(Fake | !):", round(p_fake_given_exclaim, 3))
+```
+
+---
+
+# Step 2: Bayes' Rule Setup
+
+Bayes' Rule lets us reverse conditional probabilities:
+
+\[
+P(Fake \mid !) = \frac{P(! \mid Fake) \cdot P(Fake)}{P(!)}
+\]
+
+With:
+
+- \( P(! \mid Fake) = 16/60 \)
+- \( P(Fake) = 60/150 \)
+- \( P(!) = (16+2)/150 = 18/150 \)
+
+```{r}
+likelihood <- 16 / 60
+prior <- 60 / 150
+evidence <- 18 / 150
+
+posterior <- (likelihood * prior) / evidence
+posterior
+```
+
+```{python}
+likelihood = 16 / 60
+prior = 60 / 150
+evidence = 18 / 150
+
+posterior = (likelihood * prior) / evidence
+print("Posterior P(Fake | !) using Bayes' Rule:", round(posterior, 3))
+```
+
+We get a posterior probability of ??? 0.889 - meaning that if we see an article with an exclamation mark, it's very likely to be fake.
+
+---
+
+# Conditional vs Reverse Conditional
+
+Let's highlight again:
+
+- \( P(! \mid Fake) = \frac{16}{60} = 0.267 \)
+- \( P(Fake \mid !) = \frac{16}{18} \approx 0.889 \)
+
+This shows how different the probabilities can be when the condition is flipped.
+
+```{r}
+p1 <- 16 / 60
+p2 <- 16 / 18
+
+c(p1 = p1, p2 = p2)
+```
+
+```{python}
+print({"P(! | Fake)": 16/60, "P(Fake | !)": 16/18})
+```
+
+---
+
+# Summary of Terms
+
+<div style="text-align:center">
+
+| Term         | Meaning                                  |
+|--------------|-------------------------------------------|
+| Prior        | Our initial belief (e.g., P(Fake) = 60/150) |
+| Likelihood   | P(! | Fake): Chance of seeing data if hypothesis is true |
+| Evidence     | P(!): Overall chance of seeing the data   |
+| Posterior    | Updated belief after seeing the data      |
+
+</div>
+
+---
+
+# Key Takeaway
+
+- \( P(A | B) 
+\neq P(B | A) \)
+- Bayes' Rule is the bridge between these - from **data to belief**.
+
+
+# Independence of Events
+
+Sometimes, learning new information **does not** change our belief about another event. In such cases, we say the events are **independent**.
+
+## Example: Shoes and Feet
+
+Let's say your friend owns **two pairs of shoes**:
+
+- One **yellow pair**
+- One **blue pair**
+
+Total: **4 shoes** - yellow-left, yellow-right, blue-left, and blue-right.
+
+Suppose they pick one shoe at random and don't show it to you. Initially:
+
+$$
+P(\text{Right Foot}) = \frac{2}{4} = 0.5
+$$
+
+Now they tell you:
+"I picked one of the **yellow shoes**."
+
+There are two yellow shoes - one left, one right - and they still picked one at random. So:
+
+$$
+P(\text{Right Foot} \mid \text{Yellow}) = \frac{1}{2} = 0.5
+$$
+
+That is, **learning the shoe's color didn't change our belief about which foot it's for**.
+
+> Shoe color and foot are **independent**.
+
+---
+
+## Definition: Independent Events
+
+Two events **A** and **B** are independent if:
+
+$$
+P(A \mid B) = P(A)
+$$
+
+Equivalently, if \(P(B) > 0\):
+
+$$
+P(A \cap B) = P(A) \cdot P(B)
+$$
+
+---
+
+##  Key Insight
+
+- If learning that B occurred **does change** the probability of A, A and B are **dependent**.
+- If it **does not change** the probability of A, A and B are **independent**.
+
+In the shoe example:
+- Let A = "Right Foot"
+- Let B = "Yellow Shoe"
+
+Then:
+
+$$
+P(A \mid B) = P(A) = 0.5 \Rightarrow A \text{ and } B \text{ are independent}
+$$
+# Probability vs. Likelihood
+
+Let's reexamine our fake news example with these conditional concepts in place. Earlier, we calculated:
+
+- \( P(! \mid 	\text{Fake}) = 16 / 60 = 0.267 \)
+- \( P(	\text{Fake} \mid !) = 16 / 18 \approx 0.889 \)
+
+At first glance, these might seem like they are answering the same question - but they're **not**. They differ in direction and purpose.
+
+---
+
+## Probability: Forward Thinking
+
+**Probability** answers:
+
+> "If the world behaves a certain way, what data would I expect to see?"
+
+In our example:
+
+- \( P(! \mid 	\text{Fake}) \) is the probability of seeing an exclamation mark, assuming the article is fake.
+- This is useful when simulating data: if we know something is fake, what's the chance it shouts with a "!"?
+
+---
+
+## Likelihood: Reverse Thinking
+
+**Likelihood** flips the problem and asks:
+
+> "Given that I saw some data, how plausible is each possible world (or parameter value)?"
+
+In our example:
+
+- We observe the data: the article has an exclamation mark (!)
+- We then compare:
+  - How likely is this if the article is fake? ??? \( P(! \mid 	\text{Fake}) \)
+  - How likely is this if the article is real? ??? \( P(! \mid 	\text{Real}) = 2 / 90 
+\approx 0.022 \)
+
+> We use these to judge **which hypothesis is more supported by the data**.
+
+---
+
+## Connection: Likelihood feeds Bayes' Rule
+
+Bayes' Rule takes:
+
+- **Prior** belief about Fake/Real
+- **Likelihood** of seeing an exclamation mark under each scenario
+- Combines them to yield a **posterior** probability:
+  
+\[
+P(	\text{Fake} \mid !) = \frac{P(! \mid 	\text{Fake}) \cdot P(	\text{Fake})}{P(!)}
+\]
+
+Here, the likelihood values \(P(! \mid 	\text{Fake})\) and \(P(! \mid 	\text{Real})\) help adjust our belief.
+
+---
+
+##  Key Insight
+
+- **Probability**: "Given the world, what's the chance of the data?"
+- **Likelihood**: "Given the data, how plausible is the world?"
+
+They use the same math (e.g., conditional probability), but for different purposes.
+
+
+---
+
+# Probability vs. Likelihood 
+
+Let's return to our fake news scenario and deepen our understanding of **probability** and **likelihood**-two ideas that look similar but serve different purposes.
+
+We previously computed:
+
+- \( P(! \mid 	\text{Fake}) = 16 / 60 = 0.267 \)
+- \( P(	\text{Fake} \mid !) = 16 / 18 \approx 0.889 \)
+
+These quantities might appear to be just inverses of each other-but they're actually answering different types of questions. Let's clarify.
+
+---
+
+##  What Is Probability?
+
+**Probability** quantifies the chance of an event happening **given some condition** or a model of the world. In the context of our fake news dataset:
+
+- \( P(! \mid 	\text{Fake}) \): The chance of an article **having an exclamation mark**, given that it is **fake**.
+
+This is a **forward-thinking** question: if we know the type of article, what can we expect to see in terms of features?
+
+It's useful in **generative settings** where we simulate or predict data from assumed conditions.
+
+---
+
+##  What Is Likelihood?
+
+Now flip the direction. Suppose you observe some **data**-say, an exclamation mark-and ask:
+
+> "How consistent is this data with various possible explanations of the world?"
+
+This is **likelihood**.
+
+For example:
+- The **likelihood** of the data (exclamation mark) under the assumption that the article is fake:  
+  \( L(	\text{Fake}) = P(! \mid 	\text{Fake}) = 16/60 \)
+
+- The **likelihood** of the data under the real news model:  
+  \( L(	\text{Real}) = P(! \mid 	\text{Real}) = 2/90 \approx 0.022 \)
+
+So while both quantities **use conditional probability**, **likelihood is about comparing models**, not predicting outcomes.
+
+---
+
+##  Side-by-Side Comparison
+
+<div style="text-align:center">
+
+| Concept        | Perspective            | Example                             | Purpose                     |
+|----------------|------------------------|-------------------------------------|-----------------------------|
+| Probability    | Given the model, how likely is the data? | \( P(! \mid 	\text{Fake}) \) | Predict data under a model |
+| Likelihood     | Given the data, how likely is the model? | \( L(\text{Fake}) = P(! \mid \text{Fake}) \) | Compare competing hypotheses |
+
+</div>
+
+---
+
+##  In Bayesian Updating
+
+Bayes' Rule uses **likelihood** to adjust **prior beliefs**:
+
+\[
+P(\text{Fake} \mid !) = \frac{P(! \mid 	\text{Fake}) \cdot P(\text{Fake})}{P(!)}
+\]
+
+Here's how it fits:
+
+- The **prior** \(P(\text{Fake})\) reflects our belief before seeing the title.
+- The **likelihood** \(P(! \mid 	\text{Fake})\) tells us how well this belief aligns with the observed data.
+- The **evidence** \(P(!)\) ensures we normalize across all models.
+- The **posterior** \(P(	\text{Fake} \mid !)\) is our updated belief.
+
+---
+
+##  Final Insight
+
+> Probability answers:  
+> *"What's the chance of this data under my model?"*
+
+> Likelihood answers:  
+> *"How much support does this data give each model?"*
+
+These are not just semantics-they are **core ideas** in Bayesian inference, and essential for machine learning, hypothesis testing, and decision theory.
+
+
+
+
+# Law of Total Probability and Bayes' Theorem
+
+##  Law of Total Probability (LTP)
+
+In Bayesian thinking, the Law of Total Probability helps us calculate the **marginal probability** of observed data by **summing over all possible causes**.
+
+###  General Form
+
+If \( A \) is an observed event, and \( B \), \( B^c \) are two possible states of the world, then:
+
+$$
+P(A) = P(A \cap B) + P(A \cap B^c) = P(A \mid B)P(B) + P(A \mid B^c)P(B^c)
+$$
+
+This is useful when we want to know how likely some data \( A \) is **regardless** of which hypothesis is true.
+
+### Fake News Example
+
+We observed that an article contains an exclamation mark (!). The marginal probability of this happening is:
+
+$$
+P(!) = P(! \mid \text{Fake}) \cdot P(\text{Fake}) + P(! \mid \text{Real}) \cdot P(\text{Real})
+$$
+
+Given:
+- \( P(! \mid \text{Fake}) = 0.2667 \)
+- \( P(! \mid \text{Real}) = 0.0222 \)
+- \( P(\text{Fake}) = 0.4 \)
+- \( P(\text{Real}) = 0.6 \)
+
+Then:
+$$
+P(!) = 0.2667 \cdot 0.4 + 0.0222 \cdot 0.6 = 0.1067 + 0.0133 = 0.12
+$$
+
+So, 12% of all articles use an exclamation mark.
+
+---
+
+##  Bayes' Theorem
+
+Bayes' Theorem allows us to **reverse the condition**. That is, compute:
+
+$$
+P(B \mid A) = \frac{P(B \cap A)}{P(A)} = \frac{P(B) \cdot P(A \mid B)}{P(A)}
+$$
+
+This formula is the backbone of Bayesian inference.
+
+### Fake News Posterior
+
+We use Bayes' Rule to update our belief that an article is **fake**, given we saw an exclamation mark:
+
+$$
+P(\text{Fake} \mid !) = \frac{P(! \mid \text{Fake}) \cdot P(\text{Fake})}{P(!)}
+= \frac{0.2667 \cdot 0.4}{0.12} = 0.889
+$$
+
+###  Summary Table
+
+<div style="text-align:center">
+
+| Step       | Value         |
+|------------|---------------|
+| Prior      | \( P(\text{Fake}) = 0.4 \) |
+| Likelihood | \( P(! \mid \text{Fake}) = 0.2667 \) |
+| Evidence   | \( P(!) = 0.12 \) |
+| Posterior  | \( P(\text{Fake} \mid !) = 0.889 \) |
+
+</div>
+
+> Bayes' Rule = Prior × Likelihood / Evidence
+
+This tells us: **Despite only 40% of articles being fake**, seeing an exclamation mark (more common in fake news) strongly shifts our belief to 88.9%.
+
+
+# Posterior Simulation (Section 2.1.5)
+
+Once we've calculated a posterior probability using Bayes' Rule, we can use **simulation** to better understand it. This is especially useful when:
+
+- Probabilities are hard to compute exactly
+- We want to estimate outcomes in large samples
+
+Let's walk through an example using our fake news data.
+
+## Scenario
+
+We already computed the posterior probability that a news article is fake **given** that it contains an exclamation mark:
+
+$$
+P(\text{Fake} \mid !) = 0.889
+$$
+
+Let's simulate this situation:
+
+---
+
+##  R Simulation: Sampling Based on Posterior
+
+```{r}
+set.seed(123)
+
+# Simulate 10,000 articles with exclamations
+posterior_samples <- sample(c("Fake", "Real"),
+                            size = 10000,
+                            replace = TRUE,
+                            prob = c(0.889, 0.111))
+
+# Estimate posterior from simulation
+table(posterior_samples)
+mean(posterior_samples == "Fake")
+```
+
+---
+
+##  Python Simulation
+
+```{python}
+import numpy as np
+import pandas as pd
+
+np.random.seed(123)
+
+# Simulate 10,000 news articles based on posterior probability
+samples = np.random.choice(["Fake", "Real"],
+                           size=10000,
+                           p=[0.889, 0.111])
+
+# Convert to pandas for easy analysis
+samples_df = pd.DataFrame(samples, columns=["Label"])
+posterior_mean = (samples_df["Label"] == "Fake").mean()
+
+print("Proportion of 'Fake' articles in simulation:", posterior_mean)
+```
+
+---
+
+##  Why Simulate?
+
+Simulation helps you:
+- Estimate **frequencies** when you can't easily compute them
+- Visualize **uncertainty**
+- Prepare for **Bayesian workflows** in more complex models (e.g., MCMC)
+
+In this example, the result will be very close to the analytical posterior (0.889) - confirming our calculations.
+
+
+---
+
+# Visualizing Posterior Simulation (Figure 2.2)
+
+After simulating from the posterior distribution, we can visualize the results. This bar plot shows how many of the 10,000 sampled articles were labeled "Fake" vs "Real".
+
+##  R Code for Posterior Bar Plot
+
+```{r fig.height=4, fig.width=6}
+set.seed(123)
+
+# Simulate 10,000 draws
+posterior_samples <- sample(c("Fake", "Real"),
+                            size = 10000,
+                            replace = TRUE,
+                            prob = c(0.889, 0.111))
+
+# Create a table of counts
+sample_table <- table(posterior_samples)
+
+# Bar plot
+barplot(sample_table,
+        col = c("forestgreen", "steelblue"),
+        main = "Simulated Article Status (Posterior Sample)",
+        ylab = "Count",
+        xlab = "Article Status")
+```
+
+---
+
+This bar chart provides a visual confirmation of our posterior belief: most articles with exclamation marks are likely fake.
+
+## Section 2.2: Example - Pop vs Soda vs Coke
+
+Let's apply Bayes' Rule to another scenario involving regional terminology preferences for carbonated beverages in the United States. Suppose you hear someone refer to a soft drink as "pop." Without knowing anything else, what is the most likely U.S. region they are from?
+
+We define four regions: Midwest (M), Northeast (N), South (S), and West (W). The prior probabilities of being from each region, based on U.S. Census data, are:
+
+<div style="text-align:center">
+
+| Region   | Probability |
+|:--------:|:-----------:|
+| Midwest  | 0.21        |
+| Northeast| 0.17        |
+| South    | 0.38        |
+| West     | 0.24        |
+
+</div>
+
+### Observed Data: Use of the Word "Pop"
+
+We now observe the use of the term "pop." From the `pop_vs_soda` dataset in the `bayesrules` R package, the estimated probabilities (likelihoods) of using the word "pop" in each region are derived as follows:
+
+```{r}
+# Load the data
+library(bayesrules)
+library(janitor)
+library(tidyverse)
+data(pop_vs_soda)
+
+# Summarize pop use by region
+pop_vs_soda %>%
+  tabyl(pop, region) %>%
+  adorn_percentages("col")
+```
+
+Extracting what we need from the output:
+
+<div style="text-align:center">
+
+| Region   | \( P(\text{pop} \mid \text{Region}) \) |
+|:--------:|:--------------------------------------:|
+| Midwest  | 0.6447                                |
+| Northeast| 0.2734                                |
+| South    | 0.0792                                |
+| West     | 0.2943                                |
+
+</div>
+
+### Step 1: Calculate Marginal Probability of Saying "Pop"
+
+Using the law of total probability:
+
+\[
+P(A) = \sum P(A \mid R_i)P(R_i) = 0.6447*0.21 + 0.2734*0.17 + 0.0792*0.38 + 0.2943*0.24 \approx 0.2826
+\]
+
+### Step 2: Calculate Posterior Probabilities Using Bayes' Rule
+
+Bayes' Rule:
+
+\[
+P(R_i \mid A) = \frac{P(R_i) P(A \mid R_i)}{P(A)}
+\]
+
+#### R Code
+```{r}
+# Prior probabilities
+prior <- c(M = 0.21, N = 0.17, S = 0.38, W = 0.24)
+
+# Likelihood of saying "pop"
+likelihood <- c(M = 0.6447, N = 0.2734, S = 0.0792, W = 0.2943)
+
+# Marginal probability of "pop"
+pop_marginal <- sum(prior * likelihood)
+
+# Posterior probabilities
+posterior <- (prior * likelihood) / pop_marginal
+round(posterior, 4)
+```
+
+#### Python Code
+```python
+import numpy as np
+
+prior = np.array([0.21, 0.17, 0.38, 0.24])
+likelihood = np.array([0.6447, 0.2734, 0.0792, 0.2943])
+
+# Marginal probability
+pop_marginal = np.sum(prior * likelihood)
+
+# Posterior
+posterior = (prior * likelihood) / pop_marginal
+np.round(posterior, 4)
+```
+
+Extracting what we need from the Output:
+
+<div style="text-align:center">
+
+| Region   | Posterior Probability |
+|:--------:|:---------------------:|
+| Midwest  | 0.4791                |
+| Northeast| 0.1645                |
+| South    | 0.1065                |
+| West     | 0.2499                |
+
+</div>
+
+### Interpretation
+Despite the South being the most populous region (with a prior of 0.38), the data (use of the word "pop") strongly points to the Midwest, boosting the posterior probability for the Midwest to 47.9%. This is a classic case where the likelihood influences the posterior significantly.
+
+## Section 2.3: Building a Bayesian model for random variables
+
+We now turn to modeling **numerical** outcomes using Bayes' Rule. Consider Kasparov vs. Deep Blue in a 6-game chess match. Our interest is in estimating Kasparov's win probability \( \pi \).
+
+### 2.3.1 Prior Probability Model
+
+Suppose we believe Kasparov's win probability \( \pi \) could be 0.2, 0.5, or 0.8 with prior probabilities 0.10, 0.25, and 0.65, respectively.
+
+<div style="text-align:center">
+
+| \(\pi\) | Prior \( f(\pi) \) |
+|:------:|:-----------------:|
+| 0.2    | 0.10              |
+| 0.5    | 0.25              |
+| 0.8    | 0.65              |
+
+</div>
+
+### 2.3.2 The Binomial Data Model
+
+Let \( Y \) be the number of wins in 6 games. Then:
+
+\[
+Y | \pi \sim \text{Bin}(6, \pi)
+\]
+
+Example:
+
+\[
+P(Y = 6 | \pi = 0.8) = {6 \choose 6}(0.8)^6 = 0.2621
+\]
+
+### 2.3.3 The Binomial Likelihood Function
+
+Suppose Kasparov wins 1 game. The likelihood function is:
+
+\[
+L(\pi | y = 1) = {6 \choose 1}\pi(1-\pi)^5 = 6\pi(1-\pi)^5
+\]
+
+Using R:
+```{r}
+# Likelihood values
+pi_vals <- c(0.2, 0.5, 0.8)
+likelihood <- 6 * pi_vals * (1 - pi_vals)^5
+likelihood
+```
+
+Using Python:
+```python
+pi_vals = np.array([0.2, 0.5, 0.8])
+likelihood = 6 * pi_vals * (1 - pi_vals)**5
+likelihood
+```
+
+### 2.3.4 Normalizing Constant
+
+Compute \( f(y=1) \):
+
+\[
+f(y=1) = \sum f(\pi)L(\pi | y = 1)
+\]
+
+#### R Code
+```{r}
+prior <- c(0.10, 0.25, 0.65)
+f_y1 <- sum(prior * likelihood)
+f_y1
+```
+
+#### Python Code
+```python
+prior = np.array([0.10, 0.25, 0.65])
+f_y1 = np.sum(prior * likelihood)
+f_y1
+```
+
+### 2.3.5 Posterior Probability Model
+
+\[
+f(\pi | y = 1) = \frac{f(\pi)L(\pi|y=1)}{f(y=1)}
+\]
+
+#### R Code
+```{r}
+posterior <- prior * likelihood / f_y1
+round(posterior, 3)
+```
+
+#### Python Code
+```python
+posterior = prior * likelihood / f_y1
+np.round(posterior, 3)
+```
+
+### 2.3.6 Posterior Shortcut
+
+Use unnormalized posterior and normalize manually:
+
+#### R Code
+```{r}
+unnorm_post <- prior * likelihood
+posterior <- unnorm_post / sum(unnorm_post)
+posterior
+```
+
+#### Python Code
+```python
+unnorm_post = prior * likelihood
+posterior = unnorm_post / np.sum(unnorm_post)
+posterior
+```
+
+### 2.3.7 Posterior Simulation
+
+#### R Code
+```{r}
+chess <- data.frame(pi = c(0.2, 0.5, 0.8))
+prior <- c(0.10, 0.25, 0.65)
+
+set.seed(84735)
+chess_sim <- sample_n(chess, size = 10000, weight = prior, replace = TRUE)
+chess_sim <- chess_sim %>% mutate(y = rbinom(10000, size = 6, prob = pi))
+
+win_one <- chess_sim %>% filter(y == 1)
+win_one %>% tabyl(pi) %>% adorn_totals("row")
+```
+
+#### Python Code
+```python
+import pandas as pd
+np.random.seed(84735)
+
+pi_values = np.array([0.2, 0.5, 0.8])
+prior = np.array([0.10, 0.25, 0.65])
+
+sim_pi = np.random.choice(pi_values, size=10000, p=prior)
+sim_y = np.random.binomial(n=6, p=sim_pi)
+
+df = pd.DataFrame({'pi': sim_pi, 'y': sim_y})
+posterior_sim = df[df['y'] == 1]['pi'].value_counts(normalize=True).sort_index()
+posterior_sim
+```
+
+This simulation supports our theoretical results by approximating the posterior probabilities through repeated sampling.
+
+---
+
+## Exercise 2.1: Comparing the Prior and Posterior
+
+**Problem:**  
+For each scenario below, you're given a pair of events, A and B. Explain what you believe to be the relationship between the posterior and prior probabilities of B: \( P(B \mid A) > P(B) \) or \( P(B \mid A) < P(B) \).
+
+**a)**  
+A = You just finished reading Lambda Literary Award-winning author Nicole Dennis-Benn's first novel, and you enjoyed it!  
+B = You will also enjoy Benn's newest novel.  
+**Solution**: \( P(B \mid A) > P(B) \) - Enjoying one book makes it more likely you'll enjoy another by the same author.
+
+**b)**  
+A = It's 0 degrees Fahrenheit in Minnesota on a January day.  
+B = It will be 60 degrees tomorrow.  
+**Solution**: \( P(B \mid A) < P(B) \) - Knowing it's currently extremely cold makes a sudden temperature rise seem less likely.
+
+**c)**  
+A = The authors only got 3 hours of sleep last night.  
+B = The authors make several typos in their writing today.  
+**Solution**: \( P(B \mid A) > P(B) \) - Lack of sleep increases the likelihood of making errors.
+
+**d)**  
+A = Your friend includes three hashtags in their tweet.  
+B = The tweet gets retweeted.  
+**Solution**: \( P(B \mid A) > P(B) \) - Hashtags are known to increase visibility and engagement on social media.
+
+## Exercise 2.2: Marginal, Conditional, or Joint?
+
+**Problem:**  
+Define the following events for a resident of a fictional town:
+- A = drives 10 miles per hour above the speed limit
+- B = gets a speeding ticket
+- C = took statistics at the local college
+- D = has used R
+- E = likes the music of Prince
+- F = is a Minnesotan
+
+Several facts about these events are listed below. Specify each of these facts using probability notation, paying special attention to whether it's a marginal, conditional, or joint probability.
+
+**a)** 73% of people that drive 10 miles per hour above the speed limit get a speeding ticket.  
+**Solution**: Conditional probability - \( P(B \mid A) = 0.73 \)
+
+**b)** 20% of residents drive 10 miles per hour above the speed limit.  
+**Solution**: Marginal probability - \( P(A) = 0.20 \)
+
+**c)** 15% of residents have used R.  
+**Solution**: Marginal probability - \( P(D) = 0.15 \)
+
+**d)** 91% of statistics students at the local college have used R.  
+**Solution**: Conditional probability - \( P(D \mid C) = 0.91 \)
+
+**e)** 38% of residents are Minnesotans that like the music of Prince.  
+**Solution**: Joint probability - \( P(E \cap F) = 0.38 \)
+
+**f)** 95% of the Minnesotan residents like the music of Prince.  
+**Solution**: Conditional probability - \( P(E \mid F) = 0.95 \)
+
+
+
+## Exercise 2.3: Binomial Practice
+
+**Problem:**  
+For each variable \( Y \) below, determine whether \( Y \) is Binomial.  
+If yes, use notation to specify this model and its parameters.  
+If not, explain why the Binomial model is not appropriate for \( Y \).
+
+---
+
+**a)** At a certain hospital, an average of 6 babies are born each hour.  
+Let \( Y \) be the number of babies born between 9 a.m. and 10 a.m. tomorrow.
+
+**Solution:**  
+Not Binomial. This is a count over a continuous time interval, and the number of births is not based on a fixed number of independent trials. It follows a **Poisson distribution** rather than a Binomial.
+
+---
+
+**b)** Tulips planted in fall have a 90% chance of blooming in spring.  
+You plant 27 tulips this year. Let \( Y \) be the number that bloom.
+
+**Solution:**  
+Binomial. Each tulip represents an independent trial with a binary outcome (bloom or not bloom).  
+\[
+Y \sim \text{Bin}(n = 27, \pi = 0.9)
+\]
+
+---
+
+**c)** Each time they try out for the television show *Ru Paul's Drag Race*, Alaska has a 17% probability of succeeding.  
+Let \( Y \) be the number of times Alaska has to try out until they're successful.
+
+**Solution:**  
+Not Binomial. Here, the number of trials is not fixed; we are counting the number of trials until the first success, which follows a **Geometric distribution**.
+
+---
+
+**d)** \( Y \) is the amount of time that Henry is late to your lunch date.
+
+**Solution:**  
+Not Binomial. This is a **continuous** random variable measuring time delay, not a discrete count of successes or failures.
+
+---
+
+**e)** \( Y \) is the probability that your friends will throw you a surprise birthday party even though you said you hate being the center of attention and just want to go out to eat.
+
+**Solution:**  
+Not Binomial. \( Y \) is described as a **probability**, not a count of successes over a set of trials. Thus, the Binomial model is not appropriate.
+
+---
+
+**f)** You invite 60 people to your "?? day" party, none of whom know each other, and each of whom has an 80% chance of showing up.  
+Let \( Y \) be the total number of guests at your party.
+
+**Solution:**  
+Binomial. There are a fixed number of independent trials (60 people), and each trial (whether they show up or not) has a constant probability of success (showing up).
+\[
+Y \sim \text{Bin}(n = 60, \pi = 0.8)
+\]
+
+---
+
+## Exercise 2.4: Practice Bayes' Rule for Events (Vampires?)
+
+**Problem:**  
+Edward is trying to prove to Bella that vampires exist. Bella thinks there is a 0.05 probability that vampires exist. She also believes that the probability that someone can sparkle like a diamond if vampires exist is 0.7, and the probability that someone can sparkle like a diamond if vampires don't exist is 0.03. Edward then goes into a meadow and shows Bella that he can sparkle like a diamond. Given that Edward sparkled like a diamond, what is the probability that vampires exist?
+
+Let:
+- \( A \) = Edward sparkles like a diamond
+- \( B \) = Vampires exist
+
+**Given:**
+- \( P(B) = 0.05 \)
+- \( P(A \mid B) = 0.70 \)
+- \( P(A \mid B^c) = 0.03 \)
+
+**Solution:**  
+We apply Bayes' Rule:
+
+First, compute the marginal probability of sparkling:
+\[
+P(A) = P(A \mid B)P(B) + P(A \mid B^c)P(B^c)
+= (0.70)(0.05) + (0.03)(0.95)
+= 0.035 + 0.0285 = 0.0635
+\]
+
+Now apply Bayes' Rule:
+\[
+P(B \mid A) = \frac{P(B) P(A \mid B)}{P(A)} = \frac{(0.05)(0.70)}{0.0635} = \frac{0.035}{0.0635} \approx 0.5512
+\]
+
+**Interpretation:**  
+Bella's initial belief that vampires exist was 5%. After Edward sparkled, this belief increased to approximately **55.12%**, showing a significant posterior update due to compelling new evidence.
+
+---
+
+## Exercise 2.5: Practice Bayes' Rule for Events (Sick Trees)
+
+**Problem:**  
+A local arboretum contains a variety of tree species, including elms, maples, and others. Unfortunately, 18% of all trees in the arboretum are infected with mold. Among the infected trees:
+- 15% are elms
+- 80% are maples
+- 5% are other species
+
+Among the uninfected trees:
+- 20% are elms
+- 10% are maples
+- 70% are other species
+
+In monitoring the spread of mold, an arboretum employee randomly selects a tree to test.
+
+---
+
+**a)** What's the prior probability that the selected tree has mold?
+
+**Solution:**  
+The prior probability is given:  
+\[
+P(M) = 0.18
+\]
+
+---
+
+**b)** The tree happens to be a maple. What's the probability that the employee would have selected a maple?
+
+**Solution:**  
+Use the law of total probability:
+\[
+P(Maple) = P(Maple \mid Mold)P(Mold) + P(Maple \mid No\ Mold)P(No\ Mold)
+\]
+\[
+= (0.80)(0.18) + (0.10)(0.82) = 0.144 + 0.082 = 0.226
+\]
+
+---
+
+**c)** What's the posterior probability that the selected maple tree has mold?
+
+**Solution:**  
+Apply Bayes' Rule:
+\[
+P(Mold \mid Maple) = \frac{P(Mold) P(Maple \mid Mold)}{P(Maple)} = \frac{0.18 \times 0.80}{0.226} = \frac{0.144}{0.226} \approx 0.6372
+\]
+
+---
+
+**d)** Compare the prior and posterior probability of the tree having mold. How did your understanding change in light of the fact that the tree is a maple?
+
+**Interpretation:**  
+The prior probability of mold was 18%. Upon learning the tree is a maple, the posterior probability jumps to approximately **63.72%**. This substantial increase highlights how additional information (tree species) can significantly update our beliefs using Bayes' Rule.
+
+---
+
+## Exercise 2.13: Lactose Intolerant
+
+**Problem:**  
+Lactose intolerance is an inability to digest milk, often resulting in an upset stomach. Fatima wants to learn more about the proportion of adults who are lactose intolerant, \( \pi \). Her prior model for \( \pi \) is:
+
+<div style="text-align:center">
+
+| \(\pi\) | 0.4 | 0.5 | 0.6 | 0.7 | Total |
+|:-------:|:---:|:---:|:---:|:---:|:------:|
+| \(f(\pi)\) | 0.10 | 0.20 | 0.44 | 0.26 | 1.00 |
+
+</div>
+
+---
+
+**a)** Fatima surveys a random sample of 80 adults and 47 are lactose intolerant. Without doing any math, make a guess at the posterior model of \( \pi \), and explain your reasoning.
+
+**Solution:**  
+The sample proportion is \( 47 / 80 = 0.5875 \), which is closest to \( \pi = 0.6 \). So we expect the posterior distribution to place the highest probability mass at \( \pi = 0.6 \), slightly more than in the prior. The weight for \( \pi = 0.5 \) will likely decrease, and that for \( \pi = 0.7 \) may also increase slightly.
+
+---
+
+**b)** Calculate the posterior model. How does this compare to your guess in part a?
+
+**Solution:**  
+Use the binomial likelihood:
+\[
+L(\pi) = \binom{80}{47} \pi^{47} (1 - \pi)^{33} \quad \text{(common constant omitted for proportionality)}
+\]
+
+**R Code:**
+```r
+pi_vals <- c(0.4, 0.5, 0.6, 0.7)
+prior <- c(0.10, 0.20, 0.44, 0.26)
+likelihood <- dbinom(47, size = 80, prob = pi_vals)
+posterior <- prior * likelihood
+posterior <- posterior / sum(posterior)
+round(posterior, 4)
+```
+
+**Python Code:**
+```python
+import numpy as np
+from scipy.stats import binom
+
+pi_vals = np.array([0.4, 0.5, 0.6, 0.7])
+prior = np.array([0.10, 0.20, 0.44, 0.26])
+likelihood = binom.pmf(47, 80, pi_vals)
+posterior = prior * likelihood
+posterior = posterior / np.sum(posterior)
+np.round(posterior, 4)
+```
+
+**Result:**  
+The posterior distribution is more concentrated near \( \pi = 0.6 \), confirming our expectations.
+
+---
+
+**c)** If Fatima had instead collected a sample of 800 adults and 470 (keeping the sample proportion the same as above) are lactose intolerant, how does that change the posterior model?
+
+**Solution:**  
+Repeating the process with a larger sample size:
+
+**R Code:**
+```r
+likelihood_big <- dbinom(470, size = 800, prob = pi_vals)
+posterior_big <- prior * likelihood_big
+posterior_big <- posterior_big / sum(posterior_big)
+round(posterior_big, 4)
+```
+
+**Python Code:**
+```python
+likelihood_big = binom.pmf(470, 800, pi_vals)
+posterior_big = prior * likelihood_big
+posterior_big = posterior_big / np.sum(posterior_big)
+np.round(posterior_big, 4)
+```
+
+**Interpretation:**  
+With a much larger sample, the posterior distribution becomes sharper (more peaked) around \( \pi = 0.6 \), reflecting greater confidence in that estimate. The variance of the posterior shrinks with more data.
+
+---
+
+## Exercise 2.18: Lactose Intolerant Redux
+
+**Problem:**  
+Repeat Exercise 2.13 using simulation to approximate the posterior model of \( \pi \) corresponding to Fatima's survey data. Specifically, simulate data for 10,000 people and remember to set your random number seed.
+
+---
+
+**Solution using R:**
+```r
+set.seed(2024)
+pi_vals <- c(0.4, 0.5, 0.6, 0.7)
+prior_probs <- c(0.10, 0.20, 0.44, 0.26)
+
+# Simulate 10,000 values of pi from prior
+sim_pi <- sample(pi_vals, size = 10000, replace = TRUE, prob = prior_probs)
+
+# Simulate number of lactose intolerant people in sample of size 80
+sim_y <- rbinom(n = 10000, size = 80, prob = sim_pi)
+
+# Keep those that resulted in y = 47
+sim_pi_given_y47 <- sim_pi[sim_y == 47]
+
+# Estimate posterior from simulation
+sim_posterior <- table(sim_pi_given_y47) / length(sim_pi_given_y47)
+round(sim_posterior, 4)
+```
+
+**Solution using Python:**
+```python
+import numpy as np
+np.random.seed(2024)
+
+pi_vals = np.array([0.4, 0.5, 0.6, 0.7])
+prior_probs = np.array([0.10, 0.20, 0.44, 0.26])
+
+# Simulate 10,000 values of pi from the prior
+sim_pi = np.random.choice(pi_vals, size=10000, p=prior_probs)
+
+# Simulate number of lactose intolerant people in sample of size 80
+sim_y = np.random.binomial(n=80, p=sim_pi)
+
+# Filter for y == 47
+sim_pi_given_y47 = sim_pi[sim_y == 47]
+
+# Posterior estimation from simulation
+(unique, counts) = np.unique(sim_pi_given_y47, return_counts=True)
+posterior_sim = dict(zip(unique, np.round(counts / counts.sum(), 4)))
+posterior_sim
+```
+
+**Interpretation:**  
+The simulated posterior model closely matches the analytical one from Exercise 2.13b. Simulation provides a flexible way to approximate posterior distributions when analytical solutions are complex or unavailable.
+
+---
