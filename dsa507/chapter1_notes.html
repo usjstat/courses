@@ -939,6 +939,19 @@ position = [&quot;Forward&quot;, &quot;Midfielder&quot;, &quot;Forward&quot;, &q
 result = [&quot;Win&quot;, &quot;Loss&quot;, &quot;Win&quot;, &quot;Win&quot;, &quot;Loss&quot;, &quot;Loss&quot;, &quot;Win&quot;]
 df = pd.DataFrame({&#39;Position&#39;: position, &#39;Result&#39;: result})
 print(pd.crosstab(df[&#39;Position&#39;], df[&#39;Result&#39;]))</code></pre>
+<p><strong>Hexagonal binning</strong> is a visualization technique used
+to handle overplotting in scatterplots, especially when you have large
+datasets with two continuous/numeric variables. Rather than plotting
+each individual point, it aggregates data points into hexagon-shaped
+cells (or “bins”) and colors them based on the number of points that
+fall into each bin.</p>
+<p>** When to Use It ** -</p>
+<ul>
+<li><p>You have a large number of overlapping points in a
+scatterplot</p></li>
+<li><p>You want to see the density or distribution of points</p></li>
+<li><p>Your variables are both numeric/continuous</p></li>
+</ul>
 <pre class="r"><code>library(hexbin)
 library(ggplot2)
 library(dplyr)
