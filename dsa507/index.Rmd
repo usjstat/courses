@@ -77,7 +77,6 @@ For supplementary learning and revision, please refer to the following YouTube p
 
 - [Chapter 2: Data and Sampling Distributions](chapter2.html)
 
---[Confidence Interval](conf_int.html)
 
 ---
 
