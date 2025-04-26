@@ -1,0 +1,713 @@
+---
+title: "Chapter 2 (Simplified): Data and Sampling Distributions"
+author: "Dr. Rajitha M. Silva"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center", fig.width = 6, fig.height = 6)
+```
+
+## Introduction: Sampling Still Matters
+
+Even with massive datasets (like tracking all player movements in every football match), we still rely on **sampling**. Why?
+
+- Data is often **incomplete, messy, or biased**.
+- Sampling allows for **faster computation** and **more focused models**.
+- We can avoid working with **too much irrelevant or low-quality data**.
+
+---
+
+## Population vs. Sample
+
+- **Population**: The full set of data we care about (e.g., all tennis matches played globally in a year).
+- **Sample**: A smaller, carefully selected subset used for analysis (e.g., matches from 4 Grand Slam tournaments only).
+
+---
+
+## Random Sampling
+
+**Random sampling** means each item in the population has an **equal chance** of being selected.
+
+- **With replacement**: A player (data point) can be selected more than once.
+- **Without replacement**: Once chosen, it’s removed from future draws.
+
+ *Example*: To analyze how often players double fault, you could randomly sample 100 service games across multiple tournaments.
+
+---
+
+## Sample Bias
+
+**Sample bias** occurs when your sample **misrepresents the population**. That’s dangerous — it leads to **wrong conclusions**.
+
+### Case Study: 1936 U.S. Election Poll
+
+- The **Literary Digest** polled over 10 million people (phone and car owners) and wrongly predicted a loss for Roosevelt.
+- **George Gallup**, using a **smaller but randomly selected** sample of 2,000, correctly predicted the outcome.
+
+ **Moral**: **Big biased data** is worse than **small representative data**.
+
+---
+
+## Self-Selection Bias
+
+Bias can occur if **individuals choose themselves** to be in a sample.
+
+> *Example*: A club posts a survey on Twitter about fan satisfaction. Only highly opinionated fans respond — usually those who are either very happy or very upset.
+
+This results in **self-selection bias**: the people in your sample are not typical of the whole population.
+
+---
+
+## Visualizing Bias with Simulations
+
+Let’s simulate the idea of **unbiased vs. biased sampling processes** using a sports example — like penalty kicks or free throws.
+
+### Figure A: Unbiased Process (Shots Around Target)
+
+```{r fig2.2}
+set.seed(42)
+x_unbiased <- rnorm(100, mean = 0, sd = 1)
+y_unbiased <- rnorm(100, mean = 0, sd = 1)
+plot(x_unbiased, y_unbiased,
+     main = "Figure A: Simulated Unbiased Process",
+     xlab = "X", ylab = "Y",
+     xlim = c(-4, 6), ylim = c(-4, 6),
+     pch = 19, col = "skyblue")
+abline(h = 0, v = 0, lty = 2)
+```
+
+These are like a football player's penalty shots that vary randomly but center around the goalpost.
+
+---
+
+### Figure B: Biased Process (Shots Shifted to One Side)
+
+```{r fig2.3}
+x_biased <- rnorm(100, mean = 2, sd = 1)
+y_biased <- rnorm(100, mean = 2, sd = 1)
+plot(x_biased, y_biased,
+     main = "Figure B: Simulated Biased Process",
+     xlab = "X", ylab = "Y",
+     xlim = c(-4, 6), ylim = c(-4, 6),
+     pch = 19, col = "orange")
+abline(h = 0, v = 0, lty = 2)
+```
+
+This simulates a consistent miss — like a player who always shoots too far right and high due to bad form.
+
+---
+
+
+| Concept        | Description |
+|----------------|-------------|
+| **Unbiased**   | Errors are random and cancel each other out |
+| **Biased**     | Errors are systematic and skew results in one direction |
+| **Random Sampling** | Every unit has equal chance; reduces bias |
+| **Sample Bias** | Sample doesn’t reflect population; leads to misleading conclusions |
+
+---
+
+## Random Selection
+
+While sample bias can distort conclusions, careful planning through **random selection** helps ensure that a sample is representative of the population.
+
+George Gallup famously succeeded in the 1936 U.S. election prediction by applying random selection principles, unlike the Literary Digest poll which relied on large but biased samples. The lesson: **method matters more than size**.
+
+### Defining the Population
+
+Before you select a sample, you must clearly define the population.
+
+For example, if a sports organization wants to survey fans:
+- Should it include all app users?
+- Only those who made purchases?
+- Followers on social media?
+
+Clarity about who is in your population is essential to effective sampling.
+
+### Designing a Random Selection Process
+
+Once the population is defined, a procedure for drawing the sample must be specified.
+
+Suppose we want to survey 100 customers randomly:
+- Are they selected from active users only?
+- Should former users or resellers be included?
+- Should we sample across different time zones or activity periods?
+
+If data is collected from ongoing interactions (like website visits), timing also matters. A visitor at 10 a.m. on a weekday may differ significantly from a visitor at 10 p.m. on a weekend.
+
+These decisions influence the **representativeness** of the sample.
+
+### Stratified Sampling
+
+In cases where simple random sampling might underrepresent key groups, **stratified sampling** can improve balance.
+
+The population is divided into homogeneous subgroups (strata), and random samples are drawn from each.
+
+For instance, if you're studying injury rates across player positions in rugby:
+- A random sample might include mostly forwards if they are the majority.
+- With stratified sampling, you ensure balanced representation: e.g., 30 players from each position group.
+
+This approach is especially useful in demographic or categorical studies where proportions matter.
+
+
+## Size Versus Quality: When Does Size Matter?
+
+A common misconception in the age of big data is that more data always leads to better insights. In reality, **data quality often outweighs quantity**, especially when it comes to reducing bias and improving the clarity of statistical analysis.
+
+### Why Smaller Can Be Better
+
+Smaller datasets, when carefully sampled and cleaned, offer several advantages:
+- They allow deeper inspection and data cleaning.
+- Outliers and missing values can be investigated and addressed manually.
+- Visualizations and summaries are easier to produce and interpret.
+
+For example, tracking down missing values or evaluating outliers in millions of records can be impractical. But doing the same for a few thousand records is often feasible — and informative.
+
+### When Large Size Is Necessary
+
+In some scenarios, particularly when the data is **sparse**, large datasets are crucial.
+
+One example is **search engine query data**. Each search is typically represented by a very large and sparse feature matrix — many terms, most of them zeros. To return relevant results for rare queries, search engines need data from **billions or trillions** of observations.
+
+So, size becomes necessary when:
+- The signal is weak or highly fragmented.
+- The model must capture rare events or combinations.
+- The data structure is extremely high-dimensional and sparse.
+
+### Balance and Strategy
+
+When working with data, it's not a choice between small and large — it's about:
+- Using **random sampling** to reduce the dataset for exploratory work and model prototyping.
+- Ensuring **data quality** is prioritized in every stage.
+- Scaling up **only when needed** — for production or specific modeling challenges.
+
+---
+
+## Sample Mean versus Population Mean
+
+In statistics, it is important to distinguish between what we observe and what we estimate.
+
+- **Population mean (μ)**: The true average of a variable for the entire population. This is typically unknown and unobservable.
+- **Sample mean (𝑥̄)**: The average calculated from a sample. This is what we actually observe and use to make inferences.
+
+### Why Make the Distinction?
+
+We often rely on a sample because observing the full population is not feasible — either due to size, cost, or inaccessibility.
+
+> Example: Suppose we want to estimate the average number of goals scored per match in a football league. It's easier and faster to take a random sample of 50 matches than to analyze every match played in the season.
+
+In this case:
+- The average from our 50 sampled matches is the **sample mean**.
+- Our goal is to make a statement about the **population mean** — the true average for the entire league.
+
+### Statistical Notation
+
+- **x̄ (x-bar)** represents the sample mean
+- **μ (mu)** represents the population mean
+
+This notation reinforces the idea that we’re estimating something larger and possibly unknowable with a smaller, observable value.
+
+---
+
+---
+
+## Selection Bias
+
+Selection bias refers to the way in which data is chosen — whether consciously or unconsciously — in a manner that distorts the findings. It arises when the sample used for analysis is not representative of the population due to the selection mechanism.
+
+This type of bias can lead to **misleading or non-reproducible conclusions**.
+
+### Common Types of Selection Bias
+
+**1. Data Snooping**  
+Extensively searching data to find patterns can result in misleading findings that are just artifacts of the data, not real phenomena. This often happens when hypotheses are developed *after* looking at the data.
+
+### A Cautionary Note
+
+> *“If you torture the data long enough, sooner or later it will confess.”*  
+> — Ronald Coase
+
+This well-known quote underscores the danger of forcing meaning out of data through excessive analysis. When analysts explore data without restraint or clear hypotheses, they may uncover statistically significant patterns that are **completely meaningless** — a byproduct of randomness, not reality.
+
+Such patterns are often:
+- Driven by overfitting
+- Sensitive to arbitrary choices in data cleaning, transformations, or feature engineering
+- Not reproducible on new data
+
+This is especially relevant in modern data science, where powerful tools can test **thousands of hypotheses automatically**.
+
+### Practical Advice
+
+- Begin with a well-defined question.
+- Avoid multiple comparisons unless corrected for.
+- Use holdout validation or cross-validation to verify findings.
+- Resist the temptation to keep digging until something looks significant.
+
+---
+
+**2. Vast Search Effect**  
+This occurs when analysts run many models or test many hypotheses using the same dataset. Eventually, some statistically significant result will appear purely by chance.
+
+**3. Cherry-Picking**  
+Selecting time intervals or subsets of data that support a particular hypothesis, while ignoring data that might contradict it.
+
+### Thought Experiment: Coin Tossing
+
+Imagine someone claims they can toss a coin and get 10 heads in a row. You give them a coin, and they do it — astonishing!
+
+Now consider this: at a sports stadium, 20,000 people each flip a coin 10 times. The chance that *someone* among them will get 10 heads is extremely high.
+
+> Selecting that one person *after* the fact and treating the result as meaningful is misleading — it’s an example of **selection after outcome**, not a planned test.
+
+### Practical Implication in Data Science
+
+Data scientists often search large datasets for patterns. This increases the risk of finding spurious associations. Without proper controls like **holdout validation** or **permutation tests**, these findings may not hold up under further testing.
+
+### How to Guard Against Selection Bias
+
+- Define hypotheses *before* examining the data.
+- Use **random sampling** to prevent selective inclusion.
+- Validate models using **holdout sets** or **cross-validation**.
+- Avoid building models repeatedly on the same dataset without correction.
+
+---
+
+## Regression to the Mean
+
+Regression to the mean is a natural statistical phenomenon where extremely high or low observations are likely to be followed by more moderate ones in future measurements. This is not about regression modeling — it's about **statistical tendency**.
+
+### Example: IPL Rookie of the Year
+
+Imagine a young batter who wins "Rookie of the Year" in their debut IPL season. They scored heavily — averaging over 50 runs per match — and had multiple match-winning innings.
+
+In the next season, their performance drops. They average just 30 runs per match.
+
+What changed?
+
+In many cases, **nothing fundamental**. Their underlying skill level may be the same. The drop is due to **regression to the mean** — a combination of:
+- Less favorable conditions
+- Bowlers having better analysis of their style
+- Fewer lucky breaks
+
+In the first season, their performance was boosted not just by skill, but also by **unusual positive variation**. That level of "luck" is unlikely to repeat consistently.
+
+### Galton’s Original Observation
+
+Francis Galton first noticed this pattern in 1886 while studying hereditary height:
+- Very tall fathers had sons who were tall, but **closer to average**.
+- Very short fathers had sons who were also closer to average height.
+
+He called this “regression toward mediocrity.”
+
+### Implications in Data Science
+
+This phenomenon is important when evaluating change over time. If we:
+- Select top performers to study improvement,
+- Or compare pre/post-intervention scores of outliers,
+
+... we risk attributing **natural statistical regression** to the effect of our actions or programs.
+
+> For example, if we give extra coaching only to players with the lowest batting averages and see improvement next season, some of that gain might be due to **regression to the mean**, not the coaching itself.
+
+### Summary
+
+- Regression to the mean causes extreme cases to be followed by more average results.
+- It happens when both **signal** (true skill) and **noise** (random variation) contribute to outcomes.
+- If ignored, it can lead to false conclusions about improvement or decline.
+
+---
+
+---
+
+## Sampling Distribution of a Statistic
+
+When we calculate a sample statistic (like a mean or median), it's based on a specific sample from a population. But what if we drew a different sample? Would the result be the same?
+
+This idea — that a statistic varies from sample to sample — leads us to the concept of the **sampling distribution**.
+
+### What Is It?
+
+- A **sample statistic** is a metric (like a mean or proportion) computed from a sample.
+- The **sampling distribution** is the distribution of that statistic across many samples.
+- It reflects **sampling variability** — how much the statistic would vary from sample to sample.
+
+This is a central concept in statistical inference.
+
+---
+
+### Sports Example: Batting Averages in Cricket
+
+Imagine we’re studying the batting average of players in the IPL. We want to estimate the **mean batting average** across the league.
+
+Instead of using the full season data, we randomly sample:
+- 1,000 players’ match averages (individual data)
+- 1,000 means of 5-match samples per player
+- 1,000 means of 20-match samples per player
+
+Each level of sampling would produce different distributions.
+
+- The raw data (match-by-match) would be **skewed** due to rare high scores.
+- The mean-of-5 and mean-of-20 scores would be more **bell-shaped** and **less variable**.
+- This illustrates how larger sample sizes lead to **more stable and normally distributed** estimates.
+
+---
+
+### Key Concepts
+
+- **Data distribution**: How individual values (e.g., match scores) are distributed.
+- **Sampling distribution**: How sample statistics (e.g., sample means) vary over repeated samples.
+- **Standard error**: The standard deviation of the sampling distribution.
+- **Central Limit Theorem**: As sample size increases, the sampling distribution of the mean becomes more normal-shaped.
+
+---
+
+### Visual Illustration (Refer to Figure 2-6)
+
+In the textbook, an example using income data shows:
+- Individual data: wide and skewed
+- Mean of 5 samples: tighter and more symmetric
+- Mean of 20 samples: even tighter and bell-shaped
+
+This confirms:
+- Larger samples give more **reliable estimates**
+- The **spread (standard error)** of the sampling distribution gets smaller as sample size increases
+
+---
+
+### Why This Matters in Data Science
+
+When using samples to estimate population values, we must understand how **uncertain** those estimates are. The sampling distribution lets us:
+- Quantify that uncertainty
+- Build confidence intervals
+- Perform hypothesis testing
+- Understand model generalization
+
+---
+
+## Simulation: Sampling Distribution of the Mean
+
+This simulation illustrates how the distribution of sample means becomes more concentrated and bell-shaped as sample size increases. It uses income data generated from a lognormal distribution, following the example from the textbook.
+
+### R Code
+
+```{r fig2-6-sampling-distribution, fig.width=7, fig.height=6}
+set.seed(123)
+loans_income <- rlnorm(10000, meanlog = 11, sdlog = 0.5)
+
+library(ggplot2)
+samp_data <- data.frame(income = sample(loans_income, 1000), type = "Data")
+samp_mean_5 <- data.frame(income = replicate(1000, mean(sample(loans_income, 5))), type = "Mean of 5")
+samp_mean_20 <- data.frame(income = replicate(1000, mean(sample(loans_income, 20))), type = "Mean of 20")
+
+income <- rbind(samp_data, samp_mean_5, samp_mean_20)
+income$type <- factor(income$type, levels = c("Data", "Mean of 5", "Mean of 20"))
+
+ggplot(income, aes(x = income)) +
+  geom_histogram(bins = 40, fill = "steelblue", color = "white") +
+  facet_wrap(~ type, ncol = 1, scales = "free") +
+  theme_minimal() +
+  labs(title = "Sampling Distribution of the Mean", x = "Income", y = "Count")
+
+```
+
+
+---
+
+## Central Limit Theorem
+
+The **central limit theorem (CLT)** is a foundational concept in statistics. It explains why many statistical procedures — like confidence intervals and hypothesis tests — rely on the assumption of normality.
+
+### What does the Central Limit Theorem say?
+
+The CLT states that:
+
+> *The means drawn from multiple samples will resemble the familiar bell-shaped normal curve, even if the source population is not normally distributed — provided that the sample size is large enough and the data are not too skewed.*
+
+This explains why:
+- The distribution of the sample mean becomes more symmetric and bell-shaped as sample size increases.
+- Normal-approximation formulas (e.g., those using the *t*-distribution) are valid under many conditions.
+
+---
+
+### Practical Implications
+
+Although the central limit theorem is emphasized in classical statistics, its direct application is **less central** in modern data science practice. That’s because:
+
+- **Bootstrap methods** allow us to empirically estimate sampling distributions.
+- **Computational tools** reduce the need to rely on theoretical approximations.
+- Yet, **understanding CLT is still useful**, especially when interpreting output from regression models and A/B tests.
+
+---
+
+---
+
+## Standard Error
+
+The **standard error** is a measure of the variability in a sample statistic. It quantifies how much a statistic (like the sample mean) would differ from sample to sample if we repeatedly drew samples from the population.
+
+### Definition
+
+The standard error of the mean can be estimated from a single sample using the formula:
+
+\[
+\text{Standard Error (SE)} = \frac{s}{\sqrt{n}}
+\]
+
+where:
+- \( s \) is the sample standard deviation,
+- \( n \) is the sample size.
+
+As the sample size increases, the standard error **decreases** — this relationship is sometimes referred to as the **square root of n rule**. For example, to cut the standard error in half, you would need to **quadruple** the sample size.
+
+---
+
+### Distinguishing Between Standard Deviation and Standard Error
+
+- **Standard Deviation** measures variability **among individual data points**.
+- **Standard Error** measures variability **in a statistic** (such as the sample mean) **across repeated samples**.
+
+Confusing the two can lead to incorrect inferences. While both are measures of spread, they operate on different levels.
+
+---
+
+### Theoretical vs. Practical Estimation
+
+While theoretically one could draw many new samples from the population to estimate standard error (and compute the standard deviation of the resulting statistics), this is rarely feasible or efficient.
+
+Instead, we typically:
+- Estimate SE using the formula above, or
+- Use **resampling methods like the bootstrap**, which simulate repeated sampling using the existing data.
+
+---
+
+---
+
+## The Bootstrap
+
+The bootstrap is a powerful method for estimating the sampling distribution of a statistic by resampling with replacement from the original data. This technique is especially useful when:\
+- The sample size is too small to assume normality,\
+- The population distribution is unknown,\
+- Or when analytical solutions for standard error or confidence intervals are not available.\
+
+### How It Works
+
+1. Take a sample of size \( n \) from your data.
+2. Resample with replacement \( n \) times to create a new sample (a bootstrap sample).
+3. Calculate the statistic of interest (e.g., mean, median).
+4. Repeat steps 2–3 a large number of times (e.g., 1000 or 10,000 times).
+5. Use the resulting distribution of the statistics to:
+   - Estimate the standard error,
+   - Construct confidence intervals,
+   - Assess the variability of model parameters.
+
+This process does not rely on assumptions about the distribution of the data, making it very flexible.
+
+---
+
+## Bootstrap from Scratch in R
+
+This code demonstrates how to implement the bootstrap method without relying on specialized libraries. We estimate the standard error and confidence interval for the mean of a sample.
+
+### Steps followed:
+1. Sample \( n \) values with replacement from the original sample.
+2. Compute the statistic (e.g., mean) for this bootstrap sample.
+3. Repeat steps 1–2 a large number of times.
+4. Use the resulting distribution of the statistic to estimate the standard error and confidence intervals.
+
+### Example: Cricket Batting Averages
+
+Suppose we have the match-wise batting scores for a new cricketer from 20 innings.
+
+
+```{r bootstrap-from-scratch, message=FALSE}
+set.seed(123)
+
+# Original sample: 20 simulated batting scores
+scores <- round(rnorm(20, mean = 35, sd = 15))
+
+# Step 1–3: Generate 1000 bootstrap sample means
+n <- length(scores)
+B <- 1000
+bootstrap_means <- numeric(B)
+
+for (b in 1:B) {
+  bootstrap_sample <- sample(scores, size = n, replace = TRUE)
+  bootstrap_means[b] <- mean(bootstrap_sample)
+}
+
+# Step 4: Estimate standard error
+bootstrap_se <- sd(bootstrap_means)
+
+# 90% confidence interval using percentile method
+ci_lower <- quantile(bootstrap_means, 0.05)
+ci_upper <- quantile(bootstrap_means, 0.95)
+
+# Output results
+cat("Bootstrap Mean Estimate:", mean(bootstrap_means), "\n")
+cat("Bootstrap Standard Error:", bootstrap_se, "\n")
+cat("90% Confidence Interval: [", ci_lower, ",", ci_upper, "]\n")
+```
+
+This approach gives you a hands-on understanding of the bootstrap, showing how we can approximate the sampling distribution empirically from a single dataset.
+
+---
+
+Using R: (using ***boot*** funciton)
+
+
+```{r bootstrap-batting-avg, message=FALSE}
+library(boot)
+
+# Simulate 20 match scores for a batter
+set.seed(42)
+scores <- round(rnorm(20, mean = 35, sd = 15))
+
+# Bootstrap function to calculate mean
+boot_mean <- function(data, idx) {
+  return(mean(data[idx]))
+}
+
+# Perform bootstrap with 1000 resamples
+boot_obj <- boot(data = scores, statistic = boot_mean, R = 1000)
+
+# Display estimated standard error
+boot_obj
+```
+
+This gives us:\
+- The original mean,\
+- The estimated bias,\
+- The standard error of the mean from the bootstrap.\
+
+---
+
+### Why It Works
+
+The bootstrap assumes that your original sample contains all the variation that would exist in the true population. By repeatedly resampling from it (with replacement), you simulate what would happen if you were to draw many more samples from a population just like your original sample.
+
+
+---
+
+### R Example: Bootstrap for Median income
+
+```{r multivariate-bootstrap-r, message=FALSE}
+library(boot)
+
+# Simulated loan income data (vector)
+set.seed(123)
+loans_income <- rlnorm(10000, meanlog = 11, sdlog = 0.5)
+
+# Define bootstrap statistic: median
+stat_fun <- function(x, idx) median(x[idx])
+
+# Apply bootstrap
+boot_obj <- boot(loans_income, R = 1000, statistic = stat_fun)
+
+# View result
+print(boot_obj)
+```
+
+This computes the median of bootstrapped samples from a univariate distribution (income). 
+
+---
+
+### Python Example: Bootstrap for Median income
+
+```python
+import numpy as np
+import pandas as pd
+from sklearn.utils import resample
+
+# Simulated income data
+np.random.seed(123)
+loans_income = np.random.lognormal(mean=11, sigma=0.5, size=10000)
+
+results = []
+for _ in range(1000):
+    sample = resample(loans_income)
+    results.append(np.median(sample))
+
+results = pd.Series(results)
+print("Bootstrap Statistics:")
+print("original:", np.median(loans_income))
+print("bias:", results.mean() - np.median(loans_income))
+print("std. error:", results.std())
+```
+
+---
+
+---
+
+## Confidence Intervals
+
+Confidence intervals provide a way to express the uncertainty around an estimate by offering a range instead of a single value. Instead of reporting a point estimate (e.g., “the average income is \$62,231”), we provide an interval (e.g., “the average income is between \$52,000 and \$72,000”), offering more insight into the variability of our estimate.
+
+People tend to over-trust single number estimates. Presenting a confidence interval encourages more cautious and statistically grounded interpretations.
+
+### What Is a Confidence Interval?
+
+A **confidence interval** is a range of values constructed from sample data such that, under repeated sampling, a certain percentage (e.g., 90% or 95%) of such intervals will contain the true population parameter.
+
+Confidence intervals are usually constructed around:\
+- Means\
+- Medians\
+- Proportions\
+- Model parameters\
+
+---
+
+### Constructing a Bootstrap Confidence Interval
+
+You can use the bootstrap method to build a confidence interval for any statistic.
+
+Steps:
+
+1. Draw a sample of size \( n \) with replacement from the data.
+
+2. Calculate the statistic of interest (e.g., mean) for the resample.
+
+3. Repeat steps 1–2 many times (e.g., 1000 iterations).
+
+4. For a 90% confidence interval, trim 5% of the distribution from each tail.
+
+5. The trimmed values become the endpoints of the 90% confidence interval.
+
+---
+
+### Example: Bootstrap Confidence Interval in R
+
+```{r bootstrap-ci-manual, message=FALSE}
+set.seed(123)
+# Simulate 20 sample incomes
+sample_income <- rlnorm(20, meanlog = 11, sdlog = 0.5)
+
+# Bootstrap resampling
+B <- 1000
+bootstrap_means <- numeric(B)
+
+for (i in 1:B) {
+  resample <- sample(sample_income, replace = TRUE)
+  bootstrap_means[i] <- mean(resample)
+}
+
+# Compute 90% confidence interval
+lower <- quantile(bootstrap_means, 0.05)
+upper <- quantile(bootstrap_means, 0.95)
+
+cat("Bootstrap 90% Confidence Interval: [", round(lower), ",", round(upper), "]")
+```
+
+This process estimates how our sample mean might vary and constructs a confidence interval accordingly.
+
+---
+
+### Notes on Interpretation
+
+- A 90% confidence interval means that if we repeated this procedure many times, approximately 90% of the intervals would contain the true population mean.
+- The higher the confidence level, the wider the interval.
+- Smaller sample sizes also lead to wider intervals due to more uncertainty.
+
+---
+
+
