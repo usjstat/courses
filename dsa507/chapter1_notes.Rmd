@@ -523,7 +523,7 @@ ggplot(batting, aes(x = BallsFaced, y = Runs)) +
   theme_minimal()
 ```
 
-he hexbin plot above visualizes the relationship between **Runs** and **Balls Faced** across 50 matches. Each hexagon represents a bin, and its color indicates the number of observations that fall within that bin.
+The hexbin plot above visualizes the relationship between **Runs** and **Balls Faced** across 50 matches. Each hexagon represents a bin, and its color indicates the number of observations that fall within that bin.
 
 -   **Darker blue hexagons** indicate more frequent combinations of Runs and Balls Faced.
 -   You’ll notice that most observations fall around the 35–45 ball range and 30–50 run range.
