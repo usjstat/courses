@@ -6,14 +6,13 @@ output:
     highlight: tango
 ---
 
-
-**Batch:** 2024 / 2026  
-**Schedule:** Saturdays, 8.00 a.m. to  12.00 noon  
-**Venue:** STAT Lab 1  
-**Instructor:** Dr. Rajitha M. Silva  
+**Batch:** 2024 / 2026\
+**Schedule:** Saturdays, 8.00 a.m. to 12.00 noon\
+**Venue:** STAT Lab 1\
+**Instructor:** Dr. Rajitha M. Silva\
 **Department of Statistics, University of Sri Jayewardenepura**
 
----
+------------------------------------------------------------------------
 
 ## Introduction
 
@@ -21,30 +20,31 @@ This course offers a practical and computational approach to Bayesian inference,
 
 Learning outcomes:
 
-- The foundations of Bayesian thinking\
-- Posterior analysis using simulation\
-- Markov Chain Monte Carlo (MCMC) methods\
-- Model comparison and convergence diagnostics\
+-   The foundations of Bayesian thinking\
+-   Posterior analysis using simulation\
+-   Markov Chain Monte Carlo (MCMC) methods\
+-   Model comparison and convergence diagnostics\
 
-We will work primarily in **R**, using packages such as `rstan`, `rjags`, and `brms`. However, **Python** codes will also be provided for your convenience. 
+We will work primarily in **R**, using packages such as `rstan`, `rjags`, and `brms`. However, **Python** codes will also be provided for your convenience.
 
 All course materials will be published on this page.
 
----
+------------------------------------------------------------------------
 
-##  Lecture Notes
+## Lecture Notes
+
+All the lecture notes are based on the book named "[Bayes Rules! An Introduction to Applied Bayesian Modeling](https://www.bayesrulesbook.com/)" by Alicia A. Johnson, Miles Q. Ott, and Mine Dogucu. Please read the relevant chapter before the lecture.
 
 > Click on each link to view the lecture content and downloadable code/handouts.
 
-- [Chapter 1: The Big (Bayesian) Picture](chapter1_notes.html)
+-   [Chapter 1: The Big (Bayesian) Picture](chapter1_notes.html)
 
-- [Chapter 2: Bayes Rule](chapter2.html)
+-   [Chapter 2: Bayes Rule](chapter2.html)
 
-- [Chapter 3: The Beta-Binomial Bayesian Model](chapter3.html)
+-   [Chapter 3: The Beta-Binomial Bayesian Model](chapter3.html)
 
----
+------------------------------------------------------------------------
 
 ## Contact
 
 For questions or clarifications, please reach out via email.
-
