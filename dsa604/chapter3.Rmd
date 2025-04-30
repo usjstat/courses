@@ -1,0 +1,686 @@
+
+---
+title: "Chapter 3: The Beta-Binomial Bayesian Model"
+author: "Simplified by Dr. Rajitha M. Silva"
+output: html_document
+---
+
+## Section 3.1: The Beta Prior Model
+
+In Bayesian analysis, we begin with a prior belief about the parameter we want to estimate. In this case, we are interested in:
+
+\[
+\pi = \text{Proportion of Minnesotans who currently support Michelle for president}
+\]
+
+Instead of treating \(\pi\) as a single fixed value, we treat it as a **random variable** that reflects our uncertainty. Since \(\pi\) must be between 0 and 1, a suitable distribution is the **Beta distribution**.
+
+### 3.1.1 Understanding the Beta Distribution
+
+The Beta distribution is defined by two positive shape parameters, \(\alpha\) and \(\beta\), and is written as:
+
+\[
+\pi \sim \text{Beta}(\alpha, \beta)
+\]
+
+Its probability density function is:
+
+\[
+f(\pi) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \cdot \pi^{\alpha - 1}(1 - \pi)^{\beta - 1}
+\]
+
+where \(\Gamma(\cdot)\) is the Gamma function (a generalization of the factorial).
+
+The Beta distribution is very flexible. It can take many shapes depending on \(\alpha\) and \(\beta\).
+
+#### Visualizing Beta Distributions
+
+Let us plot several Beta distributions with different values of \(\alpha\) and \(\beta\).
+
+##### R Code
+
+```{r fig-beta, echo=TRUE, include=TRUE, results='show'}
+library(bayesrules)
+library(tidyverse)
+
+# Examples of different Beta distributions
+plot_beta(1, 1)     # Uniform distribution
+plot_beta(2, 5)     # Skewed right
+plot_beta(5, 2)     # Skewed left
+plot_beta(2, 2)     # Symmetric with wide spread
+plot_beta(20, 20)   # Symmetric with narrow spread
+plot_beta(0.5, 0.5) # U-shaped
+```
+
+##### Python Code
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+
+# Create a grid of ?? values
+pi_vals = np.linspace(0.01, 0.99, 500)
+
+# List of (alpha, beta) values
+params = [(1,1), (2,5), (5,2), (2,2), (20,20), (0.5,0.5)]
+
+plt.figure(figsize=(10, 6))
+for a, b in params:
+    pdf_vals = stats.beta.pdf(pi_vals, a, b)
+    plt.plot(pi_vals, pdf_vals, label=f'Beta({a},{b})')
+
+plt.title("Various Shapes of the Beta Distribution")
+plt.xlabel("??")
+plt.ylabel("Density")
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+
+### 3.1.2 Summary Measures of the Beta Distribution
+
+To interpret a Beta distribution, we examine its **mean**, **mode**, and **variance**.
+
+Formulas:
+
+- Mean: \( \mu = \frac{\alpha}{\alpha + \beta} \)
+- Mode: \( \text{mode} = \frac{\alpha - 1}{\alpha + \beta - 2} \) (valid for \(\alpha, \beta > 1\))
+- Variance: \( \frac{\alpha \beta}{(\alpha + \beta)^2 (\alpha + \beta + 1)} \)
+- Standard deviation: square root of the variance
+
+#### R Code
+
+```{r fig-beta-char, echo=TRUE, include=TRUE, results='show'}
+alpha <- 5
+beta <- 2
+
+mean_beta <- alpha / (alpha + beta)
+mode_beta <- (alpha - 1) / (alpha + beta - 2)
+var_beta <- (alpha * beta) / (((alpha + beta)^2) * (alpha + beta + 1))
+sd_beta <- sqrt(var_beta)
+
+c(mean = mean_beta, mode = mode_beta, sd = sd_beta)
+```
+
+#### Python Code
+
+```python
+a, b = 5, 2
+
+mean = a / (a + b)
+mode = (a - 1) / (a + b - 2) if a > 1 and b > 1 else None
+variance = (a * b) / ((a + b)**2 * (a + b + 1))
+sd = np.sqrt(variance)
+
+mean, mode, sd
+```
+
+### 3.1.3 Special Case: Uniform Distribution
+
+If we have no prior preference for any value of \(\pi\) between 0 and 1, we use a **uniform prior**:
+
+\[
+\pi \sim \text{Beta}(1, 1)
+\]
+
+This reflects complete uncertainty.
+
+#### R Code
+
+```{r results='show'}
+plot_beta(1, 1)
+```
+
+#### Python Code
+
+```python
+a, b = 1, 1
+pdf_uniform = stats.beta.pdf(pi_vals, a, b)
+
+plt.figure(figsize=(8, 4))
+plt.plot(pi_vals, pdf_uniform, label="Beta(1,1) = Uniform(0,1)")
+plt.title("Uniform Prior Distribution (Beta(1,1))")
+plt.xlabel("??")
+plt.ylabel("Density")
+plt.grid(True)
+plt.legend()
+plt.show()
+```
+
+
+## Section 3.1.2: Tuning the Beta Prior
+
+In real-world Bayesian analysis, we do not pick Beta prior parameters (\(\alpha, \beta\)) randomly. We choose them to reflect **prior information** or beliefs. These parameters affect both the **center** and the **spread** of the distribution.
+
+---
+
+### Example: Michelle's Polling Support
+
+Michelle is running for president, and you are her campaign manager. Over 30 past polls, her support ranged from **25% to 65%**, with an average near **45%**.
+
+We want a prior centered around 0.45, with enough weight to reflect the historical range.
+
+---
+
+### Step 1: Use the Mean Formula
+
+The Beta distribution has mean:
+
+\[
+\text{E}(\pi) = \frac{\alpha}{\alpha + \beta}
+\]
+
+To reflect the average 45% support:
+
+\[
+\frac{\alpha}{\alpha + \beta} = 0.45 \Rightarrow \alpha = \frac{9}{11} \beta
+\]
+
+We try integer multiples of (9,11) to get different strengths of prior belief.
+
+---
+
+### Try Beta(9,11), Beta(27,33), and Beta(45,55)
+
+```{r}
+library(bayesrules)
+library(tidyverse)
+
+# Visual comparison of different scales of the 9:11 ratio
+plot_beta(9, 11)
+plot_beta(27, 33)
+plot_beta(45, 55)
+```
+
+The Beta(45,55) gives a prior centered at 0.45 with relatively low variability - a good match for Michelle's prior support from 30 polls.
+
+---
+
+### Step 2: Confirm Mean, Mode, and Standard Deviation
+
+```{r}
+alpha <- 45
+beta <- 55
+
+mean <- alpha / (alpha + beta)
+mode <- (alpha - 1) / (alpha + beta - 2)
+var <- (alpha * beta) / ((alpha + beta)^2 * (alpha + beta + 1))
+sd <- sqrt(var)
+
+tibble(mean, mode, sd)
+```
+
+---
+
+### Interpretation
+
+This prior suggests:
+
+- Michelle's expected support is **45%**
+- The most likely value (mode) is **around 0.449**
+- The standard deviation is about **0.05**, indicating moderate uncertainty
+
+So, this Beta(45,55) prior will be used in the next section as a formal summary of prior beliefs before seeing the new polling data.
+
+## Section 3.2: The Binomial Data Model and Likelihood Function
+
+In the Bayesian framework, we combine prior beliefs with observed data through a model. After specifying the **prior**, the next step is to specify the **data model**, which describes how the data relate to the parameter of interest.
+
+---
+
+### Modeling New Poll Data
+
+Suppose you now conduct a new poll of 50 Minnesotans and observe that **30** of them support Michelle.
+
+We model this situation using the **Binomial distribution**, which is suitable for counting the number of successes (supporters) in a fixed number of independent trials (poll respondents).
+
+---
+
+### The Binomial Model
+
+If \(\pi\) is the probability of success, then the number of successes \(Y\) in \(n\) trials is:
+
+\[
+Y \mid \pi \sim \text{Binomial}(n = 50, \pi)
+\]
+
+In our case:
+
+- \(Y = 30\) people supported Michelle
+- \(n = 50\) total people were polled
+
+The **likelihood function** describes how likely we are to observe \(Y = 30\) given various values of \(\pi\).
+
+---
+
+### Likelihood Function Definition
+
+\[
+L(\pi \mid Y = 30) = \binom{50}{30} \pi^{30} (1 - \pi)^{20}
+\]
+
+This function tells us: *If Michelle's true support was $\pi$, how likely would we be to observe exactly 30 supporters out of 50?*
+
+---
+
+### R Code: Plotting the Likelihood Function
+
+```{r}
+# Define the likelihood function
+likelihood <- function(pi) {
+  dbinom(30, size = 50, prob = pi)
+}
+
+# Evaluate likelihood across a grid of ?? values
+pi_vals <- seq(0, 1, length.out = 1000)
+lik_vals <- likelihood(pi_vals)
+
+# Plot the likelihood function
+plot(pi_vals, lik_vals, type = "l", lwd = 2,
+     xlab = expression(pi),
+     ylab = "Likelihood",
+     main = expression("Likelihood Function: Binomial(50," ~ pi ~ "), Y = 30"))
+abline(v = 0.6, col = "blue", lty = 2)  # mode at ?? = 0.6
+```
+
+This shows that the **most likely** value of \(\pi\) given the data is 0.6. That is, if Michelle's true support were 60%, we'd most likely observe 30 out of 50 supporters.
+
+---
+
+### Key Insight
+
+- The likelihood is **not a probability distribution** - it does not integrate to 1.
+- It helps compare how compatible different values of \(\pi\) are with the observed data.
+- The **peak** of the likelihood occurs at \( \pi = \frac{30}{50} = 0.6 \), which is the **maximum likelihood estimate (MLE)**.
+
+---
+
+We will now combine this likelihood with our prior (Beta(45,55)) in the next section to form the **posterior distribution**.
+
+## Section 3.3: The Beta Posterior Model
+
+We now combine our prior knowledge about Michelle's support (prior) with the new polling data (likelihood) to form an updated belief - the **posterior distribution**.
+
+This is the central idea in Bayesian analysis.
+
+---
+
+### Bayes' Rule (for continuous distributions)
+
+\[
+f(\pi \mid Y = 30) = \frac{f(\pi) \cdot L(\pi \mid Y = 30)}{\int_0^1 f(\pi) \cdot L(\pi \mid Y = 30) \, d\pi}
+\]
+
+In words:  
+**Posterior** = **(Prior × Likelihood) / Constant**
+
+---
+
+### Prior and Likelihood for Michelle
+
+- Prior: \( \pi \sim \text{Beta}(45, 55) \)
+- Likelihood: \( Y \mid \pi \sim \text{Binomial}(50, \pi) \), with \(Y = 30\)
+
+### Conjugate Prior
+
+A **conjugate prior** is a prior distribution that, when combined with a likelihood from a particular model family, results in a **posterior distribution from the same family**.
+
+In this case:
+
+- The **Beta distribution** is a **conjugate prior** for the **Binomial likelihood**.
+- This means if we use a Beta prior with a Binomial data model, the resulting posterior will also be a Beta distribution.
+
+Formally:
+
+> We say that \( f(\pi) \) is a **conjugate prior** for \( L(\pi \mid y) \) if the posterior  
+> \( f(\pi \mid y) \propto f(\pi) \cdot L(\pi \mid y) \)  
+> is from the **same model family** as the prior.
+
+
+Because the **Beta** prior is conjugate to the **Binomial** likelihood, the posterior is also Beta-distributed:
+
+\[
+\pi \mid Y = 30 \sim \text{Beta}(45 + 30, 55 + 20) = \text{Beta}(75, 75)
+\]
+
+---
+
+### R Code: Plotting the Posterior
+
+```{r}
+# Visualize prior, likelihood (scaled), and posterior
+plot_beta_binomial(alpha = 45, beta = 55, y = 30, n = 50)
+```
+
+This plot shows:
+- The **prior** (black curve)
+- The **likelihood**, scaled to have area 1 (gray dashed)
+- The **posterior** (blue curve), a compromise between prior and likelihood
+
+---
+
+### Summary of Posterior Characteristics
+
+We use `summarize_beta_binomial()` to extract key quantities like mean, mode, variance, and standard deviation.
+
+```{r}
+# Summarize prior and posterior
+summarize_beta_binomial(alpha = 45, beta = 55, y = 30, n = 50)
+```
+
+
+---
+
+### Interpretation
+
+- The new data nudges the mean support up from **45%** to **50%**
+- The posterior is **more concentrated** (smaller standard deviation) than the prior
+- We now have stronger belief that Michelle's support is near 50%
+
+This reflects a Bayesian learning process: we updated prior beliefs with new evidence.
+
+---
+
+In the next section, we will generalize this to a full **Beta-Binomial model** applicable to any number of trials and any prior.
+
+## Section 3.4: The General Beta-Binomial Model
+
+In the previous section, we applied Bayesian updating to Michelle's support using:
+
+- A **Beta(45, 55)** prior
+- A **Binomial(50, $\pi$)** likelihood
+- Observed data \( Y = 30 \)
+
+The result was a posterior:
+\[
+\pi \mid Y = 30 \sim \text{Beta}(75, 75)
+\]
+
+---
+
+### Generalizing: The Beta-Binomial Model
+
+This approach generalizes to many settings where we estimate a proportion \(\pi \in [0, 1]\), and we observe:
+
+- \(Y\): number of successes (e.g., voters, defective items)
+- \(n\): total number of trials
+- \(\pi\): unknown proportion (e.g., support rate, failure rate)
+
+We assume:
+
+\[
+Y \mid \pi \sim \text{Binomial}(n, \pi)
+\quad \text{and} \quad
+\pi \sim \text{Beta}(\alpha, \beta)
+\]
+
+Then the posterior is also a Beta distribution:
+\[
+\pi \mid Y = y \sim \text{Beta}(\alpha + y, \beta + n - y)
+\]
+
+---
+
+### Posterior Summaries
+
+The key formulas for the **posterior** \(\text{Beta}(\alpha + y, \beta + n - y)\) are:
+
+- **Mean**:  
+  \[
+  \mathbb{E}(\pi \mid Y = y) = \frac{\alpha + y}{\alpha + \beta + n}
+  \]
+
+- **Mode** (when \(\alpha + y > 1\) and \(\beta + n - y > 1\)):  
+  \[
+  \text{Mode}(\pi \mid Y = y) = \frac{\alpha + y - 1}{\alpha + \beta + n - 2}
+  \]
+
+- **Variance**:  
+  \[
+  \text{Var}(\pi \mid Y = y) = \frac{(\alpha + y)(\beta + n - y)}{(\alpha + \beta + n)^2(\alpha + \beta + n + 1)}
+  \]
+
+
+---
+
+### R Code: A General Example
+
+Suppose we start with a prior \( \pi \sim \text{Beta}(3, 3) \) and observe \( Y = 12 \) out of \( n = 20 \) trials.
+
+```{r}
+# Use summarize_beta_binomial() to compute updated values
+summarize_beta_binomial(alpha = 3, beta = 3, y = 12, n = 20)
+```
+
+
+---
+
+### R Code: Plot Prior, Likelihood, and Posterior
+
+```{r}
+# Visualize prior, scaled likelihood, and posterior
+plot_beta_binomial(alpha = 3, beta = 3, y = 12, n = 20)
+```
+
+---
+
+
+The **Beta-Binomial model** is a powerful and flexible Bayesian tool for:
+
+- Proportions
+- Probabilities
+- Rates in [0,1]
+
+It has wide applications, including:
+
+- Medical test sensitivity/specificity
+- Political polling
+- Manufacturing quality rates
+
+In the next section, we will simulate this model using random sampling to better understand its behavior.
+
+
+## Section 3.5: Simulating the Beta-Binomial
+
+Bayesian inference often involves computing the **posterior distribution** of an unknown parameter - like a proportion \(\pi\). When conjugate priors are used (e.g., Beta prior with Binomial data), we get a closed-form posterior. But even then, simulation helps us:
+
+- Visualize the relationship between parameter values and outcomes
+- Approximate the posterior distribution (when closed form isn't feasible)
+- Estimate summaries (mean, SD, quantiles) empirically
+- Understand the process of Bayesian updating more intuitively
+
+---
+
+### Scenario: Revisiting Michelle's Support
+
+Recall:
+
+- Prior: \(\pi \sim \text{Beta}(45, 55)\)
+- Poll: \(n = 50\) people, with \(Y = 30\) supporting Michelle
+- Likelihood: \(Y \mid \pi \sim \text{Binomial}(50, \pi)\)
+
+We will now simulate the prior and poll outcomes, and use these simulations to approximate the posterior distribution.
+
+---
+
+### Step 1: Simulate Prior \(\pi\) Values
+
+We draw 10,000 values from the prior \( \text{Beta}(45, 55) \). Each value represents a possible "true" support rate for Michelle, according to our prior belief.
+
+```{r}
+set.seed(84735)
+
+# Simulate 10,000 ?? values from the prior
+pi_sim <- rbeta(10000, shape1 = 45, shape2 = 55)
+
+# View a histogram of simulated ?? values
+hist(pi_sim, breaks = 50, main = expression("Simulated Prior:" ~ pi ~ " Beta(45, 55)"),
+     xlab = expression(pi), col = "skyblue", border = "white")
+```
+
+---
+
+### Step 2: Simulate Data for Each Prior \(\pi\)
+
+For each simulated \(\pi\), simulate a poll result: how many people out of 50 would support Michelle?
+
+```{r}
+# Simulate polling outcomes Y for each ??
+y_sim <- rbinom(10000, size = 50, prob = pi_sim)
+
+# Combine into a data frame
+michelle_sim <- data.frame(pi = pi_sim, y = y_sim)
+```
+
+This simulates what could happen **if** Michelle's support was drawn from the prior - some scenarios give high support, some low, most around 45%.
+
+---
+
+### Step 3: Filter to Simulations Matching the Observed Data
+
+We now filter the 10,000 simulations to only those where the poll result was **exactly 30 out of 50** (i.e., \(Y = 30\)). These represent prior values of \(\pi\) that are **consistent with the observed data**.
+
+```{r}
+# Keep only simulated ?? values where Y = 30
+michelle_posterior <- michelle_sim %>% filter(y == 30)
+```
+
+---
+
+### Step 4: Visualize the Simulated Posterior
+
+```{r}
+# Plot the density of posterior ?? values
+ggplot(michelle_posterior, aes(x = pi)) +
+  geom_density(fill = "skyblue") +
+  labs(title = expression("Simulated Posterior:" ~ pi ~ " | Y = 30"),
+       x = expression(pi), y = "Density")
+```
+
+This approximates the **posterior distribution** of \(\pi\), given the data \(Y = 30\). We expect the shape to resemble the analytical posterior \(\text{Beta}(75, 75)\).
+
+---
+
+### Step 5: Summarize the Simulated Posterior
+
+```{r}
+# Mean and SD of the simulated posterior
+michelle_posterior %>%
+  summarize(mean_pi = mean(pi), sd_pi = sd(pi))
+```
+
+
+
+Compare this with theoretical values from \(\text{Beta}(75, 75)\):
+- Mean = 0.50
+- SD $\approx$ 0.0407
+
+So our simulation provides a **very good approximation** of the posterior.
+
+---
+
+### Why Simulation is Important
+
+Even though we had a closed-form posterior in this case, simulation is important for several reasons:
+
+1. **Visualization**: Simulated distributions help us understand Bayesian updating intuitively.
+2. **Approximation**: Many real-world models (non-conjugate, hierarchical) don't yield closed-form posteriors.
+3. **Inference**: Simulations let us compute summaries like credible intervals, quantiles, etc., even when formulas don't exist.
+4. **Teaching and Understanding**: Seeing the posterior arise by filtering prior + likelihood deepens conceptual understanding.
+
+In practice, simulation is **how modern Bayesian analysis is done**, especially using MCMC methods, which we'll study later.
+
+---
+
+In the next section, we'll see how this approach is applied to a real experiment - Milgram's behavioral study on obedience.
+
+## Section 3.6: Example - Milgram's Behavioral Study
+
+We now apply the full Beta-Binomial model to a real-world behavioral experiment conducted by **Stanley Milgram in 1963**.
+
+---
+
+### Study Context
+
+Milgram's experiment investigated how ordinary individuals respond to authority when instructed to administer what they believed were electric shocks to another person.
+
+Out of **40 participants**, **26** went all the way to the highest shock level - despite hearing increasing levels of discomfort from the "learner".
+
+Let:
+- \( Y = 26 \): number of obedient participants
+- \( n = 40 \): total participants
+- \( \pi \): true proportion of people in the population who would obey under similar conditions
+
+---
+
+### Step 1: Prior Belief
+
+Milgram (or a skeptical observer at the time) might have believed that most people would refuse to administer the final shock. To encode this skepticism, we use:
+
+\[
+\pi \sim \text{Beta}(1, 10)
+\]
+
+This prior expresses a belief that the obedience rate \(\pi\) is likely **low**, concentrating more mass near zero.
+
+```{r}
+# Visualize the skeptical prior Beta(1, 10)
+plot_beta(1, 10)
+```
+
+---
+
+### Step 2: Data Model
+
+Observed data:  
+\[
+Y \mid \pi \sim \text{Binomial}(n = 40, \pi), \quad Y = 26
+\]
+
+We now update the prior using this data.
+
+---
+
+### Step 3: Posterior Distribution
+
+Since we are using a conjugate Beta prior with a Binomial likelihood, the posterior is:
+
+\[
+\pi \mid Y = 26 \sim \text{Beta}(1 + 26, 10 + 14) = \text{Beta}(27, 24)
+\]
+
+---
+
+### Step 4: Posterior Summary
+
+```{r}
+# Summarize prior and posterior
+summarize_beta_binomial(alpha = 1, beta = 10, y = 26, n = 40)
+```
+
+
+
+---
+
+### Step 5: Posterior Visualization
+
+```{r}
+# Plot prior, likelihood (scaled), and posterior
+plot_beta_binomial(alpha = 1, beta = 10, y = 26, n = 40)
+```
+
+This plot clearly shows the transition from **prior skepticism** (low $\pi$ values) to **posterior learning** from the data (centered near 53%).
+
+---
+
+### Interpretation
+
+- The prior (Beta(1,10)) assumed that **obedience was rare** (mean around 9%)
+- The data (26 out of 40) provided **strong contradictory evidence**
+- The posterior (Beta(27,24)) now centers around **53%**, a dramatic shift
+- This example illustrates how **Bayesian updating** lets us begin with strong opinions - and still be changed by data
+
+---
+
+

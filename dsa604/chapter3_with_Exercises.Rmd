@@ -1,0 +1,662 @@
+
+---
+title: "Chapter 3: Exercises"
+author: "Explained by Dr. Rajitha M. Silva"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(bayesrules)
+library(tidyverse)  # For summarize and plotting functions
+```
+
+## Exercises: Beta Prior Models
+
+---
+
+### **Exercise 3.1 (Tune your Beta prior: Take I)**
+
+Tune a $\text{Beta}(\alpha, \beta)$ model that accurately reflects the given prior information.
+
+**a)** Your friend applied to a job and says:  
+
+> "I think I have a 40% chance of getting the job, but I'm pretty unsure."  
+They estimate a range between **20% and 60%**.
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+```r
+# Centered at 0.4, relatively diffuse
+plot_beta(4, 6)
+summarize_beta(4, 6)
+```
+This Beta(4,6) prior reflects a mean of 0.4 and moderate uncertainty.
+
+</details>
+
+---
+
+**b)** A scientist created a new test for a rare disease.  
+They believe the test is **accurate 80%** of the time, with a **variance of 0.05**.
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+To match mean = 0.8 and variance = 0.05, we can solve for  $\alpha $ and $\beta$ using the Beta variance formula:
+
+\[
+\text{Var} = \frac{\alpha \beta}{(\alpha + \beta)^2(\alpha + \beta + 1)}
+\]
+
+One choice is:
+```r
+# Approximation that matches mean ~0.8 and var ~0.05
+plot_beta(4, 1)
+summarize_beta(4, 1)
+```
+Beta(4,1) has a mean of 0.8 and relatively high confidence, approximate variance = 0.053.
+
+</details>
+
+---
+
+**c)** Aunt Jo, a mushroom hunter, says:  
+> "I expect to find mushrooms 90% of the time. My range is between 85% and 100%."
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+High belief near 0.9 with narrow spread suggests a strong prior like:
+
+```r
+# Strong confidence near 0.9
+plot_beta(27, 3)
+summarize_beta(27, 3)
+```
+This Beta(27,3) has a mode around 0.9 and low variance - good for Aunt Jo's strong claim.
+
+</details>
+
+---
+## Exercises: Beta Prior Models
+
+---
+
+### Exercise 3.1 (Tune your Beta prior: Take I)
+
+Tune a Beta(\(\alpha, \beta\)) prior to reflect the following information.
+
+---
+
+**a)** Your friend applied to a job and says:  
+> "I think I have a 40% chance of getting the job, but I'm pretty unsure."  
+They estimate their chance lies between 20% and 60%.
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+**Rationale (from Section 3.1.2):**  
+We use the mean formula:
+
+\[
+\mathbb{E}(\pi) = \frac{\alpha}{\alpha + \beta} = 0.4
+\]
+
+Choosing \(\alpha + \beta = 10\) as a moderate strength, we solve:
+
+\[
+\frac{\alpha}{10} = 0.4 \Rightarrow \alpha = 4, \ \beta = 6
+\]
+
+Beta(4, 6) reflects moderate uncertainty with a spread roughly between 0.2 and 0.6, matching your friend's belief range.
+
+```{r}
+plot_beta(4, 6)
+summarize_beta(4, 6)
+```
+
+</details>
+
+---
+
+**b)** A scientist designed a test for a rare disease. They believe the test is **80% accurate** and estimate the **variance to be around 0.05**.
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+**Rationale (from Section 3.1.2):**  
+Use:
+
+\[
+\mathbb{E}(\pi) = 0.8 = \frac{\alpha}{\alpha + \beta}
+\]
+
+Assume \(\alpha + \beta = 5\) for moderate belief strength. Then:
+
+\[
+\alpha = 4,\ \beta = 1
+\]
+
+Variance:
+\[
+\frac{4 \cdot 1}{(4+1)^2(4+1+1)} = 0.053 \approx 0.05
+\]
+
+```{r}
+plot_beta(4, 1)
+summarize_beta(4, 1)
+```
+
+</details>
+
+---
+
+**c)** Aunt Jo says:  
+> "I expect to find mushrooms 90% of the time. My range is 85% to 100%."
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+**Rationale (from Section 3.1.2):**  
+This implies high confidence and a narrow spread. Use:
+
+\[
+\mathbb{E}(\pi) = \frac{27}{30} = 0.9,\ \ \alpha = 27,\ \beta = 3
+\]
+
+This gives a high mode near 0.896 and low variance, concentrating belief between 0.85 and 1.
+
+```{r}
+plot_beta(27, 3)
+summarize_beta(27, 3)
+```
+
+</details>
+
+---
+
+### Exercise 3.2 (Tune your Beta prior: Take II)
+
+---
+
+**a)** Your friend says:  
+> "I think I have an 80% chance of sleeping well tonight, and I'm pretty certain."  
+Range: 70% to 90%.
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+**Rationale (from Section 3.1.2):**  
+Belief is centered at 0.8 with low uncertainty.  
+Use \(\alpha = 16, \beta = 4\), giving:
+
+\[
+\mathbb{E}(\pi) = \frac{16}{20} = 0.8,\ \text{SD} \approx 0.089
+\]
+
+```{r}
+plot_beta(16, 4)
+summarize_beta(16, 4)
+```
+
+</details>
+
+---
+
+**b)** A researcher estimates \(\pi = 0.9\), but with high uncertainty. Desired variance is 0.08.
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+**Rationale (from Section 3.1.2):**  
+Smaller \(\alpha + \beta\) gives larger variance.  
+Try Beta(2.7, 0.3), which has:
+
+\[
+\mathbb{E}(\pi) = 0.9,\ \text{Var} \approx 0.08
+\]
+
+```{r}
+plot_beta(2.7, 0.3)
+summarize_beta(2.7, 0.3)
+```
+
+</details>
+
+---
+
+**c)** Max says:  
+> "I probably play Animal Crossing in the morning between 75% and 95% of the time, most likely around 85%."
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+**Rationale (from Section 3.1.2):**  
+This implies strong belief near 0.85.  
+Choose Beta(17, 3):
+
+\[
+\mathbb{E}(\pi) = 0.85,\ \text{tight spread}
+\]
+
+```{r}
+plot_beta(17, 3)
+summarize_beta(17, 3)
+```
+
+</details>
+
+---
+
+### Exercise 3.3 (It's OK to admit you don't know)
+
+---
+
+**a)** Specify and plot a Beta prior that reflects complete ignorance.
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+**Rationale:**  
+A uniform prior over \([0, 1]\) is Beta(1, 1).  
+It reflects no preference for any value of \(\pi\).
+
+```{r}
+plot_beta(1, 1)
+```
+
+</details>
+
+---
+
+**b)** What is the mean of Beta(1, 1)? Does it reflect no information?
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+\[
+\mathbb{E}(\pi) = \frac{1}{2} = 0.5
+\]
+
+This doesn't mean we believe \(\pi = 0.5\), but that **all values are equally likely**.
+
+</details>
+
+---
+
+**c)** What is the standard deviation?
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+```{r}
+summarize_beta(1, 1)
+```
+
+Standard deviation ??? 0.2887.
+
+</details>
+
+---
+
+**d)** Plot a Beta prior with smaller standard deviation (more concentrated).
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+**Rationale:**  
+Increasing \(\alpha, \beta\) reduces variance while keeping the same mean.  
+Use Beta(10, 10):
+
+```{r}
+plot_beta(10, 10)
+```
+
+</details>
+
+---
+
+**e)** Plot a Beta prior with larger standard deviation (more spread out).
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+**Rationale:**  
+Using small values of \(\alpha, \beta\), especially < 1, creates a U-shaped distribution.  
+Try Beta(0.5, 0.5):
+
+```{r}
+plot_beta(0.5, 0.5)
+```
+
+</details>
+
+
+
+---
+
+### Exercise 3.4 (Which Beta? Take I)
+
+Six Beta pdfs are shown (not included here). Match each to one of the following models:  
+**Beta(0.5,0.5), Beta(1,1), Beta(2,2), Beta(6,6), Beta(6,2), Beta(0.5,6)**
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+We identify Beta distributions by shape:
+
+- **Beta(0.5,0.5)**: U-shaped; peaks at 0 and 1  
+- **Beta(1,1)**: Uniform distribution  
+- **Beta(2,2)**: Bell-shaped, centered at 0.5  
+- **Beta(6,6)**: More concentrated version of Beta(2,2), symmetric  
+- **Beta(6,2)**: Right-skewed; mode near 0.75  
+- **Beta(0.5,6)**: Left-skewed; mode near 0.05
+
+We match each curve using mode formulas from Section 3.1.2:
+
+\[
+\text{Mode}(\pi) = \frac{\alpha - 1}{\alpha + \beta - 2}
+\]
+
+</details>
+
+---
+
+### Exercise 3.5 (Which Beta? Take II)
+
+Match each of the six plotted Beta pdfs to one of these models:  
+**Beta(1,0.3), Beta(2,1), Beta(3,3), Beta(6,3), Beta(4,2), Beta(5,6)**
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+Use visual shape + mean/mode insight:
+
+- **Beta(1,0.3)**: Heavily right-skewed (mode close to 1)  
+- **Beta(2,1)**: Right-skewed, mode ??? 0.5  
+- **Beta(3,3)**: Symmetric, centered at 0.5  
+- **Beta(6,3)**: Strong right peak  
+- **Beta(4,2)**: Mode near 0.67  
+- **Beta(5,6)**: Mildly left-skewed, mode near 0.44
+
+You can verify each with `plot_beta()` and `summarize_beta()`.
+
+</details>
+
+---
+
+### Exercise 3.6 (Beta properties)
+
+These questions refer to the Beta models in **Exercise 3.4**.
+
+---
+
+**a)** Which model has the **smallest mean**? The **largest**?
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+Use the formula:
+
+\[
+\mathbb{E}(\pi) = \frac{\alpha}{\alpha + \beta}
+\]
+
+- Smallest mean: **Beta(0.5, 6)** ??? 0.077  
+- Largest mean: **Beta(6, 2)** ??? 0.75
+
+</details>
+
+---
+
+**b)** Which model has the **smallest mode**? The **largest**?
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+Use the mode formula from Section 3.1.2:
+
+\[
+\text{Mode}(\pi) = \frac{\alpha - 1}{\alpha + \beta - 2}
+\quad \text{(if } \alpha, \beta > 1\text{)}
+\]
+
+- Smallest mode: **Beta(0.5, 6)** (mode undefined, but left-skewed)  
+- Largest mode: **Beta(6, 2)** = \( \frac{5}{6} \approx 0.833 \)
+
+</details>
+
+---
+
+**c)** Which model has the **smallest standard deviation**? The **largest**?
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+Use the variance formula:
+
+\[
+\text{Var}(\pi) = \frac{\alpha \beta}{(\alpha + \beta)^2(\alpha + \beta + 1)}
+\]
+
+- Smallest SD: **Beta(6,6)** - more concentrated  
+- Largest SD: **Beta(0.5,0.5)** - high uncertainty, U-shaped
+
+```{r}
+summarize_beta(6, 6)
+summarize_beta(0.5, 0.5)
+```
+
+</details>
+
+
+---
+
+### Exercise 3.7 (Using R for Beta)
+
+Use R to visualize and summarize the Beta models from Exercise 3.4.
+
+---
+
+**a)** Use `plot_beta()` to plot each of the six Beta distributions:
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+```{r}
+# Required library
+library(bayesrules)
+
+# Plot all six Beta models from Exercise 3.4
+plot_beta(0.5, 0.5)   # U-shaped
+plot_beta(1, 1)       # Uniform
+plot_beta(2, 2)       # Symmetric, moderate spread
+plot_beta(6, 6)       # Symmetric, narrow spread
+plot_beta(6, 2)       # Right-skewed
+plot_beta(0.5, 6)     # Left-skewed
+```
+
+</details>
+
+---
+
+**b)** Use `summarize_beta()` to compute their mean, mode, variance, and SD. Confirm your answers to Exercise 3.6.
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+```{r}
+summarize_beta(0.5, 0.5)
+summarize_beta(1, 1)
+summarize_beta(2, 2)
+summarize_beta(6, 6)
+summarize_beta(6, 2)
+summarize_beta(0.5, 6)
+```
+
+These computations will match the values derived in Exercise 3.6 for identifying smallest/largest mean, mode, and SD.
+
+</details>
+
+---
+
+### Exercise 3.8 (Calculus Challenge: Establishing Beta Features)
+
+Use calculus to verify the formulas for the Beta mean, mode, and variance, based on the Beta density:
+
+\[
+f(\pi) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \pi^{\alpha - 1}(1 - \pi)^{\beta - 1}
+\]
+
+---
+
+**a)** Prove the mean:
+
+\[
+\mathbb{E}(\pi) = \int_0^1 \pi f(\pi)\, d\pi = \frac{\alpha}{\alpha + \beta}
+\]
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+We apply the definition of expected value:
+
+\[
+\mathbb{E}(\pi) = \int_0^1 \pi \cdot \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \pi^{\alpha - 1}(1 - \pi)^{\beta - 1} d\pi
+\]
+
+This becomes:
+
+\[
+\frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \int_0^1 \pi^{\alpha}(1 - \pi)^{\beta - 1} d\pi
+\]
+
+This integral equals the Beta function \(B(\alpha + 1, \beta)\), so we get:
+
+\[
+\mathbb{E}(\pi) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \cdot \frac{\Gamma(\alpha + 1)\Gamma(\beta)}{\Gamma(\alpha + \beta + 1)} = \frac{\alpha}{\alpha + \beta}
+\]
+
+</details>
+
+---
+
+**b)** Prove the mode:
+
+\[
+\text{Mode}(\pi) = \frac{\alpha - 1}{\alpha + \beta - 2}, \quad \text{if } \alpha, \beta > 1
+\]
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+We take the derivative of \( f(\pi) \) and set it to zero to find maxima:
+
+\[
+f'(\pi) \propto (\alpha - 1)\pi^{\alpha - 2}(1 - \pi)^{\beta - 1} - (\beta - 1)\pi^{\alpha - 1}(1 - \pi)^{\beta - 2}
+\]
+
+Setting derivative to zero and simplifying gives:
+
+\[
+\frac{\alpha - 1}{\pi} = \frac{\beta - 1}{1 - \pi} \Rightarrow \pi = \frac{\alpha - 1}{\alpha + \beta - 2}
+\]
+
+</details>
+
+---
+
+**c)** Prove the variance:
+
+\[
+\text{Var}(\pi) = \mathbb{E}(\pi^2) - [\mathbb{E}(\pi)]^2 = \frac{\alpha \beta}{(\alpha + \beta)^2(\alpha + \beta + 1)}
+\]
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+We use:
+
+\[
+\mathbb{E}(\pi^2) = \frac{\alpha(\alpha + 1)}{(\alpha + \beta)(\alpha + \beta + 1)}
+\]
+
+So:
+
+\[
+\text{Var}(\pi) = \mathbb{E}(\pi^2) - \mathbb{E}(\pi)^2 = \frac{\alpha(\alpha + 1)}{(\alpha + \beta)(\alpha + \beta + 1)} - \left( \frac{\alpha}{\alpha + \beta} \right)^2
+\]
+
+Simplify algebraically to get:
+
+\[
+\frac{\alpha \beta}{(\alpha + \beta)^2(\alpha + \beta + 1)}
+\]
+
+</details>
+
+---
+
+### Exercise 3.9 (Interpreting Priors)
+
+Let \(\pi\) be the proportion of U.S. residents who say "pop" to refer to soda.
+
+---
+
+Two salespeople have different priors:
+
+- Salesperson A: North Dakota  \(\pi \sim \text{Beta}(8,2)\)
+- Salesperson B: Louisiana \(\pi \sim \text{Beta}(1,20)\)
+
+---
+
+**a)** Compute prior mean, mode, and SD for both.
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+```{r}
+summarize_beta(8, 2)   # North Dakota
+summarize_beta(1, 20)  # Louisiana
+```
+
+North Dakota:  
+- Mean = 0.8  
+- Mode = 0.777  
+- SD $\approx$ 0.12
+
+Louisiana:  
+- Mean = 0.0476  
+- Mode = 0 (left-skewed)  
+- SD $\approx$ 0.063
+
+</details>
+
+---
+
+**b)** Plot the prior distributions.
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+```{r}
+plot_beta(8, 2)
+plot_beta(1, 20)
+```
+
+</details>
+
+---
+
+**c)** Interpret the difference in their beliefs.
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+Salesperson A (ND) believes "pop" is widely used - strong belief centered near 0.8.  
+Salesperson B (LA) believes it's rare - prior centered below 5%.
+
+Their beliefs reflect regional linguistic patterns and inform the prior assumptions they bring to any analysis involving soda terminology.
+
+</details>
