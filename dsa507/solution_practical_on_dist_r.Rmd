@@ -1,0 +1,87 @@
+---
+title: "Solutions – Practical on Distributions (R)"
+author: "Statistics for Data Science"
+output: html_document
+---
+
+## 1. Binomial Distribution
+
+```{r}
+set.seed(1)
+binom_data <- rbinom(n = 1000, size = 5, prob = 0.3)
+table(binom_data)
+
+# Probability of exactly 3 successes
+dbinom(3, size = 5, prob = 0.3)
+
+# Cumulative probability of ≤ 3 successes
+pbinom(3, size = 5, prob = 0.3)
+```
+
+---
+
+## 2. Chi-Square Test using HairEyeColor
+
+```{r}
+hair_eye <- as.data.frame(HairEyeColor)
+table_data <- xtabs(Freq ~ Hair + Eye, data = hair_eye)
+
+# Chi-square test
+chisq.test(table_data)
+
+# Visualize
+barplot(table_data, beside = TRUE, legend = TRUE, col = rainbow(4))
+```
+
+---
+
+## 3. Student’s t-Distribution
+
+```{r}
+set.seed(2)
+group1 <- rnorm(10, mean = 50, sd = 5)
+group2 <- rnorm(10, mean = 55, sd = 5)
+
+# Two-sample t-test
+t.test(group1, group2)
+
+# Visual comparison
+hist(group1, col = "skyblue", main = "Group 1", xlim = c(40, 65))
+hist(group2, col = "orange", main = "Group 2", xlim = c(40, 65))
+```
+
+---
+
+## 4. F-Distribution / ANOVA
+
+```{r}
+set.seed(3)
+groupA <- rnorm(10, mean = 70)
+groupB <- rnorm(10, mean = 75)
+groupC <- rnorm(10, mean = 80)
+group <- factor(rep(c("A", "B", "C"), each = 10))
+scores <- c(groupA, groupB, groupC)
+
+anova_result <- aov(scores ~ group)
+summary(anova_result)
+```
+
+---
+
+## 5. Poisson, Exponential, Weibull
+
+```{r}
+set.seed(4)
+
+# Poisson
+pois_data <- rpois(100, lambda = 3)
+hist(pois_data, col = "lightblue", main = "Poisson (λ = 3)", xlab = "Count")
+
+# Exponential
+exp_data <- rexp(100, rate = 0.5)
+hist(exp_data, col = "lightgreen", main = "Exponential (rate = 0.5)", xlab = "Time")
+
+# Weibull
+weib_data <- rweibull(100, shape = 1.5, scale = 5)
+hist(weib_data, col = "salmon", main = "Weibull", xlab = "Time")
+```

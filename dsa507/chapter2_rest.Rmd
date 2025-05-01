@@ -1,0 +1,475 @@
+---
+title: "Chapter 2 (ctd): Data and Sampling Distributions"
+author: "Dr. Rajitha M. Silva"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+library(readr)
+```
+
+# 1. Introduction to the Normal Distribution
+
+The **normal distribution**, or Gaussian distribution, is foundational in statistics and data science. Many natural processes (like measurement errors, average scores) follow it. In sports analytics, normal distributions help model and interpret performance consistency.
+
+# 2. Key Properties of the Normal Distribution
+
+-   Symmetric, bell-shaped curve.
+
+-   Defined by mean $\mu$ and standard deviation $\sigma$.
+
+-   Follows the **Empirical Rule**:
+
+-   Approximately 68% of values lie within $\pm 1\sigma$ of the mean.
+
+-   Approximately 95% of values lie within $\pm 2\sigma$ of the mean.
+
+-   Approximately 99.7% of values lie within $\pm 3\sigma$ of the mean.
+
+```{r}
+x <- seq(-4, 4, length = 200)
+y <- dnorm(x)
+plot(x, y, type = "l", lwd = 2, col = "blue", main = "Standard Normal Curve", xlab = "Z", ylab = "Density")
+abline(v = c(-1, 1), col = "red", lty = 2)
+abline(v = c(-2, 2), col = "green", lty = 2)
+```
+
+# 3. Standardization and Z-Scores
+
+We can standardize any value using:
+
+$$
+z = \frac{x - \mu}{\sigma}
+$$
+
+This enables comparison across different units or scales.
+
+```{r}
+set.seed(123)
+nba_heights <- rnorm(100, mean = 200, sd = 10)
+z_scores <- scale(nba_heights)
+
+ggplot(data.frame(z_scores), aes(x = z_scores)) +
+  geom_histogram(bins = 30, fill = "skyblue", color = "black") +
+  ggtitle("Z-Scores of NBA Player Heights") +
+  xlab("Z-score") + ylab("Frequency")
+```
+
+# 4. Standard Normal Distribution
+
+The standard normal distribution, also known as the z-distribution, is a special case of the normal distribution where the mean is 0 and the standard deviation is 1. It is used as a reference to standardize any normal distribution by converting individual data points into z-scores, which represent how many standard deviations a value is from the mean. This transformation facilitates comparison across datasets. **However, standardizing data (e.g., converting to z-scores) does not make the data normally distributed; it only aligns the scale for comparative purposes.** The normal distribution is often referred to as the Gaussian distribution, named after Carl Friedrich Gauss, and was originally called the "**error distribution**" because of its early application to errors in astronomical measurements. A common visual tool used alongside the standard normal distribution is the Q-Q plot, which checks if the data's quantiles match those of a normal distribution. If the data is normally distributed, the Q-Q plot points will align along a diagonal line.
+
+### Visualizing Standardization
+
+```{r}
+set.seed(123)
+skewed_data <- rexp(100, rate = 1/50)  # Right-skewed distribution
+z_scores_skewed <- scale(skewed_data)
+
+par(mfrow = c(1, 2))
+
+# Original skewed data
+hist(skewed_data, col = 'lightblue', main = 'Original Skewed Data (Exponential)',
+     xlab = 'Values')
+
+# Standardized skewed data
+hist(z_scores_skewed, col = 'orange', main = 'Standardized Skewed Data (Z-scores)',
+     xlab = 'Z-scores')
+
+par(mfrow = c(1, 1))
+
+```
+
+# 5. Normal Q-Q Plot
+
+QQ-plots help assess if data follows a normal distribution.
+
+```{r}
+qqnorm(nba_heights)
+qqline(nba_heights, col = "red")
+```
+
+If points on the Q-Q plot fall close to the diagonal line, the sample is likely from a normal distribution. Deviations from the line indicate departures from normality, such as skewness or outliers.
+
+# 6. Sampling Distribution Example (Basketball Points)
+
+Let's model the points scored by a basketball player per game, which often exhibits right-skewness due to occasional high-scoring performances. We'll take multiple samples of game scores to illustrate the Central Limit Theorem - the idea that the distribution of sample means tends toward normality even if the original data is skewed.
+
+```{r}
+
+set.seed(42)
+# Simulate 1000 game scores: typical basketball scoring with occasional outliers
+game_points <- rgamma(1000, shape = 2, scale = 10)
+
+# Generate sampling distribution of means from samples of 20 games each
+sample_means <- replicate(1000, mean(sample(game_points, 20)))
+
+# Plot the histogram of sample means
+ggplot(data.frame(sample_means), aes(x = sample_means)) +
+  geom_histogram(bins = 30, fill = "orange", color = "black") +
+  ggtitle("Sampling Distribution of Mean Points per Game (n = 20)") +
+  xlab("Mean Points") + ylab("Frequency")
+```
+
+## Practical Task: Understanding Normality and Sampling Distributions Using Baseball Data
+
+### Objective
+
+Use real-world baseball batting statistics to:
+
+1.  Compute and explore batting averages
+2.  Standardize data using z-scores
+3.  Assess normality visually using histograms and Q-Q plots
+4.  Demonstrate the Central Limit Theorem by simulating the sampling distribution of the mean
+
+### Dataset
+
+-   **R users**: `Batting` table from the `Lahman` package\
+-   **Python users**: Batting data from the `pybaseball` package (`batting_stats(2022)`)
+
+### Instructions for R Users
+
+Tools: `Lahman`, `dplyr`, `ggplot2`
+
+1.  Install and load the `Lahman` package and retrieve 2022 season stats.
+2.  Filter players with at least 100 at-bats.
+3.  Compute batting average:(Hits/At_Bat) `avg = H / AB`.
+4.  Standardize batting average into z-scores.
+5.  Plot a histogram of z-scores.
+6.  Create a Q-Q plot to assess normality.
+7.  Generate the sampling distribution of the sample mean from 1,000 samples of size 30.
+8.  Plot the sampling distribution histogram.
+
+### Instructions for Python Users
+
+Tools: `pybaseball`, `pandas`, `matplotlib`, `seaborn`, `scipy.stats`
+
+1.  Install `pybaseball` and retrieve 2022 season stats using `batting_stats(2022)`.
+2.  Filter players with at least 100 at-bats.
+3.  Compute batting average:(Hits/At_Bat) `AVG = H / AB`.
+4.  Standardize into z-scores: `(AVG - mean) / std`.
+5.  Plot a histogram of z-scores using `seaborn`.
+6.  Create a Q-Q plot using `scipy.stats.probplot`.
+7.  Draw 1,000 samples of size 30 and compute the mean for each.
+8.  Plot the histogram of sample means to illustrate the Central Limit Theorem.
+
+# 7. Long-Tailed Distributions
+
+Long-tailed distributions are those in which extreme values in either (or both) directions occur more frequently than in a normal distribution. These distributions do not drop off as quickly in the tails, meaning that **outliers are more common**. This is a critical consideration in data science, specially when modeling variables like income, wait times, or sports metrics with occasional extreme performances.
+
+In practical terms, data following a long-tailed distribution may appear roughly normal in the center but have **"fatter" tails**, resulting in deviations from the normality assumption. This can cause standard statistical methods that rely on normality (such as confidence intervals or z-tests) to behave poorly, specially in small samples.
+
+### Visualizing a Long-Tailed Distribution
+
+```{r}
+set.seed(1)
+# Student's t-distribution with low degrees of freedom (heavy tails)
+long_tail_data <- rt(1000, df = 2)
+
+# Histogram to show fat tails
+ggplot(data.frame(long_tail_data), aes(x = long_tail_data)) +
+  geom_histogram(bins = 40, fill = "purple", color = "black") +
+  ggtitle("Long-Tailed Distribution (t-distribution, df = 2)") +
+  xlab("Values") + ylab("Count")
+```
+
+### Q-Q Plot Comparison
+
+```{r}
+qqnorm(long_tail_data)
+qqline(long_tail_data, col = "red")
+```
+
+The Q-Q plot clearly shows the deviation from normality, specially at the ends - this indicates the presence of long tails. Such patterns are typical in real-world data where **rare but impactful events** occur more often than expected under a normal model (e.g., rare high scores in Cricket, or financial losses).
+
+------------------------------------------------------------------------
+
+# 8. Student's t-Distribution
+
+The **Student's t-distribution** is a probability distribution that closely resembles the normal distribution but has **heavier tails**, which provide greater coverage for extreme values. This makes it particularly useful when working with **small samples** and **unknown population standard deviations**.
+
+$$
+t = \frac{\bar{x} - \mu}{s / \sqrt{n}}
+$$
+
+This statistic follows a t-distribution with $n - 1$ degrees of freedom, accounting for the additional variability introduced when using the sample standard deviation $s$ instead of the population standard deviation $\sigma$.
+
+### Historical Context
+
+The t-distribution is commonly known as **Student's t-distribution** because it was introduced in 1908 by [**William Sealy Gosset**, who published his work under the pseudonym **"Student"** in the journal *Biometrika*](https://youtu.be/bqfcFCjaE1c?feature=shared). Gosset worked for the Guinness brewery in Dublin, which prohibited employees from publishing under their own names to avoid disclosing the company's use of statistical methods.
+
+Had Gosset possessed modern computational tools, he may have opted for simulation or bootstrapping. Instead, the t-distribution became an analytical solution that approximated the sampling variability from small samples.
+
+### Visualizing the t-Distribution Compared to the Normal Distribution
+
+```{r}
+x <- seq(-5, 5, length = 200)
+plot(x, dt(x, df = 2), type = "l", col = "red", lwd = 2, ylim = c(0, 0.4),
+     ylab = "Density", main = "t-Distributions vs Normal")
+lines(x, dt(x, df = 5), col = "blue", lwd = 2)
+lines(x, dt(x, df = 30), col = "green", lwd = 2)
+lines(x, dnorm(x), col = "black", lwd = 2, lty = 2)
+legend("topright", legend = c("df = 2", "df = 5", "df = 30", "Normal"),
+       col = c("red", "blue", "green", "black"), lty = c(1,1,1,2), lwd = 2)
+```
+
+The plot demonstrates how the **t-distribution's shape changes** with the degrees of freedom. With low degrees of freedom, the distribution is wider and more dispersed. As the degrees of freedom increase, the distribution approaches the standard normal curve, reflecting greater certainty in estimating the population standard deviation from larger samples.
+
+----
+
+# 9. Binomial Distribution
+
+The **binomial distribution** models the number of successes in a fixed number of independent trials, where each trial has only two outcomes: **success** or **failure**. Each trial has the same probability of success, denoted by \( p \), and the number of trials is denoted by \( n \).
+
+This distribution is useful for answering questions like:
+
+> "If the probability of a sale from a click is 0.02, what is the chance of getting no sales from 200 clicks?"
+
+#### Key Properties
+
+- Number of trials: \( n \)  
+- Probability of success: \( p \)  
+- Mean: \( n \times p \)  
+- Variance: \( n \times p \times (1 - p) \)  
+
+As \( n \) becomes large and \( p \) is not too close to 0 or 1, the binomial distribution approximates the normal distribution.
+
+---
+
+#### Example in R
+
+```r
+# Probability of exactly 2 successes in 5 trials where p = 0.1
+dbinom(x = 2, size = 5, prob = 0.1)
+
+# Probability of 2 or fewer successes
+pbinom(q = 2, size = 5, prob = 0.1)
+```
+
+---
+
+#### Example in Python
+
+```python
+from scipy.stats import binom
+
+# Probability of exactly 2 successes in 5 trials where p = 0.1
+binom.pmf(2, n=5, p=0.1)
+
+# Probability of 2 or fewer successes
+binom.cdf(2, n=5, p=0.1)
+```
+
+---
+
+#### Why It Matters
+
+The binomial distribution underlies many binary-outcome situations in data science - such as predicting customer behavior (buy/not buy), A/B testing, fraud detection, and clinical trial analysis. Even in more complex models, this distribution helps build intuition about probabilistic outcomes and decision making.
+
+
+# 10. Chi-Square Distribution
+
+The **chi-square distribution** is used when analyzing **counts** of items or people in categories, especially when testing whether observed data fits what we expect under a hypothesis. It is often used in:
+
+- **Tests of independence** (e.g., is gender related to job promotion?)
+- **Goodness-of-fit tests** (e.g., do observed category frequencies match a theoretical distribution?)
+
+#### Key Concept
+
+It measures **departure from expectation**. That is, how different are the **observed counts** from what we would expect if there were no relationship or effect?
+
+The chi-square statistic is calculated by:
+
+\[
+\chi^2 = \sum \frac{(O - E)^2}{E}
+\]
+
+Where:
+- \( O \): Observed frequency  
+- \( E \): Expected frequency under the null hypothesis
+
+A **small chi-square value** means the data fits the expected distribution well.  
+A **large chi-square value** means the observed data differs significantly from what is expected.
+
+---
+
+#### Example in R
+
+```r
+# Create observed and expected counts
+observed <- c(50, 30, 20)
+expected <- c(40, 40, 20)
+
+# Chi-square test
+chisq.test(x = observed, p = expected / sum(expected))
+```
+
+---
+
+#### Example in Python
+
+```python
+from scipy.stats import chisquare
+
+observed = [50, 30, 20]
+expected = [40, 40, 20]
+
+chisquare(f_obs=observed, f_exp=expected)
+```
+
+---
+
+#### Why It Matters
+
+The chi-square distribution is especially useful when data are **categorical** and when you want to evaluate whether the counts show a **meaningful pattern** or could have occurred just by chance.
+
+It plays a central role in A/B testing, survey analysis, and many machine learning evaluation tasks involving contingency tables.
+
+# 11. F-Distribution
+
+The **F-distribution** arises frequently in statistical tests that compare the **variability between groups** to the **variability within groups**. It is most commonly used in:
+
+- **Analysis of Variance (ANOVA)**: Testing whether group means differ more than expected by chance.
+- **Regression analysis**: Testing the overall significance of the regression model.
+
+#### Key Concept
+
+The F-statistic is the ratio of two variances:
+
+\[
+F = \frac{\text{variance between groups}}{\text{variance within groups}}
+\]
+
+This ratio follows an **F-distribution** under the null hypothesis (that the group means are equal). If the group differences are large relative to random variation within groups, the F-statistic will be large, suggesting a statistically significant difference.
+
+---
+
+#### Example in R (Using Simulated Data)
+
+```r
+set.seed(42)
+group <- rep(c("A", "B", "C"), each = 10)
+scores <- c(rnorm(10, mean = 75, sd = 5),
+            rnorm(10, mean = 80, sd = 5),
+            rnorm(10, mean = 85, sd = 5))
+
+anova_result <- aov(scores ~ group)
+summary(anova_result)
+```
+
+---
+
+#### Example in Python
+
+```python
+import numpy as np
+from scipy.stats import f_oneway
+
+np.random.seed(42)
+groupA = np.random.normal(75, 5, 10)
+groupB = np.random.normal(80, 5, 10)
+groupC = np.random.normal(85, 5, 10)
+
+f_stat, p_value = f_oneway(groupA, groupB, groupC)
+print("F-statistic:", f_stat)
+print("p-value:", p_value)
+```
+
+---
+
+#### Why It Matters
+
+The F-distribution provides the basis for testing whether the variation due to a factor (like treatment type, education level, or software version) is large enough to suggest a real effect, rather than being attributable to random noise. It plays a foundational role in **experimental design**, **multi-group testing**, and **model validation**.
+
+# 12. Poisson and Related Distributions
+
+Many real-world processes involve **random events occurring over time or space**, such as:
+- Customer arrivals to a store
+- Website visits
+- Machine failures
+- Typographical errors in coding
+
+These events can be modeled using a family of distributions:
+
+---
+
+#### Poisson Distribution
+
+The **Poisson distribution** models the number of events occurring in a fixed interval of time or space, assuming events happen independently and at a constant average rate \( \lambda \).
+
+- **Parameter**: \( \lambda \) (the average number of events per interval)
+- **Mean = Variance = \( \lambda \)**
+
+##### R Example
+
+```r
+# Simulate 100 time intervals with an average of 2 events per interval
+rpois(100, lambda = 2)
+```
+
+##### Python Example
+
+```python
+from scipy.stats import poisson
+poisson.rvs(mu=2, size=100)
+```
+
+---
+
+#### Exponential Distribution
+
+The **exponential distribution** models the **time between events** in a Poisson process. It is continuous, and the average time between events is \( 1/\lambda \).
+
+- **Used for**: modeling time to failure, time between arrivals
+
+##### R Example
+
+```r
+rexp(n = 100, rate = 0.2)  # Average of 0.2 events per minute
+```
+
+##### Python Example
+
+```python
+from scipy.stats import expon
+expon.rvs(scale = 1/0.2, size=100)
+```
+
+---
+
+#### Weibull Distribution
+
+The **Weibull distribution** is a more flexible model than the exponential, allowing the **event rate to change over time**. It is used extensively in reliability engineering and failure analysis.
+
+- Shape parameter \( \beta \): determines increasing or decreasing failure rate
+- Scale parameter \( \eta \): characteristic life
+
+- If \( \beta > 1 \): failure rate increases over time  
+- If \( \beta < 1 \): failure rate decreases over time
+
+##### R Example
+
+```r
+rweibull(n = 100, shape = 1.5, scale = 5000)
+```
+
+##### Python Example
+
+```python
+from scipy.stats import weibull_min
+weibull_min.rvs(c=1.5, scale=5000, size=100)
+```
+
+---
+
+#### Key Points
+
+- Use **Poisson** to model number of events per interval
+- Use **Exponential** to model time between events
+- Use **Weibull** when event rate changes over time (e.g., increasing chance of failure)
+
+These distributions are essential for modeling systems like **web servers**, **manufacturing processes**, and **queueing systems**, where understanding variability over time or space is critical.
+

@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Statistics for Data Science" />
 
 
-<title>DSA 507 Statistics for Data Science &amp; AI</title>
+<title>Solutions – Practical on Distributions (Python)</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -348,96 +349,113 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">DSA 507 Statistics for Data Science &amp;
-AI</h1>
+<h1 class="title toc-ignore">Solutions – Practical on Distributions
+(Python)</h1>
+<h4 class="author">Statistics for Data Science</h4>
 
 </div>
 
 
-<p><strong>Batch:</strong> 2025 / 2027<br />
-<strong>Credit Value:</strong> 3.0<br />
-<strong>Schedule:</strong> Saturdays, 1.00 p.m. to 5.00 p.m.<br />
-<strong>Venue:</strong> Blended Learning Centre (BLC)<br />
-<strong>Instructor:</strong> Dr. Rajitha M. Silva<br />
-<strong>Department of Statistics, University of Sri
-Jayewardenepura</strong></p>
-<hr />
-<div id="course-introduction" class="section level2">
-<h2>Course Introduction</h2>
-<p>The aim of this course is to introduce postgraduate students in Data
-Science and AI to the essential concepts and techniques of statistics.
-The course balances theoretical foundations with practical applications
-using R and Python, including data collection, descriptive and
-inferential analysis, and probabilistic modeling.</p>
-<p>Upon successful completion, students will be able to: - Understand
-the role and limitations of statistics in data science - Classify
-variables and identify suitable scales of measurement - Apply effective
-data collection and sampling methods - Perform descriptive and
-inferential statistical analyses - Calculate and interpret probabilities
-for real-world scenarios</p>
-<hr />
-</div>
-<div id="course-content" class="section level2">
-<h2>Course Content</h2>
-<ul>
-<li><p><strong>1. Exploratory Data Analysis</strong></p></li>
-<li><p><strong>2. Data and Sampling Distributions</strong></p></li>
-<li><p><strong>3. Statistical Experiments and Significance
-Testing</strong></p></li>
-</ul>
+<div id="binomial-distribution" class="section level2">
+<h2>1. Binomial Distribution</h2>
+<pre class="python"><code>import numpy as np
+from scipy.stats import binom
+import matplotlib.pyplot as plt
+
+np.random.seed(1)
+binom_data = np.random.binomial(n=5, p=0.3, size=1000)
+print(np.bincount(binom_data))
+
+# P(X = 3)
+print(binom.pmf(3, n=5, p=0.3))
+
+# P(X ≤ 3)
+print(binom.cdf(3, n=5, p=0.3))
+
+# Plot
+plt.hist(binom_data, bins=np.arange(7)-0.5, edgecolor=&quot;black&quot;)
+plt.title(&quot;Binomial Distribution&quot;)
+plt.xlabel(&quot;Number of Successes&quot;)
+plt.ylabel(&quot;Frequency&quot;)
+plt.show()</code></pre>
 <hr />
 </div>
-<div id="teaching-assessment" class="section level2">
-<h2>Teaching &amp; Assessment</h2>
-<ul>
-<li><strong>Teaching Methods:</strong>
-<ul>
-<li>Lectures via direct instruction<br />
-</li>
-<li>Practical sessions focused on self-learning and inquiry-based
-learning</li>
-</ul></li>
-<li><strong>Assessment Strategy:</strong>
-<ul>
-<li>Continuous Assessment: 40%<br />
-</li>
-<li>Final Assessment: 60%</li>
-</ul></li>
-</ul>
+<div id="chi-square-test-titanic-dataset" class="section level2">
+<h2>2. Chi-Square Test (Titanic dataset)</h2>
+<pre class="python"><code>import seaborn as sns
+import pandas as pd
+from scipy.stats import chi2_contingency
+
+titanic = sns.load_dataset(&quot;titanic&quot;)
+table = pd.crosstab(titanic[&#39;sex&#39;], titanic[&#39;class&#39;])
+
+chi2_stat, p, dof, expected = chi2_contingency(table)
+print(&quot;Chi-square Statistic:&quot;, chi2_stat)
+print(&quot;p-value:&quot;, p)
+
+table.plot(kind=&#39;bar&#39;, stacked=True)
+plt.title(&quot;Observed Frequencies&quot;)
+plt.ylabel(&quot;Count&quot;)
+plt.show()</code></pre>
 <hr />
 </div>
-<div id="references" class="section level2">
-<h2>References</h2>
-<p>Peter Bruce, Andrew Bruce, Peter Gedeck - Practical Statistics for
-Data Scientists_ 50+ Essential Concepts Using R and Python (2020,
-O’Reilly Media)</p>
-</div>
-<div id="recommended-video-playlist" class="section level2">
-<h2>Recommended Video Playlist</h2>
-<p>For supplementary learning and revision, please refer to the
-following YouTube playlist:</p>
-<p><a href="https://youtube.com/playlist?list=PL-u09-6gP5ZNd6AhULnQHr6ZsF15qy4D0&amp;feature=shared">Statistics
-for Data Science YouTube Playlist</a></p>
+<div id="students-t-distribution" class="section level2">
+<h2>3. Student’s t-Distribution</h2>
+<pre class="python"><code>from scipy.stats import ttest_ind
+
+np.random.seed(2)
+group1 = np.random.normal(50, 5, 10)
+group2 = np.random.normal(55, 5, 10)
+
+# T-test
+t_stat, p_val = ttest_ind(group1, group2)
+print(&quot;T-statistic:&quot;, t_stat, &quot;p-value:&quot;, p_val)
+
+# Histograms
+plt.hist(group1, alpha=0.5, label=&#39;Group 1&#39;)
+plt.hist(group2, alpha=0.5, label=&#39;Group 2&#39;)
+plt.legend()
+plt.title(&quot;Group Distributions&quot;)
+plt.show()</code></pre>
 <hr />
 </div>
-<div id="lecture-notes" class="section level2">
-<h2>Lecture Notes</h2>
-<blockquote>
-<p>Lecture materials will be uploaded here during the semester.</p>
-</blockquote>
-<ul>
-<li><p><a href="chapter1_notes.html">Week1: Exploratory Data
-Analysis</a></p></li>
-<li><p><a href="chapter2.html">Week2: Data and Sampling
-Distributions</a></p></li>
-<li><p><a href="chapter2_rest.html">Week3: Data and Sampling
-Distributions (ctd)</a></p></li>
-</ul>
+<div id="f-distribution-anova" class="section level2">
+<h2>4. F-Distribution / ANOVA</h2>
+<pre class="python"><code>from scipy.stats import f_oneway
+
+np.random.seed(3)
+groupA = np.random.normal(70, 5, 10)
+groupB = np.random.normal(75, 5, 10)
+groupC = np.random.normal(80, 5, 10)
+
+f_stat, p_val = f_oneway(groupA, groupB, groupC)
+print(&quot;F-statistic:&quot;, f_stat)
+print(&quot;p-value:&quot;, p_val)</code></pre>
 <hr />
 </div>
-<div id="contact" class="section level2">
-<h2>Contact</h2>
-<p>For questions and feedback, please contact me via email(<a href="mailto:rsilva@sjp.ac.lk" class="email">rsilva@sjp.ac.lk</a>).</p>
+<div id="poisson-exponential-weibull" class="section level2">
+<h2>5. Poisson, Exponential, Weibull</h2>
+<pre class="python"><code>from scipy.stats import poisson, expon, weibull_min
+
+np.random.seed(4)
+
+# Poisson
+pois_data = poisson.rvs(mu=3, size=100)
+plt.hist(pois_data, bins=10, color=&#39;lightblue&#39;, edgecolor=&#39;black&#39;)
+plt.title(&quot;Poisson (λ=3)&quot;)
+plt.show()
+
+# Exponential
+exp_data = expon.rvs(scale=2, size=100)
+plt.hist(exp_data, bins=10, color=&#39;lightgreen&#39;, edgecolor=&#39;black&#39;)
+plt.title(&quot;Exponential (rate=0.5)&quot;)
+plt.show()
+
+# Weibull
+weib_data = weibull_min.rvs(c=1.5, scale=5, size=100)
+plt.hist(weib_data, bins=10, color=&#39;salmon&#39;, edgecolor=&#39;black&#39;)
+plt.title(&quot;Weibull Distribution&quot;)
+plt.show()</code></pre>
 </div>
 
 

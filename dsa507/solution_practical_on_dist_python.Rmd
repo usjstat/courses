@@ -1,0 +1,120 @@
+---
+title: "Solutions – Practical on Distributions (Python)"
+author: "Statistics for Data Science"
+output: html_document
+---
+
+## 1. Binomial Distribution
+
+```python
+import numpy as np
+from scipy.stats import binom
+import matplotlib.pyplot as plt
+
+np.random.seed(1)
+binom_data = np.random.binomial(n=5, p=0.3, size=1000)
+print(np.bincount(binom_data))
+
+# P(X = 3)
+print(binom.pmf(3, n=5, p=0.3))
+
+# P(X ≤ 3)
+print(binom.cdf(3, n=5, p=0.3))
+
+# Plot
+plt.hist(binom_data, bins=np.arange(7)-0.5, edgecolor="black")
+plt.title("Binomial Distribution")
+plt.xlabel("Number of Successes")
+plt.ylabel("Frequency")
+plt.show()
+```
+
+---
+
+## 2. Chi-Square Test (Titanic dataset)
+
+```python
+import seaborn as sns
+import pandas as pd
+from scipy.stats import chi2_contingency
+
+titanic = sns.load_dataset("titanic")
+table = pd.crosstab(titanic['sex'], titanic['class'])
+
+chi2_stat, p, dof, expected = chi2_contingency(table)
+print("Chi-square Statistic:", chi2_stat)
+print("p-value:", p)
+
+table.plot(kind='bar', stacked=True)
+plt.title("Observed Frequencies")
+plt.ylabel("Count")
+plt.show()
+```
+
+---
+
+## 3. Student’s t-Distribution
+
+```python
+from scipy.stats import ttest_ind
+
+np.random.seed(2)
+group1 = np.random.normal(50, 5, 10)
+group2 = np.random.normal(55, 5, 10)
+
+# T-test
+t_stat, p_val = ttest_ind(group1, group2)
+print("T-statistic:", t_stat, "p-value:", p_val)
+
+# Histograms
+plt.hist(group1, alpha=0.5, label='Group 1')
+plt.hist(group2, alpha=0.5, label='Group 2')
+plt.legend()
+plt.title("Group Distributions")
+plt.show()
+```
+
+---
+
+## 4. F-Distribution / ANOVA
+
+```python
+from scipy.stats import f_oneway
+
+np.random.seed(3)
+groupA = np.random.normal(70, 5, 10)
+groupB = np.random.normal(75, 5, 10)
+groupC = np.random.normal(80, 5, 10)
+
+f_stat, p_val = f_oneway(groupA, groupB, groupC)
+print("F-statistic:", f_stat)
+print("p-value:", p_val)
+```
+
+---
+
+## 5. Poisson, Exponential, Weibull
+
+```python
+from scipy.stats import poisson, expon, weibull_min
+
+np.random.seed(4)
+
+# Poisson
+pois_data = poisson.rvs(mu=3, size=100)
+plt.hist(pois_data, bins=10, color='lightblue', edgecolor='black')
+plt.title("Poisson (λ=3)")
+plt.show()
+
+# Exponential
+exp_data = expon.rvs(scale=2, size=100)
+plt.hist(exp_data, bins=10, color='lightgreen', edgecolor='black')
+plt.title("Exponential (rate=0.5)")
+plt.show()
+
+# Weibull
+weib_data = weibull_min.rvs(c=1.5, scale=5, size=100)
+plt.hist(weib_data, bins=10, color='salmon', edgecolor='black')
+plt.title("Weibull Distribution")
+plt.show()
+```

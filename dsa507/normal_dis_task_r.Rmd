@@ -1,0 +1,159 @@
+---
+title: "Batting Average Analysis: Normality and Sampling Distributions"
+author: "Statistics for Data Science"
+output:
+  html_document:
+
+---
+
+
+## Objective
+
+Use 2022 seasonal baseball batting data to:
+
+1. Compute and explore seasonal batting averages  
+2. Standardize data using z-scores  
+3. Assess normality using histograms and Q-Q plots  
+4. Demonstrate the Central Limit Theorem by simulating the sampling distribution of the mean  
+
+## Tools Required
+
+- `Lahman`  
+- `dplyr`  
+- `ggplot2`
+
+---
+
+## Step 1: Install and Load Required Packages
+
+```{r setup, include=TRUE}
+# install.packages("Lahman")  # Uncomment if not already installed
+library(Lahman)
+library(dplyr)
+library(ggplot2)
+```
+
+---
+
+## Step 2: Retrieve 2022 Batting Data
+
+```{r}
+batting_2022 <- Batting %>% filter(yearID == 2022)
+```
+
+---
+
+## Step 3: Filter Players with ≥100 At-Bats and Compute Batting Average
+
+```{r}
+batting_2022 <- batting_2022 %>%
+  filter(AB >= 100) %>%
+  mutate(avg = H / AB)
+```
+
+---
+
+## Step 4: Standardize Batting Averages (Z-scores)
+
+```{r}
+batting_2022 <- batting_2022 %>%
+  mutate(z_avg = scale(avg))
+```
+
+---
+
+## Step 5: Plot Histogram of Z-Scores
+
+```{r}
+ggplot(batting_2022, aes(x = z_avg)) +
+  geom_histogram(bins = 30, fill = "lightblue", color = "black") +
+  ggtitle("Z-Scores of Seasonal Batting Averages (2022)") +
+  xlab("Z-score") + ylab("Count")
+```
+
+---
+
+## Step 6: Create Q-Q Plot
+
+```{r}
+qqnorm(batting_2022$z_avg)
+qqline(batting_2022$z_avg, col = "red")
+```
+
+---
+
+## Step 7: Simulate Sampling Distribution of the Mean (n = 30)
+
+```{r}
+set.seed(2024)
+sample_means <- replicate(1000, mean(sample(batting_2022$avg, 30, replace = TRUE)))
+```
+
+---
+
+## Step 8: Plot Histogram of Sample Means
+
+```{r}
+ggplot(data.frame(sample_means), aes(x = sample_means)) +
+  geom_histogram(bins = 30, fill = "orange", color = "black") +
+  ggtitle("Sampling Distribution of Mean Seasonal Batting Average (n = 30)") +
+  xlab("Sample Mean AVG") + ylab("Frequency")
+```
+
+---
+
+## Summary
+
+- We computed seasonal batting averages for the 2022 MLB season.
+- Z-scores helped us understand how individual players performed relative to the group.
+- Q-Q plots indicated how closely the data followed a normal distribution.
+- Sampling simulations demonstrated the Central Limit Theorem using sports performance data.
+
+
+
+``` python
+# Step 1: Install and import necessary packages
+# pip install pybaseball pandas matplotlib seaborn scipy
+
+from pybaseball import batting_stats
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy import stats
+import numpy as np
+
+# Step 2: Retrieve 2022 season batting stats
+df = batting_stats(2022)
+
+# Step 3: Filter players with at least 100 at-bats and compute seasonal AVG
+df = df[df['AB'] >= 100].copy()
+df['AVG'] = df['H'] / df['AB']
+
+# Step 4: Standardize AVG into z-scores
+df['z_AVG'] = (df['AVG'] - df['AVG'].mean()) / df['AVG'].std()
+
+# Step 5: Plot histogram of z-scores
+sns.histplot(df['z_AVG'], bins=30, kde=True, color='skyblue')
+plt.title("Z-Scores of Seasonal Batting Averages (2022)")
+plt.xlabel("Z-score")
+plt.ylabel("Count")
+plt.show()
+
+# Step 6: Create Q-Q plot
+stats.probplot(df['z_AVG'].dropna(), dist="norm", plot=plt)
+plt.title("Q-Q Plot of Seasonal Batting Averages (2022)")
+plt.show()
+
+# Step 7: Draw 1,000 samples of size 30 and compute mean of each
+np.random.seed(2024)
+sample_means = [df['AVG'].sample(30, replace=True).mean() for _ in range(1000)]
+
+# Step 8: Plot histogram of sample means
+sns.histplot(sample_means, bins=30, kde=True, color='orange')
+plt.title("Sampling Distribution of Mean Seasonal Batting Averages (n = 30)")
+plt.xlabel("Sample Mean AVG")
+plt.ylabel("Frequency")
+plt.show()
+
+
+```
