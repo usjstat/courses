@@ -41,6 +41,8 @@ All the lecture notes are based on the book named "[Bayes Rules! An Introduction
 
 -   [Chapter 2: Bayes Rule](chapter2.html)
 
+-   [Chapter 2: Exercises](chapter2_with_Exercise)
+
 -   [Chapter 3: The Beta-Binomial Bayesian Model](chapter3.html)
 
 ------------------------------------------------------------------------
