@@ -28,11 +28,11 @@ This course establishes the fundamentals of probability theory. It supports lear
 
 ::: {style="text-align: center;"}
 |  |  |  |  |  |
-|----|----|----|----|----|
+|---------------|---------------|---------------|---------------|---------------|
 | **Week** :===========: 1 | **Topic** :============================= [Elements of Probability](week1) | **Description** :========================================================================= Introduction, experiments, outcomes, sample spaces, events | **Hours** :============: 6 (2T + 4IL) | **Assessment** :===============: |
 | 2 | [Event Operations](week2) | Complements, unions, intersections, mutually exclusive/exhaustive events | 4 (2T + 2IL) |  |
 | 3 | [Methods of Probability](https://sportsanalyzr.shinyapps.io/week3/) | Classical, relative frequency, axioms, interpretation | 4 (2T + 2IL) | Assignment 1 |
-| 4 | Conditional Probability | Independent events | 4 (2T + 2IL) | Assignment 2 |
+| 4 | [Conditional Probability](week4.html) | Independent events | 4 (2T + 2IL) | Assignment 2 |
 | 5 | Probability Rules | Addition, multiplication, total probability, Bayes' theorem | 4 (2T + 2IL) |  |
 | 6 | Random Variables | Definitions, discrete and continuous variables | 4 (2T + 2IL) | Assignment 3 |
 | 7 | Events with Random Variables | Event representation and revision | 4 (2T + 2IL) | Assignment 4 |

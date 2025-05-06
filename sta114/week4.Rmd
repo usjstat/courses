@@ -36,26 +36,6 @@ Let:
 1. Find $\Pr(A)$  
 2. Find $\Pr(A \mid B)$
 
-<details>
-<summary><strong>Solution</strong></summary>
-
-There are 5 balls total:  
-White: (1, 2, 3) and Black: (1, 2)
-
-1. $\Pr(A)$ = Number of balls with number 1 / Total number of balls  
-There are 2 balls with number 1 (white 1 and black 1):  
-$$
-\Pr(A) = \frac{2}{5}
-$$
-
-2. $\Pr(A \mid B)$ = Probability the number is 1 **given** the ball is white  
-Among white balls: {1, 2, 3}  
-Only one of them has number 1  
-$$
-\Pr(A \mid B) = \frac{1}{3}
-$$
-
-</details>
 
 ---
 
