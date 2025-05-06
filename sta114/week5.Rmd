@@ -1,0 +1,246 @@
+---
+title: "STA 114 2.0 - Probability Theory: Week 5"
+author: "Dr. Rajitha M. Silva"
+output: html_document
+---
+
+# 1.6 Rules of Probability
+
+Probability rules help us combine and manipulate events to calculate desired probabilities.
+
+## Complement Rule
+
+If \( E \) is an event, then:
+
+$$
+\Pr(E') = 1 - \Pr(E)
+$$
+
+## Addition Rule
+
+For any two events \( A \) and \( B \):
+
+$$
+\Pr(A \cup B) = \Pr(A) + \Pr(B) - \Pr(A \cap B)
+$$
+
+If \( A \) and \( B \) are mutually exclusive:
+
+$$
+\Pr(A \cup B) = \Pr(A) + \Pr(B)
+$$
+
+## Multiplication Rule
+
+For any two events \( A \) and \( B \):
+
+$$
+\Pr(A \cap B) = \Pr(A \mid B) \cdot \Pr(B)
+$$
+
+If \( A \) and \( B \) are independent:
+
+$$
+\Pr(A \cap B) = \Pr(A) \cdot \Pr(B)
+$$
+
+---
+
+## Activity 1.32
+
+**Two pumps are connected in series.** The older pump fails with probability 0.05, and the newer pump fails with probability 0.01. Failures are independent. The system fails if at least one pump fails. What is the probability the system fails?
+
+
+
+---
+
+# Law of Total Probability
+
+If \( A_1, A_2, ..., A_n \) are **mutually exclusive and exhaustive** events, and \( B \) is any event:
+
+$$
+\Pr(B) = \sum_{i=1}^{n} \Pr(B \mid A_i) \cdot \Pr(A_i)
+$$
+
+---
+
+## Activity 1.33
+
+A shop sells 3 brands of TVs:
+
+- Brand A (50%), Brand B (30%), Brand C (20%)
+- Probability a TV needs repair:
+  - A: 0.25
+  - B: 0.20
+  - C: 0.10
+
+What is the probability that a randomly selected TV will need repair?
+
+
+
+---
+
+## Activity 1.34 
+
+A quality control system inspects items on a production line. The probability that a **randomly selected item is faulty** is \( P_1 \). If an item is faulty, there is a probability \( P_2 \) that the defect will be **successfully detected** by the system.
+
+You may assume that:
+- Defects are **never detected** in items that are not faulty (i.e., no false positives),
+- Each item is inspected **independently**.
+
+
+1. What is the probability that a **defect is detected** in a randomly selected item?
+
+2. Suppose **three items are selected independently** from the production line.
+
+   (i) What is the probability that **no defects are detected** among the three items?
+
+   (ii) What is the probability that **defects are detected in exactly two items**?
+
+   (iii) What is the probability that **defects are detected in at least two items**?
+
+---
+
+
+
+
+# Bayes' Theorem
+
+Let \( A_1, A_2, ..., A_n \) be mutually exclusive and exhaustive events, and \( B \) be an event. Then for any \( A_i \):
+
+$$
+\Pr(A_i \mid B) = \frac{\Pr(B \mid A_i) \cdot \Pr(A_i)}{\sum_{j=1}^{n} \Pr(B \mid A_j) \cdot \Pr(A_j)}
+$$
+
+This formula allows **reversing conditional probabilities**, moving from \( \Pr(B \mid A_i) \) to \( \Pr(A_i \mid B) \).
+
+---
+
+## Activity 1.35
+
+A company provides 3 health plans to employees:
+
+- Deluxe (D): 30%
+- Standard (S): 60%
+- Economy (E): 10%
+
+Probability of *no claim*:
+
+- D: 0.1
+- S: 0.4
+- E: 0.7
+
+1. What is the probability that a randomly selected employee made no claims last year?  
+2. If an employee made no claims, what is the probability they were under Standard plan?
+
+
+
+
+
+---
+
+## Activity 1.36
+
+Initially, a box contains 3 balls identical in all aspects except for their colour, each of which is either white or black. Now, one white ball identical to balls in the box in all aspects except for its colour is added into the box, and then one ball is drawn at random from the box. 
+
+Assuming that the four possible initial compositions of the balls in the box are equally likely, find the probability that:
+
+(i) the ball drawn is white, and  
+(ii) initially there were exactly 2 black balls in the box, given that the ball drawn is white.
+
+
+
+
+
+## Activity 1.37
+
+A cricket selection committee is reviewing 3 different **types of batsmen** from past domestic leagues. Each player has played 3 innings. Based on historical stats, players are classified into four types:
+
+- **Type A**: consistently strong - 3 high scores  
+- **Type B**: generally good - 2 high scores, 1 low score  
+- **Type C**: inconsistent - 1 high score, 2 low scores  
+- **Type D**: struggling - 0 high scores, 3 low scores
+
+The prior probability that a randomly selected player belongs to each type is:
+
+- \( \Pr(A) = 0.15 \), \( \Pr(B) = 0.45 \), \( \Pr(C) = 0.25 \), \( \Pr(D) = 0.15 \)
+
+To simulate pressure scenarios, each player is given **an additional trial innings**, and that trial is automatically considered a **high score**. Then one of the 4 innings is randomly picked to be shown to the selection panel.
+
+Let \( H \): the event that the selected innings is a **high score**.
+
+**Find:**
+
+(i) What is the probability that the selected innings is a high score?  
+(ii) If the selected innings is a high score, what is the probability the player originally belonged to Type B?
+
+
+
+
+
+## Activity 1.38
+
+All applicants who apply for a certain job in an institute are required to sit for an aptitude test. 
+Those who obtain **A grades** in this aptitude test are **selected for the job**, and the rest of the applicants have to face an **interview**.
+
+In a survey, it was found that **60% of the applicants get A grades**, and of these, **40% are females**. 
+From the applicants who face the interview, **only 10% get selected**, and **70% of them are females**.
+
+**Find the probability that:**
+
+(i) a **male is selected** for this job,  
+(ii) a **male who has been selected** for the job has obtained an **A grade** for the aptitude test.
+
+## Activity 1.39
+
+One of three coins is biassed so that the probability of obtaining a head when it is tossed once is \( p \). The other two coins are unbiassed.
+
+One of the three coins is chosen at random and tossed twice.
+
+
+If the probability of obtaining heads on both tosses is \( \frac{17}{54} \), find the value of \( p \).
+
+For this value of \( p \), given that heads were in fact obtained on both tosses, find the probability that the chosen coin is biassed.
+
+
+
+## Activity 1.40
+
+A box \( B_1 \) contains 2 white balls and 3 black balls which are identical in all aspects except for their colours. 3 balls are transferred at random from box \( B_1 \) into an empty box \( B_2 \). Then a ball is drawn at random from box \( B_2 \).
+
+Find the probability that:
+
+(i) the ball drawn from box \( B_2 \) is white,
+
+(ii) 2 white balls and 1 black ball are transferred from box \( B_1 \) into box \( B_2 \), given that the drawn ball from box \( B_2 \) is white.
+
+---
+
+
+## Activity 1.41
+
+A bank has **6 pending credit card applications**: **4 are from salaried clients** and **2 are from self-employed clients**. The bank randomly selects **3 applications** to forward to the final approval committee.
+
+From the 3 forwarded applications, one is **randomly chosen** for immediate approval.
+
+---
+
+
+
+ Find the probability that:
+
+(i) The selected application is from a **self-employed client**,  
+(ii) The forwarded group contained **2 salaried and 1 self-employed** applications, given that the selected application was from a **self-employed client**.
+
+---
+
+### Key Points
+
+- Use **Complement Rule** when calculating probability of the event *not happening*
+- Use **Addition Rule** to combine probabilities of unions
+- Use **Multiplication Rule** to calculate intersections (especially under dependence or independence)
+- **Law of Total Probability** helps when an event depends on several underlying scenarios
+- **Bayes' Theorem** allows updating beliefs given observed evidence
+
+---
+
