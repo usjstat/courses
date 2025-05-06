@@ -410,37 +410,6 @@ selected <strong>without replacement</strong>.</p>
 </li>
 <li>Find <span class="math inline">\(\Pr(B \mid A&#39;)\)</span></li>
 </ol>
-<details>
-<summary>
-<strong>Solution</strong>
-</summary>
-<p>Total number of balls = 3 white + 2 black = <strong>5</strong></p>
-<ol style="list-style-type: decimal">
-<li>Find <span class="math inline">\(\Pr(B \mid A)\)</span></li>
-</ol>
-<p>If the <strong>first ball is white</strong>, one white is
-removed.</p>
-<p>Remaining:<br />
-- 2 white<br />
-- 2 black<br />
-- Total = 4</p>
-<p>So,<br />
-<span class="math display">\[
-\Pr(B \mid A) = \frac{2}{4} = 0.5
-\]</span></p>
-<ol start="2" style="list-style-type: decimal">
-<li>Find <span class="math inline">\(\Pr(B \mid A&#39;)\)</span></li>
-</ol>
-<p>If the <strong>first ball is black</strong>, one black is
-removed.</p>
-<p>Remaining:<br />
-- 3 white<br />
-- 1 black<br />
-- Total = 4</p>
-<p>So,<br />
-<span class="math display">\[
-\Pr(B \mid A&#39;) = \frac{1}{4} = 0.25
-\]</span></p>
 <hr />
 </div>
 <div id="activity-1.28" class="section level2">
@@ -454,22 +423,6 @@ removed.</p>
 </li>
 <li>Are the events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> independent?</li>
 </ol>
-<details>
-<summary>
-<strong>Solution</strong>
-</summary>
-<p>With replacement, the total remains 5 for each draw.</p>
-<ul>
-<li><span class="math inline">\(\Pr(A) = \frac{3}{5}\)</span><br />
-</li>
-<li><span class="math inline">\(\Pr(B) = \frac{2}{5}\)</span><br />
-</li>
-<li><span class="math inline">\(\Pr(B \mid A) =
-\frac{2}{5}\)</span></li>
-</ul>
-<p>Since <span class="math inline">\(\Pr(B \mid A) = \Pr(B)\)</span>,
-<span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <strong>independent</strong>.</p>
-</details>
 <hr />
 </div>
 <div id="conditional-probability-tree-diagram" class="section level2">
@@ -514,23 +467,6 @@ A shop sells 3 TV brands:</p>
 </li>
 <li>What is <span class="math inline">\(\Pr(A \mid R)\)</span>?</li>
 </ol>
-<details>
-<summary>
-<strong>Solution</strong>
-</summary>
-<p><strong>Tree structure:</strong></p>
-<ul>
-<li>First layer: Choose brand<br />
-</li>
-<li>Second layer: Repair or not</li>
-</ul>
-<p><span class="math display">\[
-\Pr(R) = \Pr(R \mid A) \Pr(A) + \Pr(R \mid B) \Pr(B) + \Pr(R \mid C)
-\Pr(C) \\
-= 0.25 \cdot 0.5 + 0.2 \cdot 0.3 + 0.1 \cdot 0.2 = 0.125 + 0.06 + 0.02 =
-0.205
-\]</span></p>
-</details>
 <hr />
 </div>
 </div>
@@ -555,26 +491,6 @@ A shop sells 3 TV brands:</p>
 </li>
 <li>Find <span class="math inline">\(\Pr(E \mid S_1)\)</span></li>
 </ol>
-<details>
-<summary>
-<strong>Solution</strong>
-</summary>
-<p>From the table:</p>
-<ul>
-<li><p>Total clerks = 170<br />
-</p></li>
-<li><p>Clerks with scheme II = 44<br />
-<span class="math display">\[
-\Pr(S_2 \mid C) = \frac{44}{170} \approx 0.2588
-\]</span></p></li>
-<li><p>Total with Type I = 300<br />
-</p></li>
-<li><p>Executives with Type I = 5<br />
-<span class="math display">\[
-\Pr(E \mid S_1) = \frac{5}{300} \approx 0.0167
-\]</span></p></li>
-</ul>
-</details>
 <hr />
 </div>
 <div id="definition-independent-events" class="section level2">
@@ -591,21 +507,6 @@ if:</p>
 <h2>Activity 1.31</h2>
 <p>Using the data from Activity 1.27 (no replacement), determine if
 <span class="math inline">\(A\)</span> (first white) and <span class="math inline">\(B\)</span> (second black) are independent.</p>
-<details>
-<summary>
-<strong>Solution</strong>
-</summary>
-<p>Recall:</p>
-<ul>
-<li><span class="math inline">\(\Pr(B \mid A) = 0.5\)</span><br />
-</li>
-<li><span class="math inline">\(\Pr(B) = 0.4\)</span></li>
-</ul>
-<p>Since <span class="math inline">\(\Pr(B \mid A) \ne \Pr(B)\)</span>,
-<span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <strong>not
-independent</strong>.</p>
-</details>
-<hr />
 <hr />
 </div>
 <div id="note-mutually-exclusive-events-vs.-independent-events" class="section level2">

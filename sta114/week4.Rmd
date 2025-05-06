@@ -51,40 +51,10 @@ Let:
 1. Find $\Pr(B \mid A)$  
 2. Find $\Pr(B \mid A')$
 
-<details>
-<summary><strong>Solution</strong></summary>
 
-Total number of balls = 3 white + 2 black = **5**
+  
 
 
-
- 1. Find $\Pr(B \mid A)$
-
-If the **first ball is white**, one white is removed.
-
-Remaining:  
-- 2 white  
-- 2 black  
-- Total = 4
-
-So,  
-$$
-\Pr(B \mid A) = \frac{2}{4} = 0.5
-$$
-
-2. Find $\Pr(B \mid A')$
-
-If the **first ball is black**, one black is removed.
-
-Remaining:  
-- 3 white  
-- 1 black  
-- Total = 4
-
-So,  
-$$
-\Pr(B \mid A') = \frac{1}{4} = 0.25
-$$
 
 ---
 
@@ -96,18 +66,7 @@ Repeat the above scenario but assume the balls are selected **with replacement**
 2. Find $\Pr(B \mid A)$  
 3. Are the events $A$ and $B$ independent?
 
-<details>
-<summary><strong>Solution</strong></summary>
 
-With replacement, the total remains 5 for each draw.
-
-- $\Pr(A) = \frac{3}{5}$  
-- $\Pr(B) = \frac{2}{5}$  
-- $\Pr(B \mid A) = \frac{2}{5}$
-
-Since $\Pr(B \mid A) = \Pr(B)$, $A$ and $B$ are **independent**.
-
-</details>
 
 ---
 
@@ -144,21 +103,8 @@ Let:
 1. What is $\Pr(R)$?  
 2. What is $\Pr(A \mid R)$?
 
-<details>
-<summary><strong>Solution</strong></summary>
-
-**Tree structure:**
-
-- First layer: Choose brand  
-- Second layer: Repair or not
-
-$$
-\Pr(R) = \Pr(R \mid A) \Pr(A) + \Pr(R \mid B) \Pr(B) + \Pr(R \mid C) \Pr(C) \\
-= 0.25 \cdot 0.5 + 0.2 \cdot 0.3 + 0.1 \cdot 0.2 = 0.125 + 0.06 + 0.02 = 0.205
-$$
 
 
-</details>
 
 ---
 
@@ -173,25 +119,6 @@ Consider the bonus scheme data from Activity 1.25. Let:
 
 1. Find $\Pr(S_2 \mid C)$  
 2. Find $\Pr(E \mid S_1)$
-
-<details>
-<summary><strong>Solution</strong></summary>
-
-From the table:
-
-- Total clerks = 170  
-- Clerks with scheme II = 44  
-$$
-\Pr(S_2 \mid C) = \frac{44}{170} \approx 0.2588
-$$
-
-- Total with Type I = 300  
-- Executives with Type I = 5  
-$$
-\Pr(E \mid S_1) = \frac{5}{300} \approx 0.0167
-$$
-
-</details>
 
 ---
 
@@ -209,19 +136,6 @@ $$
 
 Using the data from Activity 1.27 (no replacement), determine if $A$ (first white) and $B$ (second black) are independent.
 
-<details>
-<summary><strong>Solution</strong></summary>
-
-Recall:
-
-- $\Pr(B \mid A) = 0.5$  
-- $\Pr(B) = 0.4$
-
-Since $\Pr(B \mid A) \ne \Pr(B)$, $A$ and $B$ are **not independent**.
-
-</details>
-
----
 
 ---
 
