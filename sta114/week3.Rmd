@@ -93,7 +93,7 @@ There are four methods used to determine probabilities:
 
 ## 1.4.1 Classical Method
 
-The classical method of probability is the most basic and widely taught approach. It is grounded in situations where all outcomes are assumed to be **equally likely** — that is, each outcome has the same chance of occurring.
+The classical method of probability is the most basic and widely taught approach. It is grounded in situations where all outcomes are assumed to be **equally likely** - that is, each outcome has the same chance of occurring.
 
 ### What Does "Equally Likely" Mean?
 
@@ -179,7 +179,7 @@ $$
 
 ### 3. Combinations (Unordered Selections)
 
-Combinations count how many ways $r$ elements can be selected from $n$, where the order doesn’t matter.
+Combinations count how many ways $r$ elements can be selected from $n$, where the order doesn't matter.
 
 -   Formula: $$
     C(n, r) = \binom{n}{r} = \frac{n!}{r!(n - r)!}
@@ -219,7 +219,7 @@ A security supervisor of a large corporation wishes to issue each employee an id
 
 ## Activity 1.18
 
-A box contains 3 white balls and 2 black balls. Three balls are taken randomly from this box. Assume that the balls are marked as w₁, w₂, w₃, b₁, b₂.
+A box contains 3 white balls and 2 black balls. Three balls are taken randomly from this box. Assume that the balls are marked as $w_1, w_2, w_3, b_1, b_2$.
 
 1.  How many different selections of three balls are possible?
 2.  How many different arrangements of three balls are possible?

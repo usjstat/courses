@@ -43,7 +43,7 @@ batting_2022 <- Batting %>% filter(yearID == 2022)
 
 ---
 
-## Step 3: Filter Players with ≥100 At-Bats and Compute Batting Average
+## Step 3: Filter Players with 100 At-Bats and Compute Batting Average
 
 ```{r}
 batting_2022 <- batting_2022 %>%
