@@ -1,5 +1,5 @@
 ---
-title: "STA 114 2.0 - Probability and Distribution Theory I"
+title: "STA 1142 - Probability and Distribution Theory I"
 author: "Dr. Rajitha M. Silva"
 output: html_document
 ---
@@ -9,7 +9,7 @@ output: html_document
 |                    |                                       |
 |--------------------|---------------------------------------|
 | **Course Title:**  | Probability and Distribution Theory I |
-| **Course Code:**   | STA114                                |
+| **Course Code:**   | STA1142                               |
 | **Credit Value:**  | 2.0                                   |
 | **Status:**        | Core                                  |
 | **Year/Level:**    | 2025/First Year                       |
