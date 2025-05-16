@@ -1,0 +1,159 @@
+---
+title: "Chapter 2 (ctd): Data and Sampling Distributions"
+author: "Dr. Rajitha M. Silva"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+library(readr)
+```
+
+# 1. Introduction to the Normal Distribution
+
+The **normal distribution**, or Gaussian distribution, is foundational in statistics and data science. Many natural processes (like measurement errors, average scores) follow it. In sports analytics, normal distributions help model and interpret performance consistency.
+
+# 2. Key Properties of the Normal Distribution
+
+-   Symmetric, bell-shaped curve.
+
+-   Defined by mean $\mu$ and standard deviation $\sigma$.
+
+-   Follows the **Empirical Rule**:
+
+-   Approximately 68% of values lie within $\pm 1\sigma$ of the mean.
+
+-   Approximately 95% of values lie within $\pm 2\sigma$ of the mean.
+
+-   Approximately 99.7% of values lie within $\pm 3\sigma$ of the mean.
+
+```{r}
+x <- seq(-4, 4, length = 200)
+y <- dnorm(x)
+plot(x, y, type = "l", lwd = 2, col = "blue", main = "Standard Normal Curve", xlab = "Z", ylab = "Density")
+abline(v = c(-1, 1), col = "red", lty = 2)
+abline(v = c(-2, 2), col = "green", lty = 2)
+```
+
+# 3. Standardization and Z-Scores
+
+We can standardize any value using:
+
+$$
+z = \frac{x - \mu}{\sigma}
+$$
+
+This enables comparison across different units or scales.
+
+```{r}
+set.seed(123)
+nba_heights <- rnorm(100, mean = 200, sd = 10)
+z_scores <- scale(nba_heights)
+
+ggplot(data.frame(z_scores), aes(x = z_scores)) +
+  geom_histogram(bins = 30, fill = "skyblue", color = "black") +
+  ggtitle("Z-Scores of NBA Player Heights") +
+  xlab("Z-score") + ylab("Frequency")
+```
+
+# 4. Standard Normal Distribution
+
+The standard normal distribution, also known as the z-distribution, is a special case of the normal distribution where the mean is 0 and the standard deviation is 1. It is used as a reference to standardize any normal distribution by converting individual data points into z-scores, which represent how many standard deviations a value is from the mean. This transformation facilitates comparison across datasets. **However, standardizing data (e.g., converting to z-scores) does not make the data normally distributed; it only aligns the scale for comparative purposes.** The normal distribution is often referred to as the Gaussian distribution, named after Carl Friedrich Gauss, and was originally called the "**error distribution**" because of its early application to errors in astronomical measurements. A common visual tool used alongside the standard normal distribution is the Q-Q plot, which checks if the data's quantiles match those of a normal distribution. If the data is normally distributed, the Q-Q plot points will align along a diagonal line.
+
+### Visualizing Standardization
+
+```{r}
+set.seed(123)
+skewed_data <- rexp(100, rate = 1/50)  # Right-skewed distribution
+z_scores_skewed <- scale(skewed_data)
+
+par(mfrow = c(1, 2))
+
+# Original skewed data
+hist(skewed_data, col = 'lightblue', main = 'Original Skewed Data (Exponential)',
+     xlab = 'Values')
+
+# Standardized skewed data
+hist(z_scores_skewed, col = 'orange', main = 'Standardized Skewed Data (Z-scores)',
+     xlab = 'Z-scores')
+
+par(mfrow = c(1, 1))
+
+```
+
+# 5. Normal Q-Q Plot
+
+QQ-plots help assess if data follows a normal distribution.
+
+```{r}
+qqnorm(nba_heights)
+qqline(nba_heights, col = "red")
+```
+
+If points on the Q-Q plot fall close to the diagonal line, the sample is likely from a normal distribution. Deviations from the line indicate departures from normality, such as skewness or outliers.
+
+# 6. Sampling Distribution Example (Basketball Points)
+
+Let's model the points scored by a basketball player per game, which often exhibits right-skewness due to occasional high-scoring performances. We'll take multiple samples of game scores to illustrate the Central Limit Theorem - the idea that the distribution of sample means tends toward normality even if the original data is skewed.
+
+```{r}
+
+set.seed(42)
+# Simulate 1000 game scores: typical basketball scoring with occasional outliers
+game_points <- rgamma(1000, shape = 2, scale = 10)
+
+# Generate sampling distribution of means from samples of 20 games each
+sample_means <- replicate(1000, mean(sample(game_points, 20)))
+
+# Plot the histogram of sample means
+ggplot(data.frame(sample_means), aes(x = sample_means)) +
+  geom_histogram(bins = 30, fill = "orange", color = "black") +
+  ggtitle("Sampling Distribution of Mean Points per Game (n = 20)") +
+  xlab("Mean Points") + ylab("Frequency")
+```
+
+## Practical Task: Understanding Normality and Sampling Distributions Using Baseball Data
+
+### Objective
+
+Use real-world baseball batting statistics to:
+
+1.  Compute and explore batting averages
+2.  Standardize data using z-scores
+3.  Assess normality visually using histograms and Q-Q plots
+4.  Demonstrate the Central Limit Theorem by simulating the sampling distribution of the mean
+
+### Dataset
+
+-   **R users**: `Batting` table from the `Lahman` package\
+-   **Python users**: Batting data from the `pybaseball` package (`batting_stats(2022)`)
+
+### Instructions for R Users
+
+Tools: `Lahman`, `dplyr`, `ggplot2`
+
+1.  Install and load the `Lahman` package and retrieve 2022 season stats.
+2.  Filter players with at least 100 at-bats.
+3.  Compute batting average:(Hits/At_Bat) `avg = H / AB`.
+4.  Standardize batting average into z-scores.
+5.  Plot a histogram of z-scores.
+6.  Create a Q-Q plot to assess normality.
+7.  Generate the sampling distribution of the sample mean from 1,000 samples of size 30.
+8.  Plot the sampling distribution histogram.
+
+### Instructions for Python Users
+
+Tools: `pybaseball`, `pandas`, `matplotlib`, `seaborn`, `scipy.stats`
+
+1.  Install `pybaseball` and retrieve 2022 season stats using `batting_stats(2022)`.
+2.  Filter players with at least 100 at-bats.
+3.  Compute batting average:(Hits/At_Bat) `AVG = H / AB`.
+4.  Standardize into z-scores: `(AVG - mean) / std`.
+5.  Plot a histogram of z-scores using `seaborn`.
+6.  Create a Q-Q plot using `scipy.stats.probplot`.
+7.  Draw 1,000 samples of size 30 and compute the mean for each.
+8.  Plot the histogram of sample means to illustrate the Central Limit Theorem.
+
+
