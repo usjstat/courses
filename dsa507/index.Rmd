@@ -72,9 +72,9 @@ For supplementary learning and revision, please refer to the following YouTube p
 
 - [Week2: Data and Sampling Distributions](chapter2.html)
 
-- [Week3: Data and Sampling Distributions (ctd)](chapter2_rest.html)
+- [Week3: Data and Sampling Distributions (ctd)](chapter2_rest1.html)
 
-- [Week4: Data and Sampling Distributions (ctd)](chapter2_rest.html)
+- [Week4: Data and Sampling Distributions (ctd)](chapter2_rest2.html)
 
 
 ---
