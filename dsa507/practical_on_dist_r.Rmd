@@ -1,0 +1,104 @@
+---
+title: "Practical on Distributions"
+author: "Statistics for Data Science"
+output: html_document
+---
+
+# Practical Session: Distributions in Applied Data Science
+
+In this session, you will explore key probability distributions by applying them to real or simulated data. The tasks are designed to be completed in either **R** or **Python**. Choose your preferred language and follow the instructions accordingly.
+
+---
+
+## Datasets
+
+All datasets used are either built-in or can be generated using a fixed random seed for reproducibility:
+
+- **Simulated Binomial Events** (e.g., success/failure outcomes)
+- **HairEyeColor** (R) or Titanic dataset (Python) for Chi-Square testing
+- **Simulated small samples** for t-distribution exploration
+- **Simulated group scores** for F-distribution (ANOVA)
+- **Arrival times / event rates** for Poisson, Exponential, Weibull models
+
+---
+
+## Instructions for R Users
+
+### 1. Binomial Distribution
+
+- Simulate 1000 observations of a binary outcome (success/failure) with success probability 0.3.
+- Calculate the proportion of observations with exactly 3 successes in 5 trials.
+- Use `dbinom()` and `pbinom()` to calculate point and cumulative probabilities.
+
+### 2. Chi-Square Test
+
+- Use the built-in `HairEyeColor` dataset.
+- Perform a Chi-square test to examine whether eye color is independent of hair color.
+- Plot a bar chart of the observed counts.
+
+### 3. Student's t-Distribution
+
+- Simulate two small samples of size 10 from different means.
+- Conduct a two-sample t-test using `t.test()` and interpret the result.
+- Visualize both distributions using `hist()` or `ggplot()`.
+
+### 4. F-Distribution (ANOVA)
+
+- Simulate three groups (n = 10 each) with increasing means.
+- Perform an ANOVA using `aov()`.
+- Interpret the F-statistic and p-value.
+
+### 5. Poisson and Related Distributions
+
+- Simulate 100 Poisson-distributed counts with lambda = 3.
+- Simulate inter-arrival times from an exponential distribution with rate = 0.5.
+- Simulate failure times from a Weibull distribution.
+- Visualize all three distributions using histograms.
+
+---
+
+## Instructions for Python Users
+
+### 1. Binomial Distribution
+
+- Simulate 1000 binary outcomes using `numpy.random.binomial(n=5, p=0.3)`.
+- Calculate the probability of exactly 3 successes using `scipy.stats.binom.pmf()`.
+- Plot the binomial PMF using `matplotlib` or `seaborn`.
+
+### 2. Chi-Square Test
+
+- Use the Titanic dataset from `seaborn` (`sns.load_dataset("titanic")`).
+- Perform a Chi-square test for independence between `sex` and `class` using `scipy.stats.chi2_contingency()`.
+- Plot a stacked bar chart of observed counts.
+
+### 3. Student's t-Distribution
+
+- Generate two small samples (n=10) with different means using `numpy`.
+- Use `scipy.stats.ttest_ind()` to perform a two-sample t-test.
+- Plot both distributions using histograms.
+
+### 4. F-Distribution (ANOVA)
+
+- Simulate three groups of data with different means.
+- Use `scipy.stats.f_oneway()` to perform one-way ANOVA.
+- Interpret the F-statistic and p-value.
+
+### 5. Poisson and Related Distributions
+
+- Simulate 100 Poisson counts using `scipy.stats.poisson.rvs()`.
+- Simulate exponential wait times using `scipy.stats.expon.rvs()`.
+- Simulate failure times from a Weibull distribution using `scipy.stats.weibull_min.rvs()`.
+- Plot histograms for all three.
+
+---
+
+## Submission
+
+- Submit your `.Rmd` (R) or `.ipynb` (Python) file with code and visualizations.
+- Include short comments interpreting results.
+- Name the file: `YourName_Distributions_Practical.Rmd` or `.ipynb`
+
+---
+
+
+
