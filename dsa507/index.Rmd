@@ -76,6 +76,8 @@ For supplementary learning and revision, please refer to the following YouTube p
 
 - [Week4: Data and Sampling Distributions (ctd)](chapter2_rest2.html)
 
+  - - [Practical on distribution](practical_on_dist_r.html)
+
 
 ---
 
