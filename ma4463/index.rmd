@@ -39,6 +39,10 @@ All course materials will be published on this page.
   - [Exercise_4_1](Exercise_4_1.html)
   - [Exercise_4_2](Exercise_4_2.html)
   - [Exercise_4_3](Exercise_4_3.html)
+  
+-[Practice Questions](PracticeQuestions.pdf)
+
+  - [Predictive Distribution-Derivation](Posterior_Predictive_Derivation.pdf)
 
 ---
 
