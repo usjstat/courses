@@ -76,8 +76,14 @@ For supplementary learning and revision, please refer to the following YouTube p
 
 - [Week4: Data and Sampling Distributions (ctd)](chapter2_rest2.html)
 
-  - - [Practical on distribution](practical_on_dist_r.html)
+  -  [Practical on distribution](practical_on_dist_r.html)
+  
+  
+- [Week5: Statistical Experiments and Significance Testing](chapter3_one.html)
 
+- [Week6: Statistical Experiments and Significance Testing](chapter3_two.html)
+
+  - [Statistical Experiments and Significance Testing](chatper3_two_practical.html)
 
 ---
 
