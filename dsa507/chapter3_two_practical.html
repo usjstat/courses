@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Dr. Rajitha M. Silva" />
 
 
-<title>DSA 507 Statistics for Data Science &amp; AI</title>
+<title>Guided Practical: Multiple Testing, FDR, and ANOVA</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -348,110 +349,91 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">DSA 507 Statistics for Data Science &amp;
-AI</h1>
+<h1 class="title toc-ignore">Guided Practical: Multiple Testing, FDR,
+and ANOVA</h1>
+<h4 class="author">Dr. Rajitha M. Silva</h4>
 
 </div>
 
 
-<p><strong>Batch:</strong> 2025 / 2027<br />
-<strong>Credit Value:</strong> 3.0<br />
-<strong>Schedule:</strong> Saturdays, 1.00 p.m. to 5.00 p.m.<br />
-<strong>Venue:</strong> Blended Learning Centre (BLC)<br />
-<strong>Instructor:</strong> Dr. Rajitha M. Silva<br />
-<strong>Department of Statistics, University of Sri
-Jayewardenepura</strong></p>
-<hr />
-<div id="course-introduction" class="section level2">
-<h2>Course Introduction</h2>
-<p>The aim of this course is to introduce postgraduate students in Data
-Science and AI to the essential concepts and techniques of statistics.
-The course balances theoretical foundations with practical applications
-using R and Python, including data collection, descriptive and
-inferential analysis, and probabilistic modeling.</p>
-<p>Upon successful completion, students will be able to: - Understand
-the role and limitations of statistics in data science - Classify
-variables and identify suitable scales of measurement - Apply effective
-data collection and sampling methods - Perform descriptive and
-inferential statistical analyses - Calculate and interpret probabilities
-for real-world scenarios</p>
-<hr />
+<div id="objective" class="section level3">
+<h3>Objective:</h3>
+<p>To understand and implement: - The effects of multiple testing and
+how FDR adjustment works - Tukey’s HSD for comparing group means -
+Permutation ANOVA in a sports context (Cricket training methods)</p>
 </div>
-<div id="course-content" class="section level2">
-<h2>Course Content</h2>
-<ul>
-<li><p><strong>1. Exploratory Data Analysis</strong></p></li>
-<li><p><strong>2. Data and Sampling Distributions</strong></p></li>
-<li><p><strong>3. Statistical Experiments and Significance
-Testing</strong></p></li>
-</ul>
+<div id="section-a-multiple-testing-and-fdr" class="section level3">
+<h3>Section A: Multiple Testing and FDR</h3>
+<div id="r-instructions" class="section level4">
+<h4>R Instructions:</h4>
+<ol style="list-style-type: decimal">
+<li>Simulate 50 p-values using <code>runif()</code> between 0 and
+0.1.</li>
+<li>Adjust them using <code>p.adjust(..., method = &quot;fdr&quot;)</code>.</li>
+<li>Extract and print those adjusted p-values &lt; 0.05.</li>
+</ol>
+</div>
+<div id="python-instructions" class="section level4">
+<h4>Python Instructions:</h4>
+<ol style="list-style-type: decimal">
+<li>Simulate 50 p-values using <code>np.random.uniform()</code> between
+0 and 0.1.</li>
+<li>Use <code>statsmodels.stats.multitest.multipletests()</code> with
+method <code>&#39;fdr_bh&#39;</code>.</li>
+<li>Print adjusted p-values that are &lt; 0.05.</li>
+</ol>
 <hr />
 </div>
-<div id="teaching-assessment" class="section level2">
-<h2>Teaching &amp; Assessment</h2>
-<ul>
-<li><strong>Teaching Methods:</strong>
-<ul>
-<li>Lectures via direct instruction<br />
-</li>
-<li>Practical sessions focused on self-learning and inquiry-based
-learning</li>
-</ul></li>
-<li><strong>Assessment Strategy:</strong>
-<ul>
-<li>Continuous Assessment: 40%<br />
-</li>
-<li>Final Assessment: 60%</li>
-</ul></li>
-</ul>
+</div>
+<div id="section-b-tukeys-honest-significant-difference-hsd" class="section level3">
+<h3>Section B: Tukey’s Honest Significant Difference (HSD)</h3>
+<div id="r-instructions-1" class="section level4">
+<h4>R Instructions:</h4>
+<ol style="list-style-type: decimal">
+<li>Simulate 3 groups (A, B, C), each with 10 normal values (means 5, 6,
+7).</li>
+<li>Perform <code>aov()</code> and extract MSE and df.</li>
+<li>Use <code>qtukey()</code> to calculate critical value.</li>
+<li>Calculate HSD.</li>
+</ol>
+</div>
+<div id="python-instructions-1" class="section level4">
+<h4>Python Instructions:</h4>
+<ol style="list-style-type: decimal">
+<li>Simulate 3 groups using <code>np.random.normal()</code>.</li>
+<li>Conduct ANOVA using <code>scipy.stats.f_oneway()</code>.</li>
+<li>Estimate pooled variance (MSE).</li>
+<li>Use a static value or approximation for the Tukey q-statistic.</li>
+<li>Compute HSD manually.</li>
+</ol>
 <hr />
 </div>
-<div id="references" class="section level2">
-<h2>References</h2>
-<p>Peter Bruce, Andrew Bruce, Peter Gedeck - Practical Statistics for
-Data Scientists_ 50+ Essential Concepts Using R and Python (2020,
-O’Reilly Media)</p>
 </div>
-<div id="recommended-video-playlist" class="section level2">
-<h2>Recommended Video Playlist</h2>
-<p>For supplementary learning and revision, please refer to the
-following YouTube playlist:</p>
-<p><a href="https://youtube.com/playlist?list=PL-u09-6gP5ZNd6AhULnQHr6ZsF15qy4D0&amp;feature=shared">Statistics
-for Data Science YouTube Playlist</a></p>
+<div id="section-c-permutation-anova-in-sports" class="section level3">
+<h3>Section C: Permutation ANOVA in Sports</h3>
+<div id="r-instructions-2" class="section level4">
+<h4>R Instructions:</h4>
+<ol style="list-style-type: decimal">
+<li>Create a data frame with four cricket training types: Power,
+Agility, Endurance, Control (5 each).</li>
+<li>Generate simulated reaction times with slightly different
+means.</li>
+<li>Use <code>lmPerm::aovp()</code> with
+<code>perm = &quot;Exact&quot;</code>.</li>
+<li>Interpret the <code>Pr(Prob)</code> output.</li>
+</ol>
+</div>
+<div id="python-instructions-2" class="section level4">
+<h4>Python Instructions:</h4>
+<ol style="list-style-type: decimal">
+<li>Simulate the same cricket training dataset.</li>
+<li>Calculate observed group mean variance.</li>
+<li>Define a permutation function to shuffle outcomes.</li>
+<li>Run the permutation test (e.g., 3000 resamples).</li>
+<li>Calculate the permutation p-value.</li>
+</ol>
 <hr />
 </div>
-<div id="lecture-notes" class="section level2">
-<h2>Lecture Notes</h2>
-<blockquote>
-<p>Lecture materials will be uploaded here during the semester.</p>
-</blockquote>
-<ul>
-<li><p><a href="chapter1_notes.html">Week1: Exploratory Data
-Analysis</a></p></li>
-<li><p><a href="chapter2.html">Week2: Data and Sampling
-Distributions</a></p></li>
-<li><p><a href="chapter2_rest1.html">Week3: Data and Sampling
-Distributions (ctd)</a></p></li>
-<li><p><a href="chapter2_rest2.html">Week4: Data and Sampling
-Distributions (ctd)</a></p>
-<ul>
-<li><a href="practical_on_dist_r.html">Practical on
-distribution</a></li>
-</ul></li>
-<li><p><a href="chapter3_one.html">Week5: Statistical Experiments and
-Significance Testing</a></p></li>
-<li><p><a href="chapter3_two.html">Week5: Statistical Experiments and
-Significance Testing</a></p>
-<ul>
-<li><a href="chatper3_two_practical.html">Statistical Experiments and
-Significance Testing</a></li>
-</ul></li>
-</ul>
-<hr />
-</div>
-<div id="contact" class="section level2">
-<h2>Contact</h2>
-<p>For questions and feedback, please contact me via email(<a href="mailto:rsilva@sjp.ac.lk" class="email">rsilva@sjp.ac.lk</a>).</p>
 </div>
 
 

@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Dr. Rajitha M. Silva" />
 
 
-<title>DSA 507 Statistics for Data Science &amp; AI</title>
+<title>Statistical Experiments and Significance Testing (ctd)</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -348,110 +349,462 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">DSA 507 Statistics for Data Science &amp;
-AI</h1>
+<h1 class="title toc-ignore">Statistical Experiments and Significance
+Testing (ctd)</h1>
+<h4 class="author">Dr. Rajitha M. Silva</h4>
 
 </div>
 
 
-<p><strong>Batch:</strong> 2025 / 2027<br />
-<strong>Credit Value:</strong> 3.0<br />
-<strong>Schedule:</strong> Saturdays, 1.00 p.m. to 5.00 p.m.<br />
-<strong>Venue:</strong> Blended Learning Centre (BLC)<br />
-<strong>Instructor:</strong> Dr. Rajitha M. Silva<br />
-<strong>Department of Statistics, University of Sri
-Jayewardenepura</strong></p>
-<hr />
-<div id="course-introduction" class="section level2">
-<h2>Course Introduction</h2>
-<p>The aim of this course is to introduce postgraduate students in Data
-Science and AI to the essential concepts and techniques of statistics.
-The course balances theoretical foundations with practical applications
-using R and Python, including data collection, descriptive and
-inferential analysis, and probabilistic modeling.</p>
-<p>Upon successful completion, students will be able to: - Understand
-the role and limitations of statistics in data science - Classify
-variables and identify suitable scales of measurement - Apply effective
-data collection and sampling methods - Perform descriptive and
-inferential statistical analyses - Calculate and interpret probabilities
-for real-world scenarios</p>
+<div id="multiple-testing" class="section level2">
+<h2>Multiple Testing</h2>
+<div id="introduction" class="section level3">
+<h3>Introduction</h3>
+<p>Statistical testing is often applied to a single hypothesis. For
+example: - Testing whether a new cricket training program improves
+batting averages. - Checking if a new shoe brand improves marathon
+performance. - Evaluating if a basketball player’s free throw success
+rate is better this season.</p>
+<p>In these cases, <strong>one comparison</strong> is made, and the Type
+1 error rate (e.g., <span class="math inline">\(\alpha = 0.05\)</span>)
+is straightforward to interpret.</p>
+<p>However, in many real-world cases, <strong>multiple
+hypotheses</strong> are tested simultaneously. This can lead to an
+increased risk of <strong>false positives</strong> (Type 1 errors).</p>
 <hr />
 </div>
-<div id="course-content" class="section level2">
-<h2>Course Content</h2>
+<div id="key-terms" class="section level3">
+<h3>Key Terms</h3>
 <ul>
-<li><p><strong>1. Exploratory Data Analysis</strong></p></li>
-<li><p><strong>2. Data and Sampling Distributions</strong></p></li>
-<li><p><strong>3. Statistical Experiments and Significance
-Testing</strong></p></li>
+<li><strong>Type 1 Error</strong>: Mistakenly concluding that an effect
+is statistically significant when it is not (a false positive).</li>
+<li><strong>False Discovery Rate (FDR)</strong>: The expected proportion
+of false positives among all the significant results.</li>
+<li><strong>Adjustment of p-values</strong>: Techniques (like Bonferroni
+or Benjamini-Hochberg) used to account for multiple testing and reduce
+Type 1 error risk.</li>
+<li><strong>Overfitting</strong>: Modeling noise in the data as if it
+were signal. Common when too many models or tests are conducted.</li>
+<li><strong>Alpha Inflation</strong>: The increase in the overall
+probability of making a Type 1 error due to multiple comparisons.</li>
+<li><strong>Fitting the Noise</strong>: Selecting or tuning a model
+based on random fluctuations in the data rather than real signal. Can
+lead to poor generalization.</li>
 </ul>
 <hr />
 </div>
-<div id="teaching-assessment" class="section level2">
-<h2>Teaching &amp; Assessment</h2>
+<div id="the-problem-of-alpha-inflation" class="section level3">
+<h3>The Problem of Alpha Inflation</h3>
+<p>When performing many tests, the chance of finding at least one
+statistically significant result by chance increases.</p>
+<div id="example" class="section level4">
+<h4>Example:</h4>
+<p>Suppose we run 20 tests, each at <span class="math inline">\(\alpha =
+0.05\)</span>. The probability of <strong>at least one</strong> Type 1
+error is:</p>
+<p><span class="math display">\[
+1 - (1 - 0.05)^{20} \approx 0.64
+\]</span></p>
+<p>This formula comes from the probability of <em>not</em> making any
+Type 1 error across 20 tests:</p>
+<p><span class="math display">\[
+(1 - 0.05)^{20} = 0.95^{20} \approx 0.3585
+\]</span></p>
+<p>So the complement (probability of at least one Type 1 error) is:</p>
+<p><span class="math display">\[
+1 - 0.3585 = 0.6415
+\]</span></p>
+<p>This shows a <strong>64% chance</strong> of making <strong>at least
+one false discovery</strong> just by chance when running 20 independent
+tests at a 5% significance level.</p>
+<hr />
+<hr />
+</div>
+</div>
+</div>
+<div id="adjusting-for-multiple-comparisons" class="section level1">
+<h1>Adjusting for Multiple Comparisons</h1>
+<p>Statisticians developed procedures to handle alpha inflation by
+setting a more stringent criterion for statistical significance compared
+to single hypothesis tests. These procedures generally involve &quot;dividing
+up&quot; the alpha across the number of tests, resulting in a smaller alpha
+for each test. Common methods include:</p>
 <ul>
-<li><strong>Teaching Methods:</strong>
-<ul>
-<li>Lectures via direct instruction<br />
-</li>
-<li>Practical sessions focused on self-learning and inquiry-based
-learning</li>
-</ul></li>
-<li><strong>Assessment Strategy:</strong>
-<ul>
-<li>Continuous Assessment: 40%<br />
-</li>
-<li>Final Assessment: 60%</li>
-</ul></li>
+<li><p><strong>Bonferroni Adjustment</strong>: Dividing alpha by the
+number of tests.</p></li>
+<li><p><strong>Tukey’s Honest Significant Difference (HSD)</strong>:
+Specifically used for multiple group means comparisons. This approach
+evaluates the maximum difference among group means against a benchmark
+based on the t-distribution, similar to a resampling method. The analogy
+to resampling arises because Tukey’s HSD compares observed differences
+in group means against a distribution generated by assuming no real
+differences (null hypothesis), similar to permutation or bootstrap
+approaches. The alpha value in Tukey’s HSD is adjusted to control the
+Type 1 error rate across all pairwise comparisons
+simultaneously.</p></li>
 </ul>
-<hr />
-</div>
-<div id="references" class="section level2">
-<h2>References</h2>
-<p>Peter Bruce, Andrew Bruce, Peter Gedeck - Practical Statistics for
-Data Scientists_ 50+ Essential Concepts Using R and Python (2020,
-O’Reilly Media)</p>
-</div>
-<div id="recommended-video-playlist" class="section level2">
-<h2>Recommended Video Playlist</h2>
-<p>For supplementary learning and revision, please refer to the
-following YouTube playlist:</p>
-<p><a href="https://youtube.com/playlist?list=PL-u09-6gP5ZNd6AhULnQHr6ZsF15qy4D0&amp;feature=shared">Statistics
-for Data Science YouTube Playlist</a></p>
-<hr />
-</div>
-<div id="lecture-notes" class="section level2">
-<h2>Lecture Notes</h2>
-<blockquote>
-<p>Lecture materials will be uploaded here during the semester.</p>
-</blockquote>
+<div id="calculation-of-tukeys-hsd" class="section level4">
+<h4>Calculation of Tukey’s HSD:</h4>
+<p>Tukey’s HSD is calculated as:</p>
+<p><span class="math display">\[
+HSD = q_{\alpha, k, df_{error}} \times \sqrt{\frac{MS_{error}}{n}}
+\]</span></p>
+<p>where:</p>
 <ul>
-<li><p><a href="chapter1_notes.html">Week1: Exploratory Data
-Analysis</a></p></li>
-<li><p><a href="chapter2.html">Week2: Data and Sampling
-Distributions</a></p></li>
-<li><p><a href="chapter2_rest1.html">Week3: Data and Sampling
-Distributions (ctd)</a></p></li>
-<li><p><a href="chapter2_rest2.html">Week4: Data and Sampling
-Distributions (ctd)</a></p>
-<ul>
-<li><a href="practical_on_dist_r.html">Practical on
-distribution</a></li>
-</ul></li>
-<li><p><a href="chapter3_one.html">Week5: Statistical Experiments and
-Significance Testing</a></p></li>
-<li><p><a href="chapter3_two.html">Week5: Statistical Experiments and
-Significance Testing</a></p>
-<ul>
-<li><a href="chatper3_two_practical.html">Statistical Experiments and
-Significance Testing</a></li>
-</ul></li>
+<li><span class="math inline">\(q_{\alpha, k, df_{error}}\)</span> is
+the studentized range statistic,</li>
+<li><span class="math inline">\(MS_{error}\)</span> is the mean square
+error from ANOVA,</li>
+<li><span class="math inline">\(n\)</span> is the number of observations
+per group,</li>
+<li><span class="math inline">\(k\)</span> is the number of groups.</li>
 </ul>
-<hr />
+<p>Here’s how to calculate Tukey’s HSD explicitly in R and Python:</p>
 </div>
-<div id="contact" class="section level2">
-<h2>Contact</h2>
-<p>For questions and feedback, please contact me via email(<a href="mailto:rsilva@sjp.ac.lk" class="email">rsilva@sjp.ac.lk</a>).</p>
+<div id="r-example" class="section level4">
+<h4>R Example</h4>
+<pre class="r"><code>data &lt;- data.frame(
+  group = rep(c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;), each = 10),
+  value = c(rnorm(10, mean=5), rnorm(10, mean=6), rnorm(10, mean=7))
+)
+
+anova_results &lt;- aov(value ~ group, data=data)
+anova_summary &lt;- summary(anova_results)
+MSE &lt;- anova_summary[[1]]$`Mean Sq`[2]
+
+df_error &lt;- anova_summary[[1]]$Df[2]
+k &lt;- length(unique(data$group))
+n &lt;- length(data$value) / k
+
+q_value &lt;- qtukey(0.95, nmeans=k, df=df_error)
+HSD &lt;- q_value * sqrt(MSE / n)
+HSD</code></pre>
+<pre><code>## [1] 1.130714</code></pre>
+</div>
+<div id="python-example" class="section level4">
+<h4>Python Example</h4>
+<pre class="python"><code>import numpy as np
+import scipy.stats as stats
+
+# Example data
+np.random.seed(0)
+group_A = np.random.normal(5, 1, 10)
+group_B = np.random.normal(6, 1, 10)
+group_C = np.random.normal(7, 1, 10)
+
+all_data = np.concatenate([group_A, group_B, group_C])
+groups = [&#39;A&#39;]*10 + [&#39;B&#39;]*10 + [&#39;C&#39;]*10
+
+# ANOVA
+f_val, p_val = stats.f_oneway(group_A, group_B, group_C)
+
+# Calculate Mean Square Error
+MSE = np.var(all_data, ddof=3)
+
+# Degrees of freedom and number of groups
+df_error = len(all_data) - 3
+k = 3
+n = len(group_A)
+
+# Studentized range critical value
+q_value = stats.tukey_hsd.ppf(0.95, k, df_error)
+
+# Calculate HSD
+HSD = q_value * np.sqrt(MSE / n)
+HSD</code></pre>
+<p>These adjustments set more tighten criteria for declaring statistical
+significance, mitigating the risk of false positives.</p>
+</div>
+</div>
+<div id="false-discovery-rate-fdr" class="section level1">
+<h1>False Discovery Rate (FDR)</h1>
+<p>The <strong>False Discovery Rate (FDR)</strong> describes the
+expected proportion of false discoveries (false positives) among all
+discoveries (tests declared significant).</p>
+<p>FDR emerged notably in genomic research, which often involves tens of
+thousands of simultaneous hypothesis tests. It controls not the
+probability of making a single false discovery but rather the proportion
+of discoveries that are expected to be false.</p>
+<p>Mathematically, the FDR is expressed as:</p>
+<p><span class="math display">\[
+FDR = \frac{\text{False Positives}}{\text{Total Positives}} =
+\frac{FP}{FP + TP}
+\]</span></p>
+<p>Where: - <span class="math inline">\(FP\)</span> is False Positives.
+- <span class="math inline">\(TP\)</span> is True Positives.</p>
+<div id="fdr-and-power" class="section level3">
+<h3>FDR and Power</h3>
+<ul>
+<li><strong>FDR</strong> procedures are less strict compared to
+traditional corrections (e.g., Bonferroni), allowing some false
+positives intentionally.</li>
+<li>By allowing some false positives, FDR procedures increase the
+<strong>statistical power</strong>, or the ability to detect true
+effects. This makes FDR especially useful in exploratory analyses.</li>
+</ul>
+</div>
+<div id="why-suitable-for-exploratory-analysis" class="section level3">
+<h3>Why suitable for Exploratory Analysis?</h3>
+<ul>
+<li>In exploratory settings, researchers often test numerous hypotheses
+without prior specific predictions.</li>
+<li>A strict criterion (like Bonferroni) would drastically reduce the
+chance of discovering true effects.</li>
+<li><strong>FDR balances the risk of false discoveries against missing
+potentially interesting results</strong>, making it ideal for
+exploratory analyses involving many tests.</li>
+</ul>
+</div>
+<div id="practical-example-from-data-science" class="section level3">
+<h3>Practical Example from Data Science:</h3>
+<p>Suppose you’re analyzing 1000 genetic markers associated with a
+disease. - Using strict correction methods might significantly reduce
+the chance of finding true associations. - Applying FDR allows you to
+discover more potential associations, understanding some will inevitably
+be false. However, this trade-off is beneficial when further validation
+studies can confirm true discoveries.</p>
+</div>
+<div id="implementing-fdr-in-r" class="section level3">
+<h3>Implementing FDR in R</h3>
+<p>Here’s an example of applying FDR correction to p-values using the
+<code>p.adjust</code> function in R:</p>
+<pre class="r"><code># Example p-values
+p_values &lt;- c(0.01, 0.04, 0.03, 0.002, 0.06, 0.15, 0.001)
+
+# Adjust p-values using FDR
+adjusted_p_values &lt;- p.adjust(p_values, method = &quot;fdr&quot;)
+adjusted_p_values</code></pre>
+<pre><code>## [1] 0.02333333 0.05600000 0.05250000 0.00700000 0.07000000 0.15000000 0.00700000</code></pre>
+<div id="python-example-1" class="section level4">
+<h4>Python Example</h4>
+<pre class="python"><code>from statsmodels.stats.multitest import multipletests
+
+# Example p-values
+p_values = [0.01, 0.04, 0.03, 0.002, 0.06, 0.15, 0.001]
+
+# Adjust p-values using FDR
+adjusted_p_values = multipletests(p_values, method=&#39;fdr_bh&#39;)[1]
+adjusted_p_values</code></pre>
+<p>This adjustment helps identify discoveries worth further
+investigation.</p>
+</div>
+</div>
+<div id="cricket-example-of-fdr" class="section level3">
+<h3>Cricket Example of FDR</h3>
+<p>Suppose a cricket analyst tests 50 batting-related performance
+metrics (such as average score, strike rate, boundaries per innings,
+etc.) across 100 players to see if any metric significantly predicts
+match outcomes. Using traditional correction methods (like Bonferroni)
+might make it difficult to detect meaningful metrics due to overly
+stringent criteria. Instead, the analyst can apply an FDR approach to
+find interesting patterns, balancing discoveries and tolerating some
+false positives.</p>
+</div>
+<div id="practical-implementation-in-r-and-python" class="section level3">
+<h3>Practical implementation in R and Python</h3>
+<p><strong>R Example:</strong></p>
+<pre class="r"><code># Simulated p-values for 50 tests
+set.seed(123)
+p_values_cricket &lt;- runif(50, min=0, max=0.1)
+
+# Adjust p-values using FDR
+adjusted_p_cricket &lt;- p.adjust(p_values_cricket, method = &quot;fdr&quot;)
+
+# Display significant results
+significant_cricket &lt;- adjusted_p_cricket[adjusted_p_cricket &lt; 0.05]
+significant_cricket</code></pre>
+<pre><code>## numeric(0)</code></pre>
+<p><strong>Python Example:</strong></p>
+<pre class="python"><code>import numpy as np
+from statsmodels.stats.multitest import multipletests
+
+# Simulated p-values for 50 tests
+np.random.seed(123)
+p_values_cricket = np.random.uniform(0, 0.1, 50)
+
+# Adjust p-values using FDR
+adjusted_p_cricket = multipletests(p_values_cricket, method=&#39;fdr_bh&#39;)[1]
+
+# Display significant results
+significant_cricket = adjusted_p_cricket[adjusted_p_cricket &lt; 0.05]
+print(significant_cricket)</code></pre>
+<p>Applying FDR in this way allows the cricket analyst to identify
+potential metrics worth deeper exploration while managing the rate of
+false discoveries.</p>
+</div>
+</div>
+<div id="degrees-of-freedom-dof" class="section level1">
+<h1>Degrees of Freedom (DoF)</h1>
+<p>The <strong>Degrees of Freedom (DoF)</strong> represent the number of
+independent values in a calculation that are free to vary. This concept
+is crucial in statistical tests, influencing the shape of various
+probability distributions such as the t-distribution, chi-square, and
+F-distribution.</p>
+<p>Mathematically, degrees of freedom are often calculated as <span class="math inline">\(n - 1\)</span> where <span class="math inline">\(n\)</span> is the total number of
+observations.</p>
+<div id="sports-example-cricket" class="section level3">
+<h3>Sports Example (Cricket):</h3>
+<p>Suppose you want to analyze the average scores of a cricket player
+over 10 matches. Once you calculate the average based on these 10
+matches, you have 9 degrees of freedom. This is because knowing the
+average and the first 9 scores makes the 10th score predictable,
+removing its freedom to vary.</p>
+<div id="example-in-r" class="section level4">
+<h4>Example in R:</h4>
+<pre class="r"><code>scores &lt;- c(45, 67, 38, 70, 55, 48, 62, 77, 54, 61)
+mean_score &lt;- mean(scores)
+DoF &lt;- length(scores) - 1
+DoF</code></pre>
+<pre><code>## [1] 9</code></pre>
+</div>
+<div id="example-in-python" class="section level4">
+<h4>Example in Python:</h4>
+<pre class="python"><code>scores = [45, 67, 38, 70, 55, 48, 62, 77, 54, 61]
+mean_score = np.mean(scores)
+DoF = len(scores) - 1
+print(&quot;Degrees of Freedom:&quot;, DoF)</code></pre>
+</div>
+</div>
+<div id="is-it-important-for-data-science" class="section level3">
+<h3>Is it important for Data Science?</h3>
+<p>Not always, especially in the context of significance testing. In
+data science, formal statistical tests are used sparingly, and sample
+sizes are often large enough that the difference between using <span class="math inline">\(n\)</span> and <span class="math inline">\(n -
+1\)</span> becomes negligible. As <span class="math inline">\(n\)</span>
+increases, the bias introduced by using <span class="math inline">\(n\)</span> instead of <span class="math inline">\(n - 1\)</span> in the denominator disappears.</p>
+<p>However, degrees of freedom matter in regression modeling. In
+particular, problems can occur when creating dummy variables for
+categorical predictors. For example, the variable “day of week” has
+seven levels but only six degrees of freedom. If dummy variables are
+created for all seven days, one variable becomes redundant and causes
+multicollinearity, leading to model failure. This issue is relevant for
+both linear and logistic regression in data science workflows.</p>
+</div>
+<div id="dummy-variables" class="section level3">
+<h3>Dummy Variables</h3>
+<p>Dummy variables are commonly used to represent categorical
+information such as player positions, match venues, or days of the week
+in sports. For instance, in a cricket dataset, the match location might
+be encoded as “Home” or “Away,” or the batting position could range from
+1 to 11. Dummy variables allow such categories to be represented in
+regression models.</p>
+<p>However, when creating dummy variables, it’s crucial to avoid
+multicollinearity caused by including all levels of a categorical
+variable. For example, consider the variable “Batting Position” with 5
+positions. If we create 5 dummy variables (one for each position) and
+include all of them in a regression model along with an intercept, we
+introduce perfect multicollinearity—the sum of the dummy variables
+equals 1 for every observation.</p>
+<p>This problem is addressed by using only <span class="math inline">\(k
+- 1\)</span> dummy variables, where <span class="math inline">\(k\)</span> is the number of categories. The
+omitted category becomes the reference group. For example:</p>
+<pre class="r"><code># R Example: Dummy coding for batting positions
+batting_pos &lt;- factor(c(&quot;Opener&quot;, &quot;Middle&quot;, &quot;Middle&quot;, &quot;Lower&quot;, &quot;Opener&quot;))
+dummies &lt;- model.matrix(~ batting_pos)[, -1]  # drop intercept and first level
+print(dummies)</code></pre>
+<pre><code>##   batting_posMiddle batting_posOpener
+## 1                 0                 1
+## 2                 1                 0
+## 3                 1                 0
+## 4                 0                 0
+## 5                 0                 1</code></pre>
+<pre class="python"><code># Python Example: Dummy coding for batting positions
+import pandas as pd
+batting_pos = pd.Series([&quot;Opener&quot;, &quot;Middle&quot;, &quot;Middle&quot;, &quot;Lower&quot;, &quot;Opener&quot;])
+dummies = pd.get_dummies(batting_pos, drop_first=True)
+print(dummies)</code></pre>
+<p>By dropping one dummy variable, we maintain full rank and avoid
+multicollinearity. In sports models, this step is vital to ensure
+reliable coefficient estimates and proper interpretation of effects.</p>
+</div>
+<div id="anova-and-permutation-testing" class="section level3">
+<h3>ANOVA and Permutation Testing</h3>
+<p>Let’s illustrate this with a cricket-based sports example using
+permutation ANOVA. We test whether average reaction times differ
+significantly across four different cricket training strategies: Power,
+Agility, Endurance, and Control.</p>
+<p>Suppose we’re comparing the effectiveness of four cricket training
+strategies (A, B, C, D) by measuring players’ improvement scores. We
+collect five improvement scores for each strategy.</p>
+<p>We can test the significance of the observed variance among group
+means using this resampling procedure:</p>
+<ol style="list-style-type: decimal">
+<li>Combine all the data into a single pool.</li>
+<li>Shuffle the values and draw four resamples of five values each
+(representing A, B, C, and D).</li>
+<li>Calculate the mean of each group.</li>
+<li>Record the variance of these group means.</li>
+<li>Repeat steps 2–4 at least 1,000 times.</li>
+<li>Determine the proportion of these permutations where the resampled
+variance exceeds the actual observed variance.</li>
+</ol>
+<p>This proportion gives a <strong>p-value</strong> indicating how
+unusual the observed result is under the null hypothesis of no
+difference.</p>
+<p>In R, this type of permutation-based ANOVA can be carried out using
+the <code>aovp</code> function from the <code>lmPerm</code> package:</p>
+<pre class="r"><code># install.packages(&quot;lmPerm&quot;)
+library(lmPerm)
+# Simulated reaction time data for 4 cricket training strategies
+set.seed(123)
+cricket_sessions &lt;- data.frame(
+  TrainingFormat = rep(c(&quot;Power&quot;, &quot;Agility&quot;, &quot;Endurance&quot;, &quot;Control&quot;), each = 5),
+  ReactionTime = c(
+    rnorm(5, mean = 0.45, sd = 0.05),
+    rnorm(5, mean = 0.43, sd = 0.04),
+    rnorm(5, mean = 0.47, sd = 0.06),
+    rnorm(5, mean = 0.44, sd = 0.05)
+  )
+)
+
+# Permutation ANOVA using lmPerm
+result &lt;- aovp(ReactionTime ~ TrainingFormat, data = cricket_sessions, perm = &quot;Exact&quot;)</code></pre>
+<pre><code>## [1] &quot;Settings:  unique SS &quot;</code></pre>
+<pre class="r"><code>summary(result)</code></pre>
+<pre><code>## Component 1 :
+##                 Df R Sum Sq R Mean Sq Iter Pr(Prob)
+## TrainingFormat1  3 0.009746 0.0032487  564   0.3209
+## Residuals       16 0.041040 0.0025650</code></pre>
+<p>This method does not rely on normality assumptions and provides a
+flexible way to conduct inference, particularly useful when sample sizes
+are small or assumptions are violated.</p>
+<pre class="r"><code># Simulated reaction time data for 4 cricket training strategies
+set.seed(123)
+cricket_sessions &lt;- data.frame(
+  TrainingFormat = rep(c(&quot;Power&quot;, &quot;Agility&quot;, &quot;Endurance&quot;, &quot;Control&quot;), each = 5),
+  ReactionTime = c(
+    rnorm(5, mean = 0.45, sd = 0.05),
+    rnorm(5, mean = 0.43, sd = 0.04),
+    rnorm(5, mean = 0.47, sd = 0.06),
+    rnorm(5, mean = 0.44, sd = 0.05)
+  )
+)
+
+# Permutation ANOVA using lmPerm
+result &lt;- aovp(ReactionTime ~ TrainingFormat, data = cricket_sessions, perm = &quot;Exact&quot;)</code></pre>
+<pre><code>## [1] &quot;Settings:  unique SS &quot;</code></pre>
+<pre class="r"><code>summary(result)</code></pre>
+<pre><code>## Component 1 :
+##                 Df R Sum Sq R Mean Sq Iter Pr(Prob)
+## TrainingFormat1  3 0.009746 0.0032487  564   0.3209
+## Residuals       16 0.041040 0.0025650</code></pre>
+<p>Here, the p-value (<code>Pr(Prob)</code>) (which stands for
+“Probability of Observed (or more extreme) value under the null
+hypothesis”) is 0.3209, indicating that under the assumption of equal
+effectiveness among training formats, about 9.3% of permutations
+resulted in a variance as extreme as what was observed. Since this
+p-value is above the conventional 0.05 threshold, we do not reject the
+null hypothesis; the differences in reaction times could have arisen by
+chance.</p>
+<p>The <code>Iter</code> column shows the number of resampling
+iterations. The <code>Df</code>, <code>R Sum Sq</code>, and
+<code>R Mean Sq</code> columns mirror a traditional ANOVA table.</p>
+<pre><code>
+Here, `Pr(Prob)` in the output is the p-value obtained by comparing the observed variance among group means to the distribution of variances from permuted datasets. A value like 0.3209 means that in about 3.2% of the random permutations, a variance as extreme as the observed one was found—indicating the result is not statistically significant at the 5% level.</code></pre>
+<p>This method does not rely on normality assumptions and provides a
+flexible way to conduct inference, particularly useful when sample sizes
+are small or assumptions are violated.</p>
+</div>
 </div>
 
 
