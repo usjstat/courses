@@ -526,7 +526,7 @@ hist(pi_sim, breaks = 50, main = expression("Simulated Prior:" ~ pi ~ " Beta(45,
 For each simulated \(\pi\), simulate a poll result: how many people out of 50 would support Michelle?
 
 ```{r}
-# Simulate polling outcomes Y for each ??
+# Simulate polling outcomes Y for each pi
 y_sim <- rbinom(10000, size = 50, prob = pi_sim)
 
 # Combine into a data frame
@@ -542,7 +542,7 @@ This simulates what could happen **if** Michelle's support was drawn from the pr
 We now filter the 10,000 simulations to only those where the poll result was **exactly 30 out of 50** (i.e., \(Y = 30\)). These represent prior values of \(\pi\) that are **consistent with the observed data**.
 
 ```{r}
-# Keep only simulated ?? values where Y = 30
+# Keep only simulated pi values where Y = 30
 michelle_posterior <- michelle_sim %>% filter(y == 30)
 ```
 
@@ -551,7 +551,7 @@ michelle_posterior <- michelle_sim %>% filter(y == 30)
 ### Step 4: Visualize the Simulated Posterior
 
 ```{r}
-# Plot the density of posterior ?? values
+# Plot the density of posterior pi values
 ggplot(michelle_posterior, aes(x = pi)) +
   geom_density(fill = "skyblue") +
   labs(title = expression("Simulated Posterior:" ~ pi ~ " | Y = 30"),

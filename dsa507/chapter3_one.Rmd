@@ -1,0 +1,530 @@
+---
+title: "Statistical Experiments and Significance Testing"
+author: "Dr. Rajitha M. Silva"
+output: html_document
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+# Chapter 3: Statistical Experiments and Significance Testing
+
+## Introduction: The Role of Experiments in Data Science
+
+Design of experiments is a cornerstone of statistical practice with applications in nearly every area of research. Whether you're testing training programs, equipment, or tactics, the goal is to design an experiment that helps confirm or reject a hypothesis based on evidence.
+
+In sports analytics, continual experiments are critical—for instance, to determine which training regimen leads to faster sprint times or whether a new hydration method affects endurance. This lecture reviews the traditional design of experiments and challenges in applying these methods within modern data science contexts.
+
+## The Classical Statistical Inference Pipeline
+
+This process starts with a hypothesis such as: Training Method A is more effective than Method B. Then, an experiment is designed to test this hypothesis, collecting and analyzing data to draw conclusions. Inference refers to applying results from a limited sample to a broader population.
+
+### Five-Step Process:
+
+1. Formulate a Hypothesis\
+2. Design the Experiment\
+3. Collect the Data\
+4. Analyze the Data\
+5. Draw Conclusions\
+
+This pipeline helps estimate effects based on representative data samples.
+
+## A/B Testing Explained
+
+A/B testing compares two treatments to determine which performs better. In sports, for an example, this could be comparing two fitness plans or two types of footwear.
+
+### Key Terms
+- **Treatment**: The factor being tested (e.g., a hydration method)\
+- **Treatment Group**: Receives the new condition\
+- **Control Group**: Receives the standard or no condition\
+- **Randomization**: Subjects are randomly assigned\
+- **Subjects**: Athletes participating\
+- **Test Statistic**: The performance measure being analyzed\
+
+### Example in Sports
+Suppose you are testing two soccer ball types for distance in free-kicks. Randomly assign players to use Ball A or Ball B and measure kick distance. Differences can then be attributed to the ball or random chance.
+
+```{r}
+set.seed(123)
+ball <- rep(c("A", "B"), each = 30)
+distance <- c(rnorm(30, mean = 30, sd = 2), rnorm(30, mean = 31, sd = 1.5))
+soccer_data <- data.frame(ball, distance)
+head(soccer_data)
+```
+
+```python
+import pandas as pd
+import numpy as np
+
+np.random.seed(123)
+ball = ["A"] * 30 + ["B"] * 30
+distance = np.concatenate([
+    np.random.normal(30, 2, 30),
+    np.random.normal(31, 1.5, 30)
+])
+soccer_data = pd.DataFrame({"ball": ball, "distance": distance})
+soccer_data.head()
+```
+
+## Choosing the Right Metric
+
+The test statistic must be pre-defined. It might be distance run, heart rate improvement, or sprint time. Binary outcomes (e.g., goal or no goal) can be summarized in two-by-two tables. Continuous variables require means and standard deviations, but these may be misleading if data are skewed. Mean absolute deviation is sometimes more interpretable.
+
+## Why Use a Control Group?
+
+Without a control group, we cannot isolate the effect of the treatment. Comparing current athletes with past records ignores changing conditions. A control group ensures both sets of subjects face the same conditions, except the treatment.
+
+## Blinding in (Sports) Experiments
+
+- **Single-Blind**: Players do not know which treatment they receive.
+- **Double-Blind**: Coaches and analysts also do not know. This helps eliminate bias.
+
+
+## Why Limit to A and B?
+
+You can add more treatments (e.g., A, B, C) to test multiple options like three types of diet. This requires more planning. Adaptive methods such as multi-arm bandit designs help optimize decisions over time, shifting more subjects to better-performing treatments.
+
+## Ethics and Permission
+
+Experiments involving humans often require approval. In professional sports, consent is usually obtained via contracts or briefing. Ethical concerns arise when changes affect performance or well-being without the subject’s knowledge.
+
+### Real-World Example:
+A tech company once altered users' content feeds to test emotional response without informing them, triggering public backlash. This highlights the importance of consent even in routine experiments.
+
+
+<div style="border: 2px solid #ccc; padding: 15px; border-radius: 10px; background-color: #f9f9f9;">
+
+
+## Practical Compoenent: A/B Test 
+
+### Scenario
+You are a data analyst at a restaurant chain. Management wants to know whether there is a meaningful difference in customer spending between male and female customers. You are assigned to analyze existing restaurant data and report your findings.
+
+### Objective
+Compare average total bills between male and female customers to determine if the observed difference may influence service strategies or marketing decisions.
+
+### Dataset Description
+
+**R:** The `tips` dataset can be accessed using the `reshape2` package. Load it with:
+
+```r
+library(reshape2)
+data(tips)
+```
+Alternatively, if using the `ggplot2` package:
+```r
+library(ggplot2)
+tips <- ggplot2::mpg  # use a different dataset if 'tips' is unavailable
+```
+
+**Python:** The `tips` dataset is available through the seaborn library:
+
+```python
+import seaborn as sns
+tips = sns.load_dataset("tips")
+```
+
+### Tasks for Students (R or Python)
+1. Load the dataset.
+2. Group the data by gender.
+3. Visualize the total bill distribution using boxplots.
+4. Calculate the mean total bill for each gender.
+5. Interpret whether the observed difference appears meaningful based on the results.
+
+<!-- ### Instructions (R Users) -->
+<!-- ```{r eval=FALSE} -->
+<!-- library(ggplot2) -->
+<!-- data(tips, package = "reshape2") -->
+
+<!-- # Visualization -->
+<!-- ggplot(tips, aes(x = sex, y = total_bill)) + -->
+<!--   geom_boxplot() + -->
+<!--   labs(title = "Total Bill by Gender", x = "Gender", y = "Total Bill") -->
+
+<!-- # Summary Statistics -->
+<!-- aggregate(total_bill ~ sex, data = tips, FUN = mean) -->
+<!-- ``` -->
+
+<!-- ### Instructions (Python Users) -->
+<!-- ```python -->
+<!-- import seaborn as sns -->
+<!-- import matplotlib.pyplot as plt -->
+
+<!-- # Load dataset -->
+<!-- tips = sns.load_dataset("tips") -->
+
+<!-- # Visualization -->
+<!-- sns.boxplot(x="sex", y="total_bill", data=tips) -->
+<!-- plt.title("Total Bill by Gender") -->
+<!-- plt.xlabel("Gender") -->
+<!-- plt.ylabel("Total Bill") -->
+<!-- plt.show() -->
+
+<!-- # Summary Statistics -->
+<!-- print(tips.groupby("sex")["total_bill"].mean()) -->
+<!-- ``` -->
+
+### Reflection Questions
+- Does one gender tend to spend more than the other?
+- Is the variation within each group large or small?
+- Could any observed difference be due to chance?
+- Why is this called A/B Testing?
+
+<!-- - Two groups (male vs. female customers) are compared. -->
+<!-- - A single metric (total bill) is analyzed. -->
+<!-- - The comparison follows the principles of experimental design: group assignment, consistent outcome measurement, and interpretation of treatment effect. -->
+
+</div>
+
+## Hypothesis Testing
+
+### Key Concepts
+- **Null Hypothesis**: Assumes no effect or no difference (e.g., treatment A is the same as B).
+- **Alternative Hypothesis**: What you aim to prove (e.g., B is better than A).
+- **One-way Test**: Tests for an effect in one direction only.
+- **Two-way Test**: Tests for any difference, regardless of direction.
+
+### Why Use Hypothesis Testing?
+Humans tend to overinterpret random patterns. Hypothesis testing protects us from being misled by random chance.
+
+#### Misinterpreting Randomness
+A simple classroom demo: Ask students to simulate 50 coin flips—first by imagination, then with a real coin. The real results usually show longer runs of heads or tails.
+
+### Hypothesis Testing Logic
+In A/B testing:
+- Null: No difference in treatment effects.
+- Observed difference must be extreme enough to reject the null.
+
+---
+
+## Resampling and Permutation Tests
+
+### What is Resampling?
+Resampling repeatedly samples values from observed data to assess variability or significance. Two major types:
+- **Bootstrap**: For estimating variability.
+- **Permutation Test**: For hypothesis testing.
+
+### Permutation Test Process
+1. Combine group A and B data.
+2. Shuffle the combined data.
+3. Reassign into new groups of original size.
+4. Compute the test statistic.
+5. Repeat to build a distribution.
+6. Compare the observed statistic to this distribution.
+
+### Permutation Test Scenario (Using Sports Data)
+
+**Scenario**: A football coach wants to determine whether a new warm-up routine (Routine B) improves sprint performance compared to the traditional routine (Routine A). Twenty-one athletes follow Routine A, and fifteen athletes follow Routine B. After completing the warm-up, each athlete runs a timed 40-meter sprint. The coach records the sprint times.
+
+The goal is to assess whether the difference in average sprint times between Routine A and B could have occurred by random chance.
+
+To do this, we use a permutation test:
+- Combine all sprint times together.
+- Shuffle the combined list.
+- Randomly assign 21 times to group A and 15 to group B.
+- Calculate the difference in mean sprint times between the new groups.
+- Repeat this many times to build a distribution of mean differences.
+- Compare the observed difference in means (original groupings) to this distribution.
+
+If the observed difference is far out in the tail of this permutation distribution, we conclude that it is unlikely to have occurred by chance, and that Routine B may indeed improve sprint performance.
+
+
+### R Implementation
+
+
+```{r}
+set.seed(1)
+session_times <- data.frame(
+  Routine = rep(c("A", "B"), c(21, 15)),
+  Time = c(rnorm(21, mean=100, sd=20), rnorm(15, mean=135, sd=25))
+)
+
+# Observed difference
+mean_diff <- with(session_times, mean(Time[Routine == "B"]) - mean(Time[Routine == "A"]))
+
+# Create a boxplot of sprint times by warm-up routine
+library(ggplot2)
+ggplot(session_times, aes(x=Routine, y=Time)) +
+  geom_boxplot(fill="lightblue") +
+  labs(title = "Sprint Times by Warm-up Routine", x = "Routine", y = "Sprint Time (seconds)")
+
+# Permutation function
+perm_fun <- function(x, nA, nB) {
+  n <- nA + nB
+  idx_b <- sample(1:n, nB)
+  idx_a <- setdiff(1:n, idx_b)
+  mean(x[idx_b]) - mean(x[idx_a])
+}
+
+# Run permutation test
+perm_diffs <- replicate(1000, perm_fun(session_times$Time, 21, 15))
+
+# Plot
+hist(perm_diffs, main="Permutation Distribution", xlab="Mean Differences")
+abline(v=mean_diff, col="red", lwd=2)
+```
+
+### Python Implementation
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+np.random.seed(1)
+A = np.random.normal(100, 20, 21)
+B = np.random.normal(135, 25, 15)
+data = pd.DataFrame({"Time": np.concatenate([A, B]),
+                     "Routine": ["A"]*21 + ["B"]*15})
+
+obs_diff = data[data.Routine == "B"].Time.mean() - data[data.Routine == "A"].Time.mean()
+
+def perm_fun(x, nA, nB):
+    idx = np.random.permutation(len(x))
+    return x[idx[nA:]].mean() - x[idx[:nA]].mean()
+
+perm_diffs = [perm_fun(data.Time.values, 21, 15) for _ in range(1000)]
+
+plt.hist(perm_diffs, bins=20, edgecolor='black')
+plt.axvline(x=obs_diff, color='red', linewidth=2)
+plt.xlabel("Mean Differences")
+plt.title("Permutation Distribution")
+plt.show()
+```
+### Interpretation
+
+The boxplot shows a clear difference in sprint times between Routine A and Routine B. Athletes following Routine A tend to have faster (lower) sprint times than those following Routine B, suggesting Routine A may be more effective.
+
+The histogram of the permutation distribution provides a benchmark for what kind of mean differences might be expected due to random chance alone. The red line indicates the observed difference between the two routines.
+
+Since the observed difference lies far in the right tail of the permutation distribution, it suggests that the difference is unlikely to be due to random chance. Thus, the result is statistically significant, providing evidence that Routine A leads to faster sprint times compared to Routine B.
+
+---
+
+## Permutation Tests: The Bottom Line for Data Science
+Permutation tests provide a practical and intuitive way to assess the role of random variation in observed effects. They are:
+
+- Easy to understand, code, and explain
+- More flexible than traditional formula-based methods
+- Not reliant on assumptions like normality
+- Suitable for numeric or binary outcomes and unequal sample sizes
+
+## Statistical Significance and p-Values
+
+### Key Terms
+- **p-value**: Probability of obtaining results as extreme as the observed under the null hypothesis.
+- **Alpha (α)**: The threshold of “unusualness” (e.g., 0.05) for deeming results statistically significant.
+- **Type I Error**: False positive—concluding an effect is real when it's due to chance.
+- **Type II Error**: False negative—failing to detect a real effect due to small sample size or variation.
+
+---
+
+## Sports Example: Testing Conversion Rates of Two Coaching Strategies
+
+Two basketball teams are tested for free-throw conversion under two training strategies:
+
+- **Strategy A**: 200 successes out of 23,739 attempts\
+- **Strategy B**: 182 successes out of 22,588 attempts\
+
+### Objective
+Test if Strategy A has a significantly higher conversion rate than Strategy B using permutation and classical tests.
+
+---
+
+### Permutation Test in R
+```{r}
+perm_fun <- function(x, nA, nB) {
+  n <- nA + nB
+  idx_b <- sample(1:n, nB)
+  idx_a <- setdiff(1:n, idx_b)
+  mean(x[idx_b]) - mean(x[idx_a])
+}
+
+obs_pct_diff <- 100 * (200 / 23739 - 182 / 22588)
+conversion <- c(rep(0, 45945), rep(1, 382))
+perm_diffs <- replicate(1000, 100 * perm_fun(conversion, 23739, 22588))
+
+hist(perm_diffs, xlab='Conversion rate (percent)', main='Permutation Distribution')
+abline(v=obs_pct_diff, col='red')
+```
+
+### Permutation Test in Python
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+obs_pct_diff = 100 * (200 / 23739 - 182 / 22588)
+conversion = [0] * 45945 + [1] * 382
+conversion = pd.Series(conversion)
+
+def perm_fun(data, nA, nB):
+    shuffled = data.sample(frac=1).reset_index(drop=True)
+    return shuffled[:nA].mean() - shuffled[nA:].mean()
+
+perm_diffs = [100 * perm_fun(conversion, 23739, 22588) for _ in range(1000)]
+
+plt.hist(perm_diffs, bins=20)
+plt.axvline(x=obs_pct_diff, color='black', lw=2)
+plt.xlabel('Conversion rate (percent)')
+plt.ylabel('Frequency')
+plt.title('Permutation Distribution')
+```
+
+### Interpretation
+- The observed difference is **within** the range of typical outcomes under the null.
+- Hence, **not statistically significant**.
+
+---
+
+## Classical Proportion Test in R
+```{r}
+prop.test(x=c(200, 182), n=c(23739, 22588), alternative='greater')
+```
+
+## Classical Chi-square Test in Python
+```python
+from scipy import stats
+
+survivors = np.array([[200, 23739 - 200], [182, 22588 - 182]])
+chi2, p_value, df, _ = stats.chi2_contingency(survivors)
+print(f'p-value (one-sided): {p_value / 2:.4f}')
+```
+
+---
+
+
+## Caution with p-values
+The American Statistical Association advises:
+1. P-values show compatibility with a model, not truth of a hypothesis.
+2. They do not measure the probability that a hypothesis is correct.
+3. Don't base conclusions solely on p-values.
+4. Report all results transparently.
+5. Statistical significance does not imply practical importance.
+6. Use p-values as one piece of evidence.
+
+---
+
+## Type 1 and Type 2 Errors
+
+When interpreting statistical significance, it's crucial to recognize two types of errors:
+
+- **Type 1 Error**: Concluding that an effect is real when it is actually due to chance (false positive).
+- **Type 2 Error**: Concluding that an effect is not real when it actually is (false negative).
+
+In practice, a Type 2 error often means that the sample size was too small to detect a real effect. If a p-value exceeds a standard threshold like 0.05, it does not prove that there is no effect—it simply means that the observed evidence is insufficient to conclude that an effect exists. Larger samples might yield different conclusions.
+
+Significance tests are generally designed to **minimize the risk of Type 1 errors**, as these can mislead analysts into believing in effects that do not exist.
+
+## Data Science and p-Values
+
+In data science, p-values are used as a practical heuristic rather than a definitive decision rule. Since most data science projects are not intended for scientific publication, the emphasis is more on making informed business or product decisions.
+
+P-values are helpful for determining whether an interesting model outcome might be explained by random variation. However, they should not be the sole basis for decisions. For instance, in feature selection for machine learning models, variables might be included or excluded depending on their p-values, but always alongside other considerations like predictive power and business context.
+
+---
+
+
+<div style="border: 2px solid #ccc; padding: 15px; border-radius: 10px; background-color: #f9f9f9;">
+
+## Practical Component: Batting Performance Under Pressure
+
+### Objective
+This practical guides you through evaluating whether a cricket player's average score differs significantly between pressure situations (e.g., batting when 5 wickets are down) and low-pressure situations (e.g., opening the innings). You will apply a permutation test to determine if the observed difference in performance could be due to chance.
+
+### Scenario
+A cricket analyst is interested in assessing whether players perform worse in high-pressure situations. You have average scores for 25 innings under pressure and 25 innings under low-pressure. You need to determine if there is a statistically significant difference in mean performance using a permutation test.
+
+### Instructions for Students
+
+1. **Simulate or create the dataset**:
+   - Generate 25 scores under pressure (e.g., mean = 25, sd = 10)
+   - Generate 25 scores under low-pressure (e.g., mean = 35, sd = 10)
+
+2. **Combine the data** into a single dataset with a categorical variable (Situation: Pressure/Low) and a numerical variable (Score).
+
+3. **Visualize** the data using a boxplot comparing the two situations.
+
+4. **Calculate the observed difference** in group means (Low-pressure mean - Pressure mean).
+
+5. **Write a permutation function** that:
+   - Randomly shuffles the scores
+   - Reassigns them into two groups of original sizes (25 each)
+   - Calculates the difference in means
+
+6. **Repeat** the permutation test 1000 times and store the resulting differences.
+
+7. **Plot a histogram** of the permutation differences and mark the observed difference with a vertical line.
+
+8. **Interpret the results**:
+   - Is the observed difference statistically significant?
+   - Could it be attributed to chance?
+
+<!-- ### R Template -->
+<!-- ```{r, eval=FALSE} -->
+<!-- set.seed(10) -->
+<!-- pressure <- rnorm(25, mean=25, sd=10) -->
+<!-- low_pressure <- rnorm(25, mean=35, sd=10) -->
+<!-- scores <- data.frame( -->
+<!--   Score = c(pressure, low_pressure), -->
+<!--   Situation = rep(c("Pressure", "Low"), each=25) -->
+<!-- ) -->
+
+<!-- obs_diff <- mean(scores$Score[scores$Situation == "Low"]) - -->
+<!--              mean(scores$Score[scores$Situation == "Pressure"]) -->
+
+<!-- perm_diff <- function(x, n1) { -->
+<!--   shuffled <- sample(x) -->
+<!--   mean(shuffled[(n1+1):(2*n1)]) - mean(shuffled[1:n1]) -->
+<!-- } -->
+
+<!-- perm_diffs <- replicate(1000, perm_diff(scores$Score, 25)) -->
+
+<!-- hist(perm_diffs, breaks=30, xlab="Difference in Mean Scores", -->
+<!--      main="Permutation Distribution") -->
+<!-- abline(v = obs_diff, col = "red", lwd = 2) -->
+<!-- ``` -->
+
+<!-- ### Python Template -->
+<!-- ```python -->
+<!-- import numpy as np -->
+<!-- import pandas as pd -->
+<!-- import matplotlib.pyplot as plt -->
+
+<!-- np.random.seed(10) -->
+<!-- pressure = np.random.normal(25, 10, 25) -->
+<!-- low_pressure = np.random.normal(35, 10, 25) -->
+<!-- scores = np.concatenate([pressure, low_pressure]) -->
+<!-- situation = ["Pressure"] * 25 + ["Low"] * 25 -->
+
+<!-- obs_diff = low_pressure.mean() - pressure.mean() -->
+
+<!-- def perm_diff(x, n1): -->
+<!--     shuffled = np.random.permutation(x) -->
+<!--     return shuffled[n1:].mean() - shuffled[:n1].mean() -->
+
+<!-- perm_diffs = [perm_diff(scores, 25) for _ in range(1000)] -->
+
+<!-- plt.hist(perm_diffs, bins=30, edgecolor='black') -->
+<!-- plt.axvline(x=obs_diff, color='red', linewidth=2) -->
+<!-- plt.title("Permutation Distribution") -->
+<!-- plt.xlabel("Difference in Mean Scores") -->
+<!-- plt.show() -->
+<!-- ``` -->
+
+### Submission Requirements
+- Submit an R Markdown (pdf) or Python notebook containing:
+   - Data simulation
+   - Boxplot
+   - Permutation test code
+   - Histogram with observed value
+   - Written interpretation of the result
+
+</div>
+
+
+
+
+

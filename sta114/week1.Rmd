@@ -84,8 +84,8 @@ Each roll has 6 outcomes, so the total number of outcomes over 4 rolls is:
 
 Let's count how many outcomes include at least one six:
 
-- **Exactly 1 six:** \( \binom{4}{1} = 4 \) positions × \( 5^3 = 125 \) outcomes for other rolls ??? \( 4 \times 125 = 500 \)
-- **Exactly 2 sixes:** \( \binom{4}{2} = 6 \) × \( 5^2 = 25 \) ??? \( 6 \times 25 = 150 \)
+- **Exactly 1 six:** \( \binom{4}{1} = 4 \) positions × \( 5^3 = 125 \) outcomes for other rolls - \( 4 \times 125 = 500 \)
+- **Exactly 2 sixes:** \( \binom{4}{2} = 6 \) × \( 5^2 = 25 \) ---> \( 6 \times 25 = 150 \)
 - **Exactly 3 sixes:** \( \binom{4}{3} = 4 \) × \( 5 = 20 \)
 - **Exactly 4 sixes:** 1 outcome: (6,6,6,6)
 

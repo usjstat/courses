@@ -1,5 +1,5 @@
 ---
-title: "Solutions – Practical on Distributions (R)"
+title: "Solutions - Practical on Distributions (R)"
 author: "Statistics for Data Science"
 output: html_document
 ---
@@ -14,7 +14,7 @@ table(binom_data)
 # Probability of exactly 3 successes
 dbinom(3, size = 5, prob = 0.3)
 
-# Cumulative probability of ≤ 3 successes
+# Cumulative probability of  3 successes
 pbinom(3, size = 5, prob = 0.3)
 ```
 
@@ -35,7 +35,7 @@ barplot(table_data, beside = TRUE, legend = TRUE, col = rainbow(4))
 
 ---
 
-## 3. Student’s t-Distribution
+## 3. Student's t-Distribution
 
 ```{r}
 set.seed(2)

@@ -28,20 +28,20 @@ This course establishes the fundamentals of probability theory. It supports lear
 
 ::: {style="text-align: center;"}
 | **Week** | **Topic** | **Description** | **Hours** |
-|----------------|----------------|-----------------------|----------------|
+|----|----|----|----|
 | 1 | [Elements of Probability](week1) | Introduction, experiments, outcomes, sample spaces, events | 8 (2T + 6IL) |
 | 2 | [Event Operations](week2) | Complements, unions, intersections, mutually exclusive/exhaustive events | 8 (2T + 6IL) |
 | 3 | [Methods of Probability](https://sportsanalyzr.shinyapps.io/week3/) | Classical, relative frequency, axioms, interpretation | 8 (2T + 6IL) |
 | 4 | [Conditional Probability](week4.html) | Independent events | 8 (2T + 6IL) |
 | 5 | [Probability Rules](week5.html) | Addition, multiplication, total probability, Bayes' theorem | 8 (2T + 6IL) |
-| 6 | **Midterm Examination** | - | - |
+| 6 | **Midterm Examination** | \- | \- |
 | 7 | Random Variables | Definitions, discrete and continuous variables | 8 (2T + 6IL) |
 | 8 | Events with Random Variables | Event representation and revision | 8 (2T + 6IL) |
 | 9 | Distributions | pmf, pdf, cdf | 8 (2T + 6IL) |
 | 10 | Probability Calculations | Quantiles, quartiles, percentiles | 8 (2T + 6IL) |
 | 11 | Mean & Variance | Mean and variance of r.v.s and functions | 8 (2T + 6IL) |
 | 12 | Moments | MGF and properties | 8 (2T + 6IL) |
-| 13 | Revision & Integration | - | 8 (2T + 6IL) |
+| 13 | Revision & Integration | \- | 8 (2T + 6IL) |
 :::
 
 *T = Theory, IL = Independent Learning*
