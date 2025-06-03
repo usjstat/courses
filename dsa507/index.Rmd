@@ -74,6 +74,13 @@ For supplementary learning and revision, please refer to the following YouTube p
 
     -   [Practical: Statistical Experiments and Significance Testing](chapter3_two_practical.html)
 
+- [Week7: F Statistics and ANOVA ](chapter3_four.html)
+    -   [Practical: F Statistics and ANOVA](practical_f_statistics_anova.html)
+    
+- [Week7: Chi-Square Test ](chapter3_five.html)
+   -   [Practical: chi square test](practical_chi_square_test.html)
+  
+
 ------------------------------------------------------------------------
 
 ## Contact
