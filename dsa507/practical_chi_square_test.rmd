@@ -1,0 +1,54 @@
+
+---
+title: "Chi-Square Test - Practical Session"
+author: "Dr. Rajitha M. Silva"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Practical Objective
+
+This session helps you to understand the computation and interpretation of the chi-square test, including both theoretical and resampling-based approaches, with applications to sports analytics.
+
+### Task 1: Create the Contingency Table
+
+**Scenario:**  
+Three volleyball players attempted 50 serves each. The number of successful and failed serves is recorded:
+
+| Player   | Success | Fail |
+|----------|---------|------|
+| Player A | 42      | 8    |
+| Player B | 36      | 14   |
+| Player C | 40      | 10   |
+
+
+### Task 2: Compute Expected Counts and Chi-Square Statistic
+
+
+
+### Task 3: Theoretical Chi-Square Test
+
+
+
+
+### Task 4: Permutation Test (Resampling Approach)
+
+
+
+### Task 5: Interpretation Questions
+
+1. Which cells contribute most to the chi-square statistic?
+2. Does the permutation p-value differ significantly from the theoretical p-value?
+3. Are you confident rejecting the null hypothesis? Why or why not?
+
+## Task 6: Optional Fisher's Exact Test for 2x2
+
+
+---
+
+**Submission Instructions:**  
+- Knit your `.Rmd` file to HTML and submit it on the Google Classroom.
+- Python users may submit a Jupyter Notebook version separately.

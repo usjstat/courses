@@ -1,0 +1,119 @@
+---
+title: "Practical: F-Statistic and ANOVA Exercises"
+author: "Dr. Rajitha M. Silva"
+output: html_document
+---
+
+# Objectives
+
+1. Apply One-Way ANOVA to simulated sports data.  
+2. Interpret ANOVA tables and F-Statistic results.  
+3. Perform residual diagnostics for ANOVA models.  
+4. Conduct Two-Way ANOVA with interaction and interpret main and interaction effects.  
+
+
+# Setup
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+set.seed(2025)
+```
+
+# 1. One-Way ANOVA Practical
+
+## 1.1 Simulate Batting Average Data
+
+Simulate batting averages for three teams (A, B, C), 10 players each.
+
+```{r simulate-batting}
+team_A <- rnorm(10, mean = 0.280, sd = 0.020)
+team_B <- rnorm(10, mean = 0.270, sd = 0.018)
+team_C <- rnorm(10, mean = 0.290, sd = 0.022)
+
+batting_df <- data.frame(
+  average = c(team_A, team_B, team_C),
+  team = factor(rep(c("A", "B", "C"), each = 10))
+)
+
+# Preview data
+head(batting_df)
+```
+
+*Task 1*: Compute group means and the grand mean manually. Show your calculations in R.
+
+
+
+## 1.2 Calculate SSB, SSW, MSB, MSW, and F-Statistic Manually
+
+Use formulas:
+
+- SSB = sum_{j} n_j * (mean_j - grand_mean)^2  
+- SSW = sum_{j,i} (Y_ij - mean_j)^2  
+
+
+
+*Task 2*: Compare your manual F-Statistic to the value from `aov()`.
+
+
+
+## 1.3 Residual Diagnostics
+
+Perform residual diagnostics on the One-Way ANOVA model.
+
+*Task 3*: Evaluate whether ANOVA assumptions (normality, homoscedasticity) hold based on the plots.
+
+## 1.4 Post-Hoc Test: Tukey HSD
+
+Apply Tukey HSD to the ANOVA model.
+
+
+
+*Task 4*: Identify which pairs of teams have significantly different batting averages at $\alpha$ = 0.05.
+
+
+# 2. Two-Way ANOVA Practical
+
+## 2.1 Simulate Batting Data by Team and Order
+
+Simulate batting averages for teams (A, B, C) and batting orders (Top, Middle, Bottom), with 10 observations per combination (balanced design).
+
+```{r simulate-two-way}
+teams <- rep(c("A", "B", "C"), each = 30)
+orders <- rep(rep(c("Top", "Middle", "Bottom"), each = 10), times = 3)
+
+team_effects <- c(A = 0.000, B = -0.005, C = 0.005)
+order_effects <- c(Top = 0.010, Middle = 0.000, Bottom = -0.010)
+
+batting_two_df <- data.frame(
+  average = 0.280 +
+    team_effects[teams] +
+    order_effects[orders] +
+    rnorm(90, mean = 0, sd = 0.015),
+  team = factor(teams),
+  order = factor(orders)
+)
+
+# Preview data
+head(batting_two_df)
+table(batting_two_df$team, batting_two_df$order)
+```
+
+## 2.2 Fit Two-Way ANOVA Model
+
+Fit a Two-Way ANOVA with interaction: `average ~ team * order`.
+
+*Task 5*: Report which main effects (team, order) and the interaction are significant at $\alpha$ = 0.05.
+
+## 2.3 Interaction Plot
+
+Produce an interaction plot to visualize team by order effects.
+
+
+*Task 6*: Interpret the interaction plot. Does the effect of batting order on average depend on the team?
+
+
+# 3. Submission Instructions
+
+- Knit this R Markdown to HTML and submit both the HTML and the `.Rmd` file.  
+- Include answers to Tasks 1-6 in the final document.  
+- For Python code chunks, you may copy them into a `.py` file if needed, but no execution is required.
