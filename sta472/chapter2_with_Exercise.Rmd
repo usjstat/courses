@@ -1,0 +1,357 @@
+
+---
+title: "Chapter 2: Excercises"
+author: "Simplified by Dr. Rajitha M. Silva"
+output: html_document
+---
+
+
+
+## Exercise 2.1: Comparing the Prior and Posterior
+
+**Problem:**  
+For each scenario below, you're given a pair of events, A and B. Explain what you believe to be the relationship between the posterior and prior probabilities of B: \( P(B \mid A) > P(B) \) or \( P(B \mid A) < P(B) \).
+
+**a)**  
+A = You just finished reading Lambda Literary Award-winning author Nicole Dennis-Benn's first novel, and you enjoyed it!  
+B = You will also enjoy Benn's newest novel.  
+**Solution**: \( P(B \mid A) > P(B) \) - Enjoying one book makes it more likely you'll enjoy another by the same author.
+
+**b)**  
+A = It's 0 degrees Fahrenheit in Minnesota on a January day.  
+B = It will be 60 degrees tomorrow.  
+**Solution**: \( P(B \mid A) < P(B) \) - Knowing it's currently extremely cold makes a sudden temperature rise seem less likely.
+
+**c)**  
+A = The authors only got 3 hours of sleep last night.  
+B = The authors make several typos in their writing today.  
+**Solution**: \( P(B \mid A) > P(B) \) - Lack of sleep increases the likelihood of making errors.
+
+**d)**  
+A = Your friend includes three hashtags in their tweet.  
+B = The tweet gets retweeted.  
+**Solution**: \( P(B \mid A) > P(B) \) - Hashtags are known to increase visibility and engagement on social media.
+
+## Exercise 2.2: Marginal, Conditional, or Joint?
+
+**Problem:**  
+Define the following events for a resident of a fictional town:
+- A = drives 10 miles per hour above the speed limit
+- B = gets a speeding ticket
+- C = took statistics at the local college
+- D = has used R
+- E = likes the music of Prince
+- F = is a Minnesotan
+
+Several facts about these events are listed below. Specify each of these facts using probability notation, paying special attention to whether it's a marginal, conditional, or joint probability.
+
+**a)** 73% of people that drive 10 miles per hour above the speed limit get a speeding ticket.  
+**Solution**: Conditional probability - \( P(B \mid A) = 0.73 \)
+
+**b)** 20% of residents drive 10 miles per hour above the speed limit.  
+**Solution**: Marginal probability - \( P(A) = 0.20 \)
+
+**c)** 15% of residents have used R.  
+**Solution**: Marginal probability - \( P(D) = 0.15 \)
+
+**d)** 91% of statistics students at the local college have used R.  
+**Solution**: Conditional probability - \( P(D \mid C) = 0.91 \)
+
+**e)** 38% of residents are Minnesotans that like the music of Prince.  
+**Solution**: Joint probability - \( P(E \cap F) = 0.38 \)
+
+**f)** 95% of the Minnesotan residents like the music of Prince.  
+**Solution**: Conditional probability - \( P(E \mid F) = 0.95 \)
+
+
+
+## Exercise 2.3: Binomial Practice
+
+**Problem:**  
+For each variable \( Y \) below, determine whether \( Y \) is Binomial.  
+If yes, use notation to specify this model and its parameters.  
+If not, explain why the Binomial model is not appropriate for \( Y \).
+
+---
+
+**a)** At a certain hospital, an average of 6 babies are born each hour.  
+Let \( Y \) be the number of babies born between 9 a.m. and 10 a.m. tomorrow.
+
+**Solution:**  
+Not Binomial. This is a count over a continuous time interval, and the number of births is not based on a fixed number of independent trials. It follows a **Poisson distribution** rather than a Binomial.
+
+---
+
+**b)** Tulips planted in fall have a 90% chance of blooming in spring.  
+You plant 27 tulips this year. Let \( Y \) be the number that bloom.
+
+**Solution:**  
+Binomial. Each tulip represents an independent trial with a binary outcome (bloom or not bloom).  
+\[
+Y \sim \text{Bin}(n = 27, \pi = 0.9)
+\]
+
+---
+
+**c)** Each time they try out for the television show *Ru Paul's Drag Race*, Alaska has a 17% probability of succeeding.  
+Let \( Y \) be the number of times Alaska has to try out until they're successful.
+
+**Solution:**  
+Not Binomial. Here, the number of trials is not fixed; we are counting the number of trials until the first success, which follows a **Geometric distribution**.
+
+---
+
+**d)** \( Y \) is the amount of time that Henry is late to your lunch date.
+
+**Solution:**  
+Not Binomial. This is a **continuous** random variable measuring time delay, not a discrete count of successes or failures.
+
+---
+
+**e)** \( Y \) is the probability that your friends will throw you a surprise birthday party even though you said you hate being the center of attention and just want to go out to eat.
+
+**Solution:**  
+Not Binomial. \( Y \) is described as a **probability**, not a count of successes over a set of trials. Thus, the Binomial model is not appropriate.
+
+---
+
+**f)** You invite 60 people to your "?? day" party, none of whom know each other, and each of whom has an 80% chance of showing up.  
+Let \( Y \) be the total number of guests at your party.
+
+**Solution:**  
+Binomial. There are a fixed number of independent trials (60 people), and each trial (whether they show up or not) has a constant probability of success (showing up).
+\[
+Y \sim \text{Bin}(n = 60, \pi = 0.8)
+\]
+
+---
+
+## Exercise 2.4: Practice Bayes' Rule for Events (Vampires?)
+
+**Problem:**  
+Edward is trying to prove to Bella that vampires exist. Bella thinks there is a 0.05 probability that vampires exist. She also believes that the probability that someone can sparkle like a diamond if vampires exist is 0.7, and the probability that someone can sparkle like a diamond if vampires don't exist is 0.03. Edward then goes into a meadow and shows Bella that he can sparkle like a diamond. Given that Edward sparkled like a diamond, what is the probability that vampires exist?
+
+Let:
+- \( A \) = Edward sparkles like a diamond
+- \( B \) = Vampires exist
+
+**Given:**
+- \( P(B) = 0.05 \)
+- \( P(A \mid B) = 0.70 \)
+- \( P(A \mid B^c) = 0.03 \)
+
+**Solution:**  
+We apply Bayes' Rule:
+
+First, compute the marginal probability of sparkling:
+\[
+P(A) = P(A \mid B)P(B) + P(A \mid B^c)P(B^c)
+= (0.70)(0.05) + (0.03)(0.95)
+= 0.035 + 0.0285 = 0.0635
+\]
+
+Now apply Bayes' Rule:
+\[
+P(B \mid A) = \frac{P(B) P(A \mid B)}{P(A)} = \frac{(0.05)(0.70)}{0.0635} = \frac{0.035}{0.0635} \approx 0.5512
+\]
+
+**Interpretation:**  
+Bella's initial belief that vampires exist was 5%. After Edward sparkled, this belief increased to approximately **55.12%**, showing a significant posterior update due to compelling new evidence.
+
+---
+
+## Exercise 2.5: Practice Bayes' Rule for Events (Sick Trees)
+
+**Problem:**  
+A local arboretum contains a variety of tree species, including elms, maples, and others. Unfortunately, 18% of all trees in the arboretum are infected with mold. Among the infected trees:
+- 15% are elms
+- 80% are maples
+- 5% are other species
+
+Among the uninfected trees:
+- 20% are elms
+- 10% are maples
+- 70% are other species
+
+In monitoring the spread of mold, an arboretum employee randomly selects a tree to test.
+
+---
+
+**a)** What's the prior probability that the selected tree has mold?
+
+**Solution:**  
+The prior probability is given:  
+\[
+P(M) = 0.18
+\]
+
+---
+
+**b)** The tree happens to be a maple. What's the probability that the employee would have selected a maple?
+
+**Solution:**  
+Use the law of total probability:
+\[
+P(Maple) = P(Maple \mid Mold)P(Mold) + P(Maple \mid No\ Mold)P(No\ Mold)
+\]
+\[
+= (0.80)(0.18) + (0.10)(0.82) = 0.144 + 0.082 = 0.226
+\]
+
+---
+
+**c)** What's the posterior probability that the selected maple tree has mold?
+
+**Solution:**  
+Apply Bayes' Rule:
+\[
+P(Mold \mid Maple) = \frac{P(Mold) P(Maple \mid Mold)}{P(Maple)} = \frac{0.18 \times 0.80}{0.226} = \frac{0.144}{0.226} \approx 0.6372
+\]
+
+---
+
+**d)** Compare the prior and posterior probability of the tree having mold. How did your understanding change in light of the fact that the tree is a maple?
+
+**Interpretation:**  
+The prior probability of mold was 18%. Upon learning the tree is a maple, the posterior probability jumps to approximately **63.72%**. This substantial increase highlights how additional information (tree species) can significantly update our beliefs using Bayes' Rule.
+
+---
+
+## Exercise 2.13: Lactose Intolerant
+
+**Problem:**  
+Lactose intolerance is an inability to digest milk, often resulting in an upset stomach. Fatima wants to learn more about the proportion of adults who are lactose intolerant, \( \pi \). Her prior model for \( \pi \) is:
+
+<div style="text-align:center">
+
+| \(\pi\) | 0.4 | 0.5 | 0.6 | 0.7 | Total |
+|:-------:|:---:|:---:|:---:|:---:|:------:|
+| \(f(\pi)\) | 0.10 | 0.20 | 0.44 | 0.26 | 1.00 |
+
+</div>
+
+---
+
+**a)** Fatima surveys a random sample of 80 adults and 47 are lactose intolerant. Without doing any math, make a guess at the posterior model of \( \pi \), and explain your reasoning.
+
+**Solution:**  
+The sample proportion is \( 47 / 80 = 0.5875 \), which is closest to \( \pi = 0.6 \). So we expect the posterior distribution to place the highest probability mass at \( \pi = 0.6 \), slightly more than in the prior. The weight for \( \pi = 0.5 \) will likely decrease, and that for \( \pi = 0.7 \) may also increase slightly.
+
+---
+
+**b)** Calculate the posterior model. How does this compare to your guess in part a?
+
+**Solution:**  
+Use the binomial likelihood:
+\[
+L(\pi) = \binom{80}{47} \pi^{47} (1 - \pi)^{33} \quad \text{(common constant omitted for proportionality)}
+\]
+
+**R Code:**
+```r
+pi_vals <- c(0.4, 0.5, 0.6, 0.7)
+prior <- c(0.10, 0.20, 0.44, 0.26)
+likelihood <- dbinom(47, size = 80, prob = pi_vals)
+posterior <- prior * likelihood
+posterior <- posterior / sum(posterior)
+round(posterior, 4)
+```
+
+**Python Code:**
+```python
+import numpy as np
+from scipy.stats import binom
+
+pi_vals = np.array([0.4, 0.5, 0.6, 0.7])
+prior = np.array([0.10, 0.20, 0.44, 0.26])
+likelihood = binom.pmf(47, 80, pi_vals)
+posterior = prior * likelihood
+posterior = posterior / np.sum(posterior)
+np.round(posterior, 4)
+```
+
+**Result:**  
+The posterior distribution is more concentrated near \( \pi = 0.6 \), confirming our expectations.
+
+---
+
+**c)** If Fatima had instead collected a sample of 800 adults and 470 (keeping the sample proportion the same as above) are lactose intolerant, how does that change the posterior model?
+
+**Solution:**  
+Repeating the process with a larger sample size:
+
+**R Code:**
+```r
+likelihood_big <- dbinom(470, size = 800, prob = pi_vals)
+posterior_big <- prior * likelihood_big
+posterior_big <- posterior_big / sum(posterior_big)
+round(posterior_big, 4)
+```
+
+**Python Code:**
+```python
+likelihood_big = binom.pmf(470, 800, pi_vals)
+posterior_big = prior * likelihood_big
+posterior_big = posterior_big / np.sum(posterior_big)
+np.round(posterior_big, 4)
+```
+
+**Interpretation:**  
+With a much larger sample, the posterior distribution becomes sharper (more peaked) around \( \pi = 0.6 \), reflecting greater confidence in that estimate. The variance of the posterior shrinks with more data.
+
+---
+
+## Exercise 2.18: Lactose Intolerant Redux
+
+**Problem:**  
+Repeat Exercise 2.13 using simulation to approximate the posterior model of \( \pi \) corresponding to Fatima's survey data. Specifically, simulate data for 10,000 people and remember to set your random number seed.
+
+---
+
+**Solution using R:**
+```r
+set.seed(2024)
+pi_vals <- c(0.4, 0.5, 0.6, 0.7)
+prior_probs <- c(0.10, 0.20, 0.44, 0.26)
+
+# Simulate 10,000 values of pi from prior
+sim_pi <- sample(pi_vals, size = 10000, replace = TRUE, prob = prior_probs)
+
+# Simulate number of lactose intolerant people in sample of size 80
+sim_y <- rbinom(n = 10000, size = 80, prob = sim_pi)
+
+# Keep those that resulted in y = 47
+sim_pi_given_y47 <- sim_pi[sim_y == 47]
+
+# Estimate posterior from simulation
+sim_posterior <- table(sim_pi_given_y47) / length(sim_pi_given_y47)
+round(sim_posterior, 4)
+```
+
+**Solution using Python:**
+```python
+import numpy as np
+np.random.seed(2024)
+
+pi_vals = np.array([0.4, 0.5, 0.6, 0.7])
+prior_probs = np.array([0.10, 0.20, 0.44, 0.26])
+
+# Simulate 10,000 values of pi from the prior
+sim_pi = np.random.choice(pi_vals, size=10000, p=prior_probs)
+
+# Simulate number of lactose intolerant people in sample of size 80
+sim_y = np.random.binomial(n=80, p=sim_pi)
+
+# Filter for y == 47
+sim_pi_given_y47 = sim_pi[sim_y == 47]
+
+# Posterior estimation from simulation
+(unique, counts) = np.unique(sim_pi_given_y47, return_counts=True)
+posterior_sim = dict(zip(unique, np.round(counts / counts.sum(), 4)))
+posterior_sim
+```
+
+**Interpretation:**  
+The simulated posterior model closely matches the analytical one from Exercise 2.13b. Simulation provides a flexible way to approximate posterior distributions when analytical solutions are complex or unavailable.
+
+---

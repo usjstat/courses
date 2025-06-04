@@ -1,0 +1,196 @@
+---
+title: "Chapter 4: Balance and Sequentiality in Bayesian Analyses"
+author: "Simplified by Dr. Rajitha M. Silva"
+output: html_document
+---
+
+## Introduction
+
+Bayesian analysis provides a structured method for updating beliefs in the light of new evidence. This chapter investigates how the choice of prior distributions, the nature of incoming data, and the sequence of updates influence the resulting posterior distributions. Key themes include prior sensitivity, data accumulation, sequential updating, and the invariance of Bayesian posteriors to data order.
+
+We begin with a motivating scenario inspired by the Bechdel test: three friends (Feminist, Clueless, and Optimist) assess whether movies pass the test. Each has a different prior belief about the proportion of passing films, and all observe the same data — leading to different posteriors. Similarly, in sports, stakeholders (e.g., fans, coaches, scouts) often start with different beliefs about an athlete’s ability, which they update as new performance data accumulates.
+
+---
+
+## 4.1 Different Priors, Different Posteriors
+
+### Scenario: Bechdel Test
+
+- **Feminist** prior: \( \pi \sim \text{Beta}(5, 11) \)
+- **Clueless** prior: \( \pi \sim \text{Beta}(1, 1) \)
+- **Optimist** prior: \( \pi \sim \text{Beta}(14, 1) \)
+- Data: 12 out of 20 movies pass the Bechdel test
+
+```{r echo=TRUE, include=TRUE}
+library(bayesrules)
+library(tidyverse)
+
+plot_beta_binomial(alpha = 5, beta = 11, y = 12, n = 20)
+plot_beta_binomial(alpha = 1, beta = 1, y = 12, n = 20)
+plot_beta_binomial(alpha = 14, beta = 1, y = 12, n = 20)
+```
+
+---
+
+## 4.2 Different Data, Different Posteriors
+
+With the same prior (Optimist: Beta(14,1)), different datasets produce different posteriors:
+
+- Morteza: 6/13
+- Nadide: 29/63
+- Ursula: 46/99
+
+```{r}
+plot_beta_binomial(alpha = 14, beta = 1, y = 6, n = 13)
+plot_beta_binomial(alpha = 14, beta = 1, y = 29, n = 63)
+plot_beta_binomial(alpha = 14, beta = 1, y = 46, n = 99)
+```
+
+---
+
+## 4.3 Striking a Balance Between the Prior and the Data
+
+### 4.3.1 Connecting Observations to Concepts
+
+This section examines how the weight of the data affects the posterior. As more data accumulate, the influence of the prior diminishes.
+
+```{r}
+# Plot updates for each dataset sequentially
+plot_beta_binomial(alpha = 14, beta = 1, y = 6, n = 13)
+plot_beta_binomial(alpha = 14, beta = 1, y = 29, n = 63)
+plot_beta_binomial(alpha = 14, beta = 1, y = 46, n = 99)
+```
+
+### 4.3.2 Connecting Concepts to Theory
+
+Posterior mean can be viewed as a weighted average:
+
+\[ E(\pi | y) = w_1 E(\pi) + w_2 \frac{y}{n} \]
+
+where:
+- \( w_1 = \frac{\alpha + \beta}{\alpha + \beta + n} \)
+- \( w_2 = \frac{n}{\alpha + \beta + n} \)
+
+---
+
+## 4.4 Sequential Analysis: Evolving with Data
+
+Simulate Bayesian updating as new games are played:
+
+```{r}
+y <- c(1, 4, 5)
+n <- c(10, 5, 10)
+alpha <- 1
+beta <- 1
+
+for (i in 1:length(y)) {
+  print(summarize_beta_binomial(alpha, beta, y[i], n[i]))
+  alpha <- alpha + y[i]
+  beta <- beta + n[i] - y[i]
+}
+```
+
+---
+
+## 4.5 Proving Data Order Invariance
+
+Bayesian posteriors are invariant to the order in which data are observed. Whether data are updated in parts or all at once, the final posterior will be the same.
+
+```{r}
+# Sequential update
+post1 <- summarize_beta_binomial(1, 1, 4, 10)
+post2 <- summarize_beta_binomial(post1$alpha, post1$beta, 5, 10)
+
+# Single update
+post_total <- summarize_beta_binomial(1, 1, 9, 20)
+
+# Verify equivalence
+identical(post2, post_total)
+```
+
+---
+
+## 4.6 Don’t Be Stubborn
+
+Chapter 4 highlights one of the most compelling aspects of the Bayesian philosophy: **it allows beliefs to evolve with evidence**. However, this benefit can be entirely lost if a prior distribution is *too stubborn* — that is, if it assigns zero probability to plausible outcomes.
+
+### Scenario: Milgram Study with a Stubborn Prior
+Let \( \pi \) represent the proportion of people who obey authority even when it causes harm. A researcher, strongly believing in humanity’s goodness, insists that \( \pi \leq 0.25 \), and expresses this belief as:
+
+\[ \pi \sim \text{Unif}(0, 0.25) \]
+
+This implies a prior density function:
+
+\[ f(\pi) = 4 \text{ for } \pi \in [0, 0.25], \text{ and } f(\pi) = 0 \text{ otherwise} \]
+
+Suppose the researcher observes that 8 out of 10 participants administer the shock (\( Y = 8, n = 10 \)).
+
+### Problem:
+Despite this strong evidence suggesting \( \pi > 0.25 \), the researcher’s prior *completely rules out* any values greater than 0.25. Therefore, the posterior remains confined to \( [0, 0.25] \), and the belief fails to adjust appropriately.
+
+### Posterior Calculation:
+Bayes’ theorem yields:
+
+\[ f(\pi \mid y = 8) \propto f(\pi) \cdot L(\pi \mid y = 8) = 4 \cdot \binom{10}{8} \pi^8 (1 - \pi)^2 \text{ for } \pi \in [0, 0.25] \]
+
+Outside this interval, the posterior is zero:
+
+\[ f(\pi \mid y = 8) = 0 \quad \text{for } \pi \notin [0, 0.25] \]
+
+### R Code Visualization:
+```{r}
+curve(4 * dbinom(8, size = 10, prob = x), from = 0, to = 0.25, n = 1000, lwd = 2,
+      ylab = "Posterior Density", xlab = expression(pi), main = "Posterior under Stubborn Prior")
+abline(v = 0.25, col = "red", lty = 2)
+```
+
+### Key Insight:
+> "The support of the posterior is inherited from the prior."
+
+No matter how compelling the evidence, if the prior assigns zero probability to certain outcomes, the posterior will also assign zero probability there. Even a billion observations will not override such a prior.
+
+
+This example underscores the importance of **choosing flexible priors**. Priors should reflect genuine belief but also allow for learning. To benefit from Bayesian inference, **don’t be stubborn**.
+
+---
+
+
+## 4.7 A Note on Subjectivity
+
+Subjectivity in prior beliefs is not a flaw but a feature of Bayesian inference. Being transparent about prior assumptions helps interpret the posterior properly.
+
+---
+
+## 4.8 Chapter Summary
+
+- Different priors yield different posteriors
+- More data reduce prior influence
+- Bayesian updating can be done sequentially
+- Final results are invariant to the order of data
+- Subjectivity in priors is acknowledged, not ignored
+
+---
+
+## 4.9 (My addition) Why Bayesian with Big Data?
+
+A common misconception is that Bayesian inference becomes unnecessary when datasets are large. While it's true that the influence of the prior diminishes with more data, this chapter shows that Bayesian methods offer critical advantages even in large-scale settings:
+
+### 1. Early-Stage Inference
+Bayesian priors help make sensible inferences even when data is still accumulating. In sports, early-season performance stats benefit from prior knowledge—say, about a player’s past seasons.
+
+### 2. Natural for Sequential Updates
+As shown in Section 4.4, Bayesian methods allow seamless incorporation of new data without needing to reprocess the entire dataset. This is particularly valuable in streaming data environments like wearable sports trackers.
+
+### 3. Order-Invariance as a Strength
+Section 4.5 confirms that Bayesian posteriors are consistent regardless of the data order. This property enhances robustness and reproducibility in large datasets arriving out-of-order.
+
+### 4. Full Uncertainty Quantification
+Bayesian inference produces a full posterior distribution, not just a point estimate. This enables nuanced decision-making—like evaluating the probability that a player’s shooting accuracy exceeds a benchmark.
+
+### 5. Handling Redundant or Biased Data
+Even with large datasets, Bayesian priors can temper the influence of outliers or overrepresented segments—providing a regularizing effect, especially when prior skepticism is warranted (as in Section 4.6).
+
+### 6. Transparency and Interpretability
+Bayesian models make assumptions explicit through priors, fostering transparency and reproducibility—important qualities in academic, medical, and sports analytics settings.
+
+Thus, Bayesian thinking enhances rather than diminishes in the big data era.
