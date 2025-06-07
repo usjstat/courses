@@ -35,23 +35,23 @@ Let $E$ be an event. Using the axioms of probability, show that $\text{Pr}(E) \l
 
 <summary><strong>Solution</strong></summary>
 
-Let $E \subseteq S$. The complement of $E$, denoted $E'$, is the set of outcomes in $S$ that are not in $E$.\
+Let $E \subseteq S$. The complement of $E$, denoted $E^c$, is the set of outcomes in $S$ that are not in $E$.\
 Using event operations, this can be expressed as:
 
 $$
-E' = S \cap E^c
+E^c = S \cap E^c
 $$
 
 Note:
 
-\- $E \cap E' = \emptyset$, so $E$ and $E'$ are **mutually exclusive**.
+\- $E \cap E^c = \emptyset$, so $E$ and $E^c$ are **mutually exclusive**.
 
-\- $E \cup E' = S$
+\- $E \cup E^c = S$
 
 By **Axiom 3** (additivity for mutually exclusive events):
 
 $$
-\text{Pr}(E \cup E') = \text{Pr}(E) + \text{Pr}(E')
+\text{Pr}(E \cup E^c) = \text{Pr}(E) + \text{Pr}(E^c)
 $$
 
 By **Axiom 2**:
@@ -63,7 +63,7 @@ $$
 Therefore:
 
 $$
-\text{Pr}(E) + \text{Pr}(E') = 1 \Rightarrow \text{Pr}(E) = 1 - \text{Pr}(E') \leq 1
+\text{Pr}(E) + \text{Pr}(E^c) = 1 \Rightarrow \text{Pr}(E) = 1 - \text{Pr}(E^c) \leq 1
 $$
 
 </details>
