@@ -47,7 +47,7 @@ All the lecture notes are based on the book named "[Bayes Rules! An Introduction
 
 -   [Chapter 4: Balance and Sequentiality in Bayesian Analyses](chapter4.html)
 
--   [Chapter 6: Approximating the Posterior](chapter6.html)
+-   [Chapter 6: Approximating the Posterior](Chapter6.html)
 
 ------------------------------------------------------------------------
 

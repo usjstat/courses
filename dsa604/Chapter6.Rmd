@@ -6,14 +6,6 @@ author: "Dr. Rajitha M. Silva"
 output: html_document
 ---
 
----
-title: "Unit 2: Bayesian Computation - Grid Approximation and MCMC"
-author: "Dr. Rajitha M. Silva"
-output:
-  html_document:
-    number_sections: true
-    theme: readable
----
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
