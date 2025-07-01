@@ -1,0 +1,480 @@
+---
+title: "STA 1142 - Probability and Distribution Theory I: Week 7"
+author: "Dr. Rajitha M. Silva"
+output: html_document
+---
+
+
+# 2 Random Variables
+
+Random‐variable notation allows us to convert *qualitative* experimental outcomes into *quantitative* objects that can be analysed with algebra and calculus.  
+ 
+
+This numerical translation enables us to
+
+* **summarise** data with means, variances, and other moments;  
+* **derive** probability laws such as the binomial, Poisson, or normal distributions; and  
+* **model** real-world uncertainty in fields ranging from finance and engineering to biology and sport.
+
+Throughout this section we will encounter two broad families:
+
+1. **Discrete random variables**, whose ranges are *countable* (e.g., the number of heads in three coin tosses);  
+2. **Continuous random variables**, whose ranges contain uncountably many values (e.g., the lifetime of a light bulb measured in hours).
+
+
+**Definition 2.1**  
+
+A *random variable* (r.v.) is a function  
+\[
+X:\;S \longrightarrow \mathbb{R},
+\]  
+where $S$ is the sample space of an experiment and $\mathbb{R}$ is the set of real numbers.  
+A random variable assigns a real number to each outcome $\omega \in S$. This allows us to quantify outcomes in order to analyze probabilities, distributions, and summaries.
+
+
+### **Experiment**
+
+
+Toss a (possibly biased) coin **three times** and observe the face-up outcome each time.  
+Let the event of interest be the observation of a head (H) on any given toss.  
+Denote the probability of observing a head by
+\[
+\theta = \Pr(\text{Head}).
+\]
+
+The sample space is:
+\[
+S = \{hhh, hht, hth, htt, thh, tht, tth, ttt\}.
+\]
+
+Let
+\[
+X(\omega) = \text{number of heads in } \omega, \quad \omega \in S.
+\]
+Then $X: S \rightarrow \{0, 1, 2, 3\}$ is a discrete random variable.
+
+---
+
+### **Events in terms of $X$**
+
+Then, the above events can be written in terms of $X$ as follows:
+
+\[
+\begin{aligned}
+H_0 &= \{\omega \in S \mid X(\omega) = 0\} \\
+H_1 &= \{\omega \in S \mid X(\omega) = 1\} \\
+H_2 &= \{\omega \in S \mid X(\omega) = 2\} \\
+H_3 &= \{\omega \in S \mid X(\omega) = 3\} \\
+H_4 &= \{\omega \in S \mid X(\omega) > 1\}
+\end{aligned}
+\]
+
+Hence, we can write the probabilities of these events as:
+
+\[
+\begin{aligned}
+\Pr(\{\omega \in S \mid X(\omega) = 0\}) &= (1 - \theta)^3 \\
+\Pr(\{\omega \in S \mid X(\omega) = 1\}) &= 3\theta(1 - \theta)^2 \\
+\Pr(\{\omega \in S \mid X(\omega) = 2\}) &= 3\theta^2(1 - \theta) \\
+\Pr(\{\omega \in S \mid X(\omega) = 3\}) &= \theta^3 \\
+\Pr(\{\omega \in S \mid X(\omega) > 1\}) &= 3\theta^2(1 - \theta) + \theta^3
+\end{aligned}
+\]
+
+---
+
+### **Simplified Notation Using $X$**
+
+For convenience, we often omit writing $\omega$ and simply use the shorthand:
+
+\[
+\begin{aligned}
+\Pr(X = 0) &= (1 - \theta)^3 \\
+\Pr(X = 1) &= 3\theta(1 - \theta)^2 \\
+\Pr(X = 2) &= 3\theta^2(1 - \theta) \\
+\Pr(X = 3) &= \theta^3 \\
+\Pr(X > 1) &= 3\theta^2(1 - \theta) + \theta^3
+\end{aligned}
+\]
+
+The first four probabilities follow the **binomial distribution**:
+
+\[
+\Pr(X = x) = \binom{3}{x} \theta^x (1 - \theta)^{3 - x}, \quad x = 0,1,2,3.
+\]
+
+---
+
+### **Redefinition of $X$ (Omitting ω)**
+
+In practice, we redefine $X$ more intuitively as:
+\[
+X = \text{the number of heads in three tosses}.
+\]
+
+This form omits explicit reference to $\omega$, but the mapping from sample points to numerical outcomes is preserved.
+
+
+---
+
+
+### **Experiment**
+
+Consider the experiment of measuring the **lifetime (in hours)** of a randomly selected bulb of a certain kind.
+
+The sample space is:
+\[
+S = \{\omega \in \mathbb{R} : \omega \ge 0\}.
+\]
+Each sample point $\omega$ corresponds to the observed lifetime of a bulb.
+
+---
+
+### **Defining the Random Variable**
+
+Let  
+\[
+T(\omega) = \omega, \quad \omega \in S,
+\]
+where $T$ is a random variable representing the **lifetime of a randomly selected bulb (in hours)**.
+
+Thus, $T$ maps the sample point (i.e., observed outcome) directly to a numerical value of lifetime.
+
+---
+
+### **Describing Events in terms of the Random Variable**
+
+We define the following events in terms of the random variable $T$:
+
+- $E = \text{the event that the lifetime is exactly 1000 hours}$  
+- $F = \text{the event that the lifetime is less than 300 hours}$
+
+These can be expressed as:
+
+\[
+\begin{aligned}
+E &= \{\omega \in S \mid T(\omega) = 1000\} \\
+F &= \{\omega \in S \mid T(\omega) < 300\}
+\end{aligned}
+\]
+
+Letting  
+\[
+T = \text{Lifetime of a randomly selected bulb in hours},
+\]  
+we denote the probabilities of these events as:
+
+\[
+\begin{aligned}
+\Pr(E) &= \Pr(T = 1000) \\
+\Pr(F) &= \Pr(T < 300)
+\end{aligned}
+\]
+
+---
+
+### **Discussion**
+
+- $T$ is a **continuous random variable** defined on $[0, \infty)$.
+- In practical modeling, one may assume that $T \sim \text{Exponential}(\lambda)$ or follows another lifetime distribution such as Weibull or Gamma.
+- For continuous distributions, $\Pr(T = 1000) = 0$ exactly. However, $\Pr(T < 300)$ may be computed via integration or using the cumulative distribution function (CDF) of $T$.
+
+---
+
+
+## Activity 2.1
+
+Consider the biased coin example.
+
+1. Write down the event $A = \{X \geq 2\}$ using sample points from the sample space $S$.
+
+
+2. Express the event $B = \{X \text{ is even}\}$ in set-builder notation.
+
+
+3. Compute $\Pr(X > 1)$ for $\theta = 0.4$ using the binomial formula.
+
+
+4. Simulate 10,000 coin tosses (3 at a time) in R for $\theta = 0.3$ and estimate $\Pr(X = 1)$.
+
+
+5. Prove that $\sum_{x = 0}^{3} \Pr(X = x) = 1$ algebraically.'
+
+---
+
+
+## Types of Random Variables
+
+There are two types of random variables:
+
+- **Discrete random variables**
+- **Continuous random variables**
+
+---
+
+## 2.1 Discrete Random Variables and Probability Mass Function (pmf)
+
+**Definition 2.2**
+
+A random variable with a **countable range** is called a **discrete random variable**.
+
+---
+
+**Definition 2.3**
+
+The **probability mass function (pmf)** of a discrete random variable \( X \) is the function \( P_X \) defined as:
+
+\[
+P_X(x) = \Pr(X = x), \quad x \in \mathbb{R}
+\]
+
+---
+
+### The Probability Mass Function
+
+The **probability mass function (pmf)** of a discrete random variable \( X \) specifies the probability associated with each individual value in the range of \( X \).
+
+---
+
+### Example 2.3
+
+Consider **Example 2.1**. Let \( X \) be the number of heads observed in 3 tosses of a (possibly biased) coin, where \( \theta = \Pr(\text{Head}) \).
+
+Then, the pmf of \( X \) is given by:
+
+\[
+P_X(0) = (1 - \theta)^3
+\]
+\[
+P_X(1) = 3\theta(1 - \theta)^2
+\]
+\[
+P_X(2) = 3\theta^2(1 - \theta)
+\]
+\[
+P_X(3) = \theta^3
+\]
+\[
+P_X(x) = 0, \quad \text{if } x \notin \{0, 1, 2, 3\}
+\]
+
+---
+
+We can write this compactly using a piecewise definition:
+
+\[
+P_X(x) =
+\begin{cases}
+(1 - \theta)^3 & \text{if } x = 0 \\
+3\theta(1 - \theta)^2 & \text{if } x = 1 \\
+3\theta^2(1 - \theta) & \text{if } x = 2 \\
+\theta^3 & \text{if } x = 3 \\
+0 & \text{otherwise}
+\end{cases}
+\]
+
+Or, using the binomial form:
+
+\[
+P_X(x) = 
+\begin{cases}
+\binom{3}{x} \theta^x (1 - \theta)^{3 - x} & \text{for } x = 0, 1, 2, 3 \\
+0 & \text{otherwise}
+\end{cases}
+\]
+
+Or, simply:
+
+\[
+P_X(x) = \binom{3}{x} \theta^x (1 - \theta)^{3 - x}, \quad x = 0, 1, 2, 3
+\]
+
+---
+
+
+
+
+
+## Activity 2.2
+
+A (possibly biased) coin is tossed **repeatedly and independently** until the first Head (H) appears.  
+Let the probability of Head on any single toss be \( \theta \in (0,1) \).
+
+Define a random variable:
+
+\[
+X = \text{the number of tosses until the first Head appears}
+\]
+
+
+
+1. Write down the sample space \( S \) of this experiment using lowercase sample points.
+
+2. Express the following events in terms of \( X \):
+   - \( A = \{\text{first head appears on the 3rd toss} \} \)
+   - \( B = \{\text{at most two tosses are needed} \} \)
+   - \( C = \{\text{more than four tosses are needed} \} \)
+
+3. Derive the probability mass function (pmf) of \( X \) and identify the distribution it follows.
+
+4. For \( \theta = 0.3 \), compute:
+   - \( \Pr(X = 3) \)
+   - \( \Pr(X \leq 2) \)
+   - \( \Pr(X > 4) \)
+
+5. Simulate 10,000 repetitions of this process in R for \( \theta = 0.3 \). Plot the histogram of observed values of \( X \), and estimate the mean. Compare this to the theoretical expectation of the distribution.
+
+6. Discuss the memoryless property of this distribution. Explain why this model is appropriate for "waiting time until first success" situations in real-world applications (e.g., server failures, quality control).
+
+
+
+## Activity 2.3
+
+A curd vendor, based on a large number of sales, has observed the following purchasing
+behaviour:
+
+<div style="text-align:center">
+
+| Containers bought | Proportion of customers |
+|-------------------|-------------------------|
+| 1                 | 70 % |
+| 2                 | 15 % |
+| 3                 | 10 % |
+| 4                 | 5 % |
+
+</div>
+
+
+
+
+1. Let \(X\) be the **number of containers** bought by a randomly chosen customer.  
+   - Write down the probability-mass function (pmf) of \(X\).
+
+2. Let \(Y\) be the **number of customers observed until (and including) the first customer who buys 4 containers** on a given day.  
+   - Derive the pmf \(P_Y(y)\) of \(Y\).
+
+---
+
+
+
+## Properties of a Probability Mass Function (pmf)
+
+Let \( X \) be a discrete random variable with probability mass function \( P_X(x) = \Pr(X = x) \).
+
+Then the following properties hold:
+
+---
+
+### 1. Non-negativity and boundedness
+
+\[
+\boxed{0 \leq P_X(x) \leq 1, \quad \text{for all } x \in \mathbb{R}}
+\]
+
+**Explanation:**  
+A pmf assigns probabilities to values taken by a discrete random variable. Since probabilities cannot be negative or greater than 1, this inequality must always be satisfied.  
+This follows from the **axioms of probability**:
+- Probabilities are never negative.
+- No single event can have a probability greater than 1.
+
+**Example:**  
+In a fair die roll,
+\[
+P_X(x) = \frac{1}{6}, \quad x = 1, 2, 3, 4, 5, 6
+\]
+Here, each value satisfies \( 0 \leq \frac{1}{6} \leq 1 \).
+
+---
+
+### 2. Computing Probabilities of Events
+
+Let \(E \subseteq \Omega\) be an event in the underlying sample space.  
+Map this event into the **value space** of the random variable \(X\) by defining  
+
+\[
+\varepsilon \;=\; X(E) \;=\; \{\,x \in \mathbb{R} \mid X(\omega)=x \text{ for some } \omega \in E\,\}.
+\]
+
+Because the pmf \(P_X(x)=\Pr(X=x)\) is defined only on numerical values, the probability of the original event \(E\) is obtained by summing these point-masses over all values in \(\varepsilon\):
+
+\[
+\boxed{\;
+\Pr(E) \;=\; \sum_{x \in \varepsilon} P_X(x)
+\;}
+\]
+
+#### Explanation  
+1. **Outcome layer**: \(E\) is a subset of outcomes in \(\Omega\).  
+2. **Value layer**: \(\varepsilon\) is the set of numbers those outcomes produce through \(X\).  
+3. Summing \(P_X(x)\) over \(\varepsilon\) aggregates the total probability assigned to every outcome in \(E\).
+
+#### Example  
+Let \(X\) be the number of heads in three coin tosses.  
+Take the event
+
+\[
+E = \{X \ge 2\}.
+\]
+
+Its image in value space is  
+
+\[
+\varepsilon = \{2,3\}.
+\]
+
+Hence
+
+\[
+\Pr(E) = P_X(2) + P_X(3).
+\]
+
+---
+
+
+### 3. Total Probability Over the Range of a Discrete Random Variable
+
+Let \( S = \Omega \) be the sample space of the original experiment.  
+Define  
+
+\[
+\mathcal{S} = X(S) = \left\{\,x \in \mathbb{R} \;\middle|\; X(\omega) = x \text{ for some } \omega \in S \right\}
+\]
+
+That is, \( \mathcal{S} \) denotes the **range** (or image) of the random variable \( X \), i.e., the set of all values \( X \) can take.
+
+Then, the total probability assigned by the pmf over the entire range of \( X \) is:
+
+\[
+\boxed{\;\sum_{x \in \mathcal{S}} P_X(x) = 1\;}
+\]
+
+---
+
+#### Explanation  
+Since some outcome from the sample space \( S \) must occur, and \( X \) maps each outcome to an element in \( \mathcal{S} \), the **sum of all probability masses across \( \mathcal{S} \)** must equal 1.
+
+This property guarantees that the probability measure induced by \( X \) is valid — it distributes total mass 1 over the values in its support.
+
+---
+
+#### Example  
+Let \( X \) take values \( \{0, 1, 2, 3\} \), with
+
+\[
+P_X(0) = 0.1, \quad P_X(1) = 0.2, \quad P_X(2) = 0.4, \quad P_X(3) = 0.3
+\]
+
+Then the range of \( X \) is  
+\[
+\mathcal{S} = \{0, 1, 2, 3\}
+\]
+
+and the total probability is
+
+\[
+\sum_{x \in \mathcal{S}} P_X(x) = 0.1 + 0.2 + 0.4 + 0.3 = 1.
+\]
+
+Thus, the pmf satisfies the total probability condition.
+
+---
