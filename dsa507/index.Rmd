@@ -80,6 +80,9 @@ For supplementary learning and revision, please refer to the following YouTube p
 - [Week7: Chi-Square Test ](chapter3_five.html)
    -   [Practical: chi square test](practical_chi_square_test.html)
   
+- Week8: Non-parametric Tests 
+
+-   [Week9: Multi-Arm Bandit Algorithm](week9.html)
 
 ------------------------------------------------------------------------
 
