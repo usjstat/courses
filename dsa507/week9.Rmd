@@ -138,39 +138,65 @@ Thompson Sampling is a **Bayesian approach** that naturally balances exploration
 
 ```{r thompson-sampling, warning=FALSE}
 # Thompson Sampling (Bayesian Bandit)
+#--- 1. Setup historical data and priors -----------------------
 
-set.seed(123)
-arms <- c("A", "B", "C")
-true_probs <- c(A = 0.2, B = 0.05, C = 0.08)
-n_sim <- 1000
+# Arms and historical outcomes:
+arms   <- c("A","B","C")              # A: Aggressive L-R, B: Two anchors, C: Explosive+Inexperienced
+wins   <- c(A = 10, B = 2,  C = 4)
+trials <- c(A = 50, B = 50, C = 50)
+fails  <- trials - wins
 
-# Initialize Beta priors
-a <- c(A = 1, B = 1, C = 1)
-b <- c(A = 1, B = 1, C = 1)
+# Prior hyperparameters (Beta(?????, ?????)):
+alpha0 <- 1    # non-informative; set higher ??0 to express stronger prior belief in "success"
+beta0  <- 1    # non-informative; set higher ??0 to express stronger prior belief in "failure"
 
-wins_ts <- c(A = 0, B = 0, C = 0)
-trials_ts <- c(A = 0, B = 0, C = 0)
+# Posterior parameters after ingesting historical data:
+alpha <- wins + alpha0
+beta  <- fails + beta0
 
-for (i in 1:n_sim) {
-  sampled_probs <- sapply(arms, function(arm) rbeta(1, a[arm], b[arm]))
-  arm <- names(which.max(sampled_probs))
+# (Optional) "True" underlying win-rates for simulation purposes
+p_true <- wins / trials    # e.g. A???0.20, B???0.04, C???0.08
+
+#--- 2. Thompson Sampling function ------------------------------
+
+thompson_sampling <- function(alpha, beta, p_true, n_rounds = 500) {
+  K <- length(alpha)
+  chosen_arm <- integer(n_rounds)
+  reward     <- integer(n_rounds)
   
-  # Simulate outcome from true success probability
-  result <- rbinom(1, 1, true_probs[arm])
+  for (t in seq_len(n_rounds)) {
+    # 2.1 Sample a theta for each arm from its Beta posterior
+    thetas <- rbeta(K, alpha, beta)
+    
+    # 2.2 Select the arm with the highest sampled theta
+    arm_idx <- which.max(thetas)
+    
+    # 2.3 "Play" that arm and observe a Bernoulli outcome
+    #     Here we simulate using p_true; in real use you'd replace this with your actual observation
+    r <- rbinom(1, size = 1, prob = p_true[arm_idx])
+    
+    # 2.4 Update that arm's posterior
+    alpha[arm_idx] <- alpha[arm_idx] + r
+    beta[ arm_idx] <- beta[ arm_idx] + (1 - r)
+    
+    # 2.5 Record results
+    chosen_arm[t] <- arm_idx
+    reward[t]     <- r
+  }
   
-  # Update Beta posterior
-  a[arm] <- a[arm] + result
-  b[arm] <- b[arm] + (1 - result)
-  
-  # Track stats
-  trials_ts[arm] <- trials_ts[arm] + 1
-  wins_ts[arm] <- wins_ts[arm] + result
+  list(
+    chosen_arm   = chosen_arm,
+    reward       = reward,
+    final_alpha  = alpha,
+    final_beta   = beta
+  )
 }
 
-# Plot results
-barplot(wins_ts, main = "Total Wins per Opening Pair (Thompson Sampling)", col = "darkgreen")
 
 ```
+
+
+
 
 ### Student Activity:
 
