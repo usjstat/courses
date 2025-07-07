@@ -7,7 +7,7 @@ output: html_document
 
 # 2 Random Variables
 
-Random‐variable notation allows us to convert *qualitative* experimental outcomes into *quantitative* objects that can be analysed with algebra and calculus.  
+A random variable provides a convenient and systematic way to represent outcomes of a random experiment as real numbers. It allows us to re-express any event of interest numerically, which greatly simplifies the process of calculating probabilities.
  
 
 This numerical translation enables us to
