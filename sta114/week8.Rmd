@@ -16,14 +16,15 @@ distribution.
 
 ------------------------------------------------------------------------
 
-## Activity 1: Tossing a Die
+## Activity 2.2: Tossing a Die
 
 A fair six-sided die is rolled once and the number showing on the top
 face is observed.
 
 Let $S = \{1, 2, 3, 4, 5, 6\}$.
 
-Define the random variable $$
+Define the random variable 
+$$
 X(\omega) =
 \begin{cases}
 0 & \text{if } \omega \text{ is even} \\
@@ -39,12 +40,13 @@ $$
 
 ------------------------------------------------------------------------
 
-## Activity 2: Mapping Sample Space
+## Activity 2.3: Mapping Sample Space
 
 A box contains 3 balls labeled Red (R), Green (G), and Blue (B). One
 ball is drawn at random, and the color is observed.
 
-Define $$
+Define 
+$$
 X(\omega) =
 \begin{cases}
 1 & \text{if } \omega = R \\
@@ -62,7 +64,7 @@ $$
 
 ------------------------------------------------------------------------
 
-## Activity 3: Qualitative to Quantitative Mapping
+## Activity 2.4: Qualitative to Quantitative Mapping
 
 A survey is conducted where each person reports their favorite drink
 among Tea (T), Coffee (C), or Juice (J). The responses are recorded from
@@ -85,7 +87,7 @@ $$
 
 ------------------------------------------------------------------------
 
-## Activity 4: Expressing Events via Random Variables
+## Activity 2.5: Expressing Events via Random Variables
 
 Two coins are tossed **simultaneously**. We observe the **sequence of
 face-up outcomes** from both coins. Let H be the event that head is
@@ -106,7 +108,7 @@ $$
 
 ------------------------------------------------------------------------
 
-## Activity 5: Non-Numerical to Numerical Mapping
+## Activity 2.6: Non-Numerical to Numerical Mapping
 
 A quality control test is performed on a product in a factory. The
 result of the test is recorded as one of the following outcomes: - Pass
@@ -133,7 +135,7 @@ $$
 
 ------------------------------------------------------------------------
 
-## Activity 6: Mapping to Indicator Variables
+## Activity 2.7: Mapping to Indicator Variables
 
 Let a coin be tossed once and observe the heads up. Sample space:\
 $$
@@ -156,7 +158,7 @@ $$
 
 ------------------------------------------------------------------------
 
-## Activity 7: Mapping to Vectors
+## Activity 2.8: Mapping to Vectors
 
 Two six-sided dice are rolled simultaneously.
 
@@ -188,7 +190,7 @@ $Y(\omega) = i + j$.
 
 ------------------------------------------------------------------------
 
-## Activity 8: Categorical Mapping
+## Activity 2.9: Categorical Mapping
 
 Let a random person be chosen, and their blood type is recorded:\
 $$
@@ -214,7 +216,7 @@ $$
 
 ------------------------------------------------------------------------
 
-## Activity 9: Time to Event Mapping
+## Activity 2.10: Time to Event Mapping
 
 Let $S = \{\text{system failure at } t : t \ge 0\}$\
 Define $T(\omega) = \text{time of system failure}$
@@ -227,7 +229,7 @@ Define $T(\omega) = \text{time of system failure}$
 
 ------------------------------------------------------------------------
 
-## Activity 9: Mapping to Boolean (0/1) for Events
+## Activity 2.11: Mapping to Boolean (0/1) for Events
 
 Suppose 5 MCQ questions are attempted. Each has a binary outcome
 (Correct or Wrong).
@@ -245,7 +247,7 @@ $$
 
 
 
-## Activity 10 : Modeling Number of Attempts Until Success
+## Activity 2.12: Modeling Number of Attempts Until Success
 
 A game involves rolling a fair six-sided die repeatedly until the number
 **5** appears for the first time. Each roll is independent of the
@@ -276,7 +278,7 @@ appears.
 
 
 
-## Activity 11: Waiting for a Fixed Number of Successes
+## Activity 2.14: Waiting for a Fixed Number of Successes
 
 A fair coin is tossed repeatedly until **3 Heads** are observed. Each
 toss is independent of the others. The outcome is the **number of

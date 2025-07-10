@@ -36,7 +36,7 @@ This course establishes the fundamentals of probability theory. It supports lear
 | 5 | [Probability Rules](week5.html) | Addition, multiplication, total probability, Bayes' theorem | 8 (2T + 6IL) |
 | 6 | [**Midterm Examination**](midmarks.png) | \- | \- |
 | 7 | [Random Variables](week6.html) | Definitions, discrete and continuous variables | 8 (2T + 6IL) |
-| 8 | Events with Random Variables | Event representation and revision | 8 (2T + 6IL) |
+| 8 | [Events with Random Variables](week8.html) | Event representation and revision | 8 (2T + 6IL) |
 | 9 | Distributions | pmf, pdf, cdf | 8 (2T + 6IL) |
 | 10 | Probability Calculations | Quantiles, quartiles, percentiles | 8 (2T + 6IL) |
 | 11 | Mean & Variance | Mean and variance of r.v.s and functions | 8 (2T + 6IL) |
