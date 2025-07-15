@@ -30,9 +30,9 @@ This course establishes the fundamentals of probability and descriptive statisti
 +-----------------+---------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------+
 | **Week**        | **Topic**                                                           | **Description**                                                          | **Hours**       |
 +=================+=====================================================================+==========================================================================+=================+
-| 3               | [Elements of Probability](week1)                                    | Introduction, experiments, outcomes, sample spaces, events               | 8 (2T + 6IL)    |
+| 3               | [Elements of Probability](week1.html)                               | Introduction, experiments, outcomes, sample spaces, events               | 8 (2T + 6IL)    |
 +-----------------+---------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------+
-| 4               | [Event Operations](week2)                                           | Complements, unions, intersections, mutually exclusive/exhaustive events | 8 (2T + 6IL)    |
+| 4               | [Event Operations](week2.html)                                      | Complements, unions, intersections, mutually exclusive/exhaustive events | 8 (2T + 6IL)    |
 +-----------------+---------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------+
 | 5               | [Methods of Probability](https://sportsanalyzr.shinyapps.io/week3/) | Classical, relative frequency, axioms, interpretation                    | 8 (2T + 6IL)    |
 +-----------------+---------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------+
