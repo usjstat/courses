@@ -1,0 +1,103 @@
+---
+title: "TETC 1212 - Probability Statistics"
+author: "Dr. Rajitha M. Silva"
+output: html_document
+---
+
+# Course Information
+
+|                    |                             |
+|--------------------|-----------------------------|
+| **Course Title:**  | Probability and Statistics  |
+| **Course Code:**   | TETC 1212                   |
+| **Credit Value:**  | 2.0                         |
+| **Status:**        | Core                        |
+| **Year/Level:**    | 2025/First Year             |
+| **Semester:**      | Second Semester             |
+| **Pre-requisite:** | A/L ICT/Mathematics/Biology |
+
+------------------------------------------------------------------------
+
+# Aim of the Course
+
+This course establishes the fundamentals of probability and descriptive statistics. It is a prerequisite for advanced modules in probability and statistics.
+
+------------------------------------------------------------------------
+
+# Learning Activities & Weekly Breakdown
+
+::: {style="text-align: center;"}
++-----------------+---------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------+
+| **Week**        | **Topic**                                                           | **Description**                                                          | **Hours**       |
++=================+=====================================================================+==========================================================================+=================+
+| 3               | [Elements of Probability](week1)                                    | Introduction, experiments, outcomes, sample spaces, events               | 8 (2T + 6IL)    |
++-----------------+---------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------+
+| 4               | [Event Operations](week2)                                           | Complements, unions, intersections, mutually exclusive/exhaustive events | 8 (2T + 6IL)    |
++-----------------+---------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------+
+| 5               | [Methods of Probability](https://sportsanalyzr.shinyapps.io/week3/) | Classical, relative frequency, axioms, interpretation                    | 8 (2T + 6IL)    |
++-----------------+---------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------+
+| 6               | [Conditional Probability](week4.html)                               | Independent events                                                       | 8 (2T + 6IL)    |
++-----------------+---------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------+
+| 7               | [Probability Rules](week5.html)                                     | Addition, multiplication, total probability, Bayes' theorem              | 8 (2T + 6IL)    |
++-----------------+---------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------+
+|                 |                                                                     |                                                                          |                 |
++-----------------+---------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------+
+| 8               | [Random Variables](week6.html)                                      | Definitions, discrete and continuous variables                           | 8 (2T + 6IL)    |
++-----------------+---------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------+
+| 9               | [Events with Random Variables](week8.html)                          | Event representation and revision                                        | 8 (2T + 6IL)    |
++-----------------+---------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------+
+| 9               | Distributions and functions of RV                                   | pmf, pdf, cdf                                                            | 8 (2T + 6IL)    |
+|                 |                                                                     |                                                                          |                 |
+|                 |                                                                     | Expectation, Variance, Transforamtion                                    |                 |
++-----------------+---------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------+
+| 10              | Revision                                                            |                                                                          |                 |
++-----------------+---------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------+
+:::
+
+*T = Theory, IL = Independent Learning*
+
+------------------------------------------------------------------------
+
+# Intended Learning Outcomes (ILOs)
+
+By the end of this course, students will be able to:
+
+1.  Describe events using set notation and sample spaces.\
+2.  Formulate and identify events of interest.\
+3.  Apply classical and empirical methods for calculating probability.\
+4.  Explain and apply probability axioms.\
+5.  Distinguish conditional from unconditional events.\
+6.  Use rules of probability effectively.\
+7.  Define and identify types of random variables.\
+8.  Relate events to random variables.\
+9.  Use pmf, pdf, cdf correctly.\
+10. Calculate probabilities and descriptive measures from distributions.\
+11. Define and interpret mean, median, variance, etc.\
+12. Present clear and accurate solutions to problems.
+
+------------------------------------------------------------------------
+
+# Mode of Assessment
+
+-   **Assignments 3 (Homework)** \
+-   **Final Exam** (2 hours)
+
+------------------------------------------------------------------------
+
+# References
+
+-   Scott Stevens, *Introduction to Statistics: Think & Do*
+-   Jay L. Devore, *Probability and Statistics for Engineering and Sciences*, Brooks/Cole.\
+-   Class handouts and lecture notes.
+
+------------------------------------------------------------------------
+
+# Instructor & Office Hours
+
+**Lecturer:** Dr. Rajitha M. Silva\
+**Email:** [rsilva\@sjp.ac.lk](mailto:rsilva@sjp.ac.lk){.email}\
+**Office Hours:** One hour after lectures or by appointment
+
+------------------------------------------------------------------------
+
+*This course is effective from July 2025.*
