@@ -1,8 +1,9 @@
 ---
-title: "STA 1142 - Probability and Distribution Theory I: Week 1"
+title: Introduction to Probability
 author: "Dr. Rajitha M. Silva"
 output: html_document
 ---
+
 
 Probability is not just about dice and cards - it's the foundation of decision-making under uncertainty. Whether you are studying Mathematics or Statistics, probability theory opens the door to analyzing everything from games and genetics to finance and machine learning.
 
