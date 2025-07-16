@@ -1,0 +1,135 @@
+---
+title: "Exercise 4.3: Bayesian Inference for Comparing Two Proportions"
+author: "Rajitha M. Silva"
+date: 
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+In this analysis, we compare the **risk of fatal accidents** between drivers **using seat belts** and those **not using seat belts**.
+
+We model the number of fatal and nonfatal accidents using a **Bayesian approach** with **Beta priors**.
+
+# Data
+
+The observed accident data from the **Florida Highway Safety Department (1998)**:
+
+```{r}
+data_accidents <- data.frame(
+  Safety_Equipment = c("None", "Seat Belt"),
+  Fatal = c(1601, 510),
+  Nonfatal = c(162527, 412368)
+)
+
+data_accidents$Total <- data_accidents$Fatal + data_accidents$Nonfatal
+```
+
+# Bayesian Model
+
+We assume:
+
+\[
+Y_N \sim \text{Binomial}(n_N, p_N), \quad Y_S \sim \text{Binomial}(n_S, p_S)
+\]
+
+where:
+- \( p_N \) = probability of fatality **without a seat belt**.
+- \( p_S \) = probability of fatality **with a seat belt**.
+- **Likelihood:** Binomial model for each group.
+- **Prior:** Assume a **Beta(1,1) (Uniform) prior** for both probabilities.
+
+# Posterior Distribution
+
+Using Bayes' Theorem, the posterior distributions are:
+
+\[
+p_N | y_N \sim \text{Beta}(y_N + 1, n_N - y_N + 1)
+\]
+
+\[
+p_S | y_S \sim \text{Beta}(y_S + 1, n_S - y_S + 1)
+\]
+
+# Posterior Simulation
+
+We generate **10000 posterior samples** for \( p_N \) and \( p_S \):
+
+```{r}
+set.seed(123)
+
+# Extract values
+y_N <- data_accidents$Fatal[1]
+n_N <- data_accidents$Total[1]
+y_S <- data_accidents$Fatal[2]
+n_S <- data_accidents$Total[2]
+
+# Simulating posterior samples
+n_samples <- 10000
+p_N_samples <- rbeta(n_samples, y_N + 1, n_N - y_N + 1)
+p_S_samples <- rbeta(n_samples, y_S + 1, n_S - y_S + 1)
+```
+
+# Relative Risk (RR) and Risk Difference (RD)
+
+We compute the **relative risk (RR)** and **risk difference (RD)**:
+
+```{r}
+# Relative Risk (RR) = p_N / p_S
+RR_samples <- p_N_samples / p_S_samples
+
+# Risk Difference (RD) = p_N - p_S
+RD_samples <- p_N_samples - p_S_samples
+```
+
+# Visualization of Posterior Distributions
+
+```{r}
+library(ggplot2)
+
+data_posterior <- data.frame(
+  Probability = c(p_N_samples, p_S_samples),
+  Group = rep(c("No Seat Belt", "Seat Belt"), each = n_samples)
+)
+
+ggplot(data_posterior, aes(x = Probability, fill = Group)) +
+  geom_density(alpha = 0.5) +
+  labs(title = "Posterior Distributions of Fatality Probabilities",
+       x = "Fatality Probability", y = "Density") +
+  theme_minimal()
+```
+
+# 95% Credible Intervals
+
+```{r}
+ci_pN <- quantile(p_N_samples, c(0.025, 0.975))
+ci_pS <- quantile(p_S_samples, c(0.025, 0.975))
+ci_RR <- quantile(RR_samples, c(0.025, 0.975))
+ci_RD <- quantile(RD_samples, c(0.025, 0.975))
+
+list(
+  pN_CI = ci_pN,
+  pS_CI = ci_pS,
+  RR_CI = ci_RR,
+  RD_CI = ci_RD
+)
+```
+
+# Posterior Probability that Risk is Higher Without Seat Belts
+
+```{r}
+prob_higher_risk <- mean(RD_samples > 0)
+prob_higher_risk
+```
+
+# Summary of Results
+
+- **95% Credible Interval for \( p_N \)** (No Seat Belt): `r round(ci_pN, 6)`
+- **95% Credible Interval for \( p_S \)** (Seat Belt): `r round(ci_pS, 6)`
+- **95% Credible Interval for Relative Risk (RR)**: `r round(ci_RR, 3)`
+- **95% Credible Interval for Risk Difference (RD)**: `r round(ci_RD, 6)`
+- **Probability that risk is higher without seat belts**: `r round(prob_higher_risk, 4)`

@@ -44,6 +44,8 @@ All the lecture notes are based on the book named "[Bayes Rules! An Introduction
 
 -   [Chapter 4: Balance and Sequentiality in Bayesian Analyses](chapter4.html)
 
+- [Multiparameter Models](multiparameter-models.html)
+
 ------------------------------------------------------------------------
 
 ## Contact

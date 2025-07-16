@@ -1,0 +1,133 @@
+---
+title: "Exercise 4.5: Bayesian Inference for Poisson/Gamma Model"
+author: "Rajitha M. Silva"
+date: 
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+In this exercise, we analyze a dataset where observed counts follow a **Poisson/Gamma** distribution. The **Poisson/Gamma model** is commonly used to model count data with overdispersion (i.e., variance greater than the mean).
+
+We estimate the **parameters** \(a\) and \(b\) in the Poisson/Gamma model using **Bayesian inference**.
+
+# Problem Setup
+
+We assume the data \( y_1, ..., y_n \) follows a **Poisson/Gamma** density:
+
+\[
+f(y|a, b) = \frac{\Gamma(y + a)}{\Gamma(a) y!} \cdot \frac{b^a}{(b + 1)^{y + a}}
+\]
+
+where:
+- \( a > 0 \) is the **shape parameter**,
+- \( b > 0 \) is the **rate parameter**.
+
+We assume a **noninformative prior**:
+
+\[
+p(a, b) \propto \frac{1}{(ab)^2}
+\]
+
+To simplify computations, we transform parameters:
+
+\[
+\theta_1 = \log a, \quad \theta_2 = \log b.
+\]
+
+Then, the posterior density is:
+
+\[
+p(\theta_1, \theta_2 | y) \propto \frac{1}{ab} \prod_{i=1}^{n} \frac{\Gamma(y_i + a)}{\Gamma(a) y_i!} \cdot \frac{b^a}{(b + 1)^{y_i + a}}
+\]
+
+where \( a = e^{\theta_1} \) and \( b = e^{\theta_2} \).
+
+# Observed Data
+
+We use **data from Gilchrist (1984)**, where **33 insect traps** were set across sand dunes, recording the number of insects of the **Staphylinoidea** taxa caught:
+
+```{r}
+counts <- c(2, 5, 0, 2, 3, 1, 3, 4, 3, 0, 3,
+            2, 1, 1, 0, 6, 0, 0, 3, 0, 1, 1,
+            5, 0, 1, 2, 0, 0, 2, 1, 1, 1, 0)
+n <- length(counts)  # Number of traps
+sum_counts <- sum(counts)  # Total insects caught
+```
+
+# Posterior Grid Approximation
+
+We approximate the posterior by evaluating it over a **grid of values** for \( (\theta_1, \theta_2) \):
+
+```{r}
+# Define grid for theta1 (log a) and theta2 (log b)
+grid_theta1 <- seq(-2, 3, length.out = 100)
+grid_theta2 <- seq(-2, 3, length.out = 100)
+grid <- expand.grid(theta1 = grid_theta1, theta2 = grid_theta2)
+
+grid$post_density <- apply(grid, 1, function(params) {
+  theta1 <- params["theta1"]
+  theta2 <- params["theta2"]
+  a <- exp(theta1)
+  b <- exp(theta2)
+  sum(log(gamma(counts + a)) - log(gamma(a)) - lgamma(counts + 1) +
+      a * log(b) - (counts + a) * log(b + 1)) - log(a * b)
+})
+
+grid$post_density <- grid$post_density - max(grid$post_density)
+grid$post_density <- exp(grid$post_density)
+grid$post_density <- grid$post_density / sum(grid$post_density)
+```
+
+# Simulating from the Posterior
+
+We generate **1000 posterior samples** from the grid:
+
+```{r}
+set.seed(123)
+posterior_samples <- grid[sample(1:nrow(grid), size = 1000, prob = grid$post_density, replace = TRUE), ]
+```
+
+# 90% Credible Intervals
+
+We compute **90% credible intervals** for \(a\) and \(b\):
+
+```{r}
+ci_a <- quantile(exp(posterior_samples$theta1), c(0.05, 0.95))
+ci_b <- quantile(exp(posterior_samples$theta2), c(0.05, 0.95))
+
+list(a_CI = ci_a, b_CI = ci_b)
+```
+
+# Visualization of Posterior Distributions
+
+```{r}
+library(ggplot2)
+
+data_posterior <- data.frame(a = exp(posterior_samples$theta1), b = exp(posterior_samples$theta2))
+
+ggplot(data_posterior, aes(x = a)) +
+  geom_density(fill = "blue", alpha = 0.4) +
+  labs(title = "Posterior Distribution of Parameter a",
+       x = "a", y = "Density") +
+  theme_minimal()
+
+# Posterior distribution of b
+ggplot(data_posterior, aes(x = b)) +
+  geom_density(fill = "red", alpha = 0.4) +
+  labs(title = "Posterior Distribution of Parameter b",
+       x = "b", y = "Density") +
+  theme_minimal()
+```
+
+# Summary of Results
+
+- **90% Credible Interval for \(a\)**: `r round(ci_a, 3)`
+- **90% Credible Interval for \(b\)**: `r round(ci_b, 3)`
+- **Posterior Mean of \(a\)**: `r round(mean(exp(posterior_samples$theta1)), 3)`
+- **Posterior Mean of \(b\)**: `r round(mean(exp(posterior_samples$theta2)), 3)`
+
