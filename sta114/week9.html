@@ -9,10 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Dr. Rajitha M. Silva" />
+<meta name="author" content="Rajitha M. Silva" />
 
 
-<title>STA 1142 - Probability and Distribution Theory I</title>
+<title>Probability Distributions</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -349,232 +349,690 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">STA 1142 - Probability and Distribution
-Theory I</h1>
-<h4 class="author">Dr. Rajitha M. Silva</h4>
+<h1 class="title toc-ignore">Probability Distributions</h1>
+<h4 class="author">Rajitha M. Silva</h4>
 
 </div>
 
 
-<div id="course-information" class="section level1">
-<h1>Course Information</h1>
-<table>
-<tbody>
-<tr class="odd">
-<td><strong>Course Title:</strong></td>
-<td>Probability and Distribution Theory I</td>
-</tr>
-<tr class="even">
-<td><strong>Course Code:</strong></td>
-<td>STA1142</td>
-</tr>
-<tr class="odd">
-<td><strong>Credit Value:</strong></td>
-<td>2.0</td>
-</tr>
-<tr class="even">
-<td><strong>Status:</strong></td>
-<td>Core</td>
-</tr>
-<tr class="odd">
-<td><strong>Year/Level:</strong></td>
-<td>2025/First Year</td>
-</tr>
-<tr class="even">
-<td><strong>Semester:</strong></td>
-<td>1 (First Semester)</td>
-</tr>
-<tr class="odd">
-<td><strong>Pre-requisite:</strong></td>
-<td>A/L Combined Mathematics</td>
-</tr>
-</tbody>
-</table>
+<div id="discrete-random-variables-and-probability-mass-function-pmf" class="section level2">
+<h2>2.1 Discrete Random Variables and Probability Mass Function
+(pmf)</h2>
+<p><strong>Definition 2.2</strong></p>
+<p>A random variable with a <strong>countable range</strong> is called a
+<strong>discrete random variable</strong>.</p>
+<hr />
+<p><strong>Definition 2.3</strong></p>
+<p>The <strong>probability mass function (pmf)</strong> of a discrete
+random variable <span class="math inline">\(X\)</span> is the function
+<span class="math inline">\(P_X\)</span> defined as:</p>
+<p><span class="math display">\[
+P_X(x) = \Pr(X = x), \quad x \in \mathbb{R}
+\]</span></p>
+<hr />
+<div id="the-probability-mass-function" class="section level3">
+<h3>The Probability Mass Function</h3>
+<p>The <strong>probability mass function (pmf)</strong> of a discrete
+random variable <span class="math inline">\(X\)</span> specifies the
+probability associated with each individual value in the range of <span class="math inline">\(X\)</span>.</p>
 <hr />
 </div>
-<div id="aim-of-the-course" class="section level1">
-<h1>Aim of the Course</h1>
-<p>This course establishes the fundamentals of probability theory. It
-supports learning in statistical inference, risk evaluation, actuarial
-modeling, and various forecasting fields such as weather prediction,
-sports outcomes, and finance. It is also a prerequisite for advanced
-modules in probability and statistics.</p>
+<div id="example-2.3" class="section level3">
+<h3>Example 2.3</h3>
+<p>Consider <strong>Example 2.1</strong>. Let <span class="math inline">\(X\)</span> be the number of heads observed in 3
+tosses of a (possibly biased) coin, where <span class="math inline">\(\theta = \Pr(\text{Head})\)</span>.</p>
+<p>Then, the pmf of <span class="math inline">\(X\)</span> is given
+by:</p>
+<p><span class="math display">\[
+P_X(0) = (1 - \theta)^3
+\]</span> <span class="math display">\[
+P_X(1) = 3\theta(1 - \theta)^2
+\]</span> <span class="math display">\[
+P_X(2) = 3\theta^2(1 - \theta)
+\]</span> <span class="math display">\[
+P_X(3) = \theta^3
+\]</span> <span class="math display">\[
+P_X(x) = 0, \quad \text{if } x \notin \{0, 1, 2, 3\}
+\]</span></p>
+<hr />
+<p>We can write this compactly using a piecewise definition:</p>
+<p><span class="math display">\[
+P_X(x) =
+\begin{cases}
+(1 - \theta)^3 &amp; \text{if } x = 0 \\
+3\theta(1 - \theta)^2 &amp; \text{if } x = 1 \\
+3\theta^2(1 - \theta) &amp; \text{if } x = 2 \\
+\theta^3 &amp; \text{if } x = 3 \\
+0 &amp; \text{otherwise}
+\end{cases}
+\]</span></p>
+<p>Or, using the binomial form:</p>
+<p><span class="math display">\[
+P_X(x) =
+\begin{cases}
+\binom{3}{x} \theta^x (1 - \theta)^{3 - x} &amp; \text{for } x = 0, 1,
+2, 3 \\
+0 &amp; \text{otherwise}
+\end{cases}
+\]</span></p>
+<p>Or, simply:</p>
+<p><span class="math display">\[
+P_X(x) = \binom{3}{x} \theta^x (1 - \theta)^{3 - x}, \quad x = 0, 1, 2,
+3
+\]</span></p>
 <hr />
 </div>
-<div id="learning-activities-weekly-breakdown" class="section level1">
-<h1>Learning Activities &amp; Weekly Breakdown</h1>
-<div style="text-align: center;">
+</div>
+<div id="activity-2.15" class="section level2">
+<h2>Activity 2.15</h2>
+<p>A (possibly biased) coin is tossed <strong>repeatedly and
+independently</strong> until the first Head (H) appears.<br />
+Let the probability of Head on any single toss be <span class="math inline">\(\theta \in (0,1)\)</span>.</p>
+<p>Define a random variable:</p>
+<p><span class="math display">\[
+X = \text{the number of tosses until the first Head appears}
+\]</span></p>
+<ol style="list-style-type: decimal">
+<li><p>Write down the sample space <span class="math inline">\(S\)</span> of this experiment using lowercase
+sample points.</p></li>
+<li><p>Express the following events in terms of <span class="math inline">\(X\)</span>:</p>
+<ul>
+<li><span class="math inline">\(A = \{\text{first head appears on the
+3rd toss} \}\)</span></li>
+<li><span class="math inline">\(B = \{\text{at most two tosses are
+needed} \}\)</span></li>
+<li><span class="math inline">\(C = \{\text{more than four tosses are
+needed} \}\)</span></li>
+</ul></li>
+<li><p>Derive the probability mass function (pmf) of <span class="math inline">\(X\)</span> and identify the distribution it
+follows.</p></li>
+<li><p>For <span class="math inline">\(\theta = 0.3\)</span>,
+compute:</p>
+<ul>
+<li><span class="math inline">\(\Pr(X = 3)\)</span></li>
+<li><span class="math inline">\(\Pr(X \geq 3)\)</span></li>
+<li><span class="math inline">\(\Pr(X &gt; 4)\)</span></li>
+</ul></li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<ol style="list-style-type: decimal">
+<li>Sample Space <span class="math inline">\(S\)</span></li>
+</ol>
+<p>Let <span class="math inline">\(X\)</span> be the number of tosses
+until the first Head (H) appears.</p>
+<p>The sample space consists of all finite sequences ending in the first
+Head, where all previous outcomes are Tails (T).</p>
+<p><span class="math display">\[
+S = \{ h,\ th,\ tth,\ ttth,\ tttth,\ \dots \}
+\]</span></p>
+<p>Each outcome corresponds to a success (H) occurring for the first
+time on the <span class="math inline">\(k\)</span>th toss.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Events in Terms of <span class="math inline">\(X\)</span></li>
+</ol>
+<p>Let the random variable <span class="math inline">\(X\)</span> denote
+the number of tosses until the first Head:</p>
+<p>The event that the first Head appears on the 3rd toss or later can be
+written as:</p>
+<p>\[ \{ \omega \in S : X(\omega) \geq 3 \} \]</p>
+<p>In sequence terms:</p>
+<p>\[ \left\{ \omega \in \{t, h\}^k : \omega = t^{k-1}h,\ k \geq 3
+\right\} \]</p>
+<p>This describes all sequences of \( k \) tosses ending in a Head,
+preceded by \( k-1 \) Tails, where \( k \geq 3 \).</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Probability Mass Function of <span class="math inline">\(X\)</span></li>
+</ol>
+<p>Each toss is independent, and the first Head appears on the <span class="math inline">\(x\)</span>th toss if the first <span class="math inline">\(x - 1\)</span> tosses are all Tails, followed by a
+Head.</p>
+<p><span class="math display">\[
+\Pr(X = x) = (1 - \theta)^{x - 1} \theta, \quad x = 1, 2, 3, \dots
+\]</span></p>
+<p>This is the <strong>Geometric distribution</strong> with parameter
+<span class="math inline">\(\theta \in (0,1)\)</span>.</p>
+<p>Piecewise form:</p>
+<p><span class="math display">\[
+P_X(x) =
+\begin{cases}
+(1 - \theta)^{x - 1} \theta &amp; \text{for } x = 1, 2, 3, \dots \\
+0 &amp; \text{otherwise}
+\end{cases}
+\]</span></p>
+<ol start="4" style="list-style-type: decimal">
+<li>Numerical Computations (when <span class="math inline">\(\theta =
+0.3\)</span>)</li>
+</ol>
+<p>Let’s define:</p>
+<pre class="r"><code>theta &lt;- 0.3
+
+# Pr(X = 3)
+px3 &lt;- (1 - theta)^(3 - 1) * theta
+px3</code></pre>
+<pre><code>## [1] 0.147</code></pre>
+<pre class="r"><code># Pr(X &gt;= 3)
+px_leq3 &lt;- sum((1 - theta)^(1:3) * theta)
+px_geq3 &lt;- 1- px_leq3
+px_geq3</code></pre>
+<pre><code>## [1] 0.5401</code></pre>
+<pre class="r"><code># Pr(X &gt; 4) = 1 - Pr(X &lt;= 4)
+px_leq4 &lt;- sum((1 - theta)^(1:3) * theta)
+px_gt4 &lt;- 1 - px_leq4
+px_gt4</code></pre>
+<pre><code>## [1] 0.5401</code></pre>
+</details>
+</div>
+<div id="activity-2.16" class="section level2">
+<h2>Activity 2.16</h2>
+<p>A curd vendor, based on a large number of sales, has observed the
+following purchasing behaviour:</p>
+<div style="text-align:center">
 <table>
-<colgroup>
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
-</colgroup>
 <thead>
 <tr class="header">
-<th><strong>Week</strong></th>
-<th><strong>Topic</strong></th>
-<th><strong>Description</strong></th>
-<th><strong>Hours</strong></th>
+<th>Containers bought</th>
+<th>Proportion of customers</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>1</td>
-<td><a href="week1">Elements of Probability</a></td>
-<td>Introduction, experiments, outcomes, sample spaces, events</td>
-<td>8 (2T + 6IL)</td>
+<td>70 %</td>
 </tr>
 <tr class="even">
 <td>2</td>
-<td><a href="week2">Event Operations</a></td>
-<td>Complements, unions, intersections, mutually exclusive/exhaustive
-events</td>
-<td>8 (2T + 6IL)</td>
+<td>15 %</td>
 </tr>
 <tr class="odd">
 <td>3</td>
-<td><a href="https://sportsanalyzr.shinyapps.io/week3/">Methods of
-Probability</a></td>
-<td>Classical, relative frequency, axioms, interpretation</td>
-<td>8 (2T + 6IL)</td>
+<td>10 %</td>
 </tr>
 <tr class="even">
 <td>4</td>
-<td><a href="week4.html">Conditional Probability</a></td>
-<td>Independent events</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td><a href="week5.html">Probability Rules</a></td>
-<td>Addition, multiplication, total probability, Bayes’ theorem</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="even">
-<td>6</td>
-<td><a href="midmarks.png"><strong>Midterm Examination</strong></a></td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr class="odd">
-<td>7</td>
-<td><a href="week6.html">Random Variables</a></td>
-<td>Definitions, discrete and continuous variables</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="even">
-<td>8</td>
-<td><a href="week8.html">Events with Random Variables</a></td>
-<td>Event representation and revision</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="odd">
-<td>9</td>
-<td><a href="week9.html">Distributions</a></td>
-<td>pmf, pdf, cdf</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="even">
-<td>10</td>
-<td>Probability Calculations</td>
-<td>Quantiles, quartiles, percentiles</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="odd">
-<td>11</td>
-<td>Mean &amp; Variance</td>
-<td>Mean and variance of r.v.s and functions</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="even">
-<td>12</td>
-<td>Moments</td>
-<td>MGF and properties</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="odd">
-<td>13</td>
-<td>Revision &amp; Integration</td>
-<td>-</td>
-<td>8 (2T + 6IL)</td>
+<td>5 %</td>
 </tr>
 </tbody>
 </table>
 </div>
-<p><em>T = Theory, IL = Independent Learning</em></p>
+<ol style="list-style-type: decimal">
+<li>Let <span class="math inline">\(X\)</span> be the <strong>number of
+containers</strong> bought by a randomly chosen customer.
+<ul>
+<li>Write down the probability-mass function (pmf) of <span class="math inline">\(X\)</span>.</li>
+</ul></li>
+<li>Let <span class="math inline">\(Y\)</span> be the <strong>number of
+customers observed until (and including) the first customer who buys 4
+containers</strong> on a given day.
+<ul>
+<li>Derive the pmf <span class="math inline">\(P_Y(y)\)</span> of <span class="math inline">\(Y\)</span>.</li>
+</ul></li>
+</ol>
+<hr />
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<ol style="list-style-type: decimal">
+<li>Random Variable <span class="math inline">\(X\)</span>: Number of
+Containers Bought</li>
+</ol>
+<p>Let <span class="math inline">\(X\)</span> be the number of
+containers bought by a randomly chosen customer. Based on long-term
+observation, the probability mass function (pmf) of <span class="math inline">\(X\)</span> is:</p>
+<p><span class="math display">\[
+P_X(x) =
+\begin{cases}
+0.70 &amp; \text{if } x = 1 \\
+0.15 &amp; \text{if } x = 2 \\
+0.10 &amp; \text{if } x = 3 \\
+0.05 &amp; \text{if } x = 4 \\
+0 &amp; \text{otherwise}
+\end{cases}
+\]</span></p>
+<p>This can also be stored in R as:</p>
+<pre class="r"><code>px &lt;- c(
+  &#39;1 container&#39; = 0.70,
+  &#39;2 containers&#39; = 0.15,
+  &#39;3 containers&#39; = 0.10,
+  &#39;4 containers&#39; = 0.05
+)
+px</code></pre>
+<pre><code>##  1 container 2 containers 3 containers 4 containers 
+##         0.70         0.15         0.10         0.05</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Random Variable <span class="math inline">\(Y\)</span>: Customers
+Until First Buying 4 Containers</li>
+</ol>
+<p>Let <span class="math inline">\(Y\)</span> be the number of customers
+observed until (and including) the first customer who buys <strong>4
+containers</strong>.</p>
+<p>This is modeled using the <strong>Geometric distribution</strong>
+with success probability <span class="math inline">\(p =
+0.05\)</span>.</p>
+<p>The probability mass function (pmf) is:</p>
+<p><span class="math display">\[
+P_Y(y) = (1 - p)^{y - 1} p, \quad y = 1, 2, 3, \dots
+\]</span></p>
+<p>In R, this can be computed as:</p>
+<pre class="r"><code>p &lt;- 0.05
+
+P_Y &lt;- function(y, p = 0.05) {
+  ifelse(y &gt;= 1, (1 - p)^(y - 1) * p, 0)
+}
+
+y_vals &lt;- 1:10
+py_vals &lt;- P_Y(y_vals)
+
+data.frame(y = y_vals, P_Y = py_vals)</code></pre>
+<pre><code>##     y        P_Y
+## 1   1 0.05000000
+## 2   2 0.04750000
+## 3   3 0.04512500
+## 4   4 0.04286875
+## 5   5 0.04072531
+## 6   6 0.03868905
+## 7   7 0.03675459
+## 8   8 0.03491686
+## 9   9 0.03317102
+## 10 10 0.03151247</code></pre>
+</details>
+</div>
+<div id="activity-2.17" class="section level2">
+<h2>Activity 2.17</h2>
+<p>Determine the value of <span class="math inline">\(c\)</span> so that
+each of the following functions can serve as a <strong>probability
+distribution</strong> of the discrete random variable <span class="math inline">\(X\)</span>:</p>
+<ol style="list-style-type: lower-alpha">
+<li></li>
+</ol>
+<p><span class="math display">\[
+f(x) = c(x^2 + 4), \quad x = 0, 1, 2, 3
+\]</span></p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li></li>
+</ol>
+<p><span class="math display">\[
+f(x) = c \binom{2}{x} \binom{3}{3 - x}, \quad x = 0, 1, 2
+\]</span></p>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<ol style="list-style-type: lower-alpha">
+<li></li>
+</ol>
+<p>To ensure that <span class="math inline">\(f(x)\)</span> is a valid
+pmf, the total probability must sum to 1:</p>
+<p><span class="math display">\[
+\sum_{x=0}^{3} c(x^2 + 4) = 1
+\]</span></p>
+<p>Compute the sum:</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;= c[(0^2 + 4) + (1^2 + 4) + (2^2 + 4) + (3^2 + 4)] \\
+&amp;= c[4 + 5 + 8 + 13] = c[30]
+\end{aligned}
+\]</span></p>
+<p>Set equal to 1:</p>
+<p><span class="math display">\[
+c = \frac{1}{30}
+\]</span></p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li></li>
+</ol>
+<p>The function involves binomial coefficients:</p>
+<p><span class="math display">\[
+f(x) = c \binom{2}{x} \binom{3}{3 - x}, \quad x = 0, 1, 2
+\]</span></p>
+<p>Sum over possible values:</p>
+<p><span class="math display">\[
+\sum_{x=0}^{2} c \binom{2}{x} \binom{3}{3 - x} = 1
+\]</span></p>
+<p>Compute:</p>
+<p><span class="math display">\[
+\begin{aligned}
+f(0) &amp;= c \cdot \binom{2}{0} \binom{3}{3} = c(1)(1) = c \\
+f(1) &amp;= c \cdot \binom{2}{1} \binom{3}{2} = c(2)(3) = 6c \\
+f(2) &amp;= c \cdot \binom{2}{2} \binom{3}{1} = c(1)(3) = 3c \\
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\text{Total} = c + 6c + 3c = 10c = 1 \Rightarrow c = \frac{1}{10}
+\]</span></p>
+</details>
+</div>
+<div id="properties-of-a-probability-mass-function-pmf" class="section level2">
+<h2>Properties of a Probability Mass Function (pmf)</h2>
+<p>Let <span class="math inline">\(X\)</span> be a discrete random
+variable with probability mass function <span class="math inline">\(P_X(x) = \Pr(X = x)\)</span>.</p>
+<p>Then the following properties hold:</p>
+<hr />
+<div id="non-negativity-and-boundedness" class="section level3">
+<h3>1. Non-negativity and boundedness</h3>
+<p><span class="math display">\[
+\boxed{0 \leq P_X(x) \leq 1, \quad \text{for all } x \in \mathbb{R}}
+\]</span></p>
+<p><strong>Explanation:</strong><br />
+A pmf assigns probabilities to values taken by a discrete random
+variable. Since probabilities cannot be negative or greater than 1, this
+inequality must always be satisfied.<br />
+This follows from the <strong>axioms of probability</strong>: -
+Probabilities are never negative. - No single event can have a
+probability greater than 1.</p>
+<p><strong>Example:</strong><br />
+In a fair die roll, <span class="math display">\[
+P_X(x) = \frac{1}{6}, \quad x = 1, 2, 3, 4, 5, 6
+\]</span> Here, each value satisfies <span class="math inline">\(0 \leq
+\frac{1}{6} \leq 1\)</span>.</p>
 <hr />
 </div>
-<div id="intended-learning-outcomes-ilos" class="section level1">
-<h1>Intended Learning Outcomes (ILOs)</h1>
-<p>By the end of this course, students will be able to:</p>
+<div id="computing-probabilities-of-events" class="section level3">
+<h3>2. Computing Probabilities of Events</h3>
+<p>Let <span class="math inline">\(E \subseteq \Omega\)</span> be an
+event in the underlying sample space.<br />
+Map this event into the <strong>value space</strong> of the random
+variable <span class="math inline">\(X\)</span> by defining</p>
+<p><span class="math display">\[
+\varepsilon \;=\; X(E) \;=\; \{\,x \in \mathbb{R} \mid X(\omega)=x
+\text{ for some } \omega \in E\,\}.
+\]</span></p>
+<p>Because the pmf <span class="math inline">\(P_X(x)=\Pr(X=x)\)</span>
+is defined only on numerical values, the probability of the original
+event <span class="math inline">\(E\)</span> is obtained by summing
+these point-masses over all values in <span class="math inline">\(\varepsilon\)</span>:</p>
+<p><span class="math display">\[
+\boxed{\;
+\Pr(E) \;=\; \sum_{x \in \varepsilon} P_X(x)
+\;}
+\]</span></p>
+<div id="explanation" class="section level4">
+<h4>Explanation</h4>
 <ol style="list-style-type: decimal">
-<li>Describe events using set notation and sample spaces.<br />
+<li><strong>Outcome layer</strong>: <span class="math inline">\(E\)</span> is a subset of outcomes in <span class="math inline">\(\Omega\)</span>.<br />
 </li>
-<li>Formulate and identify events of interest.<br />
+<li><strong>Value layer</strong>: <span class="math inline">\(\varepsilon\)</span> is the set of numbers those
+outcomes produce through <span class="math inline">\(X\)</span>.<br />
 </li>
-<li>Apply classical and empirical methods for calculating
-probability.<br />
+<li>Summing <span class="math inline">\(P_X(x)\)</span> over <span class="math inline">\(\varepsilon\)</span> aggregates the total
+probability assigned to every outcome in <span class="math inline">\(E\)</span>.</li>
+</ol>
+</div>
+<div id="example" class="section level4">
+<h4>Example</h4>
+<p>Let <span class="math inline">\(X\)</span> be the number of heads in
+three coin tosses.<br />
+Take the event</p>
+<p><span class="math display">\[
+E = \{X \ge 2\}.
+\]</span></p>
+<p>Its image in value space is</p>
+<p><span class="math display">\[
+\varepsilon = \{2,3\}.
+\]</span></p>
+<p>Hence</p>
+<p><span class="math display">\[
+\Pr(E) = P_X(2) + P_X(3).
+\]</span></p>
+<hr />
+</div>
+</div>
+<div id="total-probability-over-the-range-of-a-discrete-random-variable" class="section level3">
+<h3>3. Total Probability Over the Range of a Discrete Random
+Variable</h3>
+<p>Let <span class="math inline">\(S = \Omega\)</span> be the sample
+space of the original experiment.<br />
+Define</p>
+<p><span class="math display">\[
+\mathcal{S} = X(S) = \left\{\,x \in \mathbb{R} \;\middle|\; X(\omega) =
+x \text{ for some } \omega \in S \right\}
+\]</span></p>
+<p>That is, <span class="math inline">\(\mathcal{S}\)</span> denotes the
+<strong>range</strong> (or image) of the random variable <span class="math inline">\(X\)</span>, i.e., the set of all values <span class="math inline">\(X\)</span> can take.</p>
+<p>Then, the total probability assigned by the pmf over the entire range
+of <span class="math inline">\(X\)</span> is:</p>
+<p><span class="math display">\[
+\boxed{\;\sum_{x \in \mathcal{S}} P_X(x) = 1\;}
+\]</span></p>
+<hr />
+<div id="explanation-1" class="section level4">
+<h4>Explanation</h4>
+<p>Since some outcome from the sample space <span class="math inline">\(S\)</span> must occur, and <span class="math inline">\(X\)</span> maps each outcome to an element in
+<span class="math inline">\(\mathcal{S}\)</span>, the <strong>sum of all
+probability masses across <span class="math inline">\(\mathcal{S}\)</span></strong> must equal 1.</p>
+<p>This property guarantees that the probability measure induced by
+<span class="math inline">\(X\)</span> is valid - it distributes total
+mass 1 over the values in its support.</p>
+<hr />
+</div>
+<div id="example-1" class="section level4">
+<h4>Example</h4>
+<p>Let <span class="math inline">\(X\)</span> take values <span class="math inline">\(\{0, 1, 2, 3\}\)</span>, with</p>
+<p><span class="math display">\[
+P_X(0) = 0.1, \quad P_X(1) = 0.2, \quad P_X(2) = 0.4, \quad P_X(3) = 0.3
+\]</span></p>
+<p>Then the range of <span class="math inline">\(X\)</span> is<br />
+<span class="math display">\[
+\mathcal{S} = \{0, 1, 2, 3\}
+\]</span></p>
+<p>and the total probability is</p>
+<p><span class="math display">\[
+\sum_{x \in \mathcal{S}} P_X(x) = 0.1 + 0.2 + 0.4 + 0.3 = 1.
+\]</span></p>
+<p>Thus, the pmf satisfies the total probability condition.</p>
+<hr />
+</div>
+</div>
+</div>
+<div id="continuous-random-variables-and-probability-density-function-pdf" class="section level2">
+<h2>2.2 Continuous Random Variables and Probability Density Function
+(pdf)</h2>
+<p><strong>Definition 2.4</strong></p>
+<p>A random variable with an <strong>uncountable range</strong>,
+typically intervals of real numbers, is called a <strong>continuous
+random variable</strong>.</p>
+<hr />
+<p><strong>Definition 2.5</strong></p>
+<p>The <strong>probability density function (pdf)</strong> of a
+continuous random variable <span class="math inline">\(X\)</span> is a
+function <span class="math inline">\(f_X\)</span> satisfying:</p>
+<ul>
+<li><span class="math inline">\(f_X(x) \geq 0\)</span> for all <span class="math inline">\(x \in \mathbb{R}\)</span></li>
+<li><span class="math inline">\(\int_{-\infty}^{\infty} f_X(x)\,dx =
+1\)</span></li>
+</ul>
+<p>The probability that <span class="math inline">\(X\)</span> lies in
+an interval <span class="math inline">\([a, b]\)</span> is given by:</p>
+<p><span class="math display">\[
+\Pr(a \leq X \leq b) = \int_a^b f_X(x)\, dx
+\]</span></p>
+<hr />
+<div id="properties-of-a-probability-density-function" class="section level3">
+<h3>Properties of a Probability Density Function</h3>
+<div id="non-negativity" class="section level4">
+<h4>1. Non-negativity</h4>
+<p><span class="math display">\[
+\boxed{f_X(x) \geq 0 \quad \text{for all } x \in \mathbb{R}}
+\]</span></p>
+<p>This ensures the density never assigns negative values, aligning with
+the axioms of probability.</p>
+<hr />
+</div>
+<div id="total-area-under-the-curve-is-1" class="section level4">
+<h4>2. Total Area Under the Curve is 1</h4>
+<p><span class="math display">\[
+\boxed{\int_{-\infty}^{\infty} f_X(x)\, dx = 1}
+\]</span></p>
+<p>This is the continuous analog of the total probability rule for
+pmfs.</p>
+<hr />
+</div>
+<div id="probabilities-are-assigned-to-intervals" class="section level4">
+<h4>3. Probabilities are Assigned to Intervals</h4>
+<p>For any interval <span class="math inline">\([a, b]\)</span>:</p>
+<p><span class="math display">\[
+\Pr(a \leq X \leq b) = \int_a^b f_X(x)\, dx
+\]</span></p>
+<p>Unlike discrete random variables, the probability of taking any exact
+value is zero:</p>
+<p><span class="math display">\[
+\Pr(X = x) = 0
+\]</span></p>
+<hr />
+</div>
+</div>
+<div id="example-2.6" class="section level3">
+<h3>Example 2.6</h3>
+<p>Let <span class="math inline">\(X\)</span> be a continuous random
+variable with density function:</p>
+<p><span class="math display">\[
+f_X(x) =
+\begin{cases}
+2x &amp; \text{for } 0 \leq x \leq 1 \\
+0 &amp; \text{otherwise}
+\end{cases}
+\]</span></p>
+<div id="a-verify-that-f_x-is-a-valid-pdf" class="section level4">
+<h4>(a) Verify that <span class="math inline">\(f_X\)</span> is a valid
+pdf</h4>
+<p><span class="math display">\[
+\int_0^1 2x\,dx = \left[x^2\right]_0^1 = 1
+\Rightarrow \text{Valid pdf}
+\]</span></p>
+</div>
+<div id="b-compute-pr0.2-leq-x-leq-0.6" class="section level4">
+<h4>(b) Compute <span class="math inline">\(\Pr(0.2 \leq X \leq
+0.6)\)</span></h4>
+<p><span class="math display">\[
+\Pr(0.2 \leq X \leq 0.6) = \int_{0.2}^{0.6} 2x\,dx =
+\left[x^2\right]_{0.2}^{0.6} = 0.36 - 0.04 = 0.32
+\]</span></p>
+<hr />
+</div>
+</div>
+</div>
+<div id="activity-2.18" class="section level2">
+<h2>Activity 2.18</h2>
+<p>Let <span class="math inline">\(X\)</span> be a continuous random
+variable with density:</p>
+<p><span class="math display">\[
+f(x) =
+\begin{cases}
+3x^2 &amp; \text{for } 0 \leq x \leq 1 \\
+0 &amp; \text{otherwise}
+\end{cases}
+\]</span></p>
+<p>Answer the following:</p>
+<ol style="list-style-type: decimal">
+<li>Show that <span class="math inline">\(f\)</span> is a valid
+probability density function.</li>
+<li>Compute <span class="math inline">\(\Pr(X \leq 0.5)\)</span></li>
+<li>Compute <span class="math inline">\(\Pr(0.25 \leq X \leq
+0.75)\)</span></li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<ol style="list-style-type: decimal">
+<li>Check validity:</li>
+</ol>
+<p><span class="math display">\[
+\int_0^1 3x^2\,dx = \left[x^3\right]_0^1 = 1
+\Rightarrow f \text{ is valid}
+\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Compute:</li>
+</ol>
+<p><span class="math display">\[
+\Pr(X \leq 0.5) = \int_0^{0.5} 3x^2\,dx = \left[x^3\right]_0^{0.5} =
+0.125
+\]</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Compute:</li>
+</ol>
+<p><span class="math display">\[
+\Pr(0.25 \leq X \leq 0.75) = \int_{0.25}^{0.75} 3x^2\,dx = x^3
+\Big|_{0.25}^{0.75} = 0.422 - 0.016 = 0.406
+\]</span></p>
+</details>
+<hr />
+</div>
+<div id="interpretation-of-the-density-function" class="section level2">
+<h2>Interpretation of the Density Function</h2>
+<ul>
+<li>A <strong>density function is not a probability</strong>, but an
+indication of how <em>dense</em> the probability is at different
+values.</li>
+<li>The height of the pdf curve does <strong>not</strong> exceed 1
+necessarily, but the <strong>area under the curve</strong> must be
+1.</li>
+<li>Probability is always computed as <strong>area under the
+curve</strong> over an interval.</li>
+</ul>
+<hr />
+</div>
+<div id="cumulative-distribution-function-cdf" class="section level2">
+<h2>Cumulative Distribution Function (cdf)</h2>
+<p><strong>Definition 2.6</strong></p>
+<p>Let <span class="math inline">\(X\)</span> be a random variable
+(discrete or continuous). The <strong>cumulative distribution function
+(cdf)</strong> of <span class="math inline">\(X\)</span> is defined
+as:</p>
+<p><span class="math display">\[
+F_X(x) = \Pr(X \leq x)
+\]</span></p>
+<p>This can be computed as:</p>
+<ul>
+<li><strong>For a discrete random variable</strong> with pmf <span class="math inline">\(P_X(x)\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+F_X(x) = \sum_{t \leq x} P_X(t)
+\]</span></p>
+<ul>
+<li><strong>For a continuous random variable</strong> with pdf <span class="math inline">\(f_X(x)\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+F_X(x) = \int_{-\infty}^{x} f_X(t)\,dt
+\]</span></p>
+<hr />
+<div id="properties-of-the-cdf" class="section level3">
+<h3>Properties of the CDF:</h3>
+<ol style="list-style-type: decimal">
+<li><strong>Monotonically non-decreasing</strong><br />
 </li>
-<li>Explain and apply probability axioms.<br />
+<li><span class="math inline">\(F_X(-\infty) = 0\)</span>, <span class="math inline">\(F_X(\infty) = 1\)</span><br />
 </li>
-<li>Distinguish conditional from unconditional events.<br />
-</li>
-<li>Use rules of probability effectively.<br />
-</li>
-<li>Define and identify types of random variables.<br />
-</li>
-<li>Relate events to random variables.<br />
-</li>
-<li>Use pmf, pdf, cdf correctly.<br />
-</li>
-<li>Calculate probabilities and descriptive measures from
-distributions.<br />
-</li>
-<li>Define and interpret mean, median, variance, etc.<br />
-</li>
-<li>Use moment generating functions.<br />
-</li>
-<li>Use correct notation and terminology.<br />
-</li>
-<li>Communicate clearly and coherently.<br />
-</li>
-<li>Present clear and accurate solutions to problems.</li>
+<li><strong>Right-continuous</strong></li>
 </ol>
 <hr />
 </div>
-<div id="mode-of-assessment" class="section level1">
-<h1>Mode of Assessment</h1>
-<ul>
-<li><strong>Midterm (on 6th week)</strong>: 40%<br />
-</li>
-<li><strong>Final Exam</strong> (2 hours): 60% (Summative
-Assessment)</li>
-</ul>
-<hr />
 </div>
-<div id="references" class="section level1">
-<h1>References</h1>
-<ul>
-<li>Jay L. Devore, <em>Probability and Statistics for Engineering and
-Sciences</em>, Brooks/Cole.<br />
-</li>
-<li>B.M.S.G. Banneheka, <em>Statistical Distribution Theory</em>, Open
-University of Sri Lanka.<br />
-</li>
-<li>Class handouts and lecture notes.</li>
-</ul>
-<hr />
-</div>
-<div id="instructor-office-hours" class="section level1">
-<h1>Instructor &amp; Office Hours</h1>
-<p><strong>Lecturer:</strong> Dr. Rajitha M. Silva<br />
-<strong>Email:</strong> <a href="mailto:rsilva@sjp.ac.lk" class="email">rsilva@sjp.ac.lk</a><br />
-<strong>Office Hours:</strong> One hour after lectures or by
-appointment</p>
-<hr />
-<p><em>This course is effective from 19th May 2025.</em></p>
+<div id="example-2.7" class="section level2">
+<h2>Example 2.7</h2>
+<p>For the pdf</p>
+<p><span class="math display">\[
+f(x) =
+\begin{cases}
+2x &amp; \text{if } 0 \leq x \leq 1 \\
+0 &amp; \text{otherwise}
+\end{cases}
+\]</span></p>
+<p>Find the cumulative distribution function <span class="math inline">\(F_X(x)\)</span>.</p>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p><span class="math display">\[
+F_X(x) =
+\begin{cases}
+0 &amp; \text{if } x &lt; 0 \\
+\int_0^x 2t\,dt = x^2 &amp; \text{if } 0 \leq x \leq 1 \\
+1 &amp; \text{if } x &gt; 1
+\end{cases}
+\]</span></p>
+</details>
 </div>
 
 
