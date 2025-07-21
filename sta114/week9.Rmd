@@ -196,7 +196,7 @@ px_geq3
 
 ```{r}
 # Pr(X > 4) = 1 - Pr(X <= 4)
-px_leq4 <- sum((1 - theta)^(1:3) * theta)
+px_leq4 <- sum((1 - theta)^(1:4) * theta)
 px_gt4 <- 1 - px_leq4
 px_gt4
 ```

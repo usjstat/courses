@@ -518,10 +518,10 @@ px_geq3 &lt;- 1- px_leq3
 px_geq3</code></pre>
 <pre><code>## [1] 0.5401</code></pre>
 <pre class="r"><code># Pr(X &gt; 4) = 1 - Pr(X &lt;= 4)
-px_leq4 &lt;- sum((1 - theta)^(1:3) * theta)
+px_leq4 &lt;- sum((1 - theta)^(1:4) * theta)
 px_gt4 &lt;- 1 - px_leq4
 px_gt4</code></pre>
-<pre><code>## [1] 0.5401</code></pre>
+<pre><code>## [1] 0.46807</code></pre>
 </details>
 </div>
 <div id="activity-2.16" class="section level2">
