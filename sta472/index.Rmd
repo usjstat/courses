@@ -46,6 +46,8 @@ All the lecture notes are based on the book named "[Bayes Rules! An Introduction
 
 - [Multiparameter Models](multiparameter-models.html)
 
+  - [Exercise 4.3](Exercise_4_3.html)
+
 ------------------------------------------------------------------------
 
 ## Contact
