@@ -1,0 +1,119 @@
+---
+title: "Exercise 4.8: Bayesian Logistic Regression for ACT Scores and Success Prediction"
+author: "Rajitha M. Silva"
+date: 
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+In this exercise, we analyze the relationship between students' **ACT scores** and their success (achieving an A or B) in a **business calculus class** using **Bayesian logistic regression**. The success probability follows the **logistic model**:
+
+\[
+\log \left( \frac{p_i}{1 - p_i} \right) = \beta_0 + \beta_1 x_i
+\]
+
+where:
+- \( p_i \) is the probability of success for a student with **ACT score** \( x_i \),
+- \( \beta_0 \) and \( \beta_1 \) are **regression parameters** to be estimated.
+
+# Problem Setup
+
+The math department collected data for **students' ACT scores** and their **success rates**:
+
+```{r}
+data <- data.frame(
+  ACT_Score = c(16, 18, 20, 22, 24, 26, 28),
+  Students = c(2, 7, 14, 26, 13, 14, 3),
+  Successes = c(0, 0, 6, 12, 7, 9, 3)
+)
+```
+
+# Prior Specification using Conditional Means Prior
+
+The department has prior beliefs about the probability of success for certain ACT scores:
+
+- **ACT = 18:** Quartiles for probability = (0.15, 0.35)
+- **ACT = 26:** Quartiles for probability = (0.75, 0.95)
+
+Using **beta.select**, we match these beliefs to Beta distributions:
+
+```{r}
+library(LearnBayes)
+
+# Compute prior parameters using beta.select
+prior_18 <- beta.select(list(p = 0.25, x = 0.15), list(p = 0.75, x = 0.35))
+prior_26 <- beta.select(list(p = 0.25, x = 0.75), list(p = 0.75, x = 0.95))
+
+prior_18  # Beta parameters for ACT = 18
+prior_26  # Beta parameters for ACT = 26
+```
+
+# Posterior Distribution of \( \beta_0, \beta_1 \)
+
+We define the likelihood using the **logisticpost** function and visualize the **posterior region**:
+
+```{r}
+# Define the data matrix for likelihood calculation
+data_matrix <- cbind(data$ACT_Score, data$Students, data$Successes)
+
+# Define prior data based on the matched Beta parameters
+prior_data <- rbind(
+  c(18, sum(prior_18), prior_18[1]),
+  c(26, sum(prior_26), prior_26[1])
+)
+
+data_combined <- rbind(data_matrix, prior_data)
+```
+
+Now, we compute the **posterior distribution** of \( \beta_0, \beta_1 \) using **contour plots**:
+
+```{r}
+# Contour plot of posterior distribution
+mycontour(logisticpost, c(-10, 5, -5, 3), data_combined, xlab="beta0", ylab="beta1")
+```
+
+# Simulating from the Posterior Distribution
+
+We now generate **1000 posterior samples**:
+
+```{r}
+set.seed(123)
+posterior_samples <- simcontour(logisticpost, data_combined, 1000)
+```
+
+We overlay the **posterior samples** on the contour plot:
+
+```{r}
+points(posterior_samples)
+```
+
+# Predicting Success Probability for ACT = 20
+
+To estimate the **probability of success** for a student with an **ACT score of 20**, we compute:
+
+\[
+p_{20} = \frac{\exp(\beta_0 + 20\beta_1)}{1 + \exp(\beta_0 + 20\beta_1)}
+\]
+
+```{r}
+p_success_20 <- exp(posterior_samples$x + 20 * posterior_samples$y) / 
+                 (1 + exp(posterior_samples$x + 20 * posterior_samples$y))
+```
+
+# 90% Credible Interval for \( p_{20} \)
+
+```{r}
+credible_interval <- quantile(p_success_20, c(0.05, 0.95))
+credible_interval
+```
+
+# Summary of Results
+
+- **Posterior Mean of Success Probability (ACT = 20):** `r mean(p_success_20)`
+- **90% Credible Interval for Success Probability:** `r credible_interval`
+
