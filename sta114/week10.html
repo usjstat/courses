@@ -9,10 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Dr. Rajitha M. Silva" />
+<meta name="author" content="Dr. R. M. Silva" />
 
 
-<title>STA 1142 - Probability and Distribution Theory I</title>
+<title>Cumulative Distribution Function (CDF) &amp; Quantiles</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -349,232 +349,660 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">STA 1142 - Probability and Distribution
-Theory I</h1>
-<h4 class="author">Dr. Rajitha M. Silva</h4>
+<h1 class="title toc-ignore">Cumulative Distribution Function (CDF)
+&amp; Quantiles</h1>
+<h4 class="author">Dr. R. M. Silva</h4>
 
 </div>
 
 
-<div id="course-information" class="section level1">
-<h1>Course Information</h1>
-<table>
-<tbody>
-<tr class="odd">
-<td><strong>Course Title:</strong></td>
-<td>Probability and Distribution Theory I</td>
-</tr>
-<tr class="even">
-<td><strong>Course Code:</strong></td>
-<td>STA1142</td>
-</tr>
-<tr class="odd">
-<td><strong>Credit Value:</strong></td>
-<td>2.0</td>
-</tr>
-<tr class="even">
-<td><strong>Status:</strong></td>
-<td>Core</td>
-</tr>
-<tr class="odd">
-<td><strong>Year/Level:</strong></td>
-<td>2025/First Year</td>
-</tr>
-<tr class="even">
-<td><strong>Semester:</strong></td>
-<td>1 (First Semester)</td>
-</tr>
-<tr class="odd">
-<td><strong>Pre-requisite:</strong></td>
-<td>A/L Combined Mathematics</td>
-</tr>
-</tbody>
-</table>
+<div id="definition-cumulative-distribution-function-cdf" class="section level3">
+<h3>Definition: Cumulative Distribution Function (cdf)</h3>
+<p>For any random variable <span class="math inline">\(X\)</span>, the
+<strong>cdf</strong> is <span class="math display">\[
+F_X(t) = \Pr(X \le t).
+\]</span></p>
+<p>This single function determines probabilities of all events that can
+be expressed in terms of <span class="math inline">\(X\)</span>.</p>
 <hr />
 </div>
-<div id="aim-of-the-course" class="section level1">
-<h1>Aim of the Course</h1>
-<p>This course establishes the fundamentals of probability theory. It
-supports learning in statistical inference, risk evaluation, actuarial
-modeling, and various forecasting fields such as weather prediction,
-sports outcomes, and finance. It is also a prerequisite for advanced
-modules in probability and statistics.</p>
+<div id="from-events-to-the-cdf" class="section level3">
+<h3>From Events to the CDF</h3>
+<p>For real numbers <span class="math inline">\(a \le b\)</span>, <span class="math display">\[
+\Pr(a &lt; X \le b) = F_X(b) - F_X(a).
+\]</span></p>
+<p>(Other combinations of strict/weak inequalities give the same value
+for continuous <span class="math inline">\(X\)</span>; for discrete
+<span class="math inline">\(X\)</span> they may differ by point
+masses.)</p>
+<p>A useful identity for discrete points is <span class="math display">\[
+\Pr(X = x) = F_X(x) - F_X(x-0),
+\]</span> where <span class="math inline">\(F_X(x-0)\)</span> is the
+left limit of <span class="math inline">\(F_X\)</span> at <span class="math inline">\(x\)</span>.</p>
 <hr />
 </div>
-<div id="learning-activities-weekly-breakdown" class="section level1">
-<h1>Learning Activities &amp; Weekly Breakdown</h1>
-<div style="text-align: center;">
-<table>
-<colgroup>
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Week</strong></th>
-<th><strong>Topic</strong></th>
-<th><strong>Description</strong></th>
-<th><strong>Hours</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td><a href="week1">Elements of Probability</a></td>
-<td>Introduction, experiments, outcomes, sample spaces, events</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td><a href="week2">Event Operations</a></td>
-<td>Complements, unions, intersections, mutually exclusive/exhaustive
-events</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td><a href="https://sportsanalyzr.shinyapps.io/week3/">Methods of
-Probability</a></td>
-<td>Classical, relative frequency, axioms, interpretation</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td><a href="week4.html">Conditional Probability</a></td>
-<td>Independent events</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td><a href="week5.html">Probability Rules</a></td>
-<td>Addition, multiplication, total probability, Bayes’ theorem</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="even">
-<td>6</td>
-<td><a href="midmarks.png"><strong>Midterm Examination</strong></a></td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr class="odd">
-<td>7</td>
-<td><a href="week6.html">Random Variables</a></td>
-<td>Definitions, discrete and continuous variables</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="even">
-<td>8</td>
-<td><a href="week8.html">Events with Random Variables</a></td>
-<td>Event representation and revision</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="odd">
-<td>9</td>
-<td><a href="week9.html">Distributions</a></td>
-<td>pmf, pdf, cdf</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="even">
-<td>10</td>
-<td><a href="week10.html">Probability Calculations</a></td>
-<td>Quantiles, quartiles, percentiles</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="odd">
-<td>11</td>
-<td>Mean &amp; Variance</td>
-<td>Mean and variance of r.v.s and functions</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="even">
-<td>12</td>
-<td>Moments</td>
-<td>MGF and properties</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="odd">
-<td>13</td>
-<td>Revision &amp; Integration</td>
-<td>-</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><em>T = Theory, IL = Independent Learning</em></p>
-<hr />
-</div>
-<div id="intended-learning-outcomes-ilos" class="section level1">
-<h1>Intended Learning Outcomes (ILOs)</h1>
-<p>By the end of this course, students will be able to:</p>
+<div id="properties-of-every-cdf" class="section level3">
+<h3>Properties of Every CDF</h3>
 <ol style="list-style-type: decimal">
-<li>Describe events using set notation and sample spaces.<br />
-</li>
-<li>Formulate and identify events of interest.<br />
-</li>
-<li>Apply classical and empirical methods for calculating
-probability.<br />
-</li>
-<li>Explain and apply probability axioms.<br />
-</li>
-<li>Distinguish conditional from unconditional events.<br />
-</li>
-<li>Use rules of probability effectively.<br />
-</li>
-<li>Define and identify types of random variables.<br />
-</li>
-<li>Relate events to random variables.<br />
-</li>
-<li>Use pmf, pdf, cdf correctly.<br />
-</li>
-<li>Calculate probabilities and descriptive measures from
-distributions.<br />
-</li>
-<li>Define and interpret mean, median, variance, etc.<br />
-</li>
-<li>Use moment generating functions.<br />
-</li>
-<li>Use correct notation and terminology.<br />
-</li>
-<li>Communicate clearly and coherently.<br />
-</li>
-<li>Present clear and accurate solutions to problems.</li>
+<li><p><strong>Non-decreasing:</strong> if <span class="math inline">\(t_1 &lt; t_2\)</span>, then <span class="math inline">\(F_X(t_1) \le F_X(t_2)\)</span>.<br />
+</p></li>
+<li><p><strong>Limits:</strong> <span class="math inline">\(\displaystyle \lim_{t\to -\infty}F_X(t)=0,\quad
+\lim_{t\to \infty}F_X(t)=1.\)</span><br />
+</p></li>
+<li><p><strong>Right-continuous:</strong> <span class="math inline">\(\displaystyle \lim_{h\downarrow 0}
+F_X(t+h)=F_X(t).\)</span><br />
+– right-continuous allows jumps but forbids “holes” when you approach
+from the right.</p></li>
 </ol>
 <hr />
 </div>
-<div id="mode-of-assessment" class="section level1">
-<h1>Mode of Assessment</h1>
+<div id="example-dartboard-cdf-distance-from-the-bullseye" class="section level2">
+<h2>Example: Dartboard CDF (Distance from the Bullseye)</h2>
+<p>A dart is thrown at a <strong>circular dartboard</strong> of radius
+<span class="math inline">\(R\)</span>. <strong>Assume the dart always
+hits the board and, conditional on a hit, the landing point is uniformly
+distributed over the face of the board</strong> (i.e., any two regions
+of equal area are equally likely to be hit).</p>
+<p>Let <span class="math inline">\(X\)</span> be the <strong>distance
+from the dart’s landing point to the bullseye (center)</strong>.</p>
+<p><strong>Task:</strong> Derive the cumulative distribution function
+(cdf) of <span class="math inline">\(X\)</span>, namely <span class="math display">\[
+F_X(t) = \Pr(X \le t),
+\]</span> for all real <span class="math inline">\(t\)</span>.</p>
+<div id="solution" class="section level3">
+<h3>Solution</h3>
+<p>Because the hit is <strong>uniform over area</strong>, probability is
+proportional to area.</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Event geometry</strong></p>
 <ul>
-<li><strong>Midterm (on 6th week)</strong>: 40%<br />
+<li>For <span class="math inline">\(0\le t\le R\)</span>, the event
+<span class="math inline">\(\{X\le t\}\)</span> is a disk of radius
+<span class="math inline">\(t\)</span>.<br />
 </li>
-<li><strong>Final Exam</strong> (2 hours): 60% (Summative
-Assessment)</li>
+<li>Area of that disk: <span class="math inline">\(\pi
+t^{2}\)</span>.<br />
+</li>
+<li>Area of the whole board: <span class="math inline">\(\pi
+R^{2}\)</span>.</li>
+</ul>
+<p>Hence<br />
+<span class="math display">\[
+\Pr(X\le t)=\frac{\pi t^{2}}{\pi
+R^{2}}=\left(\frac{t}{R}\right)^{2},\qquad 0\le t\le R.
+\]</span></p></li>
+<li><p><strong>Outside the feasible range</strong></p>
+<ul>
+<li>If <span class="math inline">\(t&lt;0\)</span>: distances cannot be
+negative <span class="math inline">\(\;\Rightarrow\;
+F_X(t)=0\)</span>.<br />
+</li>
+<li>If <span class="math inline">\(t&gt;R\)</span>: the dart always
+lands within distance <span class="math inline">\(R\)</span> <span class="math inline">\(\;\Rightarrow\; F_X(t)=1\)</span>.</li>
+</ul></li>
+</ol>
+<hr />
+<div id="piecewise-form" class="section level4">
+<h4>Piecewise form</h4>
+<p><span class="math display">\[
+\boxed{
+F_X(t)=
+\begin{cases}
+0, &amp; t&lt;0,\\[6pt]
+\left(\dfrac{t}{R}\right)^{2}, &amp; 0\le t\le R,\\[10pt]
+1, &amp; t&gt;R.
+\end{cases}}
+\]</span></p>
+<hr />
+</div>
+</div>
+<div id="example---number-of-heads-in-three-tosses" class="section level3">
+<h3>Example - Number of Heads in Three Tosses</h3>
+<p>Experiment: toss a fair coin three times, and record the face up at
+each trial.<br />
+Random variable: <span class="math inline">\(X=\)</span> total number of
+heads.</p>
+<ul>
+<li>There are <span class="math inline">\(2^3 = 8\)</span>
+equally-likely outcome sequences.<br />
+</li>
+<li>Exactly one sequence has 0 heads (ttt) - <span class="math inline">\(1/8\)</span>.<br />
+</li>
+<li>Exactly one sequence has 3 heads (hhh) - <span class="math inline">\(1/8\)</span>.<br />
+</li>
+<li><span class="math inline">\(\binom{3}{1}=3\)</span> sequences have 1
+head - <span class="math inline">\(3/8\)</span>.<br />
+</li>
+<li><span class="math inline">\(\binom{3}{2}=3\)</span> sequences have 2
+heads - <span class="math inline">\(3/8\)</span>.</li>
+</ul>
+<hr />
+<div id="building-the-cdf-f_xtprxle-t" class="section level4">
+<h4>Building the cdf <span class="math inline">\(F_X(t)=\Pr(X\le
+t)\)</span></h4>
+<ol style="list-style-type: decimal">
+<li><p><strong><span class="math inline">\(t&lt;0\)</span></strong><br />
+No outcome gives <span class="math inline">\(X&lt;0\)</span> –&gt; <span class="math inline">\(F_X(t)=0\)</span>.</p></li>
+<li><p><strong><span class="math inline">\(0\le
+t&lt;1\)</span></strong><br />
+Only <span class="math inline">\(X=0\)</span> satisfies <span class="math inline">\(X\le t\)</span>.<br />
+<span class="math display">\[
+F_X(t)=\Pr(X=0)=\frac18.
+\]</span></p></li>
+<li><p><strong><span class="math inline">\(1\le
+t&lt;2\)</span></strong><br />
+<span class="math inline">\(X\)</span> can be 0 or 1.<br />
+<span class="math display">\[
+F_X(t)=\Pr(X=0)+\Pr(X=1)=\frac18+\frac38=\frac12.
+\]</span></p></li>
+<li><p><strong><span class="math inline">\(2\le
+t&lt;3\)</span></strong><br />
+<span class="math inline">\(X\)</span> can be 0,1,2.<br />
+<span class="math display">\[
+F_X(t)=\frac18+\frac38+\frac38=\frac78.
+\]</span></p></li>
+<li><p><strong><span class="math inline">\(t\ge
+3\)</span></strong><br />
+All possibilities counted - <span class="math inline">\(F_X(t)=1\)</span>.</p></li>
+</ol>
+<hr />
+</div>
+<div id="resulting-piecewise-form" class="section level4">
+<h4>Resulting piecewise form</h4>
+<p><span class="math display">\[
+\boxed{
+F_X(t)=
+\begin{cases}
+0, &amp; t&lt;0,\\[4pt]
+\dfrac18, &amp; 0\le t&lt;1,\\[10pt]
+\dfrac12, &amp; 1\le t&lt;2,\\[10pt]
+\dfrac78, &amp; 2\le t&lt;3,\\[10pt]
+1, &amp; t\ge 3.
+\end{cases}}
+\]</span></p>
+<p>Each step height equals the probability at that <span class="math inline">\(x\)</span>; cumulative sums give the cdf.</p>
+</div>
+</div>
+</div>
+<div id="example---stepwise-cdf-from-a-finite-support" class="section level2">
+<h2>Example - Stepwise CDF from a Finite Support</h2>
+<p>Suppose a discrete random variable <span class="math inline">\(X\)</span> takes values in a <strong>finite
+set</strong>:</p>
+<p><span class="math display">\[
+X \in \{-3,\ 1,\ 2,\ 5\}
+\]</span></p>
+<p>with corresponding probabilities:</p>
+<p><span class="math display">\[
+\boxed{
+\begin{array}{c|c|c|c|c}
+x &amp; -3 &amp; 1 &amp; 2 &amp; 5 \\
+\hline
+\Pr(X = x) &amp; \dfrac{1}{2} &amp; \dfrac{1}{3} &amp; \dfrac{1}{6}
+&amp; 0 \\
+\end{array}
+}
+\]</span></p>
+<p>We define the <strong>cumulative distribution function (cdf)</strong>
+of <span class="math inline">\(X\)</span> as:</p>
+<p><span class="math display">\[
+F_X(t) = \Pr(X \le t)
+\]</span></p>
+<hr />
+<div id="stepwise-structure-of-the-cdf" class="section level3">
+<h3>Stepwise Structure of the CDF</h3>
+<p>Because <span class="math inline">\(X\)</span> is a
+<strong>discrete</strong> random variable, its CDF is a <strong>step
+function</strong>:</p>
+<ul>
+<li>The function is <strong>constant between jumps</strong>.</li>
+<li>It <strong>jumps only at values in the support of <span class="math inline">\(X\)</span></strong>.</li>
+<li>Each jump has a height equal to the <strong>probability mass at that
+point</strong>.</li>
 </ul>
 <hr />
 </div>
-<div id="references" class="section level1">
-<h1>References</h1>
+<div id="piecewise-definition-of-the-cdf" class="section level3">
+<h3>Piecewise Definition of the CDF</h3>
+<p><span class="math display">\[
+F_X(t) =
+\begin{cases}
+0, &amp; t &lt; -3 \\
+\frac{1}{2}, &amp; -3 \le t &lt; 1 \\
+\frac{5}{6}, &amp; 1 \le t &lt; 2 \\
+1, &amp; 2 \le t &lt; 5 \\
+1, &amp; t \ge 5
+\end{cases}
+\]</span></p>
+<blockquote>
+<p>Note: The value <span class="math inline">\(x = 5\)</span> has
+probability 0, so the CDF does <strong>not jump</strong> at that point -
+it remains constant at 1.</p>
+</blockquote>
+<hr />
+</div>
+<div id="explanation" class="section level3">
+<h3>Explanation</h3>
 <ul>
-<li>Jay L. Devore, <em>Probability and Statistics for Engineering and
-Sciences</em>, Brooks/Cole.<br />
-</li>
-<li>B.M.S.G. Banneheka, <em>Statistical Distribution Theory</em>, Open
-University of Sri Lanka.<br />
-</li>
-<li>Class handouts and lecture notes.</li>
+<li><p>For <span class="math inline">\(t &lt; -3\)</span>, no value of
+<span class="math inline">\(X\)</span> is less than or equal to <span class="math inline">\(t\)</span> - <span class="math inline">\(F_X(t) =
+0\)</span>.<br />
+</p></li>
+<li><p>For <span class="math inline">\(-3 \le t &lt; 1\)</span>, only
+<span class="math inline">\(X = -3\)</span> contributes - <span class="math inline">\(F_X(t) = \Pr(X = -3) = \frac{1}{2}\)</span>.<br />
+</p></li>
+<li><p>For <span class="math inline">\(1 \le t &lt; 2\)</span>, <span class="math inline">\(X = -3\)</span> and <span class="math inline">\(X
+= 1\)</span> are counted - <span class="math inline">\(F_X(t) =
+\frac{1}{2} + \frac{1}{3} = \frac{5}{6}\)</span>.<br />
+</p></li>
+<li><p>For <span class="math inline">\(2 \le t &lt; 5\)</span>, we
+include <span class="math inline">\(X = 2\)</span> as well - <span class="math inline">\(F_X(t) = \frac{1}{2} + \frac{1}{3} + \frac{1}{6} =
+1\)</span>.<br />
+</p></li>
+<li><p>For <span class="math inline">\(t \ge 5\)</span>, we still have
+<span class="math inline">\(F_X(t) = 1\)</span> because all mass has
+been accumulated.</p></li>
 </ul>
 <hr />
 </div>
-<div id="instructor-office-hours" class="section level1">
-<h1>Instructor &amp; Office Hours</h1>
-<p><strong>Lecturer:</strong> Dr. Rajitha M. Silva<br />
-<strong>Email:</strong> <a href="mailto:rsilva@sjp.ac.lk" class="email">rsilva@sjp.ac.lk</a><br />
-<strong>Office Hours:</strong> One hour after lectures or by
-appointment</p>
+<div id="visual-insight" class="section level3">
+<h3>Visual Insight</h3>
+<p>The CDF rises in <strong>jumps</strong> of:<br />
+</p>
+<p><span class="math inline">\(+\frac{1}{2}\)</span> at <span class="math inline">\(x = -3\)</span>,<br />
+<span class="math inline">\(+\frac{1}{3}\)</span> at <span class="math inline">\(x = 1\)</span>,<br />
+<span class="math inline">\(+\frac{1}{6}\)</span> at <span class="math inline">\(x = 2\)</span>.<br />
+</p>
+<p>There is <strong>no jump at <span class="math inline">\(x =
+5\)</span></strong> because <span class="math inline">\(\Pr(X = 5) =
+0\)</span>.</p>
+<pre class="r"><code>library(ggplot2)
+
+# Define values and cumulative probabilities
+x_vals &lt;- c(-3, 1, 2, 5)
+probs &lt;- c(1/2, 1/3, 1/6, 0)
+cdf_vals &lt;- cumsum(probs)
+
+# Extended t values for plotting step function
+t_vals &lt;- c(-4, -3, 1, 2, 5, 6)
+F_vals &lt;- c(0, 1/2, 5/6, 1, 1, 1)
+
+# Plot
+ggplot(data.frame(t = t_vals, F = F_vals), aes(x = t, y = F)) +
+  geom_step(direction = &quot;hv&quot;) +
+  geom_point(data = data.frame(x = x_vals, y = cdf_vals),
+             aes(x = x, y = y), color = &quot;red&quot;, size = 2) +
+  labs(title = &quot;Stepwise CDF of Discrete Random Variable X&quot;,
+       x = &quot;t&quot;, y = expression(F[X](t))) +
+  theme_minimal()</code></pre>
+<p><img role="img" src="data:image/png;base64,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" width="576" /></p>
+</div>
+</div>
+<div id="experiment-tossing-a-die-repeatedly" class="section level2">
+<h2>Experiment: Tossing a Die Repeatedly</h2>
+<p>Consider the experiment where we toss a die repeatedly, and let <span class="math inline">\(X\)</span> represent the number of tosses until
+the first “1” appears.</p>
+<div id="probability-mass-function-pmf" class="section level3">
+<h3>Probability Mass Function (PMF)</h3>
+<p>The probability mass function (PMF) for the random variable <span class="math inline">\(X\)</span> (number of tosses until the first “1”
+appears) is given by:</p>
+<p><span class="math display">\[
+\Pr(X = k) = \left(\frac{5}{6}\right)^{k-1} \times \frac{1}{6}, \quad k
+= 1, 2, 3, \dots
+\]</span></p>
+<p>This formula describes the following: - The first <span class="math inline">\(k-1\)</span> tosses must <strong>not</strong> be
+“1” (each has a probability of <span class="math inline">\(\frac{5}{6}\)</span>). - On the <span class="math inline">\(k\)</span>-th toss, we must roll a “1”, which has
+a probability of <span class="math inline">\(\frac{1}{6}\)</span>.</p>
+</div>
+<div id="cumulative-distribution-function-cdf" class="section level3">
+<h3>Cumulative Distribution Function (CDF)</h3>
+<p>The cumulative distribution function (CDF) <span class="math inline">\(F_X(t)\)</span> is the probability that <span class="math inline">\(X\)</span> is less than or equal to some value
+<span class="math inline">\(t\)</span>. Specifically:</p>
+<p><span class="math display">\[
+F_X(t) = \Pr(X \leq t)
+\]</span></p>
+<p>We can express this piecewise as:</p>
+<p><span class="math display">\[
+F_X(t) =
+\begin{cases}
+0, &amp; \text{for } t &lt; 1 \\
+\sum_{k=1}^{\lfloor t \rfloor} \left(\frac{5}{6}\right)^{k-1} \times
+\frac{1}{6}, &amp; \text{for } t \geq 1
+\end{cases}
+\]</span></p>
+<div id="the-role-of-the-floor-function-in-the-cdf" class="section level4">
+<h4>The Role of the Floor Function in the CDF</h4>
+<p>The <strong>floor function</strong>, denoted <span class="math inline">\(\lfloor t \rfloor\)</span>, is a mathematical
+operation that rounds down a number <span class="math inline">\(t\)</span> to the largest integer less than or
+equal to <span class="math inline">\(t\)</span>. For example:</p>
+<ul>
+<li><span class="math inline">\(\lfloor 3.7 \rfloor = 3\)</span></li>
+<li><span class="math inline">\(\lfloor 5.2 \rfloor = 5\)</span></li>
+<li><span class="math inline">\(\lfloor 7 \rfloor = 7\)</span></li>
+</ul>
+<p>In the context of the <strong>Cumulative Distribution Function
+(CDF)</strong>, we use the floor function to sum the probabilities for
+all values of <span class="math inline">\(X\)</span> less than or equal
+to <span class="math inline">\(t\)</span>. Since <span class="math inline">\(t\)</span> can be a non-integer, we need to round
+<span class="math inline">\(t\)</span> down to the nearest whole number
+before summing the probabilities.</p>
+</div>
+<div id="why-the-floor-function-is-used" class="section level4">
+<h4>Why the Floor Function Is Used</h4>
+<p>In the CDF expression (for <span class="math inline">\(t \ge
+1\)</span>):</p>
+<p><span class="math display">\[
+F_X(t) = \sum_{k=1}^{\lfloor t \rfloor} \left(\frac{5}{6}\right)^{k-1}
+\times \frac{1}{6}
+\]</span></p>
+<ul>
+<li><strong><span class="math inline">\(\lfloor t
+\rfloor\)</span></strong> ensures that we only sum the probabilities for
+values of <span class="math inline">\(X\)</span> up to the largest
+integer less than or equal to <span class="math inline">\(t\)</span>.</li>
+</ul>
+<p>For example: - If <span class="math inline">\(t = 2.5\)</span>, then
+<span class="math inline">\(\lfloor t \rfloor = 2\)</span>, so the sum
+of probabilities will be for <span class="math inline">\(X = 1\)</span>
+and <span class="math inline">\(X = 2\)</span>. - If <span class="math inline">\(t = 4.8\)</span>, then <span class="math inline">\(\lfloor t \rfloor = 4\)</span>, and we will sum
+the probabilities for <span class="math inline">\(X = 1\)</span>, <span class="math inline">\(X = 2\)</span>, <span class="math inline">\(X =
+3\)</span>, and <span class="math inline">\(X = 4\)</span>.</p>
+<p>The floor function effectively truncates any fractional part of <span class="math inline">\(t\)</span> and allows the CDF to sum probabilities
+only for complete tosses (since <span class="math inline">\(X\)</span>
+must always be a whole number of tosses).</p>
+<p>If <span class="math inline">\(t = 3.7\)</span>, then <span class="math inline">\(\lfloor t \rfloor = 3\)</span>, and the CDF sums
+the probabilities for <span class="math inline">\(X = 1\)</span>, <span class="math inline">\(X = 2\)</span>, and <span class="math inline">\(X
+= 3\)</span>. The value at <span class="math inline">\(t = 3.7\)</span>
+will be the same as the value at <span class="math inline">\(t =
+3\)</span>, as we are interested in the probability that <span class="math inline">\(X \leq 3\)</span> regardless of the decimal
+part.</p>
+<p>In the R code, the <code>floor()</code> function is used to ensure we
+correctly handle the summation of probabilities up to the integer part
+of <span class="math inline">\(t\)</span>.</p>
+<pre class="r"><code># Example of using floor in R
+t_value &lt;- 3.7
+floor_t &lt;- floor(t_value)  # Will return 3</code></pre>
+</div>
+</div>
+<div id="explanation-of-cdf-behavior" class="section level3">
+<h3>Explanation of CDF Behavior</h3>
+<ol style="list-style-type: decimal">
+<li><strong>For <span class="math inline">\(t &lt; 1\)</span></strong>:
+Since it’s impossible to have seen a “1” before the first toss, the
+probability is 0:</li>
+</ol>
+<p><span class="math display">\[
+F_X(t) = 0 \quad \text{for } t &lt; 1
+\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>For <span class="math inline">\(t \geq 1\)</span></strong>:
+The CDF sums the probabilities of all outcomes up to <span class="math inline">\(t\)</span>. For instance, if <span class="math inline">\(t = 3\)</span>, the CDF would be the sum of the
+probabilities for <span class="math inline">\(X = 1\)</span>, <span class="math inline">\(X = 2\)</span>, and <span class="math inline">\(X
+= 3\)</span>:</li>
+</ol>
+<p><span class="math display">\[
+F_X(3) = \Pr(X = 1) + \Pr(X = 2) + \Pr(X = 3)
+\]</span></p>
+<p>The CDF increases as <span class="math inline">\(t\)</span>
+increases, and eventually approaches 1 as <span class="math inline">\(t
+\to \infty\)</span>, reflecting the certainty that a “1” will eventually
+appear.</p>
+</div>
+<div id="visualizing-the-cdf-in-r" class="section level3">
+<h3>Visualizing the CDF in R</h3>
+<p>You can also plot the CDF to visualize how it behaves as <span class="math inline">\(t\)</span> increases. Below is an R code snippet
+to generate the plot:</p>
+<pre class="r"><code>library(ggplot2)
+
+# Define values and cumulative probabilities
+x_vals &lt;- c(1, 2, 3, 4)  # Possible values of X (tosses)
+probs &lt;- c((5/6)^0 * (1/6), (5/6)^1 * (1/6), (5/6)^2 * (1/6), (5/6)^3 * (1/6))  # PMF for each X value
+
+# Cumulative probabilities (CDF)
+cdf_vals &lt;- cumsum(probs)
+
+# Extended t values for plotting the step function (t-values starting from 1)
+t_vals &lt;- c(0,1, 2, 3, 4)  # Extended values for smooth step function
+F_vals &lt;- c(0, cdf_vals)  # Include 0 at t = 0 for the initial probability
+
+data.frame(t_vals,F_vals)</code></pre>
+<pre><code>##   t_vals    F_vals
+## 1      0 0.0000000
+## 2      1 0.1666667
+## 3      2 0.3055556
+## 4      3 0.4212963
+## 5      4 0.5177469</code></pre>
+<pre class="r"><code># Plot the CDF with jumps and gaps
+ggplot(data.frame(t = t_vals, F = F_vals), aes(x = t, y = F)) +
+  geom_step(direction = &quot;hv&quot;, color = &quot;blue&quot;) +  # Stepwise plot
+  geom_point(data = data.frame(x = x_vals, y = cdf_vals),
+             aes(x = x, y = y), color = &quot;red&quot;, size = 3) +  # Red dots at jump points
+  labs(title = &quot;Stepwise CDF of Discrete Random Variable X&quot;,
+       x = &quot;Number of Tosses (t)&quot;, y = expression(F[X](t))) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Adjust x-axis labels</code></pre>
+<p><img role="img" src="data:image/png;base64,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" width="672" /></p>
 <hr />
-<p><em>This course is effective from 19th May 2025.</em></p>
+</div>
+</div>
+<div id="quantiles" class="section level2">
+<h2>Quantiles</h2>
+<div id="definition-2.3-quantile" class="section level3">
+<h3>Definition 2.3 (Quantile)</h3>
+<p>For <span class="math inline">\(0&lt;p&lt;1\)</span>, a <strong><span class="math inline">\(p\)</span>-quantile</strong> <span class="math inline">\(t_p\)</span> is any solution of the inequalities
+<span class="math display">\[
+\Pr(X \le t) \ge p, \qquad \Pr(X \ge t) \ge 1-p.
+\]</span> Equivalently, <span class="math display">\[
+F_X(t) \ge p,\qquad F_X(t-0) \le p.
+\]</span></p>
+<p>Special names:<br />
+- <span class="math inline">\(t_{0.5}\)</span>:
+<strong>median</strong><br />
+- <span class="math inline">\(t_{0.25},\, t_{0.75}\)</span>:
+<strong>lower and upper quartiles</strong></p>
+<hr />
+</div>
+<div id="example---quantiles-in-continous-distribution" class="section level3">
+<h3>Example - Quantiles in Continous Distribution</h3>
+<p>Using <span class="math inline">\(F_X(t) = (t/R)^2\)</span> on <span class="math inline">\([0,R]\)</span>, solve <span class="math inline">\((t_p/R)^2=p\)</span>.<br />
+</p>
+<p>Thus <span class="math inline">\(t_p = R\sqrt{p}\)</span>;<br />
+</p>
+<p>e.g. <span class="math inline">\(t_{0.25}=R/2\)</span>.</p>
+<hr />
+</div>
+</div>
+<div id="activity-2.19" class="section level2">
+<h2>Activity 2.19</h2>
+<p>Consider a <strong>continuous distribution</strong> where the
+<strong>cumulative distribution function (CDF)</strong> is given by:</p>
+<p><span class="math display">\[
+F_X(t) = 1 - e^{-t/\lambda} \quad \text{for} \quad t \geq 0,
+\]</span></p>
+<p>where <span class="math inline">\(\lambda\)</span> is a positive
+constant.</p>
+<p>This distribution represents the probability that the random variable
+<span class="math inline">\(X\)</span> takes a value less than or equal
+to <span class="math inline">\(t\)</span>. Calculate the first quartile
+(25th quantile).</p>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>To find the <strong>quantile function</strong> (inverse of the CDF),
+we solve for <span class="math inline">\(t_p\)</span> in terms of the
+probability <span class="math inline">\(p\)</span>.</p>
+<p>Starting with the CDF:</p>
+<p><span class="math display">\[
+F_X(t) = 1 - e^{-t/\lambda},
+\]</span></p>
+<p>we solve for <span class="math inline">\(t\)</span>:</p>
+<p><span class="math display">\[
+p = 1 - e^{-t/\lambda},
+\]</span></p>
+<p><span class="math display">\[
+e^{-t/\lambda} = 1 - p,
+\]</span></p>
+<p><span class="math display">\[
+-t/\lambda = \ln(1 - p),
+\]</span></p>
+<p><span class="math display">\[
+t = -\lambda \ln(1 - p).
+\]</span></p>
+<p>Thus, the <strong>quantile function</strong> is:</p>
+<p><span class="math display">\[
+t_p = -\lambda \ln(1 - p).
+\]</span></p>
+<p>For the probability, <span class="math inline">\(p = 0.25\)</span>,
+we calculate the quantile <span class="math inline">\(t_{0.25}\)</span>:</p>
+<p><span class="math display">\[
+t_{0.25} = -\lambda \ln(1 - 0.25) = -\lambda \ln(0.75).
+\]</span></p>
+<p>Using a numerical approximation, we find:</p>
+<p><span class="math display">\[
+\ln(0.75) \approx -0.2877,
+\]</span></p>
+<p><span class="math display">\[
+t_{0.25} = -\lambda \cdot (-0.2877) = 0.2877 \lambda.
+\]</span></p>
+<p>So, if <span class="math inline">\(\lambda = 10\)</span>, then:</p>
+<p><span class="math display">\[
+t_{0.25} \approx 0.2877 \cdot 10 = 2.877.
+\]</span></p>
+<p>Thus, the <strong>25th percentile</strong> of this distribution is
+approximately <strong>2.88</strong>.</p>
+</details>
+<hr />
+<div id="example---quantiles-in-a-discrete-distribution" class="section level3">
+<h3>Example - Quantiles in a Discrete Distribution</h3>
+<p>Let the random variable <span class="math inline">\(X\)</span> take
+the values:</p>
+<p><span class="math display">\[
+X \in \{1, 2, 3\} \quad \text{with} \quad
+\Pr(X=1) = 0.2, \quad
+\Pr(X=2) = 0.6, \quad
+\Pr(X=3) = 0.2
+\]</span></p>
+<hr />
+</div>
+<div id="step-1-construct-the-cumulative-distribution-function-cdf" class="section level3">
+<h3>Step 1: Construct the Cumulative Distribution Function (cdf)</h3>
+<p><span class="math display">\[
+F_X(x) =
+\begin{cases}
+0, &amp; x &lt; 1 \\
+0.2, &amp; 1 \le x &lt; 2 \\
+0.8, &amp; 2 \le x &lt; 3 \\
+1, &amp; x \ge 3
+\end{cases}
+\]</span></p>
+<hr />
+</div>
+<div id="step-2-define-the-p-quantile" class="section level3">
+<h3>Step 2: Define the <span class="math inline">\(p\)</span>-Quantile</h3>
+<p>For any <span class="math inline">\(p \in (0,1)\)</span>, the
+<strong><span class="math inline">\(p\)</span>-quantile</strong> of a
+random variable <span class="math inline">\(X\)</span> is:</p>
+<p><span class="math display">\[
+t_p = \inf\{x \in \mathbb{R} \mid F_X(x) \ge p\}
+\]</span> ### Explanation</p>
+<p>This definition uses the <strong>infimum</strong> (greatest lower
+bound) to find the smallest value <span class="math inline">\(x\)</span>
+such that the cumulative distribution function (cdf) <span class="math inline">\(F_X(x)\)</span> reaches or exceeds the probability
+level <span class="math inline">\(p\)</span>.</p>
+<p>Let’s break it down:</p>
+<ul>
+<li><p>The <strong>cdf</strong> <span class="math inline">\(F_X(x)\)</span> gives the probability that the
+random variable <span class="math inline">\(X\)</span> takes a value
+less than or equal to <span class="math inline">\(x\)</span>, i.e.,
+<span class="math inline">\(F_X(x) = \Pr(X \le x)\)</span>.</p></li>
+<li><p>The <strong>set</strong> <span class="math inline">\(\{x \in
+\mathbb{R} \mid F_X(x) \ge p\}\)</span> contains all values of <span class="math inline">\(x\)</span> for which the cumulative probability is
+at least <span class="math inline">\(p\)</span>.</p></li>
+<li><p>The <strong>infimum</strong> of this set is the smallest such
+<span class="math inline">\(x\)</span> that satisfies the inequality
+<span class="math inline">\(F_X(x) \ge p\)</span>. This ensures that
+<span class="math inline">\(t_p\)</span> is the <strong>leftmost
+point</strong> where the cdf crosses the level <span class="math inline">\(p\)</span>.</p></li>
+</ul>
+<hr />
+<p>In the discrete case, this often involves checking intervals where
+the cdf jumps.</p>
+<hr />
+</div>
+<div id="step-3-compute-specific-quantiles" class="section level3">
+<h3>Step 3: Compute Specific Quantiles</h3>
+<ul>
+<li><p><strong>Median</strong> (<span class="math inline">\(p =
+0.5\)</span>):</p>
+<p>We seek the smallest <span class="math inline">\(x\)</span> such that
+<span class="math inline">\(F_X(x) \ge 0.5\)</span>.</p>
+<p><span class="math display">\[
+F_X(1) = 0.2 \quad \text{(too small)}\\
+F_X(2) = 0.8 \ge 0.5 \Rightarrow t_{0.5} = 2
+\]</span></p></li>
+<li><p><strong>First Quartile</strong> (<span class="math inline">\(p =
+0.25\)</span>):</p>
+<p><span class="math display">\[
+F_X(1) = 0.2 \quad \text{(too small)}\\
+F_X(2) = 0.8 \ge 0.25 \Rightarrow t_{0.25} = 2
+\]</span></p></li>
+<li><p><strong>Third Quartile</strong> (<span class="math inline">\(p =
+0.75\)</span>):</p>
+<p><span class="math display">\[
+F_X(2) = 0.8 \ge 0.75 \Rightarrow t_{0.75} = 2
+\]</span></p></li>
+<li><p><strong>90th Percentile</strong> (<span class="math inline">\(p =
+0.90\)</span>):</p>
+<p><span class="math display">\[
+F_X(3) = 1.0 \ge 0.90 \Rightarrow t_{0.90} = 3
+\]</span></p></li>
+</ul>
+<hr />
+</div>
+<div id="summary-table-of-quantiles" class="section level3">
+<h3>Summary Table of Quantiles</h3>
+<p><span class="math display">\[
+\begin{array}{c|c}
+\text{Quantile Level } p &amp; t_p \\
+\hline
+0.25 &amp; 2 \\
+0.50 &amp; 2 \\
+0.75 &amp; 2 \\
+0.90 &amp; 3 \\
+\end{array}
+\]</span></p>
+<p>Note: In a <strong>discrete</strong> distribution, many different
+<span class="math inline">\(p\)</span>-quantiles may map to the same
+value of <span class="math inline">\(X\)</span>, depending on where the
+jumps in the cdf occur.</p>
+<hr />
+</div>
+<div id="theorem---probability-between-quantiles" class="section level3">
+<h3>Theorem - Probability Between Quantiles</h3>
+<p>If <span class="math inline">\(F\)</span> is continuous and <span class="math inline">\(0&lt;\alpha&lt;\beta&lt;1\)</span>, then for any
+<span class="math inline">\(\alpha\)</span>- and <span class="math inline">\(\beta\)</span>-quantiles <span class="math inline">\(t_\alpha, t_\beta\)</span>, <span class="math display">\[
+\Pr(t_\alpha \le X \le t_\beta) = \beta - \alpha.
+\]</span></p>
+<p><strong>Example</strong> With a continuous cdf, the probability that
+<span class="math inline">\(X\)</span> lies between its first and third
+quartiles is <span class="math inline">\(0.75-0.25=0.5\)</span>.</p>
+<hr />
+</div>
+<div id="practical-use-probabilities-via-quantiles" class="section level3">
+<h3>Practical Use: Probabilities via Quantiles</h3>
+<ul>
+<li>To find <span class="math inline">\(t_p\)</span>, solve <span class="math inline">\(F_X(t_p)=p\)</span> (when a solution
+exists).<br />
+</li>
+<li>To compute <span class="math inline">\(\Pr(X\in [t_\alpha,
+t_\beta])\)</span> for a continuous cdf, use Theorem - Probability
+Between Quantiles.<br />
+</li>
+<li>In discrete cases, use the inequality definition to locate the
+smallest <span class="math inline">\(t\)</span> with <span class="math inline">\(F_X(t)\ge p\)</span>.</li>
+</ul>
+<hr />
+</div>
 </div>
 
 
