@@ -1,0 +1,949 @@
+---
+title: "TETC 1212 Probability and Statistics: Week 5"
+author: "Dr. Rajitha M. Silva"
+output: html_document
+runtime: shiny
+---
+
+# 1.3 Axioms of Probability
+
+Axioms form the foundation of probability theory. These are the basic rules or assumptions upon which all of probability is built. They allow us to develop a consistent mathematical framework for assigning and manipulating probabilities.
+
+Understanding these axioms is important because:\
+
+-   They ensure that the probability of any event is a meaningful, non-negative number.\
+-   They guarantee the total probability across all possible outcomes equals 1.\
+-   They help us handle more complex situations involving multiple events.
+
+Probability is a numerical measure that quantifies the likelihood of an event occurring.
+
+A probability function $\text{Pr}(\cdot)$ must satisfy these **three axioms**:
+
+-   **Axiom 1**: For any event $A$, $\text{Pr}(A) \geq 0$
+-   **Axiom 2**: $\text{Pr}(S) = 1$ (i.e., the total probability of the sample space is 1)
+-   **Axiom 3**: For any countable collection of **mutually exclusive** events $A_1, A_2, \ldots$, $$ \text{Pr}(A_1 \cup A_2 \cup \ldots) = \sum_i \text{Pr}(A_i) $$
+
+This holds for both **finite** and **countable infinite** unions.
+
+------------------------------------------------------------------------
+
+## Activity 1.13
+
+Let $E$ be an event. Using the axioms of probability, show that $\text{Pr}(E) \leq 1$.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Let $E \subseteq S$. The complement of $E$, denoted $E'$, is the set of outcomes in $S$ that are not in $E$.\
+Using event operations, this can be expressed as:
+
+$$
+E' = S \cap E^c
+$$
+
+Note:
+
+\- $E \cap E' = \emptyset$, so $E$ and $E'$ are **mutually exclusive**.
+
+\- $E \cup E' = S$
+
+By **Axiom 3** (additivity for mutually exclusive events):
+
+$$
+\text{Pr}(E \cup E') = \text{Pr}(E) + \text{Pr}(E')
+$$
+
+By **Axiom 2**:
+
+$$
+\text{Pr}(S) = 1
+$$
+
+Therefore:
+
+$$
+\text{Pr}(E) + \text{Pr}(E') = 1 \Rightarrow \text{Pr}(E) = 1 - \text{Pr}(E') \leq 1
+$$
+
+</details>
+
+------------------------------------------------------------------------
+
+# 1.4 Methods for Determining Probability
+
+Probability can be determined in different ways depending on the context. Whether based on logical reasoning, past data, or subjective belief, each method has its own use case and importance.
+
+Understanding these methods helps you:
+
+\- Decide which model or approach fits a given situation.
+
+\- Interpret probability values meaningfully.
+
+\- Apply theory to real-world settings, such as games, experiments, or business problems.
+
+There are four methods used to determine probabilities:
+
+1.  **Classical Method**: Based on equally likely outcomes in a finite sample space.
+2.  **Relative Frequency Method**: Based on repeated experiments and observed frequencies.
+3.  **Subjective Method**: Based on personal judgment or opinion.
+4.  **Using Probability Models**: Based on theoretical assumptions.
+
+------------------------------------------------------------------------
+
+## 1.4.1 Classical Method
+
+The classical method of probability is the most basic and widely taught approach. It is grounded in situations where all outcomes are assumed to be **equally likely** — that is, each outcome has the same chance of occurring.
+
+### What Does "Equally Likely" Mean?
+
+Equally likely outcomes mean that, based on the design of the experiment or inherent symmetry, there is no reason to believe one outcome will happen more often than another. For example:
+
+-   Each face of a fair die has a 1/6 chance.\
+-   Each side of a fair coin has a 1/2 chance.\
+-   Each card in a well-shuffled deck has a 1/52 chance.\
+
+This method is especially useful when dealing with finite, symmetric, and well-defined sample spaces, such as dice rolls, card draws, or coin tosses.
+
+If all outcomes in the sample space $S$ are equally likely, then for any event $E$:
+
+$$
+\text{Pr}(E) = \frac{n(E)}{n(S)}
+$$
+
+------------------------------------------------------------------------
+
+## Activity 1.14
+
+A fair six-sided die is rolled. Find the probabilities of the following events:
+
+1.  $A$: getting the number 1\
+2.  $B$: getting a number less than 3\
+3.  $C$: getting an even number\
+4.  $D$: getting a number greater than 5\
+5.  $E$: getting a number greater than 6
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Let $S = \{1, 2, 3, 4, 5, 6\}$ with all outcomes equally likely.
+
+-   $\text{Pr}(A) = 1/6$
+-   $\text{Pr}(B) = 2/6 = 1/3$
+-   $\text{Pr}(C) = 3/6 = 1/2$
+-   $\text{Pr}(D) = 1/6$
+-   $\text{Pr}(E) = 0$ (event is impossible)
+
+</details>
+
+------------------------------------------------------------------------
+
+## Activity 1.15
+
+A box contains:
+
+\- 1 ticket with number 6
+
+\- 2 tickets with number 5
+
+\- 3 tickets with number 4
+
+\- 4 tickets with number 3
+
+\- 5 tickets with number 2
+
+\- 6 tickets with number 1
+
+A ticket is drawn at random. Find the probabilities of the following:
+
+1.  Getting the number 1\
+2.  Getting a number less than 3\
+3.  Getting an even number\
+4.  Getting a number greater than 5\
+5.  Getting a number greater than 6
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+$$
+S = \{1_1, 1_2, 1_3, 1_4, 1_5, 1_6,\ 2_1, 2_2, 2_3, 2_4, 2_5,\ 3_1, 3_2, 3_3, 3_4,\ 4_1, 4_2, 4_3,\ 5_1, 5_2,\ 6_1\}
+$$
+
+Total number of tickets = $1+2+3+4+5+6 = 21$
+
+Define Events
+
+-   \\( A \\): Getting number 1 → 6 outcomes
+
+-   \\( B \\): Getting number less than 3 → numbers 1 & 2 → 6 + 5 = 11
+
+-   \\( C \\): Getting even number → 2, 4, 6 → 5 + 3 + 1 = 9
+
+-   \\( D \\): Getting number greater than 5 → only 6 → 1 outcome
+
+-   \\( E \\): Getting number greater than 6 → 0 outcomes
+
+Applying Classical Method
+
+-   \\[\\text{Pr}(A) = \\frac{6}{21}, \\quad\\text{Pr}(B) = \\frac{11}{21}, \\quad\\text{Pr}(C) = \\frac{9}{21}, \\quad\\text{Pr}(D) = \\frac{1}{21}, \\quad\\text{Pr}(E) = 0\\]
+
+</details>
+
+------------------------------------------------------------------------
+
+# **Counting Techniques**
+
+Counting techniques are essential tools in probability theory for calculating the number of possible outcomes in complex experiments. These techniques help us avoid the impractical task of listing every possible outcome when the number of outcomes grows large.
+
+### 1. Multiplication Rule
+
+If one task can be done in $m$ ways and another in $n$ ways, then the two tasks together can be performed in $m \times n$ ways.
+
+**Example:** How many 3-digit PINs can be formed if each digit can be from 0 to 9? $$
+10 \times 10 \times 10 = 1000 \text{ PINs}
+$$
+
+### 2. Permutations (Ordered Arrangements)
+
+Permutations refer to the number of ways to arrange $r$ items out of $n$, when the order matters.
+
+-   Formula (no repetition): $P(n, r) = \frac{n!}{(n - r)!}$
+
+**Example:** How many ways can 3 medals (gold, silver, bronze) be awarded to 5 athletes? $$
+P(n, r) = \frac{n!}{(n - r)!}
+$$
+
+$$
+P(5, 3) = \frac{5!}{(5 - 3)!} = \frac{120}{2} = 60
+$$
+
+### 3. Combinations (Unordered Selections)
+
+Combinations count how many ways $r$ elements can be selected from $n$, where the order doesn’t matter.
+
+-   Formula: $$
+    C(n, r) = \binom{n}{r} = \frac{n!}{r!(n - r)!}
+    $$
+
+$$
+\binom{10}{4} = \frac{10!}{4!6!} = 210
+$$
+
+**Example:** From 10 applicants, how many ways can a committee of 4 be formed? $$
+\binom{10}{4} = 210
+$$
+
+These techniques help us for solving problems in probability, specially when dealing with complex events such as card games, lotteries, and arrangements.
+
+------------------------------------------------------------------------
+
+## Activity 1.16
+
+A box contains 3 white balls and 2 black balls. Three balls are taken randomly from this box.\
+If possible, find the probabilities of the following events using the classical method.\
+Assume the 3 balls are drawn simultaneously (i.e., order does not matter).
+
+1.  $A$: the event of getting exactly one white ball\
+2.  $B$: the event of getting more than one white ball\
+3.  $C$: the event of getting no white balls
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+### Step 1: Total Number of Ways to Choose 3 Balls
+
+We use combinations since order does not matter: $$
+    \text{Total outcomes} = \binom{5}{3} = 10
+$$
+
+### Step 2: Event Counts
+
+Let $W$ = white, $B$ = black.
+
+-   **Event A (Exactly 1 white):** $$
+    \binom{3}{1}  \times \binom{2}{2} = 3     \times 1 = 3
+    $$
+-   **Event B (More than 1 white = 2 or 3 whites):** $$
+    \binom{3}{2}  \times \binom{2}{1} + \binom{3}{3} = 3  \times 2 + 1 = 6 + 1 = 7
+    $$
+-   **Event C (No white = all black):** Not possible as there are only 2 black balls → 0 outcomes.
+
+### Step 3: Probabilities
+
+-   $\text{Pr}(A) = \frac{3}{10} = 0.3$
+-   $\text{Pr}(B) = \frac{7}{10} = 0.7$
+-   $\text{Pr}(C) = 0$
+
+</details>
+
+## Activity 1.17
+
+A security supervisor of a large corporation wishes to issue each employee an identity card with one English letter followed by two digits.
+
+1.  How many different ID cards could be made if the two digits can be the same?
+2.  How many different ID cards could be made if the two digits cannot be the same?
+3.  How many different ID cards could be made if the first digit cannot be 0?
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+We apply the multiplication rule of counting.
+
+-   There are 26 English letters (A–Z).
+-   There are 10 digits (0–9).
+
+1.  **Digits can be the same**:
+
+$$
+\text{Total ID cards} = 26 \times 10 \times 10 = 2600
+$$
+
+2.  **Digits cannot be the same**:
+
+$$
+\text{Total ID cards} = 26 \times 10 \times 9 = 2340
+$$
+
+3.  **First digit cannot be 0**:
+
+$$
+\text{Total ID cards} = 26 \times 9 \times 10 = 2340
+$$
+
+</details>
+
+------------------------------------------------------------------------
+
+## Activity 1.18
+
+A box contains 3 white balls and 2 black balls. Three balls are taken randomly from this box. Assume that the balls are marked as $w_1, w_2, w_3, b_1, b_2$.
+
+1.  How many different selections of three balls are possible?
+2.  How many different arrangements of three balls are possible?
+3.  Out of all the possible selections of three balls, how many selections contain 1 white ball?
+4.  Out of all the possible arrangements of three balls, how many arrangements contain 1 white ball?
+5.  Out of all the possible selections of three balls, how many selections contain 2 white balls?
+6.  Out of all the possible arrangements of three balls, how many arrangements contain 2 white balls?
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Let us count using combinations and permutations.
+
+-   Total balls: 5 
+
+1.  **Selections of 3 balls** (order doesn't matter):
+
+$$
+\binom{5}{3} = 10
+$$
+
+2.  **Arrangements of 3 balls** (order matters):
+
+$$
+P(5, 3) = \frac{5!}{2!} = 60
+$$
+
+3.  **Selections with 1 white ball**:
+
+$$
+\binom{3}{1} \times \binom{2}{2} = 3 \times 1 = 3
+$$
+
+4.  **Arrangements with 1 white ball**:
+
+Each of the 3 selections can be arranged in $3! = 6$ ways:
+
+$$
+3 \times 6 = 18
+$$
+
+5.  **Selections with 2 white balls**:
+
+$$
+\binom{3}{2} \times \binom{2}{1} = 3 \times 2 = 6
+$$
+
+6.  **Arrangements with 2 white balls**:
+
+Each of the 6 selections can be arranged in $3! = 6$ ways:
+
+$$
+6 \times 6 = 36
+$$
+
+</details>
+
+------------------------------------------------------------------------
+
+## Activity 1.19
+
+In a small company there are 7 women and 5 men. A committee of 5 people is to be selected.
+
+1.  How many different committees can be selected?
+2.  How many committees with 3 women and 2 men can be selected?
+3.  If 5 people are selected at random for the committee, what is the probability that the committee consists of 3 women and 2 men?
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+We use combinations.
+
+-   Total people = 12 (7 women + 5 men)
+
+1.  **Total number of committees**:
+
+$$
+\binom{12}{5} = 792
+$$
+
+2.  **Committees with 3 women and 2 men**:
+
+$$
+\binom{7}{3} \times \binom{5}{2} = 35 \times 10 = 350
+$$
+
+3.  **A = Event of getting 3 women and 2 men**:
+
+$$
+\text{Pr}(A) = \frac{350}{792} \approx 0.442
+$$
+
+</details>
+
+------------------------------------------------------------------------
+
+**When and Why We Multiply Probabilities**
+
+In probability, we often deal with situations that involve **two or more events happening one after another**. To find the probability of such combined events, we apply the **Multiplication Rule** - a concept you've already seen in counting.
+
+**Multiplication Rule (Counting):**
+
+> If one task can be done in $m$ ways and another in $n$ ways, the tasks together can be done in $m \times n$ ways.
+
+We apply the same idea in probability:
+
+\
+If an experiment involves multiple stages (like drawing two balls one after the other), we can find the probability of a specific sequence of outcomes by **multiplying the probability of each stage**, step by step.
+
+> **Important**: Here, we are not assuming that the events are independent.\
+> We are simply applying the multiplication rule in a **sequential setting**, where the outcome of the first event affects the second.\
+> The concept of **independent events** will be formally discussed later in the course.
+
+This will help us solve the problems in the next two activities.
+
+------------------------------------------------------------------------
+
+## Activity 1.20
+
+A box contains 3 white balls and 2 black balls. Two balls are taken one after the other without replacement.
+
+1.  What is the probability that the first ball is white?\
+2.  What is the probability that the second ball is black?\
+3.  What is the probability that the first ball is white and the second ball is black?
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Let the total number of balls = 5 (3 white, 2 black). Define events:
+
+-   $A$: the event that the **first ball is white**
+-   $B$: the event that the **second ball is black**
+-   $A \cap B$: the event that the **first is white and second is black**
+
+1.  **Probability of event A**:
+
+$$
+\text{Pr}(A) = \frac{3}{5}
+$$
+
+2.  **Probability of event B** (second is black): We'll calculate this by considering all paths that can lead to a black second ball.
+
+-   Case 1: First white, second black:
+
+$$
+\text{Pr}(A \cap B) = \frac{3}{5} \times \frac{2}{4} = \frac{6}{20} = 0.3
+$$
+
+-   Case 2: First black, second black:
+
+$$
+\text{Pr}(\text{First black and second black}) = \frac{2}{5} \times \frac{1}{4} = \frac{2}{20} = 0.1
+$$
+
+So the probability of event $B$ is:
+
+$$
+\text{Pr}(B) = 0.3 + 0.1 = 0.4
+$$
+
+3.  **Probability of event** $A \cap B$ (first white and second black):
+
+$$
+\text{Pr}(A \cap B) = \frac{3}{5} \times \frac{2}{4} = 0.3
+$$
+
+</details>
+
+------------------------------------------------------------------------
+
+## Activity 1.21
+
+A box contains 3 white balls and 2 black balls. Two balls are taken one after the other with replacement.
+
+1.  What is the probability that the first ball is white?\
+2.  What is the probability that the second ball is black?\
+3.  What is the probability that the first ball is white and the second ball is black?
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Since the ball is replaced before the second draw, the total number of balls remains 5 throughout.
+
+Define events:
+
+-   $A$: the event that the **first ball is white**
+-   $B$: the event that the **second ball is black**
+-   $A \cap B$: the event that the **first is white and second is black**
+
+1.  **Probability of event A**:
+
+$$
+\text{Pr}(A) = \frac{3}{5}
+$$
+
+2.  **Probability of event B**:
+
+$$
+\text{Pr}(B) = \frac{2}{5}
+$$
+
+3.  **Probability of event** $A \cap B$:
+
+Since the first ball is replaced, the outcomes remain unchanged between the draws.
+
+$$
+\text{Pr}(A \cap B) = \frac{3}{5} \times \frac{2}{5} = \frac{6}{25} = 0.24
+$$
+
+</details>
+
+## Activity 1.22
+
+A method that is often used to estimate the size of a wildlife population involves performing a **capture-recapture experiment**.
+
+In this experiment:
+
+-   An initial sample of $M$ animals is captured, tagged, and released into the wild.
+-   Later, a second sample of size $n$ is captured (assume $n < M$).
+-   Suppose the total number of animals in the population is $N$.
+-   Let $x$ be the number of **tagged animals** in the second sample.
+
+What is the probability that the second sample contains exactly $x$ tagged animals?
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Let:
+
+-   $S$: the sample space of all possible ways to select $n$ animals from the population of $N$
+-   $T$: the event that exactly $x$ of the selected $n$ animals are tagged
+
+To calculate $\text{Pr}(T)$ using the classical method, we consider:
+
+**Total number of possible samples**
+
+This is the number of ways to choose $n$ animals from the total $N$:
+
+$$
+n(S) = \binom{N}{n}
+$$
+
+**Favorable outcomes (exactly** $x$ tagged)
+
+To get exactly $x$ tagged animals in the second sample:
+
+-   Choose $x$ animals from the $M$ tagged animals $\Rightarrow \binom{M}{x}$ ways
+-   Choose the remaining $n - x$ animals from the $N - M$ untagged animals $\Rightarrow \binom{N - M}{n - x}$ ways
+
+So the total number of favorable outcomes is:
+
+$$
+n(T) = \binom{M}{x} \cdot \binom{N - M}{n - x}
+$$
+
+Therefore, the required probability is:
+
+$$
+\text{Pr}(T) = \frac{\binom{M}{x} \cdot \binom{N - M}{n - x}}{\binom{N}{n}}
+$$
+
+</details>
+
+------------------------------------------------------------------------
+
+## Activity 1.23
+
+A production facility employs:
+
+-   20 workers on the **day shift**
+-   15 workers on the **swing shift** (between day and night, often running from 4:00 PM to midnight)
+-   10 workers on the **graveyard shift** (Night Shift)
+
+A quality control consultant is to select 6 workers at random **without replacement**.
+
+1.  How many selections result in all six workers coming from the day shift? What is the probability that all six selected workers will be from the day shift?\
+2.  What is the probability that all six selected workers will be from the same shift?\
+3.  What is the probability that **at least two different shifts** will be represented among the selected workers?
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Let total number of workers be:
+
+$$
+N = 20 + 15 + 10 = 45
+$$
+
+Let:
+
+-   $A$: the event that **all 6 workers are from the day shift**
+-   $B$: the event that **all 6 are from the same shift**
+-   $C$: the event that **at least two different shifts are represented**
+
+1.  **Event A**:
+
+Number of favorable outcomes:
+
+$$
+\binom{20}{6}
+$$
+
+Total possible selections:
+
+$$
+\binom{45}{6}
+$$
+
+So,
+
+$$
+\text{Pr}(A) = \frac{\binom{20}{6}}{\binom{45}{6}} \approx 0.00476
+$$
+
+2.  **Event B**:
+
+All 6 from any **one** of the shifts:
+
+$$
+\binom{20}{6} + \binom{15}{6} + \binom{10}{6}
+$$
+
+So,
+
+$$
+\text{Pr}(B) = \frac{\binom{20}{6} + \binom{15}{6} + \binom{10}{6}}{\binom{45}{6}} \approx 0.0054
+$$
+
+3.  **Event C**: at least two shifts represented.
+
+This is the complement of event $B$:
+
+$$
+\text{Pr}(C) = 1 - \text{Pr}(B) \approx 1 - 0.0054 = 0.9946
+$$
+
+</details>
+
+------------------------------------------------------------------------
+
+## 1.4.1 Relative Frequency Method
+
+The **relative frequency method** is another way to estimate probability - specially useful when the theoretical model is difficult to define, or when real-world data is available from repeated observations.
+
+### Key Ideas
+
+-   Suppose we repeat an experiment many times under **identical and independent conditions**.
+-   Let $E$ be an event we are interested in observing (e.g., getting a six when rolling a die).
+-   Let $\text{freq}(E)$ be the number of times the event $E$ occurs in $n$ trials.
+
+Then the **relative frequency** of event $E$ is:
+
+$$
+\text{Relative Frequency} = \frac{\text{freq}(E)}{n}
+$$
+
+As $n$ becomes large, the relative frequency tends to **stabilize**, approaching the **true probability** of the event. This leads us to the idea:
+
+$$
+\text{Pr}(E) = \lim_{n \to \infty} \frac{\text{freq}(E)}{n}
+$$
+
+This interpretation of probability is known as the **relative frequency definition**.
+
+> **When to use:**\
+> This method is especially helpful when you **collect data** from a real or simulated experiment and want to estimate the probability based on outcomes observed over many repetitions.
+
+### Simulating an Example in R
+
+We now explore how the relative frequency converges to the true probability as the number of trials increases.
+
+```{r echo=FALSE}
+library(shiny)
+
+shinyApp(
+  ui = fluidPage(
+    titlePanel("Relative Frequency of Rolling a 6"),
+    sidebarLayout(
+      sidebarPanel(
+        sliderInput("n", "Number of Trials:", 
+                    min = 100, max = 10000, value = 1000, step = 100)
+      ),
+      mainPanel(
+        plotOutput("freqPlot"),
+        verbatimTextOutput("finalFreq")
+      )
+    )
+  ),
+  
+  server = function(input, output) {
+    output$freqPlot <- renderPlot({
+      rolls <- sample(1:6, size = input$n, replace = TRUE)
+      rel_freq <- cumsum(rolls == 6) / seq_along(rolls)
+      
+      plot(rel_freq, type = "l", col = "blue", lwd = 2,
+           ylim = c(0, 0.4),
+           xlab = "Number of Trials", 
+           ylab = "Relative Frequency of Rolling a 6",
+           main = "Convergence of Relative Frequency to Theoretical Probability")
+      abline(h = 1/6, col = "red", lty = 2)
+      legend("topright", legend = c("Relative Frequency", "True Probability = 1/6"),
+             col = c("blue", "red"), lty = c(1, 2), bty = "n")
+    })
+    
+    output$finalFreq <- renderPrint({
+      rolls <- sample(1:6, size = input$n, replace = TRUE)
+      rel_freq <- mean(rolls == 6)
+      cat("Relative frequency after", input$n, "trials:", round(rel_freq, 4))
+    })
+  }
+)
+```
+
+This estimates $\text{Pr}(6)$ as the proportion of sixes observed in 10,000 simulated rolls. If the die is fair, this value should be close to $1/6 \approx 0.1667$.
+
+## Activity 1.24
+
+In a certain production process, milk powder is filled into bags. A bag is said to be **non-conforming** if its weight is **less than 398g or greater than 403g**. Otherwise, it is said to be **conforming**.
+
+The quality inspector has measured the weights of 585 randomly selected bags. The frequency table of those weights (in grams) is given below:
+
+| Weight (in grams) | Number of Bags |
+|:-----------------:|:--------------:|
+|      396-397      |       10       |
+|      398-399      |      175       |
+|      400-401      |      270       |
+|      402-403      |      115       |
+|      404-405      |       15       |
+
+1.  If a bag is taken randomly from the process, what is the probability that it will be a **non-conforming** bag?
+
+2.  If three bags are taken randomly from the process, what is the probability that **one of them will be non-conforming**?
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Let:
+
+-   $N = 585$: total number of bags
+-   $A$: the event that a randomly selected bag is **non-conforming**
+
+1\. Probability that a randomly selected bag is non-conforming
+
+Non-conforming weights are:\
+- Less than 398g → 396–397: 10 bags\
+- Greater than 403g → 404–405: 15 bags
+
+Total non-conforming = $10 + 15 = 25$ bags
+
+$$
+\text{Pr}(A) = \frac{25}{585} \approx 0.0427
+$$
+
+So, there is approximately a **4.27%** chance that a randomly selected bag is non-conforming.
+
+------------------------------------------------------------------------
+
+2\. Probability that **at least one** out of 3 bags is non-conforming
+
+Let $A'$ be the event that a bag is **conforming**.
+
+Then:
+
+$$
+\text{Pr}(A') = 1 - \text{Pr}(A) = 1 - \frac{25}{585} = \frac{560}{585}
+$$
+
+Assuming the three selections are independent (for approximation), the probability that **all three** are conforming is:
+
+\$\$ \left( \frac{560}{585} \right)\^3 \approx 0.877
+
+\$\$
+
+Therefore, the probability that **at least one** is non-conforming is:
+
+$$
+\text{Pr}(\text{at least one non-conforming}) = 1 - \left( \frac{560}{585} \right)^3 \approx 0.1228
+$$
+
+So, there's roughly a **12.28%** chance that at least one of the three bags is non-conforming.
+
+</details>
+
+------------------------------------------------------------------------
+
+## Activity 1.25
+
+In a large manufacturing facility, an opinion survey was conducted regarding three types of bonus schemes. A random sample of 960 employees was selected. The job category and the bonus scheme of each employee were recorded. The results are shown below:
+
+| Employee Category | Type I | Type II | Type III | Total |
+|:-----------------:|:------:|:-------:|:--------:|:-----:|
+|      Laborer      |  190   |   243   |   197    |  630  |
+|       Clerk       |   82   |   44    |    44    |  170  |
+|    Technician     |   23   |   78    |    34    |  135  |
+|     Executive     |   5    |   12    |    8     |  25   |
+|     **Total**     |  300   |   377   |   283    |  960  |
+
+If an employee is selected randomly from this manufacturing facility, what is the probability that:
+
+1.  The employee is a **clerk**?
+2.  The employee has **bonus scheme II**?
+3.  The employee is a **technician with bonus scheme I**?
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Let:
+
+-   $N = 960$: total number of employees
+-   $A$: event that the selected employee is a **clerk**
+-   $B$: event that the employee has **bonus scheme II**
+-   $C$: event that the employee is a **technician with bonus scheme I**
+
+**1. Probability that the employee is a clerk:**
+
+There are 170 clerks out of 960.
+
+$$
+\text{Pr}(A) = \frac{170}{960} 
+$$
+
+------------------------------------------------------------------------
+
+**2. Probability that the employee has bonus scheme II:**
+
+There are 377 employees under bonus scheme II.
+
+$$
+\text{Pr}(B) = \frac{377}{960} 
+$$
+
+------------------------------------------------------------------------
+
+**3. Probability that the employee is a technician with bonus scheme I:**
+
+There are 23 technicians with Type I bonus.
+
+$$
+\text{Pr}(C) = \frac{23}{960} \approx 0.02396
+$$
+
+So, there’s a **2.4%** chance that a randomly selected employee is a technician with bonus scheme I.
+
+</details>
+
+---
+
+## 1.4.3 Subjective Probability Method
+
+Not all situations allow us to calculate probabilities using past data (relative frequency) or symmetry (classical method). In such cases, we rely on **subjective probability**.
+
+Subjective probability is based on a person’s **judgment, intuition, or personal belief** about how likely an event is to occur.
+
+### Key Features
+
+- A **subjective probability** reflects an individual’s **opinion** about the occurrence of an event.
+- These probabilities are **personal** — they can **differ from person to person**, even when considering the same event.
+- It is often used when no past data or mathematical model is available.
+
+### Limitations
+
+- Assigning a subjective probability can be difficult and may **lack consistency**.
+- There is **no objective way to verify** whether a subjective probability is correct.
+- The value can change with time, new information, or even mood.
+
+### Common Approaches to Estimate Subjective Probabilities
+
+- **Personal guess** based on experience or intuition  
+- **Betting approach**: How much a person is willing to bet on an event indicates their belief in its occurrence  
+- **Reference lottery approach**: Comparing the uncertainty of the event to a known lottery
+
+**Note**: While subjective probabilities are important in areas like decision making and risk analysis, this method will **not be discussed further in this course.**
+
+The **subjective interpretation of probability** is a foundational idea in **Bayesian Statistics**, where probabilities are used to express **degrees of belief** rather than long-run frequencies.
+
+
+---
+
+## 1.4.4 Using Probability Models
+
+In some situations, we do not rely on personal opinions (subjective method), experimental results (relative frequency), or symmetry (classical method). Instead, we use **mathematical models** to represent the behavior of random phenomena. These are called **probability models**.
+
+A probability model defines:
+
+- A **sample space** — all possible outcomes of the experiment
+- A **probability function** — a rule that assigns probabilities to events in the sample space
+
+This approach is common in scientific, engineering, and data-driven applications where the underlying process can be **described using theoretical assumptions**.
+
+---
+
+### Key Features
+
+- Probability models are often **idealized representations** of real-world processes.
+- They allow us to **make predictions**, calculate **expected outcomes**, and assess **risks**.
+- These models are usually built using **probability distributions** such as:
+  - The binomial distribution (e.g., number of successes in a series of trials)
+  - The normal distribution (e.g., measurement errors, heights)
+  - The Poisson distribution (e.g., number of arrivals per minute)
+
+---
+
+### Example
+
+Suppose we are modeling the number of defective items in a batch of 100 products. We might assume that each item has a small, independent chance of being defective — and model the number of defectives using the **binomial distribution**.
+
+Or, we might model the amount of rainfall in a day using a **continuous distribution** like the normal or exponential distribution.
+
+> These kinds of probability models are specially useful in designing experiments, simulating systems, and making data-based decisions.
+
+---
+
+
+
+
+
+
+
