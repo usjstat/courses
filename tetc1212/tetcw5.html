@@ -12,7 +12,7 @@
 <meta name="author" content="Dr. Rajitha M. Silva" />
 
 
-<title>TETC 1212 - Probability Statistics</title>
+<title>TETC 1212 Probability and Statistics: Week 5</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -349,203 +349,1103 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">TETC 1212 - Probability Statistics</h1>
+<h1 class="title toc-ignore">TETC 1212 Probability and Statistics: Week
+5</h1>
 <h4 class="author">Dr. Rajitha M. Silva</h4>
 
 </div>
 
 
-<div id="course-information" class="section level1">
-<h1>Course Information</h1>
+<div id="axioms-of-probability" class="section level1">
+<h1>1.3 Axioms of Probability</h1>
+<p>Axioms form the foundation of probability theory. These are the basic
+rules or assumptions upon which all of probability is built. They allow
+us to develop a consistent mathematical framework for assigning and
+manipulating probabilities.</p>
+<p>Understanding these axioms is important because:<br />
+</p>
+<ul>
+<li>They ensure that the probability of any event is a meaningful,
+non-negative number.<br />
+</li>
+<li>They guarantee the total probability across all possible outcomes
+equals 1.<br />
+</li>
+<li>They help us handle more complex situations involving multiple
+events.</li>
+</ul>
+<p>Probability is a numerical measure that quantifies the likelihood of
+an event occurring.</p>
+<p>A probability function <span class="math inline">\(\text{Pr}(\cdot)\)</span> must satisfy these
+<strong>three axioms</strong>:</p>
+<ul>
+<li><strong>Axiom 1</strong>: For any event <span class="math inline">\(A\)</span>, <span class="math inline">\(\text{Pr}(A) \geq 0\)</span></li>
+<li><strong>Axiom 2</strong>: <span class="math inline">\(\text{Pr}(S) =
+1\)</span> (i.e., the total probability of the sample space is 1)</li>
+<li><strong>Axiom 3</strong>: For any countable collection of
+<strong>mutually exclusive</strong> events <span class="math inline">\(A_1, A_2, \ldots\)</span>, <span class="math display">\[ \text{Pr}(A_1 \cup A_2 \cup \ldots) = \sum_i
+\text{Pr}(A_i) \]</span></li>
+</ul>
+<p>This holds for both <strong>finite</strong> and <strong>countable
+infinite</strong> unions.</p>
+<hr />
+<div id="activity-1.13" class="section level2">
+<h2>Activity 1.13</h2>
+<p>Let <span class="math inline">\(E\)</span> be an event. Using the
+axioms of probability, show that <span class="math inline">\(\text{Pr}(E) \leq 1\)</span>.</p>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>Let <span class="math inline">\(E \subseteq S\)</span>. The
+complement of <span class="math inline">\(E\)</span>, denoted <span class="math inline">\(E&#39;\)</span>, is the set of outcomes in <span class="math inline">\(S\)</span> that are not in <span class="math inline">\(E\)</span>.<br />
+Using event operations, this can be expressed as:</p>
+<p><span class="math display">\[
+E&#39; = S \cap E^c
+\]</span></p>
+<p>Note:</p>
+<p>- <span class="math inline">\(E \cap E&#39; = \emptyset\)</span>, so
+<span class="math inline">\(E\)</span> and <span class="math inline">\(E&#39;\)</span> are <strong>mutually
+exclusive</strong>.</p>
+<p>- <span class="math inline">\(E \cup E&#39; = S\)</span></p>
+<p>By <strong>Axiom 3</strong> (additivity for mutually exclusive
+events):</p>
+<p><span class="math display">\[
+\text{Pr}(E \cup E&#39;) = \text{Pr}(E) + \text{Pr}(E&#39;)
+\]</span></p>
+<p>By <strong>Axiom 2</strong>:</p>
+<p><span class="math display">\[
+\text{Pr}(S) = 1
+\]</span></p>
+<p>Therefore:</p>
+<p><span class="math display">\[
+\text{Pr}(E) + \text{Pr}(E&#39;) = 1 \Rightarrow \text{Pr}(E) = 1 -
+\text{Pr}(E&#39;) \leq 1
+\]</span></p>
+</details>
+<hr />
+</div>
+</div>
+<div id="methods-for-determining-probability" class="section level1">
+<h1>1.4 Methods for Determining Probability</h1>
+<p>Probability can be determined in different ways depending on the
+context. Whether based on logical reasoning, past data, or subjective
+belief, each method has its own use case and importance.</p>
+<p>Understanding these methods helps you:</p>
+<p>- Decide which model or approach fits a given situation.</p>
+<p>- Interpret probability values meaningfully.</p>
+<p>- Apply theory to real-world settings, such as games, experiments, or
+business problems.</p>
+<p>There are four methods used to determine probabilities:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Classical Method</strong>: Based on equally likely outcomes
+in a finite sample space.</li>
+<li><strong>Relative Frequency Method</strong>: Based on repeated
+experiments and observed frequencies.</li>
+<li><strong>Subjective Method</strong>: Based on personal judgment or
+opinion.</li>
+<li><strong>Using Probability Models</strong>: Based on theoretical
+assumptions.</li>
+</ol>
+<hr />
+<div id="classical-method" class="section level2">
+<h2>1.4.1 Classical Method</h2>
+<p>The classical method of probability is the most basic and widely
+taught approach. It is grounded in situations where all outcomes are
+assumed to be <strong>equally likely</strong> — that is, each outcome
+has the same chance of occurring.</p>
+<div id="what-does-equally-likely-mean" class="section level3">
+<h3>What Does “Equally Likely” Mean?</h3>
+<p>Equally likely outcomes mean that, based on the design of the
+experiment or inherent symmetry, there is no reason to believe one
+outcome will happen more often than another. For example:</p>
+<ul>
+<li>Each face of a fair die has a 1/6 chance.<br />
+</li>
+<li>Each side of a fair coin has a 1/2 chance.<br />
+</li>
+<li>Each card in a well-shuffled deck has a 1/52 chance.<br />
+</li>
+</ul>
+<p>This method is especially useful when dealing with finite, symmetric,
+and well-defined sample spaces, such as dice rolls, card draws, or coin
+tosses.</p>
+<p>If all outcomes in the sample space <span class="math inline">\(S\)</span> are equally likely, then for any event
+<span class="math inline">\(E\)</span>:</p>
+<p><span class="math display">\[
+\text{Pr}(E) = \frac{n(E)}{n(S)}
+\]</span></p>
+<hr />
+</div>
+</div>
+<div id="activity-1.14" class="section level2">
+<h2>Activity 1.14</h2>
+<p>A fair six-sided die is rolled. Find the probabilities of the
+following events:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(A\)</span>: getting the number 1<br />
+</li>
+<li><span class="math inline">\(B\)</span>: getting a number less than
+3<br />
+</li>
+<li><span class="math inline">\(C\)</span>: getting an even number<br />
+</li>
+<li><span class="math inline">\(D\)</span>: getting a number greater
+than 5<br />
+</li>
+<li><span class="math inline">\(E\)</span>: getting a number greater
+than 6</li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>Let <span class="math inline">\(S = \{1, 2, 3, 4, 5, 6\}\)</span>
+with all outcomes equally likely.</p>
+<ul>
+<li><span class="math inline">\(\text{Pr}(A) = 1/6\)</span></li>
+<li><span class="math inline">\(\text{Pr}(B) = 2/6 = 1/3\)</span></li>
+<li><span class="math inline">\(\text{Pr}(C) = 3/6 = 1/2\)</span></li>
+<li><span class="math inline">\(\text{Pr}(D) = 1/6\)</span></li>
+<li><span class="math inline">\(\text{Pr}(E) = 0\)</span> (event is
+impossible)</li>
+</ul>
+</details>
+<hr />
+</div>
+<div id="activity-1.15" class="section level2">
+<h2>Activity 1.15</h2>
+<p>A box contains:</p>
+<p>- 1 ticket with number 6</p>
+<p>- 2 tickets with number 5</p>
+<p>- 3 tickets with number 4</p>
+<p>- 4 tickets with number 3</p>
+<p>- 5 tickets with number 2</p>
+<p>- 6 tickets with number 1</p>
+<p>A ticket is drawn at random. Find the probabilities of the
+following:</p>
+<ol style="list-style-type: decimal">
+<li>Getting the number 1<br />
+</li>
+<li>Getting a number less than 3<br />
+</li>
+<li>Getting an even number<br />
+</li>
+<li>Getting a number greater than 5<br />
+</li>
+<li>Getting a number greater than 6</li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p><span class="math display">\[
+S = \{1_1, 1_2, 1_3, 1_4, 1_5, 1_6,\ 2_1, 2_2, 2_3, 2_4, 2_5,\ 3_1, 3_2,
+3_3, 3_4,\ 4_1, 4_2, 4_3,\ 5_1, 5_2,\ 6_1\}
+\]</span></p>
+<p>Total number of tickets = <span class="math inline">\(1+2+3+4+5+6 =
+21\)</span></p>
+<p>Define Events</p>
+<ul>
+<li><p>\( A \): Getting number 1 → 6 outcomes</p></li>
+<li><p>\( B \): Getting number less than 3 → numbers 1 &amp; 2 → 6 + 5 =
+11</p></li>
+<li><p>\( C \): Getting even number → 2, 4, 6 → 5 + 3 + 1 = 9</p></li>
+<li><p>\( D \): Getting number greater than 5 → only 6 → 1
+outcome</p></li>
+<li><p>\( E \): Getting number greater than 6 → 0 outcomes</p></li>
+</ul>
+<p>Applying Classical Method</p>
+<ul>
+<li>\[\text{Pr}(A) = \frac{6}{21}, \quad\text{Pr}(B) = \frac{11}{21},
+\quad\text{Pr}(C) = \frac{9}{21}, \quad\text{Pr}(D) = \frac{1}{21},
+\quad\text{Pr}(E) = 0\]</li>
+</ul>
+</details>
+<hr />
+</div>
+</div>
+<div id="counting-techniques" class="section level1">
+<h1><strong>Counting Techniques</strong></h1>
+<p>Counting techniques are essential tools in probability theory for
+calculating the number of possible outcomes in complex experiments.
+These techniques help us avoid the impractical task of listing every
+possible outcome when the number of outcomes grows large.</p>
+<div id="multiplication-rule" class="section level3">
+<h3>1. Multiplication Rule</h3>
+<p>If one task can be done in <span class="math inline">\(m\)</span>
+ways and another in <span class="math inline">\(n\)</span> ways, then
+the two tasks together can be performed in <span class="math inline">\(m
+\times n\)</span> ways.</p>
+<p><strong>Example:</strong> How many 3-digit PINs can be formed if each
+digit can be from 0 to 9? <span class="math display">\[
+10 \times 10 \times 10 = 1000 \text{ PINs}
+\]</span></p>
+</div>
+<div id="permutations-ordered-arrangements" class="section level3">
+<h3>2. Permutations (Ordered Arrangements)</h3>
+<p>Permutations refer to the number of ways to arrange <span class="math inline">\(r\)</span> items out of <span class="math inline">\(n\)</span>, when the order matters.</p>
+<ul>
+<li>Formula (no repetition): <span class="math inline">\(P(n, r) =
+\frac{n!}{(n - r)!}\)</span></li>
+</ul>
+<p><strong>Example:</strong> How many ways can 3 medals (gold, silver,
+bronze) be awarded to 5 athletes? <span class="math display">\[
+P(n, r) = \frac{n!}{(n - r)!}
+\]</span></p>
+<p><span class="math display">\[
+P(5, 3) = \frac{5!}{(5 - 3)!} = \frac{120}{2} = 60
+\]</span></p>
+</div>
+<div id="combinations-unordered-selections" class="section level3">
+<h3>3. Combinations (Unordered Selections)</h3>
+<p>Combinations count how many ways <span class="math inline">\(r\)</span> elements can be selected from <span class="math inline">\(n\)</span>, where the order doesn’t matter.</p>
+<ul>
+<li>Formula: <span class="math display">\[
+C(n, r) = \binom{n}{r} = \frac{n!}{r!(n - r)!}
+\]</span></li>
+</ul>
+<p><span class="math display">\[
+\binom{10}{4} = \frac{10!}{4!6!} = 210
+\]</span></p>
+<p><strong>Example:</strong> From 10 applicants, how many ways can a
+committee of 4 be formed? <span class="math display">\[
+\binom{10}{4} = 210
+\]</span></p>
+<p>These techniques help us for solving problems in probability,
+specially when dealing with complex events such as card games,
+lotteries, and arrangements.</p>
+<hr />
+</div>
+<div id="activity-1.16" class="section level2">
+<h2>Activity 1.16</h2>
+<p>A box contains 3 white balls and 2 black balls. Three balls are taken
+randomly from this box.<br />
+If possible, find the probabilities of the following events using the
+classical method.<br />
+Assume the 3 balls are drawn simultaneously (i.e., order does not
+matter).</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(A\)</span>: the event of getting exactly
+one white ball<br />
+</li>
+<li><span class="math inline">\(B\)</span>: the event of getting more
+than one white ball<br />
+</li>
+<li><span class="math inline">\(C\)</span>: the event of getting no
+white balls</li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<div id="step-1-total-number-of-ways-to-choose-3-balls" class="section level3">
+<h3>Step 1: Total Number of Ways to Choose 3 Balls</h3>
+<p>We use combinations since order does not matter: <span class="math display">\[
+    \text{Total outcomes} = \binom{5}{3} = 10
+\]</span></p>
+</div>
+<div id="step-2-event-counts" class="section level3">
+<h3>Step 2: Event Counts</h3>
+<p>Let <span class="math inline">\(W\)</span> = white, <span class="math inline">\(B\)</span> = black.</p>
+<ul>
+<li><strong>Event A (Exactly 1 white):</strong> <span class="math display">\[
+\binom{3}{1}  \times \binom{2}{2} = 3     \times 1 = 3
+\]</span></li>
+<li><strong>Event B (More than 1 white = 2 or 3 whites):</strong> <span class="math display">\[
+\binom{3}{2}  \times \binom{2}{1} + \binom{3}{3} = 3  \times 2 + 1 = 6 +
+1 = 7
+\]</span></li>
+<li><strong>Event C (No white = all black):</strong> Not possible as
+there are only 2 black balls → 0 outcomes.</li>
+</ul>
+</div>
+<div id="step-3-probabilities" class="section level3">
+<h3>Step 3: Probabilities</h3>
+<ul>
+<li><span class="math inline">\(\text{Pr}(A) = \frac{3}{10} =
+0.3\)</span></li>
+<li><span class="math inline">\(\text{Pr}(B) = \frac{7}{10} =
+0.7\)</span></li>
+<li><span class="math inline">\(\text{Pr}(C) = 0\)</span></li>
+</ul>
+</details>
+</div>
+</div>
+<div id="activity-1.17" class="section level2">
+<h2>Activity 1.17</h2>
+<p>A security supervisor of a large corporation wishes to issue each
+employee an identity card with one English letter followed by two
+digits.</p>
+<ol style="list-style-type: decimal">
+<li>How many different ID cards could be made if the two digits can be
+the same?</li>
+<li>How many different ID cards could be made if the two digits cannot
+be the same?</li>
+<li>How many different ID cards could be made if the first digit cannot
+be 0?</li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>We apply the multiplication rule of counting.</p>
+<ul>
+<li>There are 26 English letters (A–Z).</li>
+<li>There are 10 digits (0–9).</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li><strong>Digits can be the same</strong>:</li>
+</ol>
+<p><span class="math display">\[
+\text{Total ID cards} = 26 \times 10 \times 10 = 2600
+\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>Digits cannot be the same</strong>:</li>
+</ol>
+<p><span class="math display">\[
+\text{Total ID cards} = 26 \times 10 \times 9 = 2340
+\]</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>First digit cannot be 0</strong>:</li>
+</ol>
+<p><span class="math display">\[
+\text{Total ID cards} = 26 \times 9 \times 10 = 2340
+\]</span></p>
+</details>
+<hr />
+</div>
+<div id="activity-1.18" class="section level2">
+<h2>Activity 1.18</h2>
+<p>A box contains 3 white balls and 2 black balls. Three balls are taken
+randomly from this box. Assume that the balls are marked as <span class="math inline">\(w_1, w_2, w_3, b_1, b_2\)</span>.</p>
+<ol style="list-style-type: decimal">
+<li>How many different selections of three balls are possible?</li>
+<li>How many different arrangements of three balls are possible?</li>
+<li>Out of all the possible selections of three balls, how many
+selections contain 1 white ball?</li>
+<li>Out of all the possible arrangements of three balls, how many
+arrangements contain 1 white ball?</li>
+<li>Out of all the possible selections of three balls, how many
+selections contain 2 white balls?</li>
+<li>Out of all the possible arrangements of three balls, how many
+arrangements contain 2 white balls?</li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>Let us count using combinations and permutations.</p>
+<ul>
+<li>Total balls: 5</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li><strong>Selections of 3 balls</strong> (order doesn’t matter):</li>
+</ol>
+<p><span class="math display">\[
+\binom{5}{3} = 10
+\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>Arrangements of 3 balls</strong> (order matters):</li>
+</ol>
+<p><span class="math display">\[
+P(5, 3) = \frac{5!}{2!} = 60
+\]</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>Selections with 1 white ball</strong>:</li>
+</ol>
+<p><span class="math display">\[
+\binom{3}{1} \times \binom{2}{2} = 3 \times 1 = 3
+\]</span></p>
+<ol start="4" style="list-style-type: decimal">
+<li><strong>Arrangements with 1 white ball</strong>:</li>
+</ol>
+<p>Each of the 3 selections can be arranged in <span class="math inline">\(3! = 6\)</span> ways:</p>
+<p><span class="math display">\[
+3 \times 6 = 18
+\]</span></p>
+<ol start="5" style="list-style-type: decimal">
+<li><strong>Selections with 2 white balls</strong>:</li>
+</ol>
+<p><span class="math display">\[
+\binom{3}{2} \times \binom{2}{1} = 3 \times 2 = 6
+\]</span></p>
+<ol start="6" style="list-style-type: decimal">
+<li><strong>Arrangements with 2 white balls</strong>:</li>
+</ol>
+<p>Each of the 6 selections can be arranged in <span class="math inline">\(3! = 6\)</span> ways:</p>
+<p><span class="math display">\[
+6 \times 6 = 36
+\]</span></p>
+</details>
+<hr />
+</div>
+<div id="activity-1.19" class="section level2">
+<h2>Activity 1.19</h2>
+<p>In a small company there are 7 women and 5 men. A committee of 5
+people is to be selected.</p>
+<ol style="list-style-type: decimal">
+<li>How many different committees can be selected?</li>
+<li>How many committees with 3 women and 2 men can be selected?</li>
+<li>If 5 people are selected at random for the committee, what is the
+probability that the committee consists of 3 women and 2 men?</li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>We use combinations.</p>
+<ul>
+<li>Total people = 12 (7 women + 5 men)</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li><strong>Total number of committees</strong>:</li>
+</ol>
+<p><span class="math display">\[
+\binom{12}{5} = 792
+\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>Committees with 3 women and 2 men</strong>:</li>
+</ol>
+<p><span class="math display">\[
+\binom{7}{3} \times \binom{5}{2} = 35 \times 10 = 350
+\]</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>A = Event of getting 3 women and 2 men</strong>:</li>
+</ol>
+<p><span class="math display">\[
+\text{Pr}(A) = \frac{350}{792} \approx 0.442
+\]</span></p>
+</details>
+<hr />
+<p><strong>When and Why We Multiply Probabilities</strong></p>
+<p>In probability, we often deal with situations that involve
+<strong>two or more events happening one after another</strong>. To find
+the probability of such combined events, we apply the
+<strong>Multiplication Rule</strong> - a concept you’ve already seen in
+counting.</p>
+<p><strong>Multiplication Rule (Counting):</strong></p>
+<blockquote>
+<p>If one task can be done in <span class="math inline">\(m\)</span>
+ways and another in <span class="math inline">\(n\)</span> ways, the
+tasks together can be done in <span class="math inline">\(m \times
+n\)</span> ways.</p>
+</blockquote>
+<p>We apply the same idea in probability:</p>
+<p><br />
+If an experiment involves multiple stages (like drawing two balls one
+after the other), we can find the probability of a specific sequence of
+outcomes by <strong>multiplying the probability of each stage</strong>,
+step by step.</p>
+<blockquote>
+<p><strong>Important</strong>: Here, we are not assuming that the events
+are independent.<br />
+We are simply applying the multiplication rule in a <strong>sequential
+setting</strong>, where the outcome of the first event affects the
+second.<br />
+The concept of <strong>independent events</strong> will be formally
+discussed later in the course.</p>
+</blockquote>
+<p>This will help us solve the problems in the next two activities.</p>
+<hr />
+</div>
+<div id="activity-1.20" class="section level2">
+<h2>Activity 1.20</h2>
+<p>A box contains 3 white balls and 2 black balls. Two balls are taken
+one after the other without replacement.</p>
+<ol style="list-style-type: decimal">
+<li>What is the probability that the first ball is white?<br />
+</li>
+<li>What is the probability that the second ball is black?<br />
+</li>
+<li>What is the probability that the first ball is white and the second
+ball is black?</li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>Let the total number of balls = 5 (3 white, 2 black). Define
+events:</p>
+<ul>
+<li><span class="math inline">\(A\)</span>: the event that the
+<strong>first ball is white</strong></li>
+<li><span class="math inline">\(B\)</span>: the event that the
+<strong>second ball is black</strong></li>
+<li><span class="math inline">\(A \cap B\)</span>: the event that the
+<strong>first is white and second is black</strong></li>
+</ul>
+<ol style="list-style-type: decimal">
+<li><strong>Probability of event A</strong>:</li>
+</ol>
+<p><span class="math display">\[
+\text{Pr}(A) = \frac{3}{5}
+\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>Probability of event B</strong> (second is black): We’ll
+calculate this by considering all paths that can lead to a black second
+ball.</li>
+</ol>
+<ul>
+<li>Case 1: First white, second black:</li>
+</ul>
+<p><span class="math display">\[
+\text{Pr}(A \cap B) = \frac{3}{5} \times \frac{2}{4} = \frac{6}{20} =
+0.3
+\]</span></p>
+<ul>
+<li>Case 2: First black, second black:</li>
+</ul>
+<p><span class="math display">\[
+\text{Pr}(\text{First black and second black}) = \frac{2}{5} \times
+\frac{1}{4} = \frac{2}{20} = 0.1
+\]</span></p>
+<p>So the probability of event <span class="math inline">\(B\)</span>
+is:</p>
+<p><span class="math display">\[
+\text{Pr}(B) = 0.3 + 0.1 = 0.4
+\]</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>Probability of event</strong> <span class="math inline">\(A
+\cap B\)</span> (first white and second black):</li>
+</ol>
+<p><span class="math display">\[
+\text{Pr}(A \cap B) = \frac{3}{5} \times \frac{2}{4} = 0.3
+\]</span></p>
+</details>
+<hr />
+</div>
+<div id="activity-1.21" class="section level2">
+<h2>Activity 1.21</h2>
+<p>A box contains 3 white balls and 2 black balls. Two balls are taken
+one after the other with replacement.</p>
+<ol style="list-style-type: decimal">
+<li>What is the probability that the first ball is white?<br />
+</li>
+<li>What is the probability that the second ball is black?<br />
+</li>
+<li>What is the probability that the first ball is white and the second
+ball is black?</li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>Since the ball is replaced before the second draw, the total number
+of balls remains 5 throughout.</p>
+<p>Define events:</p>
+<ul>
+<li><span class="math inline">\(A\)</span>: the event that the
+<strong>first ball is white</strong></li>
+<li><span class="math inline">\(B\)</span>: the event that the
+<strong>second ball is black</strong></li>
+<li><span class="math inline">\(A \cap B\)</span>: the event that the
+<strong>first is white and second is black</strong></li>
+</ul>
+<ol style="list-style-type: decimal">
+<li><strong>Probability of event A</strong>:</li>
+</ol>
+<p><span class="math display">\[
+\text{Pr}(A) = \frac{3}{5}
+\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>Probability of event B</strong>:</li>
+</ol>
+<p><span class="math display">\[
+\text{Pr}(B) = \frac{2}{5}
+\]</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>Probability of event</strong> <span class="math inline">\(A
+\cap B\)</span>:</li>
+</ol>
+<p>Since the first ball is replaced, the outcomes remain unchanged
+between the draws.</p>
+<p><span class="math display">\[
+\text{Pr}(A \cap B) = \frac{3}{5} \times \frac{2}{5} = \frac{6}{25} =
+0.24
+\]</span></p>
+</details>
+</div>
+<div id="activity-1.22" class="section level2">
+<h2>Activity 1.22</h2>
+<p>A method that is often used to estimate the size of a wildlife
+population involves performing a <strong>capture-recapture
+experiment</strong>.</p>
+<p>In this experiment:</p>
+<ul>
+<li>An initial sample of <span class="math inline">\(M\)</span> animals
+is captured, tagged, and released into the wild.</li>
+<li>Later, a second sample of size <span class="math inline">\(n\)</span> is captured (assume <span class="math inline">\(n &lt; M\)</span>).</li>
+<li>Suppose the total number of animals in the population is <span class="math inline">\(N\)</span>.</li>
+<li>Let <span class="math inline">\(x\)</span> be the number of
+<strong>tagged animals</strong> in the second sample.</li>
+</ul>
+<p>What is the probability that the second sample contains exactly <span class="math inline">\(x\)</span> tagged animals?</p>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>Let:</p>
+<ul>
+<li><span class="math inline">\(S\)</span>: the sample space of all
+possible ways to select <span class="math inline">\(n\)</span> animals
+from the population of <span class="math inline">\(N\)</span></li>
+<li><span class="math inline">\(T\)</span>: the event that exactly <span class="math inline">\(x\)</span> of the selected <span class="math inline">\(n\)</span> animals are tagged</li>
+</ul>
+<p>To calculate <span class="math inline">\(\text{Pr}(T)\)</span> using
+the classical method, we consider:</p>
+<p><strong>Total number of possible samples</strong></p>
+<p>This is the number of ways to choose <span class="math inline">\(n\)</span> animals from the total <span class="math inline">\(N\)</span>:</p>
+<p><span class="math display">\[
+n(S) = \binom{N}{n}
+\]</span></p>
+<p><strong>Favorable outcomes (exactly</strong> <span class="math inline">\(x\)</span> tagged)</p>
+<p>To get exactly <span class="math inline">\(x\)</span> tagged animals
+in the second sample:</p>
+<ul>
+<li>Choose <span class="math inline">\(x\)</span> animals from the <span class="math inline">\(M\)</span> tagged animals <span class="math inline">\(\Rightarrow \binom{M}{x}\)</span> ways</li>
+<li>Choose the remaining <span class="math inline">\(n - x\)</span>
+animals from the <span class="math inline">\(N - M\)</span> untagged
+animals <span class="math inline">\(\Rightarrow \binom{N - M}{n -
+x}\)</span> ways</li>
+</ul>
+<p>So the total number of favorable outcomes is:</p>
+<p><span class="math display">\[
+n(T) = \binom{M}{x} \cdot \binom{N - M}{n - x}
+\]</span></p>
+<p>Therefore, the required probability is:</p>
+<p><span class="math display">\[
+\text{Pr}(T) = \frac{\binom{M}{x} \cdot \binom{N - M}{n -
+x}}{\binom{N}{n}}
+\]</span></p>
+</details>
+<hr />
+</div>
+<div id="activity-1.23" class="section level2">
+<h2>Activity 1.23</h2>
+<p>A production facility employs:</p>
+<ul>
+<li>20 workers on the <strong>day shift</strong></li>
+<li>15 workers on the <strong>swing shift</strong> (between day and
+night, often running from 4:00 PM to midnight)</li>
+<li>10 workers on the <strong>graveyard shift</strong> (Night
+Shift)</li>
+</ul>
+<p>A quality control consultant is to select 6 workers at random
+<strong>without replacement</strong>.</p>
+<ol style="list-style-type: decimal">
+<li>How many selections result in all six workers coming from the day
+shift? What is the probability that all six selected workers will be
+from the day shift?<br />
+</li>
+<li>What is the probability that all six selected workers will be from
+the same shift?<br />
+</li>
+<li>What is the probability that <strong>at least two different
+shifts</strong> will be represented among the selected workers?</li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>Let total number of workers be:</p>
+<p><span class="math display">\[
+N = 20 + 15 + 10 = 45
+\]</span></p>
+<p>Let:</p>
+<ul>
+<li><span class="math inline">\(A\)</span>: the event that <strong>all 6
+workers are from the day shift</strong></li>
+<li><span class="math inline">\(B\)</span>: the event that <strong>all 6
+are from the same shift</strong></li>
+<li><span class="math inline">\(C\)</span>: the event that <strong>at
+least two different shifts are represented</strong></li>
+</ul>
+<ol style="list-style-type: decimal">
+<li><strong>Event A</strong>:</li>
+</ol>
+<p>Number of favorable outcomes:</p>
+<p><span class="math display">\[
+\binom{20}{6}
+\]</span></p>
+<p>Total possible selections:</p>
+<p><span class="math display">\[
+\binom{45}{6}
+\]</span></p>
+<p>So,</p>
+<p><span class="math display">\[
+\text{Pr}(A) = \frac{\binom{20}{6}}{\binom{45}{6}} \approx 0.00476
+\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>Event B</strong>:</li>
+</ol>
+<p>All 6 from any <strong>one</strong> of the shifts:</p>
+<p><span class="math display">\[
+\binom{20}{6} + \binom{15}{6} + \binom{10}{6}
+\]</span></p>
+<p>So,</p>
+<p><span class="math display">\[
+\text{Pr}(B) = \frac{\binom{20}{6} + \binom{15}{6} +
+\binom{10}{6}}{\binom{45}{6}} \approx 0.0054
+\]</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>Event C</strong>: at least two shifts represented.</li>
+</ol>
+<p>This is the complement of event <span class="math inline">\(B\)</span>:</p>
+<p><span class="math display">\[
+\text{Pr}(C) = 1 - \text{Pr}(B) \approx 1 - 0.0054 = 0.9946
+\]</span></p>
+</details>
+<hr />
+</div>
+<div id="relative-frequency-method" class="section level2">
+<h2>1.4.1 Relative Frequency Method</h2>
+<p>The <strong>relative frequency method</strong> is another way to
+estimate probability - specially useful when the theoretical model is
+difficult to define, or when real-world data is available from repeated
+observations.</p>
+<div id="key-ideas" class="section level3">
+<h3>Key Ideas</h3>
+<ul>
+<li>Suppose we repeat an experiment many times under <strong>identical
+and independent conditions</strong>.</li>
+<li>Let <span class="math inline">\(E\)</span> be an event we are
+interested in observing (e.g., getting a six when rolling a die).</li>
+<li>Let <span class="math inline">\(\text{freq}(E)\)</span> be the
+number of times the event <span class="math inline">\(E\)</span> occurs
+in <span class="math inline">\(n\)</span> trials.</li>
+</ul>
+<p>Then the <strong>relative frequency</strong> of event <span class="math inline">\(E\)</span> is:</p>
+<p><span class="math display">\[
+\text{Relative Frequency} = \frac{\text{freq}(E)}{n}
+\]</span></p>
+<p>As <span class="math inline">\(n\)</span> becomes large, the relative
+frequency tends to <strong>stabilize</strong>, approaching the
+<strong>true probability</strong> of the event. This leads us to the
+idea:</p>
+<p><span class="math display">\[
+\text{Pr}(E) = \lim_{n \to \infty} \frac{\text{freq}(E)}{n}
+\]</span></p>
+<p>This interpretation of probability is known as the <strong>relative
+frequency definition</strong>.</p>
+<blockquote>
+<p><strong>When to use:</strong><br />
+This method is especially helpful when you <strong>collect data</strong>
+from a real or simulated experiment and want to estimate the probability
+based on outcomes observed over many repetitions.</p>
+</blockquote>
+</div>
+<div id="simulating-an-example-in-r" class="section level3">
+<h3>Simulating an Example in R</h3>
+<p>We now explore how the relative frequency converges to the true
+probability as the number of trials increases.</p>
+<div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div>
+<p>This estimates <span class="math inline">\(\text{Pr}(6)\)</span> as
+the proportion of sixes observed in 10,000 simulated rolls. If the die
+is fair, this value should be close to <span class="math inline">\(1/6
+\approx 0.1667\)</span>.</p>
+</div>
+</div>
+<div id="activity-1.24" class="section level2">
+<h2>Activity 1.24</h2>
+<p>In a certain production process, milk powder is filled into bags. A
+bag is said to be <strong>non-conforming</strong> if its weight is
+<strong>less than 398g or greater than 403g</strong>. Otherwise, it is
+said to be <strong>conforming</strong>.</p>
+<p>The quality inspector has measured the weights of 585 randomly
+selected bags. The frequency table of those weights (in grams) is given
+below:</p>
 <table>
-<tbody>
-<tr class="odd">
-<td><strong>Course Title:</strong></td>
-<td>Probability and Statistics</td>
-</tr>
-<tr class="even">
-<td><strong>Course Code:</strong></td>
-<td>TETC 1212</td>
-</tr>
-<tr class="odd">
-<td><strong>Credit Value:</strong></td>
-<td>2.0</td>
-</tr>
-<tr class="even">
-<td><strong>Status:</strong></td>
-<td>Core</td>
-</tr>
-<tr class="odd">
-<td><strong>Year/Level:</strong></td>
-<td>2025/First Year</td>
-</tr>
-<tr class="even">
-<td><strong>Semester:</strong></td>
-<td>Second Semester</td>
-</tr>
-<tr class="odd">
-<td><strong>Pre-requisite:</strong></td>
-<td>A/L ICT/Mathematics/Biology</td>
-</tr>
-</tbody>
-</table>
-<hr />
-</div>
-<div id="aim-of-the-course" class="section level1">
-<h1>Aim of the Course</h1>
-<p>This course establishes the fundamentals of probability and
-descriptive statistics. It is a prerequisite for advanced modules in
-probability and statistics.</p>
-<hr />
-</div>
-<div id="learning-activities-weekly-breakdown" class="section level1">
-<h1>Learning Activities &amp; Weekly Breakdown</h1>
-<div style="text-align: center;">
-<table style="width:99%;">
-<colgroup>
-<col width="8%" />
-<col width="27%" />
-<col width="52%" />
-<col width="10%" />
-</colgroup>
 <thead>
 <tr class="header">
-<th><strong>Week</strong></th>
-<th><strong>Topic</strong></th>
-<th><strong>Description</strong></th>
-<th><strong>Hours</strong></th>
+<th align="center">Weight (in grams)</th>
+<th align="center">Number of Bags</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>3</td>
-<td><a href="week1.html">Elements of Probability</a></td>
-<td>Introduction, experiments, outcomes, sample spaces, events</td>
-<td>8 (2T + 6IL)</td>
+<td align="center">396-397</td>
+<td align="center">10</td>
 </tr>
 <tr class="even">
-<td>4</td>
-<td><a href="week2.html">Event Operations</a></td>
-<td>Complements, unions, intersections, mutually exclusive/exhaustive
-events</td>
-<td>8 (2T + 6IL)</td>
+<td align="center">398-399</td>
+<td align="center">175</td>
 </tr>
 <tr class="odd">
-<td>5</td>
-<td><a href="tetcw5.html">Methods of Probability</a></td>
-<td>Classical, relative frequency, axioms, interpretation</td>
-<td>8 (2T + 6IL)</td>
+<td align="center">400-401</td>
+<td align="center">270</td>
 </tr>
 <tr class="even">
-<td>6</td>
-<td>Conditional Probability</td>
-<td>Independent events</td>
-<td>8 (2T + 6IL)</td>
+<td align="center">402-403</td>
+<td align="center">115</td>
 </tr>
 <tr class="odd">
-<td>7</td>
-<td>Probability Rules</td>
-<td>Addition, multiplication, total probability, Bayes’ theorem</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>8</td>
-<td>Random Variables</td>
-<td>Definitions, discrete and continuous variables</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="even">
-<td>9</td>
-<td>Events with Random Variables</td>
-<td>Event representation and revision</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="odd">
-<td>9</td>
-<td>Distributions and functions of RV</td>
-<td><p>pmf, pdf, cdf</p>
-<p>Expectation, Variance, Transforamtion</p></td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="even">
-<td>10</td>
-<td>Revision</td>
-<td></td>
-<td></td>
+<td align="center">404-405</td>
+<td align="center">15</td>
 </tr>
 </tbody>
 </table>
-</div>
-<p><em>T = Theory, IL = Independent Learning</em></p>
-<hr />
-</div>
-<div id="intended-learning-outcomes-ilos" class="section level1">
-<h1>Intended Learning Outcomes (ILOs)</h1>
-<p>By the end of this course, students will be able to:</p>
 <ol style="list-style-type: decimal">
-<li>Describe events using set notation and sample spaces.<br />
-</li>
-<li>Formulate and identify events of interest.<br />
-</li>
-<li>Apply classical and empirical methods for calculating
-probability.<br />
-</li>
-<li>Explain and apply probability axioms.<br />
-</li>
-<li>Distinguish conditional from unconditional events.<br />
-</li>
-<li>Use rules of probability effectively.<br />
-</li>
-<li>Define and identify types of random variables.<br />
-</li>
-<li>Relate events to random variables.<br />
-</li>
-<li>Use pmf, pdf, cdf correctly.<br />
-</li>
-<li>Calculate probabilities and descriptive measures from
-distributions.<br />
-</li>
-<li>Define and interpret mean, median, variance, etc.<br />
-</li>
-<li>Present clear and accurate solutions to problems.</li>
+<li><p>If a bag is taken randomly from the process, what is the
+probability that it will be a <strong>non-conforming</strong>
+bag?</p></li>
+<li><p>If three bags are taken randomly from the process, what is the
+probability that <strong>one of them will be
+non-conforming</strong>?</p></li>
 </ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>Let:</p>
+<ul>
+<li><span class="math inline">\(N = 585\)</span>: total number of
+bags</li>
+<li><span class="math inline">\(A\)</span>: the event that a randomly
+selected bag is <strong>non-conforming</strong></li>
+</ul>
+<p>1. Probability that a randomly selected bag is non-conforming</p>
+<p>Non-conforming weights are:<br />
+- Less than 398g → 396–397: 10 bags<br />
+- Greater than 403g → 404–405: 15 bags</p>
+<p>Total non-conforming = <span class="math inline">\(10 + 15 =
+25\)</span> bags</p>
+<p><span class="math display">\[
+\text{Pr}(A) = \frac{25}{585} \approx 0.0427
+\]</span></p>
+<p>So, there is approximately a <strong>4.27%</strong> chance that a
+randomly selected bag is non-conforming.</p>
+<hr />
+<p>2. Probability that <strong>at least one</strong> out of 3 bags is
+non-conforming</p>
+<p>Let <span class="math inline">\(A&#39;\)</span> be the event that a
+bag is <strong>conforming</strong>.</p>
+<p>Then:</p>
+<p><span class="math display">\[
+\text{Pr}(A&#39;) = 1 - \text{Pr}(A) = 1 - \frac{25}{585} =
+\frac{560}{585}
+\]</span></p>
+<p>Assuming the three selections are independent (for approximation),
+the probability that <strong>all three</strong> are conforming is:</p>
+<p>$$ ( )^3 </p>
+<p>$$</p>
+<p>Therefore, the probability that <strong>at least one</strong> is
+non-conforming is:</p>
+<p><span class="math display">\[
+\text{Pr}(\text{at least one non-conforming}) = 1 - \left(
+\frac{560}{585} \right)^3 \approx 0.1228
+\]</span></p>
+<p>So, there’s roughly a <strong>12.28%</strong> chance that at least
+one of the three bags is non-conforming.</p>
+</details>
 <hr />
 </div>
-<div id="mode-of-assessment" class="section level1">
-<h1>Mode of Assessment</h1>
+<div id="activity-1.25" class="section level2">
+<h2>Activity 1.25</h2>
+<p>In a large manufacturing facility, an opinion survey was conducted
+regarding three types of bonus schemes. A random sample of 960 employees
+was selected. The job category and the bonus scheme of each employee
+were recorded. The results are shown below:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Employee Category</th>
+<th align="center">Type I</th>
+<th align="center">Type II</th>
+<th align="center">Type III</th>
+<th align="center">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Laborer</td>
+<td align="center">190</td>
+<td align="center">243</td>
+<td align="center">197</td>
+<td align="center">630</td>
+</tr>
+<tr class="even">
+<td align="center">Clerk</td>
+<td align="center">82</td>
+<td align="center">44</td>
+<td align="center">44</td>
+<td align="center">170</td>
+</tr>
+<tr class="odd">
+<td align="center">Technician</td>
+<td align="center">23</td>
+<td align="center">78</td>
+<td align="center">34</td>
+<td align="center">135</td>
+</tr>
+<tr class="even">
+<td align="center">Executive</td>
+<td align="center">5</td>
+<td align="center">12</td>
+<td align="center">8</td>
+<td align="center">25</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Total</strong></td>
+<td align="center">300</td>
+<td align="center">377</td>
+<td align="center">283</td>
+<td align="center">960</td>
+</tr>
+</tbody>
+</table>
+<p>If an employee is selected randomly from this manufacturing facility,
+what is the probability that:</p>
+<ol style="list-style-type: decimal">
+<li>The employee is a <strong>clerk</strong>?</li>
+<li>The employee has <strong>bonus scheme II</strong>?</li>
+<li>The employee is a <strong>technician with bonus scheme
+I</strong>?</li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>Let:</p>
 <ul>
-<li><strong>Assignments 3 (Homework)</strong><br />
+<li><span class="math inline">\(N = 960\)</span>: total number of
+employees</li>
+<li><span class="math inline">\(A\)</span>: event that the selected
+employee is a <strong>clerk</strong></li>
+<li><span class="math inline">\(B\)</span>: event that the employee has
+<strong>bonus scheme II</strong></li>
+<li><span class="math inline">\(C\)</span>: event that the employee is a
+<strong>technician with bonus scheme I</strong></li>
+</ul>
+<p><strong>1. Probability that the employee is a clerk:</strong></p>
+<p>There are 170 clerks out of 960.</p>
+<p><span class="math display">\[
+\text{Pr}(A) = \frac{170}{960}
+\]</span></p>
+<hr />
+<p><strong>2. Probability that the employee has bonus scheme
+II:</strong></p>
+<p>There are 377 employees under bonus scheme II.</p>
+<p><span class="math display">\[
+\text{Pr}(B) = \frac{377}{960}
+\]</span></p>
+<hr />
+<p><strong>3. Probability that the employee is a technician with bonus
+scheme I:</strong></p>
+<p>There are 23 technicians with Type I bonus.</p>
+<p><span class="math display">\[
+\text{Pr}(C) = \frac{23}{960} \approx 0.02396
+\]</span></p>
+<p>So, there’s a <strong>2.4%</strong> chance that a randomly selected
+employee is a technician with bonus scheme I.</p>
+</details>
+<hr />
+</div>
+<div id="subjective-probability-method" class="section level2">
+<h2>1.4.3 Subjective Probability Method</h2>
+<p>Not all situations allow us to calculate probabilities using past
+data (relative frequency) or symmetry (classical method). In such cases,
+we rely on <strong>subjective probability</strong>.</p>
+<p>Subjective probability is based on a person’s <strong>judgment,
+intuition, or personal belief</strong> about how likely an event is to
+occur.</p>
+<div id="key-features" class="section level3">
+<h3>Key Features</h3>
+<ul>
+<li>A <strong>subjective probability</strong> reflects an individual’s
+<strong>opinion</strong> about the occurrence of an event.</li>
+<li>These probabilities are <strong>personal</strong> — they can
+<strong>differ from person to person</strong>, even when considering the
+same event.</li>
+<li>It is often used when no past data or mathematical model is
+available.</li>
+</ul>
+</div>
+<div id="limitations" class="section level3">
+<h3>Limitations</h3>
+<ul>
+<li>Assigning a subjective probability can be difficult and may
+<strong>lack consistency</strong>.</li>
+<li>There is <strong>no objective way to verify</strong> whether a
+subjective probability is correct.</li>
+<li>The value can change with time, new information, or even mood.</li>
+</ul>
+</div>
+<div id="common-approaches-to-estimate-subjective-probabilities" class="section level3">
+<h3>Common Approaches to Estimate Subjective Probabilities</h3>
+<ul>
+<li><strong>Personal guess</strong> based on experience or
+intuition<br />
 </li>
-<li><strong>Final Exam</strong> (2 hours)</li>
+<li><strong>Betting approach</strong>: How much a person is willing to
+bet on an event indicates their belief in its occurrence<br />
+</li>
+<li><strong>Reference lottery approach</strong>: Comparing the
+uncertainty of the event to a known lottery</li>
+</ul>
+<p><strong>Note</strong>: While subjective probabilities are important
+in areas like decision making and risk analysis, this method will
+<strong>not be discussed further in this course.</strong></p>
+<p>The <strong>subjective interpretation of probability</strong> is a
+foundational idea in <strong>Bayesian Statistics</strong>, where
+probabilities are used to express <strong>degrees of belief</strong>
+rather than long-run frequencies.</p>
+<hr />
+</div>
+</div>
+<div id="using-probability-models" class="section level2">
+<h2>1.4.4 Using Probability Models</h2>
+<p>In some situations, we do not rely on personal opinions (subjective
+method), experimental results (relative frequency), or symmetry
+(classical method). Instead, we use <strong>mathematical models</strong>
+to represent the behavior of random phenomena. These are called
+<strong>probability models</strong>.</p>
+<p>A probability model defines:</p>
+<ul>
+<li>A <strong>sample space</strong> — all possible outcomes of the
+experiment</li>
+<li>A <strong>probability function</strong> — a rule that assigns
+probabilities to events in the sample space</li>
+</ul>
+<p>This approach is common in scientific, engineering, and data-driven
+applications where the underlying process can be <strong>described using
+theoretical assumptions</strong>.</p>
+<hr />
+<div id="key-features-1" class="section level3">
+<h3>Key Features</h3>
+<ul>
+<li>Probability models are often <strong>idealized
+representations</strong> of real-world processes.</li>
+<li>They allow us to <strong>make predictions</strong>, calculate
+<strong>expected outcomes</strong>, and assess
+<strong>risks</strong>.</li>
+<li>These models are usually built using <strong>probability
+distributions</strong> such as:
+<ul>
+<li>The binomial distribution (e.g., number of successes in a series of
+trials)</li>
+<li>The normal distribution (e.g., measurement errors, heights)</li>
+<li>The Poisson distribution (e.g., number of arrivals per minute)</li>
+</ul></li>
 </ul>
 <hr />
 </div>
-<div id="references" class="section level1">
-<h1>References</h1>
-<ul>
-<li>Scott Stevens, <em>Introduction to Statistics: Think &amp;
-Do</em></li>
-<li>Jay L. Devore, <em>Probability and Statistics for Engineering and
-Sciences</em>, Brooks/Cole.<br />
-</li>
-<li>Class handouts and lecture notes.</li>
-</ul>
+<div id="example" class="section level3">
+<h3>Example</h3>
+<p>Suppose we are modeling the number of defective items in a batch of
+100 products. We might assume that each item has a small, independent
+chance of being defective — and model the number of defectives using the
+<strong>binomial distribution</strong>.</p>
+<p>Or, we might model the amount of rainfall in a day using a
+<strong>continuous distribution</strong> like the normal or exponential
+distribution.</p>
+<blockquote>
+<p>These kinds of probability models are specially useful in designing
+experiments, simulating systems, and making data-based decisions.</p>
+</blockquote>
 <hr />
 </div>
-<div id="instructor-office-hours" class="section level1">
-<h1>Instructor &amp; Office Hours</h1>
-<p><strong>Lecturer:</strong> Dr. Rajitha M. Silva<br />
-<strong>Email:</strong> <a href="mailto:rsilva@sjp.ac.lk" class="email">rsilva@sjp.ac.lk</a><br />
-<strong>Office Hours:</strong> One hour after lectures or by
-appointment</p>
-<hr />
-<p><em>This course is effective from July 2025.</em></p>
+</div>
 </div>
 
 

@@ -2,7 +2,6 @@
 title: "TETC 1212 Probability and Statistics: Week 5"
 author: "Dr. Rajitha M. Silva"
 output: html_document
-runtime: shiny
 ---
 
 # 1.3 Axioms of Probability
