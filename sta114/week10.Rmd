@@ -1,6 +1,6 @@
 ---
 title: "Cumulative Distribution Function (CDF) & Quantiles"
-author: "Dr. R. M. Silva"
+author: "Rajitha M. Silva"
 output: html_document
 ---
 
@@ -41,7 +41,7 @@ where \(F_X(x-0)\) is the left limit of \(F_X\) at \(x\).
 2. **Limits:** \(\displaystyle \lim_{t\to -\infty}F_X(t)=0,\quad \lim_{t\to \infty}F_X(t)=1.\)\
 
 3. **Right-continuous:** \(\displaystyle \lim_{h\downarrow 0} F_X(t+h)=F_X(t).\)\
- -- right-continuous allows jumps but forbids "holes" when you approach from the right.
+ -- right-continuous allows jumps but forbids “holes” when you approach from the right.
 
 ---
 
@@ -94,25 +94,25 @@ F_X(t)=
 
 ---
 
-### Example - Number of Heads in Three Tosses
+### Example – Number of Heads in Three Tosses
 
 Experiment: toss a fair coin three times, and record the face up at each trial.  
 Random variable: \(X=\) total number of heads.
 
 
 
-- There are \(2^3 = 8\) equally-likely outcome sequences.  
-- Exactly one sequence has 0 heads (ttt) - \(1/8\).  
-- Exactly one sequence has 3 heads (hhh) - \(1/8\).  
-- \(\binom{3}{1}=3\) sequences have 1 head - \(3/8\).  
-- \(\binom{3}{2}=3\) sequences have 2 heads - \(3/8\).
+- There are \(2^3 = 8\) equally‐likely outcome sequences.  
+- Exactly one sequence has 0 heads (ttt) → \(1/8\).  
+- Exactly one sequence has 3 heads (hhh) → \(1/8\).  
+- \(\binom{3}{1}=3\) sequences have 1 head → \(3/8\).  
+- \(\binom{3}{2}=3\) sequences have 2 heads → \(3/8\).
 
 ---
 
 #### Building the cdf \(F_X(t)=\Pr(X\le t)\)
 
 1. **\(t<0\)**  
-   No outcome gives \(X<0\) --> \(F_X(t)=0\).
+   No outcome gives \(X<0\) ⇒ \(F_X(t)=0\).
 
 2. **\(0\le t<1\)**  
    Only \(X=0\) satisfies \(X\le t\).  
@@ -133,7 +133,7 @@ Random variable: \(X=\) total number of heads.
    \]
 
 5. **\(t\ge 3\)**  
-   All possibilities counted - \(F_X(t)=1\).
+   All possibilities counted ⇒ \(F_X(t)=1\).
 
 ---
 
@@ -154,7 +154,7 @@ F_X(t)=
 Each step height equals the probability at that \(x\); cumulative sums give the cdf.
 
 
-## Example - Stepwise CDF from a Finite Support
+## Example – Stepwise CDF from a Finite Support
 
 Suppose a discrete random variable \( X \) takes values in a **finite set**:
 
@@ -206,20 +206,16 @@ F_X(t) =
 \end{cases}
 \]
 
-> Note: The value \(x = 5\) has probability 0, so the CDF does **not jump** at that point - it remains constant at 1.
+> Note: The value \(x = 5\) has probability 0, so the CDF does **not jump** at that point — it remains constant at 1.
 
 ---
 
 ### Explanation
 
-- For \( t < -3 \), no value of \(X\) is less than or equal to \(t\) - \(F_X(t) = 0\).\
-
-- For \( -3 \le t < 1 \), only \(X = -3\) contributes - \(F_X(t) = \Pr(X = -3) = \frac{1}{2}\).\
-
-- For \( 1 \le t < 2 \), \(X = -3\) and \(X = 1\) are counted - \(F_X(t) = \frac{1}{2} + \frac{1}{3} = \frac{5}{6}\).\
-
-- For \( 2 \le t < 5 \), we include \(X = 2\) as well - \(F_X(t) = \frac{1}{2} + \frac{1}{3} + \frac{1}{6} = 1\).\
-
+- For \( t < -3 \), no value of \(X\) is less than or equal to \(t\) → \(F_X(t) = 0\).
+- For \( -3 \le t < 1 \), only \(X = -3\) contributes → \(F_X(t) = \Pr(X = -3) = \frac{1}{2}\).
+- For \( 1 \le t < 2 \), \(X = -3\) and \(X = 1\) are counted → \(F_X(t) = \frac{1}{2} + \frac{1}{3} = \frac{5}{6}\).
+- For \( 2 \le t < 5 \), we include \(X = 2\) as well → \(F_X(t) = \frac{1}{2} + \frac{1}{3} + \frac{1}{6} = 1\).
 - For \( t \ge 5 \), we still have \(F_X(t) = 1\) because all mass has been accumulated.
 
 ---
@@ -256,133 +252,26 @@ ggplot(data.frame(t = t_vals, F = F_vals), aes(x = t, y = F)) +
   theme_minimal()
 ```
 
+---
 
+---
 
+### Example – Waiting for the First Ace
 
-
-## Experiment: Tossing a Die Repeatedly
-
-Consider the experiment where we toss a die repeatedly, and let \( X \) represent the number of tosses until the first "1" appears.
-
-### Probability Mass Function (PMF)
-
-The probability mass function (PMF) for the random variable \( X \) (number of tosses until the first "1" appears) is given by:
-
+Experiment: toss a die repeatedly; \(X=\) number of tosses until the first “ace” (1).  
+For \(k=1,2,\dots\):
 \[
-\Pr(X = k) = \left(\frac{5}{6}\right)^{k-1} \times \frac{1}{6}, \quad k = 1, 2, 3, \dots
+\Pr(X=k)=\left(\frac{5}{6}\right)^{k-1}\!\left(\frac{1}{6}\right).
 \]
-
-This formula describes the following:
-- The first \( k-1 \) tosses must **not** be "1" (each has a probability of \( \frac{5}{6} \)).
-- On the \( k \)-th toss, we must roll a "1", which has a probability of \( \frac{1}{6} \).
-
-### Cumulative Distribution Function (CDF)
-
-The cumulative distribution function (CDF) \( F_X(t) \) is the probability that \( X \) is less than or equal to some value \( t \). Specifically:
-
+The cdf is
 \[
-F_X(t) = \Pr(X \leq t)
-\]
-
-We can express this piecewise as:
-
-\[
-F_X(t) =
+\boxed{
+F_X(t)=
 \begin{cases}
-0, & \text{for } t < 1 \\
-\sum_{k=1}^{\lfloor t \rfloor} \left(\frac{5}{6}\right)^{k-1} \times \frac{1}{6}, & \text{for } t \geq 1
-\end{cases}
+0, & t<1,\\
+\sum_{k=1}^{\lfloor t \rfloor} \left(\frac{5}{6}\right)^{k-1}\!\left(\frac{1}{6}\right), & t\ge 1.
+\end{cases}}
 \]
-
-#### The Role of the Floor Function in the CDF
-
-The **floor function**, denoted \( \lfloor t \rfloor \), is a mathematical operation that rounds down a number \( t \) to the largest integer less than or equal to \( t \). For example:
-
-- \( \lfloor 3.7 \rfloor = 3 \)
-- \( \lfloor 5.2 \rfloor = 5 \)
-- \( \lfloor 7 \rfloor = 7 \)
-
-In the context of the **Cumulative Distribution Function (CDF)**, we use the floor function to sum the probabilities for all values of \( X \) less than or equal to \( t \). Since \( t \) can be a non-integer, we need to round \( t \) down to the nearest whole number before summing the probabilities.
-
-#### Why the Floor Function Is Used
-
-In the CDF expression (for $t \ge 1$):
-
-\[
-F_X(t) = \sum_{k=1}^{\lfloor t \rfloor} \left(\frac{5}{6}\right)^{k-1} \times \frac{1}{6}
-\]
-
-- **\( \lfloor t \rfloor \)** ensures that we only sum the probabilities for values of \( X \) up to the largest integer less than or equal to \( t \).
-  
-For example:
-- If \( t = 2.5 \), then \( \lfloor t \rfloor = 2 \), so the sum of probabilities will be for \( X = 1 \) and \( X = 2 \).
-- If \( t = 4.8 \), then \( \lfloor t \rfloor = 4 \), and we will sum the probabilities for \( X = 1 \), \( X = 2 \), \( X = 3 \), and \( X = 4 \).
-
-The floor function effectively truncates any fractional part of \( t \) and allows the CDF to sum probabilities only for complete tosses (since \( X \) must always be a whole number of tosses).
-
-
-
-If \( t = 3.7 \), then \( \lfloor t \rfloor = 3 \), and the CDF sums the probabilities for \( X = 1 \), \( X = 2 \), and \( X = 3 \). The value at \( t = 3.7 \) will be the same as the value at \( t = 3 \), as we are interested in the probability that \( X \leq 3 \) regardless of the decimal part.
-
-In the R code, the `floor()` function is used to ensure we correctly handle the summation of probabilities up to the integer part of \( t \).
-
-```{r}
-# Example of using floor in R
-t_value <- 3.7
-floor_t <- floor(t_value)  # Will return 3
-
-```
-
-
-### Explanation of CDF Behavior
-
-1. **For \( t < 1 \)**: Since it's impossible to have seen a "1" before the first toss, the probability is 0:
-
-\[
-F_X(t) = 0 \quad \text{for } t < 1
-\]
-
-2. **For \( t \geq 1 \)**: The CDF sums the probabilities of all outcomes up to \( t \). For instance, if \( t = 3 \), the CDF would be the sum of the probabilities for \( X = 1 \), \( X = 2 \), and \( X = 3 \):
-
-\[
-F_X(3) = \Pr(X = 1) + \Pr(X = 2) + \Pr(X = 3)
-\]
-
-The CDF increases as \( t \) increases, and eventually approaches 1 as \( t \to \infty \), reflecting the certainty that a "1" will eventually appear.
-
-### Visualizing the CDF in R
-
-You can also plot the CDF to visualize how it behaves as \( t \) increases. Below is an R code snippet to generate the plot:
-
-```{r}
-
-library(ggplot2)
-
-# Define values and cumulative probabilities
-x_vals <- c(1, 2, 3, 4)  # Possible values of X (tosses)
-probs <- c((5/6)^0 * (1/6), (5/6)^1 * (1/6), (5/6)^2 * (1/6), (5/6)^3 * (1/6))  # PMF for each X value
-
-# Cumulative probabilities (CDF)
-cdf_vals <- cumsum(probs)
-
-# Extended t values for plotting the step function (t-values starting from 1)
-t_vals <- c(0,1, 2, 3, 4)  # Extended values for smooth step function
-F_vals <- c(0, cdf_vals)  # Include 0 at t = 0 for the initial probability
-
-data.frame(t_vals,F_vals)
-
-# Plot the CDF with jumps and gaps
-ggplot(data.frame(t = t_vals, F = F_vals), aes(x = t, y = F)) +
-  geom_step(direction = "hv", color = "blue") +  # Stepwise plot
-  geom_point(data = data.frame(x = x_vals, y = cdf_vals),
-             aes(x = x, y = y), color = "red", size = 3) +  # Red dots at jump points
-  labs(title = "Stepwise CDF of Discrete Random Variable X",
-       x = "Number of Tosses (t)", y = expression(F[X](t))) +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Adjust x-axis labels
-
-```
-
 
 ---
 
@@ -405,7 +294,7 @@ Special names:
 
 ---
 
-### Example - Quantiles in Continous Distribution
+### Example – Quantiles for the Target Distance
 
 Using \(F_X(t) = (t/R)^2\) on \([0,R]\), solve \((t_p/R)^2=p\).  \
 
@@ -415,87 +304,7 @@ e.g. \(t_{0.25}=R/2\).
 
 ---
 
-
-## Activity 2.19
-
-Consider a **continuous distribution** where the **cumulative distribution function (CDF)** is given by:
-
-\[
-F_X(t) = 1 - e^{-t/\lambda} \quad \text{for} \quad t \geq 0,
-\]
-
-where \( \lambda \) is a positive constant.
-
-This distribution represents the probability that the random variable \( X \) takes a value less than or equal to \( t \). Calculate the first quartile (25th quantile).
-
-<details>
-
-<summary><strong>Solution</strong></summary>
-
-To find the **quantile function** (inverse of the CDF), we solve for \( t_p \) in terms of the probability \( p \).
-
-Starting with the CDF:
-
-\[
-F_X(t) = 1 - e^{-t/\lambda},
-\]
-
-we solve for \( t \):
-
-\[
-p = 1 - e^{-t/\lambda},
-\]
-
-\[
-e^{-t/\lambda} = 1 - p,
-\]
-
-\[
--t/\lambda = \ln(1 - p),
-\]
-
-\[
-t = -\lambda \ln(1 - p).
-\]
-
-Thus, the **quantile function** is:
-
-\[
-t_p = -\lambda \ln(1 - p).
-\]
-
-
-
-For the probability, \( p = 0.25 \), we calculate the quantile \( t_{0.25} \):
-
-\[
-t_{0.25} = -\lambda \ln(1 - 0.25) = -\lambda \ln(0.75).
-\]
-
-Using a numerical approximation, we find:
-
-\[
-\ln(0.75) \approx -0.2877,
-\]
-
-\[
-t_{0.25} = -\lambda \cdot (-0.2877) = 0.2877 \lambda.
-\]
-
-So, if \( \lambda = 10 \), then:
-
-\[
-t_{0.25} \approx 0.2877 \cdot 10 = 2.877.
-\]
-
-Thus, the **25th percentile** of this distribution is approximately **2.88**.
-
-</details>
-
----
-
-
-### Example - Quantiles in a Discrete Distribution
+### Example – Quantiles in a Discrete Distribution
 
 Let the random variable \(X\) take the values:
 
@@ -533,7 +342,7 @@ t_p = \inf\{x \in \mathbb{R} \mid F_X(x) \ge p\}
 
 This definition uses the **infimum** (greatest lower bound) to find the smallest value \(x\) such that the cumulative distribution function (cdf) \(F_X(x)\) reaches or exceeds the probability level \(p\).
 
-Let's break it down:
+Let’s break it down:
 
 - The **cdf** \(F_X(x)\) gives the probability that the random variable \(X\) takes a value less than or equal to \(x\), i.e., \(F_X(x) = \Pr(X \le x)\).
   
@@ -597,7 +406,7 @@ Note: In a **discrete** distribution, many different \(p\)-quantiles may map to 
 
 ---
 
-### Theorem - Probability Between Quantiles
+### Theorem – Probability Between Quantiles
 
 If \(F\) is continuous and \(0<\alpha<\beta<1\), then for any \(\alpha\)- and \(\beta\)-quantiles \(t_\alpha, t_\beta\),
 \[
@@ -611,7 +420,7 @@ If \(F\) is continuous and \(0<\alpha<\beta<1\), then for any \(\alpha\)- and \(
 ### Practical Use: Probabilities via Quantiles
 
 - To find \(t_p\), solve \(F_X(t_p)=p\) (when a solution exists).  
-- To compute \(\Pr(X\in [t_\alpha, t_\beta])\) for a continuous cdf, use Theorem - Probability Between Quantiles.  
+- To compute \(\Pr(X\in [t_\alpha, t_\beta])\) for a continuous cdf, use Theorem – Probability Between Quantiles.  
 - In discrete cases, use the inequality definition to locate the smallest \(t\) with \(F_X(t)\ge p\).
 
 ---

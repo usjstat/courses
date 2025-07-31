@@ -1,0 +1,334 @@
+---
+title: "CAL_probability_theory: Week 1"
+author: "Dr. Rajitha M. Silva"
+output: html_document
+---
+
+## Introduction
+
+Probability is not just about dice and cards - it's the foundation of decision-making under uncertainty. Whether you're analyzing stock market trends, assessing investment risks, or evaluating economic forecasts, probability theory is essential.
+
+> Imagine trying to predict the next big market movement, estimating the risk of a financial asset, or optimizing investment portfolios - **probability is behind it all.**
+
+Let us begin with a story that is not only historically important but also surprisingly intuitive.
+
+### A Note from the History of Probability
+
+Probability theory as a mathematical discipline was significantly shaped by games of chance. A well-known example comes from **Chevalier de Mere**, a 17th-century French nobleman and gambler.
+
+He posed a paradox:
+
+> Which is more likely?
+\> (a) Getting **at least one six** in **four rolls** of a single die
+\> (b) Getting **at least one double six** in **24 rolls** of **two dice**
+
+Intuition may suggest these events are equally probable, but de Mere's observations hinted otherwise.
+
+-   [Chevalier de Mere's Paradox](https://www.youtube.com/watch?v=LIRG3aMQ55k) - A YouTube lecture explaining the paradox.
+
+------------------------------------------------------------------------
+
+## Analytical Solutions
+
+Let us calculate the probabilities:
+
+```{r}
+# (a) Probability of at least one six in 4 rolls of one die
+prob_a <- 1 - (5/6)^4
+
+# (b) Probability of at least one double six in 24 rolls of two dice
+prob_b <- 1 - (35/36)^24
+
+prob_a
+prob_b
+```
+
+<details>
+
+<summary><strong>Why de Mere's Intuition Was Wrong</strong></summary>
+
+Chevalier de Mere believed that the chance of rolling at least one six in four rolls of a single die should be similar to the chance of rolling at least one double six (i.e., both dice show a six) in 24 rolls of two dice. This was based on the idea that the chance of rolling a six on one die is ( frac{1}{6} ), and the chance of rolling double sixes with two dice is ( frac{1}{36} ), and since ( 4 imes frac{1}{6} = frac{2}{3} ) and ( 24 imes frac{1}{36} = frac{2}{3} ), the overall chances should be roughly equal.
+
+But this is **not how probability works** when events are repeated.
+
+In reality, the probability of getting **at least one success** in multiple independent trials is calculated using the complement:
+
+\[ P( ext{at least one success}) = 1 - (1 - p)\^n \]
+
+So: - For one six in 4 rolls:\
+\[ P = 1 - \left(frac{5}{6} ight)\^4 approx 0.5177 \] - For one double six in 24 rolls:\
+\[ P = 1 - \left(frac{35}{36} ight)\^{24} approx 0.4914 \]
+
+Even though the expected number of successes in both cases is about ( frac{2}{3} ), the **probability** of getting at least one success differs. The mistake in de Mere's reasoning was treating expected number of successes as equivalent to the probability of getting at least one success, which they are not.
+
+</details>
+
+------------------------------------------------------------------------
+
+## Monte Carlo Simulation
+
+Before we simulate, a quick note:
+
+**Why is it called "Monte Carlo" Simulation?**
+
+The term **Monte Carlo simulation** originated in the 1940s during work on nuclear weapons at the Los Alamos National Laboratory. The method was named by physicist **Stanislaw Ulam** and mathematician **John von Neumann** after the Monte Carlo Casino in Monaco - famous for games of chance.
+
+Why the name? Because this simulation technique relies on **random sampling**, much like casino games rely on random outcomes (e.g., roulette, dice). Monte Carlo simulations help us estimate probabilities or solve problems that may be analytically complex or unsolvable.
+
+In our case, we're simulating dice rolls to estimate probabilities through **repeated random experiments** - the core idea behind Monte Carlo methods.
+
+Let us simulate both scenarios to confirm.
+
+```{r}
+set.seed(123)
+
+n <- 100000
+
+# Scenario (a): One die, 4 rolls
+sim_a <- replicate(n, any(sample(1:6, 4, replace = TRUE) == 6))
+mean(sim_a)
+
+# Scenario (b): Two dice, 24 trials
+sim_b <- replicate(n, any(replicate(24, all(sample(1:6, 2, replace = TRUE) == 6))))
+mean(sim_b)
+```
+
+------------------------------------------------------------------------
+
+## Quick Challenge for You
+
+Before moving on, try answering this:\> What is the probability of getting **at least one head** in **three tosses** of a fair coin?
+
+Hint: Think about the complement event - getting no heads!
+
+------------------------------------------------------------------------
+
+## 1. Elements of Probability
+
+### 1.1 Events
+
+The **probability** is a measure of the possibility of occurring an event. To compute probabilities, we first need to define **events** clearly.
+
+-   We use the word **experiment** for any action, process, or procedure that generates observations.
+
+-   An experiment that is repeatable in an identical fashion is called a **random experiment** or a **probability experiment**.
+
+-   An **outcome** is the result of a single experiment.
+
+-   The **sample space** ( S ) is the set of all possible outcomes.
+
+-   **Any subset of a sample space is called an event.** This means if you take the full list of possible outcomes (the sample space), you can define an event by choosing one or more outcomes from it. For example, if you toss a die, and define event A as **getting an even number**, then A is the subset ( {2, 4, 6} ) of the sample space ( S = {1, 2, 3, 4, 5, 6} ).
+
+-   **Any event is a subset of some sample space.** In reverse, every event you define must be based on a known sample space. You cannot have a meaningful probability unless you know all the possible outcomes it comes from. This ensures that events are logically consistent and measurable.
+
+Events are often denoted by capital letters: ( A, B, C ), etc. Some key types:
+
+-   A **null event** has no outcomes.
+
+-   A **simple event** contains only one outcome.
+
+-   A **compound event** contains more than one outcome.
+
+------------------------------------------------------------------------
+
+### Activity 1.1: Stock Price Movement (Random Experiment)
+
+**Experiment:** Observe the daily movement of a listed stock on the Colombo Stock Exchange (CSE). On any given day, the stock can:
+
+-   Increase in value
+-   Stay the same
+-   Decrease in value
+
+This is a **random experiment** because the price movement on any day is uncertain and influenced by unpredictable market conditions (e.g., news, demand/supply, global factors). Therefore, we treat this as a probability experiment.
+
+Let:
+
+1.  $S$ = the sample space\
+2.  $A$ = the event that the stock increases in value\
+3.  $B$ = the event that the stock does not decrease\
+4.  $C$ = the event that the stock decreases\
+5.  $D$ = the event that the stock remains unchanged\
+6.  $E$ = the event that the stock increases or decreases (i.e., not remaining unchanged)
+
+Write each of the above events as subsets of the sample space $S$.
+
+------------------------------------------------------------------------
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The sample space is:
+
+$$
+S = \{ \text{increase},\ \text{no change},\ \text{decrease} \}
+$$
+
+Then the events are:
+
+- $A = \{ \text{increase} \}$
+- $B = \{ \text{increase},\ \text{no change} \}$
+- $C = \{ \text{decrease} \}$
+- $D = \{ \text{no change} \}$
+- $E = \{ \text{increase},\ \text{decrease} \}$
+
+
+</details>
+
+------------------------------------------------------------------------
+
+### Activity 1.2: Selecting a Bond Based on Credit Score (Random Experiment)
+
+**Experiment:** A portfolio manager randomly selects a bond from a pool categorized by credit quality (as rated internally or by an external agency). The pool contains:
+
+- 1 bond rated AAA  
+- 2 bonds rated AA  
+- 3 bonds rated A  
+- 4 bonds rated BBB  
+- 5 bonds rated BB  
+- 6 bonds rated B  
+
+Each bond is equally likely to be selected. Let the experiment be: *"randomly selecting one bond and recording its credit rating."*
+
+This is a random experiment because although the total pool is known, the specific bond selected is unpredictable. It mirrors real-world uncertainty in sampling financial instruments.
+
+---
+
+Let:
+
+1. $S$ = the sample space  
+2. $A$ = the event of selecting a bond rated B  
+3. $B$ = the event of selecting a bond rated below BBB  
+4. $C$ = the event of selecting a bond with investment-grade rating  
+5. $D$ = the event of selecting a bond rated exactly A  
+6. $E$ = the event of selecting a bond not rated AAA
+
+Write each of the above events as subsets of the sample space $S$.
+
+---
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The sample space is:
+
+$$
+S = \{ 	\text{AAA},\ 	\text{AA},\ 	\text{A},\ 	\text{BBB},\ 	\text{BB},\ 	\text{B} \}
+$$
+
+Then the events are:
+
+- $A = \{ 	\text{B} \}$
+- $B = \{ 	\text{BB},\ 	\text{B} \}$
+- $C = \{ 	\text{AAA},\ 	\text{AA},\ 	\text{A},\ 	\text{BBB} \}$
+- $D = \{ 	\text{A} \}$
+- $E = \{ 	\text{AA},\ 	\text{A},\ 	\text{BBB},\ 	\text{BB},\ 	\text{B} \}$
+
+------------------------------------------------------------------------
+
+### Activity 1.3: Selecting Investment Products (Random Experiment)
+
+**Experiment:** A financial advisor randomly selects 3 investment products from a pool consisting of 3 equity funds (denoted by $e$) and 2 fixed income funds (denoted by $f$). The selection is made simultaneously, and the order does not matter.
+
+This is a random experiment because the composition of the selected 3 products is not known in advance and depends on chance.
+
+Let:
+
+1. $S$ = the sample space  
+2. $A$ = the event of selecting exactly one equity fund  
+3. $B$ = the event of selecting more than one equity fund  
+4. $C$ = the event of selecting no equity funds  
+
+Denoting equity funds by $e$ and fixed income funds by $f$, write the above events as sets.
+
+---
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The sample space is:
+
+$$
+S = \{ (e,e,e),\ (e,e,f),\ (e,f,f),\ (f,f,f) \}
+$$
+
+Then the events are:
+
+- $A = \{ (e,f,f) \}$
+- $B = \{ (e,e,e),\ (e,e,f) \}$
+- $C = \{ (f,f,f) \}$
+
+</details>
+
+------------------------------------------------------------------------
+
+### Activity 1.4: Client Call Attempts for Investment Confirmation (Random Experiment)
+
+**Experiment:** A relationship manager at CAL is calling a client to confirm an investment decision. Each call has a 50% chance of the client answering. Calls are made one at a time until the client answers. The number of calls made until a response is received is recorded.
+
+This is a random experiment because we do not know in advance on which call the client will answer.
+
+Let:
+
+1. $S$ = the sample space  
+2. $A$ = the event that the client answers on the 5th call  
+3. $B$ = the event that the client answers before the 5th call  
+4. $C$ = the event that the client does not answer within the first 10 calls  
+
+Write the above events as subsets of the sample space $S$.
+
+---
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The sample space is:
+
+$$
+S = \{1,\ 2,\ 3,\ 4,\ \ldots\}
+$$
+
+Then the events are:
+
+- $A = \{5\}$
+- $B = \{1,\ 2,\ 3,\ 4\}$
+- $C = \{11,\ 12,\ 13,\ \ldots\}$
+
+</details>
+
+### Activity 1.5: Time Spent Monitoring Markets (Random Experiment)
+
+**Experiment:** A portfolio analyst at CAL records the actual time $T$ (in hours) spent monitoring market movements in the last week. The analyst is randomly selected from a team.
+
+This is a random experiment because the exact number of hours varies from one analyst to another and is unknown in advance.
+
+Let:
+
+1. $S$ = the sample space  
+2. $A$ = the event that $T$ is less than 5.5 hours  
+
+Write the above events as subsets of the sample space $S$.
+
+---
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The sample space is:
+
+$$
+S = \{ T \in \mathbb{R} \mid T \geq 0 \}
+$$
+
+Then the event is:
+
+- $A = \{ T \in \mathbb{R} \mid 0 \leq T < 5.5 \}$
+
+</details>
+
+------------------------------------------------------------------------
+
