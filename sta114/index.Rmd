@@ -39,7 +39,7 @@ This course establishes the fundamentals of probability theory. It supports lear
 | 8 | [Events with Random Variables](week8.html) | Event representation and revision | 8 (2T + 6IL) |
 | 9 | [Distributions](week9.html) | pmf, pdf, cdf | 8 (2T + 6IL) |
 | 10 | [Probability Calculations](week10.html) | Quantiles, quartiles, percentiles | 8 (2T + 6IL) |
-| 11 | Mean & Variance | Mean and variance of r.v.s and functions | 8 (2T + 6IL) |
+| 11 | [Mean & Variance](week11.html) | Mean and variance of r.v.s and functions | 8 (2T + 6IL) |
 | 12 | Moments | MGF and properties | 8 (2T + 6IL) |
 | 13 | Revision & Integration | \- | 8 (2T + 6IL) |
 :::
