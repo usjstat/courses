@@ -8,7 +8,7 @@
 
 <meta name="author" content="Dr.&nbsp;Rajitha M. Silva">
 
-<title>Probability and Distribution Theory</title>
+<title>Probability &amp; Distributional Theory: Week 2 part 2 @CAL</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,17 +24,46 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="index_files/libs/clipboard/clipboard.min.js"></script>
-<script src="index_files/libs/quarto-html/quarto.js"></script>
-<script src="index_files/libs/quarto-html/popper.min.js"></script>
-<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="index_files/libs/quarto-html/anchor.min.js"></script>
-<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="index_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="week2part2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="week2part2_files/libs/quarto-html/quarto.js"></script>
+<script src="week2part2_files/libs/quarto-html/popper.min.js"></script>
+<script src="week2part2_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="week2part2_files/libs/quarto-html/anchor.min.js"></script>
+<link href="week2part2_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="week2part2_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="week2part2_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="week2part2_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="week2part2_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -46,7 +75,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Probability and Distribution Theory</h1>
+<h1 class="title">Probability &amp; Distributional Theory: Week 2 part 2 <span class="citation" data-cites="CAL">@CAL</span></h1>
 </div>
 
 
@@ -69,112 +98,274 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="course-information" class="level1">
-<h1>Course Information</h1>
-<table class="caption-top table">
-<tbody>
-<tr class="odd">
-<td><strong>Course Title:</strong></td>
-<td>Probability and Distribution Theory</td>
-</tr>
-<tr class="even">
-<td><strong>Hours:</strong></td>
-<td>10</td>
-</tr>
-</tbody>
-</table>
+<section id="conditional-probability" class="level1">
+<h1>1.5 Conditional Probability</h1>
+<p>Conditional probability is a way to measure the likelihood of an event <strong>when we already know that another event has happened</strong>.</p>
+<hr>
+<section id="definition" class="level2">
+<h2 class="anchored" data-anchor-id="definition">Definition</h2>
+<p>Let <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> be two events, with <span class="math inline">\(\Pr(B) \ne 0\)</span>.</p>
+<p>The <strong>conditional probability</strong> of <span class="math inline">\(A\)</span> given <span class="math inline">\(B\)</span> is:</p>
+<p><span class="math display">\[
+\Pr(A \mid B) = \frac{\Pr(A \cap B)}{\Pr(B)}
+\]</span></p>
+<p>This formula tells us how to compute the probability of <span class="math inline">\(A\)</span> <strong>under the condition that <span class="math inline">\(B\)</span> has already occurred.</strong></p>
 <hr>
 </section>
-<section id="aim-of-the-course" class="level1">
-<h1>Aim of the Course</h1>
-<p>This course establishes the fundamentals of probability theory. It supports learning in statistical inference, risk evaluation, actuarial modeling, and various forecasting fields such as weather prediction, sports outcomes, and finance.</p>
+<section id="why-is-it-important" class="level2">
+<h2 class="anchored" data-anchor-id="why-is-it-important">Why is it Important?</h2>
+<p>In real-world situations, we often have <strong>partial information</strong>, and we want to update our probabilities based on that.</p>
+<section id="examples-for-cal" class="level3">
+<h3 class="anchored" data-anchor-id="examples-for-cal">Examples for CAL</h3>
+<ul>
+<li>Given that a stock has increased for three consecutive days (event <span class="math inline">\(B\)</span>), what is the probability that it will increase again tomorrow (event <span class="math inline">\(A\)</span>)?</li>
+<li>Given that a client is from a premium category (event <span class="math inline">\(B\)</span>), what is the probability that they prefer a high-risk investment (event <span class="math inline">\(A\)</span>)?</li>
+<li>Given that a transaction occurred outside business hours (event <span class="math inline">\(B\)</span>), what is the probability it gets flagged for review (event <span class="math inline">\(A\)</span>)?</li>
+</ul>
+<p>These are all <strong>conditional probability questions</strong>.</p>
 <hr>
 </section>
-<section id="learning-activities-weekly-breakdown" class="level1">
-<h1>Learning Activities &amp; Weekly Breakdown</h1>
+</section>
+<section id="interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation">Interpretation</h2>
+<ul>
+<li>If <span class="math inline">\(\Pr(A \mid B)\)</span> is <strong>close to 1</strong>, then <span class="math inline">\(A\)</span> is <strong>very likely</strong> to occur when <span class="math inline">\(B\)</span> occurs.</li>
+<li>If <span class="math inline">\(\Pr(A \mid B)\)</span> is <strong>close to 0</strong>, then <span class="math inline">\(A\)</span> is <strong>unlikely</strong> given <span class="math inline">\(B\)</span>.</li>
+<li>If <span class="math inline">\(\Pr(A \mid B) = \Pr(A)\)</span>, then events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <strong>independent</strong>.</li>
+</ul>
+<hr>
+</section>
+<section id="important-notes" class="level2">
+<h2 class="anchored" data-anchor-id="important-notes">Important Notes</h2>
+<ul>
+<li>Conditional probability <strong>changes</strong> our perspective - we now <strong>focus only on outcomes where <span class="math inline">\(B\)</span> has occurred</strong>.</li>
+<li>The denominator <span class="math inline">\(\Pr(B)\)</span> must be <strong>greater than zero</strong> for the formula to make sense.</li>
+</ul>
+<hr>
+</section>
+<section id="activity-call-centre-probability" class="level2">
+<h2 class="anchored" data-anchor-id="activity-call-centre-probability">Activity: Call Centre Probability</h2>
+<p>A CAL call centre observes the following data over a month:</p>
+<ul>
+<li>65% of all calls are from <strong>existing clients</strong> (Event <span class="math inline">\(B\)</span>).</li>
+<li>30% of all calls are <strong>escalated</strong> (the process of transferring a customer’s call from a frontline agent to a higher-level support representative) to supervisors (Event <span class="math inline">\(A\)</span>).</li>
+<li>20% of all calls are from existing clients <strong>and</strong> are escalated (Event <span class="math inline">\(A \cap B\)</span>).</li>
+</ul>
+<ol type="1">
+<li>What is the probability that a call is escalated <strong>given that</strong> it is from an existing client?</li>
+<li>What is the probability that a call is from an existing client <strong>given that</strong> it is escalated?</li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>Let’s write the known values:</p>
+<ul>
+<li><span class="math inline">\(\Pr(B) = 0.65\)</span></li>
+<li><span class="math inline">\(\Pr(A) = 0.30\)</span></li>
+<li><span class="math inline">\(\Pr(A \cap B) = 0.20\)</span></li>
+</ul>
+<p><strong>1.</strong> Probability that a call is escalated <strong>given it is from an existing client</strong>:</p>
+<p><span class="math display">\[
+\Pr(A \mid B) = \frac{\Pr(A \cap B)}{\Pr(B)} = \frac{0.20}{0.65} \approx 0.3077
+\]</span></p>
+<p>So, about <strong>30.8%</strong> of existing client calls are escalated.</p>
+<hr>
+<p><strong>2.</strong> Probability that a call is from an existing client <strong>given it is escalated</strong>:</p>
+<p><span class="math display">\[
+\Pr(B \mid A) = \frac{\Pr(A \cap B)}{\Pr(A)} = \frac{0.20}{0.30} \approx 0.6667
+\]</span></p>
+<p>So, about <strong>66.7%</strong> of escalated calls are from existing clients.</p>
+</details>
+<hr>
+</section>
+<section id="activity-advisor-assignment-by-id" class="level2">
+<h2 class="anchored" data-anchor-id="activity-advisor-assignment-by-id">Activity: Advisor Assignment by ID</h2>
+<p>In CAL’s client management system, there are 5 relationship managers. Three manage <strong>high-net-worth individual (HNWI)</strong> clients (ID: H1, H2, H3), and two manage <strong>corporate clients</strong> (ID: C1, C2). A randomly selected manager is assigned to a new client.</p>
+<p>Let:</p>
+<ul>
+<li><span class="math inline">\(A\)</span>: the manager’s ID ends in “1”<br>
+</li>
+<li><span class="math inline">\(B\)</span>: the manager serves HNWI clients</li>
+</ul>
+<ol type="1">
+<li>Find <span class="math inline">\(\\Pr(A)\)</span><br>
+</li>
+<li>Find <span class="math inline">\(\\Pr(A \mid B)\)</span></li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>Total managers = 5<br>
+HNWI: {H1, H2, H3}, Corporate: {C1, C2}</p>
+<ol type="1">
+<li><p>Managers with ID ending in “1”: H1 and C1 ??? 2<br>
+<span class="math display">\[ \Pr(A) = \frac{2}{5} \]</span></p></li>
+<li><p>Among HNWI: {H1, H2, H3} ??? only H1 ends in 1<br>
+<span class="math display">\[ \Pr(A \mid B) = \frac{1}{3} \]</span></p></li>
+</ol>
+</details>
+<hr>
+</section>
+<section id="activity-meeting-scheduling" class="level2">
+<h2 class="anchored" data-anchor-id="activity-meeting-scheduling">Activity: Meeting Scheduling</h2>
+<p>At CAL, two advisors are assigned back-to-back consultation slots. There are 3 investment advisors (I1, I2, I3) and 2 compliance advisors (C1, C2). Assume that once an advisor is assigned, she is not going to the pool again for later assignments.</p>
+<p>Let:</p>
+<ul>
+<li><span class="math inline">\(A\)</span> = first appointment is with an investment advisor<br>
+</li>
+<li><span class="math inline">\(B\)</span> = second appointment is with a compliance advisor</li>
+</ul>
+<ol type="1">
+<li>Find <span class="math inline">\(\Pr(B \mid A)\)</span><br>
+</li>
+<li>Find <span class="math inline">\(\Pr(B \mid A')\)</span></li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>Total = 5 advisors</p>
+<ol type="1">
+<li><p>If first is investment ??? 2 investment, 2 compliance left<br>
+<span class="math display">\[ \Pr(B \mid A) = \frac{2}{4} = 0.5 \]</span></p></li>
+<li><p>If first is compliance ??? 3 investment, 1 compliance left<br>
+<span class="math display">\[ \Pr(B \mid A') = \frac{1}{4} = 0.25 \]</span></p></li>
+</ol>
+</details>
+<hr>
+</section>
+<section id="activity-scheduling-with-replacement" class="level2">
+<h2 class="anchored" data-anchor-id="activity-scheduling-with-replacement">Activity: Scheduling With Replacement</h2>
+<p>Same setup as above, but assume advisors return to the pool (with replacement).</p>
+<ol type="1">
+<li>Find <span class="math inline">\(\Pr(B)\)</span><br>
+</li>
+<li>Find <span class="math inline">\(\Pr(B \mid A)\)</span><br>
+</li>
+<li>Are <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> independent?</li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>With replacement: - <span class="math inline">\(\Pr(A) = \frac{3}{5}\)</span><br>
+- <span class="math inline">\(\Pr(B) = \frac{2}{5}\)</span><br>
+- <span class="math inline">\(\Pr(B \mid A) = \frac{2}{5}\)</span><br>
+??? <span class="math inline">\(\Pr(B \mid A) = \Pr(B)\)</span> ??? <strong>independent</strong></p>
+</details>
+<hr>
+</section>
+<section id="activity-internal-bonus-scheme-data" class="level2">
+<h2 class="anchored" data-anchor-id="activity-internal-bonus-scheme-data">Activity: Internal Bonus Scheme Data</h2>
+<p>From CAL’s HR dashboard:</p>
+<p>Let:<br>
+- <span class="math inline">\(C\)</span>: staff is a <strong>Clerk</strong><br>
+- <span class="math inline">\(S_2\)</span>: staff is in <strong>Bonus Scheme II</strong><br>
+- <span class="math inline">\(E\)</span>: staff is an <strong>Executive</strong><br>
+- <span class="math inline">\(S_1\)</span>: staff is in <strong>Bonus Scheme I</strong></p>
+<ol type="1">
+<li>Find <span class="math inline">\(\Pr(S_2 \mid C)\)</span><br>
+</li>
+<li>Find <span class="math inline">\(\Pr(E \mid S_1)\)</span></li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<ul>
+<li><p>Clerks: 170 total, 44 in Scheme II<br>
+<span class="math display">\[ \Pr(S_2 \mid C) = \frac{44}{170} \approx 0.2588 \]</span></p></li>
+<li><p>Scheme I: 300 total, 5 are Executives<br>
+<span class="math display">\[ \Pr(E \mid S_1) = \frac{5}{300} \approx 0.0167 \]</span></p></li>
+</ul>
+</details>
+<hr>
+</section>
+<section id="definition-independent-events" class="level2">
+<h2 class="anchored" data-anchor-id="definition-independent-events">Definition: Independent Events</h2>
+<p>Two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <strong>independent</strong> if:</p>
+<p><span class="math display">\[
+\Pr(A \mid B) = \Pr(A) \quad \text{or} \quad \Pr(A \cap B) = \Pr(A) \cdot \Pr(B)
+\]</span></p>
+<hr>
+</section>
+<section id="activity-are-assignments-independent" class="level2">
+<h2 class="anchored" data-anchor-id="activity-are-assignments-independent">Activity: Are Assignments Independent?</h2>
+<p>At CAL, two advisors are assigned back-to-back consultation slots <strong>without replacement</strong>. There are 3 investment advisors (I1, I2, I3) and 2 compliance advisors (C1, C2).</p>
+<p>Let:</p>
+<ul>
+<li><span class="math inline">\(A\)</span> = first appointment is with an investment advisor<br>
+</li>
+<li><span class="math inline">\(B\)</span> = second appointment is with a compliance advisor</li>
+</ul>
+<p>Are assignments independent?</p>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<ul>
+<li><span class="math inline">\(\Pr(B \mid A) = 0.5\)</span><br>
+</li>
+<li><span class="math inline">\(\Pr(B) = 0.4\)</span><br>
+??? <span class="math inline">\(\Pr(B \mid A) \ne \Pr(B)\)</span> ??? <strong>not independent</strong></li>
+</ul>
+</details>
+<hr>
+</section>
+<section id="mutually-exclusive-vs.-independent-events" class="level2">
+<h2 class="anchored" data-anchor-id="mutually-exclusive-vs.-independent-events">Mutually Exclusive vs.&nbsp;Independent Events</h2>
+<section id="mutually-exclusive" class="level3">
+<h3 class="anchored" data-anchor-id="mutually-exclusive">Mutually Exclusive</h3>
+<ul>
+<li><span class="math inline">\(\Pr(A \cap B) = 0\)</span><br>
+</li>
+<li><span class="math inline">\(\Pr(A \cup B) = \Pr(A) + \Pr(B)\)</span></li>
+</ul>
+<p><strong>Example</strong>: A transaction is either <strong>flagged for review</strong> or <strong>cleared</strong> - not both.</p>
+</section>
+<section id="independent" class="level3">
+<h3 class="anchored" data-anchor-id="independent">Independent</h3>
+<ul>
+<li><span class="math inline">\(\Pr(A \cap B) = \Pr(A) \cdot \Pr(B)\)</span><br>
+</li>
+<li><span class="math inline">\(\Pr(A \mid B) = \Pr(A)\)</span></li>
+</ul>
+<p><strong>Example</strong>: Receiving a <strong>portfolio update email</strong> and a <strong>phone call from your advisor</strong> are independent.</p>
+<p><strong>Note</strong>: Mutually exclusive events with nonzero probabilities are <strong>not independent</strong>.</p>
+<hr>
+</section>
+</section>
+<section id="summary-table" class="level2">
+<h2 class="anchored" data-anchor-id="summary-table">Summary Table</h2>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 37%">
+<col style="width: 39%">
+</colgroup>
 <thead>
 <tr class="header">
-<th><strong>Week</strong></th>
-<th><strong>Topic</strong></th>
-<th><strong>Description</strong></th>
+<th>Concept</th>
+<th>Notation/Condition</th>
+<th>Interpretation</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>1</td>
-<td><a href="week1.html">Elements of Probability</a></td>
-<td>Introduction, experiments, outcomes, sample spaces, events</td>
+<td>Mutually Exclusive</td>
+<td><span class="math inline">\(\Pr(A \cap B) = 0\)</span></td>
+<td>Cannot happen together</td>
 </tr>
 <tr class="even">
-<td></td>
-<td><a href="week1part2.html">Event Operations</a></td>
-<td>Complements, unions, intersections, mutually exclusive/exhaustive events</td>
-</tr>
-<tr class="odd">
-<td>2</td>
-<td><a href="week2.html">Methods for Determining Probability</a></td>
-<td>Classical, relative frequency, axioms, interpretation</td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="week2part2.html">Conditional Probability</a></td>
-<td>Independent events</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td>Probability Rules</td>
-<td>Addition, multiplication, total probability, Bayes’ theorem</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td>Random Variables</td>
-<td>Definitions, discrete and continuous variables</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Events with Random Variables</td>
-<td>Event representation</td>
-</tr>
-<tr class="even">
-<td>5</td>
-<td>Standard Distributions</td>
-<td>Bernoulli, Binomial, Poisson, Uniform, Normal, t, F, exponential</td>
+<td>Independent Events</td>
+<td><span class="math inline">\(\Pr(A \cap B) = \Pr(A)\Pr(B)\)</span></td>
+<td>One does not affect the other</td>
 </tr>
 </tbody>
 </table>
-<hr>
 </section>
-<section id="intended-learning-outcomes-ilos" class="level1">
-<h1>Intended Learning Outcomes (ILOs)</h1>
-<p>By the end of this course, students will be able to:</p>
-<ol type="1">
-<li>Describe events using set notation and sample spaces.<br>
-</li>
-<li>Formulate and identify events of interest.<br>
-</li>
-<li>Apply classical and empirical methods for calculating probability.<br>
-</li>
-<li>Explain and apply probability axioms.<br>
-</li>
-<li>Distinguish conditional from unconditional events.<br>
-</li>
-<li>Use rules of probability effectively.<br>
-</li>
-<li>Define and identify types of random variables.<br>
-</li>
-<li>Relate events to random variables.<br>
-</li>
-<li>Calculate probabilities and descriptive measures from distributions.</li>
-</ol>
-<hr>
-</section>
-<section id="instructor" class="level1">
-<h1>Instructor</h1>
-<p><strong>Lecturer:</strong> Dr.&nbsp;Rajitha M. Silva<br>
-<strong>Email:</strong> <a href="mailto:rsilva@sjp.ac.lk">rsilva@sjp.ac.lk</a></p>
-<hr>
-<p><em>This course is designed for CAL Group and effective from 13th August 2025.</em></p>
 </section>
 
 </main>

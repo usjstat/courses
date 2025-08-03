@@ -1,0 +1,450 @@
+---
+title: "Probability & Distributional Theory: Week 2 @CAL"
+author: "Dr. Rajitha M. Silva"
+output: html_document
+---
+
+# 1.3 Axioms of Probability
+
+Axioms form the foundation of probability theory. These are the basic rules or assumptions upon which all of probability is built. They allow us to develop a consistent mathematical framework for assigning and manipulating probabilities.
+
+Understanding these axioms is important because:
+
+- They ensure that the probability of any event is a meaningful, non-negative number.
+- They guarantee the total probability across all possible outcomes equals 1.
+- They help us handle more complex situations involving multiple events.
+
+Probability is a numerical measure that quantifies the likelihood of an event occurring.
+
+A probability function $\text{Pr}(\cdot)$ must satisfy these **three axioms**:
+
+- **Axiom 1**: For any event $A$, $\text{Pr}(A) \geq 0$
+- **Axiom 2**: $\text{Pr}(S) = 1$ (i.e., the total probability of the sample space is 1)
+- **Axiom 3**: For any countable collection of **mutually exclusive** events $A_1, A_2, \ldots$,
+  $$
+  \text{Pr}(A_1 \cup A_2 \cup \ldots) = \sum_i \text{Pr}(A_i)
+  $$
+
+This holds for both **finite** and **countable infinite** unions.
+
+
+# 1.4 Methods for Determining Probability
+
+Probability can be determined in different ways depending on the context. Whether based on logical reasoning, past data, or subjective belief, each method has its own use case and importance.
+
+Understanding these methods helps you:
+
+\- Decide which model or approach fits a given situation.
+
+\- Interpret probability values meaningfully.
+
+\- Apply theory to real-world settings, such as games, experiments, or business problems.
+
+There are four methods used to determine probabilities:
+
+1.  **Classical Method**: Based on equally likely outcomes in a finite sample space.
+2.  **Relative Frequency Method**: Based on repeated experiments and observed frequencies.
+3.  **Subjective Method**: Based on personal judgment or opinion.
+4.  **Using Probability Models**: Based on theoretical assumptions.
+
+------------------------------------------------------------------------
+
+## 1.4.1 Classical Method
+
+The classical method of probability is the most basic and widely taught approach. It is grounded in situations where all outcomes are assumed to be **equally likely** — that is, each outcome has the same chance of occurring.
+
+### What Does "Equally Likely" Mean?
+
+Equally likely outcomes mean that, based on the design of the experiment or inherent symmetry, there is no reason to believe one outcome will happen more often than another. For example:
+
+- Each face of a fair die has a 1/6 chance.
+- Each side of a fair coin has a 1/2 chance.
+- Each card in a well-shuffled deck has a 1/52 chance.
+
+This method is especially useful when dealing with finite, symmetric, and well-defined sample spaces, such as dice rolls, card draws, or coin tosses.
+
+If all outcomes in the sample space $S$ are equally likely, then for any event $E$:
+
+$$
+\text{Pr}(E) = \frac{n(E)}{n(S)}
+$$
+
+## Activity – CAL Stock Portfolio Simulation
+
+A CAL analyst simulates market scenarios using a spinner divided into six equally likely sectors, each labeled with a stock's performance score for the day:
+S={1,2,3,4,5,6}
+S={1,2,3,4,5,6}
+
+Each number indicates the daily return rating of a stock from a simulated sector.
+
+Find the probabilities of the following events:
+
+  $A$: stock gets the lowest rating 1 \
+
+  $B$: stock gets a rating less than 3 \
+
+  $C$: stock gets an even rating \
+
+  $D$: stock gets a top rating (greater than 5) \
+
+  $E$: stock gets a rating higher than 6
+
+<details> <summary><strong>Solution</strong></summary>
+
+Let S={1,2,3,4,5,6}, with all outcomes equally likely.
+
+  Pr(A)=1/6
+
+  Pr(B)=2/6=1/3
+
+  Pr(C)=3/6=1/2
+
+  Pr(D)=1/6
+
+  Pr(E)=0 (event is impossible)
+
+</details>
+
+# **Counting Techniques**
+
+Counting techniques are essential tools in probability theory for calculating the number of possible outcomes in complex experiments. These techniques help us avoid the impractical task of listing every possible outcome when the number of outcomes grows large.
+
+### 1. Multiplication Rule
+
+If one task can be done in $m$ ways and another in $n$ ways, then the two tasks together can be performed in $m \times n$ ways.
+
+**Example:** A CAL analyst is tasked with generating 3-digit portfolio codes, where each digit can range from 0 to 9.
+
+$$
+10 \times 10 \times 10 = 1000 \text{ portfolio codes}
+$$
+
+---
+
+### 2. Permutations (Ordered Arrangements)
+
+Permutations refer to the number of ways to arrange $r$ items out of $n$, when the order matters.
+
+- Formula (no repetition): $P(n, r) = \dfrac{n!}{(n - r)!}$
+
+**Example:** In a CAL internship program, 5 interns compete for 3 different analyst roles: lead analyst, assistant analyst, and report reviewer. How many possible role assignments are there?
+
+$$
+P(5, 3) = \dfrac{5!}{(5 - 3)!} = \dfrac{120}{2} = 60 \text{ arrangements}
+$$
+
+---
+
+### 3. Combinations (Unordered Selections)
+
+Combinations count how many ways $r$ elements can be selected from $n$, where the order doesn’t matter.
+
+- Formula:
+
+$$
+C(n, r) = \binom{n}{r} = \dfrac{n!}{r!(n - r)!}
+$$
+
+**Example:** A CAL manager wants to select a sub-committee of 4 analysts from a pool of 10 to review a financial dashboard. How many ways can the committee be formed?
+
+$$
+\binom{10}{4} = \dfrac{10!}{4!6!} = 210 \text{ combinations}
+$$
+
+These techniques help us solve problems in probability, especially when dealing with complex events such as reporting, assignments, investment selections, and audits.
+
+---
+
+## Activity – Analyst Assignment from a Pool
+
+A CAL analyst has 3 white-labelled dashboards and 2 black-themed dashboards. For a UI review, 3 dashboards are selected at random.
+
+Assume the dashboards are selected **simultaneously** (order does not matter). Find the probabilities of:
+
+1. $A$: getting exactly one white dashboard  
+2. $B$: getting more than one white dashboard  
+3. $C$: getting no white dashboards
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+Step 1: Total Number of Ways to Choose 3 Dashboards
+
+Use combinations:
+
+$$
+\text{Total outcomes} = \binom{5}{3} = 10
+$$
+
+Step 2: Event Counts
+
+Let $W$ = white, $B$ = black.
+
+- **Event A (Exactly 1 white):**
+
+$$
+\binom{3}{1} \times \binom{2}{2} = 3 \times 1 = 3
+$$
+
+- **Event B (2 or 3 whites):**
+
+$$
+\binom{3}{2} \times \binom{2}{1} + \binom{3}{3} = 3 \times 2 + 1 = 7
+$$
+
+- **Event C (All black):**
+
+Not possible (only 2 black dashboards) → 0 outcomes.
+
+Step 3: Probabilities
+
+- $\text{Pr}(A) = \dfrac{3}{10} = 0.3$
+- $\text{Pr}(B) = \dfrac{7}{10} = 0.7$
+- $\text{Pr}(C) = 0$
+
+</details>
+
+---
+
+## Activity – Analyst ID Creation
+
+A CAL security officer must issue identity tags where each tag consists of:
+
+- One uppercase letter (A–Z)
+- Followed by two digits (0–9)
+
+1. How many different ID tags can be made if the two digits **can be the same**?  
+2. How many if the two digits **must be different**?  
+3. How many if the **first digit cannot be 0**?
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+There are 26 uppercase letters, and 10 digits (0–9).
+
+1. **Digits can be the same**:
+
+$$
+26 \times 10 \times 10 = 2600 \text{ tags}
+$$
+
+2. **Digits cannot be the same**:
+
+$$
+26 \times 10 \times 9 = 2340 \text{ tags}
+$$
+
+3. **First digit cannot be 0** (Assume format: Letter + Digit1 + Digit2):
+
+- 9 choices for first digit (1–9)
+- 10 choices for second digit
+
+$$
+26 \times 9 \times 10 = 2340 \text{ tags}
+$$
+
+</details>
+
+## 1.4.2 Relative Frequency Method
+
+The **relative frequency method** estimates probability based on repeated real-world observations - specially useful when it's hard to create a theoretical model.
+
+### Core Idea
+
+- Suppose we observe or simulate a **repetitive scenario** under **similar conditions**.
+- Let $E$ be an event of interest(e.g., the number of days a CAL analyst submits the daily performance report before noon).
+- Let $\text{freq}(E)$ be the number of times this happened out of $n$ working days.
+
+Then:
+
+$$
+\text{Relative Frequency} = \frac{\text{freq}(E)}{n}
+$$
+
+As $n$ increases, this value tends to stabilize and approximate the true probability:
+
+$$
+\text{Pr}(E) = \lim_{n \to \infty} \frac{\text{freq}(E)}{n}
+$$
+
+---
+
+## Activity: Monitoring Report Times
+
+Suppose a CAL research unit randomly samples 585 reports submitted over several months. Each report has a time stamp. A report is said to be **late** if submitted **before 8:30 AM or after 4:30 PM**. Otherwise, it is **on time**.
+
+Below is the frequency distribution:
+
+| Time Category         | Number of Reports |
+|:---------------------:|:-----------------:|
+| Before 8:30 AM        |        10         |
+| 8:30 AM - 10:30 AM    |       175         |
+| 10:30 AM - 2:30 PM    |       270         |
+| 2:30 PM - 4:30 PM     |       115         |
+| After 4:30 PM         |        15         |
+
+
+
+1. What is the probability that a report is **late**?
+2. If three reports are picked randomly, what is the probability that **at least one** of them is late?
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+Let $N = 585$ and $A$ be the event that a report is **late**.
+
+- Late times: Before 8:30 AM (10) and After 4:30 PM (15)  
+- Total late = $10 + 15 = 25$
+
+$$
+\text{Pr}(A) = \frac{25}{585} \approx 0.0427
+$$
+
+---
+
+Let $A'$ be the event that a report is **on time**.  
+Then:
+
+$$
+\text{Pr}(A') = 1 - \frac{25}{585} = \frac{560}{585}
+$$
+
+Probability that all 3 are on time:
+
+$$
+\left(\frac{560}{585}\right)^3 \approx 0.877
+$$
+
+Probability that **at least one** is late:
+
+$$
+1 - \left(\frac{560}{585}\right)^3 \approx 0.1228
+$$
+
+So, roughly a **12.28%** chance that at least one is late.
+</details>
+
+---
+
+## Activity: Bonus Scheme Preferences
+
+A survey is conducted at CAL among 960 employees regarding their preference for three bonus schemes:
+
+| Job Role     | Type I | Type II | Type III | Total |
+|--------------|--------|---------|----------|--------|
+| Analyst      |  190   |   243   |   197    |  630   |
+| Assistant    |   82   |   44    |   44     |  170   |
+| Developer    |   23   |   78    |   34     |  135   |
+| Executive    |    5   |   12    |    8     |   25   |
+| **Total**    |  300   |  377    |  283     |  960   |
+
+**Questions:**
+
+1. What is the probability that an employee is an **Assistant**?
+2. What is the probability that an employee prefers **Type II** bonus?
+3. What is the probability that the employee is a **Developer preferring Type I**?
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+1. Assistants: 170  
+$$
+\text{Pr}(\text{Assistant}) = \frac{170}{960}
+$$
+
+---
+
+2. Type II preference: 377  
+$$
+\text{Pr}(\text{Type II}) = \frac{377}{960}
+$$
+
+---
+
+3. Developer + Type I: 23  
+$$
+\text{Pr}(\text{Developer with Type I}) = \frac{23}{960} \approx 0.024
+$$
+
+So, there's about a **2.4%** chance that a randomly chosen employee is a developer who prefers Type I bonus.
+</details>
+
+## 1.4.3 Subjective Probability Method
+
+Not all situations allow us to calculate probabilities using past data (like relative frequency) or symmetry (like the classical method). In such situations, we may use **subjective probability**.
+
+### What is Subjective Probability?
+
+Subjective probability is based on **personal belief, intuition, or expert judgment** about how likely an event is to happen.
+
+### Examples
+
+- A CAL analyst believes there is a **60% chance** that a client will approve a new investment proposal this week.
+- A senior consultant estimates a **20% chance** that a financial audit will reveal serious irregularities.
+
+These are **not based on data** or formulas — they reflect an individual’s current belief.
+
+### Key Points
+
+- The probability depends on the **person’s knowledge and experience**.
+- Two people may give **different probabilities** for the same event.
+- These values can **change** with time or new information.
+
+> Subjective probability is commonly used in areas like **business decision making**, **finance**, and **risk analysis**, specially when data is limited or unavailable.
+
+
+
+### Looking Ahead
+
+The idea of using probability to express **personal belief** is central to **Bayesian statistics** — a powerful method where we update beliefs using new data.
+
+> You will learn about this approach in the **Bayesian Inference course** offered later (hopefully!).
+
+---
+
+## 1.4.4 Using Probability Models 
+
+In some cases, we use **mathematical models** to describe uncertain outcomes. These are called **probability models**.
+
+> At this stage, we are only introducing the idea. You will study it in detail later in the course.
+
+---
+
+### What is a Probability Model?
+
+A probability model includes:
+
+- A **sample space** — the list of all possible outcomes.
+- A **rule or formula** to assign probabilities to each outcome or event.
+
+These models are useful when:
+- The situation is **too complex** to observe many times,
+- We want to **make predictions**,
+- Or we are designing **simulations and systems**.
+
+---
+
+### Examples
+
+- Modeling the **number of complaints** received per day in a service firm using the **Poisson distribution**.
+- Estimating the **time to complete a task** using the **exponential distribution**.
+- Modeling the **number of successful deals** out of several client meetings using the **binomial distribution**.
+
+---
+
+> These models are widely used in **operations, risk management, and analytics** — all central areas for CAL.
+
+---
+
+### Important Note:
+
+You will learn to **build and apply these models** later in the  course.
+
+There, we will:
+
+- Explore common probability distributions (e.g., Binomial, Normal, Poisson),
+- Learn how to compute probabilities and expected values,
+- Apply them to **real-world** business and data scenarios.
+
+---
+

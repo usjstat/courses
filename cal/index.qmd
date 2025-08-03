@@ -22,11 +22,11 @@ This course establishes the fundamentals of probability theory. It supports lear
 # Learning Activities & Weekly Breakdown
 
 | **Week** | **Topic** | **Description** |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | 1 | [Elements of Probability](week1.html) | Introduction, experiments, outcomes, sample spaces, events |
 |  | [Event Operations](week1part2.html) | Complements, unions, intersections, mutually exclusive/exhaustive events |
-| 2 | \[Methods of Probability\] | Classical, relative frequency, axioms, interpretation |
-|  | Conditional Probability | Independent events |
+| 2 | [Methods for Determining Probability](week2.html) | Classical, relative frequency, axioms, interpretation |
+|  | [Conditional Probability](week2part2.html) | Independent events |
 | 3 | Probability Rules | Addition, multiplication, total probability, Bayes' theorem |
 | 4 | Random Variables | Definitions, discrete and continuous variables |
 |  | Events with Random Variables | Event representation |

@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dr.&nbsp;Rajitha M. Silva">
+
+<title>Probability &amp; Distributional Theory: Week 2 @CAL</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="week2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="week2_files/libs/quarto-html/quarto.js"></script>
+<script src="week2_files/libs/quarto-html/popper.min.js"></script>
+<script src="week2_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="week2_files/libs/quarto-html/anchor.min.js"></script>
+<link href="week2_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="week2_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="week2_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="week2_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="week2_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Probability &amp; Distributional Theory: Week 2 <span class="citation" data-cites="CAL">@CAL</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dr.&nbsp;Rajitha M. Silva </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="axioms-of-probability" class="level1">
+<h1>1.3 Axioms of Probability</h1>
+<p>Axioms form the foundation of probability theory. These are the basic rules or assumptions upon which all of probability is built. They allow us to develop a consistent mathematical framework for assigning and manipulating probabilities.</p>
+<p>Understanding these axioms is important because:</p>
+<ul>
+<li>They ensure that the probability of any event is a meaningful, non-negative number.</li>
+<li>They guarantee the total probability across all possible outcomes equals 1.</li>
+<li>They help us handle more complex situations involving multiple events.</li>
+</ul>
+<p>Probability is a numerical measure that quantifies the likelihood of an event occurring.</p>
+<p>A probability function <span class="math inline">\(\text{Pr}(\cdot)\)</span> must satisfy these <strong>three axioms</strong>:</p>
+<ul>
+<li><strong>Axiom 1</strong>: For any event <span class="math inline">\(A\)</span>, <span class="math inline">\(\text{Pr}(A) \geq 0\)</span></li>
+<li><strong>Axiom 2</strong>: <span class="math inline">\(\text{Pr}(S) = 1\)</span> (i.e., the total probability of the sample space is 1)</li>
+<li><strong>Axiom 3</strong>: For any countable collection of <strong>mutually exclusive</strong> events <span class="math inline">\(A_1, A_2, \ldots\)</span>, <span class="math display">\[
+\text{Pr}(A_1 \cup A_2 \cup \ldots) = \sum_i \text{Pr}(A_i)
+\]</span></li>
+</ul>
+<p>This holds for both <strong>finite</strong> and <strong>countable infinite</strong> unions.</p>
+</section>
+<section id="methods-for-determining-probability" class="level1">
+<h1>1.4 Methods for Determining Probability</h1>
+<p>Probability can be determined in different ways depending on the context. Whether based on logical reasoning, past data, or subjective belief, each method has its own use case and importance.</p>
+<p>Understanding these methods helps you:</p>
+<p>- Decide which model or approach fits a given situation.</p>
+<p>- Interpret probability values meaningfully.</p>
+<p>- Apply theory to real-world settings, such as games, experiments, or business problems.</p>
+<p>There are four methods used to determine probabilities:</p>
+<ol type="1">
+<li><strong>Classical Method</strong>: Based on equally likely outcomes in a finite sample space.</li>
+<li><strong>Relative Frequency Method</strong>: Based on repeated experiments and observed frequencies.</li>
+<li><strong>Subjective Method</strong>: Based on personal judgment or opinion.</li>
+<li><strong>Using Probability Models</strong>: Based on theoretical assumptions.</li>
+</ol>
+<hr>
+<section id="classical-method" class="level2">
+<h2 class="anchored" data-anchor-id="classical-method">1.4.1 Classical Method</h2>
+<p>The classical method of probability is the most basic and widely taught approach. It is grounded in situations where all outcomes are assumed to be <strong>equally likely</strong> — that is, each outcome has the same chance of occurring.</p>
+<section id="what-does-equally-likely-mean" class="level3">
+<h3 class="anchored" data-anchor-id="what-does-equally-likely-mean">What Does “Equally Likely” Mean?</h3>
+<p>Equally likely outcomes mean that, based on the design of the experiment or inherent symmetry, there is no reason to believe one outcome will happen more often than another. For example:</p>
+<ul>
+<li>Each face of a fair die has a 1/6 chance.</li>
+<li>Each side of a fair coin has a 1/2 chance.</li>
+<li>Each card in a well-shuffled deck has a 1/52 chance.</li>
+</ul>
+<p>This method is especially useful when dealing with finite, symmetric, and well-defined sample spaces, such as dice rolls, card draws, or coin tosses.</p>
+<p>If all outcomes in the sample space <span class="math inline">\(S\)</span> are equally likely, then for any event <span class="math inline">\(E\)</span>:</p>
+<p><span class="math display">\[
+\text{Pr}(E) = \frac{n(E)}{n(S)}
+\]</span></p>
+</section>
+</section>
+<section id="activity-cal-stock-portfolio-simulation" class="level2">
+<h2 class="anchored" data-anchor-id="activity-cal-stock-portfolio-simulation">Activity – CAL Stock Portfolio Simulation</h2>
+<p>A CAL analyst simulates market scenarios using a spinner divided into six equally likely sectors, each labeled with a stock’s performance score for the day: S={1,2,3,4,5,6} S={1,2,3,4,5,6}</p>
+<p>Each number indicates the daily return rating of a stock from a simulated sector.</p>
+<p>Find the probabilities of the following events:</p>
+<p><span class="math inline">\(A\)</span>: stock gets the lowest rating 1<br>
+</p>
+<p><span class="math inline">\(B\)</span>: stock gets a rating less than 3<br>
+</p>
+<p><span class="math inline">\(C\)</span>: stock gets an even rating<br>
+</p>
+<p><span class="math inline">\(D\)</span>: stock gets a top rating (greater than 5)<br>
+</p>
+<p><span class="math inline">\(E\)</span>: stock gets a rating higher than 6</p>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>Let S={1,2,3,4,5,6}, with all outcomes equally likely.</p>
+<p>Pr(A)=1/6</p>
+<p>Pr(B)=2/6=1/3</p>
+<p>Pr(C)=3/6=1/2</p>
+<p>Pr(D)=1/6</p>
+<p>Pr(E)=0 (event is impossible)</p>
+</details>
+</section>
+</section>
+<section id="counting-techniques" class="level1">
+<h1><strong>Counting Techniques</strong></h1>
+<p>Counting techniques are essential tools in probability theory for calculating the number of possible outcomes in complex experiments. These techniques help us avoid the impractical task of listing every possible outcome when the number of outcomes grows large.</p>
+<section id="multiplication-rule" class="level3">
+<h3 class="anchored" data-anchor-id="multiplication-rule">1. Multiplication Rule</h3>
+<p>If one task can be done in <span class="math inline">\(m\)</span> ways and another in <span class="math inline">\(n\)</span> ways, then the two tasks together can be performed in <span class="math inline">\(m \times n\)</span> ways.</p>
+<p><strong>Example:</strong> A CAL analyst is tasked with generating 3-digit portfolio codes, where each digit can range from 0 to 9.</p>
+<p><span class="math display">\[
+10 \times 10 \times 10 = 1000 \text{ portfolio codes}
+\]</span></p>
+<hr>
+</section>
+<section id="permutations-ordered-arrangements" class="level3">
+<h3 class="anchored" data-anchor-id="permutations-ordered-arrangements">2. Permutations (Ordered Arrangements)</h3>
+<p>Permutations refer to the number of ways to arrange <span class="math inline">\(r\)</span> items out of <span class="math inline">\(n\)</span>, when the order matters.</p>
+<ul>
+<li>Formula (no repetition): <span class="math inline">\(P(n, r) = \dfrac{n!}{(n - r)!}\)</span></li>
+</ul>
+<p><strong>Example:</strong> In a CAL internship program, 5 interns compete for 3 different analyst roles: lead analyst, assistant analyst, and report reviewer. How many possible role assignments are there?</p>
+<p><span class="math display">\[
+P(5, 3) = \dfrac{5!}{(5 - 3)!} = \dfrac{120}{2} = 60 \text{ arrangements}
+\]</span></p>
+<hr>
+</section>
+<section id="combinations-unordered-selections" class="level3">
+<h3 class="anchored" data-anchor-id="combinations-unordered-selections">3. Combinations (Unordered Selections)</h3>
+<p>Combinations count how many ways <span class="math inline">\(r\)</span> elements can be selected from <span class="math inline">\(n\)</span>, where the order doesn’t matter.</p>
+<ul>
+<li>Formula:</li>
+</ul>
+<p><span class="math display">\[
+C(n, r) = \binom{n}{r} = \dfrac{n!}{r!(n - r)!}
+\]</span></p>
+<p><strong>Example:</strong> A CAL manager wants to select a sub-committee of 4 analysts from a pool of 10 to review a financial dashboard. How many ways can the committee be formed?</p>
+<p><span class="math display">\[
+\binom{10}{4} = \dfrac{10!}{4!6!} = 210 \text{ combinations}
+\]</span></p>
+<p>These techniques help us solve problems in probability, especially when dealing with complex events such as reporting, assignments, investment selections, and audits.</p>
+<hr>
+</section>
+<section id="activity-analyst-assignment-from-a-pool" class="level2">
+<h2 class="anchored" data-anchor-id="activity-analyst-assignment-from-a-pool">Activity – Analyst Assignment from a Pool</h2>
+<p>A CAL analyst has 3 white-labelled dashboards and 2 black-themed dashboards. For a UI review, 3 dashboards are selected at random.</p>
+<p>Assume the dashboards are selected <strong>simultaneously</strong> (order does not matter). Find the probabilities of:</p>
+<ol type="1">
+<li><span class="math inline">\(A\)</span>: getting exactly one white dashboard<br>
+</li>
+<li><span class="math inline">\(B\)</span>: getting more than one white dashboard<br>
+</li>
+<li><span class="math inline">\(C\)</span>: getting no white dashboards</li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>Step 1: Total Number of Ways to Choose 3 Dashboards</p>
+<p>Use combinations:</p>
+<p><span class="math display">\[
+\text{Total outcomes} = \binom{5}{3} = 10
+\]</span></p>
+<p>Step 2: Event Counts</p>
+<p>Let <span class="math inline">\(W\)</span> = white, <span class="math inline">\(B\)</span> = black.</p>
+<ul>
+<li><strong>Event A (Exactly 1 white):</strong></li>
+</ul>
+<p><span class="math display">\[
+\binom{3}{1} \times \binom{2}{2} = 3 \times 1 = 3
+\]</span></p>
+<ul>
+<li><strong>Event B (2 or 3 whites):</strong></li>
+</ul>
+<p><span class="math display">\[
+\binom{3}{2} \times \binom{2}{1} + \binom{3}{3} = 3 \times 2 + 1 = 7
+\]</span></p>
+<ul>
+<li><strong>Event C (All black):</strong></li>
+</ul>
+<p>Not possible (only 2 black dashboards) → 0 outcomes.</p>
+<p>Step 3: Probabilities</p>
+<ul>
+<li><span class="math inline">\(\text{Pr}(A) = \dfrac{3}{10} = 0.3\)</span></li>
+<li><span class="math inline">\(\text{Pr}(B) = \dfrac{7}{10} = 0.7\)</span></li>
+<li><span class="math inline">\(\text{Pr}(C) = 0\)</span></li>
+</ul>
+</details>
+<hr>
+</section>
+<section id="activity-analyst-id-creation" class="level2">
+<h2 class="anchored" data-anchor-id="activity-analyst-id-creation">Activity – Analyst ID Creation</h2>
+<p>A CAL security officer must issue identity tags where each tag consists of:</p>
+<ul>
+<li>One uppercase letter (A–Z)</li>
+<li>Followed by two digits (0–9)</li>
+</ul>
+<ol type="1">
+<li>How many different ID tags can be made if the two digits <strong>can be the same</strong>?<br>
+</li>
+<li>How many if the two digits <strong>must be different</strong>?<br>
+</li>
+<li>How many if the <strong>first digit cannot be 0</strong>?</li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>There are 26 uppercase letters, and 10 digits (0–9).</p>
+<ol type="1">
+<li><strong>Digits can be the same</strong>:</li>
+</ol>
+<p><span class="math display">\[
+26 \times 10 \times 10 = 2600 \text{ tags}
+\]</span></p>
+<ol start="2" type="1">
+<li><strong>Digits cannot be the same</strong>:</li>
+</ol>
+<p><span class="math display">\[
+26 \times 10 \times 9 = 2340 \text{ tags}
+\]</span></p>
+<ol start="3" type="1">
+<li><strong>First digit cannot be 0</strong> (Assume format: Letter + Digit1 + Digit2):</li>
+</ol>
+<ul>
+<li>9 choices for first digit (1–9)</li>
+<li>10 choices for second digit</li>
+</ul>
+<p><span class="math display">\[
+26 \times 9 \times 10 = 2340 \text{ tags}
+\]</span></p>
+</details>
+</section>
+<section id="relative-frequency-method" class="level2">
+<h2 class="anchored" data-anchor-id="relative-frequency-method">1.4.2 Relative Frequency Method</h2>
+<p>The <strong>relative frequency method</strong> estimates probability based on repeated real-world observations - specially useful when it’s hard to create a theoretical model.</p>
+<section id="core-idea" class="level3">
+<h3 class="anchored" data-anchor-id="core-idea">Core Idea</h3>
+<ul>
+<li>Suppose we observe or simulate a <strong>repetitive scenario</strong> under <strong>similar conditions</strong>.</li>
+<li>Let <span class="math inline">\(E\)</span> be an event of interest(e.g., the number of days a CAL analyst submits the daily performance report before noon).</li>
+<li>Let <span class="math inline">\(\text{freq}(E)\)</span> be the number of times this happened out of <span class="math inline">\(n\)</span> working days.</li>
+</ul>
+<p>Then:</p>
+<p><span class="math display">\[
+\text{Relative Frequency} = \frac{\text{freq}(E)}{n}
+\]</span></p>
+<p>As <span class="math inline">\(n\)</span> increases, this value tends to stabilize and approximate the true probability:</p>
+<p><span class="math display">\[
+\text{Pr}(E) = \lim_{n \to \infty} \frac{\text{freq}(E)}{n}
+\]</span></p>
+<hr>
+</section>
+</section>
+<section id="activity-monitoring-report-times" class="level2">
+<h2 class="anchored" data-anchor-id="activity-monitoring-report-times">Activity: Monitoring Report Times</h2>
+<p>Suppose a CAL research unit randomly samples 585 reports submitted over several months. Each report has a time stamp. A report is said to be <strong>late</strong> if submitted <strong>before 8:30 AM or after 4:30 PM</strong>. Otherwise, it is <strong>on time</strong>.</p>
+<p>Below is the frequency distribution:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Time Category</th>
+<th style="text-align: center;">Number of Reports</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Before 8:30 AM</td>
+<td style="text-align: center;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8:30 AM - 10:30 AM</td>
+<td style="text-align: center;">175</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">10:30 AM - 2:30 PM</td>
+<td style="text-align: center;">270</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2:30 PM - 4:30 PM</td>
+<td style="text-align: center;">115</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">After 4:30 PM</td>
+<td style="text-align: center;">15</td>
+</tr>
+</tbody>
+</table>
+<ol type="1">
+<li>What is the probability that a report is <strong>late</strong>?</li>
+<li>If three reports are picked randomly, what is the probability that <strong>at least one</strong> of them is late?</li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>Let <span class="math inline">\(N = 585\)</span> and <span class="math inline">\(A\)</span> be the event that a report is <strong>late</strong>.</p>
+<ul>
+<li>Late times: Before 8:30 AM (10) and After 4:30 PM (15)<br>
+</li>
+<li>Total late = <span class="math inline">\(10 + 15 = 25\)</span></li>
+</ul>
+<p><span class="math display">\[
+\text{Pr}(A) = \frac{25}{585} \approx 0.0427
+\]</span></p>
+<hr>
+<p>Let <span class="math inline">\(A'\)</span> be the event that a report is <strong>on time</strong>.<br>
+Then:</p>
+<p><span class="math display">\[
+\text{Pr}(A') = 1 - \frac{25}{585} = \frac{560}{585}
+\]</span></p>
+<p>Probability that all 3 are on time:</p>
+<p><span class="math display">\[
+\left(\frac{560}{585}\right)^3 \approx 0.877
+\]</span></p>
+<p>Probability that <strong>at least one</strong> is late:</p>
+<p><span class="math display">\[
+1 - \left(\frac{560}{585}\right)^3 \approx 0.1228
+\]</span></p>
+So, roughly a <strong>12.28%</strong> chance that at least one is late.
+</details>
+<hr>
+</section>
+<section id="activity-bonus-scheme-preferences" class="level2">
+<h2 class="anchored" data-anchor-id="activity-bonus-scheme-preferences">Activity: Bonus Scheme Preferences</h2>
+<p>A survey is conducted at CAL among 960 employees regarding their preference for three bonus schemes:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Job Role</th>
+<th>Type I</th>
+<th>Type II</th>
+<th>Type III</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Analyst</td>
+<td>190</td>
+<td>243</td>
+<td>197</td>
+<td>630</td>
+</tr>
+<tr class="even">
+<td>Assistant</td>
+<td>82</td>
+<td>44</td>
+<td>44</td>
+<td>170</td>
+</tr>
+<tr class="odd">
+<td>Developer</td>
+<td>23</td>
+<td>78</td>
+<td>34</td>
+<td>135</td>
+</tr>
+<tr class="even">
+<td>Executive</td>
+<td>5</td>
+<td>12</td>
+<td>8</td>
+<td>25</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td>300</td>
+<td>377</td>
+<td>283</td>
+<td>960</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Questions:</strong></p>
+<ol type="1">
+<li>What is the probability that an employee is an <strong>Assistant</strong>?</li>
+<li>What is the probability that an employee prefers <strong>Type II</strong> bonus?</li>
+<li>What is the probability that the employee is a <strong>Developer preferring Type I</strong>?</li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<ol type="1">
+<li>Assistants: 170<br>
+<span class="math display">\[
+\text{Pr}(\text{Assistant}) = \frac{170}{960}
+\]</span></li>
+</ol>
+<hr>
+<ol start="2" type="1">
+<li>Type II preference: 377<br>
+<span class="math display">\[
+\text{Pr}(\text{Type II}) = \frac{377}{960}
+\]</span></li>
+</ol>
+<hr>
+<ol start="3" type="1">
+<li>Developer + Type I: 23<br>
+<span class="math display">\[
+\text{Pr}(\text{Developer with Type I}) = \frac{23}{960} \approx 0.024
+\]</span></li>
+</ol>
+So, there’s about a <strong>2.4%</strong> chance that a randomly chosen employee is a developer who prefers Type I bonus.
+</details>
+</section>
+<section id="subjective-probability-method" class="level2">
+<h2 class="anchored" data-anchor-id="subjective-probability-method">1.4.3 Subjective Probability Method</h2>
+<p>Not all situations allow us to calculate probabilities using past data (like relative frequency) or symmetry (like the classical method). In such situations, we may use <strong>subjective probability</strong>.</p>
+<section id="what-is-subjective-probability" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-subjective-probability">What is Subjective Probability?</h3>
+<p>Subjective probability is based on <strong>personal belief, intuition, or expert judgment</strong> about how likely an event is to happen.</p>
+</section>
+<section id="examples" class="level3">
+<h3 class="anchored" data-anchor-id="examples">Examples</h3>
+<ul>
+<li>A CAL analyst believes there is a <strong>60% chance</strong> that a client will approve a new investment proposal this week.</li>
+<li>A senior consultant estimates a <strong>20% chance</strong> that a financial audit will reveal serious irregularities.</li>
+</ul>
+<p>These are <strong>not based on data</strong> or formulas — they reflect an individual’s current belief.</p>
+</section>
+<section id="key-points" class="level3">
+<h3 class="anchored" data-anchor-id="key-points">Key Points</h3>
+<ul>
+<li>The probability depends on the <strong>person’s knowledge and experience</strong>.</li>
+<li>Two people may give <strong>different probabilities</strong> for the same event.</li>
+<li>These values can <strong>change</strong> with time or new information.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Subjective probability is commonly used in areas like <strong>business decision making</strong>, <strong>finance</strong>, and <strong>risk analysis</strong>, specially when data is limited or unavailable.</p>
+</blockquote>
+</section>
+<section id="looking-ahead" class="level3">
+<h3 class="anchored" data-anchor-id="looking-ahead">Looking Ahead</h3>
+<p>The idea of using probability to express <strong>personal belief</strong> is central to <strong>Bayesian statistics</strong> — a powerful method where we update beliefs using new data.</p>
+<blockquote class="blockquote">
+<p>You will learn about this approach in the <strong>Bayesian Inference course</strong> offered later (hopefully!).</p>
+</blockquote>
+<hr>
+</section>
+</section>
+<section id="using-probability-models" class="level2">
+<h2 class="anchored" data-anchor-id="using-probability-models">1.4.4 Using Probability Models</h2>
+<p>In some cases, we use <strong>mathematical models</strong> to describe uncertain outcomes. These are called <strong>probability models</strong>.</p>
+<blockquote class="blockquote">
+<p>At this stage, we are only introducing the idea. You will study it in detail later in the course.</p>
+</blockquote>
+<hr>
+<section id="what-is-a-probability-model" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-a-probability-model">What is a Probability Model?</h3>
+<p>A probability model includes:</p>
+<ul>
+<li>A <strong>sample space</strong> — the list of all possible outcomes.</li>
+<li>A <strong>rule or formula</strong> to assign probabilities to each outcome or event.</li>
+</ul>
+<p>These models are useful when: - The situation is <strong>too complex</strong> to observe many times, - We want to <strong>make predictions</strong>, - Or we are designing <strong>simulations and systems</strong>.</p>
+<hr>
+</section>
+<section id="examples-1" class="level3">
+<h3 class="anchored" data-anchor-id="examples-1">Examples</h3>
+<ul>
+<li>Modeling the <strong>number of complaints</strong> received per day in a service firm using the <strong>Poisson distribution</strong>.</li>
+<li>Estimating the <strong>time to complete a task</strong> using the <strong>exponential distribution</strong>.</li>
+<li>Modeling the <strong>number of successful deals</strong> out of several client meetings using the <strong>binomial distribution</strong>.</li>
+</ul>
+<hr>
+<blockquote class="blockquote">
+<p>These models are widely used in <strong>operations, risk management, and analytics</strong> — all central areas for CAL.</p>
+</blockquote>
+<hr>
+</section>
+<section id="important-note" class="level3">
+<h3 class="anchored" data-anchor-id="important-note">Important Note:</h3>
+<p>You will learn to <strong>build and apply these models</strong> later in the course.</p>
+<p>There, we will:</p>
+<ul>
+<li>Explore common probability distributions (e.g., Binomial, Normal, Poisson),</li>
+<li>Learn how to compute probabilities and expected values,</li>
+<li>Apply them to <strong>real-world</strong> business and data scenarios.</li>
+</ul>
+<hr>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

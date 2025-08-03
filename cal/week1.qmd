@@ -1,5 +1,5 @@
 ---
-title: "Probability & Distributional Theory: Week 1@CAL"
+title: "Probability & Distributional Theory: Week 1 @CAL"
 author: "Dr. Rajitha M. Silva"
 output: html_document
 ---
