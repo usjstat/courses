@@ -1,0 +1,530 @@
+---
+title: "STA 1142: Moments and Moments Generating Functions - Week 12"
+author: "Dr. R. M. Silva"
+output: html_document
+---
+
+
+## Introduction
+
+Expected value and variance are two common measures used to summarize probability distributions for a random variable $X$. However, an important question arises:
+
+> **Question:** Are these two measures sufficient to completely describe a probability distribution?
+
+To explore this, let us consider the following example.
+
+### Example: Comparing Distributions
+
+Consider the following probability mass functions:
+
+### Distribution of X
+
+\\[
+\\begin{array}{c|cc}
+x       & -1   & 1 \\\\ \\hline
+P_X(x)  & \\frac{1}{2} & \\frac{1}{2}
+\\end{array}
+\\]
+
+### Distribution of Y
+
+\\[
+\\begin{array}{c|ccc}
+y       & -2   & 0   & 2 \\\\ \\hline
+P_Y(y)  & \\frac{1}{8} & \\frac{3}{4} & \\frac{1}{8}
+\\end{array}
+\\]
+
+
+
+1. Find $E(X)$ and $V(X)$.
+2. Find $E(Y)$ and $V(Y)$.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+
+
+**Calculations for \(X\):**
+
+- \( E(X) = (-1) \cdot \frac{1}{2} + 1 \cdot \frac{1}{2} = -\frac{1}{2} + \frac{1}{2} = 0 \)
+- \( E(X^2) = (-1)^2 \cdot \frac{1}{2} + 1^2 \cdot \frac{1}{2} = \frac{1}{2} + \frac{1}{2} = 1 \)
+- \( \operatorname{Var}(X) = E(X^2) - [E(X)]^2 = 1 - 0^2 = 1 \)
+
+---
+
+
+**Calculations for \(Y\):**
+
+- \( E(Y) = (-2) \cdot \frac{1}{8} + 0 \cdot \frac{3}{4} + 2 \cdot \frac{1}{8} = -\frac{2}{8} + 0 + \frac{2}{8} = 0 \)
+- \( E(Y^2) = (-2)^2 \cdot \frac{1}{8} + 0^2 \cdot \frac{3}{4} + 2^2 \cdot \frac{1}{8} = \frac{4}{8} + 0 + \frac{4}{8} = 1 \)
+- \( \operatorname{Var}(Y) = E(Y^2) - [E(Y)]^2 = 1 - 0^2 = 1 \)
+
+---
+
+Both distributions have the same **mean** (0) and **variance** (1), but clearly have **different distributions**. This illustrates the **limitation** of using just mean and variance to characterize a distribution.
+
+</details>
+
+
+
+---
+
+## Moments (Raw and Central)
+
+> **Definition:** Let $X$ be a random variable, $c$ be a real number, and $r$ be an integer. Then:
+>
+> $$
+> E[(X - c)^r]
+> $$
+>
+> is called the $r$-th moment of $X$ around $c$.
+
+- The moments around 0 are called **raw moments**.
+- The moments around the mean are called **central moments**.
+
+Key examples:
+
+- **Mean ($\mu$):** $\displaystyle \mu = E[X]$ \
+
+- **Variance ($\sigma^2$):** $\displaystyle \operatorname{Var}(X) = E[(X - \mu)^2] = E[X^2] - (E[X])^2$ \
+
+- **Skewness:** $\displaystyle \gamma_1 = E\left[\left(\frac{X - \mu}{\sigma}\right)^3\right]$ \
+
+- **Kurtosis:** $\displaystyle \gamma_2 = E\left[\left(\frac{X - \mu}{\sigma}\right)^4\right]$
+
+---
+
+# Moment Generating Function (MGF)
+
+> **Definition:** Let $X$ be a random variable and $t \in \mathbb{R}$. The **moment generating function (MGF)** of $X$ is defined as:
+>
+> $$
+> M_X(t) = E[e^{tX}],
+> $$
+> when it exists.
+
+
+
+## Deriving Moments from the MGF
+
+We now prove the important results:
+
+\[
+M'_X(0) = E(X), \quad M''_X(0) = E(X^2)
+\]
+
+
+
+### Step 1: Definition of the MGF
+
+The moment generating function (MGF) of a random variable \( X \) is defined as:
+
+\[
+M_X(t) = E[e^{tX}]
+\]
+
+---
+
+### Step 2: First Derivative
+
+We compute the first derivative of \( M_X(t) \):
+
+\[
+M'_X(t) = \frac{d}{dt} E[e^{tX}]
+\]
+
+Assuming regularity conditions (e.g., dominated convergence), we can exchange differentiation and expectation:
+
+\[
+M'_X(t) = E\left[ \frac{d}{dt} e^{tX} \right] = E[X e^{tX}]
+\]
+
+Evaluate at \( t = 0 \):
+
+\[
+M'_X(0) = E[X e^{0}] = E[X]
+\]
+
+Thus:
+
+\[
+\boxed{M'_X(0) = E[X]}
+\]
+
+---
+
+### Step 3: Second Derivative
+
+Now differentiate again:
+
+\[
+M''_X(t) = \frac{d}{dt} M'_X(t) = \frac{d}{dt} E[X e^{tX}]
+\]
+
+Again, under regularity:
+
+\[
+M''_X(t) = E\left[ \frac{d}{dt}(X e^{tX}) \right] = E[X^2 e^{tX}]
+\]
+
+Evaluate at \( t = 0 \):
+
+\[
+M''_X(0) = E[X^2 e^{0}] = E[X^2]
+\]
+
+Thus:
+
+\[
+\boxed{M''_X(0) = E[X^2]}
+\]
+
+---
+
+Hence:
+
+$$
+\operatorname{Var}(X) = M''_X(0) - [M'_X(0)]^2
+$$
+
+---
+
+## Properties of Moment Generating Functions
+
+1. **Uniqueness:** Two random variables $X$ and $Y$ have the same distribution if and only if they have the same MGF.\
+
+2. **Linear Transformation:** If $Y = a + bX$, then $M_Y(t) = e^{at} M_X(bt)$.\
+
+3. **Sum of Independent Variables:** If $X_1, ..., X_n$ are independent, then:
+   $$
+   M_{\sum X_i}(t) = \prod M_{X_i}(t)
+   $$
+
+---
+
+### Proof:
+
+1. **Uniqueness** 
+
+ Let \( M_X(t) \) and \( M_Y(t) \) be the MGFs of \( X \) and \( Y \), respectively. Suppose:
+
+\[
+M_X(t) = M_Y(t), \quad \text{for all } t \in (-\epsilon, \epsilon)
+\]
+
+Then the **moment sequences** of \( X \) and \( Y \) are equal, i.e.,
+
+\[
+E[X^n] = E[Y^n] \quad \text{for all } n \in \mathbb{N}
+\]
+
+Under these conditions, the **distribution is uniquely determined** by the sequence of moments, so \( X \) and \( Y \) must have the same distribution.
+
+2. **Linear Transformation:**
+
+Start with the definition of the MGF of \( Y \):
+
+\[
+M_Y(t) = E[e^{tY}] = E[e^{t(a + bX)}] = E[e^{at} \cdot e^{btX}]
+\]
+
+Use properties of expectation (linearity and constants):
+
+\[
+M_Y(t) = e^{at} \cdot E[e^{btX}] = e^{at} M_X(bt)
+\]
+
+**Thus:**
+\[
+\boxed{M_Y(t) = e^{at} M_X(bt)}
+\]
+
+---
+
+3. Sum of Independent Variables
+
+
+Let \( S_n = X_1 + X_2 + \cdots + X_n \). By definition:
+
+\[
+M_{S_n}(t) = E[e^{t(X_1 + X_2 + \cdots + X_n)}] = E\left[ \prod_{i=1}^n e^{tX_i} \right]
+\]
+
+Since the \( X_i \) are independent:
+
+\[
+E\left[ \prod_{i=1}^n e^{tX_i} \right] = \prod_{i=1}^n E[e^{tX_i}] = \prod_{i=1}^n M_{X_i}(t)
+\]
+
+**Thus:**
+\[
+\boxed{M_{\sum X_i}(t) = \prod_{i=1}^n M_{X_i}(t)}
+\]
+
+
+## Examples of MGFs
+
+### Normal Distribution
+
+Let $X \sim \mathcal{N}(\mu, \sigma^2)$. Then:
+
+$$
+M_X(t) = \exp\left(\mu t + \frac{\sigma^2 t^2}{2}\right)
+$$
+
+### Poisson Distribution
+
+Let $X \sim \text{Poisson}(\lambda)$. Then:
+
+$$
+M_X(t) = \exp(\lambda(e^t - 1))
+$$
+
+---
+
+
+
+## Activity 2.23
+
+Let $X$ be a discrete random variable with:
+
+$$
+P_X(x) = p(1 - p)^x, \quad x = 0, 1, 2, \ldots
+$$
+
+1. Show that the moment generating function is:
+
+   $$
+   M_X(t) = \frac{p}{1 - (1 - p)e^t}, \quad t < -\ln(1 - p)
+   $$
+
+2. Use $M_X(t)$ to find the mean and variance of $X$.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+
+**Step-by-step:**
+
+Start with the definition of the MGF:
+
+\[
+M_X(t) = E[e^{tX}] = \sum_{x=0}^{\infty} e^{tx} P_X(x)
+= \sum_{x=0}^{\infty} e^{tx} p(1 - p)^x
+\]
+
+Factor out the constant \( p \):
+
+\[
+M_X(t) = p \sum_{x=0}^{\infty} \left[ (1 - p)e^t \right]^x
+\]
+
+This is a geometric series of the form:
+
+\[
+\sum_{x=0}^{\infty} r^x = \frac{1}{1 - r}, \quad \text{for } |r| < 1
+\]
+
+Here, \( r = (1 - p)e^t \). This converges when:
+
+\[
+(1 - p)e^t < 1 \quad \Rightarrow \quad t < -\ln(1 - p)
+\]
+
+Apply the formula:
+
+\[
+M_X(t) = \frac{p}{1 - (1 - p)e^t}
+\]
+
+**Proved.**
+
+
+---
+
+### 2. Use \( M_X(t) \) to find the mean and variance of \( X \)
+
+We use derivatives of the MGF:
+
+- \( E[X] = M'_X(0) \)
+- \( \operatorname{Var}(X) = M''_X(0) - [M'_X(0)]^2 \)
+
+Let:
+
+\[
+M_X(t) = \frac{p}{1 - (1 - p)e^t}
+\]
+
+---
+
+***First Derivative:***
+
+Differentiate using chain rule:
+
+\[
+M'_X(t) = \frac{d}{dt} \left( \frac{p}{1 - (1 - p)e^t} \right)
+= p \cdot \frac{(1 - p)e^t}{\left[1 - (1 - p)e^t\right]^2}
+\]
+
+Evaluate at \( t = 0 \):
+
+\[
+M'_X(0) = p \cdot \frac{(1 - p)}{\left[1 - (1 - p)\right]^2}
+= p \cdot \frac{(1 - p)}{p^2} = \frac{1 - p}{p}
+\]
+
+ **Mean:** \( E[X] = \frac{1 - p}{p} \)
+
+---
+
+***Second Derivative:***
+
+Differentiate again:
+
+Let:
+
+\[
+f(t) = 1 - (1 - p)e^t
+\]
+
+Then:
+
+\[
+M'_X(t) = \frac{p (1 - p)e^t}{f(t)^2}
+\]
+
+Use quotient rule:
+
+\[
+M''_X(t) = \frac{d}{dt} \left( \frac{p (1 - p)e^t}{f(t)^2} \right)
+= p(1 - p) \cdot \frac{e^t f(t)^2 - 2e^t f(t)(1 - p)e^t}{f(t)^4}
+\]
+
+At \( t = 0 \), \( f(0) = p \), so:
+
+\[
+M''_X(0) = \frac{p(1 - p)\left[1 \cdot p^2 - 2(1 - p) \cdot 1 \cdot p \right]}{p^4}
+= \frac{p(1 - p)(p^2 - 2p(1 - p))}{p^4}
+= \frac{(1 - p)(p^2 - 2p + 2p^2)}{p^3}
+= \frac{(1 - p)(1 + p)}{p^2}
+\]
+
+ **Variance:**
+
+\[
+\operatorname{Var}(X) = M''_X(0) - [M'_X(0)]^2
+= \frac{1 - p}{p^2}
+\]
+
+---
+
+
+</details>
+
+
+
+
+
+## Activity 2.24
+
+Let $X_1$ and $X_2$ be i.i.d. random variables with:
+
+$$
+P(X_i = 1) = p, \quad P(X_i = 0) = 1 - p
+$$
+
+1. Find the MGF for $X_1$.
+2. Find the MGF for $W = X_1 + X_2$.
+3. Use $M_W(t)$ to calculate $E(W)$ and $\operatorname{Var}(W)$.
+
+---
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+
+***1. Find the MGF of \( X_1 \)***
+
+Use the definition of the MGF:
+
+\[
+M_{X_1}(t) = E[e^{tX_1}] = e^{t \cdot 0}(1 - p) + e^{t \cdot 1}p = (1 - p) + pe^t
+\]
+
+ **Thus:**
+
+\[
+\boxed{M_{X_1}(t) = (1 - p) + pe^t}
+\]
+
+---
+
+***2. Find the MGF of \( W = X_1 + X_2 \)***
+
+Since \( X_1 \) and \( X_2 \) are independent, the MGF of their sum is the product of the individual MGFs:
+
+\[
+M_W(t) = M_{X_1}(t) \cdot M_{X_2}(t) = [(1 - p) + pe^t]^2
+\]
+
+**Thus:**
+
+\[
+\boxed{M_W(t) = [(1 - p) + pe^t]^2}
+\]
+
+---
+
+***3. Use \( M_W(t) \) to find \( E(W) \) and \( \operatorname{Var}(W) \)***
+
+Step 1: First Derivative
+
+Let \( M_W(t) = [(1 - p) + pe^t]^2 \)
+
+Differentiate:
+
+\[
+M'_W(t) = 2[(1 - p) + pe^t] \cdot (p e^t)
+\]
+
+Evaluate at \( t = 0 \):
+
+\[
+M'_W(0) = 2[(1 - p) + p] \cdot p = 2 \cdot 1 \cdot p = 2p
+\]
+
+ **Mean:** \( E(W) = M'_W(0) = 2p \)
+
+---
+
+***Step 2: Second Derivative***
+
+Differentiate again:
+
+\[
+M''_W(t) = 2 \left[ p e^t \cdot p e^t + [(1 - p) + pe^t] \cdot p e^t \right]
+\]
+
+At \( t = 0 \):
+
+\[
+M''_W(0) = 2 \left[ p^2 + (1 - p + p)p \right] = 2(p^2 + p) = 2(p^2 + p)
+\]
+
+Now compute variance:
+
+\[
+\operatorname{Var}(W) = M''_W(0) - [M'_W(0)]^2 = 2(p^2 + p) - (2p)^2 = 2p(p + 1) - 4p^2
+\]
+
+\[
+= 2p + 2p^2 - 4p^2 = 2p - 2p^2 = 2p(1 - p)
+\]
+
+**Variance:** \( \operatorname{Var}(W) = 2p(1 - p) \)
+
+</details>

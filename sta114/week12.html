@@ -9,10 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Dr. Rajitha M. Silva" />
+<meta name="author" content="Dr. R. M. Silva" />
 
 
-<title>STA 1142 - Probability and Distribution Theory I</title>
+<title>STA 1142: Moments and Moments Generating Functions - Week 12</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -349,232 +349,443 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">STA 1142 - Probability and Distribution
-Theory I</h1>
-<h4 class="author">Dr. Rajitha M. Silva</h4>
+<h1 class="title toc-ignore">STA 1142: Moments and Moments Generating
+Functions - Week 12</h1>
+<h4 class="author">Dr. R. M. Silva</h4>
 
 </div>
 
 
-<div id="course-information" class="section level1">
-<h1>Course Information</h1>
-<table>
-<tbody>
-<tr class="odd">
-<td><strong>Course Title:</strong></td>
-<td>Probability and Distribution Theory I</td>
-</tr>
-<tr class="even">
-<td><strong>Course Code:</strong></td>
-<td>STA1142</td>
-</tr>
-<tr class="odd">
-<td><strong>Credit Value:</strong></td>
-<td>2.0</td>
-</tr>
-<tr class="even">
-<td><strong>Status:</strong></td>
-<td>Core</td>
-</tr>
-<tr class="odd">
-<td><strong>Year/Level:</strong></td>
-<td>2025/First Year</td>
-</tr>
-<tr class="even">
-<td><strong>Semester:</strong></td>
-<td>1 (First Semester)</td>
-</tr>
-<tr class="odd">
-<td><strong>Pre-requisite:</strong></td>
-<td>A/L Combined Mathematics</td>
-</tr>
-</tbody>
-</table>
-<hr />
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>Expected value and variance are two common measures used to summarize
+probability distributions for a random variable <span class="math inline">\(X\)</span>. However, an important question
+arises:</p>
+<blockquote>
+<p><strong>Question:</strong> Are these two measures sufficient to
+completely describe a probability distribution?</p>
+</blockquote>
+<p>To explore this, let us consider the following example.</p>
+<div id="example-comparing-distributions" class="section level3">
+<h3>Example: Comparing Distributions</h3>
+<p>Consider the following probability mass functions:</p>
 </div>
-<div id="aim-of-the-course" class="section level1">
-<h1>Aim of the Course</h1>
-<p>This course establishes the fundamentals of probability theory. It
-supports learning in statistical inference, risk evaluation, actuarial
-modeling, and various forecasting fields such as weather prediction,
-sports outcomes, and finance. It is also a prerequisite for advanced
-modules in probability and statistics.</p>
-<hr />
+<div id="distribution-of-x" class="section level3">
+<h3>Distribution of X</h3>
+<p>\[ \begin{array}{c|cc} x &amp; -1 &amp; 1 \\ \hline P_X(x) &amp;
+\frac{1}{2} &amp; \frac{1}{2} \end{array} \]</p>
 </div>
-<div id="learning-activities-weekly-breakdown" class="section level1">
-<h1>Learning Activities &amp; Weekly Breakdown</h1>
-<div style="text-align: center;">
-<table>
-<colgroup>
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Week</strong></th>
-<th><strong>Topic</strong></th>
-<th><strong>Description</strong></th>
-<th><strong>Hours</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td><a href="week1">Elements of Probability</a></td>
-<td>Introduction, experiments, outcomes, sample spaces, events</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td><a href="week2">Event Operations</a></td>
-<td>Complements, unions, intersections, mutually exclusive/exhaustive
-events</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td><a href="https://sportsanalyzr.shinyapps.io/week3/">Methods of
-Probability</a></td>
-<td>Classical, relative frequency, axioms, interpretation</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td><a href="week4.html">Conditional Probability</a></td>
-<td>Independent events</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td><a href="week5.html">Probability Rules</a></td>
-<td>Addition, multiplication, total probability, Bayes’ theorem</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="even">
-<td>6</td>
-<td><a href="midmarks.png"><strong>Midterm Examination</strong></a></td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr class="odd">
-<td>7</td>
-<td><a href="week6.html">Random Variables</a></td>
-<td>Definitions, discrete and continuous variables</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="even">
-<td>8</td>
-<td><a href="week8.html">Events with Random Variables</a></td>
-<td>Event representation and revision</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="odd">
-<td>9</td>
-<td><a href="week9.html">Distributions</a></td>
-<td>pmf, pdf, cdf</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="even">
-<td>10</td>
-<td><a href="week10.html">Probability Calculations</a></td>
-<td>Quantiles, quartiles, percentiles</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="odd">
-<td>11</td>
-<td><a href="week11.html">Mean &amp; Variance</a></td>
-<td>Mean and variance of r.v.s and functions</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="even">
-<td>12</td>
-<td><a href="week12.html">Moments</a></td>
-<td>MGF and properties</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="odd">
-<td>13</td>
-<td>Revision &amp; Integration</td>
-<td>-</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><em>T = Theory, IL = Independent Learning</em></p>
-<hr />
-</div>
-<div id="intended-learning-outcomes-ilos" class="section level1">
-<h1>Intended Learning Outcomes (ILOs)</h1>
-<p>By the end of this course, students will be able to:</p>
+<div id="distribution-of-y" class="section level3">
+<h3>Distribution of Y</h3>
+<p>\[ \begin{array}{c|ccc} y &amp; -2 &amp; 0 &amp; 2 \\ \hline P_Y(y)
+&amp; \frac{1}{8} &amp; \frac{3}{4} &amp; \frac{1}{8} \end{array} \]</p>
 <ol style="list-style-type: decimal">
-<li>Describe events using set notation and sample spaces.<br />
-</li>
-<li>Formulate and identify events of interest.<br />
-</li>
-<li>Apply classical and empirical methods for calculating
-probability.<br />
-</li>
-<li>Explain and apply probability axioms.<br />
-</li>
-<li>Distinguish conditional from unconditional events.<br />
-</li>
-<li>Use rules of probability effectively.<br />
-</li>
-<li>Define and identify types of random variables.<br />
-</li>
-<li>Relate events to random variables.<br />
-</li>
-<li>Use pmf, pdf, cdf correctly.<br />
-</li>
-<li>Calculate probabilities and descriptive measures from
-distributions.<br />
-</li>
-<li>Define and interpret mean, median, variance, etc.<br />
-</li>
-<li>Use moment generating functions.<br />
-</li>
-<li>Use correct notation and terminology.<br />
-</li>
-<li>Communicate clearly and coherently.<br />
-</li>
-<li>Present clear and accurate solutions to problems.</li>
+<li>Find <span class="math inline">\(E(X)\)</span> and <span class="math inline">\(V(X)\)</span>.</li>
+<li>Find <span class="math inline">\(E(Y)\)</span> and <span class="math inline">\(V(Y)\)</span>.</li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p><strong>Calculations for <span class="math inline">\(X\)</span>:</strong></p>
+<ul>
+<li><span class="math inline">\(E(X) = (-1) \cdot \frac{1}{2} + 1 \cdot
+\frac{1}{2} = -\frac{1}{2} + \frac{1}{2} = 0\)</span></li>
+<li><span class="math inline">\(E(X^2) = (-1)^2 \cdot \frac{1}{2} + 1^2
+\cdot \frac{1}{2} = \frac{1}{2} + \frac{1}{2} = 1\)</span></li>
+<li><span class="math inline">\(\operatorname{Var}(X) = E(X^2) -
+[E(X)]^2 = 1 - 0^2 = 1\)</span></li>
+</ul>
+<hr />
+<p><strong>Calculations for <span class="math inline">\(Y\)</span>:</strong></p>
+<ul>
+<li><span class="math inline">\(E(Y) = (-2) \cdot \frac{1}{8} + 0 \cdot
+\frac{3}{4} + 2 \cdot \frac{1}{8} = -\frac{2}{8} + 0 + \frac{2}{8} =
+0\)</span></li>
+<li><span class="math inline">\(E(Y^2) = (-2)^2 \cdot \frac{1}{8} + 0^2
+\cdot \frac{3}{4} + 2^2 \cdot \frac{1}{8} = \frac{4}{8} + 0 +
+\frac{4}{8} = 1\)</span></li>
+<li><span class="math inline">\(\operatorname{Var}(Y) = E(Y^2) -
+[E(Y)]^2 = 1 - 0^2 = 1\)</span></li>
+</ul>
+<hr />
+<p>Both distributions have the same <strong>mean</strong> (0) and
+<strong>variance</strong> (1), but clearly have <strong>different
+distributions</strong>. This illustrates the <strong>limitation</strong>
+of using just mean and variance to characterize a distribution.</p>
+</details>
+<hr />
+</div>
+</div>
+<div id="moments-raw-and-central" class="section level2">
+<h2>Moments (Raw and Central)</h2>
+<blockquote>
+<p><strong>Definition:</strong> Let <span class="math inline">\(X\)</span> be a random variable, <span class="math inline">\(c\)</span> be a real number, and <span class="math inline">\(r\)</span> be an integer. Then:</p>
+<p><span class="math display">\[
+E[(X - c)^r]
+\]</span></p>
+<p>is called the <span class="math inline">\(r\)</span>-th moment of
+<span class="math inline">\(X\)</span> around <span class="math inline">\(c\)</span>.</p>
+</blockquote>
+<ul>
+<li>The moments around 0 are called <strong>raw moments</strong>.</li>
+<li>The moments around the mean are called <strong>central
+moments</strong>.</li>
+</ul>
+<p>Key examples:</p>
+<ul>
+<li><p><strong>Mean (<span class="math inline">\(\mu\)</span>):</strong>
+<span class="math inline">\(\displaystyle \mu = E[X]\)</span><br />
+</p></li>
+<li><p><strong>Variance (<span class="math inline">\(\sigma^2\)</span>):</strong> <span class="math inline">\(\displaystyle \operatorname{Var}(X) = E[(X -
+\mu)^2] = E[X^2] - (E[X])^2\)</span><br />
+</p></li>
+<li><p><strong>Skewness:</strong> <span class="math inline">\(\displaystyle \gamma_1 = E\left[\left(\frac{X -
+\mu}{\sigma}\right)^3\right]\)</span><br />
+</p></li>
+<li><p><strong>Kurtosis:</strong> <span class="math inline">\(\displaystyle \gamma_2 = E\left[\left(\frac{X -
+\mu}{\sigma}\right)^4\right]\)</span></p></li>
+</ul>
+<hr />
+</div>
+<div id="moment-generating-function-mgf" class="section level1">
+<h1>Moment Generating Function (MGF)</h1>
+<blockquote>
+<p><strong>Definition:</strong> Let <span class="math inline">\(X\)</span> be a random variable and <span class="math inline">\(t \in \mathbb{R}\)</span>. The <strong>moment
+generating function (MGF)</strong> of <span class="math inline">\(X\)</span> is defined as:</p>
+<p><span class="math display">\[
+M_X(t) = E[e^{tX}],
+\]</span> when it exists.</p>
+</blockquote>
+<div id="deriving-moments-from-the-mgf" class="section level2">
+<h2>Deriving Moments from the MGF</h2>
+<p>We now prove the important results:</p>
+<p><span class="math display">\[
+M&#39;_X(0) = E(X), \quad M&#39;&#39;_X(0) = E(X^2)
+\]</span></p>
+<div id="step-1-definition-of-the-mgf" class="section level3">
+<h3>Step 1: Definition of the MGF</h3>
+<p>The moment generating function (MGF) of a random variable <span class="math inline">\(X\)</span> is defined as:</p>
+<p><span class="math display">\[
+M_X(t) = E[e^{tX}]
+\]</span></p>
+<hr />
+</div>
+<div id="step-2-first-derivative" class="section level3">
+<h3>Step 2: First Derivative</h3>
+<p>We compute the first derivative of <span class="math inline">\(M_X(t)\)</span>:</p>
+<p><span class="math display">\[
+M&#39;_X(t) = \frac{d}{dt} E[e^{tX}]
+\]</span></p>
+<p>Assuming regularity conditions (e.g., dominated convergence), we can
+exchange differentiation and expectation:</p>
+<p><span class="math display">\[
+M&#39;_X(t) = E\left[ \frac{d}{dt} e^{tX} \right] = E[X e^{tX}]
+\]</span></p>
+<p>Evaluate at <span class="math inline">\(t = 0\)</span>:</p>
+<p><span class="math display">\[
+M&#39;_X(0) = E[X e^{0}] = E[X]
+\]</span></p>
+<p>Thus:</p>
+<p><span class="math display">\[
+\boxed{M&#39;_X(0) = E[X]}
+\]</span></p>
+<hr />
+</div>
+<div id="step-3-second-derivative" class="section level3">
+<h3>Step 3: Second Derivative</h3>
+<p>Now differentiate again:</p>
+<p><span class="math display">\[
+M&#39;&#39;_X(t) = \frac{d}{dt} M&#39;_X(t) = \frac{d}{dt} E[X e^{tX}]
+\]</span></p>
+<p>Again, under regularity:</p>
+<p><span class="math display">\[
+M&#39;&#39;_X(t) = E\left[ \frac{d}{dt}(X e^{tX}) \right] = E[X^2
+e^{tX}]
+\]</span></p>
+<p>Evaluate at <span class="math inline">\(t = 0\)</span>:</p>
+<p><span class="math display">\[
+M&#39;&#39;_X(0) = E[X^2 e^{0}] = E[X^2]
+\]</span></p>
+<p>Thus:</p>
+<p><span class="math display">\[
+\boxed{M&#39;&#39;_X(0) = E[X^2]}
+\]</span></p>
+<hr />
+<p>Hence:</p>
+<p><span class="math display">\[
+\operatorname{Var}(X) = M&#39;&#39;_X(0) - [M&#39;_X(0)]^2
+\]</span></p>
+<hr />
+</div>
+</div>
+<div id="properties-of-moment-generating-functions" class="section level2">
+<h2>Properties of Moment Generating Functions</h2>
+<ol style="list-style-type: decimal">
+<li><p><strong>Uniqueness:</strong> Two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> have the same distribution if and only
+if they have the same MGF.<br />
+</p></li>
+<li><p><strong>Linear Transformation:</strong> If <span class="math inline">\(Y = a + bX\)</span>, then <span class="math inline">\(M_Y(t) = e^{at} M_X(bt)\)</span>.<br />
+</p></li>
+<li><p><strong>Sum of Independent Variables:</strong> If <span class="math inline">\(X_1, ..., X_n\)</span> are independent, then:
+<span class="math display">\[
+M_{\sum X_i}(t) = \prod M_{X_i}(t)
+\]</span></p></li>
 </ol>
 <hr />
+<div id="proof" class="section level3">
+<h3>Proof:</h3>
+<ol style="list-style-type: decimal">
+<li><strong>Uniqueness</strong></li>
+</ol>
+<p>Let <span class="math inline">\(M_X(t)\)</span> and <span class="math inline">\(M_Y(t)\)</span> be the MGFs of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, respectively. Suppose:</p>
+<p><span class="math display">\[
+M_X(t) = M_Y(t), \quad \text{for all } t \in (-\epsilon, \epsilon)
+\]</span></p>
+<p>Then the <strong>moment sequences</strong> of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are equal, i.e.,</p>
+<p><span class="math display">\[
+E[X^n] = E[Y^n] \quad \text{for all } n \in \mathbb{N}
+\]</span></p>
+<p>Under these conditions, the <strong>distribution is uniquely
+determined</strong> by the sequence of moments, so <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> must have the same distribution.</p>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>Linear Transformation:</strong></li>
+</ol>
+<p>Start with the definition of the MGF of <span class="math inline">\(Y\)</span>:</p>
+<p><span class="math display">\[
+M_Y(t) = E[e^{tY}] = E[e^{t(a + bX)}] = E[e^{at} \cdot e^{btX}]
+\]</span></p>
+<p>Use properties of expectation (linearity and constants):</p>
+<p><span class="math display">\[
+M_Y(t) = e^{at} \cdot E[e^{btX}] = e^{at} M_X(bt)
+\]</span></p>
+<p><strong>Thus:</strong> <span class="math display">\[
+\boxed{M_Y(t) = e^{at} M_X(bt)}
+\]</span></p>
+<hr />
+<ol start="3" style="list-style-type: decimal">
+<li>Sum of Independent Variables</li>
+</ol>
+<p>Let <span class="math inline">\(S_n = X_1 + X_2 + \cdots +
+X_n\)</span>. By definition:</p>
+<p><span class="math display">\[
+M_{S_n}(t) = E[e^{t(X_1 + X_2 + \cdots + X_n)}] = E\left[ \prod_{i=1}^n
+e^{tX_i} \right]
+\]</span></p>
+<p>Since the <span class="math inline">\(X_i\)</span> are
+independent:</p>
+<p><span class="math display">\[
+E\left[ \prod_{i=1}^n e^{tX_i} \right] = \prod_{i=1}^n E[e^{tX_i}] =
+\prod_{i=1}^n M_{X_i}(t)
+\]</span></p>
+<p><strong>Thus:</strong> <span class="math display">\[
+\boxed{M_{\sum X_i}(t) = \prod_{i=1}^n M_{X_i}(t)}
+\]</span></p>
 </div>
-<div id="mode-of-assessment" class="section level1">
-<h1>Mode of Assessment</h1>
+</div>
+<div id="examples-of-mgfs" class="section level2">
+<h2>Examples of MGFs</h2>
+<div id="normal-distribution" class="section level3">
+<h3>Normal Distribution</h3>
+<p>Let <span class="math inline">\(X \sim \mathcal{N}(\mu,
+\sigma^2)\)</span>. Then:</p>
+<p><span class="math display">\[
+M_X(t) = \exp\left(\mu t + \frac{\sigma^2 t^2}{2}\right)
+\]</span></p>
+</div>
+<div id="poisson-distribution" class="section level3">
+<h3>Poisson Distribution</h3>
+<p>Let <span class="math inline">\(X \sim
+\text{Poisson}(\lambda)\)</span>. Then:</p>
+<p><span class="math display">\[
+M_X(t) = \exp(\lambda(e^t - 1))
+\]</span></p>
+<hr />
+</div>
+</div>
+<div id="activity-2.23" class="section level2">
+<h2>Activity 2.23</h2>
+<p>Let <span class="math inline">\(X\)</span> be a discrete random
+variable with:</p>
+<p><span class="math display">\[
+P_X(x) = p(1 - p)^x, \quad x = 0, 1, 2, \ldots
+\]</span></p>
+<ol style="list-style-type: decimal">
+<li><p>Show that the moment generating function is:</p>
+<p><span class="math display">\[
+M_X(t) = \frac{p}{1 - (1 - p)e^t}, \quad t &lt; -\ln(1 - p)
+\]</span></p></li>
+<li><p>Use <span class="math inline">\(M_X(t)\)</span> to find the mean
+and variance of <span class="math inline">\(X\)</span>.</p></li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p><strong>Step-by-step:</strong></p>
+<p>Start with the definition of the MGF:</p>
+<p><span class="math display">\[
+M_X(t) = E[e^{tX}] = \sum_{x=0}^{\infty} e^{tx} P_X(x)
+= \sum_{x=0}^{\infty} e^{tx} p(1 - p)^x
+\]</span></p>
+<p>Factor out the constant <span class="math inline">\(p\)</span>:</p>
+<p><span class="math display">\[
+M_X(t) = p \sum_{x=0}^{\infty} \left[ (1 - p)e^t \right]^x
+\]</span></p>
+<p>This is a geometric series of the form:</p>
+<p><span class="math display">\[
+\sum_{x=0}^{\infty} r^x = \frac{1}{1 - r}, \quad \text{for } |r| &lt; 1
+\]</span></p>
+<p>Here, <span class="math inline">\(r = (1 - p)e^t\)</span>. This
+converges when:</p>
+<p><span class="math display">\[
+(1 - p)e^t &lt; 1 \quad \Rightarrow \quad t &lt; -\ln(1 - p)
+\]</span></p>
+<p>Apply the formula:</p>
+<p><span class="math display">\[
+M_X(t) = \frac{p}{1 - (1 - p)e^t}
+\]</span></p>
+<p><strong>Proved.</strong></p>
+<hr />
+<div id="use-m_xt-to-find-the-mean-and-variance-of-x" class="section level3">
+<h3>2. Use <span class="math inline">\(M_X(t)\)</span> to find the mean
+and variance of <span class="math inline">\(X\)</span></h3>
+<p>We use derivatives of the MGF:</p>
 <ul>
-<li><strong>Midterm (on 6th week)</strong>: 40%<br />
-</li>
-<li><strong>Final Exam</strong> (2 hours): 60% (Summative
-Assessment)</li>
+<li><span class="math inline">\(E[X] = M&#39;_X(0)\)</span></li>
+<li><span class="math inline">\(\operatorname{Var}(X) = M&#39;&#39;_X(0)
+- [M&#39;_X(0)]^2\)</span></li>
 </ul>
+<p>Let:</p>
+<p><span class="math display">\[
+M_X(t) = \frac{p}{1 - (1 - p)e^t}
+\]</span></p>
 <hr />
+<p><strong><em>First Derivative:</em></strong></p>
+<p>Differentiate using chain rule:</p>
+<p><span class="math display">\[
+M&#39;_X(t) = \frac{d}{dt} \left( \frac{p}{1 - (1 - p)e^t} \right)
+= p \cdot \frac{(1 - p)e^t}{\left[1 - (1 - p)e^t\right]^2}
+\]</span></p>
+<p>Evaluate at <span class="math inline">\(t = 0\)</span>:</p>
+<p><span class="math display">\[
+M&#39;_X(0) = p \cdot \frac{(1 - p)}{\left[1 - (1 - p)\right]^2}
+= p \cdot \frac{(1 - p)}{p^2} = \frac{1 - p}{p}
+\]</span></p>
+<p><strong>Mean:</strong> <span class="math inline">\(E[X] = \frac{1 -
+p}{p}\)</span></p>
+<hr />
+<p><strong><em>Second Derivative:</em></strong></p>
+<p>Differentiate again:</p>
+<p>Let:</p>
+<p><span class="math display">\[
+f(t) = 1 - (1 - p)e^t
+\]</span></p>
+<p>Then:</p>
+<p><span class="math display">\[
+M&#39;_X(t) = \frac{p (1 - p)e^t}{f(t)^2}
+\]</span></p>
+<p>Use quotient rule:</p>
+<p><span class="math display">\[
+M&#39;&#39;_X(t) = \frac{d}{dt} \left( \frac{p (1 - p)e^t}{f(t)^2}
+\right)
+= p(1 - p) \cdot \frac{e^t f(t)^2 - 2e^t f(t)(1 - p)e^t}{f(t)^4}
+\]</span></p>
+<p>At <span class="math inline">\(t = 0\)</span>, <span class="math inline">\(f(0) = p\)</span>, so:</p>
+<p><span class="math display">\[
+M&#39;&#39;_X(0) = \frac{p(1 - p)\left[1 \cdot p^2 - 2(1 - p) \cdot 1
+\cdot p \right]}{p^4}
+= \frac{p(1 - p)(p^2 - 2p(1 - p))}{p^4}
+= \frac{(1 - p)(p^2 - 2p + 2p^2)}{p^3}
+= \frac{(1 - p)(1 + p)}{p^2}
+\]</span></p>
+<p><strong>Variance:</strong></p>
+<p><span class="math display">\[
+\operatorname{Var}(X) = M&#39;&#39;_X(0) - [M&#39;_X(0)]^2
+= \frac{1 - p}{p^2}
+\]</span></p>
+<hr />
+</details>
 </div>
-<div id="references" class="section level1">
-<h1>References</h1>
-<ul>
-<li>Jay L. Devore, <em>Probability and Statistics for Engineering and
-Sciences</em>, Brooks/Cole.<br />
-</li>
-<li>B.M.S.G. Banneheka, <em>Statistical Distribution Theory</em>, Open
-University of Sri Lanka.<br />
-</li>
-<li>Class handouts and lecture notes.</li>
-</ul>
-<hr />
 </div>
-<div id="instructor-office-hours" class="section level1">
-<h1>Instructor &amp; Office Hours</h1>
-<p><strong>Lecturer:</strong> Dr. Rajitha M. Silva<br />
-<strong>Email:</strong> <a href="mailto:rsilva@sjp.ac.lk" class="email">rsilva@sjp.ac.lk</a><br />
-<strong>Office Hours:</strong> One hour after lectures or by
-appointment</p>
+<div id="activity-2.24" class="section level2">
+<h2>Activity 2.24</h2>
+<p>Let <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> be i.i.d. random variables with:</p>
+<p><span class="math display">\[
+P(X_i = 1) = p, \quad P(X_i = 0) = 1 - p
+\]</span></p>
+<ol style="list-style-type: decimal">
+<li>Find the MGF for <span class="math inline">\(X_1\)</span>.</li>
+<li>Find the MGF for <span class="math inline">\(W = X_1 +
+X_2\)</span>.</li>
+<li>Use <span class="math inline">\(M_W(t)\)</span> to calculate <span class="math inline">\(E(W)\)</span> and <span class="math inline">\(\operatorname{Var}(W)\)</span>.</li>
+</ol>
 <hr />
-<p><em>This course is effective from 19th May 2025.</em></p>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p><strong><em>1. Find the MGF of <span class="math inline">\(X_1\)</span></em></strong></p>
+<p>Use the definition of the MGF:</p>
+<p><span class="math display">\[
+M_{X_1}(t) = E[e^{tX_1}] = e^{t \cdot 0}(1 - p) + e^{t \cdot 1}p = (1 -
+p) + pe^t
+\]</span></p>
+<p><strong>Thus:</strong></p>
+<p><span class="math display">\[
+\boxed{M_{X_1}(t) = (1 - p) + pe^t}
+\]</span></p>
+<hr />
+<p><strong><em>2. Find the MGF of <span class="math inline">\(W = X_1 +
+X_2\)</span></em></strong></p>
+<p>Since <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> are independent, the MGF of their sum
+is the product of the individual MGFs:</p>
+<p><span class="math display">\[
+M_W(t) = M_{X_1}(t) \cdot M_{X_2}(t) = [(1 - p) + pe^t]^2
+\]</span></p>
+<p><strong>Thus:</strong></p>
+<p><span class="math display">\[
+\boxed{M_W(t) = [(1 - p) + pe^t]^2}
+\]</span></p>
+<hr />
+<p><strong><em>3. Use <span class="math inline">\(M_W(t)\)</span> to
+find <span class="math inline">\(E(W)\)</span> and <span class="math inline">\(\operatorname{Var}(W)\)</span></em></strong></p>
+<p>Step 1: First Derivative</p>
+<p>Let <span class="math inline">\(M_W(t) = [(1 - p) +
+pe^t]^2\)</span></p>
+<p>Differentiate:</p>
+<p><span class="math display">\[
+M&#39;_W(t) = 2[(1 - p) + pe^t] \cdot (p e^t)
+\]</span></p>
+<p>Evaluate at <span class="math inline">\(t = 0\)</span>:</p>
+<p><span class="math display">\[
+M&#39;_W(0) = 2[(1 - p) + p] \cdot p = 2 \cdot 1 \cdot p = 2p
+\]</span></p>
+<p><strong>Mean:</strong> <span class="math inline">\(E(W) = M&#39;_W(0)
+= 2p\)</span></p>
+<hr />
+<p><strong><em>Step 2: Second Derivative</em></strong></p>
+<p>Differentiate again:</p>
+<p><span class="math display">\[
+M&#39;&#39;_W(t) = 2 \left[ p e^t \cdot p e^t + [(1 - p) + pe^t] \cdot p
+e^t \right]
+\]</span></p>
+<p>At <span class="math inline">\(t = 0\)</span>:</p>
+<p><span class="math display">\[
+M&#39;&#39;_W(0) = 2 \left[ p^2 + (1 - p + p)p \right] = 2(p^2 + p) =
+2(p^2 + p)
+\]</span></p>
+<p>Now compute variance:</p>
+<p><span class="math display">\[
+\operatorname{Var}(W) = M&#39;&#39;_W(0) - [M&#39;_W(0)]^2 = 2(p^2 + p)
+- (2p)^2 = 2p(p + 1) - 4p^2
+\]</span></p>
+<p><span class="math display">\[
+= 2p + 2p^2 - 4p^2 = 2p - 2p^2 = 2p(1 - p)
+\]</span></p>
+<p><strong>Variance:</strong> <span class="math inline">\(\operatorname{Var}(W) = 2p(1 - p)\)</span></p>
+</details>
+</div>
 </div>
 
 
