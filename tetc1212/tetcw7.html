@@ -12,7 +12,7 @@
 <meta name="author" content="Dr. Rajitha M. Silva" />
 
 
-<title>TETC 1212 - Probability Statistics</title>
+<title>TETC 1212 Probability and Statistics: Week 7</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -349,203 +349,640 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">TETC 1212 - Probability Statistics</h1>
+<h1 class="title toc-ignore">TETC 1212 Probability and Statistics: Week
+7</h1>
 <h4 class="author">Dr. Rajitha M. Silva</h4>
 
 </div>
 
 
-<div id="course-information" class="section level1">
-<h1>Course Information</h1>
-<table>
-<tbody>
-<tr class="odd">
-<td><strong>Course Title:</strong></td>
-<td>Probability and Statistics</td>
-</tr>
-<tr class="even">
-<td><strong>Course Code:</strong></td>
-<td>TETC 1212</td>
-</tr>
-<tr class="odd">
-<td><strong>Credit Value:</strong></td>
-<td>2.0</td>
-</tr>
-<tr class="even">
-<td><strong>Status:</strong></td>
-<td>Core</td>
-</tr>
-<tr class="odd">
-<td><strong>Year/Level:</strong></td>
-<td>2025/First Year</td>
-</tr>
-<tr class="even">
-<td><strong>Semester:</strong></td>
-<td>Second Semester</td>
-</tr>
-<tr class="odd">
-<td><strong>Pre-requisite:</strong></td>
-<td>A/L ICT/Mathematics/Biology</td>
-</tr>
-</tbody>
-</table>
+<div id="rules-of-probability" class="section level1">
+<h1>Rules of Probability</h1>
+<p>Probability rules help us combine and manipulate events to calculate
+desired probabilities.</p>
+<div id="complement-rule" class="section level2">
+<h2>Complement Rule</h2>
+<p>If <span class="math inline">\(E\)</span> is an event, then:</p>
+<p><span class="math display">\[
+\Pr(E&#39;) = 1 - \Pr(E)
+\]</span></p>
+</div>
+<div id="addition-rule" class="section level2">
+<h2>Addition Rule</h2>
+<p>For any two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>:</p>
+<p><span class="math display">\[
+\Pr(A \cup B) = \Pr(A) + \Pr(B) - \Pr(A \cap B)
+\]</span></p>
+<p>If <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are mutually exclusive:</p>
+<p><span class="math display">\[
+\Pr(A \cup B) = \Pr(A) + \Pr(B)
+\]</span></p>
+</div>
+<div id="multiplication-rule" class="section level2">
+<h2>Multiplication Rule</h2>
+<p>For any two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>:</p>
+<p><span class="math display">\[
+\Pr(A \cap B) = \Pr(A \mid B) \cdot \Pr(B)
+\]</span></p>
+<p>If <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are independent:</p>
+<p><span class="math display">\[
+\Pr(A \cap B) = \Pr(A) \cdot \Pr(B)
+\]</span></p>
 <hr />
 </div>
-<div id="aim-of-the-course" class="section level1">
-<h1>Aim of the Course</h1>
-<p>This course establishes the fundamentals of probability and
-descriptive statistics. It is a prerequisite for advanced modules in
-probability and statistics.</p>
+<div id="activity" class="section level2">
+<h2>Activity</h2>
+<p>Two servers are connected in <strong>series</strong> to handle a
+critical web application.</p>
+<ul>
+<li>The <strong>older server</strong> has a probability of 0.05 of going
+offline during a given hour.<br />
+</li>
+<li>The <strong>newer server</strong> has a probability of 0.01 of going
+offline during the same hour.</li>
+</ul>
+<p>Server failures are independent.<br />
+The system is considered <strong>offline</strong> if <strong>at least
+one</strong> of the servers goes offline.</p>
+<p>What is the probability that the system will be offline during a
+given hour?</p>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>Let:</p>
+<ul>
+<li><p><span class="math inline">\(A\)</span>: <strong>Older server
+works</strong><br />
+<span class="math display">\[
+\Pr(A) = 1 - 0.05 = 0.95
+\]</span></p></li>
+<li><p><span class="math inline">\(B\)</span>: <strong>Newer server
+works</strong><br />
+<span class="math display">\[
+\Pr(B) = 1 - 0.01 = 0.99
+\]</span></p></li>
+<li><p>The <strong>system works</strong> if <strong>both servers
+work</strong>.</p></li>
+</ul>
+<p>Since failures are independent:</p>
+<p><span class="math display">\[
+\Pr(\text{System works}) = \Pr(A \cap B) = 0.95 \times 0.99 = 0.9405
+\]</span></p>
+<p>Therefore, the probability that the system is
+<strong>offline</strong> is:</p>
+<p><span class="math display">\[
+\Pr(\text{System offline}) = 1 - 0.9405 = 0.0595
+\]</span></p>
+<hr />
+<p><strong>Final Answer:</strong><br />
+The probability that the system is offline in a given hour is:</p>
+<p><span class="math display">\[
+\boxed{5.95\%}
+\]</span></p>
+<hr />
+</details>
 <hr />
 </div>
-<div id="learning-activities-weekly-breakdown" class="section level1">
-<h1>Learning Activities &amp; Weekly Breakdown</h1>
-<div style="text-align: center;">
-<table style="width:99%;">
-<colgroup>
-<col width="8%" />
-<col width="28%" />
-<col width="51%" />
-<col width="10%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Week</strong></th>
-<th><strong>Topic</strong></th>
-<th><strong>Description</strong></th>
-<th><strong>Hours</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>3</td>
-<td><a href="week1.html">Elements of Probability</a></td>
-<td>Introduction, experiments, outcomes, sample spaces, events</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td><a href="week2.html">Event Operations</a></td>
-<td>Complements, unions, intersections, mutually exclusive/exhaustive
-events</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td><a href="tetcw5.html">Methods of Probability</a></td>
-<td>Classical, relative frequency, axioms, interpretation</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="even">
-<td>6</td>
-<td><a href="tetcw6.html">Conditional Probability</a></td>
-<td>Independent events</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="odd">
-<td>7</td>
-<td><a href="tetcw7.html">Probability Rules</a></td>
-<td>Addition, multiplication, total probability, Bayes’ theorem</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>8</td>
-<td>Random Variables</td>
-<td>Definitions, discrete and continuous variables</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="even">
-<td>9</td>
-<td>Events with Random Variables</td>
-<td>Event representation and revision</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="odd">
-<td>9</td>
-<td>Distributions and functions of RV</td>
-<td><p>pmf, pdf, cdf</p>
-<p>Expectation, Variance, Transforamtion</p></td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="even">
-<td>10</td>
-<td>Revision</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
 </div>
-<p><em>T = Theory, IL = Independent Learning</em></p>
+<div id="law-of-total-probability" class="section level1">
+<h1>Law of Total Probability</h1>
+<p>If <span class="math inline">\(A_1, A_2, ..., A_n\)</span> are
+<strong>mutually exclusive and exhaustive</strong> events, and <span class="math inline">\(B\)</span> is any event:</p>
+<p><span class="math display">\[
+\Pr(B) = \sum_{i=1}^{n} \Pr(B \mid A_i) \cdot \Pr(A_i)
+\]</span></p>
+<hr />
+<div id="activity-1" class="section level2">
+<h2>Activity</h2>
+<p>A shop sells 3 brands of TVs:</p>
+<ul>
+<li>Brand A (50%), Brand B (30%), Brand C (20%)</li>
+<li>Probability a TV needs repair:
+<ul>
+<li>A: 0.25</li>
+<li>B: 0.20</li>
+<li>C: 0.10</li>
+</ul></li>
+</ul>
+<p>What is the probability that a randomly selected TV will need
+repair?</p>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>Use total probability:</p>
+<p><span class="math display">\[
+\Pr(R) = 0.25 \cdot 0.5 + 0.20 \cdot 0.3 + 0.10 \cdot 0.2 = 0.125 + 0.06
++ 0.02 = 0.205
+\]</span></p>
+</details>
 <hr />
 </div>
-<div id="intended-learning-outcomes-ilos" class="section level1">
-<h1>Intended Learning Outcomes (ILOs)</h1>
-<p>By the end of this course, students will be able to:</p>
+<div id="activity-2" class="section level2">
+<h2>Activity</h2>
+<p>A quality control system inspects items on a production line. The
+probability that a <strong>randomly selected item is faulty</strong> is
+<span class="math inline">\(P_1\)</span>. If an item is faulty, there is
+a probability <span class="math inline">\(P_2\)</span> that the defect
+will be <strong>successfully detected</strong> by the system.</p>
+<p>You may assume that: - Defects are <strong>never detected</strong> in
+items that are not faulty (i.e., no false positives), - Each item is
+inspected <strong>independently</strong>.</p>
 <ol style="list-style-type: decimal">
-<li>Describe events using set notation and sample spaces.<br />
-</li>
-<li>Formulate and identify events of interest.<br />
-</li>
-<li>Apply classical and empirical methods for calculating
-probability.<br />
-</li>
-<li>Explain and apply probability axioms.<br />
-</li>
-<li>Distinguish conditional from unconditional events.<br />
-</li>
-<li>Use rules of probability effectively.<br />
-</li>
-<li>Define and identify types of random variables.<br />
-</li>
-<li>Relate events to random variables.<br />
-</li>
-<li>Use pmf, pdf, cdf correctly.<br />
-</li>
-<li>Calculate probabilities and descriptive measures from
-distributions.<br />
-</li>
-<li>Define and interpret mean, median, variance, etc.<br />
-</li>
-<li>Present clear and accurate solutions to problems.</li>
+<li><p>What is the probability that a <strong>defect is
+detected</strong> in a randomly selected item?</p></li>
+<li><p>Suppose <strong>three items are selected independently</strong>
+from the production line.</p>
+<ol style="list-style-type: lower-roman">
+<li><p>What is the probability that <strong>no defects are
+detected</strong> among the three items?</p></li>
+<li><p>What is the probability that <strong>defects are detected in
+exactly two items</strong>?</p></li>
+<li><p>What is the probability that <strong>defects are detected in at
+least two items</strong>?</p></li>
+</ol></li>
 </ol>
 <hr />
-</div>
-<div id="mode-of-assessment" class="section level1">
-<h1>Mode of Assessment</h1>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>Let: - <span class="math inline">\(D\)</span>: event that a defect is
+detected</p>
 <ul>
-<li><strong>Assignments 3 (Homework)</strong><br />
+<li><p><span class="math inline">\(\Pr(D) = P_1 \cdot
+P_2\)</span></p></li>
+<li><p><span class="math inline">\(\Pr(D^c) = 1 - P_1 \cdot
+P_2\)</span>: probability that a defect is <strong>not
+detected</strong></p></li>
+</ul>
+<p>We compute the probabilities using <strong>basic multiplication
+rules</strong>.</p>
+<p>Let: - <span class="math inline">\(d = P_1 \cdot P_2\)</span> - <span class="math inline">\(q = 1 - d\)</span></p>
+<hr />
+<ol style="list-style-type: lower-roman">
+<li>No defects are detected in any of the 3 items</li>
+</ol>
+<p>This happens when none of the three items show a defect. Each has
+probability <span class="math inline">\(q\)</span>, so:</p>
+<p><span class="math display">\[
+\Pr(\text{No detections}) = q \cdot q \cdot q = q^3 = (1 - d)^3
+\]</span></p>
+<hr />
+<ol start="2" style="list-style-type: lower-roman">
+<li>Defects are detected in <strong>exactly two</strong> items</li>
+</ol>
+<p>There are <strong>three different ways</strong> this can happen:</p>
+<ol style="list-style-type: decimal">
+<li>First and second items show defect, third does not: <span class="math inline">\(d \cdot d \cdot q\)</span></li>
+<li>First and third items show defect, second does not: <span class="math inline">\(d \cdot q \cdot d\)</span></li>
+<li>Second and third items show defect, first does not: <span class="math inline">\(q \cdot d \cdot d\)</span></li>
+</ol>
+<p>Add all three possibilities:</p>
+<p><span class="math display">\[
+\Pr(\text{Exactly two detections}) = d^2 \cdot q + d \cdot q \cdot d + q
+\cdot d^2 = 3 d^2 q
+\]</span></p>
+<hr />
+<ol start="3" style="list-style-type: lower-roman">
+<li>At least two detections</li>
+</ol>
+<p>This means: <strong>two or three</strong> detections.</p>
+<p>We already have:</p>
+<ul>
+<li><span class="math inline">\(\Pr(\text{Exactly 2}) = 3 d^2
+q\)</span></li>
+</ul>
+<p>Also compute: - <span class="math inline">\(\Pr(\text{All 3
+detections}) = d \cdot d \cdot d = d^3\)</span></p>
+<p>So:</p>
+<p><span class="math display">\[
+\Pr(\text{At least 2 detections}) = 3 d^2 q + d^3
+\]</span></p>
+<hr />
+<p>Final Answers</p>
+<p>Let <span class="math inline">\(d = P_1 \cdot P_2\)</span>, <span class="math inline">\(q = 1 - d\)</span></p>
+<ul>
+<li><ol style="list-style-type: lower-roman">
+<li><span class="math inline">\(\Pr(\text{No detections}) = q^3 = (1 -
+P_1 P_2)^3\)</span></li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-roman">
+<li><span class="math inline">\(\Pr(\text{Exactly two detections}) = 3
+\cdot (P_1 P_2)^2 \cdot (1 - P_1 P_2)\)</span></li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-roman">
+<li><span class="math inline">\(\Pr(\text{At least two detections}) = 3
+\cdot (P_1 P_2)^2 \cdot (1 - P_1 P_2) + (P_1 P_2)^3\)</span></li>
+</ol></li>
+</ul>
+<hr />
+</details>
+</div>
+</div>
+<div id="bayes-theorem" class="section level1">
+<h1>Bayes’ Theorem</h1>
+<p>Let <span class="math inline">\(A_1, A_2, ..., A_n\)</span> be
+mutually exclusive and exhaustive events, and <span class="math inline">\(B\)</span> be an event. Then for any <span class="math inline">\(A_i\)</span>:</p>
+<p><span class="math display">\[
+\Pr(A_i \mid B) = \frac{\Pr(B \mid A_i) \cdot \Pr(A_i)}{\sum_{j=1}^{n}
+\Pr(B \mid A_j) \cdot \Pr(A_j)}
+\]</span></p>
+<p>This formula allows <strong>reversing conditional
+probabilities</strong>, moving from <span class="math inline">\(\Pr(B
+\mid A_i)\)</span> to <span class="math inline">\(\Pr(A_i \mid
+B)\)</span>.</p>
+<hr />
+<div id="activity-3" class="section level2">
+<h2>Activity</h2>
+<p>A company provides 3 health plans to employees:</p>
+<ul>
+<li>Deluxe (D): 30%</li>
+<li>Standard (S): 60%</li>
+<li>Economy (E): 10%</li>
+</ul>
+<p>Probability of <em>no claim</em>:</p>
+<ul>
+<li>D: 0.1</li>
+<li>S: 0.4</li>
+<li>E: 0.7</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>What is the probability that a randomly selected employee made no
+claims last year?<br />
 </li>
-<li><strong>Final Exam</strong> (2 hours)</li>
+<li>If an employee made no claims, what is the probability they were
+under Standard plan?</li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>Let <span class="math inline">\(N\)</span>: no claims.</p>
+<ol style="list-style-type: decimal">
+<li><p><span class="math display">\[
+\Pr(N) = 0.1 \cdot 0.3 + 0.4 \cdot 0.6 + 0.7 \cdot 0.1 = 0.03 + 0.24 +
+0.07 = 0.34
+\]</span></p></li>
+<li><p>Use Bayes’ Theorem:</p></li>
+</ol>
+<p><span class="math display">\[
+\Pr(S \mid N) = \frac{0.4 \cdot 0.6}{0.34} = \frac{0.24}{0.34} \approx
+0.7059
+\]</span></p>
+</details>
+<hr />
+</div>
+<div id="activity-4" class="section level2">
+<h2>Activity</h2>
+<p>Initially, a box contains 3 balls identical in all aspects except for
+their colour, each of which is either white or black. Now, one white
+ball identical to balls in the box in all aspects except for its colour
+is added into the box, and then one ball is drawn at random from the
+box.</p>
+<p>Assuming that the four possible initial compositions of the balls in
+the box are equally likely, find the probability that:</p>
+<ol style="list-style-type: lower-roman">
+<li>the ball drawn is white, and<br />
+</li>
+<li>initially there were exactly 2 black balls in the box, given that
+the ball drawn is white.</li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>Step 1: Define Initial Compositions</p>
+<p>Let the initial composition of 3 balls be:</p>
+<ul>
+<li><span class="math inline">\(H_1\)</span>: 0 black, 3 white<br />
+</li>
+<li><span class="math inline">\(H_2\)</span>: 1 black, 2 white<br />
+</li>
+<li><span class="math inline">\(H_3\)</span>: 2 black, 1 white<br />
+</li>
+<li><span class="math inline">\(H_4\)</span>: 3 black, 0 white</li>
+</ul>
+<p>Each <span class="math inline">\(H_i\)</span> is equally likely:</p>
+<p><span class="math display">\[
+\Pr(H_i) = \frac{1}{4} \quad \text{for } i = 1, 2, 3, 4
+\]</span></p>
+<p>After adding <strong>1 white ball</strong>, the total becomes 4 balls
+in each case:</p>
+<ul>
+<li><span class="math inline">\(H_1 \rightarrow\)</span> 4 white<br />
+</li>
+<li><span class="math inline">\(H_2 \rightarrow\)</span> 3 white, 1
+black<br />
+</li>
+<li><span class="math inline">\(H_3 \rightarrow\)</span> 2 white, 2
+black<br />
+</li>
+<li><span class="math inline">\(H_4 \rightarrow\)</span> 1 white, 3
+black</li>
+</ul>
+<p>Let <span class="math inline">\(W\)</span>: the event that the drawn
+ball is white.</p>
+<hr />
+<ol style="list-style-type: lower-roman">
+<li>Find <span class="math inline">\(\Pr(W)\)</span></li>
+</ol>
+<p>We use the <strong>Law of Total Probability</strong>:</p>
+<p><span class="math display">\[
+\Pr(W) = \sum_{i=1}^{4} \Pr(W \mid H_i) \cdot \Pr(H_i)
+\]</span></p>
+<p>Evaluate:</p>
+<ul>
+<li><span class="math inline">\(\Pr(W \mid H_1) = \frac{4}{4} =
+1\)</span></li>
+<li><span class="math inline">\(\Pr(W \mid H_2) =
+\frac{3}{4}\)</span></li>
+<li><span class="math inline">\(\Pr(W \mid H_3) = \frac{2}{4} =
+0.5\)</span></li>
+<li><span class="math inline">\(\Pr(W \mid H_4) =
+\frac{1}{4}\)</span></li>
+</ul>
+<p>Now compute:</p>
+<p><span class="math display">\[
+\Pr(W) = \frac{1}{4} \cdot 1 + \frac{1}{4} \cdot \frac{3}{4} +
+\frac{1}{4} \cdot \frac{2}{4} + \frac{1}{4} \cdot \frac{1}{4}
+= \frac{1}{4} + \frac{3}{16} + \frac{2}{16} + \frac{1}{16} = \frac{4 + 3
++ 2 + 1}{16} = \frac{10}{16} = \frac{5}{8}
+\]</span></p>
+<hr />
+<ol start="2" style="list-style-type: lower-roman">
+<li>Find <span class="math inline">\(\Pr(H_3 \mid W)\)</span></li>
+</ol>
+<p>We use <strong>Bayes’ Theorem</strong>:</p>
+<p><span class="math display">\[
+\Pr(H_3 \mid W) = \frac{\Pr(W \mid H_3) \cdot \Pr(H_3)}{\Pr(W)} =
+\frac{0.5 \cdot \frac{1}{4}}{\frac{5}{8}} = \frac{1/8}{5/8} =
+\frac{1}{5}
+\]</span></p>
+<hr />
+</details>
+</div>
+<div id="activity-5" class="section level2">
+<h2>Activity</h2>
+<p>A cricket selection committee is reviewing 3 different <strong>types
+of batsmen</strong> from past domestic leagues. Each player has played 3
+innings. Based on historical stats, players are classified into four
+types:</p>
+<ul>
+<li><strong>Type A</strong>: consistently strong - 3 high scores<br />
+</li>
+<li><strong>Type B</strong>: generally good - 2 high scores, 1 low
+score<br />
+</li>
+<li><strong>Type C</strong>: inconsistent - 1 high score, 2 low
+scores<br />
+</li>
+<li><strong>Type D</strong>: struggling - 0 high scores, 3 low
+scores</li>
+</ul>
+<p>The prior probability that a randomly selected player belongs to each
+type is:</p>
+<ul>
+<li><span class="math inline">\(\Pr(A) = 0.15\)</span>, <span class="math inline">\(\Pr(B) = 0.45\)</span>, <span class="math inline">\(\Pr(C) = 0.25\)</span>, <span class="math inline">\(\Pr(D) = 0.15\)</span></li>
+</ul>
+<p>To simulate pressure scenarios, each player is given <strong>an
+additional trial innings</strong>, and that trial is automatically
+considered a <strong>high score</strong>. Then one of the 4 innings is
+randomly picked to be shown to the selection panel.</p>
+<p>Let <span class="math inline">\(H\)</span>: the event that the
+selected innings is a <strong>high score</strong>.</p>
+<p><strong>Find:</strong></p>
+<ol style="list-style-type: lower-roman">
+<li>What is the probability that the selected innings is a high
+score?<br />
+</li>
+<li>If the selected innings is a high score, what is the probability the
+player originally belonged to Type B?</li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>Let the types be:</p>
+<ul>
+<li><span class="math inline">\(H_1\)</span>: Type A –&gt; becomes 4
+high scores<br />
+</li>
+<li><span class="math inline">\(H_2\)</span>: Type B –&gt; becomes 3
+high, 1 low<br />
+</li>
+<li><span class="math inline">\(H_3\)</span>: Type C –&gt; becomes 2
+high, 2 low<br />
+</li>
+<li><span class="math inline">\(H_4\)</span>: Type D –&gt; becomes 1
+high, 3 low</li>
+</ul>
+<p>We are given:</p>
+<ul>
+<li><span class="math inline">\(\Pr(H_1) = 0.15\)</span>, <span class="math inline">\(\Pr(H_2) = 0.45\)</span>, <span class="math inline">\(\Pr(H_3) = 0.25\)</span>, <span class="math inline">\(\Pr(H_4) = 0.15\)</span></li>
+</ul>
+<ol style="list-style-type: lower-roman">
+<li>Find <span class="math inline">\(\Pr(H)\)</span></li>
+</ol>
+<p>Using the <strong>Law of Total Probability</strong>:</p>
+<p><span class="math display">\[
+\Pr(H) = \sum_{i=1}^{4} \Pr(H \mid H_i) \cdot \Pr(H_i)
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\Pr(H \mid H_1) = \frac{4}{4} =
+1\)</span></li>
+<li><span class="math inline">\(\Pr(H \mid H_2) =
+\frac{3}{4}\)</span></li>
+<li><span class="math inline">\(\Pr(H \mid H_3) = \frac{2}{4} =
+0.5\)</span></li>
+<li><span class="math inline">\(\Pr(H \mid H_4) =
+\frac{1}{4}\)</span></li>
+</ul>
+<p>Then,</p>
+<p><span class="math display">\[
+\Pr(H) = (1 \cdot 0.15) + \left(\frac{3}{4} \cdot 0.45\right) +
+\left(\frac{1}{2} \cdot 0.25\right) + \left(\frac{1}{4} \cdot
+0.15\right)
+= 0.15 + 0.3375 + 0.125 + 0.0375 = 0.65
+\]</span></p>
+<ol start="2" style="list-style-type: lower-roman">
+<li>Find <span class="math inline">\(\Pr(H_2 \mid H)\)</span></li>
+</ol>
+<p>Apply <strong>Bayes’ Theorem</strong>:</p>
+<p><span class="math display">\[
+\Pr(H_2 \mid H) = \frac{\Pr(H \mid H_2) \cdot \Pr(H_2)}{\Pr(H)} =
+\frac{0.75 \cdot 0.45}{0.65} = \frac{0.3375}{0.65} \approx 0.5192
+\]</span></p>
+<hr />
+</details>
+</div>
+<div id="activity-6" class="section level2">
+<h2>Activity</h2>
+<p>A box <span class="math inline">\(B_1\)</span> contains 2 white balls
+and 3 black balls which are identical in all aspects except for their
+colours. 3 balls are transferred at random from box <span class="math inline">\(B_1\)</span> into an empty box <span class="math inline">\(B_2\)</span>. Then a ball is drawn at random from
+box <span class="math inline">\(B_2\)</span>.</p>
+<p>Find the probability that:</p>
+<ol style="list-style-type: lower-roman">
+<li><p>the ball drawn from box <span class="math inline">\(B_2\)</span>
+is white,</p></li>
+<li><p>2 white balls and 1 black ball are transferred from box <span class="math inline">\(B_1\)</span> into box <span class="math inline">\(B_2\)</span>, given that the drawn ball from box
+<span class="math inline">\(B_2\)</span> is white.</p></li>
+</ol>
+<hr />
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>Let’s denote: - <span class="math inline">\(W\)</span>: white ball -
+<span class="math inline">\(B\)</span>: black ball</p>
+<p>Initial contents of <span class="math inline">\(B_1\)</span>: 2W,
+3B<br />
+We transfer 3 balls from <span class="math inline">\(B_1\)</span> to
+<span class="math inline">\(B_2\)</span>, then draw 1 ball from <span class="math inline">\(B_2\)</span>.</p>
+<p>Let’s define all possible combinations of 3-ball transfers from <span class="math inline">\(B_1\)</span>:</p>
+<ul>
+<li>(3W, 0B): Impossible (only 2W available)</li>
+<li>(2W, 1B): Number of ways = <span class="math inline">\(\binom{2}{2}
+\cdot \binom{3}{1} = 1 \cdot 3 = 3\)</span></li>
+<li>(1W, 2B): Number of ways = <span class="math inline">\(\binom{2}{1}
+\cdot \binom{3}{2} = 2 \cdot 3 = 6\)</span></li>
+<li>(0W, 3B): Number of ways = <span class="math inline">\(\binom{2}{0}
+\cdot \binom{3}{3} = 1 \cdot 1 = 1\)</span></li>
+</ul>
+<p><strong>Total possible transfers:</strong> <span class="math inline">\(3 + 6 + 1 = 10\)</span></p>
+<hr />
+<p>Part (i): Probability that the drawn ball from <span class="math inline">\(B_2\)</span> is white</p>
+<p>We compute:</p>
+<p><span class="math display">\[
+\Pr(\text{Draw white}) = \sum \Pr(\text{transfer}) \cdot \Pr(\text{draw
+white} \mid \text{transfer})
+\]</span></p>
+<p><strong>Case 1: 2W + 1B transferred</strong> - Probability of this
+transfer: <span class="math inline">\(\frac{3}{10}\)</span> -
+Probability of drawing white: <span class="math inline">\(\frac{2}{3}\)</span></p>
+<p>Contribution: <span class="math inline">\(\frac{3}{10} \cdot
+\frac{2}{3} = \frac{6}{30}\)</span></p>
+<p><strong>Case 2: 1W + 2B transferred</strong> - Probability: <span class="math inline">\(\frac{6}{10}\)</span> - Drawing white: <span class="math inline">\(\frac{1}{3}\)</span></p>
+<p>Contribution: <span class="math inline">\(\frac{6}{10} \cdot
+\frac{1}{3} = \frac{6}{30}\)</span></p>
+<p><strong>Case 3: 0W + 3B transferred</strong> - Probability: <span class="math inline">\(\frac{1}{10}\)</span> - Drawing white: <span class="math inline">\(0\)</span></p>
+<p>Contribution: 0</p>
+<p><strong>Total probability:</strong></p>
+<p><span class="math display">\[
+\Pr(\text{draw white}) = \frac{6}{30} + \frac{6}{30} = \frac{12}{30} =
+\boxed{\frac{2}{5}}
+\]</span></p>
+<hr />
+<p>Part (ii): Probability that 2W + 1B were transferred,
+<strong>given</strong> that a white ball was drawn</p>
+<p>Use Bayes’ Theorem:</p>
+<p><span class="math display">\[
+\Pr(2W1B \mid \text{white drawn}) = \frac{\Pr(2W1B) \cdot
+\Pr(\text{white} \mid 2W1B)}{\Pr(\text{white})}
+= \frac{\frac{3}{10} \cdot \frac{2}{3}}{\frac{2}{5}} = \frac{6}{30}
+\cdot \frac{5}{2} = \frac{6}{12} = \boxed{\frac{1}{2}}
+\]</span></p>
+<hr />
+<p>Final Answers: - (i) <span class="math inline">\(\Pr(\text{white
+drawn}) = \frac{2}{5}\)</span> - (ii) <span class="math inline">\(\Pr(\text{2W1B} \mid \text{white drawn}) =
+\frac{1}{2}\)</span></p>
+</details>
+</div>
+<div id="activity-7" class="section level2">
+<h2>Activity</h2>
+<p>A bank has <strong>6 pending credit card applications</strong>:
+<strong>4 are from salaried clients</strong> and <strong>2 are from
+self-employed clients</strong>. The bank randomly selects <strong>3
+applications</strong> to forward to the final approval committee.</p>
+<p>From the 3 forwarded applications, one is <strong>randomly
+chosen</strong> for immediate approval.</p>
+<hr />
+<p>Find the probability that:</p>
+<ol style="list-style-type: lower-roman">
+<li>The selected application is from a <strong>self-employed
+client</strong>,<br />
+</li>
+<li>The forwarded group contained <strong>2 salaried and 1
+self-employed</strong> applications, given that the selected application
+was from a <strong>self-employed client</strong>.</li>
+</ol>
+<hr />
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>Let: - SC = Salaried Client - SE = Self-Employed Client</p>
+<p>Initial pool: 4 SC, 2 SE<br />
+We randomly select 3 applications ??? then select 1 from those for
+approval.</p>
+<hr />
+<p>Step 1: List possible 3-applicant transfer combinations</p>
+<p>We calculate all valid combinations of 3 applications and count:</p>
+<ul>
+<li>(3SC): <span class="math inline">\(\binom{4}{3} = 4\)</span></li>
+<li>(2SC, 1SE): <span class="math inline">\(\binom{4}{2} \cdot
+\binom{2}{1} = 6 \cdot 2 = 12\)</span></li>
+<li>(1SC, 2SE): <span class="math inline">\(\binom{4}{1} \cdot
+\binom{2}{2} = 4 \cdot 1 = 4\)</span></li>
+</ul>
+<p><strong>Total valid groupings</strong> = <span class="math inline">\(4 + 12 + 4 = 20\)</span></p>
+<hr />
+<ol style="list-style-type: lower-roman">
+<li>Find <span class="math inline">\(\Pr(\text{selected application is
+SE})\)</span></li>
+</ol>
+<p>Use the Law of Total Probability:</p>
+<p><span class="math display">\[
+\Pr(\text{SE}) = \sum \Pr(\text{group}) \cdot \Pr(\text{select SE} \mid
+\text{group})
+\]</span></p>
+<p><strong>Case 1: 3SC</strong> - Probability of group = <span class="math inline">\(\frac{4}{20}\)</span>, <span class="math inline">\(\Pr(\text{SE}) = 0\)</span></p>
+<p><strong>Case 2: 2SC, 1SE</strong> - Probability = <span class="math inline">\(\frac{12}{20}\)</span>, <span class="math inline">\(\Pr(\text{SE}) = \frac{1}{3}\)</span></p>
+<p><strong>Case 3: 1SC, 2SE</strong> - Probability = <span class="math inline">\(\frac{4}{20}\)</span>, <span class="math inline">\(\Pr(\text{SE}) = \frac{2}{3}\)</span></p>
+<p>Total probability:</p>
+<p><span class="math display">\[
+\Pr(\text{SE}) = \frac{12}{20} \cdot \frac{1}{3} + \frac{4}{20} \cdot
+\frac{2}{3} = \frac{12}{60} + \frac{8}{60} = \frac{20}{60} =
+\boxed{\frac{1}{3}}
+\]</span></p>
+<hr />
+<ol start="2" style="list-style-type: lower-roman">
+<li>Find <span class="math inline">\(\Pr(2SC1SE \mid \text{selected
+SE})\)</span></li>
+</ol>
+<p>Use Bayes’ Theorem:</p>
+<p><span class="math display">\[
+\Pr(2SC1SE \mid \text{SE}) = \frac{\Pr(2SC1SE) \cdot \Pr(\text{SE} \mid
+2SC1SE)}{\Pr(\text{SE})}
+= \frac{\frac{12}{20} \cdot \frac{1}{3}}{\frac{1}{3}} =
+\boxed{\frac{12}{20} = \frac{3}{5}}
+\]</span></p>
+<hr />
+<p>Final Answers: - (i) Probability that the selected application is
+from a self-employed client: <span class="math inline">\(\frac{1}{3}\)</span> - (ii) Probability that the
+group had 2 SC and 1 SE, given a self-employed application was selected:
+<span class="math inline">\(\frac{3}{5}\)</span></p>
+<hr />
+</details>
+<div id="key-points" class="section level3">
+<h3>Key Points</h3>
+<ul>
+<li>Use <strong>Complement Rule</strong> when calculating probability of
+the event <em>not happening</em></li>
+<li>Use <strong>Addition Rule</strong> to combine probabilities of
+unions</li>
+<li>Use <strong>Multiplication Rule</strong> to calculate intersections
+(especially under dependence or independence)</li>
+<li><strong>Law of Total Probability</strong> helps when an event
+depends on several underlying scenarios</li>
+<li><strong>Bayes’ Theorem</strong> allows updating beliefs given
+observed evidence</li>
 </ul>
 <hr />
 </div>
-<div id="references" class="section level1">
-<h1>References</h1>
-<ul>
-<li>Scott Stevens, <em>Introduction to Statistics: Think &amp;
-Do</em></li>
-<li>Jay L. Devore, <em>Probability and Statistics for Engineering and
-Sciences</em>, Brooks/Cole.<br />
-</li>
-<li>Class handouts and lecture notes.</li>
-</ul>
-<hr />
 </div>
-<div id="instructor-office-hours" class="section level1">
-<h1>Instructor &amp; Office Hours</h1>
-<p><strong>Lecturer:</strong> Dr. Rajitha M. Silva<br />
-<strong>Email:</strong> <a href="mailto:rsilva@sjp.ac.lk" class="email">rsilva@sjp.ac.lk</a><br />
-<strong>Office Hours:</strong> One hour after lectures or by
-appointment</p>
-<hr />
-<p><em>This course is effective from July 2025.</em></p>
 </div>
 
 
