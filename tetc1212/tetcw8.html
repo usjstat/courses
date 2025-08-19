@@ -12,7 +12,7 @@
 <meta name="author" content="Dr. Rajitha M. Silva" />
 
 
-<title>TETC 1212 - Probability Statistics</title>
+<title>Random Variables: Week 8</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -349,197 +349,481 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">TETC 1212 - Probability Statistics</h1>
+<h1 class="title toc-ignore">Random Variables: Week 8</h1>
 <h4 class="author">Dr. Rajitha M. Silva</h4>
 
 </div>
 
 
-<div id="course-information" class="section level1">
-<h1>Course Information</h1>
-<table>
-<tbody>
-<tr class="odd">
-<td><strong>Course Title:</strong></td>
-<td>Probability and Statistics</td>
-</tr>
-<tr class="even">
-<td><strong>Course Code:</strong></td>
-<td>TETC 1212</td>
-</tr>
-<tr class="odd">
-<td><strong>Credit Value:</strong></td>
-<td>2.0</td>
-</tr>
-<tr class="even">
-<td><strong>Status:</strong></td>
-<td>Core</td>
-</tr>
-<tr class="odd">
-<td><strong>Year/Level:</strong></td>
-<td>2025/First Year</td>
-</tr>
-<tr class="even">
-<td><strong>Semester:</strong></td>
-<td>Second Semester</td>
-</tr>
-<tr class="odd">
-<td><strong>Pre-requisite:</strong></td>
-<td>A/L ICT/Mathematics/Biology</td>
-</tr>
-</tbody>
-</table>
-<hr />
-</div>
-<div id="aim-of-the-course" class="section level1">
-<h1>Aim of the Course</h1>
-<p>This course establishes the fundamentals of probability and
-descriptive statistics. It is a prerequisite for advanced modules in
-probability and statistics.</p>
-<hr />
-</div>
-<div id="learning-activities-weekly-breakdown" class="section level1">
-<h1>Learning Activities &amp; Weekly Breakdown</h1>
-<div style="text-align: center;">
-<table style="width:99%;">
-<colgroup>
-<col width="8%" />
-<col width="28%" />
-<col width="51%" />
-<col width="10%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Week</strong></th>
-<th><strong>Topic</strong></th>
-<th><strong>Description</strong></th>
-<th><strong>Hours</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>3</td>
-<td><a href="week1.html">Elements of Probability</a></td>
-<td>Introduction, experiments, outcomes, sample spaces, events</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td><a href="week2.html">Event Operations</a></td>
-<td>Complements, unions, intersections, mutually exclusive/exhaustive
-events</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td><a href="tetcw5.html">Methods of Probability</a></td>
-<td>Classical, relative frequency, axioms, interpretation</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="even">
-<td>6</td>
-<td><a href="tetcw6.html">Conditional Probability</a></td>
-<td>Independent events</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="odd">
-<td>7</td>
-<td><a href="tetcw7.html">Probability Rules</a></td>
-<td>Addition, multiplication, total probability, Bayes’ theorem</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>8</td>
-<td><a href="tetcw8.html">Random Variables</a></td>
-<td>Definitions, discrete and continuous variables</td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="even">
-<td>9</td>
-<td>Distributions and functions of RV</td>
-<td><p>pmf, pdf, cdf</p>
-<p>Expectation, Variance, Transforamtion</p></td>
-<td>8 (2T + 6IL)</td>
-</tr>
-<tr class="odd">
-<td>10</td>
-<td>Revision</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><em>T = Theory, IL = Independent Learning</em></p>
-<hr />
-</div>
-<div id="intended-learning-outcomes-ilos" class="section level1">
-<h1>Intended Learning Outcomes (ILOs)</h1>
-<p>By the end of this course, students will be able to:</p>
+<div id="random-variables" class="section level1">
+<h1>Random Variables</h1>
+<p>A random variable provides a convenient and systematic way to
+represent outcomes of a random experiment as real numbers. It allows us
+to re-express any event of interest numerically, which greatly
+simplifies the process of calculating probabilities.</p>
+<p>This numerical translation enables us to</p>
+<ul>
+<li><strong>summarise</strong> data with means, variances, and other
+moments;<br />
+</li>
+<li><strong>derive</strong> probability laws such as the binomial,
+Poisson, or normal distributions; and<br />
+</li>
+<li><strong>model</strong> real-world uncertainty in fields ranging from
+finance and engineering to biology and sport.</li>
+</ul>
+<p>Throughout this section we will encounter two broad families:</p>
 <ol style="list-style-type: decimal">
-<li>Describe events using set notation and sample spaces.<br />
+<li><strong>Discrete random variables</strong>, whose ranges are
+<em>countable</em> (e.g., the number of heads in three coin
+tosses);<br />
 </li>
-<li>Formulate and identify events of interest.<br />
+<li><strong>Continuous random variables</strong>, whose ranges contain
+uncountably many values (e.g., the lifetime of a light bulb measured in
+hours).</li>
+</ol>
+<p><strong>Definition</strong></p>
+<p>A <em>random variable</em> (r.v.) is a function<br />
+<span class="math display">\[
+X:\;S \longrightarrow \mathbb{R},
+\]</span><br />
+where <span class="math inline">\(S\)</span> is the sample space of an
+experiment and <span class="math inline">\(\mathbb{R}\)</span> is the
+set of real numbers.<br />
+A random variable assigns a real number to each outcome <span class="math inline">\(\omega \in S\)</span>. This allows us to quantify
+outcomes in order to analyze probabilities, distributions, and
+summaries.</p>
+<div id="experiment" class="section level3">
+<h3><strong>Experiment</strong></h3>
+<p>Toss a (possibly biased) coin <strong>three times</strong> and
+observe the face-up outcome each time.<br />
+Let the event of interest be the observation of a head (H) on any given
+toss.<br />
+Denote the probability of observing a head by <span class="math display">\[
+\theta = \Pr(\text{Head}).
+\]</span></p>
+<p>The sample space is: <span class="math display">\[
+S = \{hhh, hht, hth, htt, thh, tht, tth, ttt\}.
+\]</span></p>
+<p>Let <span class="math display">\[
+X(\omega) = \text{number of heads in } \omega, \quad \omega \in S.
+\]</span> Then <span class="math inline">\(X: S \rightarrow \{0, 1, 2,
+3\}\)</span> is a discrete random variable.</p>
+<hr />
+</div>
+<div id="events-in-terms-of-x" class="section level3">
+<h3><strong>Events in terms of <span class="math inline">\(X\)</span></strong></h3>
+<p>Then, the above events can be written in terms of <span class="math inline">\(X\)</span> as follows:</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0 &amp;= \{\omega \in S \mid X(\omega) = 0\} \\
+H_1 &amp;= \{\omega \in S \mid X(\omega) = 1\} \\
+H_2 &amp;= \{\omega \in S \mid X(\omega) = 2\} \\
+H_3 &amp;= \{\omega \in S \mid X(\omega) = 3\} \\
+H_4 &amp;= \{\omega \in S \mid X(\omega) &gt; 1\}
+\end{aligned}
+\]</span></p>
+<p>Hence, we can write the probabilities of these events as:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\Pr(\{\omega \in S \mid X(\omega) = 0\}) &amp;= (1 - \theta)^3 \\
+\Pr(\{\omega \in S \mid X(\omega) = 1\}) &amp;= 3\theta(1 - \theta)^2 \\
+\Pr(\{\omega \in S \mid X(\omega) = 2\}) &amp;= 3\theta^2(1 - \theta) \\
+\Pr(\{\omega \in S \mid X(\omega) = 3\}) &amp;= \theta^3 \\
+\Pr(\{\omega \in S \mid X(\omega) &gt; 1\}) &amp;= 3\theta^2(1 - \theta)
++ \theta^3
+\end{aligned}
+\]</span></p>
+<hr />
+</div>
+<div id="simplified-notation-using-x" class="section level3">
+<h3><strong>Simplified Notation Using <span class="math inline">\(X\)</span></strong></h3>
+<p>For convenience, we often omit writing <span class="math inline">\(\omega\)</span> and simply use the shorthand:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\Pr(X = 0) &amp;= (1 - \theta)^3 \\
+\Pr(X = 1) &amp;= 3\theta(1 - \theta)^2 \\
+\Pr(X = 2) &amp;= 3\theta^2(1 - \theta) \\
+\Pr(X = 3) &amp;= \theta^3 \\
+\Pr(X &gt; 1) &amp;= 3\theta^2(1 - \theta) + \theta^3
+\end{aligned}
+\]</span></p>
+<p>The first four probabilities follow the <strong>binomial
+distribution</strong>:</p>
+<p><span class="math display">\[
+\Pr(X = x) = \binom{3}{x} \theta^x (1 - \theta)^{3 - x}, \quad x =
+0,1,2,3.
+\]</span></p>
+<hr />
+</div>
+<div id="redefinition-of-x-omitting-omega" class="section level3">
+<h3><strong>Redefinition of <span class="math inline">\(X\)</span>
+(Omitting <span class="math inline">\(\omega\)</span>)</strong></h3>
+<p>In practice, we redefine <span class="math inline">\(X\)</span> more
+intuitively as: <span class="math display">\[
+X = \text{the number of heads in three tosses}.
+\]</span></p>
+<p>This form omits explicit reference to <span class="math inline">\(\omega\)</span>, but the mapping from sample
+points to numerical outcomes is preserved.</p>
+<hr />
+</div>
+<div id="experiment-1" class="section level3">
+<h3><strong>Experiment</strong></h3>
+<p>Consider the experiment of measuring the <strong>lifetime (in
+hours)</strong> of a randomly selected bulb of a certain kind.</p>
+<p>The sample space is: <span class="math display">\[
+S = \{\omega \in \mathbb{R} : \omega \ge 0\}.
+\]</span> Each sample point <span class="math inline">\(\omega\)</span>
+corresponds to the observed lifetime of a bulb.</p>
+<hr />
+</div>
+<div id="defining-the-random-variable" class="section level3">
+<h3><strong>Defining the Random Variable</strong></h3>
+<p>Let<br />
+<span class="math display">\[
+T(\omega) = \omega, \quad \omega \in S,
+\]</span> where <span class="math inline">\(T\)</span> is a random
+variable representing the <strong>lifetime of a randomly selected bulb
+(in hours)</strong>.</p>
+<p>Thus, <span class="math inline">\(T\)</span> maps the sample point
+(i.e., observed outcome) directly to a numerical value of lifetime.</p>
+<hr />
+</div>
+<div id="describing-events-in-terms-of-the-random-variable" class="section level3">
+<h3><strong>Describing Events in terms of the Random
+Variable</strong></h3>
+<p>We define the following events in terms of the random variable <span class="math inline">\(T\)</span>:</p>
+<ul>
+<li><span class="math inline">\(E = \text{the event that the lifetime is
+exactly 1000 hours}\)</span><br />
 </li>
-<li>Apply classical and empirical methods for calculating
-probability.<br />
-</li>
-<li>Explain and apply probability axioms.<br />
-</li>
-<li>Distinguish conditional from unconditional events.<br />
-</li>
-<li>Use rules of probability effectively.<br />
-</li>
-<li>Define and identify types of random variables.<br />
-</li>
-<li>Relate events to random variables.<br />
-</li>
-<li>Use pmf, pdf, cdf correctly.<br />
-</li>
-<li>Calculate probabilities and descriptive measures from
-distributions.<br />
-</li>
-<li>Define and interpret mean, median, variance, etc.<br />
-</li>
-<li>Present clear and accurate solutions to problems.</li>
+<li><span class="math inline">\(F = \text{the event that the lifetime is
+less than 300 hours}\)</span></li>
+</ul>
+<p>These can be expressed as:</p>
+<p><span class="math display">\[
+\begin{aligned}
+E &amp;= \{\omega \in S \mid T(\omega) = 1000\} \\
+F &amp;= \{\omega \in S \mid T(\omega) &lt; 300\}
+\end{aligned}
+\]</span></p>
+<p>Letting<br />
+<span class="math display">\[
+T = \text{Lifetime of a randomly selected bulb in hours},
+\]</span><br />
+we denote the probabilities of these events as:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\Pr(E) &amp;= \Pr(T = 1000) \\
+\Pr(F) &amp;= \Pr(T &lt; 300)
+\end{aligned}
+\]</span></p>
+<hr />
+</div>
+<div id="discussion" class="section level3">
+<h3><strong>Discussion</strong></h3>
+<ul>
+<li><span class="math inline">\(T\)</span> is a <strong>continuous
+random variable</strong> defined on <span class="math inline">\([0,
+\infty)\)</span>.</li>
+<li>In practical modeling, one may assume that <span class="math inline">\(T \sim \text{Exponential}(\lambda)\)</span> or
+follows another lifetime distribution such as Weibull or Gamma.</li>
+<li>For continuous distributions, <span class="math inline">\(\Pr(T =
+1000) = 0\)</span> exactly. However, <span class="math inline">\(\Pr(T
+&lt; 300)\)</span> may be computed via integration or using the
+cumulative distribution function (CDF) of <span class="math inline">\(T\)</span>.</li>
+</ul>
+<hr />
+</div>
+<div id="activity" class="section level2">
+<h2>Activity</h2>
+<p>Consider the biased coin example.</p>
+<ol style="list-style-type: decimal">
+<li><p>Write down the event <span class="math inline">\(A = \{X \geq
+2\}\)</span> using sample points from the sample space <span class="math inline">\(S\)</span>.</p></li>
+<li><p>Express the event <span class="math inline">\(B = \{X \text{ is
+even}\}\)</span> in set-builder notation.</p></li>
+<li><p>Compute <span class="math inline">\(\Pr(X &gt; 1)\)</span> for
+<span class="math inline">\(\theta = 0.4\)</span> using the binomial
+formula.</p></li>
+<li><p>Simulate 10,000 coin tosses (3 at a time) in R for <span class="math inline">\(\theta = 0.3\)</span> and estimate <span class="math inline">\(\Pr(X = 1)\)</span>.</p></li>
+<li><p>Prove that <span class="math inline">\(\sum_{x = 0}^{3} \Pr(X =
+x) = 1\)</span> algebraically.’</p></li>
 </ol>
 <hr />
 </div>
-<div id="mode-of-assessment" class="section level1">
-<h1>Mode of Assessment</h1>
-<ul>
-<li><strong>Assignments 3 (Homework)</strong><br />
+<div id="activity-tossing-a-die" class="section level2">
+<h2>Activity: Tossing a Die</h2>
+<p>A fair six-sided die is rolled once and the number showing on the top
+face is observed.</p>
+<p>Let <span class="math inline">\(S = \{1, 2, 3, 4, 5,
+6\}\)</span>.</p>
+<p>Define the random variable <span class="math display">\[
+X(\omega) =
+\begin{cases}
+0 &amp; \text{if } \omega \text{ is even} \\
+1 &amp; \text{if } \omega \text{ is odd}
+\end{cases}
+\]</span></p>
+<ol style="list-style-type: decimal">
+<li>Write the range of <span class="math inline">\(X\)</span>.<br />
 </li>
-<li><strong>Final Exam</strong> (2 hours)</li>
-</ul>
+<li>Express the event “an even number is rolled” in terms of <span class="math inline">\(X\)</span>.<br />
+</li>
+<li>Find <span class="math inline">\(\Pr(X = 0)\)</span> and <span class="math inline">\(\Pr(X = 1)\)</span>.</li>
+</ol>
 <hr />
 </div>
-<div id="references" class="section level1">
-<h1>References</h1>
-<ul>
-<li>Scott Stevens, <em>Introduction to Statistics: Think &amp;
-Do</em></li>
-<li>Jay L. Devore, <em>Probability and Statistics for Engineering and
-Sciences</em>, Brooks/Cole.<br />
+<div id="activity-mapping-sample-space" class="section level2">
+<h2>Activity: Mapping Sample Space</h2>
+<p>A box contains 3 balls labeled Red (R), Green (G), and Blue (B). One
+ball is drawn at random, and the color is observed.</p>
+<p>Define <span class="math display">\[
+X(\omega) =
+\begin{cases}
+1 &amp; \text{if } \omega = R \\
+2 &amp; \text{if } \omega = G \\
+3 &amp; \text{if } \omega = B
+\end{cases}
+\]</span></p>
+<ol style="list-style-type: decimal">
+<li>Define the sample space <span class="math inline">\(S\)</span>.<br />
 </li>
-<li>Class handouts and lecture notes.</li>
-</ul>
+<li>Write the set <span class="math inline">\(X(S)\)</span>.<br />
+</li>
+<li>Express the event “ball drawn is not Green” using <span class="math inline">\(X\)</span>.<br />
+</li>
+<li>Compute <span class="math inline">\(\Pr(X = 2)\)</span>.</li>
+</ol>
 <hr />
 </div>
-<div id="instructor-office-hours" class="section level1">
-<h1>Instructor &amp; Office Hours</h1>
-<p><strong>Lecturer:</strong> Dr. Rajitha M. Silva<br />
-<strong>Email:</strong> <a href="mailto:rsilva@sjp.ac.lk" class="email">rsilva@sjp.ac.lk</a><br />
-<strong>Office Hours:</strong> One hour after lectures or by
-appointment</p>
+<div id="activity-qualitative-to-quantitative-mapping" class="section level2">
+<h2>Activity: Qualitative to Quantitative Mapping</h2>
+<p>A survey is conducted where each person reports their favorite drink
+among Tea (T), Coffee (C), or Juice (J). The responses are recorded from
+4 individuals, one after the other, independently.</p>
+<p>Define <span class="math display">\[
+X(\omega) = \text{number of people choosing Tea}
+\]</span></p>
+<ol style="list-style-type: decimal">
+<li>Give two possible outcomes from the sample space <span class="math inline">\(S\)</span>.</li>
+<li>Write the sample space in set-builder notation.</li>
+<li>Write the range of <span class="math inline">\(X\)</span>.<br />
+</li>
+<li>What is <span class="math inline">\(X(T, T, J, C)\)</span>?<br />
+</li>
+<li>Express the event “exactly two people chose Tea” in terms of <span class="math inline">\(X\)</span>.<br />
+</li>
+<li>Compute <span class="math inline">\(\Pr(X = 2)\)</span> assuming all
+outcomes are equally likely.</li>
+</ol>
 <hr />
-<p><em>This course is effective from July 2025.</em></p>
+</div>
+<div id="activity-expressing-events-via-random-variables" class="section level2">
+<h2>Activity: Expressing Events via Random Variables</h2>
+<p>Two coins are tossed <strong>simultaneously</strong>. We observe the
+<strong>sequence of face-up outcomes</strong> from both coins. Let H be
+the event that head is observed and T be the event that tail is
+observed. Then, <span class="math inline">\(H = \{h\}\)</span> and <span class="math inline">\(T = \{t\}\)</span></p>
+<p>Let <span class="math inline">\(S = \{hh, ht, th, tt\}\)</span>.</p>
+<p>Define <span class="math display">\[
+X(\omega) = \text{number of heads}
+\]</span></p>
+<ol style="list-style-type: decimal">
+<li>List values of <span class="math inline">\(X(\omega)\)</span> for
+each outcome.<br />
+</li>
+<li>Express “at least one head” using <span class="math inline">\(X\)</span>.<br />
+</li>
+<li>Compute <span class="math inline">\(\Pr(X = 1)\)</span> and <span class="math inline">\(\Pr(X \ge 1)\)</span>.</li>
+</ol>
+<hr />
+</div>
+<div id="activity-non-numerical-to-numerical-mapping" class="section level2">
+<h2>Activity: Non-Numerical to Numerical Mapping</h2>
+<p>A quality control test is performed on a product in a factory. The
+result of the test is recorded as one of the following outcomes: - Pass
+(P) - Defect (D) - Missing Part (M)</p>
+<p>Define <span class="math display">\[
+X(\omega) =
+\begin{cases}
+1 &amp; \text{if } \omega = P \\
+2 &amp; \text{if } \omega = D \\
+3 &amp; \text{if } \omega = M
+\end{cases}
+\]</span></p>
+<ol style="list-style-type: decimal">
+<li>What is the range of <span class="math inline">\(X\)</span>?<br />
+</li>
+<li>Consider the complement of the event ``pass’’ is considered as
+“fail’’. Write the event “product failed” using <span class="math inline">\(X\)</span>.<br />
+</li>
+<li>Given: <span class="math inline">\(\Pr(P) = 0.8, \Pr(D) = 0.1,
+\Pr(M) = 0.1\)</span>. Find:
+<ul>
+<li><span class="math inline">\(\Pr(X = 2)\)</span><br />
+</li>
+<li><span class="math inline">\(\Pr(X \le 3\})\)</span></li>
+</ul></li>
+</ol>
+<hr />
+</div>
+<div id="activity-mapping-to-indicator-variables" class="section level2">
+<h2>Activity: Mapping to Indicator Variables</h2>
+<p>Let a coin be tossed once and observe the heads up. Sample
+space:<br />
+<span class="math display">\[
+S = \{h, t\}
+\]</span></p>
+<p>Define random variable<br />
+<span class="math display">\[
+X(\omega) =
+\begin{cases}
+1 &amp; \text{if } \omega = h \\
+0 &amp; \text{if } \omega = t
+\end{cases}
+\]</span></p>
+<ol style="list-style-type: decimal">
+<li>Is <span class="math inline">\(X\)</span> a random variable?
+Why?</li>
+<li>Express the event “Tail occurs” using <span class="math inline">\(X\)</span>.</li>
+</ol>
+<hr />
+</div>
+<div id="activity-mapping-to-vectors" class="section level2">
+<h2>Activity: Mapping to Vectors</h2>
+<p>Two six-sided dice are rolled simultaneously.</p>
+<p>The outcome is recorded as an ordered pair <span class="math inline">\((i, j)\)</span>, where:</p>
+<ul>
+<li><p><span class="math inline">\(i\)</span> is the number shown on the
+first die,</p></li>
+<li><p><span class="math inline">\(j\)</span> is the number shown on the
+second die.</p></li>
+</ul>
+<p>The sample space is: <span class="math display">\[
+S = \{(i, j) : i, j \in \{1, 2, 3, 4, 5, 6\}\}
+\]</span></p>
+<p>There are <span class="math inline">\(6 \times 6 = 36\)</span>
+possible outcomes in total.</p>
+<p>Define the vector-valued r.v. <span class="math inline">\(X(\omega) =
+(i, j)\)</span> and scalar r.v. <span class="math inline">\(Y(\omega) =
+i + j\)</span>.</p>
+<ol style="list-style-type: decimal">
+<li><p>What is the range of <span class="math inline">\(X\)</span>?</p></li>
+<li><p>What is the range of <span class="math inline">\(Y\)</span>?</p></li>
+<li><p>Express event <span class="math inline">\(A = \{ \text{sum is
+even} \}\)</span> using <span class="math inline">\(Y\)</span>.</p></li>
+</ol>
+<hr />
+</div>
+<div id="activity-categorical-mapping" class="section level2">
+<h2>Activity: Categorical Mapping</h2>
+<p>Let a random person be chosen, and their blood type is
+recorded:<br />
+<span class="math display">\[
+S = \{\text{A}, \text{B}, \text{AB}, \text{O}\}
+\]</span></p>
+<p>Define <span class="math display">\[
+X(\omega) =
+\begin{cases}
+1 &amp; \omega = A \\
+2 &amp; \omega = B \\
+3 &amp; \omega = AB \\
+4 &amp; \omega = O
+\end{cases}
+\]</span></p>
+<ol style="list-style-type: decimal">
+<li>Is <span class="math inline">\(X\)</span> a valid random
+variable?<br />
+</li>
+<li>Express the event “person has type A or O” using <span class="math inline">\(X\)</span>.<br />
+</li>
+<li>Does numeric encoding affect the nature of <span class="math inline">\(X\)</span> as a r.v.?</li>
+</ol>
+<hr />
+</div>
+<div id="activity-time-to-event-mapping" class="section level2">
+<h2>Activity: Time to Event Mapping</h2>
+<p>Let <span class="math inline">\(S = \{\text{system failure at } t : t
+\ge 0\}\)</span><br />
+Define <span class="math inline">\(T(\omega) = \text{time of system
+failure}\)</span></p>
+<ol style="list-style-type: decimal">
+<li>What is the range of <span class="math inline">\(T\)</span>?<br />
+</li>
+<li>Give an example of an event in terms of <span class="math inline">\(T\)</span>.<br />
+</li>
+<li>Is <span class="math inline">\(T\)</span> discrete or
+continuous?</li>
+</ol>
+<hr />
+</div>
+<div id="activity-mapping-to-boolean-01-for-events" class="section level2">
+<h2>Activity: Mapping to Boolean (0/1) for Events</h2>
+<p>Suppose 5 MCQ questions are attempted. Each has a binary outcome
+(Correct or Wrong).</p>
+<p>Let <span class="math inline">\(X_i = 1\)</span> if <span class="math inline">\(i^{th}\)</span> question is correct, 0
+otherwise.</p>
+<p>Define total score:<br />
+<span class="math display">\[
+S = \{ \text{outcomes of 5 questions} \}, \quad T = X_1 + X_2 + X_3 +
+X_4 + X_5
+\]</span></p>
+<ol style="list-style-type: decimal">
+<li>What kind of random variable is <span class="math inline">\(T\)</span>?<br />
+</li>
+<li>What is its range?<br />
+</li>
+<li>Define event <span class="math inline">\(A = \{ \text{at least 3
+correct} \}\)</span> using <span class="math inline">\(T\)</span>.</li>
+</ol>
+</div>
+<div id="activity-modeling-number-of-attempts-until-success" class="section level2">
+<h2>Activity: Modeling Number of Attempts Until Success</h2>
+<p>A game involves rolling a fair six-sided die repeatedly until the
+number <strong>5</strong> appears for the first time. Each roll is
+independent of the others. The outcome is the <strong>number of
+rolls</strong> needed until the first 5 appears.</p>
+<hr />
+<ol style="list-style-type: decimal">
+<li><p>Define the sample space <span class="math inline">\(S\)</span> of
+the experiment using lowercase outcome sequences (e.g., rrr5, rr5, etc.,
+where r = not 5, 5 = success).</p></li>
+<li><p>Define a random variable <span class="math inline">\(X\)</span>
+that maps each outcome <span class="math inline">\(\omega\)</span> to
+the number of rolls until the first 5 appears.</p></li>
+<li><p>Write the set <span class="math inline">\(X(S)\)</span>, i.e.,
+the range of the random variable.</p></li>
+<li><p>Compute the probability that the first 5 appears:</p>
+<ul>
+<li>on the 1st roll<br />
+</li>
+<li>on the 2nd roll<br />
+</li>
+<li>on the 3rd roll</li>
+</ul></li>
+<li><p>Let <span class="math inline">\(p = \Pr(\text{a 5 is
+rolled})\)</span>. Write a general expression for <span class="math inline">\(\Pr(X = x)\)</span> where <span class="math inline">\(x \in \{1, 2, 3, \dots\}\)</span>.</p></li>
+</ol>
+<hr />
+</div>
+<div id="activity-waiting-for-a-fixed-number-of-successes" class="section level2">
+<h2>Activity: Waiting for a Fixed Number of Successes</h2>
+<p>A fair coin is tossed repeatedly until <strong>3 Heads</strong> are
+observed. Each toss is independent of the others. The outcome is the
+<strong>number of tosses</strong> required to get 3 Heads.</p>
+<ol style="list-style-type: decimal">
+<li>Define the sample space <span class="math inline">\(S\)</span> using
+outcome sequences of h’s and t’s.</li>
+<li>Define the random variable <span class="math inline">\(X\)</span> as
+the number of tosses until the 3rd Head appears.</li>
+<li>Write the range <span class="math inline">\(X(S)\)</span>.</li>
+<li>Write a general expression for <span class="math inline">\(\Pr(X =
+x)\)</span>, where <span class="math inline">\(x \in \{3, 4, 5,
+\dots\}\)</span>.</li>
+<li>Compute <span class="math inline">\(\Pr(X = 3)\)</span>, <span class="math inline">\(\Pr(X = 4)\)</span>, and <span class="math inline">\(\Pr(X = 5)\)</span> for a fair coin.</li>
+</ol>
+</div>
 </div>
 
 

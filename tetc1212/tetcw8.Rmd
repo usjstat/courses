@@ -1,0 +1,484 @@
+---
+title: "Random Variables: Week 8"
+author: "Dr. Rajitha M. Silva"
+output: html_document
+---
+
+
+# Random Variables
+
+A random variable provides a convenient and systematic way to represent outcomes of a random experiment as real numbers. It allows us to re-express any event of interest numerically, which greatly simplifies the process of calculating probabilities.
+ 
+
+This numerical translation enables us to
+
+* **summarise** data with means, variances, and other moments;  
+* **derive** probability laws such as the binomial, Poisson, or normal distributions; and  
+* **model** real-world uncertainty in fields ranging from finance and engineering to biology and sport.
+
+Throughout this section we will encounter two broad families:
+
+1. **Discrete random variables**, whose ranges are *countable* (e.g., the number of heads in three coin tosses);  
+2. **Continuous random variables**, whose ranges contain uncountably many values (e.g., the lifetime of a light bulb measured in hours).
+
+
+**Definition**  
+
+A *random variable* (r.v.) is a function  
+\[
+X:\;S \longrightarrow \mathbb{R},
+\]  
+where $S$ is the sample space of an experiment and $\mathbb{R}$ is the set of real numbers.  
+A random variable assigns a real number to each outcome $\omega \in S$. This allows us to quantify outcomes in order to analyze probabilities, distributions, and summaries.
+
+
+### **Experiment**
+
+
+Toss a (possibly biased) coin **three times** and observe the face-up outcome each time.  
+Let the event of interest be the observation of a head (H) on any given toss.  
+Denote the probability of observing a head by
+\[
+\theta = \Pr(\text{Head}).
+\]
+
+The sample space is:
+\[
+S = \{hhh, hht, hth, htt, thh, tht, tth, ttt\}.
+\]
+
+Let
+\[
+X(\omega) = \text{number of heads in } \omega, \quad \omega \in S.
+\]
+Then $X: S \rightarrow \{0, 1, 2, 3\}$ is a discrete random variable.
+
+---
+
+### **Events in terms of $X$**
+
+Then, the above events can be written in terms of $X$ as follows:
+
+\[
+\begin{aligned}
+H_0 &= \{\omega \in S \mid X(\omega) = 0\} \\
+H_1 &= \{\omega \in S \mid X(\omega) = 1\} \\
+H_2 &= \{\omega \in S \mid X(\omega) = 2\} \\
+H_3 &= \{\omega \in S \mid X(\omega) = 3\} \\
+H_4 &= \{\omega \in S \mid X(\omega) > 1\}
+\end{aligned}
+\]
+
+Hence, we can write the probabilities of these events as:
+
+\[
+\begin{aligned}
+\Pr(\{\omega \in S \mid X(\omega) = 0\}) &= (1 - \theta)^3 \\
+\Pr(\{\omega \in S \mid X(\omega) = 1\}) &= 3\theta(1 - \theta)^2 \\
+\Pr(\{\omega \in S \mid X(\omega) = 2\}) &= 3\theta^2(1 - \theta) \\
+\Pr(\{\omega \in S \mid X(\omega) = 3\}) &= \theta^3 \\
+\Pr(\{\omega \in S \mid X(\omega) > 1\}) &= 3\theta^2(1 - \theta) + \theta^3
+\end{aligned}
+\]
+
+---
+
+### **Simplified Notation Using $X$**
+
+For convenience, we often omit writing $\omega$ and simply use the shorthand:
+
+\[
+\begin{aligned}
+\Pr(X = 0) &= (1 - \theta)^3 \\
+\Pr(X = 1) &= 3\theta(1 - \theta)^2 \\
+\Pr(X = 2) &= 3\theta^2(1 - \theta) \\
+\Pr(X = 3) &= \theta^3 \\
+\Pr(X > 1) &= 3\theta^2(1 - \theta) + \theta^3
+\end{aligned}
+\]
+
+The first four probabilities follow the **binomial distribution**:
+
+\[
+\Pr(X = x) = \binom{3}{x} \theta^x (1 - \theta)^{3 - x}, \quad x = 0,1,2,3.
+\]
+
+---
+
+### **Redefinition of $X$ (Omitting $\omega$)**
+
+In practice, we redefine $X$ more intuitively as:
+\[
+X = \text{the number of heads in three tosses}.
+\]
+
+This form omits explicit reference to $\omega$, but the mapping from sample points to numerical outcomes is preserved.
+
+
+---
+
+
+### **Experiment**
+
+Consider the experiment of measuring the **lifetime (in hours)** of a randomly selected bulb of a certain kind.
+
+The sample space is:
+\[
+S = \{\omega \in \mathbb{R} : \omega \ge 0\}.
+\]
+Each sample point $\omega$ corresponds to the observed lifetime of a bulb.
+
+---
+
+### **Defining the Random Variable**
+
+Let  
+\[
+T(\omega) = \omega, \quad \omega \in S,
+\]
+where $T$ is a random variable representing the **lifetime of a randomly selected bulb (in hours)**.
+
+Thus, $T$ maps the sample point (i.e., observed outcome) directly to a numerical value of lifetime.
+
+---
+
+### **Describing Events in terms of the Random Variable**
+
+We define the following events in terms of the random variable $T$:
+
+- $E = \text{the event that the lifetime is exactly 1000 hours}$  
+- $F = \text{the event that the lifetime is less than 300 hours}$
+
+These can be expressed as:
+
+\[
+\begin{aligned}
+E &= \{\omega \in S \mid T(\omega) = 1000\} \\
+F &= \{\omega \in S \mid T(\omega) < 300\}
+\end{aligned}
+\]
+
+Letting  
+\[
+T = \text{Lifetime of a randomly selected bulb in hours},
+\]  
+we denote the probabilities of these events as:
+
+\[
+\begin{aligned}
+\Pr(E) &= \Pr(T = 1000) \\
+\Pr(F) &= \Pr(T < 300)
+\end{aligned}
+\]
+
+---
+
+### **Discussion**
+
+- $T$ is a **continuous random variable** defined on $[0, \infty)$.
+- In practical modeling, one may assume that $T \sim \text{Exponential}(\lambda)$ or follows another lifetime distribution such as Weibull or Gamma.
+- For continuous distributions, $\Pr(T = 1000) = 0$ exactly. However, $\Pr(T < 300)$ may be computed via integration or using the cumulative distribution function (CDF) of $T$.
+
+---
+
+
+## Activity
+
+Consider the biased coin example.
+
+1. Write down the event $A = \{X \geq 2\}$ using sample points from the sample space $S$.
+
+
+2. Express the event $B = \{X \text{ is even}\}$ in set-builder notation.
+
+
+3. Compute $\Pr(X > 1)$ for $\theta = 0.4$ using the binomial formula.
+
+
+4. Simulate 10,000 coin tosses (3 at a time) in R for $\theta = 0.3$ and estimate $\Pr(X = 1)$.
+
+
+5. Prove that $\sum_{x = 0}^{3} \Pr(X = x) = 1$ algebraically.'
+
+---
+
+
+## Activity: Tossing a Die
+
+A fair six-sided die is rolled once and the number showing on the top
+face is observed.
+
+Let $S = \{1, 2, 3, 4, 5, 6\}$.
+
+Define the random variable 
+$$
+X(\omega) =
+\begin{cases}
+0 & \text{if } \omega \text{ is even} \\
+1 & \text{if } \omega \text{ is odd}
+\end{cases}
+$$
+
+1.  Write the range of $X$.\
+2.  Express the event "an even number is rolled" in terms of $X$.\
+3.  Find $\Pr(X = 0)$ and $\Pr(X = 1)$.
+
+
+
+------------------------------------------------------------------------
+
+## Activity: Mapping Sample Space
+
+A box contains 3 balls labeled Red (R), Green (G), and Blue (B). One
+ball is drawn at random, and the color is observed.
+
+Define 
+$$
+X(\omega) =
+\begin{cases}
+1 & \text{if } \omega = R \\
+2 & \text{if } \omega = G \\
+3 & \text{if } \omega = B
+\end{cases}
+$$
+
+1.  Define the sample space $S$.\
+2.  Write the set $X(S)$.\
+3.  Express the event “ball drawn is not Green” using $X$.\
+4.  Compute $\Pr(X = 2)$.
+
+
+
+------------------------------------------------------------------------
+
+## Activity: Qualitative to Quantitative Mapping
+
+A survey is conducted where each person reports their favorite drink
+among Tea (T), Coffee (C), or Juice (J). The responses are recorded from
+4 individuals, one after the other, independently.
+
+Define 
+$$
+X(\omega) = \text{number of people choosing Tea}
+$$
+
+
+1.  Give two possible outcomes from the sample space $S$.
+2.  Write the sample space in set-builder notation.
+3.  Write the range of $X$.\
+4.  What is $X(T, T, J, C)$?\
+5.  Express the event "exactly two people chose Tea" in terms of $X$.\
+6.  Compute $\Pr(X = 2)$ assuming all outcomes are equally likely.
+
+
+
+------------------------------------------------------------------------
+
+## Activity: Expressing Events via Random Variables
+
+Two coins are tossed **simultaneously**. We observe the **sequence of
+face-up outcomes** from both coins. Let H be the event that head is
+observed and T be the event that tail is observed. Then, $H = \{h\}$ and
+$T = \{t\}$
+
+Let $S = \{hh, ht, th, tt\}$. 
+
+Define 
+$$
+X(\omega) = \text{number of heads}
+$$
+
+1.  List values of $X(\omega)$ for each outcome.\
+2.  Express "at least one head" using $X$.\
+3.  Compute $\Pr(X = 1)$ and $\Pr(X \ge 1)$.
+
+
+------------------------------------------------------------------------
+
+## Activity: Non-Numerical to Numerical Mapping
+
+A quality control test is performed on a product in a factory. The
+result of the test is recorded as one of the following outcomes: - Pass
+(P) - Defect (D) - Missing Part (M)
+
+Define 
+$$
+X(\omega) =
+\begin{cases}
+1 & \text{if } \omega = P \\
+2 & \text{if } \omega = D \\
+3 & \text{if } \omega = M
+\end{cases}
+$$
+
+1.  What is the range of $X$?\
+2.  Consider the complement of the event \`\`pass'' is considered as
+    "fail''. Write the event “product failed” using $X$.\
+3.  Given: $\Pr(P) = 0.8, \Pr(D) = 0.1, \Pr(M) = 0.1$. Find:
+    -   $\Pr(X = 2)$\
+    -   $\Pr(X \le 3\})$
+
+
+
+------------------------------------------------------------------------
+
+## Activity: Mapping to Indicator Variables
+
+Let a coin be tossed once and observe the heads up. Sample space:\
+$$
+S = \{h, t\}
+$$
+
+Define random variable\
+$$
+X(\omega) =
+\begin{cases}
+1 & \text{if } \omega = h \\
+0 & \text{if } \omega = t
+\end{cases}
+$$
+
+1.  Is $X$ a random variable? Why?
+2.  Express the event “Tail occurs” using $X$.
+
+
+
+------------------------------------------------------------------------
+
+## Activity: Mapping to Vectors
+
+Two six-sided dice are rolled simultaneously.
+
+The outcome is recorded as an ordered pair $(i, j)$, where:
+
+-   $i$ is the number shown on the first die,
+
+-   $j$ is the number shown on the second die.
+
+The sample space is: 
+$$
+S = \{(i, j) : i, j \in \{1, 2, 3, 4, 5, 6\}\}
+$$
+
+
+
+There are $6 \times 6 = 36$ possible outcomes in total.
+
+Define the vector-valued r.v. $X(\omega) = (i, j)$ and scalar r.v.
+$Y(\omega) = i + j$.
+
+1.  What is the range of $X$?
+
+2.  What is the range of $Y$?
+
+3.  Express event $A = \{ \text{sum is even} \}$ using $Y$.
+
+
+
+------------------------------------------------------------------------
+
+## Activity: Categorical Mapping
+
+Let a random person be chosen, and their blood type is recorded:\
+$$
+S = \{\text{A}, \text{B}, \text{AB}, \text{O}\}
+$$
+
+Define 
+$$
+X(\omega) =
+\begin{cases}
+1 & \omega = A \\
+2 & \omega = B \\
+3 & \omega = AB \\
+4 & \omega = O
+\end{cases}
+$$
+
+1.  Is $X$ a valid random variable?\
+2.  Express the event “person has type A or O” using $X$.\
+3.  Does numeric encoding affect the nature of $X$ as a r.v.?
+
+
+
+------------------------------------------------------------------------
+
+## Activity: Time to Event Mapping
+
+Let $S = \{\text{system failure at } t : t \ge 0\}$\
+Define $T(\omega) = \text{time of system failure}$
+
+1.  What is the range of $T$?\
+2.  Give an example of an event in terms of $T$.\
+3.  Is $T$ discrete or continuous?
+
+
+
+------------------------------------------------------------------------
+
+## Activity: Mapping to Boolean (0/1) for Events
+
+Suppose 5 MCQ questions are attempted. Each has a binary outcome
+(Correct or Wrong).
+
+Let $X_i = 1$ if $i^{th}$ question is correct, 0 otherwise.
+
+Define total score:\
+$$
+S = \{ \text{outcomes of 5 questions} \}, \quad T = X_1 + X_2 + X_3 + X_4 + X_5
+$$
+
+1.  What kind of random variable is $T$?\
+2.  What is its range?\
+3.  Define event $A = \{ \text{at least 3 correct} \}$ using $T$.
+
+
+
+## Activity: Modeling Number of Attempts Until Success
+
+A game involves rolling a fair six-sided die repeatedly until the number
+**5** appears for the first time. Each roll is independent of the
+others. The outcome is the **number of rolls** needed until the first 5
+appears.
+
+------------------------------------------------------------------------
+
+1.  Define the sample space $S$ of the experiment using lowercase
+    outcome sequences (e.g., rrr5, rr5, etc., where r = not 5, 5 =
+    success).
+
+2.  Define a random variable $X$ that maps each outcome $\omega$ to the
+    number of rolls until the first 5 appears.
+
+3.  Write the set $X(S)$, i.e., the range of the random variable.
+
+4.  Compute the probability that the first 5 appears:
+
+    -   on the 1st roll\
+    -   on the 2nd roll\
+    -   on the 3rd roll
+
+5.  Let $p = \Pr(\text{a 5 is rolled})$. Write a general expression for
+    $\Pr(X = x)$ where $x \in \{1, 2, 3, \dots\}$.
+
+------------------------------------------------------------------------
+
+
+
+## Activity: Waiting for a Fixed Number of Successes
+
+A fair coin is tossed repeatedly until **3 Heads** are observed. Each
+toss is independent of the others. The outcome is the **number of
+tosses** required to get 3 Heads.
+
+1.  Define the sample space $S$ using outcome sequences of h's and t's.
+2.  Define the random variable $X$ as the number of tosses until the 3rd
+    Head appears.
+3.  Write the range $X(S)$.
+4.  Write a general expression for $\Pr(X = x)$, where
+    $x \in \{3, 4, 5, \dots\}$.
+5.  Compute $\Pr(X = 3)$, $\Pr(X = 4)$, and $\Pr(X = 5)$ for a fair
+    coin.
+
+
+

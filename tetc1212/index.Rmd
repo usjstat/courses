@@ -42,9 +42,7 @@ This course establishes the fundamentals of probability and descriptive statisti
 +-----------+----------------------------------------+--------------------------------------------------------------------------+--------------+
 |           |                                        |                                                                          |              |
 +-----------+----------------------------------------+--------------------------------------------------------------------------+--------------+
-| 8         | Random Variables                       | Definitions, discrete and continuous variables                           | 8 (2T + 6IL) |
-+-----------+----------------------------------------+--------------------------------------------------------------------------+--------------+
-| 9         | Events with Random Variables           | Event representation and revision                                        | 8 (2T + 6IL) |
+| 8         | [Random Variables](tetcw8.html)        | Definitions, discrete and continuous variables                           | 8 (2T + 6IL) |
 +-----------+----------------------------------------+--------------------------------------------------------------------------+--------------+
 | 9         | Distributions and functions of RV      | pmf, pdf, cdf                                                            | 8 (2T + 6IL) |
 |           |                                        |                                                                          |              |
