@@ -354,9 +354,9 @@ plot_beta_binomial(alpha = 45, beta = 55, y = 30, n = 50)
 ```
 
 This plot shows:
-- The **prior** (black curve)
-- The **likelihood**, scaled to have area 1 (gray dashed)
-- The **posterior** (blue curve), a compromise between prior and likelihood
+- The **prior** (yellow)
+- The **likelihood**, scaled to have area 1 (blue)
+- The **posterior** (green), a compromise between prior and likelihood
 
 ---
 
