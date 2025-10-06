@@ -1,0 +1,130 @@
+---
+title: "STA 313 1.0: Statistical Decision Theory"
+author: "Dr. R. M. Silva - Department of Statistics, USJ"
+format:
+  html:
+    toc: true
+    toc-location: left
+    toc-depth: 3
+    number-sections: true
+    code-fold: false
+  pdf:
+    toc: true
+    number-sections: true
+lang: en
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: visual
+---
+
+```{r}
+#| label: setup
+#| include: false
+set.seed(1142)
+```
+
+# Course Overview
+
+**Course:** STA 313 1.0 : Statistical Decision Theory\
+
+**Credits:** 1 (8 x 2-hour lectures)
+
+**Semester/Year:** Semester II - 2025\
+
+**Audience:** Third Year Statistics undergraduates (optional)
+
+**Mode:** Lecture + worked examples + short activities\
+
+**Suggested Assessment:** mini-project (40%), final exam (60%)
+
+## Learning Outcomes
+
+By the end of this course, students will be able to:
+
+1\. Specify actions, states of nature, loss functions, and risk for a decision problem.
+
+2\. Choose suitable loss functions and interpret risk functions for estimation/classification tasks.
+
+3\. Derive Bayes rules under common losses and compute Bayes risk in simple models.
+
+4\. Explain and apply minimax and admissibility; relate least favorable priors to minimaxity.
+
+5\. Compare Bayesian and frequentist decision rules analytically and via simulation.
+
+6.  Communicate decisions, uncertainty, and trade-offs for real applications.
+
+# Lecture Plan (2 hours each)
+
++------------+-------------------------------------------+--------------------------------------------------------------------------------------------+
+| Lec        | Theme                                     | Core Ideas                                                                                 |
++:==========:+===========================================+============================================================================================+
+| 1          | Introduction to Decision Theory           | -   Motivation and examples of decision problems in statistics                             |
+|            |                                           |                                                                                            |
+|            |                                           | -   Elements of a decision problem: action, state of nature, loss, risk                    |
+|            |                                           |                                                                                            |
+|            |                                           | -   Decision-making under uncertainty                                                      |
+|            |                                           |                                                                                            |
+|            |                                           | -   Real-life statistical decisions (medical diagnosis, quality control, sports analytics) |
++------------+-------------------------------------------+--------------------------------------------------------------------------------------------+
+| 2          | Loss & Risk Functions                     | -   Definition and interpretation of loss function $(L(\theta,a)$                          |
+|            |                                           |                                                                                            |
+|            |                                           | -   Common loss functions: quadratic, absolute, 0-1 loss                                   |
+|            |                                           |                                                                                            |
+|            |                                           | -   Concept of risk function $R(\theta,\delta)$                                            |
+|            |                                           |                                                                                            |
+|            |                                           | -   Illustration with mean estimation and classification examples                          |
+|            |                                           |                                                                                            |
+|            |                                           | -   Visualization of loss and risk in R                                                    |
++------------+-------------------------------------------+--------------------------------------------------------------------------------------------+
+| 3          | Decision Rules & Randomization            | -   Deterministic vs randomized decision rules                                             |
+|            |                                           |                                                                                            |
+|            |                                           | -   Criteria for evaluating decision rules                                                 |
+|            |                                           |                                                                                            |
+|            |                                           | -   Risk minimization principle                                                            |
+|            |                                           |                                                                                            |
+|            |                                           | -   Example: estimation of a normal mean under squared error loss                          |
++------------+-------------------------------------------+--------------------------------------------------------------------------------------------+
+| 4          | Bayesian Decision Framework               | -   Prior distribution and posterior distribution                                          |
+|            |                                           | -   Posterior expected loss and Bayes risk                                                 |
+|            |                                           | -   Bayes decision rule                                                                    |
+|            |                                           | -   Examples under quadratic and 0-1 loss                                                  |
+|            |                                           | -   R implementation: posterior-based decision rule                                        |
++------------+-------------------------------------------+--------------------------------------------------------------------------------------------+
+| 5          | Minimax & Admissibility                   | -   Minimax principle and its motivation                                                   |
+|            |                                           | -   Least favorable prior                                                                  |
+|            |                                           | -   Admissible and inadmissible rules                                                      |
+|            |                                           | -   Relationship between Bayes and minimax rules                                           |
+|            |                                           | -   Example: binomial proportion estimation                                                |
++------------+-------------------------------------------+--------------------------------------------------------------------------------------------+
+| 6          | Likelihood and Frequentist Decision Rules | -   Likelihood-based decision making                                                       |
+|            |                                           | -   Maximum likelihood and unbiased estimators as decision rules                           |
+|            |                                           | -   Risk comparison of frequentist estimators                                              |
+|            |                                           | -   Connection to hypothesis testing and confidence intervals                              |
++------------+-------------------------------------------+--------------------------------------------------------------------------------------------+
+| 7          | Applications and Simulation Study         | -   Case study: medical test decision, cricket player selection, business decision         |
+|            |                                           |                                                                                            |
+|            |                                           | -   Monte Carlo simulation for decision comparison                                         |
++------------+-------------------------------------------+--------------------------------------------------------------------------------------------+
+| 8          | Course Review                             | -   Summary of principles: Bayes, minimax, admissibility                                   |
+|            |                                           |                                                                                            |
+|            |                                           | -   Course recap and assignment briefing                                                   |
++------------+-------------------------------------------+--------------------------------------------------------------------------------------------+
+
+------------------------------------------------------------------------
+
+# References
+
+-   Berger, J. O. *Statistical Decision Theory and Bayesian Analysis* (selected chapters).\
+-   DeGroot, M. H. & Schervish, M. J. *Probability and Statistics* (decision theory sections).\
+
+------------------------------------------------------------------------
+
+# Mini-Project (Weeks 7-8)
+
+Choose one application (medical, QC, sports, or business).\
+1. Specify losses/costs and (if Bayesian) priors.\
+2. Propose two competing decision rules.\
+3. Compare risks analytically or via Monte Carlo; do sensitivity analysis.\
+4. Deliver a short memo justifying the recommended rule for stakeholders.
