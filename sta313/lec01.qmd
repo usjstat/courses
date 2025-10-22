@@ -14,7 +14,7 @@ set.seed(1142)
 
 Statistics often ends with an action: approve a loan, treat a patient, accept a lot, pick a player. Data reduce uncertainty but do not remove it. Decision theory supplies:
 
--    A language for actions, uncertainty, and consequences.
+-   A language for actions, uncertainty, and consequences.
 
 -   A way to encode goals via a loss or cost function.
 
@@ -24,13 +24,13 @@ Statistics often ends with an action: approve a loan, treat a patient, accept a 
 
 # Anatomy of a statistical decision problem
 
--    Data: X (observed information).
+-   Data: X (observed information).
 
 -   Action: $a$ in a set of possible actions (for example, treat or not treat).
 
 -   State of nature: $\theta$ (unknown true condition, for example, disease or no disease).
 
--   Loss (or cost): $L(\theta, a)$ quantifies how bad action a is if the true state is theta.
+-   Loss (or cost): $L(\theta, a)$ quantifies how bad action $a$ is if the true state is theta.
 
 -   Decision rule: $\delta(X)$ maps data to an action.
 
@@ -39,7 +39,7 @@ Statistics often ends with an action: approve a loan, treat a patient, accept a 
 # Notation
 
 | Symbol | Meaning | Example interpretation |
-|---------------|------------------------------|---------------------------|
+|------------------|-----------------------------|--------------------------|
 | $X$ | The data or observation you have before acting | The result of a medical test (positive / negative) |
 | $a$ | An action you take | Treat or do not treat a patient |
 | $\theta$ | The state of nature - the true but unknown situation | Whether the person really has the disease |
