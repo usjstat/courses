@@ -1,0 +1,254 @@
+---
+title: "Lecture 1: STA 313 1.0 Statistical Decision Theory"
+author: "Dr. R. M. Silva - Department of Statistics, USJ"
+output: html_document
+---
+
+```{r}
+#| label: setup
+#| include: false
+set.seed(1142)
+```
+
+# Why decision theory?
+
+Statistics often ends with an action: approve a loan, treat a patient, accept a lot, pick a player. Data reduce uncertainty but do not remove it. Decision theory supplies:
+
+-    A language for actions, uncertainty, and consequences.
+
+-   A way to encode goals via a loss or cost function.
+
+-   Criteria to compare procedures (risk, Bayes risk, minimax).
+
+-   A bridge between classical and Bayesian ideas.
+
+# Anatomy of a statistical decision problem
+
+-    Data: X (observed information).
+
+-   Action: $a$ in a set of possible actions (for example, treat or not treat).
+
+-   State of nature: $\theta$ (unknown true condition, for example, disease or no disease).
+
+-   Loss (or cost): $L(\theta, a)$ quantifies how bad action a is if the true state is theta.
+
+-   Decision rule: $\delta(X)$ maps data to an action.
+
+-   Risk: $R(\theta, \delta) = E_\theta[ L(\theta, \delta(X)) ]$ is the expected loss under state theta.
+
+# Notation
+
+| Symbol | Meaning | Example interpretation |
+|---------------|------------------------------|---------------------------|
+| $X$ | The data or observation you have before acting | The result of a medical test (positive / negative) |
+| $a$ | An action you take | Treat or do not treat a patient |
+| $\theta$ | The state of nature - the true but unknown situation | Whether the person really has the disease |
+| $L(\theta, a)$ | The loss function - how bad it is to take action $a$ when the truth is $\theta$ | The cost of a false positive or false negative |
+| $\delta(X)$ | The decision rule - a rule that tells which action to take based on the observed data $X$ | "If the test is positive, treat; otherwise, do not treat." |
+| $R(\theta, \delta)$ | The risk function - the expected loss of rule $\delta$ when the true state is $\theta$ | The average cost if you used that rule repeatedly when disease status $=\ \theta$ |
+| $p$ | Probability of the disease (prevalence) or prior probability | $0.05$ means $5\%$ of people have the disease |
+| $E_{\theta}[\cdot]$ | Expected value given $\theta$ - an average over possible samples $X$ when $\theta$ is fixed | The mean of the losses across many hypothetical test outcomes |
+
+# 
+
+# The elements of a decision problem (Cricket Player Selection)
+
+## 1) Data: $X$
+
+**What you know before deciding.**
+
+\
+Examples for the opener decision:
+
+-   Recent powerplay performance: dot-ball rate, boundary rate, average runs in overs 1-6.
+
+-   Matchups: opener vs likely new-ball bowlers (swing, pace, left/right-arm).
+
+-   Venue and conditions: pitch pace/bounce, average PP runs at ground, dew factor, day/night.
+
+-   Contextual information: player fitness, travel fatigue, left-right opening pair requirement.
+
+-   Team balance constraints: middle-order bench, wicket-keeper options.
+
+**Notes:** Data can be noisy, biased (e.g., small samples), or not directly aligned to the goal (win probability). Clarify which variables are observed **before** the decision.
+
+## 2) Actions: $a$
+
+**What you are allowed to do.**
+
+\
+For openers, actions could be:
+
+-   $a$ = pick_A (Player A opens)
+
+-   $a$ = pick_B (Player B opens)
+
+-   $a$ = rotate (A opens vs pace-dominant attacks; B opens vs spin-heavy)
+
+-   $a$ = conditional (choose after toss or pitch report)
+
+**Notes:** The **action set** must respect constraints (e.g., batting order promises, workload management, left-right combination rules).
+
+## 3) State of nature: $\theta$
+
+**What is true but unknown at decision time.**
+
+\
+In cricket, $\theta$ bundles the uncertain factors that drive outcomes:
+
+-   Players' true next-match performance potential (e.g., expected PP runs for A and B).
+
+-   Actual match conditions (swing present or not, surface deterioration).
+
+-   Opponent tactics (bowling changes, field settings).
+
+We do not know $\theta$; we only have beliefs informed by data $X$ and domain knowledge.
+
+## 4) Loss (or cost) function: $L(\theta, a)$
+
+**How you score the consequences of an action if the true state is** $\theta$**.**
+
+\
+Loss should reflect the stakeholder's real goal.
+
+Common choices in this setting:
+
+-   **Regret in runs:**
+
+$L_\mbox{regret}(\theta, a)= (\mbox{Expected PP runs of the better opener}) - (\mbox{Expected PP runs of chosen opener})$
+
+Meaning: how many runs do we give up by a wrong pick?
+
+-   **Win probability shortfall:**
+
+$L_\mbox{winprob}(\theta, a) = \mbox{winprob(best action)}- \mbox{winprob(chosen action)}$
+
+Meaning: how much does the choice hurt chances of winning?
+
+-   **Stage-weighted loss:** larger penalty in knockout than league games.
+
+    **Key point:** Pick **one** loss that matches the decision's purpose. If the selector optimizes an internal metric (e.g., average PP runs) but management cares about win probability, decisions can systematically misalign with goals.
+
+## 5) Decision rule: $\delta(X)$
+
+**A mapping from observed data to an action.**
+
+-   **Threshold rule:** open with A if A's form indicator exceeds B's by a set margin; otherwise B.
+
+-   **Conditions rule:** open with A on pace-friendly pitch; otherwise B.
+
+-   **Rotation policy:** alternate unless matchup signal crosses a clear threshold.
+
+-   **Panel rule:** if scouting consensus is strong for A, choose A; else default to B.
+
+**Notes:** A good rule is **pre-specified** (to avoid cherry-picking) and simple enough to communicate to coaches and players.
+
+## 6) Risk: $R(\theta, \delta)$
+
+**Expected loss of a rule** $\delta$ **if the true state is** $\theta$**.**
+
+\
+Interpretation: - If the world were in state $\theta$ and we repeatedly faced similar matches using the same rule, **risk** is the long-run average penalty we would pay.
+
+In practice we cannot see $\theta$, so later in the course we will learn ways to compare rules:
+
+**Back-testing:** apply rules to past matches and summarize losses.
+
+**Prospective evaluation:** simulate plausible match conditions to estimate average loss.
+
+**Sensitivity checks:** see how conclusions change if the pitch is slower/faster than expected.
+
+# Putting it together
+
+-   **Decision context:** T20 league match, away ground with historically two-paced pitch under lights. Opposition new-ball pair includes a left-arm swing bowler.\
+-   **Data** $X$**:** A has higher boundary rate vs pace in overs 1-3 but struggles vs left-arm swing; B rotates strike better and has fewer early dismissals on slow pitches.\
+-   **Actions** $a$**:** pick_A, pick_B, or a simple conditional policy based on toss outcome.\
+-   **State** $\theta$**:** true pitch plays slower than average; swing fades after 2 overs; A's timing is slightly off this week.\
+-   **Loss** $L(\theta, a)$**:** stage-weighted regret in runs for overs 1-6.\
+-   **Decision rule** $\delta(X)$**:** "If pitch looks slow or left-arm swing confirmed, choose B; else choose A."\
+-   **Risk** $R(\theta, \delta)$**:** long-run average regret of this policy across similar away-night matches.
+
+The **language** above forces clarity: what we know $(X)$, what we can do $(a)$, what is unknown $(\theta)$, what we care about $(L)$, how we act $(\delta)$, and how we judge a policy $(R)$.
+
+# Why this structure helps selectors
+
+-   **Transparency:** Everyone sees how and why a call was made.\
+
+-   **Alignment:** The chosen loss matches the team's true objective (e.g., win probability).\
+
+-   **Consistency:** The same inputs lead to the same action; reduces bias.\
+
+-   **Learning:** Post-match reviews can update the rule or the loss when goals change.
+
+# Decision-making under uncertainty
+
+Real decisions rarely wait for perfect information. Decision theory gives a clear language and a small set of principled criteria for choosing actions **before** numbers and code enter the picture.
+
+## 1) What is uncertainty?
+
+-   **Aleatory (intrinsic) uncertainty:** Real randomness you cannot remove (e.g., a ball edges the bat).
+-   **Epistemic (knowledge) uncertainty:** Lack of knowledge that could, in principle, be reduced (e.g., not knowing if the pitch will be two-paced).
+
+**Implication:** Aleatory uncertainty is handled by averaging outcomes; epistemic uncertainty invites better data, expert input, or robust choices.
+
+## 2) Four classic decision criteria (intuitions only)
+
+1.  **Bayes (minimum expected loss):**\
+    Choose the action or rule that **minimizes average loss**, where the average uses your current beliefs (probabilities) about scenarios.
+    -   When to use: you have reasonable probability assessments and a well-specified loss.
+    -   Cricket mapping: weigh likely pitch states and bowlers you expect to face; choose the opener that minimizes average regret in powerplay runs.
+2.  **Minimax (protect the worst case):**\
+    Choose the action that **minimizes the maximum possible loss** across plausible states.
+    -   When to use: high stakes, little trust in probabilities, or strong penalty for being wrong.
+    -   Cricket mapping: if a meltdown start is catastrophic (knockout match), pick the opener that avoids the worst plausible powerplay collapse.
+3.  **Minimax regret (Savage):**\
+    Instead of absolute loss, compute **regret** (how much worse you do than the best action in that state). Choose the action with the **smallest maximum regret**.
+    -   When to use: you value not being far from the best, regardless of the state.
+    -   Cricket mapping: pick the opener that keeps you close to the state-wise best opener, even in unlucky conditions.
+4.  **Satisficing / safety-first:**\
+    Set an **aspiration level** or a do-not-cross threshold; choose any action that meets it with high credibility.
+    -   When to use: organizations with minimum performance standards (e.g., avoid \< 30 PP runs).
+    -   Cricket mapping: prefer the opener whose lower tail of PP runs stays above the threshold.
+
+> No single criterion is universally correct; it depends on stakeholder goals, stakes, and how credible your probabilities are.
+
+## 3) Risk attitude is encoded in the loss
+
+-   **Risk-neutral** behavior corresponds to losses proportional to the objective (e.g., linear regret in runs).
+-   **Risk-averse** behavior increases penalties for bad tails (e.g., large extra cost for early wickets in knockouts).
+-   **Organizational constraints** (workload, development) can be added as small penalties in $L(\theta, a)$.
+
+## 4) Timing and policy commitment
+
+-   **One-shot vs sequential:** Will you commit now or can you adapt after new information (e.g., after the toss)?
+    -   If sequential, design **policies**: "If we bat first on a dry pitch, open with B; else open with A."
+-   **Pre-commitment** reduces hindsight bias and keeps the process fair and explainable.
+
+## 5) Value of information (VOI) without math
+
+-   **EVPI (perfect information):** How much you would benefit if you could know the true state before acting. If EVPI is large, more scouting or better pitch assessment is valuable.
+-   **EVSI (sample information):** Expected benefit of feasible extra information (e.g., a more detailed pitch inspection, a short practice net under lights).\
+-   **Rule of thumb:** Collect more information **only** if its value exceeds its cost and delay.
+
+## 6) Decision trees and structuring the problem
+
+-   **Decision nodes:** points where you choose an action.\
+-   **Chance nodes:** points where nature reveals an outcome (e.g., weather, toss, swing persisting).\
+-   **Terminal nodes:** outcomes with a loss value.\
+-   **Rollback:** evaluate from the end to the start using your chosen criterion (expected loss, worst-case, or regret).
+
+## 7) Sensitivity analysis (robustness)
+
+-   Identify **key drivers** (e.g., pitch speed, left-arm swing, opener's current form).\
+-   Explore **break-even points**: when would the rule switch from A to B?\
+-   Check **directional consistency**: if swing likelihood increases, does your chosen action change in the expected direction?
+
+## 8) Common pitfalls
+
+-   **Optimizing the wrong metric:** maximizing average PP runs when stakeholders really care about win probability.\
+
+-   **Ignoring asymmetry of costs:** a disastrous start in a knockout may be far worse than a quiet start in a league game.\
+
+-   **Base-rate neglect:** over-weighting a recent highlight, under-weighting long-run performance.\
+
+-   **Overfitting the narrative:** too many conditional branches with no data to support them.
