@@ -30,16 +30,16 @@ Statistics often ends with an action: approve a loan, treat a patient, accept a 
 
 -   State of nature: $\theta$ (unknown true condition, for example, disease or no disease).
 
--   Loss (or cost): $L(\theta, a)$ quantifies how bad action $a$ is if the true state is theta.
+-   Loss (or cost): $L(\theta, a)$ quantifies how bad action $a$ is if the true state is $\theta$.
 
 -   Decision rule: $\delta(X)$ maps data to an action.
 
--   Risk: $R(\theta, \delta) = E_\theta[ L(\theta, \delta(X)) ]$ is the expected loss under state theta.
+-   Risk: $R(\theta, \delta) = E_\theta[ L(\theta, \delta(X)) ]$ is the expected loss under state $\theta$.
 
 # Notation
 
 | Symbol | Meaning | Example interpretation |
-|------------------|-----------------------------|--------------------------|
+|------------------|----------------------------|--------------------------|
 | $X$ | The data or observation you have before acting | The result of a medical test (positive / negative) |
 | $a$ | An action you take | Treat or do not treat a patient |
 | $\theta$ | The state of nature - the true but unknown situation | Whether the person really has the disease |
