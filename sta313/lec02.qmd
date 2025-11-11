@@ -1,0 +1,219 @@
+---
+title: "Lecture 2: Loss and Risk Functions"
+author: "Dr. Rajitha M. Silva"
+format:
+  html:
+    math: mathjax
+---
+
+Statistical decision theory connects probability, estimation, and optimization. The concepts of **loss** and **risk** provide the mathematical foundation for making rational statistical decisions under uncertainty.
+
+------------------------------------------------------------------------
+
+## 1. Definition and Interpretation of Loss Function
+
+A **loss function** quantifies the *cost* or *penalty* of making an incorrect decision. It translates errors in estimation or classification into numerical form, allowing decisions to be compared quantitatively.
+
+### General Definition
+
+Let:
+
+-    $\theta$ = true (unknown) state or parameter,
+
+-   $a$ = chosen action (e.g., an estimate or decision),
+
+then the **loss function** is denoted by:
+
+$$
+L(a, \theta)
+$$
+
+and represents the penalty incurred for choosing action $a$ when the true state is $\theta$.
+
+The smaller the value of $L(a, \theta)$, the better the decision.
+
+### Interpretation
+
+-   It provides a *bridge* between the model world and the decision world.
+-   Different choices of $L(a, \theta)$ express different priorities or attitudes toward error.
+-   A statistician must carefully select an appropriate loss function that aligns with the practical consequences of wrong decisions.
+
+------------------------------------------------------------------------
+
+## 2. Common Loss Functions
+
+Different problems require different measures of loss. Below are the most commonly used loss functions.
+
+### (a) Quadratic (Squared Error) Loss
+
+$$
+L(a, \theta) = (a - \theta)^2
+$$
+
+**Interpretation:** Penalizes large deviations more severely than small ones. Commonly used in estimation problems because of its analytical convenience.
+
+**Example:** In mean estimation, if $a$ is the estimate of the population mean $\theta$, the loss is proportional to the squared estimation error.
+
+------------------------------------------------------------------------
+
+### (b) Absolute Error Loss
+
+$$
+L(a, \theta) = |a - \theta|
+$$
+
+**Interpretation:** Penalizes errors linearly. More robust to outliers than the quadratic loss. Leads to the **median** as the optimal estimate instead of the mean.
+
+**Example:** In estimating the median household income, absolute error loss is more appropriate because extreme values should not overly influence the result.
+
+------------------------------------------------------------------------
+
+### (c) 0–1 Loss (Classification Loss)
+
+$$
+L(a, \theta) = 
+\begin{cases}
+0, & \text{if } a = \theta \\
+1, & \text{if } a \ne \theta
+\end{cases}
+$$
+
+**Interpretation:** Used in classification and decision problems where the only concern is whether the decision is correct or not.
+
+**Example:** In spam detection, the loss is 1 if an email is misclassified, and 0 otherwise.
+
+------------------------------------------------------------------------
+
+## 3. Concept of Risk Function
+
+Since the true state $\theta$ is random or unknown, we cannot minimize the loss directly. Instead, we minimize its *expected value* under the assumed model.
+
+### Definition
+
+The **risk function** of an action $a$ is the expected loss:
+
+$$
+R(a, \theta) = E[L(a, \theta)]
+$$
+
+This expectation is taken with respect to the probability distribution of the data (or uncertainty about $\theta$).
+
+-   **Frequentist interpretation:** The risk is the average loss over repeated samples when the true parameter is $\theta$.
+-   **Bayesian interpretation:** The risk is the expected loss under the posterior distribution of $\theta$.
+
+### Intuition
+
+-   Loss tells us the penalty for a single case.
+-   Risk averages that penalty over randomness, providing a performance measure for a decision rule.
+
+------------------------------------------------------------------------
+
+## 4. Illustrations
+
+### Example 1: Mean Estimation
+
+Suppose $X_1, X_2, \dots, X_n$ are i.i.d. from a normal distribution $N(\theta, 1)$, and we estimate $\theta$ by $a = \bar{X}$.
+
+**Quadratic loss:** $L(a, \theta) = (a - \theta)^2$
+
+Then the risk function is:
+
+$$
+R(a, \theta) = E[(\bar{X} - \theta)^2] = Var(\bar{X}) = \frac{1}{n}
+$$
+
+This shows that risk decreases as sample size increases.
+
+**Alternative estimator:** Using $a = 0$ always,
+
+$$
+R(a, \theta) = (0 - \theta)^2 = \theta^2
+$$
+
+Hence, the sample mean has smaller risk for large $n$ and performs uniformly better.
+
+------------------------------------------------------------------------
+
+### Example 2: Binary Classification
+
+Let $Y \in \{0,1\}$ be the true class, and $\hat{Y}$ the predicted class. Under 0–1 loss,
+
+$$
+L(\hat{Y}, Y) = I(\hat{Y} \ne Y)
+$$
+
+where $I(\cdot)$ is the indicator function.
+
+Then the **risk function** is the **misclassification probability**:
+
+$$
+R(\hat{Y}) = P(\hat{Y} \ne Y)
+$$
+
+If class probabilities are known, the Bayes classifier minimizes this risk by choosing the class with the higher posterior probability:
+
+$$
+\hat{Y} = 
+\begin{cases}
+1, & P(Y=1|x) > P(Y=0|x) \\
+0, & \text{otherwise}
+\end{cases}
+$$
+
+This rule minimizes the expected 0–1 loss and achieves the **Bayes risk** (the lowest possible misclassification rate).
+
+------------------------------------------------------------------------
+
+## 5. Visualization of Loss and Risk in R
+
+Below are simple R codes to visualize how different loss functions behave and how risk can be illustrated.
+
+### (a) Visualizing Common Loss Functions
+
+```{r}
+library(tidyverse)
+x <- seq(-4, 4, length.out = 200)
+loss_df <- tibble(
+  x = x,
+  Quadratic = x^2,
+  Absolute = abs(x),
+  ZeroOne = ifelse(x == 0, 0, 1)
+) %>% pivot_longer(-x, names_to = "LossType", values_to = "Loss")
+
+ggplot(loss_df, aes(x, Loss, color = LossType)) +
+  geom_line(size = 1.1) +
+  theme_minimal() +
+  labs(title = "Common Loss Functions", x = "Estimation Error (a - θ)", y = "Loss")
+```
+
+### (b) Risk Function Illustration (Mean Estimation)
+
+```{r}
+set.seed(1)
+N <- 1000
+n <- 10
+theta <- 2
+xbar <- replicate(N, mean(rnorm(n, mean = theta, sd = 1)))
+loss <- (xbar - theta)^2
+mean(loss)  # Estimated risk
+
+# Visualize distribution of loss
+qplot(loss, bins = 30, fill = I("steelblue"), main = "Distribution of Loss for Mean Estimator") +
+  theme_minimal()
+```
+
+### (c) Visualizing Risk Across Sample Size
+
+```{r}
+set.seed(1)
+ns <- seq(2, 100, by = 2)
+risk <- 1 / ns
+tibble(ns, risk) %>%
+  ggplot(aes(ns, risk)) +
+  geom_line(size = 1.2, color = "darkred") +
+  theme_minimal() +
+  labs(title = "Risk Function for Mean Estimator under Quadratic Loss",
+       x = "Sample Size (n)", y = "Risk")
+```
+
+------------------------------------------------------------------------

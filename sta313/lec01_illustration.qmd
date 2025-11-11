@@ -1,0 +1,143 @@
+---
+title: "Lecture 1 illustration: Discrete Case Example"
+author: "Dr. Rajitha M. Silva"
+format:
+  html:
+    math: mathjax
+---
+
+# Discrete Application of Statistical Decision Theory
+
+Consider a cricketing example. Before the start of an innings, a team’s management must decide **which batters should open** against the **opponent team**. The success of this choice depends on how the **powerplay overs** will be bowled—whether the opponent relies mainly on **pacers** or **spinners** during that phase. Although some insights may be gained from previous matches, pitch conditions, or weather reports, the actual bowling composition chosen by the opponent remains uncertain at the time of decision.
+
+This forms a classic **discrete decision problem**:
+
+-   **Actions**: selecting an opener (for example, a technically strong batter who excels against pace, or an aggressive player better suited to spin).
+
+-   **States of nature**: the type of bowling attack used by the opponent in the powerplay—**pace-dominated** or **spin-dominated**.
+
+-   **Loss**: the expected disadvantage (for instance, in terms of lower strike rate or additional “regret runs”) when the selected opener performs poorly against the encountered bowling type.
+
+-   Using a **loss matrix**, one can represent the potential consequences of each batting choice under each bowling condition. The **risk function** then expresses the expected loss for each action, given a subjective probability that the opponent will use pacers or spinners.
+
+From this, two fundamental decision criteria emerge:
+
+-   The **Bayes action**, which minimizes the *expected loss* given the prior probability of facing pacers.
+
+-   The **minimax action**, which minimizes the *worst-case loss* when the opponent’s bowling composition is entirely unpredictable.
+
+This cricket-based example shows how statistical decision theory translates strategic uncertainty into measurable quantities, allowing captains and analysts to make data-informed decisions against an opponent team, even when the match dynamics are not fully known.
+
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+# 1. Setup
+
+**Actions:**\
+$\mathcal{A} = \{ a_1, a_2 \}$\
+- $a_1$: open with a batter suited to pace\
+- $a_2$: open with a batter suited to spin
+
+**States of nature:**\
+$\Theta = \{ P, S \}$\
+- $P$: opponent uses pace bowlers in powerplay\
+- $S$: opponent uses spin bowlers in powerplay
+
+**Loss** = number of regret runs (or expected performance disadvantage) compared to the optimal choice.
+
+# 2. Loss Matrix
+
+| Action (Decision) | Powerplay dominated by Pacers (P) | Powerplay dominated by Spinners (S) |
+|:---|:--:|:--:|
+| pace-suited opener ($a_1$) | 0 | 6 |
+| spin-suited opener ($a_2$) | 4 | 0 |
+
+Interpretation: - Using a pace-suited opener when the powerplay is dominated by spinners costs 6 runs.\
+- Using a spin-suited opener when the powerplay is dominated by pacers costs 4 runs.
+
+# 3. Risk Function
+
+Let $p = \Pr(P)$ be the probability that the opponent’s powerplay will be dominated by pacers.
+
+$$
+R(a_1, p) = 0 \cdot p + 6(1 - p) = 6(1 - p)
+$$ $$
+R(a_2, p) = 4p + 0 \cdot (1 - p) = 4p
+$$
+
+# 4. Bayes Action (Given Prior)
+
+Suppose $p = 0.7$.
+
+$$
+R(a_1, 0.7) = 6(1 - 0.7) = 1.8
+$$ $$
+R(a_2, 0.7) = 4(0.7) = 2.8
+$$
+
+Bayes Action: Choose $a_1$ (open with batter suited to pace) since it has lower Bayes risk.
+
+# 5. Decision Boundary
+
+Find the threshold where both risks are equal:
+
+$$
+6(1 - p) = 4p \implies p^* = 0.6
+$$
+
+Hence, - If $p > 0.6$: choose batter suited to pace ($a_1$) - If $p < 0.6$: choose batter suited to spin ($a_2$) - If $p = 0.6$: either action yields equal risk (2.4)
+
+# 6. Minimax Action
+
+Worst-case (maximum) risk for each action:
+
+$$
+\max_p R(a_1, p) = 6 \text{ (at } p=0)$$
+
+$$
+\max_p R(a_2, p) = 4 \text{ (at } p=1)
+$$
+
+Minimax Action: $a_2$ (batter suited to spin) since 4 \< 6.
+
+# 6.1 Interpretation: Bayes vs. Minimax
+
+The Bayes and Minimax actions differ because they are based on two distinct attitudes toward uncertainty.
+
+| Criterion | What it Minimizes | Information Used | Decision Attitude |
+|----|----|----|----|
+| **Bayes** | Expected loss (averaged over a prior) | Uses a prior probability for each state of nature | Subjective / probabilistic |
+| **Minimax** | Maximum loss (worst case) | Assumes no prior—focuses on worst possible outcome | Conservative / risk-averse |
+
+**In this cricket example:**
+
+-   **Bayes action:** With prior belief $p = 0.7$ that the opponent will use pacers in the powerplay, $a_1$ (pace-suited opener) minimizes the expected loss.
+
+-   **Minimax action:** With no reliable prior, we guard against the worst case. Since $\max_p R(a_1,p) = 6$ and $\max_p R(a_2,p) = 4$, the safer choice is $a_2$ (spin-suited opener).
+
+**Interpretation:** - The Bayes approach trusts available evidence or scouting data—optimal *on average* given the prior. - The Minimax approach assumes total uncertainty—optimal under the *worst possible* scenario.
+
+In practice, if match data or scouting reports provide credible probabilities, the Bayes decision is reasonable. When uncertainty is high or the opponent is unpredictable, the minimax choice is safer.
+
+------------------------------------------------------------------------
+
+# 7. R Code
+
+```{r}
+library(tidyverse)
+p <- seq(0, 1, by = 0.01)
+R1 <- 6 * (1 - p)
+R2 <- 4 * p
+
+data.frame(p, R1, R2) %>%
+  pivot_longer(cols = c(R1, R2), names_to = "Action", values_to = "Risk") %>%
+  ggplot(aes(p, Risk, color = Action)) +
+  geom_line(size = 1.2) +
+  geom_vline(xintercept = 0.6, linetype = "dashed") +
+  annotate("text", x = 0.6, y = 3.5, label = "p* = 0.6", hjust = -0.1) +
+  theme_minimal() +
+  labs(title = "Risk Functions for Discrete Actions (Cricket Example)",
+       x = "Probability of Pace-Dominated Powerplay (p)",
+       y = "Expected Loss (Risk)")
+```

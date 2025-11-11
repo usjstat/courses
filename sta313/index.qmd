@@ -42,60 +42,60 @@ By the end of this course, students will be able to:
 
 # Lecture Plan (2 hours each)
 
-+-------------+-----------------------------------------------+--------------------------------------------------------------------------------------------+
-| Lec         | Theme                                         | Core Ideas                                                                                 |
-+:===========:+===============================================+============================================================================================+
-| 1           | [Introduction to Decision Theory](lec01.html) | -   Motivation and examples of decision problems in statistics                             |
-|             |                                               |                                                                                            |
-|             |                                               | -   Elements of a decision problem: action, state of nature, loss, risk                    |
-|             |                                               |                                                                                            |
-|             |                                               | -   Decision-making under uncertainty                                                      |
-|             |                                               |                                                                                            |
-|             |                                               | -   Real-life statistical decisions (medical diagnosis, quality control, sports analytics) |
-+-------------+-----------------------------------------------+--------------------------------------------------------------------------------------------+
-| 2           | Loss & Risk Functions                         | -   Definition and interpretation of loss function $(L(\theta,a)$                          |
-|             |                                               |                                                                                            |
-|             |                                               | -   Common loss functions: quadratic, absolute, 0-1 loss                                   |
-|             |                                               |                                                                                            |
-|             |                                               | -   Concept of risk function $R(\theta,\delta)$                                            |
-|             |                                               |                                                                                            |
-|             |                                               | -   Illustration with mean estimation and classification examples                          |
-|             |                                               |                                                                                            |
-|             |                                               | -   Visualization of loss and risk in R                                                    |
-+-------------+-----------------------------------------------+--------------------------------------------------------------------------------------------+
-| 3           | Decision Rules & Randomization                | -   Deterministic vs randomized decision rules                                             |
-|             |                                               |                                                                                            |
-|             |                                               | -   Criteria for evaluating decision rules                                                 |
-|             |                                               |                                                                                            |
-|             |                                               | -   Risk minimization principle                                                            |
-|             |                                               |                                                                                            |
-|             |                                               | -   Example: estimation of a normal mean under squared error loss                          |
-+-------------+-----------------------------------------------+--------------------------------------------------------------------------------------------+
-| 4           | Bayesian Decision Framework                   | -   Prior distribution and posterior distribution                                          |
-|             |                                               | -   Posterior expected loss and Bayes risk                                                 |
-|             |                                               | -   Bayes decision rule                                                                    |
-|             |                                               | -   Examples under quadratic and 0-1 loss                                                  |
-|             |                                               | -   R implementation: posterior-based decision rule                                        |
-+-------------+-----------------------------------------------+--------------------------------------------------------------------------------------------+
-| 5           | Minimax & Admissibility                       | -   Minimax principle and its motivation                                                   |
-|             |                                               | -   Least favorable prior                                                                  |
-|             |                                               | -   Admissible and inadmissible rules                                                      |
-|             |                                               | -   Relationship between Bayes and minimax rules                                           |
-|             |                                               | -   Example: binomial proportion estimation                                                |
-+-------------+-----------------------------------------------+--------------------------------------------------------------------------------------------+
-| 6           | Likelihood and Frequentist Decision Rules     | -   Likelihood-based decision making                                                       |
-|             |                                               | -   Maximum likelihood and unbiased estimators as decision rules                           |
-|             |                                               | -   Risk comparison of frequentist estimators                                              |
-|             |                                               | -   Connection to hypothesis testing and confidence intervals                              |
-+-------------+-----------------------------------------------+--------------------------------------------------------------------------------------------+
-| 7           | Applications and Simulation Study             | -   Case study: medical test decision, cricket player selection, business decision         |
-|             |                                               |                                                                                            |
-|             |                                               | -   Monte Carlo simulation for decision comparison                                         |
-+-------------+-----------------------------------------------+--------------------------------------------------------------------------------------------+
-| 8           | Course Review                                 | -   Summary of principles: Bayes, minimax, admissibility                                   |
-|             |                                               |                                                                                            |
-|             |                                               | -   Course recap and assignment briefing                                                   |
-+-------------+-----------------------------------------------+--------------------------------------------------------------------------------------------+
++-----------+-----------------------------------------------+--------------------------------------------------------------------------------------------+
+| Lec       | Theme                                         | Core Ideas                                                                                 |
++:=========:+===============================================+============================================================================================+
+| 1         | [Introduction to Decision Theory](lec01.html) | -   Motivation and examples of decision problems in statistics                             |
+|           |                                               |                                                                                            |
+|           | [Discrete example](lec01_illustration.html)   | -   Elements of a decision problem: action, state of nature, loss, risk                    |
+|           |                                               |                                                                                            |
+|           |                                               | -   Decision-making under uncertainty                                                      |
+|           |                                               |                                                                                            |
+|           |                                               | -   Real-life statistical decisions (medical diagnosis, quality control, sports analytics) |
++-----------+-----------------------------------------------+--------------------------------------------------------------------------------------------+
+| 2         | [Loss & Risk Functions](lec02.html)           | -   Definition and interpretation of loss function $(L(\theta,a)$                          |
+|           |                                               |                                                                                            |
+|           |                                               | -   Common loss functions: quadratic, absolute, 0-1 loss                                   |
+|           |                                               |                                                                                            |
+|           |                                               | -   Concept of risk function $R(\theta,\delta)$                                            |
+|           |                                               |                                                                                            |
+|           |                                               | -   Illustration with mean estimation and classification examples                          |
+|           |                                               |                                                                                            |
+|           |                                               | -   Visualization of loss and risk in R                                                    |
++-----------+-----------------------------------------------+--------------------------------------------------------------------------------------------+
+| 3         | Decision Rules & Randomization                | -   Deterministic vs randomized decision rules                                             |
+|           |                                               |                                                                                            |
+|           |                                               | -   Criteria for evaluating decision rules                                                 |
+|           |                                               |                                                                                            |
+|           |                                               | -   Risk minimization principle                                                            |
+|           |                                               |                                                                                            |
+|           |                                               | -   Example: estimation of a normal mean under squared error loss                          |
++-----------+-----------------------------------------------+--------------------------------------------------------------------------------------------+
+| 4         | Bayesian Decision Framework                   | -   Prior distribution and posterior distribution                                          |
+|           |                                               | -   Posterior expected loss and Bayes risk                                                 |
+|           |                                               | -   Bayes decision rule                                                                    |
+|           |                                               | -   Examples under quadratic and 0-1 loss                                                  |
+|           |                                               | -   R implementation: posterior-based decision rule                                        |
++-----------+-----------------------------------------------+--------------------------------------------------------------------------------------------+
+| 5         | Minimax & Admissibility                       | -   Minimax principle and its motivation                                                   |
+|           |                                               | -   Least favorable prior                                                                  |
+|           |                                               | -   Admissible and inadmissible rules                                                      |
+|           |                                               | -   Relationship between Bayes and minimax rules                                           |
+|           |                                               | -   Example: binomial proportion estimation                                                |
++-----------+-----------------------------------------------+--------------------------------------------------------------------------------------------+
+| 6         | Likelihood and Frequentist Decision Rules     | -   Likelihood-based decision making                                                       |
+|           |                                               | -   Maximum likelihood and unbiased estimators as decision rules                           |
+|           |                                               | -   Risk comparison of frequentist estimators                                              |
+|           |                                               | -   Connection to hypothesis testing and confidence intervals                              |
++-----------+-----------------------------------------------+--------------------------------------------------------------------------------------------+
+| 7         | Applications and Simulation Study             | -   Case study: medical test decision, cricket player selection, business decision         |
+|           |                                               |                                                                                            |
+|           |                                               | -   Monte Carlo simulation for decision comparison                                         |
++-----------+-----------------------------------------------+--------------------------------------------------------------------------------------------+
+| 8         | Course Review                                 | -   Summary of principles: Bayes, minimax, admissibility                                   |
+|           |                                               |                                                                                            |
+|           |                                               | -   Course recap and assignment briefing                                                   |
++-----------+-----------------------------------------------+--------------------------------------------------------------------------------------------+
 
 ------------------------------------------------------------------------
 
