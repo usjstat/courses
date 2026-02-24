@@ -1,0 +1,142 @@
+---
+title: "Probability and Distribution Theory: Lesson 5"
+author: "Dr. Rajitha M. Silva"
+output: html_document
+---
+
+# 1.6 Rules of Probability
+
+Probability rules help us combine and manipulate events to calculate desired probabilities.
+
+## Complement Rule
+
+If \( E \) is an event, then:
+
+$$
+\Pr(E') = 1 - \Pr(E)
+$$
+
+## Addition Rule
+
+For any two events \( A \) and \( B \):
+
+$$
+\Pr(A \cup B) = \Pr(A) + \Pr(B) - \Pr(A \cap B)
+$$
+
+If \( A \) and \( B \) are mutually exclusive:
+
+$$
+\Pr(A \cup B) = \Pr(A) + \Pr(B)
+$$
+
+## Multiplication Rule
+
+For any two events \( A \) and \( B \):
+
+$$
+\Pr(A \cap B) = \Pr(A \mid B) \cdot \Pr(B)
+$$
+
+If \( A \) and \( B \) are independent:
+
+$$
+\Pr(A \cap B) = \Pr(A) \cdot \Pr(B)
+$$
+
+---
+
+## Activity 1.15
+
+**Two pumps are connected in series.** The older pump fails with probability 0.05, and the newer pump fails with probability 0.01. Failures are independent. The system fails if at least one pump fails. What is the probability the system fails?
+
+
+
+---
+
+# Law of Total Probability
+
+If \( A_1, A_2, ..., A_n \) are **mutually exclusive and exhaustive** events, and \( B \) is any event:
+
+$$
+\Pr(B) = \sum_{i=1}^{n} \Pr(B \mid A_i) \cdot \Pr(A_i)
+$$
+
+---
+
+## Activity 1.16
+
+A shop sells 3 brands of TVs:
+
+- Brand A (50%), Brand B (30%), Brand C (20%)
+- Probability a TV needs repair:
+  - A: 0.25
+  - B: 0.20
+  - C: 0.10
+
+What is the probability that a randomly selected TV will need repair?
+
+
+
+---
+
+
+
+
+# Bayes' Theorem
+
+Let \( A_1, A_2, ..., A_n \) be mutually exclusive and exhaustive events, and \( B \) be an event. Then for any \( A_i \):
+
+$$
+\Pr(A_i \mid B) = \frac{\Pr(B \mid A_i) \cdot \Pr(A_i)}{\sum_{j=1}^{n} \Pr(B \mid A_j) \cdot \Pr(A_j)}
+$$
+
+This formula allows **reversing conditional probabilities**, moving from \( \Pr(B \mid A_i) \) to \( \Pr(A_i \mid B) \).
+
+---
+
+## Activity 1.17
+
+A company provides 3 health plans to employees:
+
+- Deluxe (D): 30%
+- Standard (S): 60%
+- Economy (E): 10%
+
+Probability of *no claim*:
+
+- D: 0.1
+- S: 0.4
+- E: 0.7
+
+1. What is the probability that a randomly selected employee made no claims last year?  
+2. If an employee made no claims, what is the probability they were under Standard plan?
+
+
+
+
+
+---
+
+## Activity 1.18
+
+Initially, a box contains 3 balls identical in all aspects except for their colour, each of which is either white or black. Now, one white ball identical to balls in the box in all aspects except for its colour is added into the box, and then one ball is drawn at random from the box. 
+
+Assuming that the four possible initial compositions of the balls in the box are equally likely, find the probability that:
+
+(i) the ball drawn is white, and  
+(ii) initially there were exactly 2 black balls in the box, given that the ball drawn is white.
+
+
+
+
+### Key Points
+
+- Use **Complement Rule** when calculating probability of the event *not happening*
+- Use **Addition Rule** to combine probabilities of unions
+- Use **Multiplication Rule** to calculate intersections (especially under dependence or independence)
+- **Law of Total Probability** helps when an event depends on several underlying scenarios
+- **Bayes' Theorem** allows updating beliefs given observed evidence
+
+---
+

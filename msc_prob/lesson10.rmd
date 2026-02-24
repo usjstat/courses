@@ -1,0 +1,663 @@
+
+---
+title: "Probability and Distribution Theory: Lesson 10"
+author: "Dr. R. M. Silva"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+
+
+### Expectation: \( \mathbb{E}[g(X)] \)
+
+Let \( X \) be a discrete random variable with pmf \( P_X(x) = \Pr(X = x) \). For any real-valued function \( g \), the **expected value of a function of a random variable** is defined as:
+
+\[
+\mathbb{E}[g(X)] = \sum_{x} g(x) \cdot P_X(x)
+\]
+
+This definition includes the expectation of \( X \) itself, by letting \( g(x) = x \).
+
+In probability theory, the **expectation** (or **expected value**) of a random variable provides a measure of the *center* or *average* of its distribution. It is denoted by $E(X)$ or $\mathbb{E}[X]$.
+
+### Motivation
+
+Consider a random variable $X$ defined on a sample space $\mathcal{S}$. If a gambler repeatedly samples outcomes from $\mathcal{S}$, and $X(\omega)$ (we simply write $X$) denotes the gain or loss in each trial, then the **average gain** over many repetitions approximates the expectation of $X$.
+
+Let $X_1, X_2, \ldots, X_n$ be independent repetitions. The average gain is:
+
+\[
+\frac{X_1 + X_2 + \cdots + X_n}{n}
+\]
+
+As $n \to \infty$, this average converges to a constant value called the **expected value** of $X$, denoted by $E(X)$.
+
+---
+
+
+
+## Expectation for Discrete Random Variables
+
+Let $X$ be a discrete random variable with possible values $x_1, x_2, \ldots, x_n$ and corresponding probabilities $p_i = \Pr(X = x_i)$. Then:
+
+\[
+\mathbb{E}[X] = \sum_{i=1}^{n} x_i \cdot \Pr(X = x_i)
+\]
+
+This assumes:
+
+\[
+\sum_{i=1}^{n} |x_i| \cdot \Pr(X = x_i) < \infty
+\]
+
+### Example: Win or Lose Game
+
+Let $X$ be the amount won in a game:
+
+- Win Rs. 1 with probability $p$
+- Win Rs. 0 with probability $1-p$
+
+Then:
+\[
+\mathbb{E}[X] = 0 \cdot (1-p) + 1 \cdot p = p
+\]
+
+### Example: Win Rs. 1 or Lose Rs. 1
+
+Let $Y$ be defined as:
+
+- Win Rs. 1 with probability $p$
+- Lose Rs. 1 with probability $1-p$
+
+Then:
+\[
+\mathbb{E}[X] = (-1)(1-p) + (1)(p) = 2p - 1
+\]
+
+---
+
+
+## Expectation for Continuous Random Variables
+
+If $X$ is a continuous random variable with density function $f_X(x)$, then:
+
+\[
+\mathbb{E}[X] = \int_{-\infty}^{\infty} x f_X(x) dx
+\]
+
+provided:
+
+\[
+\int_{-\infty}^{\infty} |x| f_X(x) dx < \infty
+\]
+
+---
+
+## Interpretation of Expectation
+
+### Mechanical View (Discrete)
+
+- Consider a set of points \( x_1, x_2, \ldots, x_n \) on a number line.
+- Attach a weight \( p_i = \Pr(X = x_i) \) at each point \( x_i \).
+- The expectation \( \mathbb{E}[X] \) is the point at which the system balances - similar to the **center of mass** of a discrete system.
+- Mathematically,
+  \[
+  \mathbb{E}[X] = \sum_{i} x_i \Pr(X = x_i)
+  \]
+- The expectation is the point where the weighted distances on either side are equal.
+
+**Example:**
+### Example Table of a Discrete Random Variable
+
+| Value \(x_i\) | Probability \(p_i\) |
+|:-------------:|:------------------:|
+| \(-1\)        | \(0.2\)            |
+| \(0\)         | \(0.5\)            |
+| \(2\)         | \(0.3\)            |
+
+
+Then the expectation is:
+
+\[
+\mathbb{E}[X] = (-1)(0.2) + (0)(0.5) + (2)(0.3) = -0.2 + 0 + 0.6 = 0.4
+\]
+
+---
+
+### Mechanical View (Continuous)
+
+- Imagine a **thin metal rod** (or sheet) lying along the real number line, where:
+  - At each point \( x \), the "density" is given by the **probability density function (pdf)** \( f(x) \).
+- Then the expectation \( \mathbb{E}[X] \) is the **center of mass** (balance point) of this rod.
+
+\[
+\mathbb{E}[X] = \int_{-\infty}^{\infty} x f(x) \, dx
+\]
+
+- This interpretation is useful in physics and engineering, where mass distributions are modeled similarly.
+
+**Visualization Idea:**
+
+- For discrete: visualize weights hanging from a bar.
+- For continuous: visualize a curve on a sheet, where expectation is the horizontal coordinate where it would balance.
+
+---
+
+---
+
+### Properties of Expectation
+
+- \( \mathbb{E}[aX + b] = a \cdot \mathbb{E}[X] + b \)\
+
+- Linearity: \( \mathbb{E}[X + Y] = \mathbb{E}[X] + \mathbb{E}[Y] \)\
+
+- If \( X \) is constant \( c \), then \( \mathbb{E}[X] = c \)
+
+
+### Proof:
+
+### 1. Linearity: \( \mathbb{E}[aX + b] = a \cdot \mathbb{E}[X] + b \)
+
+#### Discrete Case
+
+Let \( X \) take values \( x_i \) with probabilities \( p_i \):
+
+\[
+\mathbb{E}[aX + b] = \sum_i (a x_i + b) p_i = a \sum_i x_i p_i + b \sum_i p_i = a \mathbb{E}[X] + b
+\]
+
+#### Continuous Case
+
+Let \( X \) have pdf \( f(x) \):
+
+\[
+\mathbb{E}[aX + b] = \int_{-\infty}^{\infty} (a x + b) f(x) dx = a \int x f(x) dx + b \int f(x) dx = a \mathbb{E}[X] + b
+\]
+
+---
+
+### 2. Additivity: \( \mathbb{E}[X + Y] = \mathbb{E}[X] + \mathbb{E}[Y] \)
+
+#### Discrete Case
+
+Joint pmf \( p(x,y) \):
+
+\[
+\mathbb{E}[X + Y] = \sum_{x, y} (x + y) p(x, y) = \sum_{x, y} x p(x, y) + \sum_{x, y} y p(x, y) = \mathbb{E}[X] + \mathbb{E}[Y]
+\]
+
+#### Continuous Case
+
+
+Let \(X\) and \(Y\) be two continuous random variables with **joint probability density function** \(f(x, y)\). The expectation of the sum \(X + Y\) is:
+
+\[
+\mathbb{E}[X + Y] = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} (x + y) f(x, y) \, dx \, dy
+\]
+
+We now apply **linearity of integration**:
+
+\[
+= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} x f(x, y) \, dx \, dy + \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} y f(x, y) \, dx \, dy
+\]
+
+Swap the order of integration (justified under Fubini's Theorem):
+
+\[
+= \int_{-\infty}^{\infty} \left( \int_{-\infty}^{\infty} x f(x, y) \, dx \right) dy + \int_{-\infty}^{\infty} \left( \int_{-\infty}^{\infty} y f(x, y) \, dy \right) dx
+\]
+
+Note that:
+- The first term integrates out \(x\), keeping \(y\) fixed.
+- The second term integrates out \(y\), keeping \(x\) fixed.
+
+We now recognize:
+
+\[
+= \int_{-\infty}^{\infty} \left( \int_{-\infty}^{\infty} x f(x, y) \, dx \right) dy = \mathbb{E}[X]
+\]
+and
+\[
+= \int_{-\infty}^{\infty} \left( \int_{-\infty}^{\infty} y f(x, y) \, dy \right) dx = \mathbb{E}[Y]
+\]
+
+So finally:
+
+\[
+\mathbb{E}[X + Y] = \mathbb{E}[X] + \mathbb{E}[Y]
+\]
+
+---
+
+### 3. Constant Random Variable
+
+
+
+Suppose \( X = c \) almost surely - that is, the random variable \( X \) always takes the same constant value \( c \).
+
+---
+
+#### Discrete Case
+
+In the discrete setting, if \( X = c \) with probability 1:
+
+\[
+\mathbb{E}[X] = \sum_x x \cdot \Pr(X = x)
+\]
+
+Since \( \Pr(X = c) = 1 \) and \( \Pr(X = x) = 0 \) for all \( x \neq c \), the sum becomes:
+
+\[
+\mathbb{E}[X] = c \cdot 1 + \sum_{x \neq c} x \cdot 0 = c
+\]
+
+---
+
+#### Continuous Case
+
+Let \( X \) be a continuous random variable with probability density function \( f_X(x) \).
+
+By definition of expectation:
+\[
+\mathbb{E}[c] = \int_{-\infty}^{\infty} c \cdot f_X(x) \, dx
+\]
+
+Since \( c \) is constant, we can pull it outside the integral:
+\[
+\mathbb{E}[c] = c \cdot \int_{-\infty}^{\infty} f_X(x) \, dx
+\]
+
+But we know that the total probability under the density function is:
+\[
+\int_{-\infty}^{\infty} f_X(x) \, dx = 1
+\]
+
+Therefore:
+\[
+\mathbb{E}[c] = c \cdot 1 = c
+\]
+
+---
+
+## Variance: \( \mathrm{Var}(X) \)   or \( V(X)\)
+
+### Definition
+
+Variance measures how spread out the values of \( X \) are around the mean:
+
+\[
+\mathrm{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2]
+\]
+
+### Activity 2.20:  Shortcut formula
+
+Simplify the above formula to the folowing:
+
+\[
+\mathrm{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2
+\]
+
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+We start with the definition of the variance of a random variable \( X \):
+
+\[
+\mathrm{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2]
+\]
+
+
+
+We can expand the square inside the expectation:
+
+\[
+\mathrm{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2]
+= \mathbb{E}[X^2 - 2X\mathbb{E}[X] + (\mathbb{E}[X])^2]
+\]
+
+
+
+Now, using the linearity of expectation, we can break this into three separate terms:
+
+\[
+\mathrm{Var}(X) = \mathbb{E}[X^2] - 2\mathbb{E}[X\mathbb{E}[X]] + \mathbb{E}[(\mathbb{E}[X])^2]
+\]
+
+Simplifying the Terms - 
+
+1. The first term \( \mathbb{E}[X^2] \) stays as is.\
+
+2. The second term \( \mathbb{E}[X\mathbb{E}[X]] \) simplifies to \( \mathbb{E}[X] \cdot \mathbb{E}[X] \) because \( \mathbb{E}[X] \) is constant.\
+
+3. The third term \( \mathbb{E}[(\mathbb{E}[X])^2] \) simplifies to \( (\mathbb{E}[X])^2 \), since \( \mathbb{E}[X] \) is constant.\
+
+
+Thus, we get:
+
+\[
+\mathrm{Var}(X) = \mathbb{E}[X^2] - 2\mathbb{E}[X](\mathbb{E}[X]) + (\mathbb{E}[X])^2
+\]
+
+
+
+Simplifying the above expression:
+
+\[
+\mathrm{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2
+\]
+
+Thus, we have shown that the variance of \( X \) is given by:
+
+\[
+\mathrm{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2
+\]
+
+This completes the proof.
+
+</details>
+
+### Properties of Variance
+
+- \( \mathrm{Var}(aX + b) = a^2 \cdot \mathrm{Var}(X) \)
+- \( \mathrm{Var}(X) \geq 0 \)
+- \( \mathrm{Var}(c) = 0 \) for any constant \( c \)
+
+---
+
+###  Activity 2.21: Proof of properties of  variance
+
+Prove the above properties.
+
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+1. Property: \( \mathrm{Var}(aX + b) = a^2 \cdot \mathrm{Var}(X) \)
+
+Proof:
+
+Recall the definition of variance:
+
+\[
+\mathrm{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2]
+\]
+
+Now consider the variance of \( aX + b \):
+
+\[
+\mathrm{Var}(aX + b) = \mathbb{E}[(aX + b - \mathbb{E}[aX + b])^2]
+\]
+
+First, simplify the expectation \( \mathbb{E}[aX + b] \):
+
+\[
+\mathbb{E}[aX + b] = a\mathbb{E}[X] + b
+\]
+
+Thus, we have:
+
+\[
+\mathrm{Var}(aX + b) = \mathbb{E}[(aX + b - (a\mathbb{E}[X] + b))^2]
+\]
+\[
+= \mathbb{E}[(a(X - \mathbb{E}[X]))^2]
+\]
+\[
+= \mathbb{E}[a^2(X - \mathbb{E}[X])^2]
+\]
+
+Since \( a^2 \) is a constant, it can be factored out of the expectation:
+
+\[
+\mathrm{Var}(aX + b) = a^2 \cdot \mathbb{E}[(X - \mathbb{E}[X])^2]
+\]
+
+By the definition of variance, this is:
+
+\[
+\mathrm{Var}(aX + b) = a^2 \cdot \mathrm{Var}(X)
+\]
+
+Thus, we have proven the first property:
+
+\[
+\mathrm{Var}(aX + b) = a^2 \cdot \mathrm{Var}(X)
+\]
+
+2. Property: \( \mathrm{Var}(X) \geq 0 \)
+
+Proof:
+
+Variance is defined as:
+
+\[
+\mathrm{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2]
+\]
+
+Since \( (X - \mathbb{E}[X])^2 \) is always non-negative for any value of \( X \), we know that:
+
+\[
+\mathbb{E}[(X - \mathbb{E}[X])^2] \geq 0
+\]
+
+Therefore, variance must also be non-negative:
+
+\[
+\mathrm{Var}(X) \geq 0
+\]
+
+Thus, the second property is proven:
+
+\[
+\mathrm{Var}(X) \geq 0
+\]
+
+3. Property: \( \mathrm{Var}(c) = 0 \) for any constant \( c \)
+
+Proof:
+
+Let \( X = c \) be a constant. The variance of a constant is given by:
+
+\[
+\mathrm{Var}(c) = \mathbb{E}[(c - \mathbb{E}[c])^2]
+\]
+
+Since \( c \) is a constant, \( \mathbb{E}[c] = c \). Therefore:
+
+\[
+\mathrm{Var}(c) = \mathbb{E}[(c - c)^2] = \mathbb{E}[0^2] = \mathbb{E}[0] = 0
+\]
+
+Thus, the variance of any constant is zero:
+
+\[
+\mathrm{Var}(c) = 0
+\]
+
+This proves the third property:
+
+\[
+\mathrm{Var}(c) = 0
+\]
+
+</details>
+
+---
+
+## Example: Using a Table
+
+Let \( X \) be a random variable with the following distribution:
+
+\[
+\begin{array}{c|cccc}
+x_i & -1 & 0 & 1 & 2 \\
+\hline
+\Pr(X = x_i) & 0.2 & 0.5 & 0.2 & 0.1
+\end{array}
+\]
+
+Then:
+
+\[
+\mathbb{E}[X] = (-1)(0.2) + (0)(0.5) + (1)(0.2) + (2)(0.1) = -0.2 + 0 + 0.2 + 0.2 = 0.2
+\]
+
+\[
+\mathbb{E}[X^2] = (-1)^2(0.2) + 0^2(0.5) + 1^2(0.2) + 2^2(0.1) = 0.2 + 0 + 0.2 + 0.4 = 0.8
+\]
+
+\[
+\mathrm{Var}(X) = 0.8 - (0.2)^2 = 0.8 - 0.04 = 0.76
+\]
+
+---
+
+### Activity 2.22: Defective Bulbs in Boxes
+
+A bulb manufacturer sells his product to vendors in boxes, each containing 12 bulbs. A recent inspection of 1000 randomly selected boxes resulted in the following data:
+
+\[
+\begin{array}{|c|c|}
+\hline
+\textbf{Number of defective bulbs in a box} & \textbf{Number of boxes} \\
+\hline
+0 & 980 \\
+1 & 20 \\
+2 \text{ or more} & 0 \\
+\hline
+\end{array}
+\]
+
+Assume that the above information provides a good approximation to the distribution of the number of defective bulbs in a box. You may also assume that defects occur independently across bulbs, and each bulb has the same probability of being defective.
+
+---
+
+Let \( X \) be the number of defective bulbs in a randomly selected box.
+
+**(i)** Derive the probability mass function (pmf) of \( X \).
+
+**(ii)** Calculate \( E(X) \) and \( E(X^2) \) using the definition of expected value. Hence calculate the variance \( \text{Var}(X) \).
+
+**(iii)** A vendor has bought 10 boxes of bulbs. Let \( X_i \) be the number of defective bulbs in the \( i^{th} \) box for \( i = 1, 2, \dots, 10 \), and let:
+
+\[
+Y = \sum_{i = 1}^{10} X_i
+\]
+
+That is, \( Y \) is the total number of defective bulbs in the 10 boxes.
+
+Calculate \( E(Y) \) and \( V(Y) \) using \( E(X) \) and \( V(X) \)
+
+**(iv)** The vendor has bought the 10 boxes at a price of Rs. 900 per* box. He sells bulbs at a price of Rs. 100 per bulb.
+
+He checks each bulb before selling and sells **only** the non-defective bulbs.
+
+Derive an expression for the total **profit** as a function of \(Y\):
+
+**(v)** Express \( E(\text{Profit}) \) and \( V(\text{Profit}) \) in terms of \( E(Y) \) and \( V(X) \):
+
+---
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+
+
+ (i) The Probability Mass Function (PMF) of \( X \)
+
+Since each box contains 12 bulbs, and each bulb has a small probability \( p \) of being defective, the total number of defective bulbs in a box, \( X \), follows a **Binomial distribution**:
+
+\[
+X \sim \text{Binomial}(n = 12, p)
+\]
+
+Estimate \( p \) using the data:
+
+- Total defective bulbs observed: 20 boxes × 1 defective bulb = 20 defective bulbs
+- Total bulbs observed: 1000 boxes × 12 bulbs = 12,000 bulbs
+
+\[
+\hat{p} = \frac{20}{12000} = \frac{1}{600} \approx 0.00167
+\]
+
+Thus, the PMF is:
+
+\[
+P_X(x) = \binom{12}{x} \left( \frac{1}{600} \right)^x \left(1 - \frac{1}{600} \right)^{12 - x}, \quad x = 0, 1, \dots, 12
+\]
+
+As the second approach, We can estimate the probability mass function (PMF) of \( X \) directly from the data:
+
+\[
+P(X = 0) = \frac{980}{1000} = 0.98, \quad P(X = 1) = \frac{20}{1000} = 0.02, \quad P(X \geq 2) = 0
+\]
+
+
+
+(ii) Using the definition of expectation:
+
+\[
+E(X) = \sum_x x \cdot P(X = x) = 0 \cdot 0.98 + 1 \cdot 0.02 = 0.02
+\]
+
+\[
+E(X^2) = \sum_x x^2 \cdot P(X = x) = 0^2 \cdot 0.98 + 1^2 \cdot 0.02 = 0.02
+\]
+
+\[
+\text{Var}(X) = E(X^2) - [E(X)]^2 = 0.02 - (0.02)^2 = 0.0196
+\]
+
+
+(iii) **Expected Value \( E(Y) \)**
+
+\[
+E(Y) = \sum_{i=1}^{10} E(X_i) = E(X_1) + E(X_2) + \cdots + E(X_{10}) = 10 \cdot 0.02 = 0.2
+\]
+
+**Variance \( V(Y) \)**
+
+Assuming the boxes are independent (i.e., \( X_1, X_2, \dots, X_{10} \) are independent):
+
+\[
+V(Y) = \sum_{i=1}^{10} V(X_i) = V(X_1) + V(X_2) + \cdots + V(X_{10}) = 10 \cdot 0.0196 = 0.196
+\]
+
+(iv) Let \( Y \) be the total number of defective bulbs among the 120 bulbs (from 10 boxes). The number of non-defective bulbs is \( 120 - Y \). 
+
+To derive an expression for the total **profit**:
+
+- Cost: \( 10 \times 900 = 9000 \) rupees
+- Revenue: \( (120 - Y) \times 100 \)
+
+\[
+\text{Profit} = 100(120 - Y) - 9000 = 12000 - 100Y - 9000 = 3000 - 100Y
+\]
+
+(v) To Express \( E(\text{Profit}) \) and \( V(\text{Profit}) \):
+
+Let's use the linearity of expectation and properties of variance.
+
+\[
+E(\text{Profit}) = E[3000 - 100Y] = 3000 - 100E(Y)
+\]
+
+\[
+V(\text{Profit}) = \text{Var}(3000 - 100Y) = 100^2 \cdot \text{Var}(Y)
+\]
+
+
+
+---
+
+</details>
+

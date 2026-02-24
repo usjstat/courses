@@ -1,0 +1,639 @@
+---
+title: "Probability and Distribution Theory: Lesson 8"
+author: "Rajitha M. Silva"
+output: html_document
+---
+
+
+## 2.1 Discrete Random Variables and Probability Mass Function (pmf)
+
+**Definition 2.2**
+
+A random variable with a **countable range** is called a **discrete random variable**.
+
+---
+
+**Definition 2.3**
+
+The **probability mass function (pmf)** of a discrete random variable \( X \) is the function \( P_X \) defined as:
+
+\[
+P_X(x) = \Pr(X = x), \quad x \in \mathbb{R}
+\]
+
+---
+
+### The Probability Mass Function
+
+The **probability mass function (pmf)** of a discrete random variable \( X \) specifies the probability associated with each individual value in the range of \( X \).
+
+---
+
+### Example 2.3
+
+Consider **Example 2.1**. Let \( X \) be the number of heads observed in 3 tosses of a (possibly biased) coin, where \( \theta = \Pr(\text{Head}) \).
+
+Then, the pmf of \( X \) is given by:
+
+\[
+P_X(0) = (1 - \theta)^3
+\]
+\[
+P_X(1) = 3\theta(1 - \theta)^2
+\]
+\[
+P_X(2) = 3\theta^2(1 - \theta)
+\]
+\[
+P_X(3) = \theta^3
+\]
+\[
+P_X(x) = 0, \quad \text{if } x \notin \{0, 1, 2, 3\}
+\]
+
+---
+
+We can write this compactly using a piecewise definition:
+
+\[
+P_X(x) =
+\begin{cases}
+(1 - \theta)^3 & \text{if } x = 0 \\
+3\theta(1 - \theta)^2 & \text{if } x = 1 \\
+3\theta^2(1 - \theta) & \text{if } x = 2 \\
+\theta^3 & \text{if } x = 3 \\
+0 & \text{otherwise}
+\end{cases}
+\]
+
+Or, using the binomial form:
+
+\[
+P_X(x) = 
+\begin{cases}
+\binom{3}{x} \theta^x (1 - \theta)^{3 - x} & \text{for } x = 0, 1, 2, 3 \\
+0 & \text{otherwise}
+\end{cases}
+\]
+
+Or, simply:
+
+\[
+P_X(x) = \binom{3}{x} \theta^x (1 - \theta)^{3 - x}, \quad x = 0, 1, 2, 3
+\]
+
+---
+
+
+
+
+
+## Activity 2.15
+
+A (possibly biased) coin is tossed **repeatedly and independently** until the first Head (H) appears.  
+Let the probability of Head on any single toss be \( \theta \in (0,1) \).
+
+Define a random variable:
+
+\[
+X = \text{the number of tosses until the first Head appears}
+\]
+
+
+
+1. Write down the sample space \( S \) of this experiment using lowercase sample points.
+
+2. Express the following events in terms of \( X \):
+   - \( A = \{\text{first head appears on the 3rd toss} \} \)
+   - \( B = \{\text{at most two tosses are needed} \} \)
+   - \( C = \{\text{more than four tosses are needed} \} \)
+
+3. Derive the probability mass function (pmf) of \( X \) and identify the distribution it follows.
+
+4. For \( \theta = 0.3 \), compute:
+   - \( \Pr(X = 3) \)
+   - \( \Pr(X \geq 3) \)
+   - \( \Pr(X > 4) \)
+
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+ 1. Sample Space \( S \)
+
+Let \( X \) be the number of tosses until the first Head (H) appears.
+
+The sample space consists of all finite sequences ending in the first Head, where all previous outcomes are Tails (T).
+
+\[
+S = \{ h,\ th,\ tth,\ ttth,\ tttth,\ \dots \}
+\]
+
+Each outcome corresponds to a success (H) occurring for the first time on the \( k \)th toss.
+
+
+ 2. Events in Terms of \( X \)
+
+Let the random variable \( X \) denote the number of tosses until the first Head:
+
+The event that the first Head appears on the 3rd toss or later can be written as:
+
+\\[
+\\{ \\omega \\in S : X(\\omega) \\geq 3 \\}
+\\]
+
+In sequence terms:
+
+\\[
+\\left\\{ \\omega \\in \\{t, h\\}^k : \\omega = t^{k-1}h,\\ k \\geq 3 \\right\\}
+\\]
+
+This describes all sequences of \\( k \\) tosses ending in a Head, preceded by \\( k-1 \\) Tails, where \\( k \\geq 3 \\).
+
+
+
+ 3. Probability Mass Function of \( X \)
+
+Each toss is independent, and the first Head appears on the \( x \)th toss if the first \( x - 1 \) tosses are all Tails, followed by a Head.
+
+\[
+\Pr(X = x) = (1 - \theta)^{x - 1} \theta, \quad x = 1, 2, 3, \dots
+\]
+
+This is the **Geometric distribution** with parameter \( \theta \in (0,1) \).
+
+ Piecewise form:
+
+\[
+P_X(x) =
+\begin{cases}
+(1 - \theta)^{x - 1} \theta & \text{for } x = 1, 2, 3, \dots \\
+0 & \text{otherwise}
+\end{cases}
+\]
+
+
+
+ 4. Numerical Computations (when \( \theta = 0.3 \))
+
+Let's define:
+
+```{r}
+theta <- 0.3
+
+# Pr(X = 3)
+px3 <- (1 - theta)^(3 - 1) * theta
+px3
+```
+
+```{r}
+# Pr(X >= 3)
+px_leq3 <- sum((1 - theta)^(1:3) * theta)
+px_geq3 <- 1- px_leq3
+px_geq3
+```
+
+```{r}
+# Pr(X > 4) = 1 - Pr(X <= 4)
+px_leq4 <- sum((1 - theta)^(1:4) * theta)
+px_gt4 <- 1 - px_leq4
+px_gt4
+```
+
+</details>
+
+
+
+
+## Activity 2.16
+
+A curd vendor, based on a large number of sales, has observed the following purchasing
+behaviour:
+
+<div style="text-align:center">
+
+| Containers bought | Proportion of customers |
+|-------------------|-------------------------|
+| 1                 | 70 % |
+| 2                 | 15 % |
+| 3                 | 10 % |
+| 4                 | 5 % |
+
+</div>
+
+
+
+
+1. Let \(X\) be the **number of containers** bought by a randomly chosen customer.  
+   - Write down the probability-mass function (pmf) of \(X\).
+
+2. Let \(Y\) be the **number of customers observed until (and including) the first customer who buys 4 containers** on a given day.  
+   - Derive the pmf \(P_Y(y)\) of \(Y\).
+
+---
+
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+1. Random Variable \( X \): Number of Containers Bought
+
+Let \( X \) be the number of containers bought by a randomly chosen customer. Based on long-term observation, the probability mass function (pmf) of \( X \) is:
+
+\[
+P_X(x) =
+\begin{cases}
+0.70 & \text{if } x = 1 \\
+0.15 & \text{if } x = 2 \\
+0.10 & \text{if } x = 3 \\
+0.05 & \text{if } x = 4 \\
+0 & \text{otherwise}
+\end{cases}
+\]
+
+This can also be stored in R as:
+
+```{r}
+px <- c(
+  '1 container' = 0.70,
+  '2 containers' = 0.15,
+  '3 containers' = 0.10,
+  '4 containers' = 0.05
+)
+px
+```
+
+
+
+2. Random Variable \( Y \): Customers Until First Buying 4 Containers
+
+Let \( Y \) be the number of customers observed until (and including) the first customer who buys **4 containers**.
+
+This is modeled using the **Geometric distribution** with success probability \( p = 0.05 \).
+
+The probability mass function (pmf) is:
+
+\[
+P_Y(y) = (1 - p)^{y - 1} p, \quad y = 1, 2, 3, \dots
+\]
+
+In R, this can be computed as:
+
+```{r}
+p <- 0.05
+
+P_Y <- function(y, p = 0.05) {
+  ifelse(y >= 1, (1 - p)^(y - 1) * p, 0)
+}
+
+y_vals <- 1:10
+py_vals <- P_Y(y_vals)
+
+data.frame(y = y_vals, P_Y = py_vals)
+```
+
+
+
+</details>
+
+## Activity 2.17
+
+Determine the value of \( c \) so that each of the following functions can serve as a **probability distribution** of the discrete random variable \( X \):
+
+ (a)
+
+\[
+f(x) = c(x^2 + 4), \quad x = 0, 1, 2, 3
+\]
+
+ (b)
+
+\[
+f(x) = c \binom{2}{x} \binom{3}{3 - x}, \quad x = 0, 1, 2
+\]
+
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+(a)
+
+To ensure that \( f(x) \) is a valid pmf, the total probability must sum to 1:
+
+\[
+\sum_{x=0}^{3} c(x^2 + 4) = 1
+\]
+
+Compute the sum:
+
+\[
+\begin{aligned}
+&= c[(0^2 + 4) + (1^2 + 4) + (2^2 + 4) + (3^2 + 4)] \\
+&= c[4 + 5 + 8 + 13] = c[30]
+\end{aligned}
+\]
+
+Set equal to 1:
+
+\[
+c = \frac{1}{30}
+\]
+
+(b)
+
+The function involves binomial coefficients:
+
+\[
+f(x) = c \binom{2}{x} \binom{3}{3 - x}, \quad x = 0, 1, 2
+\]
+
+Sum over possible values:
+
+\[
+\sum_{x=0}^{2} c \binom{2}{x} \binom{3}{3 - x} = 1
+\]
+
+Compute:
+
+\[
+\begin{aligned}
+f(0) &= c \cdot \binom{2}{0} \binom{3}{3} = c(1)(1) = c \\
+f(1) &= c \cdot \binom{2}{1} \binom{3}{2} = c(2)(3) = 6c \\
+f(2) &= c \cdot \binom{2}{2} \binom{3}{1} = c(1)(3) = 3c \\
+\end{aligned}
+\]
+
+\[
+\text{Total} = c + 6c + 3c = 10c = 1 \Rightarrow c = \frac{1}{10}
+\]
+
+</details>
+
+## Properties of a Probability Mass Function (pmf)
+
+Let \( X \) be a discrete random variable with probability mass function \( P_X(x) = \Pr(X = x) \).
+
+Then the following properties hold:
+
+---
+
+### 1. Non-negativity and boundedness
+
+\[
+\boxed{0 \leq P_X(x) \leq 1, \quad \text{for all } x \in \mathbb{R}}
+\]
+
+**Explanation:**  
+A pmf assigns probabilities to values taken by a discrete random variable. Since probabilities cannot be negative or greater than 1, this inequality must always be satisfied.  
+This follows from the **axioms of probability**:
+- Probabilities are never negative.
+- No single event can have a probability greater than 1.
+
+**Example:**  
+In a fair die roll,
+\[
+P_X(x) = \frac{1}{6}, \quad x = 1, 2, 3, 4, 5, 6
+\]
+Here, each value satisfies \( 0 \leq \frac{1}{6} \leq 1 \).
+
+---
+
+### 2. Computing Probabilities of Events
+
+Let \(E \subseteq \Omega\) be an event in the underlying sample space.  
+Map this event into the **value space** of the random variable \(X\) by defining  
+
+\[
+\varepsilon \;=\; X(E) \;=\; \{\,x \in \mathbb{R} \mid X(\omega)=x \text{ for some } \omega \in E\,\}.
+\]
+
+Because the pmf \(P_X(x)=\Pr(X=x)\) is defined only on numerical values, the probability of the original event \(E\) is obtained by summing these point-masses over all values in \(\varepsilon\):
+
+\[
+\boxed{\;
+\Pr(E) \;=\; \sum_{x \in \varepsilon} P_X(x)
+\;}
+\]
+
+#### Explanation  
+1. **Outcome layer**: \(E\) is a subset of outcomes in \(\Omega\).  
+2. **Value layer**: \(\varepsilon\) is the set of numbers those outcomes produce through \(X\).  
+3. Summing \(P_X(x)\) over \(\varepsilon\) aggregates the total probability assigned to every outcome in \(E\).
+
+#### Example  
+Let \(X\) be the number of heads in three coin tosses.  
+Take the event
+
+\[
+E = \{X \ge 2\}.
+\]
+
+Its image in value space is  
+
+\[
+\varepsilon = \{2,3\}.
+\]
+
+Hence
+
+\[
+\Pr(E) = P_X(2) + P_X(3).
+\]
+
+---
+
+
+### 3. Total Probability Over the Range of a Discrete Random Variable
+
+Let \( S = \Omega \) be the sample space of the original experiment.  
+Define  
+
+\[
+\mathcal{S} = X(S) = \left\{\,x \in \mathbb{R} \;\middle|\; X(\omega) = x \text{ for some } \omega \in S \right\}
+\]
+
+That is, \( \mathcal{S} \) denotes the **range** (or image) of the random variable \( X \), i.e., the set of all values \( X \) can take.
+
+Then, the total probability assigned by the pmf over the entire range of \( X \) is:
+
+\[
+\boxed{\;\sum_{x \in \mathcal{S}} P_X(x) = 1\;}
+\]
+
+---
+
+#### Explanation  
+Since some outcome from the sample space \( S \) must occur, and \( X \) maps each outcome to an element in \( \mathcal{S} \), the **sum of all probability masses across \( \mathcal{S} \)** must equal 1.
+
+This property guarantees that the probability measure induced by \( X \) is valid - it distributes total mass 1 over the values in its support.
+
+---
+
+#### Example  
+Let \( X \) take values \( \{0, 1, 2, 3\} \), with
+
+\[
+P_X(0) = 0.1, \quad P_X(1) = 0.2, \quad P_X(2) = 0.4, \quad P_X(3) = 0.3
+\]
+
+Then the range of \( X \) is  
+\[
+\mathcal{S} = \{0, 1, 2, 3\}
+\]
+
+and the total probability is
+
+\[
+\sum_{x \in \mathcal{S}} P_X(x) = 0.1 + 0.2 + 0.4 + 0.3 = 1.
+\]
+
+Thus, the pmf satisfies the total probability condition.
+
+---
+
+## 2.2 Continuous Random Variables and Probability Density Function (pdf)
+
+**Definition 2.4**
+
+A random variable with an **uncountable range**, typically intervals of real numbers, is called a **continuous random variable**.
+
+---
+
+**Definition 2.5**
+
+The **probability density function (pdf)** of a continuous random variable \( X \) is a function \( f_X \) satisfying:
+
+- \( f_X(x) \geq 0 \) for all \( x \in \mathbb{R} \)
+- \( \int_{-\infty}^{\infty} f_X(x)\,dx = 1 \)
+
+The probability that \( X \) lies in an interval \( [a, b] \) is given by:
+
+\[
+\Pr(a \leq X \leq b) = \int_a^b f_X(x)\, dx
+\]
+
+---
+
+### Properties of a Probability Density Function
+
+#### 1. Non-negativity
+
+\[
+\boxed{f_X(x) \geq 0 \quad \text{for all } x \in \mathbb{R}}
+\]
+
+This ensures the density never assigns negative values, aligning with the axioms of probability.
+
+---
+
+#### 2. Total Area Under the Curve is 1
+
+\[
+\boxed{\int_{-\infty}^{\infty} f_X(x)\, dx = 1}
+\]
+
+This is the continuous analog of the total probability rule for pmfs.
+
+---
+
+#### 3. Probabilities are Assigned to Intervals
+
+For any interval \( [a, b] \):
+
+\[
+\Pr(a \leq X \leq b) = \int_a^b f_X(x)\, dx
+\]
+
+Unlike discrete random variables, the probability of taking any exact value is zero:
+
+\[
+\Pr(X = x) = 0
+\]
+
+---
+
+### Example 2.6
+
+Let \( X \) be a continuous random variable with density function:
+
+\[
+f_X(x) =
+\begin{cases}
+2x & \text{for } 0 \leq x \leq 1 \\
+0 & \text{otherwise}
+\end{cases}
+\]
+
+#### (a) Verify that \( f_X \) is a valid pdf
+
+\[
+\int_0^1 2x\,dx = \left[x^2\right]_0^1 = 1
+\Rightarrow \text{Valid pdf}
+\]
+
+#### (b) Compute \( \Pr(0.2 \leq X \leq 0.6) \)
+
+\[
+\Pr(0.2 \leq X \leq 0.6) = \int_{0.2}^{0.6} 2x\,dx = \left[x^2\right]_{0.2}^{0.6} = 0.36 - 0.04 = 0.32
+\]
+
+---
+
+## Activity 2.18
+
+Let \( X \) be a continuous random variable with density:
+
+\[
+f(x) =
+\begin{cases}
+3x^2 & \text{for } 0 \leq x \leq 1 \\
+0 & \text{otherwise}
+\end{cases}
+\]
+
+Answer the following:
+
+1. Show that \( f \) is a valid probability density function.
+2. Compute \( \Pr(X \leq 0.5) \)
+3. Compute \( \Pr(0.25 \leq X \leq 0.75) \)
+
+<details>
+<summary><strong>Solution</strong></summary>
+
+1. Check validity:
+
+\[
+\int_0^1 3x^2\,dx = \left[x^3\right]_0^1 = 1
+\Rightarrow f \text{ is valid}
+\]
+
+2. Compute:
+
+\[
+\Pr(X \leq 0.5) = \int_0^{0.5} 3x^2\,dx = \left[x^3\right]_0^{0.5} = 0.125
+\]
+
+3. Compute:
+
+\[
+\Pr(0.25 \leq X \leq 0.75) = \int_{0.25}^{0.75} 3x^2\,dx = x^3 \Big|_{0.25}^{0.75} = 0.422 - 0.016 = 0.406
+\]
+
+</details>
+
+---
+
+## Interpretation of the Density Function
+
+- A **density function is not a probability**, but an indication of how *dense* the probability is at different values.
+- The height of the pdf curve does **not** exceed 1 necessarily, but the **area under the curve** must be 1.
+- Probability is always computed as **area under the curve** over an interval.
+
+---
+
+
+
+
