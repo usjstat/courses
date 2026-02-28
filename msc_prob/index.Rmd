@@ -22,20 +22,35 @@ This course establishes the fundamentals of probability theory. It supports lear
 # Learning Activities & Weekly Breakdown
 
 ::: {style="text-align: center;"}
++---------------------------------------------------------------------+
 | **Topic**                                                           |
-|---------------------------------------------------------------------|
++=====================================================================+
 | [Elements of Probability](lesson1.html)                             |
++---------------------------------------------------------------------+
 | [Event Operations](lesson2.html)                                    |
++---------------------------------------------------------------------+
 | [Methods of Probability](https://sportsanalyzr.shinyapps.io/week3/) |
-| [Conditional Probability](week4.html)                               |
-| [Probability Rules](week5.html)                                     |
-| [Random Variables](week6.html)                                      |
-| [Events with Random Variables](week8.html)                          |
-| [Distributions](week9.html)                                         |
-| [Probability Calculations](week10.html)                             |
-| [Mean & Variance](week11.html)                                      |
++---------------------------------------------------------------------+
+| [Conditional Probability](lesson4.html)                             |
++---------------------------------------------------------------------+
+| [Probability Rules](lesson5.html)                                   |
++---------------------------------------------------------------------+
+| Random Variables                                                    |
++---------------------------------------------------------------------+
+| Events with Random Variables                                        |
++---------------------------------------------------------------------+
+| Distributions                                                       |
++---------------------------------------------------------------------+
+| Probability Calculations                                            |
++---------------------------------------------------------------------+
+| Mean & Variance                                                     |
 |                                                                     |
+| Some Probability Distributions                                      |
++---------------------------------------------------------------------+
 |                                                                     |
++---------------------------------------------------------------------+
+|                                                                     |
++---------------------------------------------------------------------+
 :::
 
 *T = Theory, IL = Independent Learning*
