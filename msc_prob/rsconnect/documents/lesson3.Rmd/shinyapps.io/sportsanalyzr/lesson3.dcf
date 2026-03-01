@@ -1,0 +1,12 @@
+name: lesson3
+title: lesson3
+username: sportsanalyzr
+account: sportsanalyzr
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 16784777
+bundleId: 11641818
+url: https://sportsanalyzr.shinyapps.io/lesson3/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

@@ -9,10 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Dr. Rajitha M. Silva" />
+<meta name="author" content="Dr. R. M. Silva" />
 
 
-<title>MSc in Applied Statistics - Foundation: Probability and Distribution Theory</title>
+<title>Probability and Distribution Theory: Lesson 12</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -349,166 +349,453 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">MSc in Applied Statistics - Foundation:
-Probability and Distribution Theory</h1>
-<h4 class="author">Dr. Rajitha M. Silva</h4>
+<h1 class="title toc-ignore">Probability and Distribution Theory: Lesson
+12</h1>
+<h4 class="author">Dr. R. M. Silva</h4>
 
 </div>
 
 
-<div id="course-information" class="section level1">
-<h1>Course Information</h1>
-<table>
-<tbody>
-<tr class="odd">
-<td><strong>Course Title:</strong></td>
-<td>Probability and Distribution Theory</td>
-</tr>
-<tr class="even">
-<td><strong>Pre-requisite:</strong></td>
-<td>BSc Degree</td>
-</tr>
-</tbody>
-</table>
+<div id="some-important-probability-distributions" class="section level1">
+<h1>Some Important Probability Distributions</h1>
+<p>Probability distributions describe the functional relationship
+between a random variable and its probabilities.</p>
+<p>If the random variable is <strong>discrete</strong>, we use a
+<strong>probability mass function (pmf)</strong>.<br />
+If the random variable is <strong>continuous</strong>, we use a
+<strong>probability density function (pdf)</strong>.</p>
 <hr />
 </div>
-<div id="aim-of-the-course" class="section level1">
-<h1>Aim of the Course</h1>
-<p>This course establishes the fundamentals of probability theory. It
-supports learning in statistical inference, risk evaluation, actuarial
-modeling, and various forecasting fields such as weather prediction,
-sports outcomes, and finance. It is also a prerequisite for advanced
-modules in probability and statistics.</p>
+<div id="bernoulli-distribution" class="section level1">
+<h1>1. Bernoulli Distribution</h1>
+<div id="definition" class="section level2">
+<h2>Definition</h2>
+<p>A <strong>Bernoulli trial</strong> has only two outcomes:<br />
+- Success (probability <span class="math inline">\(p\)</span>)<br />
+- Failure (probability <span class="math inline">\(q = 1 -
+p\)</span>)</p>
+<p>Let<br />
+<span class="math display">\[
+X =
+\begin{cases}
+1, &amp; \text{success} \\
+0, &amp; \text{failure}
+\end{cases}
+\]</span></p>
+<p>Then the pmf is:</p>
+<p><span class="math display">\[
+P(X = x) = p^x (1-p)^{1-x}, \quad x = 0,1
+\]</span></p>
+</div>
+<div id="parameters" class="section level2">
+<h2>Parameters</h2>
+<ul>
+<li><span class="math inline">\(p\)</span>, where <span class="math inline">\(0 \le p \le 1\)</span></li>
+</ul>
+</div>
+<div id="mean-and-variance" class="section level2">
+<h2>Mean and Variance</h2>
+<p><span class="math display">\[
+E(X) = p
+\]</span></p>
+<p><span class="math display">\[
+\text{Var}(X) = p(1-p) = pq
+\]</span></p>
 <hr />
 </div>
-<div id="learning-activities-weekly-breakdown" class="section level1">
-<h1>Learning Activities &amp; Weekly Breakdown</h1>
-<div style="text-align: center;">
+</div>
+<div id="binomial-distribution" class="section level1">
+<h1>2. Binomial Distribution</h1>
+<div id="definition-1" class="section level2">
+<h2>Definition</h2>
+<p>If a Bernoulli experiment is repeated independently <span class="math inline">\(n\)</span> times with constant success probability
+<span class="math inline">\(p\)</span>, then the number of successes
+<span class="math inline">\(X\)</span> follows a <strong>Binomial
+distribution</strong>.</p>
+<p><span class="math display">\[
+P(X = x) = \binom{n}{x} p^x q^{\,n-x}, \quad x = 0,1,2,\dots,n
+\]</span></p>
+<p>Notation: <span class="math display">\[
+X \sim B(n,p)
+\]</span></p>
+</div>
+<div id="parameters-1" class="section level2">
+<h2>Parameters</h2>
+<ul>
+<li><span class="math inline">\(n\)</span> : number of trials<br />
+</li>
+<li><span class="math inline">\(p\)</span> : probability of success</li>
+</ul>
+</div>
+<div id="mean-and-variance-1" class="section level2">
+<h2>Mean and Variance</h2>
+<p><span class="math display">\[
+E(X) = np
+\]</span></p>
+<p><span class="math display">\[
+\text{Var}(X) = npq
+\]</span></p>
+</div>
+<div id="important-properties" class="section level2">
+<h2>Important Properties</h2>
+<ul>
+<li>Discrete distribution<br />
+</li>
+<li>Symmetric if <span class="math inline">\(p = 1/2\)</span><br />
+</li>
+<li>Additive property: If <span class="math inline">\(X \sim
+B(n_1,p)\)</span> and <span class="math inline">\(Y \sim
+B(n_2,p)\)</span>, then <span class="math inline">\(X+Y \sim
+B(n_1+n_2,p)\)</span>.</li>
+</ul>
+</div>
+<div id="applications" class="section level2">
+<h2>Applications</h2>
+<ul>
+<li>Tossing coins<br />
+</li>
+<li>Number of defectives in a batch<br />
+</li>
+<li>Number of successes in repeated trials</li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="poisson-distribution" class="section level1">
+<h1>3. Poisson Distribution</h1>
+<div id="definition-2" class="section level2">
+<h2>Definition</h2>
+<p>A random variable <span class="math inline">\(X\)</span> follows a
+<strong>Poisson distribution</strong> with parameter <span class="math inline">\(\lambda &gt; 0\)</span> if</p>
+<p><span class="math display">\[
+P(X = x) = \frac{e^{-\lambda} \lambda^x}{x!}, \quad x = 0,1,2,\dots
+\]</span></p>
+</div>
+<div id="parameter" class="section level2">
+<h2>Parameter</h2>
+<ul>
+<li><span class="math inline">\(\lambda\)</span> (mean rate)</li>
+</ul>
+</div>
+<div id="mean-and-variance-2" class="section level2">
+<h2>Mean and Variance</h2>
+<p><span class="math display">\[
+E(X) = \lambda
+\]</span></p>
+<p><span class="math display">\[
+\text{Var}(X) = \lambda
+\]</span></p>
+<p>Thus, mean = variance.</p>
+</div>
+<div id="important-properties-1" class="section level2">
+<h2>Important Properties</h2>
+<ul>
+<li>Discrete distribution<br />
+</li>
+<li>Additive property: If <span class="math inline">\(X \sim
+\text{Poisson}(\lambda_1)\)</span> and <span class="math inline">\(Y
+\sim \text{Poisson}(\lambda_2)\)</span>, then <span class="math inline">\(X+Y \sim \text{Poisson}(\lambda_1 +
+\lambda_2)\)</span>.</li>
+</ul>
+</div>
+<div id="limiting-case" class="section level2">
+<h2>Limiting Case</h2>
+<p>Poisson distribution is obtained from Binomial distribution when: -
+<span class="math inline">\(n \to \infty\)</span> - <span class="math inline">\(p \to 0\)</span> - <span class="math inline">\(np
+= \lambda\)</span> (finite)</p>
+</div>
+<div id="applications-1" class="section level2">
+<h2>Applications</h2>
+<ul>
+<li>Number of arrivals per minute<br />
+</li>
+<li>Number of misprints per page<br />
+</li>
+<li>Number of rare events in a fixed interval</li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="normal-distribution" class="section level1">
+<h1>4. Normal Distribution</h1>
+<div id="definition-3" class="section level2">
+<h2>Definition</h2>
+<p>A continuous random variable <span class="math inline">\(X\)</span>
+follows a <strong>Normal distribution</strong> with mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span> if</p>
+<p><span class="math display">\[
+f(x) = \frac{1}{\sqrt{2\pi}\sigma}
+\exp\left( -\frac{(x-\mu)^2}{2\sigma^2} \right),
+\quad -\infty &lt; x &lt; \infty
+\]</span></p>
+<p>Notation: <span class="math display">\[
+X \sim N(\mu, \sigma^2)
+\]</span></p>
+</div>
+<div id="parameters-2" class="section level2">
+<h2>Parameters</h2>
+<ul>
+<li><span class="math inline">\(\mu\)</span> : mean<br />
+</li>
+<li><span class="math inline">\(\sigma &gt; 0\)</span> : standard
+deviation</li>
+</ul>
+</div>
+<div id="mean-and-variance-3" class="section level2">
+<h2>Mean and Variance</h2>
+<p><span class="math display">\[
+E(X) = \mu
+\]</span></p>
+<p><span class="math display">\[
+\text{Var}(X) = \sigma^2
+\]</span></p>
+</div>
+<div id="standard-normal-distribution" class="section level2">
+<h2>Standard Normal Distribution</h2>
+<p>If <span class="math display">\[
+Z = \frac{X-\mu}{\sigma}
+\]</span> then <span class="math display">\[
+Z \sim N(0,1)
+\]</span></p>
+<p>Probabilities are computed using: <span class="math display">\[
+P(c \le X \le d) = \Phi(d&#39;) - \Phi(c&#39;)
+\]</span> where<br />
+<span class="math display">\[
+c&#39; = \frac{c-\mu}{\sigma}, \quad d&#39; = \frac{d-\mu}{\sigma}
+\]</span></p>
+</div>
+<div id="important-properties-2" class="section level2">
+<h2>Important Properties</h2>
+<ul>
+<li>Symmetric about <span class="math inline">\(\mu\)</span><br />
+</li>
+<li>Mean = Median = Mode<br />
+</li>
+<li>Bell-shaped curve<br />
+</li>
+<li>Total area under curve = 1</li>
+</ul>
+</div>
+<div id="importance" class="section level2">
+<h2>Importance</h2>
+<ul>
+<li>Approximates Binomial and Poisson distributions (under
+conditions)<br />
+</li>
+<li>Many sampling distributions tend to normality<br />
+</li>
+<li>Foundation of statistical inference</li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="summary-table" class="section level1">
+<h1>Summary Table</h1>
 <table>
 <colgroup>
-<col width="50%" />
-<col width="50%" />
+<col width="19%" />
+<col width="17%" />
+<col width="26%" />
+<col width="16%" />
+<col width="19%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th><strong>Topic</strong></th>
-<th></th>
+<th align="left">Distribution</th>
+<th align="left">Type</th>
+<th align="left">Parameters</th>
+<th align="left">Mean</th>
+<th align="left">Variance</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="lesson1.html">Elements of Probability</a></td>
-<td></td>
+<td align="left">Bernoulli</td>
+<td align="left">Discrete</td>
+<td align="left"><span class="math inline">\(p\)</span></td>
+<td align="left"><span class="math inline">\(p\)</span></td>
+<td align="left"><span class="math inline">\(pq\)</span></td>
 </tr>
 <tr class="even">
-<td><a href="lesson2.html">Event Operations</a></td>
-<td></td>
+<td align="left">Binomial</td>
+<td align="left">Discrete</td>
+<td align="left"><span class="math inline">\(n, p\)</span></td>
+<td align="left"><span class="math inline">\(np\)</span></td>
+<td align="left"><span class="math inline">\(npq\)</span></td>
 </tr>
 <tr class="odd">
-<td><a href="https://sportsanalyzr.shinyapps.io/lesson3/">Methods of
-Probability</a></td>
-<td></td>
+<td align="left">Poisson</td>
+<td align="left">Discrete</td>
+<td align="left"><span class="math inline">\(\lambda\)</span></td>
+<td align="left"><span class="math inline">\(\lambda\)</span></td>
+<td align="left"><span class="math inline">\(\lambda\)</span></td>
 </tr>
 <tr class="even">
-<td><a href="lesson4.html">Conditional Probability</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="lesson5.html">Probability Rules</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="lesson6.html">Random Variables</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="lesson7.html">Events with Random Variables</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="lesson8.html">Distributions</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="lesson9.html">Cumulative Distribution Function</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><p><a href="lesson11.html">Mean &amp; Variance</a></p>
-<p><a href="lesson12.html">Some Probability Distributions</a></p></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
+<td align="left">Normal</td>
+<td align="left">Continuous</td>
+<td align="left"><span class="math inline">\(\mu, \sigma\)</span></td>
+<td align="left"><span class="math inline">\(\mu\)</span></td>
+<td align="left"><span class="math inline">\(\sigma^2\)</span></td>
 </tr>
 </tbody>
 </table>
-</div>
 <hr />
-</div>
-<div id="intended-learning-outcomes-ilos" class="section level1">
-<h1>Intended Learning Outcomes (ILOs)</h1>
-<p>By the end of this course, students will be able to:</p>
-<ol style="list-style-type: decimal">
-<li>Describe events using set notation and sample spaces.<br />
-</li>
-<li>Formulate and identify events of interest.<br />
-</li>
-<li>Apply classical and empirical methods for calculating
-probability.<br />
-</li>
-<li>Explain and apply probability axioms.<br />
-</li>
-<li>Distinguish conditional from unconditional events.<br />
-</li>
-<li>Use rules of probability effectively.<br />
-</li>
-<li>Define and identify types of random variables.<br />
-</li>
-<li>Relate events to random variables.<br />
-</li>
-<li>Use pmf, pdf, cdf correctly.<br />
-</li>
-<li>Calculate probabilities and descriptive measures from
-distributions.<br />
-</li>
-<li>Define and interpret mean, median, variance, etc.<br />
-</li>
-<li>Use known distributions for applications<br />
-</li>
-<li>Use correct notation and terminology.<br />
-</li>
-<li>Communicate clearly and coherently.<br />
-</li>
-<li>Present clear and accurate solutions to problems.</li>
-</ol>
+<div id="activity-2.23-heights-of-students" class="section level2">
+<h2>Activity 2.23: Heights of Students</h2>
+<p>The heights of students in a certain university are approximately
+<strong>normally distributed</strong> with mean <span class="math inline">\(\mu = 170\)</span> cm and standard deviation <span class="math inline">\(\sigma = 8\)</span> cm.</p>
+<p>Let <span class="math inline">\(X\)</span> denote the height (in cm)
+of a randomly selected student.</p>
 <hr />
-</div>
-<div id="references" class="section level1">
-<h1>References</h1>
+<p><strong>(i)</strong> Find the probability that a student’s height
+lies between 160 cm and 180 cm.</p>
+<hr />
+<p><strong>(ii)</strong> Find the probability that a student’s height is
+greater than 185 cm.</p>
+<hr />
+<p><strong>(iii)</strong> If 1000 students are selected at random, how
+many students would you expect to have heights less than 155 cm?</p>
+<hr />
+<p><strong>(iv)</strong> Find the height <span class="math inline">\(h\)</span> such that only 5% of students are
+taller than <span class="math inline">\(h\)</span>.</p>
+<hr />
+<div id="computing-normal-cdf-excel-r-and-scientific-calculators" class="section level3">
+<h3>Computing Normal CDF: Excel, R, and Scientific Calculators</h3>
+<p>To compute Normal probabilities, we often use the
+<strong>CDF</strong>: <span class="math display">\[
+F(x) = P(X \le x)
+\]</span> For <span class="math inline">\(X \sim
+N(\mu,\sigma^2)\)</span>, software computes <span class="math inline">\(P(X \le x)\)</span> directly, or computes interval
+probabilities using: <span class="math display">\[
+P(a \le X \le b) = F(b) - F(a)
+\]</span></p>
+<hr />
+<div id="a.-excel" class="section level4">
+<h4>A. Excel</h4>
+<p>Excel CDF function:</p>
+<pre class="text"><code>=NORM.DIST(x, mean, sd, TRUE)</code></pre>
+<p>Examples:</p>
 <ul>
-<li>Jay L. Devore, <em>Probability and Statistics for Engineering and
-Sciences</em>, Brooks/Cole.<br />
-</li>
-<li>B.M.S.G. Banneheka, <em>Statistical Distribution Theory</em>, Open
-University of Sri Lanka.<br />
-</li>
-<li>Class handouts and lecture notes.</li>
+<li><span class="math inline">\(P(X \le 180)\)</span></li>
 </ul>
+<pre class="text"><code>=NORM.DIST(180,170,8,TRUE)</code></pre>
+<ul>
+<li><span class="math inline">\(P(160 \le X \le 180)\)</span></li>
+</ul>
+<pre class="text"><code>=NORM.DIST(180,170,8,TRUE) - NORM.DIST(160,170,8,TRUE)</code></pre>
+<ul>
+<li><span class="math inline">\(P(X &gt; 185)\)</span></li>
+</ul>
+<pre class="text"><code>=1 - NORM.DIST(185,170,8,TRUE)</code></pre>
+<ul>
+<li>95th percentile <span class="math inline">\(h\)</span> where <span class="math inline">\(P(X \le h)=0.95\)</span></li>
+</ul>
+<pre class="text"><code>=NORM.INV(0.95,170,8)</code></pre>
 <hr />
 </div>
-<div id="instructor" class="section level1">
-<h1>Instructor</h1>
-<p><strong>Lecturer:</strong> Dr. Rajitha M. Silva<br />
-<strong>Email:</strong> <a href="mailto:rsilva@sjp.ac.lk" class="email">rsilva@sjp.ac.lk</a><br />
-</p>
+<div id="b.-r" class="section level4">
+<h4>B. R</h4>
+<p>R CDF function:</p>
+<pre class="r"><code>pnorm(q, mean, sd)</code></pre>
+<p>Examples:</p>
+<pre class="r"><code>pnorm(180, mean=170, sd=8)                     # P(X &lt;= 180)
+pnorm(180,170,8) - pnorm(160,170,8)            # P(160 &lt;= X &lt;= 180)
+1 - pnorm(185,170,8)                           # P(X &gt; 185)
+qnorm(0.95, mean=170, sd=8)                    # 95th percentile</code></pre>
+<p>(Useful family: <code>dnorm</code> density, <code>pnorm</code> CDF,
+<code>qnorm</code> quantile, <code>rnorm</code> random generation.)</p>
 <hr />
-<p><em>This course is effective from 28th February 2026.</em></p>
+</div>
+<div id="d.-scientific-calculator" class="section level4">
+<h4>D. Scientific Calculator</h4>
+<p><strong>If your calculator has Normal CDF (NormalCD /
+Ncd):</strong><br />
+Common path (Casio-style):
+<code>MODE --&gt; DIST --&gt; Normal CD</code></p>
+<ul>
+<li>Interval probability <span class="math inline">\(P(160 \le X \le
+180)\)</span>: enter
+<ul>
+<li>Lower = 160, Upper = 180, Mean = 170, SD = 8</li>
+</ul></li>
+<li>Upper tail <span class="math inline">\(P(X&gt;185)\)</span>: enter
+<ul>
+<li>Lower = 185, Upper = a very large number (e.g. <span class="math inline">\(1E99\)</span>), Mean = 170, SD = 8</li>
+</ul></li>
+<li>Percentile (inverse CDF): <code>DIST --&gt; Normal Inv</code> with
+<ul>
+<li>Area = 0.95, Mean = 170, SD = 8</li>
+</ul></li>
+</ul>
+<p><strong>If your calculator does NOT have Normal CDF:</strong><br />
+1. Standardize: <span class="math inline">\(Z =
+\frac{X-\mu}{\sigma}\)</span><br />
+2. Use a standard normal table and symmetry: <span class="math display">\[
+\Phi(-z) = 1-\Phi(z)
+\]</span></p>
+<hr />
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>Given:<br />
+<span class="math display">\[
+\mu = 170, \quad \sigma = 8, \quad Z=\frac{X-\mu}{\sigma}
+\]</span></p>
+<ol style="list-style-type: lower-roman">
+<li><span class="math inline">\(P(160 \le X \le 180)\)</span></li>
+</ol>
+<p>Standardize:</p>
+<p>For <span class="math inline">\(X=160\)</span>: <span class="math display">\[
+z_1=\frac{160-170}{8}=-1.25
+\]</span></p>
+<p>For <span class="math inline">\(X=180\)</span>: <span class="math display">\[
+z_2=\frac{180-170}{8}=1.25
+\]</span></p>
+<p>Thus, <span class="math display">\[
+P(160 \le X \le 180)=P(-1.25 \le Z \le 1.25)=\Phi(1.25)-\Phi(-1.25)
+\]</span></p>
+<p>Using symmetry <span class="math inline">\(\Phi(-z)=1-\Phi(z)\)</span>: <span class="math display">\[
+=\Phi(1.25)-(1-\Phi(1.25))=2\Phi(1.25)-1
+\]</span></p>
+<ol start="2" style="list-style-type: lower-roman">
+<li><span class="math inline">\(P(X&gt;185)\)</span></li>
+</ol>
+<p>Standardize: <span class="math display">\[
+z=\frac{185-170}{8}=1.875
+\]</span></p>
+<p><span class="math display">\[
+P(X&gt;185)=1-\Phi(1.875)
+\]</span></p>
+<ol start="3" style="list-style-type: lower-roman">
+<li>Expected number with <span class="math inline">\(X&lt;155\)</span>
+out of 1000</li>
+</ol>
+<p>Standardize: <span class="math display">\[
+z=\frac{155-170}{8}=-1.875
+\]</span></p>
+<p><span class="math display">\[
+P(X&lt;155)=\Phi(-1.875)
+\]</span></p>
+<p>Expected number: <span class="math display">\[
+1000 \times \Phi(-1.875)
+\]</span></p>
+<ol start="4" style="list-style-type: lower-roman">
+<li>Height <span class="math inline">\(h\)</span> such that only 5% are
+taller</li>
+</ol>
+<p><span class="math display">\[
+P(X&gt;h)=0.05 \Rightarrow P(X \le h)=0.95
+\]</span></p>
+<p>Let <span class="math inline">\(z_{0.95}\approx 1.645\)</span>.
+Then:</p>
+<p><span class="math display">\[
+h=\mu+z\sigma
+=170+(1.645)(8)
+\]</span></p>
+</details>
+</div>
+</div>
+</div>
 </div>
 
 

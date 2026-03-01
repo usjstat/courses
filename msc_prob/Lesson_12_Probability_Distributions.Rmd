@@ -1,0 +1,224 @@
+\
+---
+title: "Probability and Distribution Theory: Lesson 12"
+author: "Dr. R. M. Silva"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Some Important Probability Distributions
+
+Probability distributions describe the functional relationship between a random variable and its probabilities.
+
+If the random variable is **discrete**, we use a **probability mass function (pmf)**.  
+If the random variable is **continuous**, we use a **probability density function (pdf)**.
+
+---
+
+# 1. Bernoulli Distribution
+
+## Definition
+
+A **Bernoulli trial** has only two outcomes:  
+- Success (probability \( p \))  
+- Failure (probability \( q = 1 - p \))
+
+Let  
+\[
+X =
+\begin{cases}
+1, & \text{success} \\
+0, & \text{failure}
+\end{cases}
+\]
+
+Then the pmf is:
+
+\[
+P(X = x) = p^x (1-p)^{1-x}, \quad x = 0,1
+\]
+
+## Parameters
+- \( p \), where \( 0 \le p \le 1 \)
+
+## Mean and Variance
+
+\[
+E(X) = p
+\]
+
+\[
+\text{Var}(X) = p(1-p) = pq
+\]
+
+---
+
+# 2. Binomial Distribution
+
+## Definition
+
+If a Bernoulli experiment is repeated independently \( n \) times with constant success probability \( p \), then the number of successes \( X \) follows a **Binomial distribution**.
+
+\[
+P(X = x) = \binom{n}{x} p^x q^{\,n-x}, \quad x = 0,1,2,\dots,n
+\]
+
+Notation:
+\[
+X \sim B(n,p)
+\]
+
+## Parameters
+- \( n \) : number of trials  
+- \( p \) : probability of success
+
+## Mean and Variance
+
+\[
+E(X) = np
+\]
+
+\[
+\text{Var}(X) = npq
+\]
+
+## Important Properties
+
+- Discrete distribution  
+- Symmetric if \( p = 1/2 \)  
+- Additive property: If \( X \sim B(n_1,p) \) and \( Y \sim B(n_2,p) \), then \( X+Y \sim B(n_1+n_2,p) \).
+
+## Applications
+
+- Tossing coins  
+- Number of defectives in a batch  
+- Number of successes in repeated trials
+
+---
+
+# 3. Poisson Distribution
+
+## Definition
+
+A random variable \( X \) follows a **Poisson distribution** with parameter \( \lambda > 0 \) if
+
+\[
+P(X = x) = \frac{e^{-\lambda} \lambda^x}{x!}, \quad x = 0,1,2,\dots
+\]
+
+## Parameter
+- \( \lambda \) (mean rate)
+
+## Mean and Variance
+
+\[
+E(X) = \lambda
+\]
+
+\[
+\text{Var}(X) = \lambda
+\]
+
+Thus, mean = variance.
+
+## Important Properties
+
+- Discrete distribution  
+- Additive property: If \( X \sim \text{Poisson}(\lambda_1) \) and \( Y \sim \text{Poisson}(\lambda_2) \), then \( X+Y \sim \text{Poisson}(\lambda_1 + \lambda_2) \).
+
+## Limiting Case
+
+Poisson distribution is obtained from Binomial distribution when:
+- \( n \to \infty \)
+- \( p \to 0 \)
+- \( np = \lambda \) (finite)
+
+## Applications
+
+- Number of arrivals per minute  
+- Number of misprints per page  
+- Number of rare events in a fixed interval
+
+---
+
+# 4. Normal Distribution
+
+## Definition
+
+A continuous random variable \( X \) follows a **Normal distribution** with mean \( \mu \) and standard deviation \( \sigma \) if
+
+\[
+f(x) = \frac{1}{\sqrt{2\pi}\sigma}
+\exp\left( -\frac{(x-\mu)^2}{2\sigma^2} \right),
+\quad -\infty < x < \infty
+\]
+
+Notation:
+\[
+X \sim N(\mu, \sigma^2)
+\]
+
+## Parameters
+- \( \mu \) : mean  
+- \( \sigma > 0 \) : standard deviation
+
+## Mean and Variance
+
+\[
+E(X) = \mu
+\]
+
+\[
+\text{Var}(X) = \sigma^2
+\]
+
+## Standard Normal Distribution
+
+If
+\[
+Z = \frac{X-\mu}{\sigma}
+\]
+then
+\[
+Z \sim N(0,1)
+\]
+
+Probabilities are computed using:
+\[
+P(c \le X \le d) = \Phi(d') - \Phi(c')
+\]
+where  
+\[
+c' = \frac{c-\mu}{\sigma}, \quad d' = \frac{d-\mu}{\sigma}
+\]
+
+## Important Properties
+
+- Symmetric about \( \mu \)  
+- Mean = Median = Mode  
+- Bell-shaped curve  
+- Total area under curve = 1
+
+## Importance
+
+- Approximates Binomial and Poisson distributions (under conditions)  
+- Many sampling distributions tend to normality  
+- Foundation of statistical inference
+
+---
+
+# Summary Table
+
+| Distribution | Type | Parameters | Mean | Variance |
+|--------------|------|------------|------|----------|
+| Bernoulli | Discrete | \( p \) | \( p \) | \( pq \) |
+| Binomial | Discrete | \( n, p \) | \( np \) | \( npq \) |
+| Poisson | Discrete | \( \lambda \) | \( \lambda \) | \( \lambda \) |
+| Normal | Continuous | \( \mu, \sigma \) | \( \mu \) | \( \sigma^2 \) |
+
+---
+
+*Source:* Prepared from Chapter 6 (Probability Distributions) of the provided PDF.

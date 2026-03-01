@@ -1,0 +1,416 @@
+
+---
+title: "Probability and Distribution Theory: Lesson 12"
+author: "Dr. R. M. Silva"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Some Important Probability Distributions
+
+Probability distributions describe the functional relationship between a random variable and its probabilities.
+
+If the random variable is **discrete**, we use a **probability mass function (pmf)**.  
+If the random variable is **continuous**, we use a **probability density function (pdf)**.
+
+---
+
+# 1. Bernoulli Distribution
+
+## Definition
+
+A **Bernoulli trial** has only two outcomes:  
+- Success (probability \( p \))  
+- Failure (probability \( q = 1 - p \))
+
+Let  
+\[
+X =
+\begin{cases}
+1, & \text{success} \\
+0, & \text{failure}
+\end{cases}
+\]
+
+Then the pmf is:
+
+\[
+P(X = x) = p^x (1-p)^{1-x}, \quad x = 0,1
+\]
+
+## Parameters
+- \( p \), where \( 0 \le p \le 1 \)
+
+## Mean and Variance
+
+\[
+E(X) = p
+\]
+
+\[
+\text{Var}(X) = p(1-p) = pq
+\]
+
+---
+
+# 2. Binomial Distribution
+
+## Definition
+
+If a Bernoulli experiment is repeated independently \( n \) times with constant success probability \( p \), then the number of successes \( X \) follows a **Binomial distribution**.
+
+\[
+P(X = x) = \binom{n}{x} p^x q^{\,n-x}, \quad x = 0,1,2,\dots,n
+\]
+
+Notation:
+\[
+X \sim B(n,p)
+\]
+
+## Parameters
+- \( n \) : number of trials  
+- \( p \) : probability of success
+
+## Mean and Variance
+
+\[
+E(X) = np
+\]
+
+\[
+\text{Var}(X) = npq
+\]
+
+## Important Properties
+
+- Discrete distribution  
+- Symmetric if \( p = 1/2 \)  
+- Additive property: If \( X \sim B(n_1,p) \) and \( Y \sim B(n_2,p) \), then \( X+Y \sim B(n_1+n_2,p) \).
+
+## Applications
+
+- Tossing coins  
+- Number of defectives in a batch  
+- Number of successes in repeated trials
+
+---
+
+# 3. Poisson Distribution
+
+## Definition
+
+A random variable \( X \) follows a **Poisson distribution** with parameter \( \lambda > 0 \) if
+
+\[
+P(X = x) = \frac{e^{-\lambda} \lambda^x}{x!}, \quad x = 0,1,2,\dots
+\]
+
+## Parameter
+- \( \lambda \) (mean rate)
+
+## Mean and Variance
+
+\[
+E(X) = \lambda
+\]
+
+\[
+\text{Var}(X) = \lambda
+\]
+
+Thus, mean = variance.
+
+## Important Properties
+
+- Discrete distribution  
+- Additive property: If \( X \sim \text{Poisson}(\lambda_1) \) and \( Y \sim \text{Poisson}(\lambda_2) \), then \( X+Y \sim \text{Poisson}(\lambda_1 + \lambda_2) \).
+
+## Limiting Case
+
+Poisson distribution is obtained from Binomial distribution when:
+- \( n \to \infty \)
+- \( p \to 0 \)
+- \( np = \lambda \) (finite)
+
+## Applications
+
+- Number of arrivals per minute  
+- Number of misprints per page  
+- Number of rare events in a fixed interval
+
+---
+
+# 4. Normal Distribution
+
+## Definition
+
+A continuous random variable \( X \) follows a **Normal distribution** with mean \( \mu \) and standard deviation \( \sigma \) if
+
+\[
+f(x) = \frac{1}{\sqrt{2\pi}\sigma}
+\exp\left( -\frac{(x-\mu)^2}{2\sigma^2} \right),
+\quad -\infty < x < \infty
+\]
+
+Notation:
+\[
+X \sim N(\mu, \sigma^2)
+\]
+
+## Parameters
+- \( \mu \) : mean  
+- \( \sigma > 0 \) : standard deviation
+
+## Mean and Variance
+
+\[
+E(X) = \mu
+\]
+
+\[
+\text{Var}(X) = \sigma^2
+\]
+
+## Standard Normal Distribution
+
+If
+\[
+Z = \frac{X-\mu}{\sigma}
+\]
+then
+\[
+Z \sim N(0,1)
+\]
+
+Probabilities are computed using:
+\[
+P(c \le X \le d) = \Phi(d') - \Phi(c')
+\]
+where  
+\[
+c' = \frac{c-\mu}{\sigma}, \quad d' = \frac{d-\mu}{\sigma}
+\]
+
+## Important Properties
+
+- Symmetric about \( \mu \)  
+- Mean = Median = Mode  
+- Bell-shaped curve  
+- Total area under curve = 1
+
+## Importance
+
+- Approximates Binomial and Poisson distributions (under conditions)  
+- Many sampling distributions tend to normality  
+- Foundation of statistical inference
+
+---
+
+# Summary Table
+
+| Distribution | Type       | Parameters       | Mean      | Variance    |
+|:------------|:-----------|:-----------------|:----------|:------------|
+| Bernoulli   | Discrete   | \(p\)            | \(p\)     | \(pq\)      |
+| Binomial    | Discrete   | \(n, p\)         | \(np\)    | \(npq\)     |
+| Poisson     | Discrete   | \(\lambda\)      | \(\lambda\) | \(\lambda\) |
+| Normal      | Continuous | \(\mu, \sigma\)  | \(\mu\)   | \(\sigma^2\) |
+---
+
+## Activity 2.23: Heights of Students
+
+The heights of students in a certain university are approximately **normally distributed** with mean \( \mu = 170 \) cm and standard deviation \( \sigma = 8 \) cm.
+
+Let \( X \) denote the height (in cm) of a randomly selected student.
+
+---
+
+**(i)** Find the probability that a student's height lies between 160 cm and 180 cm.
+
+---
+
+**(ii)** Find the probability that a student's height is greater than 185 cm.
+
+---
+
+**(iii)** If 1000 students are selected at random, how many students would you expect to have heights less than 155 cm?
+
+---
+
+**(iv)** Find the height \( h \) such that only 5% of students are taller than \( h \).
+
+---
+
+### Computing Normal CDF: Excel, R, and Scientific Calculators
+
+To compute Normal probabilities, we often use the **CDF**:
+\[
+F(x) = P(X \le x)
+\]
+For \( X \sim N(\mu,\sigma^2) \), software computes \( P(X \le x) \) directly, or computes interval probabilities using:
+\[
+P(a \le X \le b) = F(b) - F(a)
+\]
+
+---
+
+#### A. Excel
+
+Excel CDF function:
+
+```text
+=NORM.DIST(x, mean, sd, TRUE)
+```
+
+Examples:
+
+- \(P(X \le 180)\)
+```text
+=NORM.DIST(180,170,8,TRUE)
+```
+
+- \(P(160 \le X \le 180)\)
+```text
+=NORM.DIST(180,170,8,TRUE) - NORM.DIST(160,170,8,TRUE)
+```
+
+- \(P(X > 185)\)
+```text
+=1 - NORM.DIST(185,170,8,TRUE)
+```
+
+- 95th percentile \(h\) where \(P(X \le h)=0.95\)
+```text
+=NORM.INV(0.95,170,8)
+```
+
+---
+
+#### B. R
+
+R CDF function:
+
+```r
+pnorm(q, mean, sd)
+```
+
+Examples:
+
+```r
+pnorm(180, mean=170, sd=8)                     # P(X <= 180)
+pnorm(180,170,8) - pnorm(160,170,8)            # P(160 <= X <= 180)
+1 - pnorm(185,170,8)                           # P(X > 185)
+qnorm(0.95, mean=170, sd=8)                    # 95th percentile
+```
+
+(Useful family: `dnorm` density, `pnorm` CDF, `qnorm` quantile, `rnorm` random generation.)
+
+
+---
+
+#### D. Scientific Calculator
+
+**If your calculator has Normal CDF (NormalCD / Ncd):**  
+Common path (Casio-style):
+`MODE --> DIST --> Normal CD`
+
+- Interval probability \(P(160 \le X \le 180)\): enter
+  - Lower = 160, Upper = 180, Mean = 170, SD = 8
+- Upper tail \(P(X>185)\): enter
+  - Lower = 185, Upper = a very large number (e.g. \(1E99\)), Mean = 170, SD = 8
+- Percentile (inverse CDF): `DIST --> Normal Inv` with
+  - Area = 0.95, Mean = 170, SD = 8
+
+**If your calculator does NOT have Normal CDF:**  
+1. Standardize: \(Z = \frac{X-\mu}{\sigma}\)  
+2. Use a standard normal table and symmetry:
+\[
+\Phi(-z) = 1-\Phi(z)
+\]
+
+---
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Given:  
+\[
+\mu = 170, \quad \sigma = 8, \quad Z=\frac{X-\mu}{\sigma}
+\]
+
+ (i) \(P(160 \le X \le 180)\)
+
+Standardize:
+
+For \(X=160\):
+\[
+z_1=\frac{160-170}{8}=-1.25
+\]
+
+For \(X=180\):
+\[
+z_2=\frac{180-170}{8}=1.25
+\]
+
+Thus,
+\[
+P(160 \le X \le 180)=P(-1.25 \le Z \le 1.25)=\Phi(1.25)-\Phi(-1.25)
+\]
+
+Using symmetry \( \Phi(-z)=1-\Phi(z)\):
+\[
+=\Phi(1.25)-(1-\Phi(1.25))=2\Phi(1.25)-1
+\]
+
+
+ (ii) \(P(X>185)\)
+
+Standardize:
+\[
+z=\frac{185-170}{8}=1.875
+\]
+
+\[
+P(X>185)=1-\Phi(1.875)
+\]
+
+
+
+ (iii) Expected number with \(X<155\) out of 1000
+
+Standardize:
+\[
+z=\frac{155-170}{8}=-1.875
+\]
+
+\[
+P(X<155)=\Phi(-1.875)
+\]
+
+Expected number:
+\[
+1000 \times \Phi(-1.875)
+\]
+
+
+
+(iv) Height \(h\) such that only 5% are taller
+
+\[
+P(X>h)=0.05 \Rightarrow P(X \le h)=0.95
+\]
+
+Let \(z_{0.95}\approx 1.645\). Then:
+
+\[
+h=\mu+z\sigma
+=170+(1.645)(8)
+\]
+
+
+
+</details>

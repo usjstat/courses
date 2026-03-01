@@ -9,10 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Dr. Rajitha M. Silva" />
+<meta name="author" content="Dr. R. M. Silva" />
 
 
-<title>MSc in Applied Statistics - Foundation: Probability and Distribution Theory</title>
+<title>Probability and Distribution Theory: Lesson 11</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -349,166 +349,684 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">MSc in Applied Statistics - Foundation:
-Probability and Distribution Theory</h1>
-<h4 class="author">Dr. Rajitha M. Silva</h4>
+<h1 class="title toc-ignore">Probability and Distribution Theory: Lesson
+11</h1>
+<h4 class="author">Dr. R. M. Silva</h4>
 
 </div>
 
 
-<div id="course-information" class="section level1">
-<h1>Course Information</h1>
-<table>
-<tbody>
-<tr class="odd">
-<td><strong>Course Title:</strong></td>
-<td>Probability and Distribution Theory</td>
-</tr>
-<tr class="even">
-<td><strong>Pre-requisite:</strong></td>
-<td>BSc Degree</td>
-</tr>
-</tbody>
-</table>
+<div id="expectation-mathbbegx" class="section level3">
+<h3>Expectation: <span class="math inline">\(\mathbb{E}[g(X)]\)</span></h3>
+<p>Let <span class="math inline">\(X\)</span> be a discrete random
+variable with pmf <span class="math inline">\(P_X(x) = \Pr(X =
+x)\)</span>. For any real-valued function <span class="math inline">\(g\)</span>, the <strong>expected value of a
+function of a random variable</strong> is defined as:</p>
+<p><span class="math display">\[
+\mathbb{E}[g(X)] = \sum_{x} g(x) \cdot P_X(x)
+\]</span></p>
+<p>This definition includes the expectation of <span class="math inline">\(X\)</span> itself, by letting <span class="math inline">\(g(x) = x\)</span>.</p>
+<p>In probability theory, the <strong>expectation</strong> (or
+<strong>expected value</strong>) of a random variable provides a measure
+of the <em>center</em> or <em>average</em> of its distribution. It is
+denoted by <span class="math inline">\(E(X)\)</span> or <span class="math inline">\(\mathbb{E}[X]\)</span>.</p>
+</div>
+<div id="motivation" class="section level3">
+<h3>Motivation</h3>
+<p>Consider a random variable <span class="math inline">\(X\)</span>
+defined on a sample space <span class="math inline">\(\mathcal{S}\)</span>. If a gambler repeatedly
+samples outcomes from <span class="math inline">\(\mathcal{S}\)</span>,
+and <span class="math inline">\(X(\omega)\)</span> (we simply write
+<span class="math inline">\(X\)</span>) denotes the gain or loss in each
+trial, then the <strong>average gain</strong> over many repetitions
+approximates the expectation of <span class="math inline">\(X\)</span>.</p>
+<p>Let <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> be
+independent repetitions. The average gain is:</p>
+<p><span class="math display">\[
+\frac{X_1 + X_2 + \cdots + X_n}{n}
+\]</span></p>
+<p>As <span class="math inline">\(n \to \infty\)</span>, this average
+converges to a constant value called the <strong>expected value</strong>
+of <span class="math inline">\(X\)</span>, denoted by <span class="math inline">\(E(X)\)</span>.</p>
 <hr />
 </div>
-<div id="aim-of-the-course" class="section level1">
-<h1>Aim of the Course</h1>
-<p>This course establishes the fundamentals of probability theory. It
-supports learning in statistical inference, risk evaluation, actuarial
-modeling, and various forecasting fields such as weather prediction,
-sports outcomes, and finance. It is also a prerequisite for advanced
-modules in probability and statistics.</p>
+<div id="expectation-for-discrete-random-variables" class="section level2">
+<h2>Expectation for Discrete Random Variables</h2>
+<p>Let <span class="math inline">\(X\)</span> be a discrete random
+variable with possible values <span class="math inline">\(x_1, x_2,
+\ldots, x_n\)</span> and corresponding probabilities <span class="math inline">\(p_i = \Pr(X = x_i)\)</span>. Then:</p>
+<p><span class="math display">\[
+\mathbb{E}[X] = \sum_{i=1}^{n} x_i \cdot \Pr(X = x_i)
+\]</span></p>
+<p>This assumes:</p>
+<p><span class="math display">\[
+\sum_{i=1}^{n} |x_i| \cdot \Pr(X = x_i) &lt; \infty
+\]</span></p>
+<div id="example-win-or-lose-game" class="section level3">
+<h3>Example: Win or Lose Game</h3>
+<p>Let <span class="math inline">\(X\)</span> be the amount won in a
+game:</p>
+<ul>
+<li>Win Rs. 1 with probability <span class="math inline">\(p\)</span></li>
+<li>Win Rs. 0 with probability <span class="math inline">\(1-p\)</span></li>
+</ul>
+<p>Then: <span class="math display">\[
+\mathbb{E}[X] = 0 \cdot (1-p) + 1 \cdot p = p
+\]</span></p>
+</div>
+<div id="example-win-rs.-1-or-lose-rs.-1" class="section level3">
+<h3>Example: Win Rs. 1 or Lose Rs. 1</h3>
+<p>Let <span class="math inline">\(Y\)</span> be defined as:</p>
+<ul>
+<li>Win Rs. 1 with probability <span class="math inline">\(p\)</span></li>
+<li>Lose Rs. 1 with probability <span class="math inline">\(1-p\)</span></li>
+</ul>
+<p>Then: <span class="math display">\[
+\mathbb{E}[X] = (-1)(1-p) + (1)(p) = 2p - 1
+\]</span></p>
 <hr />
 </div>
-<div id="learning-activities-weekly-breakdown" class="section level1">
-<h1>Learning Activities &amp; Weekly Breakdown</h1>
-<div style="text-align: center;">
+</div>
+<div id="expectation-for-continuous-random-variables" class="section level2">
+<h2>Expectation for Continuous Random Variables</h2>
+<p>If <span class="math inline">\(X\)</span> is a continuous random
+variable with density function <span class="math inline">\(f_X(x)\)</span>, then:</p>
+<p><span class="math display">\[
+\mathbb{E}[X] = \int_{-\infty}^{\infty} x f_X(x) dx
+\]</span></p>
+<p>provided:</p>
+<p><span class="math display">\[
+\int_{-\infty}^{\infty} |x| f_X(x) dx &lt; \infty
+\]</span></p>
+<hr />
+</div>
+<div id="interpretation-of-expectation" class="section level2">
+<h2>Interpretation of Expectation</h2>
+<div id="mechanical-view-discrete" class="section level3">
+<h3>Mechanical View (Discrete)</h3>
+<ul>
+<li>Consider a set of points <span class="math inline">\(x_1, x_2,
+\ldots, x_n\)</span> on a number line.</li>
+<li>Attach a weight <span class="math inline">\(p_i = \Pr(X =
+x_i)\)</span> at each point <span class="math inline">\(x_i\)</span>.</li>
+<li>The expectation <span class="math inline">\(\mathbb{E}[X]\)</span>
+is the point at which the system balances - similar to the
+<strong>center of mass</strong> of a discrete system.</li>
+<li>Mathematically, <span class="math display">\[
+\mathbb{E}[X] = \sum_{i} x_i \Pr(X = x_i)
+\]</span></li>
+<li>This is analogous to a lever balancing on a fulcrum: the expectation
+is the point where the moments (weighted distances) on either side are
+equal.</li>
+</ul>
+<p><strong>Example:</strong> ### Example Table of a Discrete Random
+Variable</p>
 <table>
-<colgroup>
-<col width="50%" />
-<col width="50%" />
-</colgroup>
 <thead>
 <tr class="header">
-<th><strong>Topic</strong></th>
-<th></th>
+<th align="center">Value <span class="math inline">\(x_i\)</span></th>
+<th align="center">Probability <span class="math inline">\(p_i\)</span></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="lesson1.html">Elements of Probability</a></td>
-<td></td>
+<td align="center"><span class="math inline">\(-1\)</span></td>
+<td align="center"><span class="math inline">\(0.2\)</span></td>
 </tr>
 <tr class="even">
-<td><a href="lesson2.html">Event Operations</a></td>
-<td></td>
+<td align="center"><span class="math inline">\(0\)</span></td>
+<td align="center"><span class="math inline">\(0.5\)</span></td>
 </tr>
 <tr class="odd">
-<td><a href="https://sportsanalyzr.shinyapps.io/lesson3/">Methods of
-Probability</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="lesson4.html">Conditional Probability</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="lesson5.html">Probability Rules</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="lesson6.html">Random Variables</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="lesson7.html">Events with Random Variables</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="lesson8.html">Distributions</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="lesson9.html">Cumulative Distribution Function</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><p><a href="lesson11.html">Mean &amp; Variance</a></p>
-<p><a href="lesson12.html">Some Probability Distributions</a></p></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
+<td align="center"><span class="math inline">\(2\)</span></td>
+<td align="center"><span class="math inline">\(0.3\)</span></td>
 </tr>
 </tbody>
 </table>
-</div>
+<p>Then the expectation is:</p>
+<p><span class="math display">\[
+\mathbb{E}[X] = (-1)(0.2) + (0)(0.5) + (2)(0.3) = -0.2 + 0 + 0.6 = 0.4
+\]</span></p>
 <hr />
 </div>
-<div id="intended-learning-outcomes-ilos" class="section level1">
-<h1>Intended Learning Outcomes (ILOs)</h1>
-<p>By the end of this course, students will be able to:</p>
-<ol style="list-style-type: decimal">
-<li>Describe events using set notation and sample spaces.<br />
-</li>
-<li>Formulate and identify events of interest.<br />
-</li>
-<li>Apply classical and empirical methods for calculating
-probability.<br />
-</li>
-<li>Explain and apply probability axioms.<br />
-</li>
-<li>Distinguish conditional from unconditional events.<br />
-</li>
-<li>Use rules of probability effectively.<br />
-</li>
-<li>Define and identify types of random variables.<br />
-</li>
-<li>Relate events to random variables.<br />
-</li>
-<li>Use pmf, pdf, cdf correctly.<br />
-</li>
-<li>Calculate probabilities and descriptive measures from
-distributions.<br />
-</li>
-<li>Define and interpret mean, median, variance, etc.<br />
-</li>
-<li>Use known distributions for applications<br />
-</li>
-<li>Use correct notation and terminology.<br />
-</li>
-<li>Communicate clearly and coherently.<br />
-</li>
-<li>Present clear and accurate solutions to problems.</li>
-</ol>
-<hr />
-</div>
-<div id="references" class="section level1">
-<h1>References</h1>
+<div id="mechanical-view-continuous" class="section level3">
+<h3>Mechanical View (Continuous)</h3>
 <ul>
-<li>Jay L. Devore, <em>Probability and Statistics for Engineering and
-Sciences</em>, Brooks/Cole.<br />
-</li>
-<li>B.M.S.G. Banneheka, <em>Statistical Distribution Theory</em>, Open
-University of Sri Lanka.<br />
-</li>
-<li>Class handouts and lecture notes.</li>
+<li>Imagine a <strong>thin metal rod</strong> (or sheet) lying along the
+real number line, where:
+<ul>
+<li>At each point <span class="math inline">\(x\)</span>, the “density”
+is given by the <strong>probability density function (pdf)</strong>
+<span class="math inline">\(f(x)\)</span>.</li>
+</ul></li>
+<li>Then the expectation <span class="math inline">\(\mathbb{E}[X]\)</span> is the <strong>center of
+mass</strong> (balance point) of this rod.</li>
+</ul>
+<p><span class="math display">\[
+\mathbb{E}[X] = \int_{-\infty}^{\infty} x f(x) \, dx
+\]</span></p>
+<ul>
+<li>This interpretation is useful in physics and engineering, where mass
+distributions are modeled similarly.</li>
+</ul>
+<p><strong>Visualization Idea:</strong></p>
+<ul>
+<li>For discrete: visualize weights hanging from a bar.</li>
+<li>For continuous: visualize a curve on a sheet, where expectation is
+the horizontal coordinate where it would balance.</li>
 </ul>
 <hr />
 </div>
-<div id="instructor" class="section level1">
-<h1>Instructor</h1>
-<p><strong>Lecturer:</strong> Dr. Rajitha M. Silva<br />
-<strong>Email:</strong> <a href="mailto:rsilva@sjp.ac.lk" class="email">rsilva@sjp.ac.lk</a><br />
-</p>
+</div>
+<div id="when-expectation-does-not-exist" class="section level2">
+<h2>When Expectation Does Not Exist</h2>
+<p>In some cases, a random variable may have such large values (with
+small but non-zero probabilities) that the expectation is <strong>not
+finite</strong>. This typically happens when the weighted sum of the
+absolute values of the outcomes diverges.</p>
 <hr />
-<p><em>This course is effective from 28th February 2026.</em></p>
+<div id="condition-for-non-existence" class="section level3">
+<h3>Condition for Non-existence</h3>
+<p>If the following series diverges, then the expectation <span class="math inline">\(\mathbb{E}[X]\)</span> does <strong>not
+exist</strong>:</p>
+<p><span class="math display">\[
+\sum |x_i| \cdot \Pr(X = x_i) = \infty
+\]</span></p>
+<p>This means that either the positive or negative parts of the series
+(or both) are infinite.</p>
+<hr />
+</div>
+<div id="example-st.-petersburg-paradox" class="section level3">
+<h3>Example: St. Petersburg Paradox</h3>
+<p>This is a classic example of a game with <strong>infinite expected
+value</strong>.</p>
+<div id="game-description" class="section level4">
+<h4>Game Description</h4>
+<ul>
+<li>A fair coin is tossed until the first Head appears.</li>
+<li>If the first Head appears on the <span class="math inline">\(k\)</span>-th toss, the player wins <span class="math inline">\(2^k\)</span> dollars.</li>
+<li>The probability of the first Head on the <span class="math inline">\(k\)</span>-th toss is <span class="math inline">\(\left( \frac{1}{2} \right)^k\)</span>.</li>
+</ul>
+</div>
+<div id="expected-value" class="section level4">
+<h4>Expected Value</h4>
+<p>Let <span class="math inline">\(X\)</span> be the winnings:</p>
+<p><span class="math display">\[
+\mathbb{E}[X] = \sum_{k=1}^\infty 2^k \cdot \left( \frac{1}{2} \right)^k
+\]</span></p>
+<p><span class="math display">\[
+= \sum_{k=1}^\infty 1 = \infty
+\]</span></p>
+<p>Hence, the expectation <strong>does not exist</strong> in the finite
+sense, even though each outcome has a well-defined value.</p>
+<hr />
+</div>
+</div>
+<div id="interpretation" class="section level3">
+<h3>Interpretation</h3>
+<p>Although every individual outcome has a finite value, the
+<strong>average value</strong> over infinitely many repetitions is not
+finite. This paradox highlights the limitations of expectation as a
+measure of central tendency in such extreme cases.</p>
+<hr />
+</div>
+<div id="properties-of-expectation" class="section level3">
+<h3>Properties of Expectation</h3>
+<ul>
+<li><p><span class="math inline">\(\mathbb{E}[aX + b] = a \cdot
+\mathbb{E}[X] + b\)</span><br />
+</p></li>
+<li><p>Linearity: <span class="math inline">\(\mathbb{E}[X + Y] =
+\mathbb{E}[X] + \mathbb{E}[Y]\)</span><br />
+</p></li>
+<li><p>If <span class="math inline">\(X\)</span> is constant <span class="math inline">\(c\)</span>, then <span class="math inline">\(\mathbb{E}[X] = c\)</span></p></li>
+</ul>
+</div>
+<div id="proof" class="section level3">
+<h3>Proof:</h3>
+</div>
+<div id="linearity-mathbbeax-b-a-cdot-mathbbex-b" class="section level3">
+<h3>1. Linearity: <span class="math inline">\(\mathbb{E}[aX + b] = a
+\cdot \mathbb{E}[X] + b\)</span></h3>
+<div id="discrete-case" class="section level4">
+<h4>Discrete Case</h4>
+<p>Let <span class="math inline">\(X\)</span> take values <span class="math inline">\(x_i\)</span> with probabilities <span class="math inline">\(p_i\)</span>:</p>
+<p><span class="math display">\[
+\mathbb{E}[aX + b] = \sum_i (a x_i + b) p_i = a \sum_i x_i p_i + b
+\sum_i p_i = a \mathbb{E}[X] + b
+\]</span></p>
+</div>
+<div id="continuous-case" class="section level4">
+<h4>Continuous Case</h4>
+<p>Let <span class="math inline">\(X\)</span> have pdf <span class="math inline">\(f(x)\)</span>:</p>
+<p><span class="math display">\[
+\mathbb{E}[aX + b] = \int_{-\infty}^{\infty} (a x + b) f(x) dx = a \int
+x f(x) dx + b \int f(x) dx = a \mathbb{E}[X] + b
+\]</span></p>
+<hr />
+</div>
+</div>
+<div id="additivity-mathbbex-y-mathbbex-mathbbey" class="section level3">
+<h3>2. Additivity: <span class="math inline">\(\mathbb{E}[X + Y] =
+\mathbb{E}[X] + \mathbb{E}[Y]\)</span></h3>
+<div id="discrete-case-1" class="section level4">
+<h4>Discrete Case</h4>
+<p>Joint pmf <span class="math inline">\(p(x,y)\)</span>:</p>
+<p><span class="math display">\[
+\mathbb{E}[X + Y] = \sum_{x, y} (x + y) p(x, y) = \sum_{x, y} x p(x, y)
++ \sum_{x, y} y p(x, y) = \mathbb{E}[X] + \mathbb{E}[Y]
+\]</span></p>
+</div>
+<div id="continuous-case-1" class="section level4">
+<h4>Continuous Case</h4>
+<p>Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be two continuous random variables with
+<strong>joint probability density function</strong> <span class="math inline">\(f(x, y)\)</span>. The expectation of the sum <span class="math inline">\(X + Y\)</span> is:</p>
+<p><span class="math display">\[
+\mathbb{E}[X + Y] = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} (x +
+y) f(x, y) \, dx \, dy
+\]</span></p>
+<p>We now apply <strong>linearity of integration</strong>:</p>
+<p><span class="math display">\[
+= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} x f(x, y) \, dx \, dy
++ \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} y f(x, y) \, dx \, dy
+\]</span></p>
+<p>Swap the order of integration (justified under Fubini’s Theorem):</p>
+<p><span class="math display">\[
+= \int_{-\infty}^{\infty} \left( \int_{-\infty}^{\infty} x f(x, y) \, dx
+\right) dy + \int_{-\infty}^{\infty} \left( \int_{-\infty}^{\infty} y
+f(x, y) \, dy \right) dx
+\]</span></p>
+<p>Note that: - The first term integrates out <span class="math inline">\(x\)</span>, keeping <span class="math inline">\(y\)</span> fixed. - The second term integrates out
+<span class="math inline">\(y\)</span>, keeping <span class="math inline">\(x\)</span> fixed.</p>
+<p>We now recognize:</p>
+<p><span class="math display">\[
+= \int_{-\infty}^{\infty} \left( \int_{-\infty}^{\infty} x f(x, y) \, dx
+\right) dy = \mathbb{E}[X]
+\]</span> and <span class="math display">\[
+= \int_{-\infty}^{\infty} \left( \int_{-\infty}^{\infty} y f(x, y) \, dy
+\right) dx = \mathbb{E}[Y]
+\]</span></p>
+<p>So finally:</p>
+<p><span class="math display">\[
+\mathbb{E}[X + Y] = \mathbb{E}[X] + \mathbb{E}[Y]
+\]</span></p>
+<hr />
+</div>
+</div>
+<div id="constant-random-variable" class="section level3">
+<h3>3. Constant Random Variable</h3>
+<p>Suppose <span class="math inline">\(X = c\)</span> almost surely -
+that is, the random variable <span class="math inline">\(X\)</span>
+always takes the same constant value <span class="math inline">\(c\)</span>.</p>
+<hr />
+<div id="discrete-case-2" class="section level4">
+<h4>Discrete Case</h4>
+<p>In the discrete setting, if <span class="math inline">\(X =
+c\)</span> with probability 1:</p>
+<p><span class="math display">\[
+\mathbb{E}[X] = \sum_x x \cdot \Pr(X = x)
+\]</span></p>
+<p>Since <span class="math inline">\(\Pr(X = c) = 1\)</span> and <span class="math inline">\(\Pr(X = x) = 0\)</span> for all <span class="math inline">\(x \neq c\)</span>, the sum becomes:</p>
+<p><span class="math display">\[
+\mathbb{E}[X] = c \cdot 1 + \sum_{x \neq c} x \cdot 0 = c
+\]</span></p>
+<hr />
+</div>
+<div id="continuous-case-2" class="section level4">
+<h4>Continuous Case</h4>
+<p>Let <span class="math inline">\(X\)</span> be a continuous random
+variable with probability density function <span class="math inline">\(f_X(x)\)</span>.</p>
+<p>By definition of expectation: <span class="math display">\[
+\mathbb{E}[c] = \int_{-\infty}^{\infty} c \cdot f_X(x) \, dx
+\]</span></p>
+<p>Since <span class="math inline">\(c\)</span> is constant, we can pull
+it outside the integral: <span class="math display">\[
+\mathbb{E}[c] = c \cdot \int_{-\infty}^{\infty} f_X(x) \, dx
+\]</span></p>
+<p>But we know that the total probability under the density function is:
+<span class="math display">\[
+\int_{-\infty}^{\infty} f_X(x) \, dx = 1
+\]</span></p>
+<p>Therefore: <span class="math display">\[
+\mathbb{E}[c] = c \cdot 1 = c
+\]</span></p>
+<hr />
+</div>
+</div>
+</div>
+<div id="variance-mathrmvarx-or-vx" class="section level2">
+<h2>Variance: <span class="math inline">\(\mathrm{Var}(X)\)</span> or
+<span class="math inline">\(V(X)\)</span></h2>
+<div id="definition" class="section level3">
+<h3>Definition</h3>
+<p>Variance measures how spread out the values of <span class="math inline">\(X\)</span> are around the mean:</p>
+<p><span class="math display">\[
+\mathrm{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2]
+\]</span></p>
+</div>
+<div id="activity-2.20-shortcut-formula" class="section level3">
+<h3>Activity 2.20: Shortcut formula</h3>
+<p>Simplify the above formula to the folowing:</p>
+<p><span class="math display">\[
+\mathrm{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2
+\]</span></p>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>We start with the definition of the variance of a random variable
+<span class="math inline">\(X\)</span>:</p>
+<p><span class="math display">\[
+\mathrm{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2]
+\]</span></p>
+<p>We can expand the square inside the expectation:</p>
+<p><span class="math display">\[
+\mathrm{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2]
+= \mathbb{E}[X^2 - 2X\mathbb{E}[X] + (\mathbb{E}[X])^2]
+\]</span></p>
+<p>Now, using the linearity of expectation, we can break this into three
+separate terms:</p>
+<p><span class="math display">\[
+\mathrm{Var}(X) = \mathbb{E}[X^2] - 2\mathbb{E}[X\mathbb{E}[X]] +
+\mathbb{E}[(\mathbb{E}[X])^2]
+\]</span></p>
+<p>Simplifying the Terms -</p>
+<ol style="list-style-type: decimal">
+<li><p>The first term <span class="math inline">\(\mathbb{E}[X^2]\)</span> stays as is.<br />
+</p></li>
+<li><p>The second term <span class="math inline">\(\mathbb{E}[X\mathbb{E}[X]]\)</span> simplifies to
+<span class="math inline">\(\mathbb{E}[X] \cdot \mathbb{E}[X]\)</span>
+because <span class="math inline">\(\mathbb{E}[X]\)</span> is
+constant.<br />
+</p></li>
+<li><p>The third term <span class="math inline">\(\mathbb{E}[(\mathbb{E}[X])^2]\)</span> simplifies
+to <span class="math inline">\((\mathbb{E}[X])^2\)</span>, since <span class="math inline">\(\mathbb{E}[X]\)</span> is constant.<br />
+</p></li>
+</ol>
+<p>Thus, we get:</p>
+<p><span class="math display">\[
+\mathrm{Var}(X) = \mathbb{E}[X^2] - 2\mathbb{E}[X](\mathbb{E}[X]) +
+(\mathbb{E}[X])^2
+\]</span></p>
+<p>Simplifying the above expression:</p>
+<p><span class="math display">\[
+\mathrm{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2
+\]</span></p>
+<p>Thus, we have shown that the variance of <span class="math inline">\(X\)</span> is given by:</p>
+<p><span class="math display">\[
+\mathrm{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2
+\]</span></p>
+<p>This completes the proof.</p>
+</details>
+</div>
+<div id="properties-of-variance" class="section level3">
+<h3>Properties of Variance</h3>
+<ul>
+<li><span class="math inline">\(\mathrm{Var}(aX + b) = a^2 \cdot
+\mathrm{Var}(X)\)</span></li>
+<li><span class="math inline">\(\mathrm{Var}(X) \geq 0\)</span></li>
+<li><span class="math inline">\(\mathrm{Var}(c) = 0\)</span> for any
+constant <span class="math inline">\(c\)</span></li>
+</ul>
+<hr />
+</div>
+<div id="activity-2.21-proof-of-properties-of-variance" class="section level3">
+<h3>Activity 2.21: Proof of properties of variance</h3>
+<p>Prove the above properties.</p>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<ol style="list-style-type: decimal">
+<li>Property: <span class="math inline">\(\mathrm{Var}(aX + b) = a^2
+\cdot \mathrm{Var}(X)\)</span></li>
+</ol>
+<p>Proof:</p>
+<p>Recall the definition of variance:</p>
+<p><span class="math display">\[
+\mathrm{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2]
+\]</span></p>
+<p>Now consider the variance of <span class="math inline">\(aX +
+b\)</span>:</p>
+<p><span class="math display">\[
+\mathrm{Var}(aX + b) = \mathbb{E}[(aX + b - \mathbb{E}[aX + b])^2]
+\]</span></p>
+<p>First, simplify the expectation <span class="math inline">\(\mathbb{E}[aX + b]\)</span>:</p>
+<p><span class="math display">\[
+\mathbb{E}[aX + b] = a\mathbb{E}[X] + b
+\]</span></p>
+<p>Thus, we have:</p>
+<p><span class="math display">\[
+\mathrm{Var}(aX + b) = \mathbb{E}[(aX + b - (a\mathbb{E}[X] + b))^2]
+\]</span> <span class="math display">\[
+= \mathbb{E}[(a(X - \mathbb{E}[X]))^2]
+\]</span> <span class="math display">\[
+= \mathbb{E}[a^2(X - \mathbb{E}[X])^2]
+\]</span></p>
+<p>Since <span class="math inline">\(a^2\)</span> is a constant, it can
+be factored out of the expectation:</p>
+<p><span class="math display">\[
+\mathrm{Var}(aX + b) = a^2 \cdot \mathbb{E}[(X - \mathbb{E}[X])^2]
+\]</span></p>
+<p>By the definition of variance, this is:</p>
+<p><span class="math display">\[
+\mathrm{Var}(aX + b) = a^2 \cdot \mathrm{Var}(X)
+\]</span></p>
+<p>Thus, we have proven the first property:</p>
+<p><span class="math display">\[
+\mathrm{Var}(aX + b) = a^2 \cdot \mathrm{Var}(X)
+\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Property: <span class="math inline">\(\mathrm{Var}(X) \geq
+0\)</span></li>
+</ol>
+<p>Proof:</p>
+<p>Variance is defined as:</p>
+<p><span class="math display">\[
+\mathrm{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2]
+\]</span></p>
+<p>Since <span class="math inline">\((X - \mathbb{E}[X])^2\)</span> is
+always non-negative for any value of <span class="math inline">\(X\)</span>, we know that:</p>
+<p><span class="math display">\[
+\mathbb{E}[(X - \mathbb{E}[X])^2] \geq 0
+\]</span></p>
+<p>Therefore, variance must also be non-negative:</p>
+<p><span class="math display">\[
+\mathrm{Var}(X) \geq 0
+\]</span></p>
+<p>Thus, the second property is proven:</p>
+<p><span class="math display">\[
+\mathrm{Var}(X) \geq 0
+\]</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Property: <span class="math inline">\(\mathrm{Var}(c) = 0\)</span>
+for any constant <span class="math inline">\(c\)</span></li>
+</ol>
+<p>Proof:</p>
+<p>Let <span class="math inline">\(X = c\)</span> be a constant. The
+variance of a constant is given by:</p>
+<p><span class="math display">\[
+\mathrm{Var}(c) = \mathbb{E}[(c - \mathbb{E}[c])^2]
+\]</span></p>
+<p>Since <span class="math inline">\(c\)</span> is a constant, <span class="math inline">\(\mathbb{E}[c] = c\)</span>. Therefore:</p>
+<p><span class="math display">\[
+\mathrm{Var}(c) = \mathbb{E}[(c - c)^2] = \mathbb{E}[0^2] =
+\mathbb{E}[0] = 0
+\]</span></p>
+<p>Thus, the variance of any constant is zero:</p>
+<p><span class="math display">\[
+\mathrm{Var}(c) = 0
+\]</span></p>
+<p>This proves the third property:</p>
+<p><span class="math display">\[
+\mathrm{Var}(c) = 0
+\]</span></p>
+</details>
+<hr />
+</div>
+</div>
+<div id="example-using-a-table" class="section level2">
+<h2>Example: Using a Table</h2>
+<p>Let <span class="math inline">\(X\)</span> be a random variable with
+the following distribution:</p>
+<p><span class="math display">\[
+\begin{array}{c|cccc}
+x_i &amp; -1 &amp; 0 &amp; 1 &amp; 2 \\
+\hline
+\Pr(X = x_i) &amp; 0.2 &amp; 0.5 &amp; 0.2 &amp; 0.1
+\end{array}
+\]</span></p>
+<p>Then:</p>
+<p><span class="math display">\[
+\mathbb{E}[X] = (-1)(0.2) + (0)(0.5) + (1)(0.2) + (2)(0.1) = -0.2 + 0 +
+0.2 + 0.2 = 0.2
+\]</span></p>
+<p><span class="math display">\[
+\mathbb{E}[X^2] = (-1)^2(0.2) + 0^2(0.5) + 1^2(0.2) + 2^2(0.1) = 0.2 + 0
++ 0.2 + 0.4 = 0.8
+\]</span></p>
+<p><span class="math display">\[
+\mathrm{Var}(X) = 0.8 - (0.2)^2 = 0.8 - 0.04 = 0.76
+\]</span></p>
+<hr />
+<div id="activity-2.22-defective-bulbs-in-boxes" class="section level3">
+<h3>Activity 2.22: Defective Bulbs in Boxes</h3>
+<p>A bulb manufacturer sells his product to vendors in boxes, each
+containing 12 bulbs. A recent inspection of 1000 randomly selected boxes
+resulted in the following data:</p>
+<p><span class="math display">\[
+\begin{array}{|c|c|}
+\hline
+\textbf{Number of defective bulbs in a box} &amp; \textbf{Number of
+boxes} \\
+\hline
+0 &amp; 980 \\
+1 &amp; 20 \\
+2 \text{ or more} &amp; 0 \\
+\hline
+\end{array}
+\]</span></p>
+<p>Assume that the above information provides a good approximation to
+the distribution of the number of defective bulbs in a box. You may also
+assume that defects occur independently across bulbs, and each bulb has
+the same probability of being defective.</p>
+<hr />
+<p>Let <span class="math inline">\(X\)</span> be the number of defective
+bulbs in a randomly selected box.</p>
+<p><strong>(i)</strong> Derive the probability mass function (pmf) of
+<span class="math inline">\(X\)</span>.</p>
+<p><strong>(ii)</strong> Calculate <span class="math inline">\(E(X)\)</span> and <span class="math inline">\(E(X^2)\)</span> using the definition of expected
+value. Hence calculate the variance <span class="math inline">\(\text{Var}(X)\)</span>.</p>
+<p><strong>(iii)</strong> A vendor has bought 10 boxes of bulbs. Let
+<span class="math inline">\(X_i\)</span> be the number of defective
+bulbs in the <span class="math inline">\(i^{th}\)</span> box for <span class="math inline">\(i = 1, 2, \dots, 10\)</span>, and let:</p>
+<p><span class="math display">\[
+Y = \sum_{i = 1}^{10} X_i
+\]</span></p>
+<p>That is, <span class="math inline">\(Y\)</span> is the total number
+of defective bulbs in the 10 boxes.</p>
+<p>Calculate <span class="math inline">\(E(Y)\)</span> and <span class="math inline">\(V(Y)\)</span> using <span class="math inline">\(E(X)\)</span> and <span class="math inline">\(V(X)\)</span></p>
+<p><strong>(iv)</strong> The vendor has bought the 10 boxes at a price
+of Rs. 900 per* box. He sells bulbs at a price of Rs. 100 per bulb.</p>
+<p>He checks each bulb before selling and sells <strong>only</strong>
+the non-defective bulbs.</p>
+<p>Derive an expression for the total <strong>profit</strong> as a
+function of <span class="math inline">\(Y\)</span>:</p>
+<p><strong>(v)</strong> Express <span class="math inline">\(E(\text{Profit})\)</span> and <span class="math inline">\(V(\text{Profit})\)</span> in terms of <span class="math inline">\(E(Y)\)</span> and <span class="math inline">\(V(X)\)</span>:</p>
+<hr />
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<ol style="list-style-type: lower-roman">
+<li>The Probability Mass Function (PMF) of <span class="math inline">\(X\)</span></li>
+</ol>
+<p>Since each box contains 12 bulbs, and each bulb has a small
+probability <span class="math inline">\(p\)</span> of being defective,
+the total number of defective bulbs in a box, <span class="math inline">\(X\)</span>, follows a <strong>Binomial
+distribution</strong>:</p>
+<p><span class="math display">\[
+X \sim \text{Binomial}(n = 12, p)
+\]</span></p>
+<p>Estimate <span class="math inline">\(p\)</span> using the data:</p>
+<ul>
+<li>Total defective bulbs observed: 20 boxes × 1 defective bulb = 20
+defective bulbs</li>
+<li>Total bulbs observed: 1000 boxes × 12 bulbs = 12,000 bulbs</li>
+</ul>
+<p><span class="math display">\[
+\hat{p} = \frac{20}{12000} = \frac{1}{600} \approx 0.00167
+\]</span></p>
+<p>Thus, the PMF is:</p>
+<p><span class="math display">\[
+P_X(x) = \binom{12}{x} \left( \frac{1}{600} \right)^x \left(1 -
+\frac{1}{600} \right)^{12 - x}, \quad x = 0, 1, \dots, 12
+\]</span></p>
+<p>As the second approach, We can estimate the probability mass function
+(PMF) of <span class="math inline">\(X\)</span> directly from the
+data:</p>
+<p><span class="math display">\[
+P(X = 0) = \frac{980}{1000} = 0.98, \quad P(X = 1) = \frac{20}{1000} =
+0.02, \quad P(X \geq 2) = 0
+\]</span></p>
+<ol start="2" style="list-style-type: lower-roman">
+<li>Using the definition of expectation:</li>
+</ol>
+<p><span class="math display">\[
+E(X) = \sum_x x \cdot P(X = x) = 0 \cdot 0.98 + 1 \cdot 0.02 = 0.02
+\]</span></p>
+<p><span class="math display">\[
+E(X^2) = \sum_x x^2 \cdot P(X = x) = 0^2 \cdot 0.98 + 1^2 \cdot 0.02 =
+0.02
+\]</span></p>
+<p><span class="math display">\[
+\text{Var}(X) = E(X^2) - [E(X)]^2 = 0.02 - (0.02)^2 = 0.0196
+\]</span></p>
+<ol start="3" style="list-style-type: lower-roman">
+<li><strong>Expected Value <span class="math inline">\(E(Y)\)</span></strong></li>
+</ol>
+<p><span class="math display">\[
+E(Y) = \sum_{i=1}^{10} E(X_i) = E(X_1) + E(X_2) + \cdots + E(X_{10}) =
+10 \cdot 0.02 = 0.2
+\]</span></p>
+<p><strong>Variance <span class="math inline">\(V(Y)\)</span></strong></p>
+<p>Assuming the boxes are independent (i.e., <span class="math inline">\(X_1, X_2, \dots, X_{10}\)</span> are
+independent):</p>
+<p><span class="math display">\[
+V(Y) = \sum_{i=1}^{10} V(X_i) = V(X_1) + V(X_2) + \cdots + V(X_{10}) =
+10 \cdot 0.0196 = 0.196
+\]</span></p>
+<ol start="4" style="list-style-type: lower-roman">
+<li>Let <span class="math inline">\(Y\)</span> be the total number of
+defective bulbs among the 120 bulbs (from 10 boxes). The number of
+non-defective bulbs is <span class="math inline">\(120 -
+Y\)</span>.</li>
+</ol>
+<p>To derive an expression for the total <strong>profit</strong>:</p>
+<ul>
+<li>Cost: <span class="math inline">\(10 \times 900 = 9000\)</span>
+rupees</li>
+<li>Revenue: <span class="math inline">\((120 - Y) \times
+100\)</span></li>
+</ul>
+<p><span class="math display">\[
+\text{Profit} = 100(120 - Y) - 9000 = 12000 - 100Y - 9000 = 3000 - 100Y
+\]</span></p>
+<ol start="22" style="list-style-type: lower-alpha">
+<li>To Express <span class="math inline">\(E(\text{Profit})\)</span> and
+<span class="math inline">\(V(\text{Profit})\)</span>:</li>
+</ol>
+<p>Let’s use the linearity of expectation and properties of
+variance.</p>
+<p><span class="math display">\[
+E(\text{Profit}) = E[3000 - 100Y] = 3000 - 100E(Y)
+\]</span></p>
+<p><span class="math display">\[
+V(\text{Profit}) = \text{Var}(3000 - 100Y) = 100^2 \cdot \text{Var}(Y)
+\]</span></p>
+<hr />
+</details>
+</div>
 </div>
 
 
