@@ -210,15 +210,7 @@ c' = \frac{c-\mu}{\sigma}, \quad d' = \frac{d-\mu}{\sigma}
 
 ---
 
-# Summary Table
 
-| Distribution | Type       | Parameters       | Mean      | Variance    |
-|:------------|:-----------|:-----------------|:----------|:------------|
-| Bernoulli   | Discrete   | \(p\)            | \(p\)     | \(pq\)      |
-| Binomial    | Discrete   | \(n, p\)         | \(np\)    | \(npq\)     |
-| Poisson     | Discrete   | \(\lambda\)      | \(\lambda\) | \(\lambda\) |
-| Normal      | Continuous | \(\mu, \sigma\)  | \(\mu\)   | \(\sigma^2\) |
----
 
 ## Activity 2.23: Heights of Students
 
