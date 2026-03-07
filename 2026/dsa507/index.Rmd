@@ -1,0 +1,97 @@
+---
+title: "DSA 507  Statistics for Data Science & AI"
+output: 
+  html_document:
+---
+
+**Batch:** 2026 / 2028\
+**Credit Value:** 3.0\
+**Schedule:** Saturdays, 1.00 p.m. to 5.00 p.m.\
+**Venue:** Blended Learning Centre (BLC)\
+**Instructor:** Dr. Rajitha M. Silva\
+**Department of Statistics, University of Sri Jayewardenepura**
+
+------------------------------------------------------------------------
+
+## Course Introduction
+
+The aim of this course is to introduce postgraduate students in Data Science and AI to the essential concepts and techniques of statistics. The course balances theoretical foundations with practical applications using R and Python, including data collection, descriptive and inferential analysis, and probabilistic modeling.
+
+Upon successful completion, students will be able to: - Understand the role and limitations of statistics in data science - Classify variables and identify suitable scales of measurement - Apply effective data collection and sampling methods - Perform descriptive and inferential statistical analyses - Calculate and interpret probabilities for real-world scenarios
+
+------------------------------------------------------------------------
+
+## Course Content
+
+-   **1. Exploratory Data Analysis**
+
+-   **2. Data and Sampling Distributions**
+
+-   **3. Statistical Experiments and Significance Testing**
+
+------------------------------------------------------------------------
+
+## Teaching & Assessment
+
+-   **Teaching Methods:**
+    -   Lectures via direct instruction\
+    -   Practical sessions focused on self-learning and inquiry-based learning
+-   **Assessment Strategy:**
+    -   Continuous Assessment: 40%\
+    -   Final Assessment: 60%
+
+------------------------------------------------------------------------
+
+## References
+
+Peter Bruce, Andrew Bruce, Peter Gedeck - Practical Statistics for Data Scientists\_ 50+ Essential Concepts Using R and Python (2020, O'Reilly Media)
+
+## Recommended Video Playlist
+
+For supplementary learning and revision, please refer to the following YouTube playlist:
+
+[Statistics for Data Science YouTube Playlist](https://youtube.com/playlist?list=PL-u09-6gP5ZNd6AhULnQHr6ZsF15qy4D0&feature=shared)
+
+------------------------------------------------------------------------
+
+## Lecture Notes
+
+> Lecture materials will be uploaded here during the semester.
+
+-   [Week1: Exploratory Data Analysis](chapter1_notes.html)
+
+-   [Week2: Data and Sampling Distributions](chapter2.html)
+
+-   [Week3: Data and Sampling Distributions (ctd)](chapter2_rest1.html)
+
+-   [Week4: Data and Sampling Distributions (ctd)](chapter2_rest2.html)
+
+    -   [Practical on distribution](practical_on_dist_r.html)
+
+-   [Week5: Statistical Experiments and Significance Testing](chapter3_one.html)
+
+-   [Week6: Statistical Experiments and Significance Testing](chapter3_two.html)
+
+    -   [Practical: Statistical Experiments and Significance Testing](chapter3_two_practical.html)
+
+-   [Week7: F Statistics and ANOVA](chapter3_four.html)
+
+    -   [Practical: F Statistics and ANOVA](practical_f_statistic_anova.html)
+
+-   [Week7: Chi-Square Test](chapter3_five.html)
+
+    -   [Practical: chi square test](practical_chi_square_test.html)
+
+-   Week8: Non-parametric Tests
+
+-   [Week9: Multi-Arm Bandit Algorithm](week9.html)
+
+-   [Week10: Power Analysis](week10.html)
+
+[**Mock Exam with solution**](mock.pdf)
+
+------------------------------------------------------------------------
+
+## Contact
+
+For questions and feedback, please contact me via email([rsilva\@sjp.ac.lk](mailto:rsilva@sjp.ac.lk){.email}).

@@ -1,0 +1,263 @@
+---
+title: "Week 9: Multi-Arm Bandit Algorithms"
+author: "Dr. Rajitha M. Silva"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+The **Multi-Arm Bandit (MAB)** problem is a classic scenario in sequential decision-making. It provides an adaptive alternative to traditional A/B testing by **balancing exploration and exploitation**, allowing us to learn and optimize on the fly.
+
+In this lecture, we apply this concept to **cricket strategy optimization** - specifically, choosing the best **opening batting pair** to maximize success rates in T20 matches.
+
+## Key Concepts
+
+-   **Arm**: A candidate opening pair (e.g., Pair A = Player 1 + Player 2).
+-   **Win**: A success (e.g., pair scores more than 30 runs in Powerplay).
+-   **Exploration**: Trying different pairs to learn their effectiveness.
+-   **Exploitation**: Repeatedly using the most successful pair so far.
+
+# Sports Scenario: Choosing a T20 Opening Pair
+
+Suppose a cricket analyst is evaluating three opening combinations based on historical and simulated match segments:
+
+-   **Pair A**: Aggressive left-right combination
+-   **Pair B**: Two anchors
+-   **Pair C**: One explosive, one inexperienced player
+
+Each trial is a match segment. A **"win"** is defined as the pair scoring **at least 30 runs in the Powerplay** (first 6 overs).
+
+## Initial Results (after 50 matches each)
+
+| Opening Pair (Arm) | Wins |
+|--------------------|------|
+| A                  | 10   |
+| B                  | 2    |
+| C                  | 4    |
+
+If we only exploit Pair A, we might miss out on a late bloomer like Pair C.
+
+# Epsilon-Greedy Algorithm
+
+The epsilon-greedy algorithm is a simple rule that decides whether to explore a new arm or exploit the current best-performing one:
+
+What does epsilon ($\epsilon$) do?
+
+Epsilon ($\epsilon$) is a small number between 0 and 1 that controls the degree of randomness in your decisions.
+
+With probability $\epsilon$, the algorithm explores - it selects a random option to gather more information.
+
+With probability 1-$\epsilon$, the algorithm exploits - it picks the option that has performed best so far.
+
+A higher $\epsilon$ means more exploration, which is good early on; a lower $\epsilon$ means more exploitation, which is good when you're confident in your choice.
+
+**Algorithm Steps (Flowchart-style):**
+
+1.  Initialize wins and trials for each arm
+
+2.  For each round:
+
+-   With probability $\epsilon$: choose a random arm (exploration)
+
+-   Otherwise: choose the arm with the highest success rate so far (exploitation)
+
+-   Record result and update counts
+
+3.  Repeat for a fixed number of rounds
+
+Importance: This method ensures the model does not over-commit to an option too early, especially when performance variability is high.
+
+We simulate a simple **epsilon-greedy algorithm**, with `epsilon = 0.1`.
+
+```{r epsilon-greedy, warning=FALSE}
+set.seed(123)
+
+# True probabilities of success (unknown in reality)
+true_probs <- c(A = 0.2, B = 0.05, C = 0.08)
+
+# Initialize
+wins <- c(A = 0, B = 0, C = 0)
+trials <- c(A = 0, B = 0, C = 0)
+epsilon <- 0.1
+n_sim <- 1000
+
+history <- data.frame(trial = 1:n_sim, chosen = NA, result = NA)
+
+for (i in 1:n_sim) {
+  if (runif(1) < epsilon || sum(trials) == 0) {
+    arm <- sample(names(true_probs), 1)
+  } else {
+    success_rates <- ifelse(trials == 0, 0, wins / trials)
+    arm <- names(which.max(success_rates))
+  }
+
+  result <- rbinom(1, 1, true_probs[arm])
+  trials[arm] <- trials[arm] + 1
+  wins[arm] <- wins[arm] + result
+
+  history$chosen[i] <- arm
+  history$result[i] <- result
+}
+
+barplot(wins, main = "Total Wins per Opening Pair (Epsilon-Greedy)", col = "steelblue")
+```
+
+### Student Activity:
+
+-   Modify the `epsilon` value (e.g., try 0.01 or 0.3) and observe the impact on win counts.
+
+-   Change the success probabilities (`true_probs`) to simulate different scenarios.
+
+-   Plot running success rates (`wins/trials`) over time.
+
+# Thompson Sampling (Bayesian Bandit)
+
+Thompson Sampling is a **Bayesian approach** that naturally balances exploration and exploitation. It assumes a **probabilistic model** of each arm's success rate and updates it with each new trial.
+
+### Algorithm Steps:
+
+1.  For each arm, assume a Beta(1,1) prior (uniform)
+
+2.  In each trial:
+
+    -   Sample success rate from each arm's current Beta distribution
+
+    -   Choose arm with highest sampled success rate
+
+    -   Observe result (1 = success, 0 = failure)
+
+    -   Update Beta posterior ($\alpha$= $\alpha$+ success, $\beta$ = $\beta$ + failure)
+
+3.  Repeat over many trials
+
+**Importance:** This method is theoretically optimal under many conditions and performs well even when there's high uncertainty or variability.
+
+```{r thompson-sampling, warning=FALSE}
+# Thompson Sampling (Bayesian Bandit)
+#--- 1. Setup historical data and priors -----------------------
+
+# Arms and historical outcomes:
+arms   <- c("A","B","C")              # A: Aggressive L-R, B: Two anchors, C: Explosive+Inexperienced
+wins   <- c(A = 10, B = 2,  C = 4)
+trials <- c(A = 50, B = 50, C = 50)
+fails  <- trials - wins
+
+# Prior hyperparameters (Beta(?????, ?????)):
+alpha0 <- 1    # non-informative; set higher ??0 to express stronger prior belief in "success"
+beta0  <- 1    # non-informative; set higher ??0 to express stronger prior belief in "failure"
+
+# Posterior parameters after ingesting historical data:
+alpha <- wins + alpha0
+beta  <- fails + beta0
+
+# (Optional) "True" underlying win-rates for simulation purposes
+p_true <- wins / trials    # e.g. A???0.20, B???0.04, C???0.08
+
+#--- 2. Thompson Sampling function ------------------------------
+
+thompson_sampling <- function(alpha, beta, p_true, n_rounds = 500) {
+  K <- length(alpha)
+  chosen_arm <- integer(n_rounds)
+  reward     <- integer(n_rounds)
+  
+  for (t in seq_len(n_rounds)) {
+    # 2.1 Sample a theta for each arm from its Beta posterior
+    thetas <- rbeta(K, alpha, beta)
+    
+    # 2.2 Select the arm with the highest sampled theta
+    arm_idx <- which.max(thetas)
+    
+    # 2.3 "Play" that arm and observe a Bernoulli outcome
+    #     Here we simulate using p_true; in real use you'd replace this with your actual observation
+    r <- rbinom(1, size = 1, prob = p_true[arm_idx])
+    
+    # 2.4 Update that arm's posterior
+    alpha[arm_idx] <- alpha[arm_idx] + r
+    beta[ arm_idx] <- beta[ arm_idx] + (1 - r)
+    
+    # 2.5 Record results
+    chosen_arm[t] <- arm_idx
+    reward[t]     <- r
+  }
+  
+  list(
+    chosen_arm   = chosen_arm,
+    reward       = reward,
+    final_alpha  = alpha,
+    final_beta   = beta
+  )
+}
+
+#--- 3. Run the sampler and inspect results --------------------
+
+set.seed(42)
+res <- thompson_sampling(alpha, beta, p_true, n_rounds = 1000)
+
+# How often each arm was chosen:
+table(factor(res$chosen_arm, levels = 1:3),
+      dnn = "Arm")
+
+# Cumulative reward (wins) over time:
+cumsum(res$reward)[c(100, 500, 1000)]
+
+# Plot frequency of picks over time
+runs  <- seq_along(res$chosen_arm)
+freqs <- sapply(1:3, function(a) cumsum(res$chosen_arm == a) / runs)
+
+matplot(runs, freqs, type = "l", lty = 1, 
+        xlab = "Trial", ylab = "Empirical pick probability")
+legend("bottomright", legend = arms, lty = 1)
+```
+
+
+
+
+### Student Activity:
+
+-   Try different prior settings (e.g., Beta(2,2)) and observe changes.
+
+-   Track and plot the `a / (a + b)` values (posterior means) for each arm over time.
+
+-   Compare Thompson Sampling results with epsilon-greedy outcomes.
+
+### Student Activity:
+
+#### Selecting Death Over Batters using MAB
+
+You are the data analyst for a T20 cricket team. You need to choose the best batter to send in during the **last two overs (death overs)** when quick scoring is critical. You have three players:
+
+-   **Batter A**: High strike rate but inconsistent
+
+-   **Batter B**: Moderate but steady
+
+-   **Batter C**: Young player with limited data
+
+**Instructions:**
+
+1.  Define a 'win' as scoring at least 20 runs in the last 2 overs.
+
+2.  Simulate 1000 such match scenarios using both epsilon-greedy and Thompson Sampling.
+
+3.  Track and compare:
+
+    -   How often each batter is selected
+
+    -   Total wins per batter
+
+    -   Which algorithm adapts faster to select the most successful batter
+
+**Implementation Tips:**
+
+-   Replace the `true_probs` vector with new values like:
+
+    ```         
+    true_probs <- c(A = 0.25, B = 0.15, C = 0.20)
+    ```
+
+-   Re-label the arms from opening pairs to `Batter A`, `Batter B`, and `Batter C`.
+
+-   Plot bar charts and running averages for insight.

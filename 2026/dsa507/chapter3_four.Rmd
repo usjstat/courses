@@ -1,0 +1,422 @@
+---
+title: "Lecture Note: The F-Statistic and One-Way ANOVA"
+author: "Dr. Rajitha M. Silva"
+output: html_document
+
+---
+
+## Introduction
+
+In this lecture, we will explore the **F-Statistic** as used in Analysis of Variance (ANOVA). The F-Statistic allows us to test whether the means of three or more groups differ more than would be expected by random chance. While a t-test can compare two groups, ANOVA (and its associated F-Statistic) generalizes this for multiple groups.
+
+Throughout this note, all examples will be drawn from the **sports world**. We will provide both **R** and **Python** code to:
+
+1. Illustrate the decomposition of variance.  
+2. Compute the F-Statistic.  
+3. Conduct a One-Way ANOVA in R and Python.
+4. Conduct Two-Way ANOVA (Two-Factor ANOVA) including model, interpretation, and examples.  
+  
+
+## 1. Decomposition of Variance
+
+Any observation \( Y_{ij} \) can be thought of as the sum of:
+
+1. The **grand mean** \( \bar{Y}_{\cdot\cdot} \).  
+2. The **treatment (group) effect** \( \tau_j \).  
+3. The **residual (error)** \( \epsilon_{ij} \).
+
+Mathematically, for group \( j \) and observation \( i \):
+\[
+Y_{ij} = \bar{Y}_{\cdot\cdot} + \tau_j + \epsilon_{ij},
+\]
+where:
+- \( \bar{Y}_{\cdot\cdot} \) is the overall mean across all observations.
+- \( \tau_j = \bar{Y}_{\cdot j} - \bar{Y}_{\cdot\cdot} \) is the effect of group \( j \) (how group \( j \)'s mean deviates from the grand mean).
+- \( \epsilon_{ij} = Y_{ij} - \bar{Y}_{\cdot j} \) is the deviation of observation \( i \) in group \( j \) from its group mean.
+
+The F-Statistic is derived by comparing:
+
+- The **between-group variance** (variance of the group means around the grand mean).  
+- The **within-group variance** (variance of observations within each group around their respective group means).  
+
+## 2. F-Statistic in One-Way ANOVA
+
+#### 2.1 Formula
+
+Given \( k \) groups, with \( n_j \) observations in group \( j \) and total \( N = \sum_{j=1}^k n_j \), define:
+
+- **Sum of Squares Between (SSB)**:
+  \[
+  \text{SSB} = \sum_{j=1}^k n_j \left(\bar{Y}_{\cdot j} - \bar{Y}_{\cdot\cdot}\right)^2.
+  \]
+  Degrees of freedom: \( \text{df}_{\text{between}} = k - 1 \).
+
+- **Sum of Squares Within (SSW)**:
+  \[
+  \text{SSW} = \sum_{j=1}^k \sum_{i=1}^{n_j} \left(Y_{ij} - \bar{Y}_{\cdot j}\right)^2.
+  \]
+  Degrees of freedom: \( \text{df}_{\text{within}} = N - k \).
+
+Compute:
+
+- **Mean Square Between (MSB)**:
+  \[
+  \text{MSB} = \frac{\text{SSB}}{k - 1}.
+  \]
+- **Mean Square Within (MSW)**:
+  \[
+  \text{MSW} = \frac{\text{SSW}}{N - k}.
+  \]
+- The **F-Statistic**:
+  \[
+  F = \frac{\text{MSB}}{\text{MSW}}.
+  \]
+Under the null hypothesis (all group means equal), \( F \) follows an \( F \)-distribution with \( (k - 1,\, N - k) \) degrees of freedom.
+
+#### 2.2 Interpretation
+
+- A large \( F \)-value indicates that the between-group variance is large relative to the within-group variance, suggesting at least one group mean differs.  
+- We compute a **p-value** by comparing the observed \( F \)-value to the \( F \)-distribution. If \( p < \alpha \) (e.g., 0.05), we reject the null hypothesis of equal means.  
+
+## 3. Sports Example 1: Comparing Batting Averages Across Three Baseball Teams
+
+Suppose we collect the batting averages of 10 randomly selected players from each of three teams: **Team A**, **Team B**, and **Team C**. We want to test if the mean batting average is the same across all three teams.
+
+1. **Team A**:  
+   - Sample of 10 players.  
+   - Batting averages (in decimal form, e.g., 0.275).  
+
+2. **Team B**:  
+   - Sample of 10 players.  
+   - Batting averages.  
+
+3. **Team C**:  
+   - Sample of 10 players.  
+   - Batting averages.  
+
+Below is simulated data for illustration.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+```{r data-simulation}
+## Simulate batting average data (10 players per team)
+set.seed(2025)
+team_A <- rnorm(10, mean = 0.280, sd = 0.020)
+team_B <- rnorm(10, mean = 0.270, sd = 0.018)
+team_C <- rnorm(10, mean = 0.290, sd = 0.022)
+
+## Combine into a data frame
+batting_df <- data.frame(
+  average = c(team_A, team_B, team_C),
+  team = factor(rep(c("A", "B", "C"), each = 10))
+)
+
+head(batting_df)
+```
+
+#### 3.1 Compute One-Way ANOVA "by Hand" (Conceptual Steps)
+
+1. **Compute group means** \( \bar{Y}_{\cdot A}, \bar{Y}_{\cdot B}, \bar{Y}_{\cdot C} \).  
+2. **Compute grand mean** \( \bar{Y}_{\cdot\cdot} \).  
+3. **Calculate SSB** and **SSW** using formulas from Section 2.  
+4. **Compute MSB = SSB / (k - 1)** and **MSW = SSW / (N - k)**.  
+5. **Compute \( F = \frac{\text{MSB}}{\text{MSW}} \)**.  
+
+
+#### 3.2 Compute One-Way ANOVA in R
+
+```{r anova-r}
+## Perform One-Way ANOVA in R
+anova_result <- aov(average ~ team, data = batting_df)
+summary(anova_result)
+```
+
+- `aov(average ~ team, data = batting_df)` fits the One-Way ANOVA model.  
+- `summary(anova_result)` displays the ANOVA table, including Df, Sum Sq, Mean Sq, F value, and Pr(>F).
+
+Interpretation:
+- If the **F value** is large and the **Pr(>F)** (p-value) is less than 0.05, we conclude that at least one team's mean batting average differs from the others.
+
+#### 3.3 Show One-Way ANOVA Code in Python 
+
+```{python python-code, eval=FALSE}
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+from statsmodels.formula.api import ols
+
+## Create the same DataFrame in Python
+np.random.seed(2025)
+team_A_py = np.random.normal(loc=0.280, scale=0.020, size=10)
+team_B_py = np.random.normal(loc=0.270, scale=0.018, size=10)
+team_C_py = np.random.normal(loc=0.290, scale=0.022, size=10)
+
+batting_py = pd.DataFrame({
+    "average": np.concatenate([team_A_py, team_B_py, team_C_py]),
+    "team": ["A"]*10 + ["B"]*10 + ["C"]*10
+})
+
+## Fit the One-Way ANOVA model
+model = ols('average ~ C(team)', data=batting_py).fit()
+anova_table = sm.stats.anova_lm(model, typ=1)
+print(anova_table)
+```
+
+- The chunk is set with `eval=FALSE` to **show** the Python code without executing it.
+
+## 4. Sports Example 2: Comparing Sprint Times Across Three Track Surfaces
+
+Imagine we measure 100m sprint times (in seconds) for 8 athletes on three different surfaces: **Asphalt**, **Synthetic Track**, and **Grass**. We want to know if the average sprint time differs by surface.
+
+```{r data-sprint}
+set.seed(2025)
+asphalt <- rnorm(8, mean = 10.5, sd = 0.2)
+synthetic <- rnorm(8, mean = 10.3, sd = 0.18)
+grass <- rnorm(8, mean = 10.7, sd = 0.25)
+
+sprint_df <- data.frame(
+  time = c(asphalt, synthetic, grass),
+  surface = factor(rep(c("Asphalt", "Synthetic", "Grass"), each = 8))
+)
+
+head(sprint_df)
+```
+
+#### 4.1 Compute One-Way ANOVA in R
+
+```{r anova-sprint-r}
+sprint_anova <- aov(time ~ surface, data = sprint_df)
+summary(sprint_anova)
+```
+
+#### 4.2 Show One-Way ANOVA Code in Python 
+
+```{python python-sprint-code, eval=FALSE}
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+from statsmodels.formula.api import ols
+
+## Python DataFrame
+np.random.seed(2025)
+asphalt_py = np.random.normal(loc=10.5, scale=0.2, size=8)
+synthetic_py = np.random.normal(loc=10.3, scale=0.18, size=8)
+grass_py = np.random.normal(loc=10.7, scale=0.25, size=8)
+
+sprint_py = pd.DataFrame({
+    "time": np.concatenate([asphalt_py, synthetic_py, grass_py]),
+    "surface": ["Asphalt"]*8 + ["Synthetic"]*8 + ["Grass"]*8
+})
+
+## Fit and get ANOVA table
+model_sprint = ols('time ~ C(surface)', data=sprint_py).fit()
+anova_sprint = sm.stats.anova_lm(model_sprint, typ=1)
+print(anova_sprint)
+```
+
+## 5. Assumptions and Diagnostics
+
+1. **Independence**: Observations in each group are independent.  
+2. **Normality**: Within each group, the residuals are approximately normally distributed.  
+3. **Homoscedasticity (Equal Variances)**: The variance within each group is roughly equal.
+
+#### 5.1 Residual Diagnostics in R (Sports Example 1)
+
+```{r diagnostics-r}
+## Extract residuals and fitted values
+resid_vals <- residuals(anova_result)
+fitted_vals <- fitted(anova_result)
+
+## 1. Q-Q plot for normality
+qqnorm(resid_vals)
+qqline(resid_vals, col = "blue", lwd = 2)
+
+## 2. Residuals vs Fitted for homoscedasticity
+plot(fitted_vals, resid_vals,
+     xlab = "Fitted Values",
+     ylab = "Residuals",
+     main = "Residuals vs Fitted")
+abline(h = 0, col = "red", lwd = 2)
+```
+
+#### 5.2 Show Python Diagnostic Code 
+
+```{python python-diagnostics-code, eval=FALSE}
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+
+## Obtain residuals and fitted values from previous model
+resid_py = model.resid
+fitted_py = model.fittedvalues
+
+## 1. Q-Q plot
+plt.figure()
+stats.probplot(resid_py, dist="norm", plot=plt)
+plt.title("Q-Q Plot of Residuals")
+plt.show()
+
+## 2. Residuals vs Fitted
+plt.figure()
+plt.scatter(fitted_py, resid_py)
+plt.axhline(y=0, color='red', linestyle='--', linewidth=1.5)
+plt.xlabel("Fitted Values")
+plt.ylabel("Residuals")
+plt.title("Residuals vs Fitted")
+plt.show()
+```
+
+## 6. Post-Hoc Tests (If ANOVA is Significant)
+
+When the overall ANOVA is significant, we often want to know **which pairs of groups** differ. A common post-hoc test is **Tukey's Honest Significant Difference (HSD)**.
+
+#### 6.1 Tukey HSD in R (Sports Example 1)
+
+```{r tukey-r}
+TukeyHSD(anova_result)
+```
+
+Interpretation:
+- Look at the confidence intervals and adjusted p-values for each pairwise comparison. If the interval does not contain 0, those two teams differ significantly.
+
+#### 6.2 Show Tukey HSD Code in Python 
+
+```{python python-tukey-code, eval=FALSE}
+from statsmodels.stats.multicomp import pairwise_tukeyhsd
+
+## Perform Tukey HSD
+tukey = pairwise_tukeyhsd(endog=batting_py["average"],
+                          groups=batting_py["team"],
+                          alpha=0.05)
+print(tukey)
+```
+
+---  
+
+## 7. Two-Way ANOVA (Two-Factor ANOVA)
+
+Two-Way ANOVA allows us to assess the effect of **two categorical factors** (and their interaction) on a numeric outcome.  For example, we might ask: *Does batting average depend on both **Team** and **Batting Order** simultaneously?*
+
+#### 7.1 Model and Interpretation
+
+Assume two factors:
+- Factor A: \( A_i \) with levels \( i = 1, 2, \dots, a \).  
+- Factor B: \( B_j \) with levels \( j = 1, 2, \dots, b \).  
+
+The Two-Way ANOVA model with interaction is:
+\[
+Y_{ijk} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \epsilon_{ijk},
+\]
+where:
+- \( \mu \) is the overall mean.  
+- \( \alpha_i \) is the effect of level \( i \) of Factor A.  
+- \( \beta_j \) is the effect of level \( j \) of Factor B.  
+- \( (\alpha\beta)_{ij} \) is the interaction effect when \( A = i \) and \( B = j \).  
+- \( \epsilon_{ijk} \sim N(0, \sigma^2) \) is the random error.  
+
+###### Hypotheses
+
+1. **Main effect of Factor A**:  
+   \[
+   H_{0A}: \alpha_1 = \alpha_2 = \dots = \alpha_a = 0 \quad vs. \quad H_{1A}: \text{not all } \alpha_i = 0.
+   \]
+
+2. **Main effect of Factor B**:  
+   \[
+   H_{0B}: \beta_1 = \beta_2 = \dots = \beta_b = 0 \quad vs. \quad H_{1B}: \text{not all } \beta_j = 0.
+   \]
+
+3. **Interaction effect**:  
+   \[
+   H_{0AB}: (\alpha\beta)_{ij} = 0 \; \text{for all } i, j \quad vs. \quad H_{1AB}: \text{some } (\alpha\beta)_{ij} \neq 0.
+   \]
+
+- If the interaction is significant, it means the effect of one factor depends on the level of the other factor.  
+
+#### 7.2 Sports Example: Batting Average by Team and Batting Order
+
+We simulate batting averages for players categorized by **Team** (A, B, C) and **Batting Order** (Top, Middle, Bottom).  
+
+```{r setup-two-way, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+```{r data-two-way}
+## Simulate balanced Two-Way ANOVA data
+set.seed(2025)
+teams <- rep(c("A", "B", "C"), each = 30)
+orders <- rep(rep(c("Top", "Middle", "Bottom"), each = 10), times = 3)
+
+## Simulate effects: base = 0.280, team effects, order effects, interaction noise
+team_effects <- c(A = 0.000, B = -0.005, C = 0.005)
+order_effects <- c(Top = 0.010, Middle = 0.000, Bottom = -0.010)
+
+## Create batting averages with interaction noise
+batting_two_df <- data.frame(
+  average = 0.280 +
+    team_effects[teams] +
+    order_effects[orders] +
+    rnorm(90, mean = 0, sd = 0.015),
+  team = factor(teams),
+  order = factor(orders)
+)
+
+head(batting_two_df)
+```
+
+###### 7.2.1 Two-Way ANOVA in R
+
+```{r anova-two-way-r}
+## Fit Two-Way ANOVA with interaction
+anova_two <- aov(average ~ team * order, data = batting_two_df)
+summary(anova_two)
+```
+
+- `team * order` requests main effects and interaction.  
+- The ANOVA table will show three rows:  
+  1. `team` (main effect)  
+  2. `order` (main effect)  
+  3. `team:order` (interaction)  
+  4. Residuals  
+
+###### 7.2.2 Interpreting the R Output
+
+- If **`team`** row has p < 0.05: batting average differs by team, averaging over orders.  
+- If **`order`** row has p < 0.05: batting average differs by batting order, averaging over teams.  
+- If **`team:order`** row has p < 0.05: the effect of batting order differs across teams (interaction).  
+
+###### 7.2.3 Show Two-Way ANOVA Code in Python (No Execution)
+
+```{python python-two-way-code, eval=FALSE}
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+from statsmodels.formula.api import ols
+
+## Recreate the DataFrame in Python
+np.random.seed(2025)
+teams_py = np.repeat(["A", "B", "C"], 30)
+orders_py = np.tile(np.repeat(["Top", "Middle", "Bottom"], 10), 3)
+
+team_effects_py = {"A": 0.000, "B": -0.005, "C": 0.005}
+order_effects_py = {"Top": 0.010, "Middle": 0.000, "Bottom": -0.010}
+
+batting_two_py = pd.DataFrame({
+    "average": 0.280 +
+        [team_effects_py[t] for t in teams_py] +
+        [order_effects_py[o] for o in orders_py] +
+        np.random.normal(loc=0, scale=0.015, size=90),
+    "team": teams_py,
+    "order": orders_py
+})
+
+## Fit Two-Way ANOVA with interaction
+model_two = ols('average ~ C(team) * C(order)', data=batting_two_py).fit()
+anova_two_table = sm.stats.anova_lm(model_two, typ=2)
+print(anova_two_table)
+```
+
+- `C(team) * C(order)` requests main effects and interaction in Python.  
+- `typ=2` stands for Type II sum of squares (common default for balanced designs).
+

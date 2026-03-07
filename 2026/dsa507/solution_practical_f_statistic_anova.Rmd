@@ -1,0 +1,239 @@
+---
+title: "Practical: F-Statistic and ANOVA Exercises"
+author: "Dr. Rajitha M. Silva"
+output: html_document
+
+---
+
+# Objectives
+
+1. Apply One-Way ANOVA to simulated sports data.  
+2. Interpret ANOVA tables and F-Statistic results.  
+3. Perform residual diagnostics for ANOVA models.  
+4. Conduct Two-Way ANOVA with interaction and interpret main and interaction effects.  
+5. Show equivalent Python code (with `eval=FALSE`) for each task.
+
+# Setup
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+set.seed(2025)
+```
+
+# 1. One-Way ANOVA Practical
+
+## 1.1 Simulate Batting Average Data
+
+Simulate batting averages for three teams (A, B, C), 10 players each.
+
+```{r simulate-batting}
+team_A <- rnorm(10, mean = 0.280, sd = 0.020)
+team_B <- rnorm(10, mean = 0.270, sd = 0.018)
+team_C <- rnorm(10, mean = 0.290, sd = 0.022)
+
+batting_df <- data.frame(
+  average = c(team_A, team_B, team_C),
+  team = factor(rep(c("A", "B", "C"), each = 10))
+)
+
+# Preview data
+head(batting_df)
+```
+
+**Task 1**: Compute group means and the grand mean manually. Show your calculations in R.
+
+```{r group-means}
+# Compute group and grand means
+group_means <- tapply(batting_df$average, batting_df$team, mean)
+grand_mean <- mean(batting_df$average)
+group_means
+grand_mean
+```
+
+## 1.2 Calculate SSB, SSW, MSB, MSW, and F-Statistic Manually
+
+Use formulas:
+
+- SSB = sum_{j} n_j * (mean_j - grand_mean)^2  
+- SSW = sum_{j,i} (Y_ij - mean_j)^2  
+
+```{r manual-ssb-ssw}
+n_j <- table(batting_df$team)
+ssb <- sum(n_j * (group_means - grand_mean)^2)
+ssw <- sum(tapply((batting_df$average - rep(group_means, each = 10))^2,
+                  batting_df$team, sum))
+msb <- ssb / (length(group_means) - 1)
+msw <- ssw / (nrow(batting_df) - length(group_means))
+F_value <- msb / msw
+
+ssb
+ssw
+msb
+msw
+F_value
+```
+
+**Task 2**: Compare your manual F-Statistic to the value from `aov()`.
+
+```{r anova-compare}
+anova_result <- aov(average ~ team, data = batting_df)
+anova_summary <- summary(anova_result)
+anova_summary
+```
+
+## 1.3 Residual Diagnostics
+
+Perform residual diagnostics on the One-Way ANOVA model.
+
+```{r diagnostics}
+# Extract residuals and fitted values
+resid_vals <- residuals(anova_result)
+fitted_vals <- fitted(anova_result)
+
+# Q-Q plot
+qqnorm(resid_vals); qqline(resid_vals, col = "blue", lwd = 2)
+
+# Residuals vs Fitted
+plot(fitted_vals, resid_vals,
+     xlab = "Fitted Values",
+     ylab = "Residuals",
+     main = "Residuals vs Fitted")
+abline(h = 0, col = "red", lwd = 2)
+```
+
+**Task 3**: Evaluate whether ANOVA assumptions (normality, homoscedasticity) hold based on the plots.
+
+## 1.4 Post-Hoc Test: Tukey HSD
+
+Apply Tukey HSD to the ANOVA model.
+
+```{r tukey-practical}
+tukey_results <- TukeyHSD(anova_result)
+tukey_results
+plot(tukey_results)
+```
+
+**Task 4**: Identify which pairs of teams have significantly different batting averages at α = 0.05.
+
+## 1.5 Equivalent Python Code (No Execution)
+
+```{python python-oneway, eval=FALSE}
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+from statsmodels.formula.api import ols
+from statsmodels.stats.multicomp import pairwise_tukeyhsd
+
+# Create DataFrame
+np.random.seed(2025)
+team_A_py = np.random.normal(loc=0.280, scale=0.020, size=10)
+team_B_py = np.random.normal(loc=0.270, scale=0.018, size=10)
+team_C_py = np.random.normal(loc=0.290, scale=0.022, size=10)
+
+batting_py = pd.DataFrame({
+    "average": np.concatenate([team_A_py, team_B_py, team_C_py]),
+    "team": ["A"]*10 + ["B"]*10 + ["C"]*10
+})
+
+# Fit One-Way ANOVA
+model = ols('average ~ C(team)', data=batting_py).fit()
+anova_table = sm.stats.anova_lm(model, typ=1)
+print(anova_table)
+
+# Residual diagnostics and Tukey HSD
+tukey = pairwise_tukeyhsd(endog=batting_py["average"],
+                          groups=batting_py["team"],
+                          alpha=0.05)
+print(tukey)
+```
+
+# 2. Two-Way ANOVA Practical
+
+## 2.1 Simulate Batting Data by Team and Order
+
+Simulate batting averages for teams (A, B, C) and batting orders (Top, Middle, Bottom), with 10 observations per combination (balanced design).
+
+```{r simulate-two-way}
+teams <- rep(c("A", "B", "C"), each = 30)
+orders <- rep(rep(c("Top", "Middle", "Bottom"), each = 10), times = 3)
+
+team_effects <- c(A = 0.000, B = -0.005, C = 0.005)
+order_effects <- c(Top = 0.010, Middle = 0.000, Bottom = -0.010)
+
+batting_two_df <- data.frame(
+  average = 0.280 +
+    team_effects[teams] +
+    order_effects[orders] +
+    rnorm(90, mean = 0, sd = 0.015),
+  team = factor(teams),
+  order = factor(orders)
+)
+
+# Preview data
+head(batting_two_df)
+table(batting_two_df$team, batting_two_df$order)
+```
+
+## 2.2 Fit Two-Way ANOVA Model
+
+Fit a Two-Way ANOVA with interaction: `average ~ team * order`.
+
+```{r anova-two-way-practical}
+anova_two <- aov(average ~ team * order, data = batting_two_df)
+summary(anova_two)
+```
+
+**Task 5**: Report which main effects (team, order) and the interaction are significant at α = 0.05.
+
+## 2.3 Interaction Plot
+
+Produce an interaction plot to visualize team by order effects.
+
+```{r interaction-plot}
+interaction.plot(x.factor = batting_two_df$order,
+                 trace.factor = batting_two_df$team,
+                 response = batting_two_df$average,
+                 fun = mean,
+                 xlab = "Batting Order",
+                 ylab = "Mean Batting Average",
+                 trace.label = "Team")
+```
+
+**Task 6**: Interpret the interaction plot. Does the effect of batting order on average depend on the team?
+
+## 2.4 Equivalent Python Code (No Execution)
+
+```{python python-two-way-practical, eval=FALSE}
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+from statsmodels.formula.api import ols
+
+# Create DataFrame
+np.random.seed(2025)
+teams_py = np.repeat(["A", "B", "C"], 30)
+orders_py = np.tile(np.repeat(["Top", "Middle", "Bottom"], 10), 3)
+
+team_effects_py = {"A": 0.000, "B": -0.005, "C": 0.005}
+order_effects_py = {"Top": 0.010, "Middle": 0.000, "Bottom": -0.010}
+
+batting_two_py = pd.DataFrame({
+    "average": 0.280 +
+        [team_effects_py[t] for t in teams_py] +
+        [order_effects_py[o] for o in orders_py] +
+        np.random.normal(loc=0, scale=0.015, size=90),
+    "team": teams_py,
+    "order": orders_py
+})
+
+# Fit Two-Way ANOVA
+model_two = ols('average ~ C(team) * C(order)', data=batting_two_py).fit()
+anova_two_table = sm.stats.anova_lm(model_two, typ=2)
+print(anova_two_table)
+```
+
+# 3. Submission Instructions
+
+- Knit this R Markdown to HTML and submit both the HTML and the `.Rmd` file.  
+- Include answers to Tasks 1–6 in the final document.  
+- For Python code chunks, you may copy them into a `.py` file if needed, but no execution is required.

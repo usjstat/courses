@@ -1,0 +1,354 @@
+---
+title: "Week 10: Power and Sample Size"
+author: "Dr. Rajitha M. Silva"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library(pwr)
+library(ggplot2)
+library(dplyr)
+```
+
+# Lecture Overview
+
+This session introduces the core concepts of **Power and Sample Size** estimation in statistical testing, using real-world examples.
+
+# Key Concepts
+
+- **Effect Size**: The minimum size of the effect you hope to detect in a statistical test (e.g., a 20% improvement in click rates or a 10-run increase in powerplay).
+- **Power**: The probability of detecting a given effect size with a given sample size. Typically, 0.80 (80%) is considered standard.
+- **Significance Level (\( \alpha \))**: The statistical significance level at which the test is conducted, usually set at 0.05.
+- **Sample Size**: Number of observations required to detect an effect of a specified size with given power and significance.
+
+To distinguish between a .350 hitter and a .200 hitter in baseball, not many at-bats are needed. But to distinguish between a .300 hitter and a .280 hitter, many more are required. The smaller the effect size, the larger the sample needed.
+
+# Sports Example: Batting Averages
+
+Suppose we want to distinguish between two cricket openers:
+
+- Player A: Batting average = 35  
+- Player B: Batting average = 45  
+- pooled standard deviation = 10
+
+What is the required sample size to detect this difference?
+
+```{r batting_power}
+effect_size <- (45 - 35) / 10  # Cohen's d
+pwr.t.test(d = effect_size, sig.level = 0.05, power = 0.8, type = "two.sample")
+```
+
+# Simulation-Based Power Estimation: Powerplay Runs
+
+You are a cricket data analyst evaluating two different batting strategies used during the Powerplay overs (the first 6 overs of a T20 match):
+
+  Strategy A (Conservative): Typically scores an average of 39 runs
+
+  Strategy B (Aggressive): Aims to score an average of 43 runs
+
+  The standard deviation of runs in both strategies is approximately 10
+
+You want to know:
+
+  With a sample size of 30 matches per strategy, what is the probability (power) that a statistical test will detect a significant difference between the two strategies at a 5% significance level?
+
+```{r simulate_power_function}
+simulate_power <- function(n, mean1, mean2, sd, reps = 1000, alpha = 0.05) {
+  significant_results <- replicate(reps, {
+    group1 <- rnorm(n, mean1, sd)       # Simulate n matches using Strategy A
+    group2 <- rnorm(n, mean2, sd)       # Simulate n matches using Strategy B
+    p_value <- t.test(group1, group2)$p.value  # Perform two-sample t-test
+    p_value < alpha                     # Count as significant if p-value < alpha
+  })
+  mean(significant_results)            # Estimate power as proportion of significant results
+}
+
+simulate_power(n = 30, mean1 = 39, mean2 = 43, sd = 10)
+```
+
+It simulates 1000 hypothetical experiments (by default) with:
+
+    30 matches per strategy
+
+    Strategy A has a true mean of 39
+
+    Strategy B has a true mean of 43
+
+    Standard deviation of 10 runs in both groups
+
+For each experiment:
+
+    It generates synthetic match scores from normal distributions
+
+    Performs a two-sample t-test between the two strategies
+
+    Checks whether the test is statistically significant (i.e., p-value < 0.05)
+
+It finally returns the estimated power: the proportion of times the null hypothesis was correctly rejected.
+
+
+
+This means that with 30 matches per strategy, the probability of detecting a real 4-run difference is about 31.2\%.
+
+If you want to achieve 80\% power, you'd need to increase the number of matches per group (sample size).
+
+# Power Curve for Cricket Strategy
+
+In statistical hypothesis testing, power increases with sample size. A Power Curve visually illustrates how different sample sizes affect the ability to detect a real difference (effect size) with a given significance level.
+
+In this cricket example, we are comparing two powerplay strategies:
+
+    Strategy A (Conservative): Average = 39 runs
+
+    Strategy B (Aggressive): Average = 43 runs
+
+    Standard deviation (common): 10
+
+    Significance level $\alpha$ =0.05
+
+    Effect size = 4 runs
+
+We want to explore how power changes as we increase the sample size (number of matches per group).
+
+```{r power_curve_plot}
+# Power simulation function
+simulate_power <- function(n, mean1, mean2, sd, reps = 1000, alpha = 0.05) {
+  significant_results <- replicate(reps, {
+    group1 <- rnorm(n, mean1, sd)
+    group2 <- rnorm(n, mean2, sd)
+    t.test(group1, group2)$p.value < alpha
+  })
+  mean(significant_results)
+}
+
+# Generate power curve
+sample_sizes <- seq(10, 150, by = 10)
+powers <- sapply(sample_sizes, simulate_power, mean1 = 39, mean2 = 43, sd = 10)
+power_df <- data.frame(SampleSize = sample_sizes, Power = powers)
+
+# Plot the power curve
+ggplot(power_df, aes(x = SampleSize, y = Power)) +
+  geom_line(color = "steelblue", size = 1.2) +
+  geom_point(size = 2) +
+  labs(title = "Power Curve: Detecting 4-Run Difference in Powerplay",
+       x = "Sample Size per Group",
+       y = "Estimated Power") +
+  theme_minimal()
+
+```
+
+### Interpretation:
+
+The curve shows that small sample sizes (e.g., 10-30 matches) are unlikely to detect the 4-run difference reliably.
+
+Power increases as the sample size increases, approaching 1 as the sample becomes large.
+
+You can use this curve to choose a sample size that ensures a target power level (commonly 0.80 or 80%).
+
+This analysis supports practical decision-making: if the cost of running matches is high, you might only commit to a larger sample size if the detectable difference is worthwhile.
+
+# Optional Exercise: Penalty Success Rate
+
+A football analyst wants to test if a new technique improves penalty success from 75% to 85%.
+
+```{r penalty_kick}
+effect_size_penalty <- ES.h(p1 = 0.85, p2 = 0.75)
+pwr.2p.test(h = effect_size_penalty, power = 0.9, sig.level = 0.05)
+```
+
+# Summary Table
+
+| Feature           | Effect Size                         | Sample Size                      |
+|-------------------|--------------------------------------|----------------------------------|
+| What it measures  | Strength of effect                   | Number of observations           |
+| Controlled by     | Domain knowledge, practical goals    | Design and cost constraints      |
+| Affects           | Practical significance               | Power and precision              |
+| In power analysis | Usually input                        | Usually calculated               |
+
+# Student Practical Assignment
+
+1. Simulate a scenario comparing two T20 batting pairs.
+2. Use both analytical and simulation-based methods to estimate power.
+3. Plot a power curve varying the sample size.
+4. Submit code and brief interpretation in RMarkdown or Jupyter Notebook.
+
+# Supplementary Materials
+
+To reinforce your understanding of **Power Analysis**, watch the following videos:
+
+- [Power and Sample Size Calculation in Hypothesis Testing (StatQuest with Josh Starmer)](https://youtu.be/Rsc5znwR5FA?si=b_-a0MeL-Paoa-xA)
+- [Statistical Power, The Concept and How to Calculate It (StatQuest with Josh Starmer)](https://youtu.be/VX_M3tIyiYk?si=wky3wpViwz_45b0R)
+
+These offer intuitive explanations of how sample size, effect size, alpha level, and power interact in statistical tests.
+
+
+### Power Estimation Using Permutation Test and Bootstrap Sampling
+
+Traditional power analysis relies on theoretical distributions and assumptions (e.g., normality). When these assumptions may not hold, **resampling methods** such as **bootstrap** and **permutation tests** offer robust, data-driven alternatives for estimating statistical power.
+
+These methods simulate repeated experiments to estimate how often a statistical test detects a true effect under given conditions.
+
+---
+
+#### Bootstrap-Based Power Estimation
+
+**Bootstrap power estimation** involves:
+
+1. Generating large synthetic populations with specified means and standard deviation.
+2. Drawing bootstrap samples (with replacement) from each population.
+3. Performing a t-test on each resampled pair.
+4. Repeating the process many times and estimating the proportion of significant results.
+
+```{r bootstrap_power}
+bootstrap_power <- function(n, mean1, mean2, sd, reps = 1000, alpha = 0.05) {
+  true_group1 <- rnorm(10000, mean1, sd)
+  true_group2 <- rnorm(10000, mean2, sd)
+  
+  significant <- replicate(reps, {
+    sample1 <- sample(true_group1, n, replace = TRUE)
+    sample2 <- sample(true_group2, n, replace = TRUE)
+    t.test(sample1, sample2)$p.value < alpha
+  })
+  
+  mean(significant)
+}
+
+# Example usage
+bootstrap_power(n = 30, mean1 = 39, mean2 = 43, sd = 10)
+```
+
+This code estimates the power of detecting a 4-run difference in cricket powerplay scores using bootstrap sampling with 30 matches per group.
+
+---
+
+#### Permutation Test-Based Power Estimation
+
+**Permutation power estimation** involves:
+
+1. Simulating two groups with known mean and standard deviation.
+2. Performing a two-sample test on the observed data.
+3. Creating a null distribution by randomly shuffling group labels.
+4. Comparing the observed statistic to the permutation-based null distribution.
+5. Repeating the entire experiment multiple times to estimate power.
+
+```{r permutation_power}
+permutation_power <- function(n, mean1, mean2, sd, reps = 1000, permutations = 1000, alpha = 0.05) {
+  power <- replicate(reps, {
+    group1 <- rnorm(n, mean1, sd)
+    group2 <- rnorm(n, mean2, sd)
+    observed_diff <- mean(group2) - mean(group1)
+    
+    combined <- c(group1, group2)
+    perm_diffs <- replicate(permutations, {
+      shuffled <- sample(combined)
+      mean(shuffled[(n+1):(2*n)]) - mean(shuffled[1:n])
+    })
+    
+    p_value <- mean(abs(perm_diffs) >= abs(observed_diff))
+    p_value < alpha
+  })
+  mean(power)
+}
+
+# Example usage
+permutation_power(n = 30, mean1 = 39, mean2 = 43, sd = 10)
+```
+
+This estimates the power of detecting a 4-run difference using a non-parametric permutation test.
+
+---
+
+#### Summary Table
+
+| Scenario                             | Recommended Method |
+|--------------------------------------|--------------------|
+| Normality assumed                    | Formula-based      |
+| Unknown or non-normal distributions | Bootstrap          |
+| Need for non-parametric inference    | Permutation        |
+
+---
+
+These simulation-based approaches are especially useful in data science and sports analytics where:
+
+- Assumptions may not hold.
+- Sample sizes are small.
+- Data distributions are complex or unknown.
+- You want to validate analytical power results.
+
+Both methods provide **empirical power estimates** and can be adapted to real-world data situations for better planning of sample sizes.
+
+
+## Practical Assignment: Power Analysis for Email Campaign Performance
+
+### Objective
+
+This hands-on assignment is designed to help you apply **power analysis** in a real-world digital marketing scenario. You will simulate data based on industry benchmarks, conduct power analysis using both formula-based and resampling methods, and determine the appropriate sample size for a conclusive A/B test.
+
+---
+
+### Real-World Scenario
+
+A digital marketing team is running an **email A/B test** to compare the effectiveness of two subject lines in increasing the **email open rate**.
+
+- **Subject Line A (Baseline)**: Current industry average open rate is 20% (0.20).
+- **Subject Line B (New)**: The team hopes to improve this rate by at least 3% (i.e., up to 23%).
+- **Each email costs money to send**, so determining the minimum required number of recipients per group is important before running the campaign.
+
+You are tasked with:
+
+- Estimating the **sample size** required to detect this 3% improvement with 80% power and ?? = 0.05.
+- Exploring how the required sample size changes for different effect sizes.
+- Simulating the experiment and estimating power using **bootstrap** and **permutation** tests.
+- Visualizing power curves and interpreting results.
+
+---
+
+### Tasks
+
+#### Task 1: Calculate Sample Size Using Analytical Method
+
+Use the `pwr.2p.test()` function to estimate the sample size needed to detect a 3% increase in open rates.
+
+
+
+- What is the minimum number of emails needed per group?
+- Repeat this analysis for effect sizes of 0.01 (1%) and 0.05 (5%). Summarize your results.
+
+---
+
+#### Task 2: Simulate Email Open Data and Estimate Power Using Bootstrap
+
+
+
+- Try varying sample sizes (e.g., 100, 200, 500, 1000) and plot the power curve.
+
+---
+
+#### Task 3: Permutation Test-Based Power Estimation
+
+
+
+- Repeat with different sample sizes and plot a power curve.
+
+---
+
+#### Task 4: Visualize Power Curve
+
+Generate a power curve using either bootstrap or permutation results.
+
+
+
+---
+
+### Deliverables
+
+Submit a report (in RMarkdown or HTML/PDF format) that includes:
+
+1. Calculated sample sizes for various effect sizes.
+2. Bootstrap and permutation-based power estimates.
+3. Power curves and interpretation.
+
+
+---
+

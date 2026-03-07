@@ -1,0 +1,68 @@
+---
+title: "Understanding John Tukey's Way of Thinking in Statistics"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+Studying John Tukey's contributions by retracing his **way of thinking** is a powerful way to understand the foundations of modern data analysis. Tukey reshaped how statisticians think, act, and explore data - specially through his innovations in **exploratory data analysis** (EDA), data visualization, and even the language of data.
+
+# Tukey's Way of Thinking
+
+## From Pure Math to Practical Data
+
+Tukey was trained as a topologist, but his **curiosity about data** and real-world problems drove him into statistics. He did not come to statistics to prove theorems - he wanted to **see what data had to say** before deciding which model to fit. This mindset became central to his philosophy:
+
+> The greatest value of a picture is when it forces us to notice what we never expected to see.
+
+## Exploratory First, Confirmatory Later
+
+Most statisticians in the mid-20th century focused on **confirmatory analysis** - testing hypotheses with strict assumptions. Tukey **flipped the workflow**:
+
+- Explore first, test later.\
+- Uncover structure, patterns, and outliers.\
+- Ask better questions from data.\
+
+His 1977 book *Exploratory Data Analysis* is not just a toolkit, it is a **manifesto** for curiosity and skepticism.
+
+## Simplicity and Resistance
+
+Tukey believed in **resistant statistics** - robust measures not distorted by outliers:
+- **Median** over mean.
+- **Interquartile range** over standard deviation.
+- He developed the **boxplot** as a compact visual summary.
+
+# Key Contributions
+
+| Contribution             | Tukey's Thought Process                                            |
+|--------------------------|---------------------------------------------------------------------|
+| **EDA**                  | Let the data speak. Explore first, hypothesize later.              |
+| **Fast Fourier Transform** | Combine mathematical elegance with computational speed.            |
+| **Boxplot**              | Visual summary that is robust and interpretable.                    |
+| **Stem-and-leaf plot**   | Preserve actual data values while visualizing distribution.         |
+| **Bit** (CS term)        | Created new language for new ideas.                               |
+| **Multiple Comparisons** | Developed Tukey HSD for honest inference after ANOVA.              |
+| **Philosophy**           | Approximate answers to the right questions > exact wrong answers.  |
+
+# Tukey's Mental Compass
+
+1. What is the simplest way to see what is going on?
+2. What are we missing by relying only on models or p-values?
+3. How can visuals help thinking not just presentation?
+4. Can we build tools that guide intuition, not replace it?
+
+# What Made Him Different
+
+- **Intuition over Formalism**
+- **Tools over Theories**
+- **Language Shaper** (e.g., "bit", "software", "data analysis")
+- **Bridge-Builder** (between math, computing, and practical stats)
+
+# Closing Thoughts
+
+Tukey reshaped the role of the statistician: from model-fitter to **data explorer**, from number-cruncher to **insight-seeker**.
+

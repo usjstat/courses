@@ -1,0 +1,170 @@
+
+---
+title: "Week8: Essential Non-parametric One-Sample Procedures in R"
+
+output: 
+  html_document:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+## 1  Motivation
+
+Classical t-procedures rely on Normality; when that assumption is shaky—or when data are merely ordinal—**rank-based methods** step in.  
+This note reviews eight core ideas:
+
+1. One-sample inference on a proportion  
+2. The sign test  
+3. Wilcoxon signed-rank test  
+4. Hodges–Lehmann estimator & CIs  
+5. Adjustments for ties  
+6. Asymptotic large-sample versions  
+7. Bootstrap confidence intervals & tests  
+8. A glimpse at robustness
+
+---
+
+## 2  One-Sample Proportion Problems
+
+Let \\(X \\sim \\text{Bernoulli}(p)\\). For a sample \\(X_1,\\dots,X_n\\), the number of successes \\(S = \\sum X_i\\) follows \\(\\text{Bin}(n, p)\\).
+
+#### 2.1  Point & Interval Estimation  
+
+\[
+\hat{p} = \frac{S}{n}, \quad 
+\text{CI}_{\text{Wald}} = \hat{p} \pm z_{1 - \alpha/2} \sqrt{ \frac{ \hat{p}(1 - \hat{p}) }{n} }
+\]
+
+
+```{r prop-ci}
+phat <- 10 / 143
+se <- sqrt(phat * (1 - phat) / 143)
+phat + c(-1, 1) * qnorm(0.975) * se
+```
+
+---
+
+## 3  The Sign Test
+
+The **sign test** is a simple non-parametric method to test whether the median of a population is equal to a specified value (often 0). It works by counting how many observations are above and below the hypothesized median.
+
+The **test statistic** is defined as:
+
+```{=latex}
+\[
+S^+ = \#\{X_i > 0\}
+\]
+```
+
+### Explanation:
+
+- \( S^+ \): This is the **number of positive signs** in the sample — i.e., how many observations are greater than the hypothesized median (usually 0).
+- \( \#\{X_i > 0\} \): The symbol “\#” denotes the count of elements satisfying the condition inside the set brackets. So this represents “the number of \( X_i \) such that \( X_i > 0 \)”.
+
+In simple terms:  
+> Count how many observations are positive after subtracting the hypothesized median. That count is \( S^+ \).
+
+The test assumes that under the null hypothesis (e.g., median = 0), positive and negative signs should be equally likely.
+
+```{r sign-example}
+# Example data: differences from some hypothesized value (e.g., 0)
+x <- c(3.2, -1.1, 4.7, 0, -2.5, 5.0)
+
+# Count of values greater than 0 (ignores zeros)
+S_plus <- sum(x > 0)
+S_plus
+```
+
+If the number of positives is significantly more (or less) than expected under randomness, we reject the null hypothesis.
+
+
+```{r sign}
+x <- c(3.2, -1.1, 4.7, 0, -2.5, 5.0)
+Splus <- sum(x > 0)
+pval <- 1 - pbinom(Splus - 1, length(x), 0.5)
+pval
+```
+
+---
+
+## Wilcoxon Signed-Rank Test
+
+### Test Statistic
+
+1. Remove zeros, take absolute values, rank them  
+2. \\( W^+ = \\sum_{X_i > 0} \\text{rank}(|X_i|) \\)  
+
+### 4.2 Example – Nursery-school Twins
+
+```{r twins}
+school <- c(82, 69, 73, 43, 58, 56, 76, 65)
+home <- c(63, 42, 74, 37, 51, 43, 80, 62)
+resp <- school - home
+wilcox.test(resp, alternative = "greater", conf.int = TRUE)
+```
+
+
+## 5 Confidence Intervals & Standard Errors
+
+### 5.1 Distribution-free CI for \\( \\theta \\) using Walsh Averages
+
+Use \\( A_{(1)} \\le A_{(2)} \\le \\dots \\le A_{(m)} \\), where \\( m = n(n+1)/2 \\).  
+A 95% CI is \\( (A_{(c+1)}, A_{(m-c)}) \\) for appropriate critical value \\( c \\).
+
+### 5.2 Standard Error via CI Length
+
+\\[
+\\widehat{\\text{SE}}(\\hat\\theta_{\\mathrm{HL}}) = \\frac{A_{(m - c)} - A_{(c+1)}}{2 z_{1 - \\alpha/2} \\sqrt{n}}
+\\]
+
+---
+
+## 6  Handling Ties
+
+- Zeros are omitted in both sign and Wilcoxon tests  
+- If ties exist, assign average ranks  
+- Adjust Wilcoxon variance:
+
+\\[
+\\operatorname{Var}(W^+) = \\frac{n(n+1)(2n+1)}{24} - \\frac{1}{2} \\sum t_j(t_j - 1)(t_j + 1)
+\\]
+
+where \\( t_j \\) is the size of tie group \\( j \\)
+
+---
+
+## 7  Large Sample Approximations
+
+For \\( n \\geq 20 \\), use Normal approximations:
+
+\\[
+Z_W = \\frac{W^+ - n(n+1)/4}{\\sqrt{\\operatorname{Var}(W^+)}},\\quad
+Z_S = \\frac{S^+ - n/2}{\\sqrt{n/4}}
+\\]
+
+Include continuity correction ±0.5 when appropriate.
+
+---
+
+## 8  Bootstrap Confidence Intervals & Tests
+
+Percentile CI approach:
+
+```{r bootstrap-ci}
+set.seed(123)
+x <- rnorm(25, 30, 5)
+B <- 2000
+theta_star <- replicate(B, mean(sample(x, replace = TRUE)))
+quantile(theta_star, c(0.025, 0.975))
+```
+
+Bootstrap tests resample under \\( H_0 \\): center data at \\( \\theta_0 \\), recompute test statistic, and compare to observed.
+
+---
+
+

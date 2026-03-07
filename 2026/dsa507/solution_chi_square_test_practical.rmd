@@ -1,0 +1,140 @@
+
+---
+title: "Chi-Square Test - Practical Session"
+author: "Dr. Rajitha M. Silva"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Practical Objective
+
+This session helps students understand the computation and interpretation of the chi-square test, including both theoretical and resampling-based approaches, with applications to sports analytics.
+
+# Task 1: Create the Contingency Table
+
+**Scenario:**  
+Three volleyball players attempted 50 serves each. The number of successful and failed serves is recorded:
+
+| Player   | Success | Fail |
+|----------|---------|------|
+| Player A | 42      | 8    |
+| Player B | 36      | 14   |
+| Player C | 40      | 10   |
+
+## 1.1 R: Create the matrix
+
+```{r}
+observed <- matrix(
+  c(42, 8,
+    36, 14,
+    40, 10),
+  nrow = 3,
+  byrow = TRUE
+)
+rownames(observed) <- c("Player A", "Player B", "Player C")
+colnames(observed) <- c("Success", "Fail")
+observed
+```
+
+## 1.2 Python: Create the table (display only)
+
+```{python, eval=FALSE}
+import numpy as np
+observed = np.array([[42, 8],
+                     [36, 14],
+                     [40, 10]])
+print(observed)
+```
+
+# Task 2: Compute Expected Counts and Chi-Square Statistic
+
+## 2.1 R: Manually compute expected values and Pearson residuals
+
+```{r}
+row_totals <- rowSums(observed)
+col_totals <- colSums(observed)
+grand_total <- sum(observed)
+
+expected <- outer(row_totals, col_totals) / grand_total
+pearson_residuals <- (observed - expected) / sqrt(expected)
+chi2_manual <- sum(pearson_residuals^2)
+
+expected
+pearson_residuals
+chi2_manual
+```
+
+## 2.2 Python: Display equivalent code (not run)
+
+```{python, eval=FALSE}
+row_totals = observed.sum(axis=1)
+col_totals = observed.sum(axis=0)
+grand_total = observed.sum()
+
+expected = np.outer(row_totals, col_totals) / grand_total
+residuals = (observed - expected) / np.sqrt(expected)
+chi2_stat = np.sum(residuals**2)
+```
+
+# Task 3: Theoretical Chi-Square Test
+
+## 3.1 R
+
+```{r}
+chisq.test(observed)
+```
+
+## 3.2 Python (code only)
+
+```{python, eval=FALSE}
+from scipy.stats import chi2_contingency
+chi2, p, df, expected = chi2_contingency(observed)
+```
+
+# Task 4: Permutation Test (Resampling Approach)
+
+## 4.1 R
+
+```{r}
+set.seed(1234)
+box <- c(rep(1, sum(observed[, "Success"])), rep(0, sum(observed[, "Fail"])))
+perm_chi2 <- function(box, row_sizes, col_totals) {
+  shuffled <- sample(box)
+  idx1 <- shuffled[1:row_sizes[1]]
+  idx2 <- shuffled[(row_sizes[1]+1):(sum(row_sizes[1:2]))]
+  idx3 <- shuffled[(sum(row_sizes[1:2])+1):sum(row_sizes)]
+  made_counts <- c(sum(idx1), sum(idx2), sum(idx3))
+  missed_counts <- row_sizes - made_counts
+  perm_obs <- cbind(made_counts, missed_counts)
+  perm_expected <- outer(row_sizes, col_totals) / sum(row_sizes)
+  resids <- (perm_obs - perm_expected) / sqrt(perm_expected)
+  sum(resids^2)
+}
+
+row_sizes <- row_totals
+perm_stats <- replicate(2000, perm_chi2(box, row_sizes, col_totals))
+mean(perm_stats >= chi2_manual)
+```
+
+# Task 5: Interpretation Questions
+
+1. Which cells contribute most to the chi-square statistic?
+2. Does the permutation p-value differ significantly from the theoretical p-value?
+3. Are you confident rejecting the null hypothesis? Why or why not?
+
+# Task 6: Optional Fisher’s Exact Test for 2x2
+
+## R Only:
+
+```{r}
+fisher.test(observed[1:2, ])
+```
+
+---
+
+**Submission Instructions:**  
+- Knit your `.Rmd` file to HTML and submit it on the LMS.
+- Python users may submit a Jupyter Notebook version separately.

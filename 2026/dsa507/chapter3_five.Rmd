@@ -1,0 +1,316 @@
+---
+title: "Lecture Note: Chi-Square Test"
+author: "Dr. Rajitha M. Silva"
+output: html_document
+---
+
+## Introduction
+
+The **Chi-Square Test** is a fundamental statistical procedure for analyzing count data in contingency tables. It evaluates how well observed counts fit expected counts under a specified null hypothesis- most commonly, the assumption of **independence** between two categorical variables. Originally developed by Karl Pearson in 1900, the chi-square test compares the sum of squared - Pearson residuals - against a reference chi-square distribution to yield a p-value. 
+
+In sports analytics, we often encounter scenarios such as:
+
+- Comparing free-throw success rates among multiple basketball players.  
+- Assessing whether penalty calls in soccer are independent of referee assignments.  
+- Determining if batting outcomes (hit vs. no hit) are independent of pitch type in baseball.  
+
+In this lecture, we will:
+
+1. Explain the **definition** and **formula** for the chi-square statistic.  
+2. Illustrate a **resampling (permutation)** approach for estimating p-values.  
+3. Demonstrate a **sports themed example** (free-throw success across three players) in both **R** and **Python**.  
+4. Show the **asymptotic (theoretical) chi-square test** in R and Python.  
+5. Introduce **Fisher's Exact Test** for small-count tables.  
+
+## 1. Chi-Square Statistic
+
+Given an \(r 	\times c\) contingency table of observed counts \(\{O_{ij}\}\), define the expected counts \(\{E_{ij}\}\) under the null hypothesis (e.g., equal probabilities or independence). The **Pearson residual** for cell \((i,j)\) is:
+\[
+R_{ij} \;=\; \frac{O_{ij} - E_{ij}}{\sqrt{E_{ij}}}.
+\]
+The **chi-square statistic** is then:
+\[
+\chi^2 \;=\; \sum_{i=1}^r \sum_{j=1}^c R_{ij}^2 
+\;=\; \sum_{i=1}^r \sum_{j=1}^c \frac{(O_{ij} - E_{ij})^2}{E_{ij}}.
+\]
+Under large-sample assumptions, \(\chi^2\) follows approximately a chi-square distribution with
+\[
+	\text{df} \;=\; (r - 1)\,(c - 1).
+\] 
+These degrees of freedom account for the constraints on row and column totals. 
+
+## 2. Resampling (Permutation) Approach
+
+When some expected counts are small or we prefer a **data-driven p-value**, we can use a **resampling procedure**:
+
+1. **Combine** all individual observations (coded as 1 for "success" or 0 for "failure") into a single pool (box).  
+2. **Shuffle** the entire box and **re-draw** samples for each group with the same sample sizes as in the observed data.  
+3. **Re-compute** the contingency table and the chi-square statistic on the shuffled (permuted) data.  
+4. **Repeat** steps 2-3 many times (e.g., 2,000 or more).  
+5. The **resampling p-value** is the proportion of permuted \(\chi^2\) statistics that exceed the observed \(\chi^2\).
+
+This approach directly approximates the null distribution under minimal modeling assumptions.
+
+## 3. Sports Example: Free-Throw Success Across Three Players
+
+Consider three basketball players?**Player A**, **Player B**, and **Player C**?each taking 100 free throws. We record the number of **made** and **missed** attempts for each:
+
+<div style="text-align:center">
+
+| Player   | Made | Missed |
+|----------|------|--------|
+| A        | 80   | 20     |
+| B        | 75   | 25     |
+| C        | 85   | 15     |
+
+</div>
+
+We want to test whether the **free-throw success rate** is the same across these three players. This is a \(3 	\times 2\) contingency table.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+#### 3.1 Construct the Contingency Table in R
+
+```{r construct-table}
+## Create a matrix of observed counts
+observed <- matrix(
+  c(80, 20,   ## Player A
+    75, 25,   ## Player B
+    85, 15),  ## Player C
+  nrow = 3,
+  byrow = TRUE
+)
+rownames(observed) <- c("PlayerA", "PlayerB", "PlayerC")
+colnames(observed) <- c("Made", "Missed")
+observed
+```
+
+#### 3.2 Compute Expected Counts and Pearson Residuals By Hand
+
+```{r expected-residuals}
+## Compute row totals, column totals, and grand total
+row_totals <- rowSums(observed)
+col_totals <- colSums(observed)
+grand_total <- sum(observed)
+
+## Expected counts under the null hypothesis of equal success rate
+expected <- outer(row_totals, col_totals) / grand_total
+
+## Pearson residuals
+pearson_residuals <- (observed - expected) / sqrt(expected)
+
+observed
+expected
+pearson_residuals
+```
+
+- The matrix `expected` shows how many **made** and **missed** throws we would expect if all three players had the same success probability.  
+- The matrix `pearson_residuals` shows, for each cell, the standardized deviation from expectation.  
+
+#### 3.3 Compute \(\chi^2\) By Hand
+
+```{r chi2-by-hand}
+## Sum of squared Pearson residuals
+chi2_statistic <- sum(pearson_residuals^2)
+chi2_statistic
+df_manual <- (nrow(observed) - 1) * (ncol(observed) - 1)
+df_manual
+```
+
+We obtain:
+- **Observed chi-square**: `chi2_statistic`  
+- **Degrees of freedom**: \((3 - 1)\,(2 - 1) = 2\).
+
+#### 3.4 Resampling (Permutation) Test in R
+
+```{r chi2-resampling}
+set.seed(2025)
+
+## Build the box of 300 total free-throw outcomes (1 = made, 0 = missed)
+box <- c(rep(1, sum(observed[, "Made"])), rep(0, sum(observed[, "Missed"])))
+
+## Function to compute chi-square on permuted draws
+perm_chi2 <- function(box, row_sizes, col_totals) {
+  ## Shuffle the box
+  shuffled <- sample(box)
+
+  ## Draw group-specific free throws
+  idx1 <- shuffled[1:row_sizes[1]]
+  idx2 <- shuffled[(row_sizes[1] + 1):(sum(row_sizes[1:2]))]
+  idx3 <- shuffled[(sum(row_sizes[1:2]) + 1):sum(row_sizes)]
+
+  ## Count made attempts per player
+  made_counts <- c(sum(idx1), sum(idx2), sum(idx3))
+  missed_counts <- row_sizes - made_counts
+
+  ## Construct permuted contingency table
+  perm_obs <- cbind(made_counts, missed_counts)
+
+  ## Expected under null (use column totals from original observed)
+  perm_row_totals <- row_sizes
+  perm_expected <- outer(perm_row_totals, col_totals) / sum(row_sizes)
+
+  ## Compute Pearson residuals and chi2
+  resids <- (perm_obs - perm_expected) / sqrt(perm_expected)
+  sum(resids^2)
+}
+
+## Original row sizes and original column totals
+row_sizes <- row_totals
+orig_col_totals <- col_totals
+
+## Observed chi2 (computed earlier)
+chi2_observed <- chi2_statistic
+
+## Perform 2000 permutations
+n_perm <- 2000
+perm_stats <- replicate(n_perm, perm_chi2(box, row_sizes, orig_col_totals))
+
+## Resampling p-value
+p_value_resample <- mean(perm_stats > chi2_observed)
+chi2_observed
+p_value_resample
+```
+
+- **Interpretation**: `p_value_resample` gives the proportion of permuted \(\chi^2\) = observed \(\chi^2\).  
+- If `p_value_resample` is small (e.g., < 0.05), we reject the null that all three players have the same free-throw success rate. 
+
+#### 3.5 Equivalent Python Code (Showing Only, No Execution)
+
+```{python python-chi2-resample, eval=FALSE}
+import numpy as np
+import pandas as pd
+import random
+
+## Observed counts for Made and Missed free throws
+observed = np.array([[80, 20],
+                     [75, 25],
+                     [85, 15]])
+row_totals = observed.sum(axis=1)
+col_totals = observed.sum(axis=0)
+grand_total = observed.sum()
+
+## Compute expected counts
+expected = np.outer(row_totals, col_totals) / grand_total
+
+## Compute Pearson residuals and observed chi-square
+pearson_residuals = (observed - expected) / np.sqrt(expected)
+chi2_observed = np.sum(pearson_residuals**2)
+df = (observed.shape[0] - 1) * (observed.shape[1] - 1)
+
+## Build the box of 300 outcomes: 1=Made, 0=Missed
+box = [1]*int(col_totals[0]) + [0]*int(col_totals[1])
+
+def perm_chi2(box, row_sizes, col_totals):
+    shuffled = box.copy()
+    random.shuffle(shuffled)
+
+    ## Draw for each player
+    start = 0
+    made_counts = []
+    for size in row_sizes:
+        group = shuffled[start:start+size]
+        made_counts.append(sum(group))
+        start += size
+    made_counts = np.array(made_counts)
+    missed_counts = row_sizes - made_counts
+    perm_obs = np.column_stack((made_counts, missed_counts))
+
+    perm_expected = np.outer(row_sizes, col_totals) / sum(row_sizes)
+    resids = (perm_obs - perm_expected) / np.sqrt(perm_expected)
+    return np.sum(resids**2)
+
+## Perform permutations
+n_perm = 2000
+perm_stats = [perm_chi2(box, row_totals, col_totals) for _ in range(n_perm)]
+p_value_resample = np.mean([stat > chi2_observed for stat in perm_stats])
+
+print(f"Observed chi2: {chi2_observed:.4f}, Degrees of freedom: {df}")
+print(f"Resampling p-value: {p_value_resample:.4f}")
+```
+
+## 4. Chi-Square Test: Asymptotic (Theoretical) Approach
+
+When sample sizes are sufficiently large, we can compare the observed \(\chi^2\) to a chi-square distribution with \((r-1)(c-1)\) degrees of freedom to compute a p-value.
+
+#### 4.1 Chi-Square Test in R
+
+```{r chisq-theory}
+## Perform theoretical chi-square test (no resampling)
+chisq_result <- chisq.test(observed, simulate.p.value = FALSE)
+
+## Output
+chisq_result
+```
+
+- **Output fields**:
+  - `X-squared`: The observed \(\chi^2\) statistic.  
+  - `df`: Degrees of freedom (should be 2 for a 3x2 table).  
+  - `p-value`: The probability of observing such an extreme \(\chi^2\) under the null of equal proportions. 
+
+#### 4.2 Chi-Square Test in Python
+
+```{python python-chisq-theory, eval=FALSE}
+import numpy as np
+from scipy import stats
+
+## Observed 3x2 table
+observed = np.array([[80, 20],
+                     [75, 25],
+                     [85, 15]])
+
+## Perform chi-square test of independence
+chi2_stat, p_value, df, expected = stats.chi2_contingency(observed)
+
+print(f"Observed chi2: {chi2_stat:.4f}")
+print(f"Degrees of freedom: {df}")
+print(f"Theoretical p-value: {p_value:.4f}")
+print("Expected counts under null:")
+print(expected)
+```
+
+## 5. Fisher's Exact Test
+
+When **any expected count** is very small (commonly = 5), the chi-square approximation may be inaccurate. In such cases, we use **Fisher's Exact Test**, which computes an **exact** p-value by enumerating all possible contingency tables with the same marginals. This is feasible when at least one dimension is 2 (i.e., a \(2	\times c\) or \(r 	\times 2\) table).
+
+For our \(3 	\times 2\) table, a full Fisher's exact test is not directly available in base R for more than \(2 	\times 2\). However, if we collapse two players into one group or otherwise reduce to \(2 	\times 2\), we can demonstrate Fisher's test. For example, compare **Player A** vs **Player B**:
+
+```{r fisher-example}
+## 2x2 table for Player A vs Player B
+obs_2x2 <- matrix(c(80, 20,
+                    75, 25),
+                  nrow = 2, byrow = TRUE)
+rownames(obs_2x2) <- c("PlayerA", "PlayerB")
+colnames(obs_2x2) <- c("Made", "Missed")
+
+## Perform Fisher's Exact Test
+fisher_test_result <- fisher.test(obs_2x2)
+fisher_test_result
+```
+
+- `p-value` from Fisher's test will be very close to the permutation p-value if counts are moderate. 
+
+_No equivalent built-in Fisher's exact test exists for larger tables in SciPy; user-written functions or custom enumeration would be required._
+
+## 6. Interpreting Results
+
+1. **Resampling vs. theory**:  
+   - Resampling delivers a data-driven p-value without relying on large-sample approximations.  
+   - Theoretical chi-square is fast and accurate when all expected counts = 5.  
+
+2. **Pearson residuals**:  
+   - Residuals \(R_{ij}\) indicate which cells contribute most to the overall \(\chi^2\).  
+   - In our free-throw example, check if any player's actual successes deviate strongly from expectation.
+
+3. **Practical interpretation**:  
+   - If the p-value (resampling or theoretical) < 0.05, conclude free-throw success rates differ among players. 
+   - Otherwise, no evidence that success rates differ beyond chance.
+
+
+
+In data science practice, chi-square (and Fisher's exact) tests can serve as a **filter** to identify promising categorical patterns in sports data- for instance, **identifying features** (player position, weather, game location) that are not independent of outcomes (scoring vs. no scoring). However, they should be supplemented by **model-based approaches** (logistic regression, random forests) for predictive tasks.
+
+---
+
