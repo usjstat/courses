@@ -52,6 +52,8 @@ For supplementary learning and revision, please refer to the following YouTube p
 
 [Statistics for Data Science YouTube Playlist](https://youtube.com/playlist?list=PL-u09-6gP5ZNd6AhULnQHr6ZsF15qy4D0&feature=shared)
 
+[Statistics for Data Science](https://youtu.be/Vfo5le26IhY?si=bfqgPYi9NegFwwzh)
+
 ------------------------------------------------------------------------
 
 ## Lecture Notes
