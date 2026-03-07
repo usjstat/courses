@@ -58,7 +58,7 @@ For supplementary learning and revision, please refer to the following YouTube p
 
 ## Lecture Notes
 
-> Lecture materials will be uploaded here during the semester.
+
 
 -   [Week1: Exploratory Data Analysis](chapter1_notes.html)
 
