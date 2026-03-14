@@ -1,0 +1,12 @@
+name: week3
+title: week3
+username: sportsanalyzr
+account: sportsanalyzr
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 14405075
+bundleId: 10043126
+url: https://sportsanalyzr.shinyapps.io/week3/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

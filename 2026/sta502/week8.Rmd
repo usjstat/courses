@@ -1,0 +1,298 @@
+---
+title: "STA 1142 - Events with Random Variables"
+author: "Dr. Rajitha M. Silva"
+output: html_document
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+
+
+Each of the following activities focuses on understanding how a random variable maps from
+the sample space to the real numbers, how events are expressed using
+random variables, and how probabilities are computed using the induced
+distribution.
+
+------------------------------------------------------------------------
+
+## Activity 2.2: Tossing a Die
+
+A fair six-sided die is rolled once and the number showing on the top
+face is observed.
+
+Let $S = \{1, 2, 3, 4, 5, 6\}$.
+
+Define the random variable 
+$$
+X(\omega) =
+\begin{cases}
+0 & \text{if } \omega \text{ is even} \\
+1 & \text{if } \omega \text{ is odd}
+\end{cases}
+$$
+
+1.  Write the range of $X$.\
+2.  Express the event "an even number is rolled" in terms of $X$.\
+3.  Find $\Pr(X = 0)$ and $\Pr(X = 1)$.
+
+
+
+------------------------------------------------------------------------
+
+## Activity 2.3: Mapping Sample Space
+
+A box contains 3 balls labeled Red (R), Green (G), and Blue (B). One
+ball is drawn at random, and the color is observed.
+
+Define 
+$$
+X(\omega) =
+\begin{cases}
+1 & \text{if } \omega = R \\
+2 & \text{if } \omega = G \\
+3 & \text{if } \omega = B
+\end{cases}
+$$
+
+1.  Define the sample space $S$.\
+2.  Write the set $X(S)$.\
+3.  Express the event “ball drawn is not Green” using $X$.\
+4.  Compute $\Pr(X = 2)$.
+
+
+
+------------------------------------------------------------------------
+
+## Activity 2.4: Qualitative to Quantitative Mapping
+
+A survey is conducted where each person reports their favorite drink
+among Tea (T), Coffee (C), or Juice (J). The responses are recorded from
+4 individuals, one after the other, independently.
+
+Define 
+$$
+X(\omega) = \text{number of people choosing Tea}
+$$
+
+
+1.  Give two possible outcomes from the sample space $S$.
+2.  Write the sample space in set-builder notation.
+3.  Write the range of $X$.\
+4.  What is $X(T, T, J, C)$?\
+5.  Express the event "exactly two people chose Tea" in terms of $X$.\
+6.  Compute $\Pr(X = 2)$ assuming all outcomes are equally likely.
+
+
+
+------------------------------------------------------------------------
+
+## Activity 2.5: Expressing Events via Random Variables
+
+Two coins are tossed **simultaneously**. We observe the **sequence of
+face-up outcomes** from both coins. Let H be the event that head is
+observed and T be the event that tail is observed. Then, $H = \{h\}$ and
+$T = \{t\}$
+
+Let $S = \{hh, ht, th, tt\}$. 
+
+Define 
+$$
+X(\omega) = \text{number of heads}
+$$
+
+1.  List values of $X(\omega)$ for each outcome.\
+2.  Express "at least one head" using $X$.\
+3.  Compute $\Pr(X = 1)$ and $\Pr(X \ge 1)$.
+
+
+------------------------------------------------------------------------
+
+## Activity 2.6: Non-Numerical to Numerical Mapping
+
+A quality control test is performed on a product in a factory. The
+result of the test is recorded as one of the following outcomes: - Pass
+(P) - Defect (D) - Missing Part (M)
+
+Define 
+$$
+X(\omega) =
+\begin{cases}
+1 & \text{if } \omega = P \\
+2 & \text{if } \omega = D \\
+3 & \text{if } \omega = M
+\end{cases}
+$$
+
+1.  What is the range of $X$?\
+2.  Consider the complement of the event \`\`pass'' is considered as
+    "fail''. Write the event “product failed” using $X$.\
+3.  Given: $\Pr(P) = 0.8, \Pr(D) = 0.1, \Pr(M) = 0.1$. Find:
+    -   $\Pr(X = 2)$\
+    -   $\Pr(X \le 3\})$
+
+
+
+------------------------------------------------------------------------
+
+## Activity 2.7: Mapping to Indicator Variables
+
+Let a coin be tossed once and observe the heads up. Sample space:\
+$$
+S = \{h, t\}
+$$
+
+Define random variable\
+$$
+X(\omega) =
+\begin{cases}
+1 & \text{if } \omega = h \\
+0 & \text{if } \omega = t
+\end{cases}
+$$
+
+1.  Is $X$ a random variable? Why?
+2.  Express the event “Tail occurs” using $X$.
+
+
+
+------------------------------------------------------------------------
+
+## Activity 2.8: Mapping to Vectors
+
+Two six-sided dice are rolled simultaneously.
+
+The outcome is recorded as an ordered pair $(i, j)$, where:
+
+-   $i$ is the number shown on the first die,
+
+-   $j$ is the number shown on the second die.
+
+The sample space is: 
+$$
+S = \{(i, j) : i, j \in \{1, 2, 3, 4, 5, 6\}\}
+$$
+
+
+
+There are $6 \times 6 = 36$ possible outcomes in total.
+
+Define the vector-valued r.v. $X(\omega) = (i, j)$ and scalar r.v.
+$Y(\omega) = i + j$.
+
+1.  What is the range of $X$?
+
+2.  What is the range of $Y$?
+
+3.  Express event $A = \{ \text{sum is even} \}$ using $Y$.
+
+
+
+------------------------------------------------------------------------
+
+## Activity 2.9: Categorical Mapping
+
+Let a random person be chosen, and their blood type is recorded:\
+$$
+S = \{\text{A}, \text{B}, \text{AB}, \text{O}\}
+$$
+
+Define 
+$$
+X(\omega) =
+\begin{cases}
+1 & \omega = A \\
+2 & \omega = B \\
+3 & \omega = AB \\
+4 & \omega = O
+\end{cases}
+$$
+
+1.  Is $X$ a valid random variable?\
+2.  Express the event “person has type A or O” using $X$.\
+3.  Does numeric encoding affect the nature of $X$ as a r.v.?
+
+
+
+------------------------------------------------------------------------
+
+## Activity 2.10: Time to Event Mapping
+
+Let $S = \{\text{system failure at } t : t \ge 0\}$\
+Define $T(\omega) = \text{time of system failure}$
+
+1.  What is the range of $T$?\
+2.  Give an example of an event in terms of $T$.\
+3.  Is $T$ discrete or continuous?
+
+
+
+------------------------------------------------------------------------
+
+## Activity 2.11: Mapping to Boolean (0/1) for Events
+
+Suppose 5 MCQ questions are attempted. Each has a binary outcome
+(Correct or Wrong).
+
+Let $X_i = 1$ if $i^{th}$ question is correct, 0 otherwise.
+
+Define total score:\
+$$
+S = \{ \text{outcomes of 5 questions} \}, \quad T = X_1 + X_2 + X_3 + X_4 + X_5
+$$
+
+1.  What kind of random variable is $T$?\
+2.  What is its range?\
+3.  Define event $A = \{ \text{at least 3 correct} \}$ using $T$.
+
+
+
+## Activity 2.12: Modeling Number of Attempts Until Success
+
+A game involves rolling a fair six-sided die repeatedly until the number
+**5** appears for the first time. Each roll is independent of the
+others. The outcome is the **number of rolls** needed until the first 5
+appears.
+
+------------------------------------------------------------------------
+
+1.  Define the sample space $S$ of the experiment using lowercase
+    outcome sequences (e.g., rrr5, rr5, etc., where r = not 5, 5 =
+    success).
+
+2.  Define a random variable $X$ that maps each outcome $\omega$ to the
+    number of rolls until the first 5 appears.
+
+3.  Write the set $X(S)$, i.e., the range of the random variable.
+
+4.  Compute the probability that the first 5 appears:
+
+    -   on the 1st roll\
+    -   on the 2nd roll\
+    -   on the 3rd roll
+
+5.  Let $p = \Pr(\text{a 5 is rolled})$. Write a general expression for
+    $\Pr(X = x)$ where $x \in \{1, 2, 3, \dots\}$.
+
+------------------------------------------------------------------------
+
+
+
+## Activity 2.14: Waiting for a Fixed Number of Successes
+
+A fair coin is tossed repeatedly until **3 Heads** are observed. Each
+toss is independent of the others. The outcome is the **number of
+tosses** required to get 3 Heads.
+
+1.  Define the sample space $S$ using outcome sequences of h's and t's.
+2.  Define the random variable $X$ as the number of tosses until the 3rd
+    Head appears.
+3.  Write the range $X(S)$.
+4.  Write a general expression for $\Pr(X = x)$, where
+    $x \in \{3, 4, 5, \dots\}$.
+5.  Compute $\Pr(X = 3)$, $\Pr(X = 4)$, and $\Pr(X = 5)$ for a fair
+    coin.
+
+
+
+------------------------------------------------------------------------

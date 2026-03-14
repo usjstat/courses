@@ -1,0 +1,213 @@
+---
+title: "STA 1142 - Probability and Distribution Theory I: Week 7"
+author: "Dr. Rajitha M. Silva"
+output: html_document
+---
+
+
+# 2 Random Variables
+
+A random variable provides a convenient and systematic way to represent outcomes of a random experiment as real numbers. It allows us to re-express any event of interest numerically, which greatly simplifies the process of calculating probabilities.
+ 
+
+This numerical translation enables us to
+
+* **summarise** data with means, variances, and other moments;  
+* **derive** probability laws such as the binomial, Poisson, or normal distributions; and  
+* **model** real-world uncertainty in fields ranging from finance and engineering to biology and sport.
+
+Throughout this section we will encounter two broad families:
+
+1. **Discrete random variables**, whose ranges are *countable* (e.g., the number of heads in three coin tosses);  
+2. **Continuous random variables**, whose ranges contain uncountably many values (e.g., the lifetime of a light bulb measured in hours).
+
+
+**Definition 2.1**  
+
+A *random variable* (r.v.) is a function  
+\[
+X:\;S \longrightarrow \mathbb{R},
+\]  
+where $S$ is the sample space of an experiment and $\mathbb{R}$ is the set of real numbers.  
+A random variable assigns a real number to each outcome $\omega \in S$. This allows us to quantify outcomes in order to analyze probabilities, distributions, and summaries.
+
+
+### **Experiment**
+
+
+Toss a (possibly biased) coin **three times** and observe the face-up outcome each time.  
+Let the event of interest be the observation of a head (H) on any given toss.  
+Denote the probability of observing a head by
+\[
+\theta = \Pr(\text{Head}).
+\]
+
+The sample space is:
+\[
+S = \{hhh, hht, hth, htt, thh, tht, tth, ttt\}.
+\]
+
+Let
+\[
+X(\omega) = \text{number of heads in } \omega, \quad \omega \in S.
+\]
+Then $X: S \rightarrow \{0, 1, 2, 3\}$ is a discrete random variable.
+
+---
+
+### **Events in terms of $X$**
+
+Then, the above events can be written in terms of $X$ as follows:
+
+\[
+\begin{aligned}
+H_0 &= \{\omega \in S \mid X(\omega) = 0\} \\
+H_1 &= \{\omega \in S \mid X(\omega) = 1\} \\
+H_2 &= \{\omega \in S \mid X(\omega) = 2\} \\
+H_3 &= \{\omega \in S \mid X(\omega) = 3\} \\
+H_4 &= \{\omega \in S \mid X(\omega) > 1\}
+\end{aligned}
+\]
+
+Hence, we can write the probabilities of these events as:
+
+\[
+\begin{aligned}
+\Pr(\{\omega \in S \mid X(\omega) = 0\}) &= (1 - \theta)^3 \\
+\Pr(\{\omega \in S \mid X(\omega) = 1\}) &= 3\theta(1 - \theta)^2 \\
+\Pr(\{\omega \in S \mid X(\omega) = 2\}) &= 3\theta^2(1 - \theta) \\
+\Pr(\{\omega \in S \mid X(\omega) = 3\}) &= \theta^3 \\
+\Pr(\{\omega \in S \mid X(\omega) > 1\}) &= 3\theta^2(1 - \theta) + \theta^3
+\end{aligned}
+\]
+
+---
+
+### **Simplified Notation Using $X$**
+
+For convenience, we often omit writing $\omega$ and simply use the shorthand:
+
+\[
+\begin{aligned}
+\Pr(X = 0) &= (1 - \theta)^3 \\
+\Pr(X = 1) &= 3\theta(1 - \theta)^2 \\
+\Pr(X = 2) &= 3\theta^2(1 - \theta) \\
+\Pr(X = 3) &= \theta^3 \\
+\Pr(X > 1) &= 3\theta^2(1 - \theta) + \theta^3
+\end{aligned}
+\]
+
+The first four probabilities follow the **binomial distribution**:
+
+\[
+\Pr(X = x) = \binom{3}{x} \theta^x (1 - \theta)^{3 - x}, \quad x = 0,1,2,3.
+\]
+
+---
+
+### **Redefinition of $X$ (Omitting $\omega$)**
+
+In practice, we redefine $X$ more intuitively as:
+\[
+X = \text{the number of heads in three tosses}.
+\]
+
+This form omits explicit reference to $\omega$, but the mapping from sample points to numerical outcomes is preserved.
+
+
+---
+
+
+### **Experiment**
+
+Consider the experiment of measuring the **lifetime (in hours)** of a randomly selected bulb of a certain kind.
+
+The sample space is:
+\[
+S = \{\omega \in \mathbb{R} : \omega \ge 0\}.
+\]
+Each sample point $\omega$ corresponds to the observed lifetime of a bulb.
+
+---
+
+### **Defining the Random Variable**
+
+Let  
+\[
+T(\omega) = \omega, \quad \omega \in S,
+\]
+where $T$ is a random variable representing the **lifetime of a randomly selected bulb (in hours)**.
+
+Thus, $T$ maps the sample point (i.e., observed outcome) directly to a numerical value of lifetime.
+
+---
+
+### **Describing Events in terms of the Random Variable**
+
+We define the following events in terms of the random variable $T$:
+
+- $E = \text{the event that the lifetime is exactly 1000 hours}$  
+- $F = \text{the event that the lifetime is less than 300 hours}$
+
+These can be expressed as:
+
+\[
+\begin{aligned}
+E &= \{\omega \in S \mid T(\omega) = 1000\} \\
+F &= \{\omega \in S \mid T(\omega) < 300\}
+\end{aligned}
+\]
+
+Letting  
+\[
+T = \text{Lifetime of a randomly selected bulb in hours},
+\]  
+we denote the probabilities of these events as:
+
+\[
+\begin{aligned}
+\Pr(E) &= \Pr(T = 1000) \\
+\Pr(F) &= \Pr(T < 300)
+\end{aligned}
+\]
+
+---
+
+### **Discussion**
+
+- $T$ is a **continuous random variable** defined on $[0, \infty)$.
+- In practical modeling, one may assume that $T \sim \text{Exponential}(\lambda)$ or follows another lifetime distribution such as Weibull or Gamma.
+- For continuous distributions, $\Pr(T = 1000) = 0$ exactly. However, $\Pr(T < 300)$ may be computed via integration or using the cumulative distribution function (CDF) of $T$.
+
+---
+
+
+## Activity 2.1
+
+Consider the biased coin example.
+
+1. Write down the event $A = \{X \geq 2\}$ using sample points from the sample space $S$.
+
+
+2. Express the event $B = \{X \text{ is even}\}$ in set-builder notation.
+
+
+3. Compute $\Pr(X > 1)$ for $\theta = 0.4$ using the binomial formula.
+
+
+4. Simulate 10,000 coin tosses (3 at a time) in R for $\theta = 0.3$ and estimate $\Pr(X = 1)$.
+
+
+5. Prove that $\sum_{x = 0}^{3} \Pr(X = x) = 1$ algebraically.'
+
+---
+
+
+## Types of Random Variables
+
+There are two types of random variables:
+
+- **Discrete random variables**
+- **Continuous random variables**
+
+---
