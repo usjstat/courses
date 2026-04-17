@@ -12,7 +12,7 @@ output: html_document
 | **Course Code:**   | STA1142                               |
 | **Credit Value:**  | 2.0                                   |
 | **Status:**        | Core                                  |
-| **Year/Level:**    | 2025/First Year                       |
+| **Year/Level:**    | 2026/First Year                       |
 | **Semester:**      | 1 (First Semester)                    |
 | **Pre-requisite:** | A/L Combined Mathematics              |
 
@@ -28,13 +28,13 @@ This course establishes the fundamentals of probability theory. It supports lear
 
 ::: {style="text-align: center;"}
 | **Week** | **Topic** | **Description** | **Hours** |
-|----|----|----|----|
+|------------------|------------------|------------------|------------------|
 | 1 | [Elements of Probability](week1) | Introduction, experiments, outcomes, sample spaces, events | 8 (2T + 6IL) |
 | 2 | [Event Operations](week2) | Complements, unions, intersections, mutually exclusive/exhaustive events | 8 (2T + 6IL) |
 | 3 | [Methods of Probability](https://sportsanalyzr.shinyapps.io/week3/) | Classical, relative frequency, axioms, interpretation | 8 (2T + 6IL) |
 | 4 | [Conditional Probability](week4.html) | Independent events | 8 (2T + 6IL) |
 | 5 | [Probability Rules](week5.html) | Addition, multiplication, total probability, Bayes' theorem | 8 (2T + 6IL) |
-| 6 | [**Midterm Examination**](midmarks.png) | \- | \- |
+| 6 | **Midterm Examination** | \- | \- |
 | 7 | [Random Variables](week6.html) | Definitions, discrete and continuous variables | 8 (2T + 6IL) |
 | 8 | [Events with Random Variables](week8.html) | Event representation and revision | 8 (2T + 6IL) |
 | 9 | [Distributions](week9.html) | pmf, pdf, cdf | 8 (2T + 6IL) |
@@ -93,4 +93,4 @@ By the end of this course, students will be able to:
 
 ------------------------------------------------------------------------
 
-*This course is effective from 19th May 2025.*
+*This course is effective from 20th April 2026.*

@@ -9,10 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Rajitha M. Silva" />
+<meta name="author" content="Dr. R. M. Silva" />
 
 
-<title>Cumulative Distribution Function (CDF) &amp; Quantiles</title>
+<title>STA 1142: Mean and variance of r.v.s and functions - Week 11</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -349,464 +349,683 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">Cumulative Distribution Function (CDF)
-&amp; Quantiles</h1>
-<h4 class="author">Rajitha M. Silva</h4>
+<h1 class="title toc-ignore">STA 1142: Mean and variance of r.v.s and
+functions - Week 11</h1>
+<h4 class="author">Dr. R. M. Silva</h4>
 
 </div>
 
 
-<div id="definition-cumulative-distribution-function-cdf" class="section level3">
-<h3>Definition: Cumulative Distribution Function (cdf)</h3>
-<p>For any random variable <span class="math inline">\(X\)</span>, the
-<strong>cdf</strong> is <span class="math display">\[
-F_X(t) = \Pr(X \le t).
+<div id="expectation-mathbbegx" class="section level3">
+<h3>Expectation: <span class="math inline">\(\mathbb{E}[g(X)]\)</span></h3>
+<p>Let <span class="math inline">\(X\)</span> be a discrete random
+variable with pmf <span class="math inline">\(P_X(x) = \Pr(X =
+x)\)</span>. For any real-valued function <span class="math inline">\(g\)</span>, the <strong>expected value of a
+function of a random variable</strong> is defined as:</p>
+<p><span class="math display">\[
+\mathbb{E}[g(X)] = \sum_{x} g(x) \cdot P_X(x)
 \]</span></p>
-<p>This single function determines probabilities of all events that can
-be expressed in terms of <span class="math inline">\(X\)</span>.</p>
-<hr />
+<p>This definition includes the expectation of <span class="math inline">\(X\)</span> itself, by letting <span class="math inline">\(g(x) = x\)</span>.</p>
+<p>In probability theory, the <strong>expectation</strong> (or
+<strong>expected value</strong>) of a random variable provides a measure
+of the <em>center</em> or <em>average</em> of its distribution. It is
+denoted by <span class="math inline">\(E(X)\)</span> or <span class="math inline">\(\mathbb{E}[X]\)</span>.</p>
 </div>
-<div id="from-events-to-the-cdf" class="section level3">
-<h3>From Events to the CDF</h3>
-<p>For real numbers <span class="math inline">\(a \le b\)</span>, <span class="math display">\[
-\Pr(a &lt; X \le b) = F_X(b) - F_X(a).
+<div id="motivation" class="section level3">
+<h3>Motivation</h3>
+<p>Consider a random variable <span class="math inline">\(X\)</span>
+defined on a sample space <span class="math inline">\(\mathcal{S}\)</span>. If a gambler repeatedly
+samples outcomes from <span class="math inline">\(\mathcal{S}\)</span>,
+and <span class="math inline">\(X(\omega)\)</span> (we simply write
+<span class="math inline">\(X\)</span>) denotes the gain or loss in each
+trial, then the <strong>average gain</strong> over many repetitions
+approximates the expectation of <span class="math inline">\(X\)</span>.</p>
+<p>Let <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> be
+independent repetitions. The average gain is:</p>
+<p><span class="math display">\[
+\frac{X_1 + X_2 + \cdots + X_n}{n}
 \]</span></p>
-<p>(Other combinations of strict/weak inequalities give the same value
-for continuous <span class="math inline">\(X\)</span>; for discrete
-<span class="math inline">\(X\)</span> they may differ by point
-masses.)</p>
-<p>A useful identity for discrete points is <span class="math display">\[
-\Pr(X = x) = F_X(x) - F_X(x-0),
-\]</span> where <span class="math inline">\(F_X(x-0)\)</span> is the
-left limit of <span class="math inline">\(F_X\)</span> at <span class="math inline">\(x\)</span>.</p>
+<p>As <span class="math inline">\(n \to \infty\)</span>, this average
+converges to a constant value called the <strong>expected value</strong>
+of <span class="math inline">\(X\)</span>, denoted by <span class="math inline">\(E(X)\)</span>.</p>
 <hr />
 </div>
-<div id="properties-of-every-cdf" class="section level3">
-<h3>Properties of Every CDF</h3>
-<ol style="list-style-type: decimal">
-<li><p><strong>Non-decreasing:</strong> if <span class="math inline">\(t_1 &lt; t_2\)</span>, then <span class="math inline">\(F_X(t_1) \le F_X(t_2)\)</span>.<br />
-</p></li>
-<li><p><strong>Limits:</strong> <span class="math inline">\(\displaystyle \lim_{t\to -\infty}F_X(t)=0,\quad
-\lim_{t\to \infty}F_X(t)=1.\)</span><br />
-</p></li>
-<li><p><strong>Right-continuous:</strong> <span class="math inline">\(\displaystyle \lim_{h\downarrow 0}
-F_X(t+h)=F_X(t).\)</span><br />
-– right-continuous allows jumps but forbids - holes - when you approach
-from the right.</p></li>
-</ol>
-<hr />
-</div>
-<div id="example-dartboard-cdf-distance-from-the-bullseye" class="section level2">
-<h2>Example: Dartboard CDF (Distance from the Bullseye)</h2>
-<p>A dart is thrown at a <strong>circular dartboard</strong> of radius
-<span class="math inline">\(R\)</span>. <strong>Assume the dart always
-hits the board and, conditional on a hit, the landing point is uniformly
-distributed over the face of the board</strong> (i.e., any two regions
-of equal area are equally likely to be hit).</p>
-<p>Let <span class="math inline">\(X\)</span> be the <strong>distance
-from the dart’s landing point to the bullseye (center)</strong>.</p>
-<p><strong>Task:</strong> Derive the cumulative distribution function
-(cdf) of <span class="math inline">\(X\)</span>, namely <span class="math display">\[
-F_X(t) = \Pr(X \le t),
-\]</span> for all real <span class="math inline">\(t\)</span>.</p>
-<div id="solution" class="section level3">
-<h3>Solution</h3>
-<p>Because the hit is <strong>uniform over area</strong>, probability is
-proportional to area.</p>
-<ol style="list-style-type: decimal">
-<li><p><strong>Event geometry</strong></p>
+<div id="expectation-for-discrete-random-variables" class="section level2">
+<h2>Expectation for Discrete Random Variables</h2>
+<p>Let <span class="math inline">\(X\)</span> be a discrete random
+variable with possible values <span class="math inline">\(x_1, x_2,
+\ldots, x_n\)</span> and corresponding probabilities <span class="math inline">\(p_i = \Pr(X = x_i)\)</span>. Then:</p>
+<p><span class="math display">\[
+\mathbb{E}[X] = \sum_{i=1}^{n} x_i \cdot \Pr(X = x_i)
+\]</span></p>
+<p>This assumes:</p>
+<p><span class="math display">\[
+\sum_{i=1}^{n} |x_i| \cdot \Pr(X = x_i) &lt; \infty
+\]</span></p>
+<div id="example-win-or-lose-game" class="section level3">
+<h3>Example: Win or Lose Game</h3>
+<p>Let <span class="math inline">\(X\)</span> be the amount won in a
+game:</p>
 <ul>
-<li>For <span class="math inline">\(0\le t\le R\)</span>, the event
-<span class="math inline">\(\{X\le t\}\)</span> is a disk of radius
-<span class="math inline">\(t\)</span>.<br />
-</li>
-<li>Area of that disk: <span class="math inline">\(\pi
-t^{2}\)</span>.<br />
-</li>
-<li>Area of the whole board: <span class="math inline">\(\pi
-R^{2}\)</span>.</li>
+<li>Win Rs. 1 with probability <span class="math inline">\(p\)</span></li>
+<li>Win Rs. 0 with probability <span class="math inline">\(1-p\)</span></li>
 </ul>
-<p>Hence<br />
-<span class="math display">\[
-\Pr(X\le t)=\frac{\pi t^{2}}{\pi
-R^{2}}=\left(\frac{t}{R}\right)^{2},\qquad 0\le t\le R.
-\]</span></p></li>
-<li><p><strong>Outside the feasible range</strong></p>
+<p>Then: <span class="math display">\[
+\mathbb{E}[X] = 0 \cdot (1-p) + 1 \cdot p = p
+\]</span></p>
+</div>
+<div id="example-win-rs.-1-or-lose-rs.-1" class="section level3">
+<h3>Example: Win Rs. 1 or Lose Rs. 1</h3>
+<p>Let <span class="math inline">\(Y\)</span> be defined as:</p>
 <ul>
-<li>If <span class="math inline">\(t&lt;0\)</span>: distances cannot be
-negative <span class="math inline">\(\;\Rightarrow\;
-F_X(t)=0\)</span>.<br />
-</li>
-<li>If <span class="math inline">\(t&gt;R\)</span>: the dart always
-lands within distance <span class="math inline">\(R\)</span> <span class="math inline">\(\;\Rightarrow\; F_X(t)=1\)</span>.</li>
+<li>Win Rs. 1 with probability <span class="math inline">\(p\)</span></li>
+<li>Lose Rs. 1 with probability <span class="math inline">\(1-p\)</span></li>
+</ul>
+<p>Then: <span class="math display">\[
+\mathbb{E}[X] = (-1)(1-p) + (1)(p) = 2p - 1
+\]</span></p>
+<hr />
+</div>
+</div>
+<div id="expectation-for-continuous-random-variables" class="section level2">
+<h2>Expectation for Continuous Random Variables</h2>
+<p>If <span class="math inline">\(X\)</span> is a continuous random
+variable with density function <span class="math inline">\(f_X(x)\)</span>, then:</p>
+<p><span class="math display">\[
+\mathbb{E}[X] = \int_{-\infty}^{\infty} x f_X(x) dx
+\]</span></p>
+<p>provided:</p>
+<p><span class="math display">\[
+\int_{-\infty}^{\infty} |x| f_X(x) dx &lt; \infty
+\]</span></p>
+<hr />
+</div>
+<div id="interpretation-of-expectation" class="section level2">
+<h2>Interpretation of Expectation</h2>
+<div id="mechanical-view-discrete" class="section level3">
+<h3>Mechanical View (Discrete)</h3>
+<ul>
+<li>Consider a set of points <span class="math inline">\(x_1, x_2,
+\ldots, x_n\)</span> on a number line.</li>
+<li>Attach a weight <span class="math inline">\(p_i = \Pr(X =
+x_i)\)</span> at each point <span class="math inline">\(x_i\)</span>.</li>
+<li>The expectation <span class="math inline">\(\mathbb{E}[X]\)</span>
+is the point at which the system balances - similar to the
+<strong>center of mass</strong> of a discrete system.</li>
+<li>Mathematically, <span class="math display">\[
+\mathbb{E}[X] = \sum_{i} x_i \Pr(X = x_i)
+\]</span></li>
+<li>This is analogous to a lever balancing on a fulcrum: the expectation
+is the point where the moments (weighted distances) on either side are
+equal.</li>
+</ul>
+<p><strong>Example:</strong> ### Example Table of a Discrete Random
+Variable</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Value <span class="math inline">\(x_i\)</span></th>
+<th align="center">Probability <span class="math inline">\(p_i\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span class="math inline">\(-1\)</span></td>
+<td align="center"><span class="math inline">\(0.2\)</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(0\)</span></td>
+<td align="center"><span class="math inline">\(0.5\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(2\)</span></td>
+<td align="center"><span class="math inline">\(0.3\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Then the expectation is:</p>
+<p><span class="math display">\[
+\mathbb{E}[X] = (-1)(0.2) + (0)(0.5) + (2)(0.3) = -0.2 + 0 + 0.6 = 0.4
+\]</span></p>
+<hr />
+</div>
+<div id="mechanical-view-continuous" class="section level3">
+<h3>Mechanical View (Continuous)</h3>
+<ul>
+<li>Imagine a <strong>thin metal rod</strong> (or sheet) lying along the
+real number line, where:
+<ul>
+<li>At each point <span class="math inline">\(x\)</span>, the “density”
+is given by the <strong>probability density function (pdf)</strong>
+<span class="math inline">\(f(x)\)</span>.</li>
 </ul></li>
-</ol>
-<hr />
-<div id="piecewise-form" class="section level4">
-<h4>Piecewise form</h4>
+<li>Then the expectation <span class="math inline">\(\mathbb{E}[X]\)</span> is the <strong>center of
+mass</strong> (balance point) of this rod.</li>
+</ul>
 <p><span class="math display">\[
-\boxed{
-F_X(t)=
-\begin{cases}
-0, &amp; t&lt;0,\\[6pt]
-\left(\dfrac{t}{R}\right)^{2}, &amp; 0\le t\le R,\\[10pt]
-1, &amp; t&gt;R.
-\end{cases}}
+\mathbb{E}[X] = \int_{-\infty}^{\infty} x f(x) \, dx
+\]</span></p>
+<ul>
+<li>This interpretation is useful in physics and engineering, where mass
+distributions are modeled similarly.</li>
+</ul>
+<p><strong>Visualization Idea:</strong></p>
+<ul>
+<li>For discrete: visualize weights hanging from a bar.</li>
+<li>For continuous: visualize a curve on a sheet, where expectation is
+the horizontal coordinate where it would balance.</li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="when-expectation-does-not-exist" class="section level2">
+<h2>When Expectation Does Not Exist</h2>
+<p>In some cases, a random variable may have such large values (with
+small but non-zero probabilities) that the expectation is <strong>not
+finite</strong>. This typically happens when the weighted sum of the
+absolute values of the outcomes diverges.</p>
+<hr />
+<div id="condition-for-non-existence" class="section level3">
+<h3>Condition for Non-existence</h3>
+<p>If the following series diverges, then the expectation <span class="math inline">\(\mathbb{E}[X]\)</span> does <strong>not
+exist</strong>:</p>
+<p><span class="math display">\[
+\sum |x_i| \cdot \Pr(X = x_i) = \infty
+\]</span></p>
+<p>This means that either the positive or negative parts of the series
+(or both) are infinite.</p>
+<hr />
+</div>
+<div id="example-st.-petersburg-paradox" class="section level3">
+<h3>Example: St. Petersburg Paradox</h3>
+<p>This is a classic example of a game with <strong>infinite expected
+value</strong>.</p>
+<div id="game-description" class="section level4">
+<h4>Game Description</h4>
+<ul>
+<li>A fair coin is tossed until the first Head appears.</li>
+<li>If the first Head appears on the <span class="math inline">\(k\)</span>-th toss, the player wins <span class="math inline">\(2^k\)</span> dollars.</li>
+<li>The probability of the first Head on the <span class="math inline">\(k\)</span>-th toss is <span class="math inline">\(\left( \frac{1}{2} \right)^k\)</span>.</li>
+</ul>
+</div>
+<div id="expected-value" class="section level4">
+<h4>Expected Value</h4>
+<p>Let <span class="math inline">\(X\)</span> be the winnings:</p>
+<p><span class="math display">\[
+\mathbb{E}[X] = \sum_{k=1}^\infty 2^k \cdot \left( \frac{1}{2} \right)^k
+\]</span></p>
+<p><span class="math display">\[
+= \sum_{k=1}^\infty 1 = \infty
+\]</span></p>
+<p>Hence, the expectation <strong>does not exist</strong> in the finite
+sense, even though each outcome has a well-defined value.</p>
+<hr />
+</div>
+</div>
+<div id="interpretation" class="section level3">
+<h3>Interpretation</h3>
+<p>Although every individual outcome has a finite value, the
+<strong>average value</strong> over infinitely many repetitions is not
+finite. This paradox highlights the limitations of expectation as a
+measure of central tendency in such extreme cases.</p>
+<hr />
+</div>
+<div id="properties-of-expectation" class="section level3">
+<h3>Properties of Expectation</h3>
+<ul>
+<li><p><span class="math inline">\(\mathbb{E}[aX + b] = a \cdot
+\mathbb{E}[X] + b\)</span><br />
+</p></li>
+<li><p>Linearity: <span class="math inline">\(\mathbb{E}[X + Y] =
+\mathbb{E}[X] + \mathbb{E}[Y]\)</span><br />
+</p></li>
+<li><p>If <span class="math inline">\(X\)</span> is constant <span class="math inline">\(c\)</span>, then <span class="math inline">\(\mathbb{E}[X] = c\)</span></p></li>
+</ul>
+</div>
+<div id="proof" class="section level3">
+<h3>Proof:</h3>
+</div>
+<div id="linearity-mathbbeax-b-a-cdot-mathbbex-b" class="section level3">
+<h3>1. Linearity: <span class="math inline">\(\mathbb{E}[aX + b] = a
+\cdot \mathbb{E}[X] + b\)</span></h3>
+<div id="discrete-case" class="section level4">
+<h4>Discrete Case</h4>
+<p>Let <span class="math inline">\(X\)</span> take values <span class="math inline">\(x_i\)</span> with probabilities <span class="math inline">\(p_i\)</span>:</p>
+<p><span class="math display">\[
+\mathbb{E}[aX + b] = \sum_i (a x_i + b) p_i = a \sum_i x_i p_i + b
+\sum_i p_i = a \mathbb{E}[X] + b
+\]</span></p>
+</div>
+<div id="continuous-case" class="section level4">
+<h4>Continuous Case</h4>
+<p>Let <span class="math inline">\(X\)</span> have pdf <span class="math inline">\(f(x)\)</span>:</p>
+<p><span class="math display">\[
+\mathbb{E}[aX + b] = \int_{-\infty}^{\infty} (a x + b) f(x) dx = a \int
+x f(x) dx + b \int f(x) dx = a \mathbb{E}[X] + b
 \]</span></p>
 <hr />
 </div>
 </div>
-<div id="example-number-of-heads-in-three-tosses" class="section level3">
-<h3>Example – Number of Heads in Three Tosses</h3>
-<p>Experiment: toss a fair coin three times, and record the face up at
-each trial.<br />
-Random variable: <span class="math inline">\(X=\)</span> total number of
-heads.</p>
-<ul>
-<li>There are <span class="math inline">\(2^3 = 8\)</span>
-equally‐likely outcome sequences.<br />
-</li>
-<li>Exactly one sequence has 0 heads (ttt) → <span class="math inline">\(1/8\)</span>.<br />
-</li>
-<li>Exactly one sequence has 3 heads (hhh) → <span class="math inline">\(1/8\)</span>.<br />
-</li>
-<li><span class="math inline">\(\binom{3}{1}=3\)</span> sequences have 1
-head → <span class="math inline">\(3/8\)</span>.<br />
-</li>
-<li><span class="math inline">\(\binom{3}{2}=3\)</span> sequences have 2
-heads → <span class="math inline">\(3/8\)</span>.</li>
-</ul>
+<div id="additivity-mathbbex-y-mathbbex-mathbbey" class="section level3">
+<h3>2. Additivity: <span class="math inline">\(\mathbb{E}[X + Y] =
+\mathbb{E}[X] + \mathbb{E}[Y]\)</span></h3>
+<div id="discrete-case-1" class="section level4">
+<h4>Discrete Case</h4>
+<p>Joint pmf <span class="math inline">\(p(x,y)\)</span>:</p>
+<p><span class="math display">\[
+\mathbb{E}[X + Y] = \sum_{x, y} (x + y) p(x, y) = \sum_{x, y} x p(x, y)
++ \sum_{x, y} y p(x, y) = \mathbb{E}[X] + \mathbb{E}[Y]
+\]</span></p>
+</div>
+<div id="continuous-case-1" class="section level4">
+<h4>Continuous Case</h4>
+<p>Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be two continuous random variables with
+<strong>joint probability density function</strong> <span class="math inline">\(f(x, y)\)</span>. The expectation of the sum <span class="math inline">\(X + Y\)</span> is:</p>
+<p><span class="math display">\[
+\mathbb{E}[X + Y] = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} (x +
+y) f(x, y) \, dx \, dy
+\]</span></p>
+<p>We now apply <strong>linearity of integration</strong>:</p>
+<p><span class="math display">\[
+= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} x f(x, y) \, dx \, dy
++ \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} y f(x, y) \, dx \, dy
+\]</span></p>
+<p>Swap the order of integration (justified under Fubini’s Theorem):</p>
+<p><span class="math display">\[
+= \int_{-\infty}^{\infty} \left( \int_{-\infty}^{\infty} x f(x, y) \, dx
+\right) dy + \int_{-\infty}^{\infty} \left( \int_{-\infty}^{\infty} y
+f(x, y) \, dy \right) dx
+\]</span></p>
+<p>Note that: - The first term integrates out <span class="math inline">\(x\)</span>, keeping <span class="math inline">\(y\)</span> fixed. - The second term integrates out
+<span class="math inline">\(y\)</span>, keeping <span class="math inline">\(x\)</span> fixed.</p>
+<p>We now recognize:</p>
+<p><span class="math display">\[
+= \int_{-\infty}^{\infty} \left( \int_{-\infty}^{\infty} x f(x, y) \, dx
+\right) dy = \mathbb{E}[X]
+\]</span> and <span class="math display">\[
+= \int_{-\infty}^{\infty} \left( \int_{-\infty}^{\infty} y f(x, y) \, dy
+\right) dx = \mathbb{E}[Y]
+\]</span></p>
+<p>So finally:</p>
+<p><span class="math display">\[
+\mathbb{E}[X + Y] = \mathbb{E}[X] + \mathbb{E}[Y]
+\]</span></p>
 <hr />
-<div id="building-the-cdf-f_xtprxle-t" class="section level4">
-<h4>Building the cdf <span class="math inline">\(F_X(t)=\Pr(X\le
-t)\)</span></h4>
+</div>
+</div>
+<div id="constant-random-variable" class="section level3">
+<h3>3. Constant Random Variable</h3>
+<p>Suppose <span class="math inline">\(X = c\)</span> almost surely -
+that is, the random variable <span class="math inline">\(X\)</span>
+always takes the same constant value <span class="math inline">\(c\)</span>.</p>
+<hr />
+<div id="discrete-case-2" class="section level4">
+<h4>Discrete Case</h4>
+<p>In the discrete setting, if <span class="math inline">\(X =
+c\)</span> with probability 1:</p>
+<p><span class="math display">\[
+\mathbb{E}[X] = \sum_x x \cdot \Pr(X = x)
+\]</span></p>
+<p>Since <span class="math inline">\(\Pr(X = c) = 1\)</span> and <span class="math inline">\(\Pr(X = x) = 0\)</span> for all <span class="math inline">\(x \neq c\)</span>, the sum becomes:</p>
+<p><span class="math display">\[
+\mathbb{E}[X] = c \cdot 1 + \sum_{x \neq c} x \cdot 0 = c
+\]</span></p>
+<hr />
+</div>
+<div id="continuous-case-2" class="section level4">
+<h4>Continuous Case</h4>
+<p>Let <span class="math inline">\(X\)</span> be a continuous random
+variable with probability density function <span class="math inline">\(f_X(x)\)</span>.</p>
+<p>By definition of expectation: <span class="math display">\[
+\mathbb{E}[c] = \int_{-\infty}^{\infty} c \cdot f_X(x) \, dx
+\]</span></p>
+<p>Since <span class="math inline">\(c\)</span> is constant, we can pull
+it outside the integral: <span class="math display">\[
+\mathbb{E}[c] = c \cdot \int_{-\infty}^{\infty} f_X(x) \, dx
+\]</span></p>
+<p>But we know that the total probability under the density function is:
+<span class="math display">\[
+\int_{-\infty}^{\infty} f_X(x) \, dx = 1
+\]</span></p>
+<p>Therefore: <span class="math display">\[
+\mathbb{E}[c] = c \cdot 1 = c
+\]</span></p>
+<hr />
+</div>
+</div>
+</div>
+<div id="variance-mathrmvarx-or-vx" class="section level2">
+<h2>Variance: <span class="math inline">\(\mathrm{Var}(X)\)</span> or
+<span class="math inline">\(V(X)\)</span></h2>
+<div id="definition" class="section level3">
+<h3>Definition</h3>
+<p>Variance measures how spread out the values of <span class="math inline">\(X\)</span> are around the mean:</p>
+<p><span class="math display">\[
+\mathrm{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2]
+\]</span></p>
+</div>
+<div id="activity-2.20-shortcut-formula" class="section level3">
+<h3>Activity 2.20: Shortcut formula</h3>
+<p>Simplify the above formula to the folowing:</p>
+<p><span class="math display">\[
+\mathrm{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2
+\]</span></p>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>We start with the definition of the variance of a random variable
+<span class="math inline">\(X\)</span>:</p>
+<p><span class="math display">\[
+\mathrm{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2]
+\]</span></p>
+<p>We can expand the square inside the expectation:</p>
+<p><span class="math display">\[
+\mathrm{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2]
+= \mathbb{E}[X^2 - 2X\mathbb{E}[X] + (\mathbb{E}[X])^2]
+\]</span></p>
+<p>Now, using the linearity of expectation, we can break this into three
+separate terms:</p>
+<p><span class="math display">\[
+\mathrm{Var}(X) = \mathbb{E}[X^2] - 2\mathbb{E}[X\mathbb{E}[X]] +
+\mathbb{E}[(\mathbb{E}[X])^2]
+\]</span></p>
+<p>Simplifying the Terms -</p>
 <ol style="list-style-type: decimal">
-<li><p><strong><span class="math inline">\(t&lt;0\)</span></strong><br />
-No outcome gives <span class="math inline">\(X&lt;0\)</span> ⇒ <span class="math inline">\(F_X(t)=0\)</span>.</p></li>
-<li><p><strong><span class="math inline">\(0\le
-t&lt;1\)</span></strong><br />
-Only <span class="math inline">\(X=0\)</span> satisfies <span class="math inline">\(X\le t\)</span>.<br />
-<span class="math display">\[
-F_X(t)=\Pr(X=0)=\frac18.
-\]</span></p></li>
-<li><p><strong><span class="math inline">\(1\le
-t&lt;2\)</span></strong><br />
-<span class="math inline">\(X\)</span> can be 0 or 1.<br />
-<span class="math display">\[
-F_X(t)=\Pr(X=0)+\Pr(X=1)=\frac18+\frac38=\frac12.
-\]</span></p></li>
-<li><p><strong><span class="math inline">\(2\le
-t&lt;3\)</span></strong><br />
-<span class="math inline">\(X\)</span> can be 0,1,2.<br />
-<span class="math display">\[
-F_X(t)=\frac18+\frac38+\frac38=\frac78.
-\]</span></p></li>
-<li><p><strong><span class="math inline">\(t\ge
-3\)</span></strong><br />
-All possibilities counted ⇒ <span class="math inline">\(F_X(t)=1\)</span>.</p></li>
+<li><p>The first term <span class="math inline">\(\mathbb{E}[X^2]\)</span> stays as is.<br />
+</p></li>
+<li><p>The second term <span class="math inline">\(\mathbb{E}[X\mathbb{E}[X]]\)</span> simplifies to
+<span class="math inline">\(\mathbb{E}[X] \cdot \mathbb{E}[X]\)</span>
+because <span class="math inline">\(\mathbb{E}[X]\)</span> is
+constant.<br />
+</p></li>
+<li><p>The third term <span class="math inline">\(\mathbb{E}[(\mathbb{E}[X])^2]\)</span> simplifies
+to <span class="math inline">\((\mathbb{E}[X])^2\)</span>, since <span class="math inline">\(\mathbb{E}[X]\)</span> is constant.<br />
+</p></li>
 </ol>
+<p>Thus, we get:</p>
+<p><span class="math display">\[
+\mathrm{Var}(X) = \mathbb{E}[X^2] - 2\mathbb{E}[X](\mathbb{E}[X]) +
+(\mathbb{E}[X])^2
+\]</span></p>
+<p>Simplifying the above expression:</p>
+<p><span class="math display">\[
+\mathrm{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2
+\]</span></p>
+<p>Thus, we have shown that the variance of <span class="math inline">\(X\)</span> is given by:</p>
+<p><span class="math display">\[
+\mathrm{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2
+\]</span></p>
+<p>This completes the proof.</p>
+</details>
+</div>
+<div id="properties-of-variance" class="section level3">
+<h3>Properties of Variance</h3>
+<ul>
+<li><span class="math inline">\(\mathrm{Var}(aX + b) = a^2 \cdot
+\mathrm{Var}(X)\)</span></li>
+<li><span class="math inline">\(\mathrm{Var}(X) \geq 0\)</span></li>
+<li><span class="math inline">\(\mathrm{Var}(c) = 0\)</span> for any
+constant <span class="math inline">\(c\)</span></li>
+</ul>
 <hr />
 </div>
-<div id="resulting-piecewise-form" class="section level4">
-<h4>Resulting piecewise form</h4>
+<div id="activity-2.21-proof-of-properties-of-variance" class="section level3">
+<h3>Activity 2.21: Proof of properties of variance</h3>
+<p>Prove the above properties.</p>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<ol style="list-style-type: decimal">
+<li>Property: <span class="math inline">\(\mathrm{Var}(aX + b) = a^2
+\cdot \mathrm{Var}(X)\)</span></li>
+</ol>
+<p>Proof:</p>
+<p>Recall the definition of variance:</p>
 <p><span class="math display">\[
-\boxed{
-F_X(t)=
-\begin{cases}
-0, &amp; t&lt;0,\\[4pt]
-\dfrac18, &amp; 0\le t&lt;1,\\[10pt]
-\dfrac12, &amp; 1\le t&lt;2,\\[10pt]
-\dfrac78, &amp; 2\le t&lt;3,\\[10pt]
-1, &amp; t\ge 3.
-\end{cases}}
+\mathrm{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2]
 \]</span></p>
-<p>Each step height equals the probability at that <span class="math inline">\(x\)</span>; cumulative sums give the cdf.</p>
-</div>
-</div>
-</div>
-<div id="example-stepwise-cdf-from-a-finite-support" class="section level2">
-<h2>Example – Stepwise CDF from a Finite Support</h2>
-<p>Suppose a discrete random variable <span class="math inline">\(X\)</span> takes values in a <strong>finite
-set</strong>:</p>
+<p>Now consider the variance of <span class="math inline">\(aX +
+b\)</span>:</p>
 <p><span class="math display">\[
-X \in \{-3,\ 1,\ 2,\ 5\}
+\mathrm{Var}(aX + b) = \mathbb{E}[(aX + b - \mathbb{E}[aX + b])^2]
 \]</span></p>
-<p>with corresponding probabilities:</p>
+<p>First, simplify the expectation <span class="math inline">\(\mathbb{E}[aX + b]\)</span>:</p>
 <p><span class="math display">\[
-\boxed{
-\begin{array}{c|c|c|c|c}
-x &amp; -3 &amp; 1 &amp; 2 &amp; 5 \\
+\mathbb{E}[aX + b] = a\mathbb{E}[X] + b
+\]</span></p>
+<p>Thus, we have:</p>
+<p><span class="math display">\[
+\mathrm{Var}(aX + b) = \mathbb{E}[(aX + b - (a\mathbb{E}[X] + b))^2]
+\]</span> <span class="math display">\[
+= \mathbb{E}[(a(X - \mathbb{E}[X]))^2]
+\]</span> <span class="math display">\[
+= \mathbb{E}[a^2(X - \mathbb{E}[X])^2]
+\]</span></p>
+<p>Since <span class="math inline">\(a^2\)</span> is a constant, it can
+be factored out of the expectation:</p>
+<p><span class="math display">\[
+\mathrm{Var}(aX + b) = a^2 \cdot \mathbb{E}[(X - \mathbb{E}[X])^2]
+\]</span></p>
+<p>By the definition of variance, this is:</p>
+<p><span class="math display">\[
+\mathrm{Var}(aX + b) = a^2 \cdot \mathrm{Var}(X)
+\]</span></p>
+<p>Thus, we have proven the first property:</p>
+<p><span class="math display">\[
+\mathrm{Var}(aX + b) = a^2 \cdot \mathrm{Var}(X)
+\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Property: <span class="math inline">\(\mathrm{Var}(X) \geq
+0\)</span></li>
+</ol>
+<p>Proof:</p>
+<p>Variance is defined as:</p>
+<p><span class="math display">\[
+\mathrm{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2]
+\]</span></p>
+<p>Since <span class="math inline">\((X - \mathbb{E}[X])^2\)</span> is
+always non-negative for any value of <span class="math inline">\(X\)</span>, we know that:</p>
+<p><span class="math display">\[
+\mathbb{E}[(X - \mathbb{E}[X])^2] \geq 0
+\]</span></p>
+<p>Therefore, variance must also be non-negative:</p>
+<p><span class="math display">\[
+\mathrm{Var}(X) \geq 0
+\]</span></p>
+<p>Thus, the second property is proven:</p>
+<p><span class="math display">\[
+\mathrm{Var}(X) \geq 0
+\]</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Property: <span class="math inline">\(\mathrm{Var}(c) = 0\)</span>
+for any constant <span class="math inline">\(c\)</span></li>
+</ol>
+<p>Proof:</p>
+<p>Let <span class="math inline">\(X = c\)</span> be a constant. The
+variance of a constant is given by:</p>
+<p><span class="math display">\[
+\mathrm{Var}(c) = \mathbb{E}[(c - \mathbb{E}[c])^2]
+\]</span></p>
+<p>Since <span class="math inline">\(c\)</span> is a constant, <span class="math inline">\(\mathbb{E}[c] = c\)</span>. Therefore:</p>
+<p><span class="math display">\[
+\mathrm{Var}(c) = \mathbb{E}[(c - c)^2] = \mathbb{E}[0^2] =
+\mathbb{E}[0] = 0
+\]</span></p>
+<p>Thus, the variance of any constant is zero:</p>
+<p><span class="math display">\[
+\mathrm{Var}(c) = 0
+\]</span></p>
+<p>This proves the third property:</p>
+<p><span class="math display">\[
+\mathrm{Var}(c) = 0
+\]</span></p>
+</details>
+<hr />
+</div>
+</div>
+<div id="example-using-a-table" class="section level2">
+<h2>Example: Using a Table</h2>
+<p>Let <span class="math inline">\(X\)</span> be a random variable with
+the following distribution:</p>
+<p><span class="math display">\[
+\begin{array}{c|cccc}
+x_i &amp; -1 &amp; 0 &amp; 1 &amp; 2 \\
 \hline
-\Pr(X = x) &amp; \dfrac{1}{2} &amp; \dfrac{1}{3} &amp; \dfrac{1}{6}
-&amp; 0 \\
-\end{array}
-}
-\]</span></p>
-<p>We define the <strong>cumulative distribution function (cdf)</strong>
-of <span class="math inline">\(X\)</span> as:</p>
-<p><span class="math display">\[
-F_X(t) = \Pr(X \le t)
-\]</span></p>
-<hr />
-<div id="stepwise-structure-of-the-cdf" class="section level3">
-<h3>Stepwise Structure of the CDF</h3>
-<p>Because <span class="math inline">\(X\)</span> is a
-<strong>discrete</strong> random variable, its CDF is a <strong>step
-function</strong>:</p>
-<ul>
-<li>The function is <strong>constant between jumps</strong>.</li>
-<li>It <strong>jumps only at values in the support of <span class="math inline">\(X\)</span></strong>.</li>
-<li>Each jump has a height equal to the <strong>probability mass at that
-point</strong>.</li>
-</ul>
-<hr />
-</div>
-<div id="piecewise-definition-of-the-cdf" class="section level3">
-<h3>Piecewise Definition of the CDF</h3>
-<p><span class="math display">\[
-F_X(t) =
-\begin{cases}
-0, &amp; t &lt; -3 \\
-\frac{1}{2}, &amp; -3 \le t &lt; 1 \\
-\frac{5}{6}, &amp; 1 \le t &lt; 2 \\
-1, &amp; 2 \le t &lt; 5 \\
-1, &amp; t \ge 5
-\end{cases}
-\]</span></p>
-<blockquote>
-<p>Note: The value <span class="math inline">\(x = 5\)</span> has
-probability 0, so the CDF does <strong>not jump</strong> at that point —
-it remains constant at 1.</p>
-</blockquote>
-<hr />
-</div>
-<div id="explanation" class="section level3">
-<h3>Explanation</h3>
-<ul>
-<li>For <span class="math inline">\(t &lt; -3\)</span>, no value of
-<span class="math inline">\(X\)</span> is less than or equal to <span class="math inline">\(t\)</span> → <span class="math inline">\(F_X(t) =
-0\)</span>.</li>
-<li>For <span class="math inline">\(-3 \le t &lt; 1\)</span>, only <span class="math inline">\(X = -3\)</span> contributes → <span class="math inline">\(F_X(t) = \Pr(X = -3) = \frac{1}{2}\)</span>.</li>
-<li>For <span class="math inline">\(1 \le t &lt; 2\)</span>, <span class="math inline">\(X = -3\)</span> and <span class="math inline">\(X
-= 1\)</span> are counted → <span class="math inline">\(F_X(t) =
-\frac{1}{2} + \frac{1}{3} = \frac{5}{6}\)</span>.</li>
-<li>For <span class="math inline">\(2 \le t &lt; 5\)</span>, we include
-<span class="math inline">\(X = 2\)</span> as well → <span class="math inline">\(F_X(t) = \frac{1}{2} + \frac{1}{3} + \frac{1}{6} =
-1\)</span>.</li>
-<li>For <span class="math inline">\(t \ge 5\)</span>, we still have
-<span class="math inline">\(F_X(t) = 1\)</span> because all mass has
-been accumulated.</li>
-</ul>
-<hr />
-</div>
-<div id="visual-insight" class="section level3">
-<h3>Visual Insight</h3>
-<p>The CDF rises in <strong>jumps</strong> of:<br />
-</p>
-<p><span class="math inline">\(+\frac{1}{2}\)</span> at <span class="math inline">\(x = -3\)</span>,<br />
-<span class="math inline">\(+\frac{1}{3}\)</span> at <span class="math inline">\(x = 1\)</span>,<br />
-<span class="math inline">\(+\frac{1}{6}\)</span> at <span class="math inline">\(x = 2\)</span>.<br />
-</p>
-<p>There is <strong>no jump at <span class="math inline">\(x =
-5\)</span></strong> because <span class="math inline">\(\Pr(X = 5) =
-0\)</span>.</p>
-<pre class="r"><code>library(ggplot2)
-
-# Define values and cumulative probabilities
-x_vals &lt;- c(-3, 1, 2, 5)
-probs &lt;- c(1/2, 1/3, 1/6, 0)
-cdf_vals &lt;- cumsum(probs)
-
-# Extended t values for plotting step function
-t_vals &lt;- c(-4, -3, 1, 2, 5, 6)
-F_vals &lt;- c(0, 1/2, 5/6, 1, 1, 1)
-
-# Plot
-ggplot(data.frame(t = t_vals, F = F_vals), aes(x = t, y = F)) +
-  geom_step(direction = &quot;hv&quot;) +
-  geom_point(data = data.frame(x = x_vals, y = cdf_vals),
-             aes(x = x, y = y), color = &quot;red&quot;, size = 2) +
-  labs(title = &quot;Stepwise CDF of Discrete Random Variable X&quot;,
-       x = &quot;t&quot;, y = expression(F[X](t))) +
-  theme_minimal()</code></pre>
-<p><img role="img" src="data:image/png;base64,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" width="576" /></p>
-<hr />
-<hr />
-</div>
-<div id="example-waiting-for-the-first-ace" class="section level3">
-<h3>Example – Waiting for the First Ace</h3>
-<p>Experiment: toss a die repeatedly; <span class="math inline">\(X=\)</span> number of tosses until the first “ace”
-(1).<br />
-For <span class="math inline">\(k=1,2,\dots\)</span>: <span class="math display">\[
-\Pr(X=k)=\left(\frac{5}{6}\right)^{k-1}\!\left(\frac{1}{6}\right).
-\]</span> The cdf is <span class="math display">\[
-\boxed{
-F_X(t)=
-\begin{cases}
-0, &amp; t&lt;1,\\
-\sum_{k=1}^{\lfloor t \rfloor}
-\left(\frac{5}{6}\right)^{k-1}\!\left(\frac{1}{6}\right), &amp; t\ge 1.
-\end{cases}}
-\]</span></p>
-<hr />
-</div>
-</div>
-<div id="quantiles" class="section level2">
-<h2>Quantiles</h2>
-<div id="definition-2.3-quantile" class="section level3">
-<h3>Definition 2.3 (Quantile)</h3>
-<p>For <span class="math inline">\(0&lt;p&lt;1\)</span>, a <strong><span class="math inline">\(p\)</span>-quantile</strong> <span class="math inline">\(t_p\)</span> is any solution of the inequalities
-<span class="math display">\[
-\Pr(X \le t) \ge p, \qquad \Pr(X \ge t) \ge 1-p.
-\]</span> Equivalently, <span class="math display">\[
-F_X(t) \ge p,\qquad F_X(t-0) \le p.
-\]</span></p>
-<p>Special names:<br />
-- <span class="math inline">\(t_{0.5}\)</span>:
-<strong>median</strong><br />
-- <span class="math inline">\(t_{0.25},\, t_{0.75}\)</span>:
-<strong>lower and upper quartiles</strong></p>
-<hr />
-</div>
-<div id="example-quantiles-for-the-target-distance" class="section level3">
-<h3>Example – Quantiles for the Target Distance</h3>
-<p>Using <span class="math inline">\(F_X(t) = (t/R)^2\)</span> on <span class="math inline">\([0,R]\)</span>, solve <span class="math inline">\((t_p/R)^2=p\)</span>.<br />
-</p>
-<p>Thus <span class="math inline">\(t_p = R\sqrt{p}\)</span>;<br />
-</p>
-<p>e.g. <span class="math inline">\(t_{0.25}=R/2\)</span>.</p>
-<hr />
-</div>
-<div id="example-quantiles-in-a-discrete-distribution" class="section level3">
-<h3>Example – Quantiles in a Discrete Distribution</h3>
-<p>Let the random variable <span class="math inline">\(X\)</span> take
-the values:</p>
-<p><span class="math display">\[
-X \in \{1, 2, 3\} \quad \text{with} \quad
-\Pr(X=1) = 0.2, \quad
-\Pr(X=2) = 0.6, \quad
-\Pr(X=3) = 0.2
-\]</span></p>
-<hr />
-</div>
-<div id="step-1-construct-the-cumulative-distribution-function-cdf" class="section level3">
-<h3>Step 1: Construct the Cumulative Distribution Function (cdf)</h3>
-<p><span class="math display">\[
-F_X(x) =
-\begin{cases}
-0, &amp; x &lt; 1 \\
-0.2, &amp; 1 \le x &lt; 2 \\
-0.8, &amp; 2 \le x &lt; 3 \\
-1, &amp; x \ge 3
-\end{cases}
-\]</span></p>
-<hr />
-</div>
-<div id="step-2-define-the-p-quantile" class="section level3">
-<h3>Step 2: Define the <span class="math inline">\(p\)</span>-Quantile</h3>
-<p>For any <span class="math inline">\(p \in (0,1)\)</span>, the
-<strong><span class="math inline">\(p\)</span>-quantile</strong> of a
-random variable <span class="math inline">\(X\)</span> is:</p>
-<p><span class="math display">\[
-t_p = \inf\{x \in \mathbb{R} \mid F_X(x) \ge p\}
-\]</span> ### Explanation</p>
-<p>This definition uses the <strong>infimum</strong> (greatest lower
-bound) to find the smallest value <span class="math inline">\(x\)</span>
-such that the cumulative distribution function (cdf) <span class="math inline">\(F_X(x)\)</span> reaches or exceeds the probability
-level <span class="math inline">\(p\)</span>.</p>
-<p>Let’s break it down:</p>
-<ul>
-<li><p>The <strong>cdf</strong> <span class="math inline">\(F_X(x)\)</span> gives the probability that the
-random variable <span class="math inline">\(X\)</span> takes a value
-less than or equal to <span class="math inline">\(x\)</span>, i.e.,
-<span class="math inline">\(F_X(x) = \Pr(X \le x)\)</span>.</p></li>
-<li><p>The <strong>set</strong> <span class="math inline">\(\{x \in
-\mathbb{R} \mid F_X(x) \ge p\}\)</span> contains all values of <span class="math inline">\(x\)</span> for which the cumulative probability is
-at least <span class="math inline">\(p\)</span>.</p></li>
-<li><p>The <strong>infimum</strong> of this set is the smallest such
-<span class="math inline">\(x\)</span> that satisfies the inequality
-<span class="math inline">\(F_X(x) \ge p\)</span>. This ensures that
-<span class="math inline">\(t_p\)</span> is the <strong>leftmost
-point</strong> where the cdf crosses the level <span class="math inline">\(p\)</span>.</p></li>
-</ul>
-<hr />
-<p>In the discrete case, this often involves checking intervals where
-the cdf jumps.</p>
-<hr />
-</div>
-<div id="step-3-compute-specific-quantiles" class="section level3">
-<h3>Step 3: Compute Specific Quantiles</h3>
-<ul>
-<li><p><strong>Median</strong> (<span class="math inline">\(p =
-0.5\)</span>):</p>
-<p>We seek the smallest <span class="math inline">\(x\)</span> such that
-<span class="math inline">\(F_X(x) \ge 0.5\)</span>.</p>
-<p><span class="math display">\[
-F_X(1) = 0.2 \quad \text{(too small)}\\
-F_X(2) = 0.8 \ge 0.5 \Rightarrow t_{0.5} = 2
-\]</span></p></li>
-<li><p><strong>First Quartile</strong> (<span class="math inline">\(p =
-0.25\)</span>):</p>
-<p><span class="math display">\[
-F_X(1) = 0.2 \quad \text{(too small)}\\
-F_X(2) = 0.8 \ge 0.25 \Rightarrow t_{0.25} = 2
-\]</span></p></li>
-<li><p><strong>Third Quartile</strong> (<span class="math inline">\(p =
-0.75\)</span>):</p>
-<p><span class="math display">\[
-F_X(2) = 0.8 \ge 0.75 \Rightarrow t_{0.75} = 2
-\]</span></p></li>
-<li><p><strong>90th Percentile</strong> (<span class="math inline">\(p =
-0.90\)</span>):</p>
-<p><span class="math display">\[
-F_X(3) = 1.0 \ge 0.90 \Rightarrow t_{0.90} = 3
-\]</span></p></li>
-</ul>
-<hr />
-</div>
-<div id="summary-table-of-quantiles" class="section level3">
-<h3>Summary Table of Quantiles</h3>
-<p><span class="math display">\[
-\begin{array}{c|c}
-\text{Quantile Level } p &amp; t_p \\
-\hline
-0.25 &amp; 2 \\
-0.50 &amp; 2 \\
-0.75 &amp; 2 \\
-0.90 &amp; 3 \\
+\Pr(X = x_i) &amp; 0.2 &amp; 0.5 &amp; 0.2 &amp; 0.1
 \end{array}
 \]</span></p>
-<p>Note: In a <strong>discrete</strong> distribution, many different
-<span class="math inline">\(p\)</span>-quantiles may map to the same
-value of <span class="math inline">\(X\)</span>, depending on where the
-jumps in the cdf occur.</p>
-<hr />
-</div>
-<div id="theorem-probability-between-quantiles" class="section level3">
-<h3>Theorem – Probability Between Quantiles</h3>
-<p>If <span class="math inline">\(F\)</span> is continuous and <span class="math inline">\(0&lt;\alpha&lt;\beta&lt;1\)</span>, then for any
-<span class="math inline">\(\alpha\)</span>- and <span class="math inline">\(\beta\)</span>-quantiles <span class="math inline">\(t_\alpha, t_\beta\)</span>, <span class="math display">\[
-\Pr(t_\alpha \le X \le t_\beta) = \beta - \alpha.
+<p>Then:</p>
+<p><span class="math display">\[
+\mathbb{E}[X] = (-1)(0.2) + (0)(0.5) + (1)(0.2) + (2)(0.1) = -0.2 + 0 +
+0.2 + 0.2 = 0.2
 \]</span></p>
-<p><strong>Example</strong> With a continuous cdf, the probability that
-<span class="math inline">\(X\)</span> lies between its first and third
-quartiles is <span class="math inline">\(0.75-0.25=0.5\)</span>.</p>
+<p><span class="math display">\[
+\mathbb{E}[X^2] = (-1)^2(0.2) + 0^2(0.5) + 1^2(0.2) + 2^2(0.1) = 0.2 + 0
++ 0.2 + 0.4 = 0.8
+\]</span></p>
+<p><span class="math display">\[
+\mathrm{Var}(X) = 0.8 - (0.2)^2 = 0.8 - 0.04 = 0.76
+\]</span></p>
 <hr />
-</div>
-<div id="practical-use-probabilities-via-quantiles" class="section level3">
-<h3>Practical Use: Probabilities via Quantiles</h3>
+<div id="activity-2.22-defective-bulbs-in-boxes" class="section level3">
+<h3>Activity 2.22: Defective Bulbs in Boxes</h3>
+<p>A bulb manufacturer sells his product to vendors in boxes, each
+containing 12 bulbs. A recent inspection of 1000 randomly selected boxes
+resulted in the following data:</p>
+<p><span class="math display">\[
+\begin{array}{|c|c|}
+\hline
+\textbf{Number of defective bulbs in a box} &amp; \textbf{Number of
+boxes} \\
+\hline
+0 &amp; 980 \\
+1 &amp; 20 \\
+2 \text{ or more} &amp; 0 \\
+\hline
+\end{array}
+\]</span></p>
+<p>Assume that the above information provides a good approximation to
+the distribution of the number of defective bulbs in a box. You may also
+assume that defects occur independently across bulbs, and each bulb has
+the same probability of being defective.</p>
+<hr />
+<p>Let <span class="math inline">\(X\)</span> be the number of defective
+bulbs in a randomly selected box.</p>
+<p><strong>(i)</strong> Derive the probability mass function (pmf) of
+<span class="math inline">\(X\)</span>.</p>
+<p><strong>(ii)</strong> Calculate <span class="math inline">\(E(X)\)</span> and <span class="math inline">\(E(X^2)\)</span> using the definition of expected
+value. Hence calculate the variance <span class="math inline">\(\text{Var}(X)\)</span>.</p>
+<p><strong>(iii)</strong> A vendor has bought 10 boxes of bulbs. Let
+<span class="math inline">\(X_i\)</span> be the number of defective
+bulbs in the <span class="math inline">\(i^{th}\)</span> box for <span class="math inline">\(i = 1, 2, \dots, 10\)</span>, and let:</p>
+<p><span class="math display">\[
+Y = \sum_{i = 1}^{10} X_i
+\]</span></p>
+<p>That is, <span class="math inline">\(Y\)</span> is the total number
+of defective bulbs in the 10 boxes.</p>
+<p>Calculate <span class="math inline">\(E(Y)\)</span> and <span class="math inline">\(V(Y)\)</span> using <span class="math inline">\(E(X)\)</span> and <span class="math inline">\(V(X)\)</span></p>
+<p><strong>(iv)</strong> The vendor has bought the 10 boxes at a price
+of Rs. 900 per* box. He sells bulbs at a price of Rs. 100 per bulb.</p>
+<p>He checks each bulb before selling and sells <strong>only</strong>
+the non-defective bulbs.</p>
+<p>Derive an expression for the total <strong>profit</strong> as a
+function of <span class="math inline">\(Y\)</span>:</p>
+<p><strong>(v)</strong> Express <span class="math inline">\(E(\text{Profit})\)</span> and <span class="math inline">\(V(\text{Profit})\)</span> in terms of <span class="math inline">\(E(Y)\)</span> and <span class="math inline">\(V(X)\)</span>:</p>
+<hr />
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<ol style="list-style-type: lower-roman">
+<li>The Probability Mass Function (PMF) of <span class="math inline">\(X\)</span></li>
+</ol>
+<p>Since each box contains 12 bulbs, and each bulb has a small
+probability <span class="math inline">\(p\)</span> of being defective,
+the total number of defective bulbs in a box, <span class="math inline">\(X\)</span>, follows a <strong>Binomial
+distribution</strong>:</p>
+<p><span class="math display">\[
+X \sim \text{Binomial}(n = 12, p)
+\]</span></p>
+<p>Estimate <span class="math inline">\(p\)</span> using the data:</p>
 <ul>
-<li>To find <span class="math inline">\(t_p\)</span>, solve <span class="math inline">\(F_X(t_p)=p\)</span> (when a solution
-exists).<br />
-</li>
-<li>To compute <span class="math inline">\(\Pr(X\in [t_\alpha,
-t_\beta])\)</span> for a continuous cdf, use Theorem – Probability
-Between Quantiles.<br />
-</li>
-<li>In discrete cases, use the inequality definition to locate the
-smallest <span class="math inline">\(t\)</span> with <span class="math inline">\(F_X(t)\ge p\)</span>.</li>
+<li>Total defective bulbs observed: 20 boxes × 1 defective bulb = 20
+defective bulbs</li>
+<li>Total bulbs observed: 1000 boxes × 12 bulbs = 12,000 bulbs</li>
 </ul>
+<p><span class="math display">\[
+\hat{p} = \frac{20}{12000} = \frac{1}{600} \approx 0.00167
+\]</span></p>
+<p>Thus, the PMF is:</p>
+<p><span class="math display">\[
+P_X(x) = \binom{12}{x} \left( \frac{1}{600} \right)^x \left(1 -
+\frac{1}{600} \right)^{12 - x}, \quad x = 0, 1, \dots, 12
+\]</span></p>
+<p>As the second approach, We can estimate the probability mass function
+(PMF) of <span class="math inline">\(X\)</span> directly from the
+data:</p>
+<p><span class="math display">\[
+P(X = 0) = \frac{980}{1000} = 0.98, \quad P(X = 1) = \frac{20}{1000} =
+0.02, \quad P(X \geq 2) = 0
+\]</span></p>
+<ol start="2" style="list-style-type: lower-roman">
+<li>Using the definition of expectation:</li>
+</ol>
+<p><span class="math display">\[
+E(X) = \sum_x x \cdot P(X = x) = 0 \cdot 0.98 + 1 \cdot 0.02 = 0.02
+\]</span></p>
+<p><span class="math display">\[
+E(X^2) = \sum_x x^2 \cdot P(X = x) = 0^2 \cdot 0.98 + 1^2 \cdot 0.02 =
+0.02
+\]</span></p>
+<p><span class="math display">\[
+\text{Var}(X) = E(X^2) - [E(X)]^2 = 0.02 - (0.02)^2 = 0.0196
+\]</span></p>
+<ol start="3" style="list-style-type: lower-roman">
+<li><strong>Expected Value <span class="math inline">\(E(Y)\)</span></strong></li>
+</ol>
+<p><span class="math display">\[
+E(Y) = \sum_{i=1}^{10} E(X_i) = E(X_1) + E(X_2) + \cdots + E(X_{10}) =
+10 \cdot 0.02 = 0.2
+\]</span></p>
+<p><strong>Variance <span class="math inline">\(V(Y)\)</span></strong></p>
+<p>Assuming the boxes are independent (i.e., <span class="math inline">\(X_1, X_2, \dots, X_{10}\)</span> are
+independent):</p>
+<p><span class="math display">\[
+V(Y) = \sum_{i=1}^{10} V(X_i) = V(X_1) + V(X_2) + \cdots + V(X_{10}) =
+10 \cdot 0.0196 = 0.196
+\]</span></p>
+<ol start="4" style="list-style-type: lower-roman">
+<li>Let <span class="math inline">\(Y\)</span> be the total number of
+defective bulbs among the 120 bulbs (from 10 boxes). The number of
+non-defective bulbs is <span class="math inline">\(120 -
+Y\)</span>.</li>
+</ol>
+<p>To derive an expression for the total <strong>profit</strong>:</p>
+<ul>
+<li>Cost: <span class="math inline">\(10 \times 900 = 9000\)</span>
+rupees</li>
+<li>Revenue: <span class="math inline">\((120 - Y) \times
+100\)</span></li>
+</ul>
+<p><span class="math display">\[
+\text{Profit} = 100(120 - Y) - 9000 = 12000 - 100Y - 9000 = 3000 - 100Y
+\]</span></p>
+<ol start="22" style="list-style-type: lower-alpha">
+<li>To Express <span class="math inline">\(E(\text{Profit})\)</span> and
+<span class="math inline">\(V(\text{Profit})\)</span>:</li>
+</ol>
+<p>Let’s use the linearity of expectation and properties of
+variance.</p>
+<p><span class="math display">\[
+E(\text{Profit}) = E[3000 - 100Y] = 3000 - 100E(Y)
+\]</span></p>
+<p><span class="math display">\[
+V(\text{Profit}) = \text{Var}(3000 - 100Y) = 100^2 \cdot \text{Var}(Y)
+\]</span></p>
 <hr />
+</details>
 </div>
 </div>
 
