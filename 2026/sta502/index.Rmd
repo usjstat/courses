@@ -9,12 +9,12 @@ output: html_document
 |                    |                                       |
 |--------------------|---------------------------------------|
 | **Course Title:**  | Probability and Distribution Theory I |
-| **Course Code:**   | STA502                              |
+| **Course Code:**   | STA502                                |
 | **Credit Value:**  | 2.0                                   |
 | **Status:**        | Core                                  |
-| **Year**    | 2026                      |
+| **Year**           | 2026                                  |
 | **Semester:**      | 1 (First Semester)                    |
-| **Pre-requisite:** | Basic Degree             |
+| **Pre-requisite:** | Basic Degree                          |
 
 ------------------------------------------------------------------------
 
@@ -28,20 +28,18 @@ This course establishes the fundamentals of probability theory. It supports lear
 
 ::: {style="text-align: center;"}
 | **Week** | **Topic** | **Description** | **Hours** |
-|----|----|----|----|
+|------------------|------------------|------------------|------------------|
 | 1 | [Elements of Probability](week1) | Introduction, experiments, outcomes, sample spaces, events | 8 (2T + 6IL) |
 | 2 | [Event Operations](week2) | Complements, unions, intersections, mutually exclusive/exhaustive events | 8 (2T + 6IL) |
 | 3 | [Methods of Probability](https://sportsanalyzr.shinyapps.io/week3/) | Classical, relative frequency, axioms, interpretation | 8 (2T + 6IL) |
 | 4 | [Conditional Probability](week4.html) | Independent events | 8 (2T + 6IL) |
 | 5 | [Probability Rules](week5.html) | Addition, multiplication, total probability, Bayes' theorem | 8 (2T + 6IL) |
-| 6 | [**Midterm Examination**](midmarks.png) | \- | \- |
+| 6 | **Midterm Examination** | \- | \- |
 | 7 | [Random Variables](week6.html) | Definitions, discrete and continuous variables | 8 (2T + 6IL) |
 | 8 | [Events with Random Variables](week8.html) | Event representation and revision | 8 (2T + 6IL) |
-| 9 | [Distributions](week9.html) | pmf, pdf, cdf | 8 (2T + 6IL) |
+| 9 | Distributions | pmf, pdf, cdf | 8 (2T + 6IL) |
 | 10 | [Probability Calculations](week10.html) | Quantiles, quartiles, percentiles | 8 (2T + 6IL) |
 | 11 | [Mean & Variance](week11.html) | Mean and variance of r.v.s and functions | 8 (2T + 6IL) |
-| 12 | [Moments](week12.html) | MGF and properties | 8 (2T + 6IL) |
-| 13 | Revision & Integration | \- | 8 (2T + 6IL) |
 :::
 
 *T = Theory, IL = Independent Learning*
@@ -63,7 +61,7 @@ By the end of this course, students will be able to:
 9.  Use pmf, pdf, cdf correctly.\
 10. Calculate probabilities and descriptive measures from distributions.\
 11. Define and interpret mean, median, variance, etc.\
-12. Use moment generating functions.\
+12. calulate probabilities from known Discrite and Continuous Distributions.
 13. Use correct notation and terminology.\
 14. Communicate clearly and coherently.\
 15. Present clear and accurate solutions to problems.
@@ -89,8 +87,7 @@ By the end of this course, students will be able to:
 
 **Lecturer:** Dr. Rajitha M. Silva\
 **Email:** [rsilva\@sjp.ac.lk](mailto:rsilva@sjp.ac.lk){.email}\
-**Office Hours:** One hour after lectures or by appointment
 
 ------------------------------------------------------------------------
 
-*This course is effective from 19th May 2025.*
+*This course is effective from 20th April 2026.*
