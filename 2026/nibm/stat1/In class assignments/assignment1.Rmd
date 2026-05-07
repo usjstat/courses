@@ -1,0 +1,188 @@
+---
+title: "Probability & Distribution Theory - In class Assignment 01 "
+author: "Dr. Rajitha M. Silva"
+output:
+  html_document: default
+---
+
+
+# Probability Theory: Events and Operations
+
+Each of the following experiments is accompanied by a real-world context and includes the specific observation being recorded. Write clear answers using appropriate set notation and logical reasoning.
+
+---
+
+## Question 1
+
+**Experiment:** A spinner equally divided into 8 sectors numbered from 1 to 8 is spun once, and the number at which it stops is recorded.
+
+Let:
+
+- \( A \): the number is even  
+- \( B \): the number is greater than 5  
+- \( C \): the number is divisible by 4
+
+Write:
+
+- The sample space \( S \)  
+- The events \( A, B, C \) as subsets of \( S \)  
+- \( A \cap B \), \( A \cup C \), and \( B' \)
+
+---
+
+## Question 2
+
+**Experiment:** A day is selected at random from a week, and the name of the selected day is recorded.
+
+Let:
+
+- \( A \): the day is a weekday  
+- \( B \): the day name starts with “S”  
+- \( C \): the day is Monday or Tuesday
+
+Write:
+
+- The sample space \( S \)  
+- The events \( A, B, C \)  
+- \( A \cap B \), \( A \cup C \), and \( B' \)
+
+---
+
+## Question 3
+
+**Experiment:** A customer picks a drink at random from a vending machine that offers 3 cola drinks, 2 orange juices, and 1 water bottle, and the label of the selected drink is recorded.
+
+Let:
+
+- \( A \): selecting a cola  
+- \( B \): selecting a non-cola drink  
+- \( C \): selecting either a cola or water
+
+Write:
+
+- The sample space \( S \)  
+- The events \( A, B, C \)  
+- \( A \cup C \), \( A \cap B \), and \( B' \)
+
+---
+
+## Question 4
+
+**Experiment:** A user taps one app at random from 10 app icons on their smartphone home screen, and the category of the app is recorded. There are 4 Social, 2 Game, 3 Utility, and 1 Finance app.
+
+Let:
+
+- \( A \): the app is social  
+- \( B \): the app is not social  
+- \( C \): the app is a Game or Finance app
+
+Write:
+
+- The sample space \( S \)  
+- The events \( A, B, C \)  
+- \( A \cup C \), \( A \cap B \), \( A' \)
+
+---
+
+## Question 5
+
+**Experiment:** A coin is tossed three times, and the full sequence of outcomes (in order) is recorded (e.g., HTH, TTT).
+
+Let:
+
+- \( A \): exactly one head appears  
+- \( B \): at least one tail appears  
+- \( C \): the first toss is a head
+
+Write:
+
+- The sample space \( S \)  
+- The events \( A, B, C \)  
+- \( A \cap B \), \( A \cup C \), and \( B' \)
+
+---
+
+## Question 6
+
+**Experiment:** A person selects and watches one video from a streaming platform that offers five content categories: Music, Education, News, Sports, and Comedy. The category of the selected video is recorded.
+
+Let:
+
+- \( A \): the video is informative (Education or News)  
+- \( B \): the video is entertaining (Music or Comedy)  
+- \( C \): the video is a Sports video
+
+Write:
+
+- The sample space \( S \)  
+- The events \( A, B, C \)  
+- \( A \cup B \), \( A \cap C \), \( A' \)
+
+---
+
+## Question 7
+
+**Experiment:** A fitness app records the number of minutes a randomly selected adult spends walking outdoors in a day.
+
+Let:
+
+- The sample space \( S = [0, 300] \)  
+- \( A \): the person walks for less than 30 minutes  
+- \( B \): the person walks for more than 150 minutes
+
+Write:
+
+- The events \( A, B \)  
+- \( A \cup B \), \( A \cap B \), and \( A' \)
+
+---
+
+## Question 8
+
+**Experiment:** An inspector selects a random part from a production line and checks if the part is defective, if it passes the length specification, and if it passes both length and width specifications.
+
+Let:
+
+- \( A \): the part is defective  
+- \( B \): the part passes length check  
+- \( C \): the part passes both length and width checks
+
+Write:
+
+- Interpret \( A^c \), \( B \cap C \), and \( A \cup B \)
+
+---
+
+## Question 9
+
+**Experiment:** A family continues to have children until their first girl is born, and the number of children up to that point is recorded.
+
+Let:
+
+- \( S = \{1, 2, 3, \ldots\} \)  
+- \( A \): the girl is born on or before the third child  
+- \( B \): the girl is born on an odd-numbered birth  
+- \( C \): the girl is born after the 5th child
+
+Write:
+
+- \( A \cup B \), \( B \cap C \), and \( A^c \)
+
+---
+
+## Question 10
+
+**Experiment:** The weight (in kg) of a randomly selected newborn baby is measured using a digital scale.
+
+Let:
+
+- \( S = (1.5, 5.5) \)  
+- \( A \): the baby weighs less than 3.0 kg  
+- \( B \): the baby weighs more than 4.0 kg
+
+Write:
+
+- \( A, B, A^c, A \cup B \)
+
+---
+

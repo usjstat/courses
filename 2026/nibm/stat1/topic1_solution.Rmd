@@ -1,0 +1,1738 @@
+---
+title: "Fundamentals of sets and probability theory"
+author: "Rajitha M. Silva"
+output: html_document
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Topic 1: Fundamentals of Sets and Probability Theory
+
+This topic introduces the language and logic of probability. Students
+will learn how to use sets, events, Venn diagrams, probability rules,
+conditional probability, independence, and Bayes' theorem to reason
+about uncertainty in practical data science and business analytics
+problems.
+
+Probability is not only a mathematical topic. In data science and
+business analytics, probability helps us answer questions such as:
+
+-   What is the chance that a customer will purchase a product?
+-   What is the probability that a loan applicant will default?
+-   How likely is a machine to fail within the next month?
+-   If a fraud detection system gives an alert, how likely is the
+    transaction actually fraudulent?
+-   If a customer clicked an advertisement, how likely are they to buy?
+
+The purpose of this topic is to help students translate real-world
+uncertainty into probability language and then use probability rules to
+support better decisions.
+
+------------------------------------------------------------------------
+
+## Why Probability Matters in Data Science and Business Analytics
+
+### Learning Purpose
+
+we rarely work with certainty. Most decisions are made using incomplete
+information. Probability gives us a structured way to measure
+uncertainty and make better decisions.
+
+Probability is used when outcomes are uncertain but not completely
+unknown. For example, a business may not know whether a particular
+customer will buy a product, but based on past data, it can estimate the
+chance of purchase.
+
+In data science and business analytics, probability is used in:
+
+-   customer behaviour analysis;
+-   fraud detection;
+-   credit risk assessment;
+-   medical testing;
+-   quality control;
+-   demand forecasting
+
+### Practical Explanation
+
+Suppose a company sends a promotional email to 1,000 customers. Out of
+these, 180 customers make a purchase.
+
+The probability that a randomly selected customer purchases after
+receiving the email can be estimated as:
+
+$$
+P(\text{Purchase}) = \frac{180}{1000} = 0.18
+$$
+
+This means the estimated probability of purchase is **0.18**, or
+**18%**.
+
+In practice, this information helps the business estimate expected sales
+from future campaigns.
+
+### Practical Example
+
+A bank receives many loan applications. Some applicants will repay their
+loans, while others may default. The bank cannot know the future with
+certainty, but it can use past data to estimate the probability of
+default.
+
+For example:
+
+$$
+P(\text{Default}) = 0.08
+$$
+
+This means that, based on available data, about 8 out of every 100
+similar applicants are expected to default.
+
+## Sets, Sample Spaces, and Events
+
+**Suggested time:** 45 minutes
+
+### Learning Purpose
+
+This subtopic introduces the basic language used in probability: sets,
+sample spaces, and events.
+
+Before calculating probabilities, students must first identify what
+outcomes are possible and which outcomes are of interest.
+
+### Key Definitions
+
+A **set** is a collection of objects or outcomes.
+
+A **sample space**, usually denoted by $S$, is the set of all possible
+outcomes of an experiment.
+
+An **event** is a subset of the sample space. It represents the outcome
+or collection of outcomes we are interested in.
+
+### Simple Example
+
+Consider tossing a coin once.
+
+The sample space is:
+
+$$
+S = \{h, t\}
+$$
+
+where:
+
+-   $H$ = the event of Head appears $\{h\}$
+-   $T$ = the event of Head appears $\{t\}$
+
+The event of getting a head is:
+
+$$H = \{h\}
+$$
+
+Here, $H$ is an event because it is a subset of the sample space.
+
+### Business Analytics Example
+
+Suppose a company classifies customers according to whether they make a
+purchase after visiting a website.
+
+The sample space can be written as:
+
+$$
+S = \{\text{Purchase}, \text{No Purchase}\}
+$$
+
+Let:
+
+$$
+A = \{\text{Purchase}\}
+$$
+
+Then $A$ is the event that a randomly selected website visitor makes a
+purchase.
+
+### Data Science Example
+
+Suppose a machine learning model classifies an email as either spam or
+not spam.
+
+The sample space is:
+
+$$
+S = \{\text{Spam}, \text{Not Spam}\}
+$$
+
+An event of interest may be:
+
+$$
+A = \{\text{Spam}\}
+$$
+
+This event represents the email being spam.
+
+### Types of Events
+
+#### Null Event
+
+A **null event** is an event that contains **no outcomes** from the
+sample space.
+
+#### Simple Event
+
+A simple event contains only one outcome.
+
+Example:
+
+$$
+A = \{\text{Purchase}\}
+$$
+
+#### Compound Event
+
+A compound event contains more than one outcome.
+
+Example:
+
+Suppose customers are classified as:
+
+$$
+S = \{\text{Low Spending}, \text{Medium Spending}, \text{High Spending}\}
+$$
+
+The event that a customer is not a low spender is:
+
+$$
+A = \{\text{Medium Spending}, \text{High Spending}\}
+$$
+
+### Activity 1.1
+
+A company classifies loan applicants into three categories:
+
+$$
+S = \{\text{Low Risk}, \text{Medium Risk}, \text{High Risk}\}
+$$
+
+Define the following events:
+
+1.  The applicant is high risk.
+2.  The applicant is not high risk.
+3.  The applicant is either medium risk or high risk.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+1.  $$
+    A = \{\text{High Risk}\}$$
+
+2.  $$
+    B = \{\text{Low Risk}, \text{Medium Risk}\}
+    $$
+
+3.  $$
+    C = \{\text{Medium Risk}, \text{High Risk}\}
+    $$
+
+</details>
+
+------------------------------------------------------------------------
+
+## Set Operations and Venn Diagrams
+
+Let $A$ and $B$ be two events.
+
+#### Union
+
+The union of $A$ and $B$, written as:
+
+$$
+A \cup B
+$$
+
+means that either $A$ occurs, or $B$ occurs, or both occur.
+
+In words:
+
+$$
+A \cup B = \text{A or B or both}
+$$
+
+#### Intersection
+
+The intersection of $A$ and $B$, written as:
+
+$$
+A \cap B
+$$
+
+means that both $A$ and $B$ occur.
+
+In words:
+
+$$
+A \cap B = \text{A and B}
+$$
+
+#### Complement
+
+The complement of $A$, written as:
+
+$$
+A^c
+$$
+
+means that event $A$ does not occur.
+
+In words:
+
+$$
+A^c = \text{not A}
+$$
+
+### Business Example
+
+Suppose a company studies its customers.
+
+Let:
+
+$$
+A = \{\text{customers who use the mobile app}\}
+$$
+
+$$
+B = \{\text{customers who made a purchase this month}\}
+$$
+
+Then:
+
+$$
+A \cup B
+$$
+
+means customers who use the mobile app or made a purchase this month or
+both.
+
+$$
+A \cap B
+$$
+
+means customers who use the mobile app and made a purchase this month.
+
+$$
+A^c
+$$
+
+means customers who do not use the mobile app.
+
+### Venn Diagrams
+
+A Venn diagram is a visual tool used to represent events and
+relationships between events.
+
+In a Venn diagram:
+
+-   the rectangle represents the sample space;
+-   circles represent events;
+-   overlapping areas represent intersections;
+-   the area outside a circle represents the complement of an event.
+
+### Example Using Customer Data
+
+Suppose a business has 100 customers.
+
+-   40 customers use the mobile app.
+-   30 customers made a purchase this month.
+-   15 customers both use the mobile app and made a purchase.
+
+Let:
+
+$$
+A = \text{Uses mobile app}
+$$
+
+$$
+B = \text{Made purchase}
+$$
+
+Then:
+
+$$
+n(A) = 40
+$$
+
+$$
+n(B) = 30
+$$
+
+$$
+n(A \cap B) = 15
+$$
+
+The number of customers in $A \cup B$ is:
+
+$$
+n(A \cup B) = n(A) + n(B) - n(A \cap B)
+$$
+
+$$
+n(A \cup B) = 40 + 30 - 15 = 55
+$$
+
+So, 55 customers either use the app or made a purchase or both.
+
+### Mutually Exclusive Events
+
+Two events are mutually exclusive if they cannot happen at the same
+time.
+
+That is:
+
+$$
+A \cap B = \emptyset
+$$
+
+For example, when classifying one customer into one risk group:
+
+$$
+A = \{\text{Low Risk}\}
+$$
+
+$$
+B = \{\text{High Risk}\}
+$$
+
+A customer cannot be both low risk and high risk at the same time if the
+categories are strictly defined.
+
+### Exhaustive Events
+
+Events are exhaustive if together they cover the whole sample space.
+
+For example:
+
+$$
+S = \{\text{Low Risk}, \text{Medium Risk}, \text{High Risk}\}
+$$
+
+These categories are exhaustive if every applicant must belong to one of
+these groups.
+
+### Activity 1.2
+
+A supermarket studies customer purchases.
+
+Let:
+
+$$
+A = \text{Customer buys vegetables}
+$$
+
+$$
+B = \text{Customer buys fruits}
+$$
+
+Out of 200 customers:
+
+-   90 bought vegetables;
+-   80 bought fruits;
+-   50 bought both vegetables and fruits.
+
+Find:
+
+1.  $n(A \cup B)$
+2.  The number of customers who bought neither vegetables nor fruits.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+$$
+n(A \cup B) = n(A) + n(B) - n(A \cap B)
+$$
+
+$$
+n(A \cup B) = 90 + 80 - 50 = 120
+$$
+
+So, 120 customers bought vegetables or fruits or both.
+
+The number who bought neither is:
+
+$$
+200 - 120 = 80
+$$
+
+</details>
+
+## Basic Probability Rules
+
+The probability of an event is a number between 0 and 1.
+
+$$
+0 \leq P(A) \leq 1
+$$
+
+A probability close to 0 means the event is unlikely.
+
+A probability close to 1 means the event is likely.
+
+A probability of 0 means the event is impossible.
+
+A probability of 1 means the event is certain.
+
+### Probability from Counts
+
+If all outcomes are equally likely, then:
+
+$$
+P(A) = \frac{\text{Number of outcomes favourable to A}}{\text{Total number of outcomes}}
+$$
+
+In data-based problems, we often estimate probability using relative
+frequency:
+
+$$
+P(A) = \frac{\text{Number of times A occurs}}{\text{Total number of observations}}
+$$
+
+### Example
+
+A company observes 500 website visitors. Out of these, 75 make a
+purchase.
+
+The probability that a randomly selected visitor makes a purchase is:
+
+$$
+P(\text{Purchase}) = \frac{75}{500} = 0.15
+$$
+
+So, the probability of purchase is 0.15, or 15%.
+
+### Complement Rule
+
+The complement rule is:
+
+$$
+P(A^c) = 1 - P(A)
+$$
+
+This is useful when it is easier to calculate the probability that
+something does not happen.
+
+### Example
+
+If the probability that a customer makes a purchase is:
+
+$$
+P(\text{Purchase}) = 0.15
+$$
+
+then the probability that the customer does not make a purchase is:
+
+$$
+P(\text{No Purchase}) = 1 - 0.15 = 0.85
+$$
+
+### Addition Rule
+
+For any two events $A$ and $B$:
+
+$$
+P(A \cup B) = P(A) + P(B) - P(A \cap B)
+$$
+
+We subtract $P(A \cap B)$ because the overlap is counted twice.
+
+### Example
+
+Suppose:
+
+$$
+P(A) = 0.40
+$$
+
+$$
+P(B) = 0.30
+$$
+
+$$
+P(A \cap B) = 0.10
+$$
+
+Then:
+
+$$
+P(A \cup B) = 0.40 + 0.30 - 0.10 = 0.60
+$$
+
+### Addition Rule for Mutually Exclusive Events
+
+If $A$ and $B$ are mutually exclusive, then:
+
+$$
+P(A \cap B) = 0
+$$
+
+So:
+
+$$
+P(A \cup B) = P(A) + P(B)
+$$
+
+### Practical Example
+
+Suppose a customer can belong to only one loyalty category:
+
+-   Bronze
+-   Silver
+-   Gold
+
+Let:
+
+$$
+A = \text{Customer is Silver}
+$$
+
+$$
+B = \text{Customer is Gold}
+$$
+
+Since a customer cannot be both Silver and Gold at the same time, these
+events are mutually exclusive.
+
+If:
+
+$$
+P(A) = 0.30
+$$
+
+$$
+P(B) = 0.20
+$$
+
+then:
+
+$$
+P(A \cup B) = 0.30 + 0.20 = 0.50
+$$
+
+### Multiplication Rule: Introductory Idea
+
+The multiplication rule is used when we want the probability of two
+events happening together.
+
+For two events $A$ and $B$:
+
+$$
+P(A \cap B) = P(A)P(B|A)
+$$
+
+This means:
+
+$$
+\text{Probability of A and B} = \text{Probability of A} \times \text{Probability of B given A}
+$$
+
+This rule will be developed further under conditional probability.
+
+### Activity 1.3
+
+A business survey gives the following results:
+
+-   60% of customers use online banking.
+-   35% of customers use mobile banking.
+-   25% use both online and mobile banking.
+
+Let:
+
+$$
+A = \text{Uses online banking}
+$$
+
+$$
+B = \text{Uses mobile banking}
+$$
+
+Find:
+
+1.  $P(A \cup B)$
+2.  $P(A^c)$
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+$$
+P(A \cup B) = P(A) + P(B) - P(A \cap B)
+$$
+
+$$
+P(A \cup B) = 0.60 + 0.35 - 0.25 = 0.70
+$$
+
+So, 70% of customers use online banking or mobile banking or both.
+
+$$
+P(A^c) = 1 - P(A)
+$$
+
+$$
+P(A^c) = 1 - 0.60 = 0.40
+$$
+
+So, 40% of customers do not use online banking.
+
+</details>
+
+## Conditional Probability
+
+Conditional probability allows us to update probability when new
+information is available.
+
+### Meaning of Conditional Probability
+
+The conditional probability of $B$ given $A$ is written as:
+
+$$
+P(B|A)
+$$
+
+It means the probability that event $B$ occurs, given that event $A$ has
+already occurred.
+
+The formula is:
+
+$$
+P(B|A) = \frac{P(A \cap B)}{P(A)}
+$$
+
+where:
+
+$$
+P(A) > 0
+$$
+
+### Practical Meaning
+
+Conditional probability changes the reference group.
+
+For example:
+
+$$
+P(\text{Purchase})
+$$
+
+means the probability that a randomly selected customer purchases.
+
+But:
+
+$$
+P(\text{Purchase}|\text{Clicked Advertisement})
+$$
+
+means the probability that a customer purchases among those who clicked
+the advertisement.
+
+The second probability is more specific and often more useful in
+business analytics.
+
+### Example Using Counts
+
+A company studies 1,000 customers.
+
+| Customer Type               | Purchased | Did Not Purchase | Total |
+|-----------------------------|----------:|-----------------:|------:|
+| Clicked advertisement       |       120 |              280 |   400 |
+| Did not click advertisement |        80 |              520 |   600 |
+| Total                       |       200 |              800 |  1000 |
+
+Let:
+
+$$
+A = \text{Clicked advertisement}
+$$
+
+$$
+B = \text{Purchased}
+$$
+
+Then:
+
+$$
+P(B|A) = \frac{\text{Number who clicked and purchased}}{\text{Number who clicked}}
+$$
+
+$$
+P(B|A) = \frac{120}{400} = 0.30
+$$
+
+So, among customers who clicked the advertisement, 30% purchased.
+
+Now consider:
+
+$$
+P(B|A^c)
+$$
+
+This means the probability of purchase among customers who did not click
+the advertisement.
+
+$$
+P(B|A^c) = \frac{80}{600} = 0.1333
+$$
+
+So, among customers who did not click the advertisement, about 13.33%
+purchased.
+
+### Interpretation
+
+The probability of purchase is higher among customers who clicked the
+advertisement.
+
+This does not automatically prove that the advertisement caused the
+purchase, but it suggests a relationship worth investigating.
+
+### Conditional Probability from Probabilities
+
+Suppose:
+
+$$
+P(A) = 0.40
+$$
+
+$$
+P(A \cap B) = 0.12
+$$
+
+Then:
+
+$$
+P(B|A) = \frac{P(A \cap B)}{P(A)}
+$$
+
+$$
+P(B|A) = \frac{0.12}{0.40} = 0.30
+$$
+
+### Common Student Mistake
+
+Students often confuse:
+
+$$
+P(B|A)
+$$
+
+with:
+
+$$
+P(A|B)
+$$
+
+These are usually not the same.
+
+For example:
+
+$$
+P(\text{Purchase}|\text{Clicked Advertisement})
+$$
+
+is not necessarily the same as:
+
+$$
+P(\text{Clicked Advertisement}|\text{Purchase})
+$$
+
+The first one looks at customers who clicked.
+
+The second one looks at customers who purchased.
+
+They use different reference groups.
+
+### Activity 1.4
+
+A bank studies 500 loan applicants.
+
+| Applicant Type | Defaulted | Did Not Default | Total |
+|----------------|----------:|----------------:|------:|
+| High risk      |        60 |             140 |   200 |
+| Not high risk  |        30 |             270 |   300 |
+| Total          |        90 |             410 |   500 |
+
+Let:
+
+$$
+A = \text{High risk}
+$$
+
+$$
+B = \text{Defaulted}
+$$
+
+Find:
+
+1.  $P(B|A)$
+2.  $P(B|A^c)$
+3.  Interpret the results.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+$$
+P(B|A) = \frac{60}{200} = 0.30
+$$
+
+So, among high-risk applicants, 30% defaulted.
+
+$$
+P(B|A^c) = \frac{30}{300} = 0.10
+$$
+
+So, among applicants who were not high risk, 10% defaulted.
+
+interpretation:\
+High-risk applicants have a higher default rate than applicants who are
+not high risk. This type of conditional probability is widely used in
+credit risk modelling.
+
+</details>
+
+## Independence and Dependence
+
+Two events $A$ and $B$ are independent if the occurrence of one event
+does not change the probability of the other event.
+
+Mathematically, $A$ and $B$ are independent if:
+
+$$
+P(B|A) = P(B)
+$$
+
+Equivalently:
+
+$$
+P(A \cap B) = P(A)P(B)
+$$
+
+### Practical Explanation
+
+Suppose:
+
+$$
+A = \text{Customer receives promotional email}
+$$
+
+$$
+B = \text{Customer makes a purchase}
+$$
+
+If receiving the promotional email does not change the probability of
+purchase, then $A$ and $B$ are independent.
+
+But if customers who receive the email are more likely to purchase, then
+the two events are dependent.
+
+### Example
+
+Suppose:
+
+$$
+P(B) = 0.20
+$$
+
+and:
+
+$$
+P(B|A) = 0.20
+$$
+
+Then receiving the email does not change the probability of purchase.
+
+So, $A$ and $B$ may be considered independent.
+
+But if:
+
+$$
+P(B|A) = 0.35
+$$
+
+then receiving the email changes the probability of purchase.
+
+So, $A$ and $B$ are dependent.
+
+### Independence Using the Multiplication Rule
+
+If $A$ and $B$ are independent, then:
+
+$$
+P(A \cap B) = P(A)P(B)
+$$
+
+### Example
+
+Suppose:
+
+$$
+P(A) = 0.40
+$$
+
+$$
+P(B) = 0.25
+$$
+
+If $A$ and $B$ are independent, then:
+
+$$
+P(A \cap B) = 0.40 \times 0.25 = 0.10
+$$
+
+### Important Distinction: Mutually Exclusive vs Independent
+
+Students often confuse mutually exclusive events with independent
+events.
+
+Mutually exclusive events cannot happen together.
+
+Independent events can happen together, but one does not affect the
+probability of the other.
+
+If two non-impossible events are mutually exclusive, they are usually
+not independent.
+
+### Example
+
+Let:
+
+$$
+A = \text{Customer is classified as low risk}
+$$
+
+$$
+B = \text{Customer is classified as high risk}
+$$
+
+If each customer can only belong to one risk group, then $A$ and $B$ are
+mutually exclusive.
+
+If a customer is low risk, the probability that the same customer is
+high risk becomes 0.
+
+Therefore, the events are not independent.
+
+### Business Analytics Example
+
+Consider the following events:
+
+$$
+A = \text{Customer is under age 25}
+$$
+
+$$
+B = \text{Customer uses mobile banking}
+$$
+
+These events may be dependent because younger customers may be more
+likely to use mobile banking.
+
+A data analyst can check this by comparing:
+
+$$
+P(B|A)
+$$
+
+with:
+
+$$
+P(B)
+$$
+
+If they are very different, the events are likely dependent.
+
+### Activity 1.5
+
+A company finds that:
+
+$$
+P(\text{Purchase}) = 0.20
+$$
+
+and:
+
+$$
+P(\text{Purchase}|\text{Clicked Ad}) = 0.45
+$$
+
+Are the events “Clicked Ad” and “Purchase” independent?
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+If the events were independent, then:
+
+$$
+P(\text{Purchase}|\text{Clicked Ad}) = P(\text{Purchase})
+$$
+
+But:
+
+$$
+0.45 \neq 0.20
+$$
+
+Therefore, the events are not independent. They are dependent.
+
+</details>
+
+## Bayes' Theorem and Real-World Reasoning
+
+Bayes' theorem is widely used in data science, machine learning, medical
+testing, fraud detection, spam filtering, and decision analytics.
+
+### Main Idea
+
+Bayes' theorem allows us to reverse conditional probabilities.
+
+Often, we know:
+
+$$
+P(\text{Evidence}|\text{Cause})
+$$
+
+but we want:
+
+$$
+P(\text{Cause}|\text{Evidence})
+$$
+
+### Bayes' Theorem
+
+For two events $A$ and $B$:
+
+$$
+P(A|B) = \frac{P(B|A)P(A)}{P(B)}
+$$
+
+where:
+
+-   $P(A)$ is the prior probability;
+-   $P(B|A)$ is the likelihood;
+-   $P(B)$ is the total probability of the evidence;
+-   $P(A|B)$ is the posterior probability.
+
+### Practical Meaning
+
+Bayes' theorem helps answer questions like:
+
+-   If a transaction is flagged as suspicious, what is the probability
+    it is actually fraudulent?
+-   If a medical test is positive, what is the probability that the
+    patient actually has the disease?
+-   If an email contains certain words, what is the probability that it
+    is spam?
+-   If a customer visits a product page, what is the probability that
+    they will purchase?
+
+### Fraud Detection Example
+
+Suppose a bank knows the following:
+
+$$
+P(\text{Fraud}) = 0.02
+$$
+
+This means 2% of transactions are fraudulent.
+
+The fraud detection system correctly flags 90% of fraudulent
+transactions:
+
+$$
+P(\text{Flagged}|\text{Fraud}) = 0.90
+$$
+
+The system also incorrectly flags 5% of non-fraudulent transactions:
+
+$$
+P(\text{Flagged}|\text{No Fraud}) = 0.05
+$$
+
+We want to find:
+
+$$
+P(\text{Fraud}|\text{Flagged})
+$$
+
+This is the probability that a transaction is actually fraudulent given
+that it was flagged.
+
+### Step 1: Define Events
+
+Let:
+
+$$
+F = \text{Transaction is fraudulent}
+$$
+
+$$
+G = \text{Transaction is flagged}
+$$
+
+We are given:
+
+$$
+P(F) = 0.02
+$$
+
+$$
+P(F^c) = 0.98
+$$
+
+$$
+P(G|F) = 0.90
+$$
+
+$$
+P(G|F^c) = 0.05
+$$
+
+### Step 2: Find Total Probability of Being Flagged
+
+$$
+P(G) = P(G|F)P(F) + P(G|F^c)P(F^c)
+$$
+
+$$
+P(G) = (0.90)(0.02) + (0.05)(0.98)
+$$
+
+$$
+P(G) = 0.018 + 0.049 = 0.067
+$$
+
+### Step 3: Apply Bayes' Theorem
+
+$$
+P(F|G) = \frac{P(G|F)P(F)}{P(G)}
+$$
+
+$$
+P(F|G) = \frac{(0.90)(0.02)}{0.067}
+$$
+
+$$
+P(F|G) = \frac{0.018}{0.067} = 0.2687
+$$
+
+So, the probability that a flagged transaction is actually fraudulent is
+about 26.87%.
+
+### Interpretation
+
+Even though the system detects 90% of fraudulent transactions, not every
+flagged transaction is fraud.
+
+This happens because fraud is rare. This is called the base-rate effect.
+
+In business analytics, this is extremely important. A model can look
+accurate but still produce many false alarms when the event of interest
+is rare.
+
+### Bayes' Theorem in Data Science
+
+Bayes' theorem is the foundation of many classification methods. For
+example, spam filters use words in an email as evidence to update the
+probability that the email is spam.
+
+The general idea is:
+
+$$
+P(\text{Class}|\text{Data})
+$$
+
+This means the probability of a class given the observed data.
+
+### Activity 1.6
+
+A medical screening test is used for a disease.
+
+Suppose:
+
+$$
+P(\text{Disease}) = 0.01
+$$
+
+$$
+P(\text{Positive}|\text{Disease}) = 0.95
+$$
+
+$$
+P(\text{Positive}|\text{No Disease}) = 0.10
+$$
+
+Find:
+
+$$
+P(\text{Disease}|\text{Positive})
+$$
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Let:
+
+$$
+D = \text{Disease}
+$$
+
+$$
+T = \text{Positive test}
+$$
+
+Then:
+
+$$
+P(D) = 0.01
+$$
+
+$$
+P(D^c) = 0.99
+$$
+
+$$
+P(T|D) = 0.95
+$$
+
+$$
+P(T|D^c) = 0.10
+$$
+
+First find:
+
+$$
+P(T) = P(T|D)P(D) + P(T|D^c)P(D^c)
+$$
+
+$$
+P(T) = (0.95)(0.01) + (0.10)(0.99)
+$$
+
+$$
+P(T) = 0.0095 + 0.099 = 0.1085
+$$
+
+Now:
+
+$$
+P(D|T) = \frac{P(T|D)P(D)}{P(T)}
+$$
+
+$$
+P(D|T) = \frac{(0.95)(0.01)}{0.1085}
+$$
+
+$$
+P(D|T) = 0.0876
+$$
+
+So, the probability of actually having the disease given a positive test
+is about 8.76%.
+
+</details>
+
+## Integrated Practice and Mini Case Study
+
+**Suggested time:** 30 minutes
+
+### Learning Purpose
+
+This final subtopic allows students to combine the ideas learned in the
+previous subtopics.
+
+Students should practise moving from a real-world scenario to event
+notation, probability calculations, conditional probability,
+independence, and Bayes' theorem.
+
+### Mini Case Study: Customer Promotion Analysis
+
+A company runs a marketing campaign for 1,000 customers.
+
+The results are shown below.
+
+| Customer Group            | Purchased | Did Not Purchase | Total |
+|---------------------------|----------:|-----------------:|------:|
+| Received promotion        |       180 |              320 |   500 |
+| Did not receive promotion |       100 |              400 |   500 |
+| Total                     |       280 |              720 |  1000 |
+
+Let:
+
+$$
+A = \text{Customer received promotion}
+$$
+
+$$
+B = \text{Customer purchased}
+$$
+
+### Question 1: Find $P(A)$
+
+$$
+P(A) = \frac{500}{1000} = 0.50
+$$
+
+So, 50% of customers received the promotion.
+
+### Question 2: Find $P(B)$
+
+$$
+P(B) = \frac{280}{1000} = 0.28
+$$
+
+So, 28% of customers purchased.
+
+### Question 3: Find $P(A \cap B)$
+
+$$
+P(A \cap B) = \frac{180}{1000} = 0.18
+$$
+
+So, 18% of customers both received the promotion and purchased.
+
+### Question 4: Find $P(B|A)$
+
+$$
+P(B|A) = \frac{180}{500} = 0.36
+$$
+
+So, among customers who received the promotion, 36% purchased.
+
+### Question 5: Find $P(B|A^c)$
+
+$$
+P(B|A^c) = \frac{100}{500} = 0.20
+$$
+
+So, among customers who did not receive the promotion, 20% purchased.
+
+### Question 6: Are Receiving Promotion and Purchase Independent?
+
+To check independence, compare:
+
+$$
+P(B|A)
+$$
+
+with:
+
+$$
+P(B)
+$$
+
+We have:
+
+$$
+P(B|A) = 0.36
+$$
+
+and:
+
+$$
+P(B) = 0.28
+$$
+
+Since:
+
+$$
+0.36 \neq 0.28
+$$
+
+the events are not independent.
+
+Receiving the promotion appears to be associated with a higher
+probability of purchase.
+
+### Question 7: Find $P(A|B)$
+
+This means the probability that a customer received the promotion given
+that the customer purchased.
+
+$$
+P(A|B) = \frac{P(A \cap B)}{P(B)}
+$$
+
+$$
+P(A|B) = \frac{180}{280} = 0.6429
+$$
+
+So, among customers who purchased, about 64.29% had received the
+promotion.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Question 1: Find $P(A)$
+
+$$ P(A) = \frac{500}{1000} = 0.50 $$
+
+So, 50% of customers received the promotion.
+
+Question 2: Find $P(B)$
+
+$$ P(B) = \frac{280}{1000} = 0.28 $$
+
+So, 28% of customers purchased.
+
+Question 3: Find $P(A \cap B)$
+
+$$ P(A \cap B) = \frac{180}{1000} = 0.18 $$
+
+So, 18% of customers both received the promotion and purchased.
+
+Question 4: Find $P(B|A)$
+
+$$ P(B|A) = \frac{180}{500} = 0.36 $$
+
+So, among customers who received the promotion, 36% purchased.
+
+Question 5: Find $P(B|A^c)$
+
+$$ P(B|A^c) = \frac{100}{500} = 0.20 $$
+
+So, among customers who did not receive the promotion, 20% purchased.
+
+Question 6: Are Receiving Promotion and Purchase Independent?
+
+To check independence, compare:
+
+$$ P(B|A) $$
+
+with:
+
+$$ P(B) $$
+
+We have:
+
+$$ P(B|A) = 0.36 $$
+
+and:
+
+$$ P(B) = 0.28 $$
+
+Since:
+
+$$ 0.36 \neq 0.28 $$
+
+the events are not independent.
+
+Receiving the promotion appears to be associated with a higher
+probability of purchase.
+
+Question 7: Find $P(A|B)$
+
+This means the probability that a customer received the promotion given
+that the customer purchased.
+
+$$ P(A|B) = \frac{P(A \cap B)}{P(B)} $$
+
+$$ P(A|B) = \frac{180}{280} = 0.6429 $$
+
+So, among customers who purchased, about 64.29% had received the
+promotion.
+
+Interpretation:
+
+The promotion group had a higher purchase rate than the non-promotion
+group:
+
+$$
+P(B|A) = 0.36
+$$
+
+$$
+P(B|A^c) = 0.20
+$$
+
+This suggests that the promotion may be useful. However, from a business
+analytics perspective, we should also ask:
+
+-   Were customers randomly assigned to the promotion?
+-   Were high-value customers more likely to receive the promotion?
+-   What was the cost of the promotion?
+
+Was the increase in purchases large enough to justify the campaign?
+
+</details>
+
+# Summary
+
+In this topic, students learned that probability is a practical language
+for handling uncertainty in data science and business analytics.
+
+The main ideas covered were:
+
+-   probability as a measure of uncertainty;
+-   sets, sample spaces, and events;
+-   union, intersection, and complement;
+-   Venn diagrams for visual reasoning;
+-   mutually exclusive and exhaustive events;
+-   basic probability rules;
+-   conditional probability;
+-   independence and dependence;
+-   Bayes' theorem;
+-   practical interpretation using business examples.
+
+------------------------------------------------------------------------
+
+# Quick Formula Summary
+
+## Probability from Counts
+
+$$
+P(A) = \frac{\text{Number of times A occurs}}{\text{Total number of observations}}
+$$
+
+## Complement Rule
+
+$$
+P(A^c) = 1 - P(A)
+$$
+
+## Addition Rule
+
+$$
+P(A \cup B) = P(A) + P(B) - P(A \cap B)
+$$
+
+## Addition Rule for Mutually Exclusive Events
+
+$$
+P(A \cup B) = P(A) + P(B)
+$$
+
+## Conditional Probability
+
+$$
+P(B|A) = \frac{P(A \cap B)}{P(A)}
+$$
+
+## Multiplication Rule
+
+$$
+P(A \cap B) = P(A)P(B|A)
+$$
+
+## Independence Rule
+
+$$
+P(B|A) = P(B)
+$$
+
+or equivalently:
+
+$$
+P(A \cap B) = P(A)P(B)
+$$
+
+## Bayes' Theorem
+
+$$
+P(A|B) = \frac{P(B|A)P(A)}{P(B)}
+$$
+
+## Total Probability Rule for Two Cases
+
+$$
+P(B) = P(B|A)P(A) + P(B|A^c)P(A^c)
+$$
+
+------------------------------------------------------------------------
+
+# Suggested End-of-Topic Practice Questions
+
+## Question 1
+
+A company has 800 customers. Out of these, 300 use the mobile app, 250
+use online banking, and 150 use both.
+
+Let:
+
+$$
+A = \text{Uses mobile app}
+$$
+
+$$
+B = \text{Uses online banking}
+$$
+
+Find:
+
+1.  $P(A)$
+2.  $P(B)$
+3.  $P(A \cap B)$
+4.  $P(A \cup B)$
+5.  The probability that a customer uses neither service.
+
+## Question 2
+
+A shop records that 40% of customers buy product A, 30% buy product B,
+and 15% buy both.
+
+Find:
+
+1.  The probability that a customer buys product A or product B.
+2.  The probability that a customer buys product A but not product B.
+3.  The probability that a customer buys neither product.
+
+## Question 3
+
+In a survey of 500 students, 200 study statistics, 150 study
+programming, and 80 study both.
+
+Let:
+
+$$
+A = \text{Studies statistics}
+$$
+
+$$
+B = \text{Studies programming}
+$$
+
+Find:
+
+1.  $P(A)$
+2.  $P(B)$
+3.  $P(A \cap B)$
+4.  $P(B|A)$
+5.  Are $A$ and $B$ independent?
+
+## Question 4
+
+A fraud detection system flags 8% of all transactions. Among flagged
+transactions, 30% are actually fraudulent.
+
+Explain the meaning of:
+
+$$
+P(\text{Fraud}|\text{Flagged}) = 0.30
+$$
+
+in simple business language.
+
+## Question 5
+
+A disease affects 2% of a population. A test correctly identifies 95% of
+people with the disease and incorrectly gives a positive result for 4%
+of people without the disease.
+
+Find the probability that a person actually has the disease given that
+the test result is positive.
+
+------------------------------------------------------------------------

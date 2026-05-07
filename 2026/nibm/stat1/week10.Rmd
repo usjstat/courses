@@ -1,0 +1,428 @@
+---
+title: "Cumulative Distribution Function (CDF) & Quantiles"
+author: "Rajitha M. Silva"
+output: html_document
+---
+
+
+
+### Definition: Cumulative Distribution Function (cdf)
+
+For any random variable \(X\), the **cdf** is
+\[
+F_X(t) = \Pr(X \le t).
+\]
+
+This single function determines probabilities of all events that can be expressed in terms of \(X\).
+
+---
+
+### From Events to the CDF
+
+For real numbers \(a \le b\),
+\[
+\Pr(a < X \le b) = F_X(b) - F_X(a).
+\]
+
+(Other combinations of strict/weak inequalities give the same value for continuous \(X\); for discrete \(X\) they may differ by point masses.)
+
+A useful identity for discrete points is
+\[
+\Pr(X = x) = F_X(x) - F_X(x-0),
+\]
+where \(F_X(x-0)\) is the left limit of \(F_X\) at \(x\).
+
+---
+
+### Properties of Every CDF
+
+1. **Non-decreasing:** if \(t_1 < t_2\), then \(F_X(t_1) \le F_X(t_2)\).\
+
+2. **Limits:** \(\displaystyle \lim_{t\to -\infty}F_X(t)=0,\quad \lim_{t\to \infty}F_X(t)=1.\)\
+
+3. **Right-continuous:** \(\displaystyle \lim_{h\downarrow 0} F_X(t+h)=F_X(t).\)\
+ -- right-continuous allows jumps but forbids - holes - when you approach from the right.
+
+---
+
+
+
+## Example: Dartboard CDF (Distance from the Bullseye)
+
+A dart is thrown at a **circular dartboard** of radius \(R\). **Assume the dart always hits the board and,  conditional on a hit, the landing point is uniformly distributed over the face of the board** (i.e., any two regions of equal area are equally likely to be hit).
+
+Let \(X\) be the **distance from the dart's landing point to the bullseye (center)**.
+
+**Task:** Derive the cumulative distribution function (cdf) of \(X\), namely
+\[
+F_X(t) = \Pr(X \le t),
+\]
+for all real \(t\).
+
+### Solution
+
+Because the hit is **uniform over area**, probability is proportional to area.
+
+1. **Event geometry**  
+   - For \(0\le t\le R\), the event \(\{X\le t\}\) is a disk of radius \(t\).  
+   - Area of that disk: \(\pi t^{2}\).  
+   - Area of the whole board: \(\pi R^{2}\).
+
+   Hence  
+   \[
+   \Pr(X\le t)=\frac{\pi t^{2}}{\pi R^{2}}=\left(\frac{t}{R}\right)^{2},\qquad 0\le t\le R.
+   \]
+
+2. **Outside the feasible range**
+   - If \(t<0\): distances cannot be negative \(\;\Rightarrow\; F_X(t)=0\).  
+   - If \(t>R\): the dart always lands within distance \(R\) \(\;\Rightarrow\; F_X(t)=1\).
+
+---
+
+#### Piecewise form
+
+\[
+\boxed{
+F_X(t)=
+\begin{cases}
+0, & t<0,\\[6pt]
+\left(\dfrac{t}{R}\right)^{2}, & 0\le t\le R,\\[10pt]
+1, & t>R.
+\end{cases}}
+\]
+
+
+---
+
+### Example – Number of Heads in Three Tosses
+
+Experiment: toss a fair coin three times, and record the face up at each trial.  
+Random variable: \(X=\) total number of heads.
+
+
+
+- There are \(2^3 = 8\) equally‐likely outcome sequences.  
+- Exactly one sequence has 0 heads (ttt) → \(1/8\).  
+- Exactly one sequence has 3 heads (hhh) → \(1/8\).  
+- \(\binom{3}{1}=3\) sequences have 1 head → \(3/8\).  
+- \(\binom{3}{2}=3\) sequences have 2 heads → \(3/8\).
+
+---
+
+#### Building the cdf \(F_X(t)=\Pr(X\le t)\)
+
+1. **\(t<0\)**  
+   No outcome gives \(X<0\) ⇒ \(F_X(t)=0\).
+
+2. **\(0\le t<1\)**  
+   Only \(X=0\) satisfies \(X\le t\).  
+   \[
+   F_X(t)=\Pr(X=0)=\frac18.
+   \]
+
+3. **\(1\le t<2\)**  
+   \(X\) can be 0 or 1.  
+   \[
+   F_X(t)=\Pr(X=0)+\Pr(X=1)=\frac18+\frac38=\frac12.
+   \]
+
+4. **\(2\le t<3\)**  
+   \(X\) can be 0,1,2.  
+   \[
+   F_X(t)=\frac18+\frac38+\frac38=\frac78.
+   \]
+
+5. **\(t\ge 3\)**  
+   All possibilities counted ⇒ \(F_X(t)=1\).
+
+---
+
+#### Resulting piecewise form
+
+\[
+\boxed{
+F_X(t)=
+\begin{cases}
+0, & t<0,\\[4pt]
+\dfrac18, & 0\le t<1,\\[10pt]
+\dfrac12, & 1\le t<2,\\[10pt]
+\dfrac78, & 2\le t<3,\\[10pt]
+1, & t\ge 3.
+\end{cases}}
+\]
+
+Each step height equals the probability at that \(x\); cumulative sums give the cdf.
+
+
+## Example – Stepwise CDF from a Finite Support
+
+Suppose a discrete random variable \( X \) takes values in a **finite set**:
+
+\[
+X \in \{-3,\ 1,\ 2,\ 5\}
+\]
+
+with corresponding probabilities:
+
+\[
+\boxed{
+\begin{array}{c|c|c|c|c}
+x & -3 & 1 & 2 & 5 \\
+\hline
+\Pr(X = x) & \dfrac{1}{2} & \dfrac{1}{3} & \dfrac{1}{6} & 0 \\
+\end{array}
+}
+\]
+
+
+We define the **cumulative distribution function (cdf)** of \( X \) as:
+
+\[
+F_X(t) = \Pr(X \le t)
+\]
+
+---
+
+### Stepwise Structure of the CDF
+
+Because \(X\) is a **discrete** random variable, its CDF is a **step function**:
+
+- The function is **constant between jumps**.
+- It **jumps only at values in the support of \(X\)**.
+- Each jump has a height equal to the **probability mass at that point**.
+
+---
+
+### Piecewise Definition of the CDF
+
+\[
+F_X(t) =
+\begin{cases}
+0, & t < -3 \\
+\frac{1}{2}, & -3 \le t < 1 \\
+\frac{5}{6}, & 1 \le t < 2 \\
+1, & 2 \le t < 5 \\
+1, & t \ge 5
+\end{cases}
+\]
+
+> Note: The value \(x = 5\) has probability 0, so the CDF does **not jump** at that point — it remains constant at 1.
+
+---
+
+### Explanation
+
+- For \( t < -3 \), no value of \(X\) is less than or equal to \(t\) → \(F_X(t) = 0\).
+- For \( -3 \le t < 1 \), only \(X = -3\) contributes → \(F_X(t) = \Pr(X = -3) = \frac{1}{2}\).
+- For \( 1 \le t < 2 \), \(X = -3\) and \(X = 1\) are counted → \(F_X(t) = \frac{1}{2} + \frac{1}{3} = \frac{5}{6}\).
+- For \( 2 \le t < 5 \), we include \(X = 2\) as well → \(F_X(t) = \frac{1}{2} + \frac{1}{3} + \frac{1}{6} = 1\).
+- For \( t \ge 5 \), we still have \(F_X(t) = 1\) because all mass has been accumulated.
+
+---
+
+### Visual Insight
+
+The CDF rises in **jumps** of:\
+
+ \(+\frac{1}{2}\) at \(x = -3\),\
+ \(+\frac{1}{3}\) at \(x = 1\),\
+ \(+\frac{1}{6}\) at \(x = 2\).\
+
+There is **no jump at \(x = 5\)** because \(\Pr(X = 5) = 0\).
+
+```{r fig.width=6, fig.height=4}
+library(ggplot2)
+
+# Define values and cumulative probabilities
+x_vals <- c(-3, 1, 2, 5)
+probs <- c(1/2, 1/3, 1/6, 0)
+cdf_vals <- cumsum(probs)
+
+# Extended t values for plotting step function
+t_vals <- c(-4, -3, 1, 2, 5, 6)
+F_vals <- c(0, 1/2, 5/6, 1, 1, 1)
+
+# Plot
+ggplot(data.frame(t = t_vals, F = F_vals), aes(x = t, y = F)) +
+  geom_step(direction = "hv") +
+  geom_point(data = data.frame(x = x_vals, y = cdf_vals),
+             aes(x = x, y = y), color = "red", size = 2) +
+  labs(title = "Stepwise CDF of Discrete Random Variable X",
+       x = "t", y = expression(F[X](t))) +
+  theme_minimal()
+```
+
+---
+
+---
+
+### Example – Waiting for the First Ace
+
+Experiment: toss a die repeatedly; \(X=\) number of tosses until the first “ace” (1).  
+For \(k=1,2,\dots\):
+\[
+\Pr(X=k)=\left(\frac{5}{6}\right)^{k-1}\!\left(\frac{1}{6}\right).
+\]
+The cdf is
+\[
+\boxed{
+F_X(t)=
+\begin{cases}
+0, & t<1,\\
+\sum_{k=1}^{\lfloor t \rfloor} \left(\frac{5}{6}\right)^{k-1}\!\left(\frac{1}{6}\right), & t\ge 1.
+\end{cases}}
+\]
+
+---
+
+## Quantiles
+
+### Definition 2.3 (Quantile)
+
+For \(0<p<1\), a **\(p\)-quantile** \(t_p\) is any solution of the inequalities
+\[
+\Pr(X \le t) \ge p, \qquad \Pr(X \ge t) \ge 1-p.
+\]
+Equivalently,
+\[
+F_X(t) \ge p,\qquad F_X(t-0) \le p.
+\]
+
+Special names:  
+- \(t_{0.5}\): **median**  
+- \(t_{0.25},\, t_{0.75}\): **lower and upper quartiles**
+
+---
+
+### Example – Quantiles for the Target Distance
+
+Using \(F_X(t) = (t/R)^2\) on \([0,R]\), solve \((t_p/R)^2=p\).  \
+
+Thus \(t_p = R\sqrt{p}\);\
+
+e.g. \(t_{0.25}=R/2\).
+
+---
+
+### Example – Quantiles in a Discrete Distribution
+
+Let the random variable \(X\) take the values:
+
+\[
+X \in \{1, 2, 3\} \quad \text{with} \quad 
+\Pr(X=1) = 0.2, \quad 
+\Pr(X=2) = 0.6, \quad 
+\Pr(X=3) = 0.2
+\]
+
+---
+
+### Step 1: Construct the Cumulative Distribution Function (cdf)
+
+\[
+F_X(x) = 
+\begin{cases}
+0, & x < 1 \\
+0.2, & 1 \le x < 2 \\
+0.8, & 2 \le x < 3 \\
+1, & x \ge 3
+\end{cases}
+\]
+
+---
+
+### Step 2: Define the \(p\)-Quantile
+
+For any \(p \in (0,1)\), the **\(p\)-quantile** of a random variable \(X\) is:
+
+\[
+t_p = \inf\{x \in \mathbb{R} \mid F_X(x) \ge p\}
+\]
+### Explanation
+
+This definition uses the **infimum** (greatest lower bound) to find the smallest value \(x\) such that the cumulative distribution function (cdf) \(F_X(x)\) reaches or exceeds the probability level \(p\).
+
+Let’s break it down:
+
+- The **cdf** \(F_X(x)\) gives the probability that the random variable \(X\) takes a value less than or equal to \(x\), i.e., \(F_X(x) = \Pr(X \le x)\).
+  
+- The **set** \(\{x \in \mathbb{R} \mid F_X(x) \ge p\}\) contains all values of \(x\) for which the cumulative probability is at least \(p\).
+
+- The **infimum** of this set is the smallest such \(x\) that satisfies the inequality \(F_X(x) \ge p\). This ensures that \(t_p\) is the **leftmost point** where the cdf crosses the level \(p\).
+
+---
+
+In the discrete case, this often involves checking intervals where the cdf jumps.
+
+---
+
+### Step 3: Compute Specific Quantiles
+
+- **Median** (\(p = 0.5\)):
+
+  We seek the smallest \(x\) such that \(F_X(x) \ge 0.5\).
+
+  \[
+  F_X(1) = 0.2 \quad \text{(too small)}\\
+  F_X(2) = 0.8 \ge 0.5 \Rightarrow t_{0.5} = 2
+  \]
+
+- **First Quartile** (\(p = 0.25\)):
+
+  \[
+  F_X(1) = 0.2 \quad \text{(too small)}\\
+  F_X(2) = 0.8 \ge 0.25 \Rightarrow t_{0.25} = 2
+  \]
+
+- **Third Quartile** (\(p = 0.75\)):
+
+  \[
+  F_X(2) = 0.8 \ge 0.75 \Rightarrow t_{0.75} = 2
+  \]
+
+- **90th Percentile** (\(p = 0.90\)):
+
+  \[
+  F_X(3) = 1.0 \ge 0.90 \Rightarrow t_{0.90} = 3
+  \]
+
+---
+
+### Summary Table of Quantiles
+
+\[
+\begin{array}{c|c}
+\text{Quantile Level } p & t_p \\
+\hline
+0.25 & 2 \\
+0.50 & 2 \\
+0.75 & 2 \\
+0.90 & 3 \\
+\end{array}
+\]
+
+Note: In a **discrete** distribution, many different \(p\)-quantiles may map to the same value of \(X\), depending on where the jumps in the cdf occur.
+
+
+---
+
+### Theorem – Probability Between Quantiles
+
+If \(F\) is continuous and \(0<\alpha<\beta<1\), then for any \(\alpha\)- and \(\beta\)-quantiles \(t_\alpha, t_\beta\),
+\[
+\Pr(t_\alpha \le X \le t_\beta) = \beta - \alpha.
+\]
+
+**Example** With a continuous cdf, the probability that \(X\) lies between its first and third quartiles is \(0.75-0.25=0.5\).
+
+---
+
+### Practical Use: Probabilities via Quantiles
+
+- To find \(t_p\), solve \(F_X(t_p)=p\) (when a solution exists).  
+- To compute \(\Pr(X\in [t_\alpha, t_\beta])\) for a continuous cdf, use Theorem – Probability Between Quantiles.  
+- In discrete cases, use the inequality definition to locate the smallest \(t\) with \(F_X(t)\ge p\).
+
+---
+
+
