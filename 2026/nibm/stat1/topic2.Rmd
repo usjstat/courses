@@ -1,0 +1,1213 @@
+---
+title: "Introduction to Statistics"
+author: "Rajitha M. Silva, PhD"
+output: html_document
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Topic 2: Introduction to Statistics
+
+This topic introduces the basic ideas of statistics for data science and
+business analytics. Students will learn how samples are used to understand
+populations, how sample results vary, and why statistical thinking is
+important when making business decisions using data.
+
+Statistics is not only about calculating averages or drawing graphs. In data
+science and business analytics, statistics helps us answer practical
+questions such as:
+
+- What is the average spending of customers?
+- What proportion of customers are satisfied with a service?
+- Can a small sample of customers represent the whole customer base?
+- How reliable is a sample average?
+- How much error should we expect when using sample data?
+- Why do different samples give different results?
+
+The purpose of this topic is to help students understand the connection
+between sample data and population-level conclusions.
+
+## Introduction to Statistics in Data Science and Business Analytics
+
+In real business situations, decisions are usually made using data. However,
+it is often not possible to collect data from every customer, every product,
+every transaction, or every user.
+
+Statistics provides methods to collect, summarize, analyze, and interpret
+data so that useful conclusions can be made.
+
+## Meaning of Statistics
+
+Statistics is the science of collecting, organizing, summarizing, analyzing,
+and interpreting data.
+
+In simple words, statistics helps us convert raw data into useful
+information.
+
+For example, a supermarket may collect data on customer purchases. By using
+statistics, the supermarket can understand average spending, customer
+preferences, sales patterns, and variation in demand.
+
+## Descriptive Statistics
+
+Descriptive statistics is used to summarize and describe data.
+
+Examples include:
+
+- mean;
+- median;
+- mode;
+- range;
+- standard deviation;
+- tables;
+- graphs;
+- charts.
+
+For example, if a company records the monthly spending of 100 customers,
+descriptive statistics can be used to calculate the average spending and
+summarize the distribution of spending.
+
+## Inferential Statistics
+
+Inferential statistics is used to make conclusions about a population based
+on sample data.
+
+For example, a company may survey 500 customers and use the results to
+estimate the satisfaction level of all customers.
+
+This is important because studying the whole population is often expensive,
+slow, or impossible.
+
+## Practical Example
+
+Suppose a supermarket has 50,000 customers. It wants to know the average
+monthly spending of its customers.
+
+It may be costly and time-consuming to study all 50,000 customers. Instead,
+the supermarket selects 500 customers and calculates their average monthly
+spending.
+
+If the sample is properly selected, the sample average can provide useful
+information about the population average.
+
+
+## Population and Sample
+
+A population is the complete collection of individuals, items, or
+observations that we want to study.
+
+A sample is a smaller group selected from the population.
+
+The population is the full group of interest. The sample is the part of the
+population that we actually observe.
+
+### Population
+
+A population may consist of:
+
+- all customers of a bank;
+- all transactions made in a month;
+- all students in a university;
+- all products manufactured in a factory;
+- all patients in a hospital;
+- all users of a mobile application.
+
+The population depends on the question being asked.
+
+### Sample
+
+A sample is selected from the population and used to learn about the
+population.
+
+For example, if a bank has 100,000 customers, it may select 1,000 customers
+and study their satisfaction level.
+
+Here:
+
+- the population is all 100,000 customers;
+- the sample is the selected 1,000 customers.
+
+### Why Do We Use Samples?
+
+We use samples because studying the entire population may be:
+
+- too expensive;
+- too time-consuming;
+- not practical;
+- impossible in real time;
+- unnecessary if a good sample is available.
+
+### Practical Business Example
+
+Suppose an online company wants to know the average delivery satisfaction
+score of its customers.
+
+The company has 200,000 customers.
+
+Instead of asking every customer, the company selects 2,000 customers and
+asks them to rate their delivery experience.
+
+The 200,000 customers form the population.
+
+The 2,000 selected customers form the sample.
+
+### Population and Sample in Notation
+
+Let the population contain all possible observations:
+
+$$
+X_1, X_2, X_3, \ldots, X_N
+$$
+
+where $N$ is the population size.
+
+A sample of size $n$ may be written as:
+
+$$
+X_1, X_2, X_3, \ldots, X_n
+$$
+
+where $n$ is the sample size.
+
+Usually:
+
+$$
+n < N
+$$
+
+### Example
+
+Suppose a company has 10,000 customers.
+
+If the company selects 400 customers for a survey, then:
+
+$$
+N = 10000
+$$
+
+and:
+
+$$
+n = 400
+$$
+
+Here, $N$ represents the population size and $n$ represents the sample size.
+
+### Activity 2.1
+
+Identify the population and sample in each situation.
+
+1. A university has 8,000 students. A survey is conducted using 300 students
+   to estimate average daily study time.
+2. A bank has 500,000 customers. It selects 2,000 customers to estimate
+   customer satisfaction.
+3. A factory produces 20,000 bottles per day. A quality inspector checks 200
+   bottles.
+4. A mobile app has 1 million users. The company analyzes data from 5,000
+   users.
+
+
+
+
+## Parameters and Statistics
+
+In statistics, we usually want to know something about a population. However,
+we often have only sample data.
+
+Therefore, we use sample information to estimate population information.
+
+### Parameter
+
+A parameter is a numerical value that describes a population.
+
+A parameter is usually unknown because we often cannot observe the entire
+population.
+
+Examples of parameters include:
+
+- population mean;
+- population proportion;
+- population variance;
+- population standard deviation.
+
+### Statistic
+
+A statistic is a numerical value calculated from a sample.
+
+A statistic is used to estimate a population parameter.
+
+Examples of statistics include:
+
+- sample mean;
+- sample proportion;
+- sample variance;
+- sample standard deviation.
+
+### Population Mean and Sample Mean
+
+The population mean is usually denoted by:
+
+$$
+\mu
+$$
+
+The sample mean is usually denoted by:
+
+$$
+\bar{x}
+$$
+
+The population mean is calculated using all values in the population.
+
+The sample mean is calculated using values in the sample.
+
+### Population Proportion and Sample Proportion
+
+The population proportion is usually denoted by:
+
+$$
+p
+$$
+
+The sample proportion is usually denoted by:
+
+$$
+\hat{p}
+$$
+
+For example, $p$ may represent the true proportion of all customers who are
+satisfied.
+
+The value $\hat{p}$ may represent the proportion of satisfied customers in a
+sample.
+
+### Practical Example
+
+Suppose a company wants to know the true average monthly spending of all its
+customers.
+
+The true average monthly spending of all customers is a population
+parameter.
+
+This may be written as:
+
+$$
+\mu
+$$
+
+The company selects 500 customers and calculates their average monthly
+spending.
+
+This sample average is a statistic.
+
+This may be written as:
+
+$$
+\bar{x}
+$$
+
+The company uses $\bar{x}$ to estimate $\mu$.
+
+### Business Analytics Example
+
+Suppose a bank wants to know the true proportion of customers who are
+satisfied with online banking.
+
+The true proportion of satisfied customers in the whole customer base is:
+
+$$
+p
+$$
+
+The bank surveys 1,000 customers and finds that 760 are satisfied.
+
+The sample proportion is:
+
+$$
+\hat{p} = \frac{760}{1000} = 0.76
+$$
+
+The bank uses $\hat{p} = 0.76$ to estimate the unknown population proportion
+$p$.
+
+### Important Distinction
+
+A parameter describes the population.
+
+A statistic describes the sample.
+
+Usually, the parameter is unknown and the statistic is known after collecting
+sample data.
+
+### Activity 2.2
+
+For each case, identify whether the value is a parameter or a statistic.
+
+1. The average income of all customers of a bank.
+2. The average income of 500 selected customers.
+3. The proportion of all students in a university who own a laptop.
+4. The proportion of laptop owners in a sample of 300 students.
+5. The standard deviation of delivery times for all orders last year.
+6. The standard deviation of delivery times for 1,000 selected orders.
+
+
+
+
+## Sampling and Sampling Methods
+
+Sampling is the process of selecting a smaller group from a population.
+
+The selected group should represent the population as closely as possible.
+
+If the sample is not representative, the results may be misleading.
+
+### Why Sampling Method Matters
+
+In business analytics, the quality of the sample is very important.
+
+For example, suppose a company wants to measure customer satisfaction but
+only surveys customers who made complaints.
+
+The results may show very low satisfaction, but this may not represent all
+customers.
+
+This is because the sample is biased.
+
+### Simple Random Sampling
+
+In simple random sampling, every member of the population has an equal
+chance of being selected.
+
+For example, if a company randomly selects 1,000 customers from its full
+customer database, this is simple random sampling.
+
+Simple random sampling is easy to understand and is commonly used as a basic
+model in statistics.
+
+### Stratified Sampling
+
+In stratified sampling, the population is divided into groups called strata.
+Then samples are selected from each group.
+
+For example, a bank may divide customers into:
+
+- low income;
+- middle income;
+- high income.
+
+Then it selects customers from each group.
+
+This helps ensure that important groups are represented.
+
+### Cluster Sampling
+
+In cluster sampling, the population is divided into clusters, and some
+clusters are selected.
+
+For example, a retail company may select some branches and collect data from
+all customers in those selected branches.
+
+Cluster sampling is useful when the population is spread across different
+locations.
+
+### Convenience Sampling
+
+In convenience sampling, data are collected from individuals who are easy to
+access.
+
+For example, surveying students in one classroom because they are nearby is
+convenience sampling.
+
+This method is easy but may produce biased results.
+
+### Practical Example
+
+Suppose a university wants to estimate the average daily study time of
+students.
+
+If it only surveys students in the library, the estimate may be too high
+because library users may study more than average.
+
+A better approach is to randomly select students from all faculties and year
+levels.
+
+### Sampling Bias
+
+Sampling bias occurs when some members of the population are more likely to
+be selected than others in a way that affects the result.
+
+In data science, sampling bias can cause models to perform poorly in
+real-world settings.
+
+For example, if a model is trained only using urban customers, it may not
+work well for rural customers.
+
+### Activity 2.3
+
+For each situation, identify the possible sampling problem.
+
+1. A restaurant collects feedback only from customers who scan a QR code
+   after eating.
+2. A bank studies loan default using only customers from one city.
+3. A university estimates student satisfaction by surveying only final-year
+   students.
+4. A company tests a mobile app only using high-end smartphones.
+
+
+
+
+## Sampling Distributions
+
+A sampling distribution is the probability distribution of a statistic
+calculated from many possible samples of the same size from the same
+population.
+
+In simple language:
+
+If we repeatedly take samples from the same population and calculate a
+statistic each time, the values of that statistic will vary from sample to
+sample.
+
+The distribution of those statistic values is called the sampling
+distribution.
+
+### Why Do Sample Statistics Vary?
+
+Different samples usually contain different individuals or observations.
+
+Therefore, the sample mean from one sample may not be exactly equal to the
+sample mean from another sample.
+
+This variation is natural.
+
+### Example
+
+Suppose a company wants to estimate the average monthly spending of
+customers.
+
+The company selects one sample of 100 customers and calculates:
+
+$$
+\bar{x}_1 = 5200
+$$
+
+Another sample of 100 customers may give:
+
+$$
+\bar{x}_2 = 5350
+$$
+
+Another sample may give:
+
+$$
+\bar{x}_3 = 5100
+$$
+
+These sample means are different because the samples are different.
+
+If we take many samples and calculate the mean for each sample, the
+distribution of these sample means is the sampling distribution of the
+sample mean.
+
+### Practical Meaning
+
+A sampling distribution helps us understand how much a sample statistic is
+expected to change from sample to sample.
+
+This is very important because business decisions are often based on one
+sample.
+
+The sampling distribution helps us measure the uncertainty in that sample
+result.
+
+### Sampling Distribution of a Statistic
+
+A statistic can be:
+
+- sample mean;
+- sample proportion;
+- sample variance;
+- sample standard deviation;
+- sample median.
+
+Each statistic can have a sampling distribution.
+
+However, in this topic, we focus mainly on the sampling distribution of the
+sample mean.
+
+### Simple Illustration
+
+Suppose we take many samples of size $n = 50$ from a customer database.
+
+For each sample, we calculate the sample mean spending.
+
+This gives many values:
+
+$$
+\bar{x}_1, \bar{x}_2, \bar{x}_3, \ldots, \bar{x}_k
+$$
+
+The distribution of these values is the sampling distribution of $\bar{x}$.
+
+### Activity 2.4
+
+A business analyst takes five different samples of customers and calculates
+the average monthly spending for each sample.
+
+The sample means are:
+
+$$
+5100,\ 5250,\ 5180,\ 5320,\ 5210
+$$
+
+Discuss:
+
+1. Why are the sample means different?
+2. Which value should be used as the estimate?
+3. What does this variation tell us about sampling?
+
+
+
+
+
+## Sampling Distribution of the Sample Mean
+
+The sampling distribution of the sample mean is one of the most important
+ideas in introductory statistics because it forms the foundation for
+confidence intervals and hypothesis testing.
+
+### Sample Mean
+
+The sample mean is calculated as:
+
+$$
+\bar{x} = \frac{x_1 + x_2 + x_3 + \cdots + x_n}{n}
+$$
+
+where:
+
+- $x_1, x_2, x_3, \ldots, x_n$ are the sample observations;
+- $n$ is the sample size.
+
+The sample mean is used to estimate the population mean $\mu$.
+
+### Mean of the Sampling Distribution
+
+If repeated random samples of size $n$ are taken from a population with mean
+$\mu$, then the mean of the sampling distribution of $\bar{x}$ is:
+
+$$
+E(\bar{x}) = \mu
+$$
+
+This means that, on average, the sample mean targets the population mean.
+
+In simple language, the sample mean is a good estimator of the population
+mean when the sampling process is properly done.
+
+### Standard Deviation of the Sampling Distribution
+
+The standard deviation of the sampling distribution of the sample mean is
+called the standard error.
+
+If the population standard deviation is $\sigma$, then:
+
+$$
+SE(\bar{x}) = \frac{\sigma}{\sqrt{n}}
+$$
+
+where:
+
+- $\sigma$ is the population standard deviation;
+- $n$ is the sample size.
+
+### Meaning of Standard Error
+
+The standard error measures how much the sample mean varies from sample to
+sample.
+
+A smaller standard error means the sample mean is more stable.
+
+A larger sample size gives a smaller standard error.
+
+This is because:
+
+$$
+SE(\bar{x}) = \frac{\sigma}{\sqrt{n}}
+$$
+
+As $n$ increases, $\sqrt{n}$ increases, so the standard error decreases.
+
+### Practical Example
+
+Suppose the standard deviation of customer monthly spending is:
+
+$$
+\sigma = 1200
+$$
+
+If we take a sample of:
+
+$$
+n = 100
+$$
+
+then the standard error of the sample mean is:
+
+$$
+SE(\bar{x}) = \frac{1200}{\sqrt{100}}
+$$
+
+$$
+SE(\bar{x}) = \frac{1200}{10} = 120
+$$
+
+This means the sample mean is expected to vary from sample to sample with a
+standard deviation of about 120.
+
+### Effect of Sample Size
+
+If the sample size increases to:
+
+$$
+n = 400
+$$
+
+then:
+
+$$
+SE(\bar{x}) = \frac{1200}{\sqrt{400}}
+$$
+
+$$
+SE(\bar{x}) = \frac{1200}{20} = 60
+$$
+
+So, increasing the sample size from 100 to 400 reduces the standard error
+from 120 to 60.
+
+This means larger samples usually produce more stable estimates.
+
+### Business Interpretation
+
+Suppose a company estimates average customer spending using a sample.
+
+A small sample may give a rough estimate.
+
+A large sample usually gives a more reliable estimate.
+
+However, larger samples may cost more money and time. Therefore, businesses
+must balance accuracy and cost.
+
+### Activity 2.5
+
+Suppose the standard deviation of delivery time is 15 minutes.
+
+Find the standard error of the sample mean for each sample size.
+
+1. $n = 25$
+2. $n = 100$
+3. $n = 225$
+
+Interpret what happens as sample size increases.
+
+
+
+
+
+## Central Limit Theorem
+
+The central limit theorem is one of the most important results in
+statistics. It explains why the normal distribution appears so often in
+statistical analysis.
+
+### Main Idea of the Central Limit Theorem
+
+The central limit theorem says that, under suitable conditions, the sampling
+distribution of the sample mean becomes approximately normal as the sample
+size becomes large, even if the original population is not normally
+distributed.
+
+In simple language:
+
+Even when the original data are not normal, the averages of large random
+samples tend to follow an approximately normal distribution.
+
+### Statement of the Central Limit Theorem
+
+If random samples of size $n$ are taken from a population with mean $\mu$ and
+standard deviation $\sigma$, then for large $n$, the sampling distribution
+of the sample mean $\bar{x}$ is approximately normal with:
+
+$$
+E(\bar{x}) = \mu
+$$
+
+and:
+
+$$
+SE(\bar{x}) = \frac{\sigma}{\sqrt{n}}
+$$
+
+Therefore:
+
+$$
+\bar{x} \sim N\left(\mu, \frac{\sigma}{\sqrt{n}}\right)
+$$
+
+approximately, for large $n$.
+
+### Important Practical Point
+
+The original population does not need to be normal for the central limit
+theorem to work well.
+
+If the sample size is large enough, the distribution of sample means becomes
+approximately normal.
+
+A common practical guideline is that $n \geq 30$ is often considered large
+enough in many introductory applications.
+
+However, if the population is extremely skewed or has strong outliers, a
+larger sample size may be needed.
+
+### Business Analytics Example
+
+Suppose customer spending is highly skewed. Most customers spend a small
+amount, but a few customers spend very large amounts.
+
+The distribution of individual spending may not be normal.
+
+However, if we repeatedly take large samples of customers and calculate the
+average spending for each sample, those sample averages will tend to form an
+approximately normal distribution.
+
+This allows analysts to use normal-based methods for estimation and testing.
+
+### Why the Central Limit Theorem Matters
+
+The central limit theorem is important because it supports many methods used
+in statistics, including:
+
+- confidence intervals;
+- hypothesis testing;
+- quality control;
+- A/B testing;
+- forecast evaluation;
+- business decision-making under uncertainty.
+
+### Practical Example
+
+Suppose a company knows that the average delivery time is:
+
+$$
+\mu = 40
+$$
+
+minutes, with standard deviation:
+
+$$
+\sigma = 12
+$$
+
+minutes.
+
+If samples of size:
+
+$$
+n = 36
+$$
+
+are taken, then according to the central limit theorem, the sample mean
+delivery time has approximately:
+
+$$
+E(\bar{x}) = 40
+$$
+
+and:
+
+$$
+SE(\bar{x}) = \frac{12}{\sqrt{36}} = \frac{12}{6} = 2
+$$
+
+So:
+
+$$
+\bar{x} \sim N(40, 2)
+$$
+
+approximately.
+
+This means sample average delivery times will be centred around 40 minutes,
+with typical variation measured by a standard error of 2 minutes.
+
+### Important Interpretation
+
+The central limit theorem is about the distribution of sample means, not
+necessarily the distribution of individual observations.
+
+This is a common student mistake.
+
+Individual customer spending may be skewed.
+
+But the average spending from many large samples may be approximately
+normal.
+
+### Activity 2.6
+
+A call centre records customer waiting times. Individual waiting times are
+strongly right-skewed.
+
+Discuss:
+
+1. Will individual waiting times necessarily be normally distributed?
+2. If we take many samples of 50 calls and calculate the average waiting time
+   for each sample, what does the central limit theorem suggest?
+3. Why is this useful for managers?
+
+
+## Sampling Error
+
+Sampling error is the natural difference between a sample result and the
+true population value. It occurs because a sample is only part of the
+population.
+
+### Meaning of Sampling Error
+
+Sampling error is the difference between a sample statistic and the
+corresponding population parameter.
+
+For example, if $\bar{x}$ is the sample mean and $\mu$ is the population
+mean, then the sampling error is:
+
+$$
+\text{Sampling Error} = \bar{x} - \mu
+$$
+
+Different samples usually give different results. Therefore, different
+samples usually have different sampling errors.
+
+### Example
+
+Suppose the true average monthly spending of all customers is:
+
+$$
+\mu = 5000
+$$
+
+A sample of customers gives:
+
+$$
+\bar{x} = 5200
+$$
+
+Then the sampling error is:
+
+$$
+\bar{x} - \mu = 5200 - 5000 = 200
+$$
+
+The sample mean is 200 higher than the population mean.
+
+### Practical Interpretation
+
+Sampling error does not mean that someone made a mistake.
+
+It simply means that the sample result is not exactly equal to the
+population value.
+
+This is normal when working with sample data.
+
+### Sampling Error and Sample Size
+
+Sampling error tends to decrease as sample size increases.
+
+Larger samples usually provide estimates closer to the population value.
+
+However, sampling error cannot usually be completely removed unless the
+whole population is studied.
+
+### Sampling Error vs Non-Sampling Error
+
+Sampling error happens because we use a sample instead of the full
+population.
+
+Non-sampling error happens due to problems such as:
+
+- poor questionnaire design;
+- wrong data entry;
+- measurement error;
+- non-response;
+- biased sampling method;
+- dishonest responses;
+- incorrect data cleaning.
+
+### Business Example
+
+Suppose a company estimates customer satisfaction using a sample survey.
+
+Sampling error occurs because only some customers are surveyed.
+
+Non-sampling error may occur if unhappy customers are less likely to respond,
+or if the question is poorly worded.
+
+Both types of error can affect the quality of the conclusion.
+
+### Practical Example
+
+A company surveys 500 customers and finds that 72% are satisfied.
+
+The true population satisfaction may be 70%, 73%, or another nearby value.
+
+The difference between the sample result and the true population value is
+sampling error.
+
+### Activity 2.7
+
+A university wants to estimate the average monthly spending of students.
+
+The true population mean is known to be Rs. 35,000.
+
+Three different samples give the following sample means:
+
+Sample 1:
+
+$$
+\bar{x}_1 = 34,200
+$$
+
+Sample 2:
+
+$$
+\bar{x}_2 = 35,800
+$$
+
+Sample 3:
+
+$$
+\bar{x}_3 = 36,100
+$$
+
+Find the sampling error for each sample.
+
+Discuss why the sampling errors are different.
+
+
+
+## Integrated Practice and Mini Case Study
+
+This section connects population, sample, sample mean, sampling
+distribution, central limit theorem, and sampling error in one business
+problem.
+
+### Mini Case Study: Estimating Average Customer Spending
+
+A retail company has 100,000 customers. The company wants to estimate the
+average monthly spending of all customers.
+
+Studying all 100,000 customers is expensive and time-consuming, so the
+company selects a random sample of 400 customers.
+
+The sample mean monthly spending is:
+
+$$
+\bar{x} = 5800
+$$
+
+The population standard deviation is assumed to be:
+
+$$
+\sigma = 1600
+$$
+
+Let:
+
+$$
+N = 100000
+$$
+
+and:
+
+$$
+n = 400
+$$
+
+Answer the following questions.
+
+1. Identify the population.
+2. Identify the sample.
+3. Identify the parameter of interest.
+4. Identify the statistic.
+5. Find the standard error.
+6. Interpret the standard error.
+7. Explain why the central limit theorem is useful here.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Question 1: Identify the population.
+
+The population is all 100,000 customers of the retail company.
+
+Question 2: Identify the sample.
+
+The sample is the 400 selected customers.
+
+Question 3: Identify the parameter of interest.
+
+The parameter of interest is the true average monthly spending of all
+customers.
+
+This is the population mean:
+
+$$
+\mu
+$$
+
+Question 4: Identify the statistic.
+
+The statistic is the sample mean monthly spending:
+
+$$
+\bar{x} = 5800
+$$
+
+Question 5: Find the standard error.
+
+The standard error is:
+
+$$
+SE(\bar{x}) = \frac{\sigma}{\sqrt{n}}
+$$
+
+Substitute:
+
+$$
+SE(\bar{x}) = \frac{1600}{\sqrt{400}}
+$$
+
+$$
+SE(\bar{x}) = \frac{1600}{20} = 80
+$$
+
+So, the standard error of the sample mean is 80.
+
+Question 6: Interpret the standard error.
+
+The sample mean monthly spending is expected to vary from sample to sample
+with a standard deviation of about Rs. 80.
+
+This means the sample mean is relatively stable because the sample size is
+large.
+
+Question 7: Explain why the central limit theorem is useful here.
+
+Since the sample size is:
+
+$$
+n = 400
+$$
+
+which is large, the central limit theorem suggests that the sampling
+distribution of the sample mean can be treated as approximately normal.
+
+Therefore:
+
+$$
+\bar{x} \sim N(\mu, 80)
+$$
+
+approximately.
+
+This allows the company to use normal-based statistical methods for further
+analysis, such as confidence intervals and hypothesis testing.
+
+</details>
+
+### Practical Business Interpretation
+
+The company can use the sample mean of Rs. 5,800 as an estimate of the true
+average monthly spending of all customers.
+
+Because the sample size is large, the estimate is expected to be more
+reliable than an estimate from a very small sample.
+
+However, the company should still remember that some sampling error is
+present.
+
+## Summary
+
+In this topic, students learned that statistics helps us use sample data to
+understand a larger population.
+
+The main ideas covered were:
+
+- statistics as a tool for learning from data;
+- descriptive statistics and inferential statistics;
+- population and sample;
+- parameters and statistics;
+- sampling methods;
+- sampling bias;
+- sampling distributions;
+- sampling distribution of the sample mean;
+- standard error;
+- central limit theorem;
+- sampling error;
+- non-sampling error;
+- practical interpretation in business analytics.
+
+## Quick Formula Summary
+
+### Sample Mean
+
+$$
+\bar{x} = \frac{x_1 + x_2 + x_3 + \cdots + x_n}{n}
+$$
+
+### Population Mean
+
+$$
+\mu = \frac{x_1 + x_2 + x_3 + \cdots + x_N}{N}
+$$
+
+### Sample Proportion
+
+$$
+\hat{p} = \frac{\text{Number with characteristic of interest}}{\text{Sample size}}
+$$
+
+### Sampling Error for the Mean
+
+$$
+\text{Sampling Error} = \bar{x} - \mu
+$$
+
+### Standard Error of the Sample Mean
+
+$$
+SE(\bar{x}) = \frac{\sigma}{\sqrt{n}}
+$$
+
+### Mean of the Sampling Distribution of the Sample Mean
+
+$$
+E(\bar{x}) = \mu
+$$
+
+### Central Limit Theorem
+
+For large $n$:
+
+$$
+\bar{x} \sim N\left(\mu, \frac{\sigma}{\sqrt{n}}\right)
+$$
+
+approximately.
+

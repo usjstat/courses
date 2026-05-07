@@ -30,7 +30,7 @@ By the end of the module, students should be comfortable moving from raw data to
 | **Topic** | **Practical Focus for Students** | **Teaching Hours** |
 |------------------------|------------------------|------------------------|
 | [Fundamentals of sets and probability theory](topic1.html) | Using sets, events, Venn diagrams, probability rules, conditional probability, independence, and Bayes' theorem to reason about uncertainty in real problems. | 6 |
-| Introduction to Statistics | Understanding samples, populations, sampling distributions, the sampling distribution of the sample mean, the central limit theorem, and sampling error. | 6 |
+| [Introduction to Statistics](topic2.html) | Understanding samples, populations, sampling distributions, the sampling distribution of the sample mean, the central limit theorem, and sampling error. | 6 |
 | Introduction to descriptive statistics | Using graphs and numerical summaries to understand data: bar graphs, pie charts, line graphs, ogives, relative frequency tables, dot plots, histograms, stem-and-leaf plots, mean, median, mode, range, interquartile range, outliers, and box-and-whisker plots. | 6 |
 | Discrete probability distributions | Identifying and working with discrete random variables and performing probability calculations using discrete distributions. | 6 |
 | Continuous probability distributions | Identifying and working with continuous random variables and performing probability calculations using continuous distributions. | 6 |
