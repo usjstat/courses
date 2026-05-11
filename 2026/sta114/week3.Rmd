@@ -401,7 +401,7 @@ The quality inspector has measured the weights of 585 randomly selected bags. Th
 
 1.  If a bag is taken randomly from the process, what is the probability that it will be a **non-conforming** bag?
 
-2.  If three bags are taken randomly from the process, what is the probability that **one of them will be non-conforming**?
+2.  If three bags are taken randomly from the process, what is the probability that **at least one of them will be non-conforming**?
 
 ------------------------------------------------------------------------
 
