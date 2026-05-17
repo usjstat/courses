@@ -6,7 +6,7 @@ output: html_document
 # Module Information
 
 |  |  |
-|-------------------------|-----------------------------------------------|
+|----|----|
 | **Institution:** | National Institute of Business Management |
 | **Centre:** | National Innovation Center |
 | **Programme:** | Advanced Diploma in Data Science -- Full Time (1st Year) |
@@ -28,7 +28,7 @@ By the end of the module, students should be comfortable moving from raw data to
 
 ::: {style="text-align: center;"}
 | **Topic** | **Practical Focus for Students** | **Teaching Hours** |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | [Fundamentals of sets and probability theory](topic1.html) | Using sets, events, Venn diagrams, probability rules, conditional probability, independence, and Bayes' theorem to reason about uncertainty in real problems. | 6 |
 | [Introduction to Statistics](topic2.html) | Understanding samples, populations, sampling distributions, the sampling distribution of the sample mean, the central limit theorem, and sampling error. | 6 |
 | Introduction to descriptive statistics | Using graphs and numerical summaries to understand data: bar graphs, pie charts, line graphs, ogives, relative frequency tables, dot plots, histograms, stem-and-leaf plots, mean, median, mode, range, interquartile range, outliers, and box-and-whisker plots. | 6 |

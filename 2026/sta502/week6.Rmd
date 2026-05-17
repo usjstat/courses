@@ -1,5 +1,5 @@
 ---
-title: "STA 1142 - Probability and Distribution Theory I: Week 7"
+title: "STA 502 - Probability and Distribution Theory I"
 author: "Dr. Rajitha M. Silva"
 output: html_document
 ---

@@ -1,5 +1,5 @@
 ---
-title: "STA 1142 - Events with Random Variables"
+title: "STA 502 - Events with Random Variables"
 author: "Dr. Rajitha M. Silva"
 output: html_document
 editor_options: 

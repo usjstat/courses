@@ -1,6 +1,6 @@
 
 ---
-title: "STA 1142: Mean and variance of r.v.s and functions - Week 11"
+title: "STA 502: Mean and variance of r.v.s and functions"
 author: "Dr. R. M. Silva"
 output: html_document
 ---

@@ -7,24 +7,23 @@ editor_options:
     wrap: 72
 ---
 
+# Activities: Understanding Random Variables as Functions
 
-
-Each of the following activities focuses on understanding how a random variable maps from
+Each activity focuses on understanding how a random variable maps from
 the sample space to the real numbers, how events are expressed using
 random variables, and how probabilities are computed using the induced
 distribution.
 
 ------------------------------------------------------------------------
 
-## Activity 2.2: Tossing a Die
+## Activity 1: Tossing a Die
 
 A fair six-sided die is rolled once and the number showing on the top
 face is observed.
 
 Let $S = \{1, 2, 3, 4, 5, 6\}$.
 
-Define the random variable 
-$$
+Define the random variable $$
 X(\omega) =
 \begin{cases}
 0 & \text{if } \omega \text{ is even} \\
@@ -40,13 +39,12 @@ $$
 
 ------------------------------------------------------------------------
 
-## Activity 2.3: Mapping Sample Space
+## Activity 2: Mapping Sample Space
 
 A box contains 3 balls labeled Red (R), Green (G), and Blue (B). One
 ball is drawn at random, and the color is observed.
 
-Define 
-$$
+Define $$
 X(\omega) =
 \begin{cases}
 1 & \text{if } \omega = R \\
@@ -57,24 +55,22 @@ $$
 
 1.  Define the sample space $S$.\
 2.  Write the set $X(S)$.\
-3.  Express the event “ball drawn is not Green” using $X$.\
+3.  Express the event ``ball drawn is not Green'' using $X$.\
 4.  Compute $\Pr(X = 2)$.
 
 
 
 ------------------------------------------------------------------------
 
-## Activity 2.4: Qualitative to Quantitative Mapping
+## Activity 3: Qualitative to Quantitative Mapping
 
 A survey is conducted where each person reports their favorite drink
 among Tea (T), Coffee (C), or Juice (J). The responses are recorded from
 4 individuals, one after the other, independently.
 
-Define 
-$$
+Define $$
 X(\omega) = \text{number of people choosing Tea}
 $$
-
 
 1.  Give two possible outcomes from the sample space $S$.
 2.  Write the sample space in set-builder notation.
@@ -87,17 +83,14 @@ $$
 
 ------------------------------------------------------------------------
 
-## Activity 2.5: Expressing Events via Random Variables
+## Activity 4: Expressing Events via Random Variables
 
 Two coins are tossed **simultaneously**. We observe the **sequence of
 face-up outcomes** from both coins. Let H be the event that head is
 observed and T be the event that tail is observed. Then, $H = \{h\}$ and
 $T = \{t\}$
 
-Let $S = \{hh, ht, th, tt\}$. 
-
-Define 
-$$
+Let $S = \{hh, ht, th, tt\}$. Define $$
 X(\omega) = \text{number of heads}
 $$
 
@@ -108,14 +101,13 @@ $$
 
 ------------------------------------------------------------------------
 
-## Activity 2.6: Non-Numerical to Numerical Mapping
+## Activity 5: Non-Numerical to Numerical Mapping
 
 A quality control test is performed on a product in a factory. The
 result of the test is recorded as one of the following outcomes: - Pass
 (P) - Defect (D) - Missing Part (M)
 
-Define 
-$$
+Define $$
 X(\omega) =
 \begin{cases}
 1 & \text{if } \omega = P \\
@@ -126,16 +118,15 @@ $$
 
 1.  What is the range of $X$?\
 2.  Consider the complement of the event \`\`pass'' is considered as
-    "fail''. Write the event “product failed” using $X$.\
+    "fail''. Write the event ``product failed''� using $X$.\
 3.  Given: $\Pr(P) = 0.8, \Pr(D) = 0.1, \Pr(M) = 0.1$. Find:
     -   $\Pr(X = 2)$\
     -   $\Pr(X \le 3\})$
 
 
-
 ------------------------------------------------------------------------
 
-## Activity 2.7: Mapping to Indicator Variables
+## Activity 6: Mapping to Indicator Variables
 
 Let a coin be tossed once and observe the heads up. Sample space:\
 $$
@@ -158,7 +149,7 @@ $$
 
 ------------------------------------------------------------------------
 
-## Activity 2.8: Mapping to Vectors
+## Activity 7: Mapping to Vectors
 
 Two six-sided dice are rolled simultaneously.
 
@@ -168,12 +159,9 @@ The outcome is recorded as an ordered pair $(i, j)$, where:
 
 -   $j$ is the number shown on the second die.
 
-The sample space is: 
-$$
+The sample space is: $$
 S = \{(i, j) : i, j \in \{1, 2, 3, 4, 5, 6\}\}
 $$
-
-
 
 There are $6 \times 6 = 36$ possible outcomes in total.
 
@@ -190,15 +178,14 @@ $Y(\omega) = i + j$.
 
 ------------------------------------------------------------------------
 
-## Activity 2.9: Categorical Mapping
+## Activity 8: Categorical Mapping
 
 Let a random person be chosen, and their blood type is recorded:\
 $$
 S = \{\text{A}, \text{B}, \text{AB}, \text{O}\}
 $$
 
-Define 
-$$
+Define $$
 X(\omega) =
 \begin{cases}
 1 & \omega = A \\
@@ -209,14 +196,14 @@ X(\omega) =
 $$
 
 1.  Is $X$ a valid random variable?\
-2.  Express the event “person has type A or O” using $X$.\
+2.  Express the event ``person has type A or O'' using $X$.\
 3.  Does numeric encoding affect the nature of $X$ as a r.v.?
 
 
 
 ------------------------------------------------------------------------
 
-## Activity 2.10: Time to Event Mapping
+## Activity 9: Time to Event Mapping
 
 Let $S = \{\text{system failure at } t : t \ge 0\}$\
 Define $T(\omega) = \text{time of system failure}$
@@ -226,10 +213,9 @@ Define $T(\omega) = \text{time of system failure}$
 3.  Is $T$ discrete or continuous?
 
 
-
 ------------------------------------------------------------------------
 
-## Activity 2.11: Mapping to Boolean (0/1) for Events
+## Activity 9: Mapping to Boolean (0/1) for Events
 
 Suppose 5 MCQ questions are attempted. Each has a binary outcome
 (Correct or Wrong).
@@ -247,7 +233,7 @@ $$
 
 
 
-## Activity 2.12: Modeling Number of Attempts Until Success
+## Activity 10 : Modeling Number of Attempts Until Success
 
 A game involves rolling a fair six-sided die repeatedly until the number
 **5** appears for the first time. Each roll is independent of the
@@ -277,8 +263,7 @@ appears.
 ------------------------------------------------------------------------
 
 
-
-## Activity 2.14: Waiting for a Fixed Number of Successes
+## Activity 11: Waiting for a Fixed Number of Successes
 
 A fair coin is tossed repeatedly until **3 Heads** are observed. Each
 toss is independent of the others. The outcome is the **number of
