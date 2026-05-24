@@ -1,0 +1,590 @@
+---
+title: "Known Probability Distributions"
+author: "Rajitha M. Silva"
+output:
+  html_document:
+    theme: flatly
+    toc: true
+    toc_float: true
+    number_sections: false
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  fig.align = "center",
+  fig.width = 7,
+  fig.height = 4.5
+)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+## Learning objectives
+
+By the end of this lesson, students should be able to:
+
+1. distinguish between discrete and continuous random variables;
+2. identify whether a distribution is described by a pmf or a pdf;
+3. recognize common probability distributions and their parameters;
+4. compute probabilities using R;
+5. interpret the mean and variance of each distribution.
+
+---
+
+## Random variables and probability distributions
+
+A **random variable** is a numerical quantity whose value is determined by the outcome of a random experiment. We usually write random variables using capital letters such as \(X\), \(Y\), and \(Z\), and possible observed values using lower-case letters such as \(x\), \(y\), and \(z\).
+
+Examples:
+
+- Toss a coin once and define \(X=1\) if a head appears and \(X=0\) otherwise.
+- Count the number of cars passing a toll booth in one hour.
+- Measure the waiting time until the next customer arrives.
+
+A **probability distribution** describes how probability is assigned to the possible values of a random variable.
+
+---
+
+## Discrete and continuous random variables
+
+### Discrete random variables
+
+A random variable is **discrete** if it takes countable values, usually integers.
+
+Examples:
+
+- number of correct answers in an MCQ test;
+- number of accidents in a month;
+- number of calls received in an hour.
+
+For a discrete random variable, probabilities are described by a **probability mass function** (pmf)
+
+\[
+p(x)=P(X=x).
+\]
+
+A valid pmf must satisfy
+
+\[
+p(x)\ge 0, \qquad \sum_x p(x)=1.
+\]
+
+### Continuous random variables
+
+A random variable is **continuous** if it can take any value in an interval of the real line.
+
+Examples:
+
+- height;
+- weight;
+- lifetime of a machine;
+- waiting time.
+
+For a continuous random variable, probabilities are described by a **probability density function** (pdf) \(f(x)\). A valid pdf satisfies
+
+\[
+f(x)\ge 0, \qquad \int_{-\infty}^{\infty} f(x)\,dx=1.
+\]
+
+For continuous random variables,
+
+\[
+P(a<X<b)=\int_a^b f(x)\,dx,
+\]
+
+and \(P(X=x)=0\) for any single exact value \(x\).
+
+---
+
+## Summary of common distributions
+
+| Distribution | Type | Support | Parameter(s) | Mean | Variance | R functions |
+|---|---|---:|---|---:|---:|---|
+| Bernoulli | Discrete | \(0,1\) | \(p\) | \(p\) | \(p(1-p)\) | `dbinom`, `pbinom`, `rbinom` |
+| Binomial | Discrete | \(0,1,\ldots,n\) | \(n,p\) | \(np\) | \(np(1-p)\) | `dbinom`, `pbinom`, `rbinom` |
+| Poisson | Discrete | \(0,1,2,\ldots\) | \(\lambda\) | \(\lambda\) | \(\lambda\) | `dpois`, `ppois`, `rpois` |
+| Uniform | Continuous | \((a,b)\) | \(a,b\) | \((a+b)/2\) | \((b-a)^2/12\) | `dunif`, `punif`, `runif` |
+| Exponential | Continuous | \((0,\infty)\) | \(\lambda\) | \(1/\lambda\) | \(1/\lambda^2\) | `dexp`, `pexp`, `rexp` |
+| Normal | Continuous | \((-\infty,\infty)\) | \(\mu,\sigma^2\) | \(\mu\) | \(\sigma^2\) | `dnorm`, `pnorm`, `rnorm` |
+
+In R, distribution functions commonly use prefixes:
+
+- `d`: density or mass function;
+- `p`: cumulative distribution function;
+- `q`: quantile function;
+- `r`: random generation.
+
+---
+
+# Discrete probability distributions
+
+## Bernoulli distribution
+
+A random variable \(X\) follows a **Bernoulli distribution** with parameter \(p\), written
+
+\[
+X \sim \mathrm{Bernoulli}(p),
+\]
+
+if
+
+\[
+P(X=1)=p, \qquad P(X=0)=1-p, \qquad 0<p<1.
+\]
+
+The pmf can be written compactly as
+
+\[
+P(X=x)=p^x(1-p)^{1-x}, \qquad x=0,1.
+\]
+
+Mean and variance:
+
+\[
+E(X)=p, \qquad \mathrm{Var}(X)=p(1-p).
+\]
+
+### Example: one coin toss
+
+Let \(X=1\) if a fair coin shows head and \(X=0\) otherwise. Then \(X\sim \mathrm{Bernoulli}(0.5)\).
+
+```{r bernoulli-plot}
+p <- 0.5
+bernoulli_df <- data.frame(
+  x = c(0, 1),
+  prob = dbinom(c(0, 1), size = 1, prob = p)
+)
+
+ggplot(bernoulli_df, aes(x = factor(x), y = prob)) +
+  geom_col(width = 0.5) +
+  labs(title = "Bernoulli(0.5) distribution",
+       x = "x", y = "P(X = x)") +
+  theme_minimal()
+```
+
+---
+
+## Binomial distribution
+
+A random variable \(X\) follows a **Binomial distribution**, written
+
+\[
+X\sim \mathrm{Binomial}(n,p),
+\]
+
+if \(X\) counts the number of successes in \(n\) independent Bernoulli trials, each with success probability \(p\).
+
+The pmf is
+
+\[
+P(X=x)=\binom{n}{x}p^x(1-p)^{n-x}, \qquad x=0,1,\ldots,n.
+\]
+
+Mean and variance:
+
+\[
+E(X)=np, \qquad \mathrm{Var}(X)=np(1-p).
+\]
+
+### Example: random guessing in MCQs
+
+Suppose there are 3 multiple-choice questions, each with 4 options and only one correct answer. A student guesses each answer independently. Let \(X\) be the number of correct answers. Then
+
+\[
+X\sim \mathrm{Binomial}(3,0.25).
+\]
+
+```{r binomial-example}
+n <- 3
+p <- 0.25
+x <- 0:n
+binom_df <- data.frame(
+  x = x,
+  prob = dbinom(x, size = n, prob = p)
+)
+
+binom_df
+```
+
+```{r binomial-plot}
+ggplot(binom_df, aes(x = x, y = prob)) +
+  geom_col(width = 0.5) +
+  scale_x_continuous(breaks = x) +
+  labs(title = "Binomial distribution: n = 3, p = 0.25",
+       x = "Number of correct answers", y = "P(X = x)") +
+  theme_minimal()
+```
+
+The probability of exactly two correct answers is
+
+```{r binomial-probability}
+dbinom(2, size = 3, prob = 0.25)
+```
+
+The probability of at least one correct answer is
+
+```{r binomial-at-least-one}
+1 - dbinom(0, size = 3, prob = 0.25)
+# equivalently: 1 - pbinom(0, size = 3, prob = 0.25)
+```
+
+---
+
+## Poisson distribution
+
+A random variable \(X\) follows a **Poisson distribution**, written
+
+\[
+X\sim \mathrm{Poisson}(\lambda),
+\]
+
+if
+
+\[
+P(X=x)=\frac{e^{-\lambda}\lambda^x}{x!}, \qquad x=0,1,2,\ldots, \quad \lambda>0.
+\]
+
+Mean and variance:
+
+\[
+E(X)=\lambda, \qquad \mathrm{Var}(X)=\lambda.
+\]
+
+The Poisson distribution is commonly used to model counts of events occurring in a fixed interval of time or space, such as calls per hour, defects per item, or errors per page.
+
+### Example: errors on a page
+
+Suppose the average number of errors per page is \(0.2\). Let \(X\) be the number of errors on a randomly selected page. Then
+
+\[
+X\sim \mathrm{Poisson}(0.2).
+\]
+
+Probability of no error:
+
+```{r poisson-zero}
+dpois(0, lambda = 0.2)
+```
+
+Probability of two or more errors:
+
+```{r poisson-two-or-more}
+1 - ppois(1, lambda = 0.2)
+```
+
+```{r poisson-plot}
+lambda <- 0.2
+pois_df <- data.frame(
+  x = 0:8,
+  prob = dpois(0:8, lambda = lambda)
+)
+
+ggplot(pois_df, aes(x = x, y = prob)) +
+  geom_col(width = 0.6) +
+  scale_x_continuous(breaks = 0:8) +
+  labs(title = expression(Poisson(lambda == 0.2)),
+       x = "Number of errors", y = "P(X = x)") +
+  theme_minimal()
+```
+
+---
+
+# Continuous probability distributions
+
+## Uniform distribution
+
+A random variable \(X\) follows a **Uniform distribution** on \((a,b)\), written
+
+\[
+X\sim U(a,b),
+\]
+
+if its pdf is
+
+\[
+f(x)=\frac{1}{b-a}, \qquad a<x<b.
+\]
+
+Mean and variance:
+
+\[
+E(X)=\frac{a+b}{2}, \qquad \mathrm{Var}(X)=\frac{(b-a)^2}{12}.
+\]
+
+### Example
+
+Let \(X\sim U(0,10)\). Find \(P(2<X<6)\).
+
+\[
+P(2<X<6)=\frac{6-2}{10-0}=0.4.
+\]
+
+```{r uniform-example}
+punif(6, min = 0, max = 10) - punif(2, min = 0, max = 10)
+```
+
+```{r uniform-plot}
+unif_df <- data.frame(x = seq(-1, 11, length.out = 400)) |>
+  mutate(density = dunif(x, min = 0, max = 10))
+
+ggplot(unif_df, aes(x = x, y = density)) +
+  geom_line(linewidth = 1) +
+  labs(title = "Uniform distribution on (0, 10)",
+       x = "x", y = "f(x)") +
+  theme_minimal()
+```
+
+---
+
+## Exponential distribution
+
+A random variable \(X\) follows an **Exponential distribution**, written
+
+\[
+X\sim \mathrm{Exponential}(\lambda),
+\]
+
+if its pdf is
+
+\[
+f(x)=\lambda e^{-\lambda x}, \qquad x>0, \quad \lambda>0.
+\]
+
+Mean and variance:
+
+\[
+E(X)=\frac{1}{\lambda}, \qquad \mathrm{Var}(X)=\frac{1}{\lambda^2}.
+\]
+
+The exponential distribution is often used to model waiting time until the next event.
+
+Its cdf is
+
+\[
+F(x)=P(X\le x)=1-e^{-\lambda x}, \qquad x>0.
+\]
+
+Therefore,
+
+\[
+P(X>x)=e^{-\lambda x}.
+\]
+
+### Example: machine repair time
+
+Suppose the average repair time of a machine is 0.5 hours. Since \(E(X)=1/\lambda\), we have
+
+\[
+\lambda=\frac{1}{0.5}=2.
+\]
+
+Find \(P(X>2)\).
+
+\[
+P(X>2)=e^{-2(2)}=e^{-4}.
+\]
+
+```{r exponential-example}
+1 - pexp(2, rate = 2)
+```
+
+```{r exponential-plot}
+exp_df <- data.frame(x = seq(0, 4, length.out = 400)) |>
+  mutate(density = dexp(x, rate = 2))
+
+ggplot(exp_df, aes(x = x, y = density)) +
+  geom_line(linewidth = 1) +
+  labs(title = expression(Exponential(lambda == 2)),
+       x = "Repair time", y = "f(x)") +
+  theme_minimal()
+```
+
+---
+
+## Normal distribution
+
+A random variable \(X\) follows a **Normal distribution**, written
+
+\[
+X\sim N(\mu,\sigma^2),
+\]
+
+if its pdf is
+
+\[
+f(x)=\frac{1}{\sigma\sqrt{2\pi}}\exp\left[-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2\right],
+\qquad -\infty<x<\infty.
+\]
+
+Mean and variance:
+
+\[
+E(X)=\mu, \qquad \mathrm{Var}(X)=\sigma^2.
+\]
+
+Important characteristics:
+
+- The curve is bell-shaped and symmetric about \(\mu\).
+- Mean = median = mode.
+- Approximately 68.27% of observations lie within \(\mu\pm \sigma\).
+- Approximately 95.45% lie within \(\mu\pm 2\sigma\).
+- Approximately 99.73% lie within \(\mu\pm 3\sigma\).
+
+### Standard normal transformation
+
+If
+
+\[
+X\sim N(\mu,\sigma^2),
+\]
+
+then
+
+\[
+Z=\frac{X-\mu}{\sigma}\sim N(0,1).
+\]
+
+This transformation allows probabilities for any normal random variable to be computed using the standard normal distribution.
+
+### Example: weekly TV viewers
+
+Suppose the number of viewers of a TV show per week, in millions, follows
+
+\[
+X\sim N(29,5^2).
+\]
+
+Find the probability that next week's viewership is between 30 and 34 million.
+
+```{r normal-between}
+pnorm(34, mean = 29, sd = 5) - pnorm(30, mean = 29, sd = 5)
+```
+
+Find the probability that next week's viewership is at least 23 million.
+
+```{r normal-at-least}
+1 - pnorm(23, mean = 29, sd = 5)
+```
+
+Find the probability that next week's viewership exceeds 40 million.
+
+```{r normal-exceed}
+1 - pnorm(40, mean = 29, sd = 5)
+```
+
+```{r normal-plot}
+norm_df <- data.frame(x = seq(10, 50, length.out = 600)) |>
+  mutate(density = dnorm(x, mean = 29, sd = 5))
+
+ggplot(norm_df, aes(x = x, y = density)) +
+  geom_line(linewidth = 1) +
+  labs(title = expression(Normal(mu == 29, sigma == 5)),
+       x = "Viewers per week (millions)", y = "f(x)") +
+  theme_minimal()
+```
+
+---
+
+## Comparing distributions by simulation
+
+Simulation helps students connect formulas with long-run frequency behavior.
+
+```{r simulation-comparison}
+set.seed(502)
+
+sim_df <- tibble(
+  Bernoulli = rbinom(1000, size = 1, prob = 0.5),
+  Binomial = rbinom(1000, size = 10, prob = 0.4),
+  Poisson = rpois(1000, lambda = 3),
+  Uniform = runif(1000, min = 0, max = 1),
+  Exponential = rexp(1000, rate = 2),
+  Normal = rnorm(1000, mean = 0, sd = 1)
+)
+
+summary(sim_df)
+```
+
+```{r simulation-normal}
+ggplot(sim_df, aes(x = Normal)) +
+  geom_histogram(aes(y = after_stat(density)), bins = 30) +
+  geom_density(linewidth = 1) +
+  labs(title = "Simulated standard normal observations",
+       x = "x", y = "Density") +
+  theme_minimal()
+```
+
+---
+
+## Classroom discussion questions
+
+1. What is the difference between a probability mass function and a probability density function?
+2. Why is \(P(X=x)=0\) for a continuous random variable?
+3. When is the Binomial distribution appropriate?
+4. Why does the Poisson distribution have the same mean and variance?
+5. What does the parameter \(\lambda\) represent in the Exponential distribution?
+6. Why do we standardize a normal random variable?
+
+---
+
+## Practice problems
+
+### Problem 1: Binomial
+
+A student answers 8 true/false questions by guessing. Let \(X\) be the number of correct answers.
+
+1. Identify the distribution of \(X\).
+2. Find \(P(X=5)\).
+3. Find \(P(X\ge 6)\).
+
+```{r practice-binomial, eval=FALSE}
+dbinom(5, size = 8, prob = 0.5)
+1 - pbinom(5, size = 8, prob = 0.5)
+```
+
+### Problem 2: Poisson
+
+A call center receives an average of 4 calls per minute. Let \(X\) be the number of calls in one minute.
+
+1. Identify the distribution of \(X\).
+2. Find \(P(X=3)\).
+3. Find \(P(X>5)\).
+
+```{r practice-poisson, eval=FALSE}
+dpois(3, lambda = 4)
+1 - ppois(5, lambda = 4)
+```
+
+### Problem 3: Exponential
+
+The waiting time until the next bus follows an exponential distribution with mean 10 minutes.
+
+1. Find \(\lambda\).
+2. Find the probability that the waiting time exceeds 15 minutes.
+
+```{r practice-exponential, eval=FALSE}
+rate <- 1 / 10
+1 - pexp(15, rate = rate)
+```
+
+### Problem 4: Normal
+
+Suppose exam scores follow \(N(70,10^2)\).
+
+1. Find \(P(X>85)\).
+2. Find \(P(60<X<80)\).
+3. Find the 90th percentile.
+
+```{r practice-normal, eval=FALSE}
+1 - pnorm(85, mean = 70, sd = 10)
+pnorm(80, mean = 70, sd = 10) - pnorm(60, mean = 70, sd = 10)
+qnorm(0.90, mean = 70, sd = 10)
+```
+
+---
+
+
