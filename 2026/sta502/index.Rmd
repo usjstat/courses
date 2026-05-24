@@ -28,7 +28,7 @@ This course establishes the fundamentals of probability theory. It supports lear
 
 ::: {style="text-align: center;"}
 | **Week** | **Topic** | **Description** | **Hours** |
-|----|----|----|----|
+|------------------|------------------|------------------|------------------|
 | 1 | [Elements of Probability](week1) | Introduction, experiments, outcomes, sample spaces, events | 8 (2T + 6IL) |
 | 2 | [Event Operations](week2) | Complements, unions, intersections, mutually exclusive/exhaustive events | 8 (2T + 6IL) |
 | 3 | [Methods of Probability](https://sportsanalyzr.shinyapps.io/week3/) | Classical, relative frequency, axioms, interpretation | 8 (2T + 6IL) |
@@ -37,7 +37,7 @@ This course establishes the fundamentals of probability theory. It supports lear
 | 6 | **Midterm Examination** | \- | \- |
 | 7 | [Random Variables](week6.html) | Definitions, discrete and continuous variables | 8 (2T + 6IL) |
 | 8 | [Events with Random Variables](week8.html) | Event representation and revision | 8 (2T + 6IL) |
-| 9 | Distributions | pmf, pdf, cdf | 8 (2T + 6IL) |
+| 9 | [Distributions](known_probability_distributions.html) | pmf, pdf, cdf | 8 (2T + 6IL) |
 | 10 | [Probability Calculations](week10.html) | Quantiles, quartiles, percentiles | 8 (2T + 6IL) |
 | 11 | [Mean & Variance](week11.html) | Mean and variance of r.v.s and functions | 8 (2T + 6IL) |
 :::
