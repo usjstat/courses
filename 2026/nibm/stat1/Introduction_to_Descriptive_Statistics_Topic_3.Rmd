@@ -1,0 +1,1791 @@
+---
+title: "Introduction to Descriptive Statistics"
+author: "Rajitha M. Silva"
+output: html_document
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Topic 3: Introduction to Descriptive Statistics
+
+This topic introduces graphical and numerical methods for understanding
+data. Students will learn how to use graphs and summary measures to describe
+patterns, compare groups, identify unusual values, and communicate results
+clearly in data science and business analytics.
+
+Descriptive statistics is the first step in almost every data analysis
+project. Before building models or making predictions, a data analyst must
+understand the data.
+
+In practice, descriptive statistics helps us answer questions such as:
+
+- What does the data look like?
+- Which values occur most often?
+- Is the distribution symmetric or skewed?
+- Are there unusual observations?
+- How spread out are the values?
+- Which group has higher or lower values?
+- How can we present data clearly to decision-makers?
+
+The purpose of this topic is to help students summarize data using suitable
+graphs and numerical measures.
+
+## Why Descriptive Statistics Matters in Data Science and Business Analytics
+
+Raw data are usually difficult to understand directly. A spreadsheet with
+thousands of rows may contain useful information, but that information is
+not immediately visible.
+
+Descriptive statistics helps us convert raw data into meaningful summaries.
+
+In business analytics, descriptive statistics is used in:
+
+- customer profiling;
+- sales analysis;
+- market research;
+- quality control;
+- human resource analytics;
+- financial reporting;
+- operational performance monitoring;
+- dashboard development.
+
+For example, a retail company may have daily sales data for many branches.
+Descriptive statistics can help identify high-performing branches, low sales
+periods, unusual sales values, and customer purchasing patterns.
+
+## Types of Data
+
+Before choosing a graph or numerical summary, we must understand the type of
+data.
+
+Different types of data require different methods of presentation and
+analysis.
+
+### Qualitative Data
+
+Qualitative data describe categories or labels.
+
+Examples include:
+
+- gender;
+- payment method;
+- customer segment;
+- product category;
+- branch location;
+- satisfaction level;
+- risk category.
+
+Qualitative data are usually summarized using frequency tables, relative
+frequency tables, bar graphs, and pie charts.
+
+### Quantitative Data
+
+Quantitative data are numerical values.
+
+Examples include:
+
+- monthly income;
+- delivery time;
+- customer spending;
+- age;
+- number of purchases;
+- exam marks;
+- waiting time.
+
+Quantitative data are usually summarized using dot plots, histograms,
+stem-and-leaf plots, box-and-whisker plots, and numerical measures such as
+mean, median, range, and interquartile range.
+
+### Discrete Quantitative Data
+
+Discrete quantitative data take countable values.
+
+Examples include:
+
+- number of complaints;
+- number of children;
+- number of website visits;
+- number of products purchased.
+
+### Continuous Quantitative Data
+
+Continuous quantitative data can take any value within an interval.
+
+Examples include:
+
+- height;
+- weight;
+- income;
+- time;
+- temperature;
+- distance.
+
+## Frequency Tables and Relative Frequency Tables
+
+A frequency table shows how often each value or category occurs.
+
+A relative frequency table shows the proportion or percentage of observations
+in each category.
+
+Frequency and relative frequency tables are very useful for summarizing
+categorical data.
+
+### Example
+
+Suppose a company records the preferred payment method of 100 customers.
+
+| Payment Method | Frequency |
+|---|---:|
+| Cash | 20 |
+| Card | 45 |
+| Bank Transfer | 15 |
+| Mobile Payment | 20 |
+
+The relative frequency is calculated as:
+
+$$
+\text{Relative Frequency} =
+\frac{\text{Frequency}}{\text{Total Frequency}}
+$$
+
+For card payments:
+
+$$
+\text{Relative Frequency} = \frac{45}{100} = 0.45
+$$
+
+So, 45% of customers used card payments.
+
+### Business Interpretation
+
+The most common payment method is card payment. This suggests that card
+payment facilities are important for this company.
+
+If mobile payment is growing over time, the company may also consider
+improving mobile payment options.
+
+### Activity 3.1
+
+A company records the delivery rating of 50 customers.
+
+| Rating | Frequency |
+|---|---:|
+| Poor | 5 |
+| Fair | 10 |
+| Good | 20 |
+| Excellent | 15 |
+
+Find the relative frequency for each rating.
+
+Interpret the most common rating.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The total number of customers is:
+
+$$
+5 + 10 + 20 + 15 = 50
+$$
+
+For Poor:
+
+$$
+\frac{5}{50} = 0.10
+$$
+
+For Fair:
+
+$$
+\frac{10}{50} = 0.20
+$$
+
+For Good:
+
+$$
+\frac{20}{50} = 0.40
+$$
+
+For Excellent:
+
+$$
+\frac{15}{50} = 0.30
+$$
+
+The relative frequency table is:
+
+| Rating | Frequency | Relative Frequency |
+|---|---:|---:|
+| Poor | 5 | 0.10 |
+| Fair | 10 | 0.20 |
+| Good | 20 | 0.40 |
+| Excellent | 15 | 0.30 |
+
+The most common rating is Good, with a relative frequency of 0.40 or 40%.
+
+</details>
+
+## Bar Graphs
+
+A bar graph is used to display categorical data.
+
+In a bar graph, categories are shown on one axis and frequencies or
+percentages are shown on the other axis.
+
+The bars are separated because the categories are distinct.
+
+### Practical Example
+
+Suppose a business records the number of customers by product category.
+
+| Product Category | Number of Customers |
+|---|---:|
+| Food | 120 |
+| Clothing | 80 |
+| Electronics | 60 |
+| Books | 40 |
+
+A bar graph can be used to compare the number of customers across product
+categories.
+
+### Interpretation
+
+The tallest bar shows the most common category.
+
+In this example, Food has the largest number of customers.
+
+This may suggest that food products are the strongest category for the
+business.
+
+### When to Use a Bar Graph
+
+Use a bar graph when:
+
+- the data are categorical;
+- you want to compare categories;
+- the order of categories is not necessarily numerical;
+- you want a simple visual summary.
+
+### Activity 3.2
+
+A bank records the number of customers using different banking channels.
+
+| Banking Channel | Number of Customers |
+|---|---:|
+| Branch | 150 |
+| ATM | 220 |
+| Mobile App | 300 |
+| Internet Banking | 180 |
+
+Which banking channel is most commonly used?
+
+Which graph is suitable for presenting this data?
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The most commonly used banking channel is Mobile App, because it has the
+highest frequency:
+
+$$
+300
+$$
+
+A bar graph is suitable because the data are categorical.
+
+</details>
+
+## Pie Charts
+
+A pie chart is used to show how a whole is divided into parts.
+
+Each slice of the pie represents a category. The size of the slice shows the
+percentage or proportion of the total.
+
+### Practical Example
+
+Suppose a company studies the market share of four brands.
+
+| Brand | Market Share |
+|---|---:|
+| Brand A | 40% |
+| Brand B | 25% |
+| Brand C | 20% |
+| Brand D | 15% |
+
+A pie chart can show how the total market is divided among the four brands.
+
+### When to Use a Pie Chart
+
+Use a pie chart when:
+
+- the data are categorical;
+- the categories form parts of a whole;
+- the number of categories is small;
+- percentages add up to 100%.
+
+### Warning for Students
+
+Pie charts are not always the best graph.
+
+If there are many categories, a pie chart becomes difficult to read.
+
+A bar graph is often clearer when comparing many categories.
+
+### Activity 3.3
+
+A company analyzes the source of website traffic.
+
+| Source | Percentage |
+|---|---:|
+| Search Engine | 50% |
+| Social Media | 25% |
+| Direct Visit | 15% |
+| Email | 10% |
+
+Is a pie chart suitable for this data?
+
+Give a practical interpretation.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Yes, a pie chart is suitable because the categories form parts of a whole and
+the percentages add up to 100%.
+
+The largest source of website traffic is Search Engine, with 50% of visits.
+This suggests that search visibility is very important for the company.
+
+</details>
+
+## Line Graphs
+
+A line graph is used to show how a variable changes over time.
+
+Line graphs are very useful in business analytics because many business data
+sets are time-based.
+
+Examples include:
+
+- monthly sales;
+- daily website visits;
+- weekly customer complaints;
+- yearly profit;
+- hourly electricity usage;
+- monthly inflation rate.
+
+### Practical Example
+
+Suppose a shop records monthly sales.
+
+| Month | Sales |
+|---|---:|
+| January | 120000 |
+| February | 135000 |
+| March | 128000 |
+| April | 150000 |
+| May | 165000 |
+
+A line graph can show whether sales are increasing, decreasing, or
+fluctuating over time.
+
+### Interpretation
+
+If the line moves upward, the values are increasing.
+
+If the line moves downward, the values are decreasing.
+
+If the line moves up and down repeatedly, the values are fluctuating.
+
+### When to Use a Line Graph
+
+Use a line graph when:
+
+- the data are measured over time;
+- the order of observations is important;
+- you want to identify trends;
+- you want to compare changes across periods.
+
+### Activity 3.4
+
+A company records the number of customer complaints over four months.
+
+| Month | Complaints |
+|---|---:|
+| January | 80 |
+| February | 70 |
+| March | 55 |
+| April | 40 |
+
+What trend is shown by the data?
+
+Which graph is suitable?
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The number of complaints is decreasing over time.
+
+A line graph is suitable because the data are measured across time.
+
+This may suggest that service quality is improving, but further investigation
+is needed before making a final conclusion.
+
+</details>
+
+## Ogives
+
+An ogive is a cumulative frequency graph.
+
+It shows how many observations are less than or equal to a given value.
+
+Ogives are useful for understanding percentiles, quartiles, and cumulative
+patterns in numerical data.
+
+### Practical Example
+
+Suppose a company records customer waiting times.
+
+| Waiting Time Less Than or Equal To | Cumulative Frequency |
+|---|---:|
+| 5 minutes | 10 |
+| 10 minutes | 25 |
+| 15 minutes | 45 |
+| 20 minutes | 60 |
+| 25 minutes | 70 |
+
+An ogive can show how many customers waited up to a certain number of
+minutes.
+
+### Interpretation
+
+From the table, 45 customers waited 15 minutes or less.
+
+If the total number of customers is 70, then:
+
+$$
+\frac{45}{70} = 0.6429
+$$
+
+So, about 64.29% of customers waited 15 minutes or less.
+
+### Business Use of Ogives
+
+Ogives are useful when management wants to answer questions such as:
+
+- What percentage of customers are served within 10 minutes?
+- What waiting time is exceeded by only 10% of customers?
+- What delivery time covers 75% of orders?
+- What score is needed to be in the top 25%?
+
+### Activity 3.5
+
+A delivery company records cumulative delivery times.
+
+| Delivery Time Less Than or Equal To | Cumulative Frequency |
+|---|---:|
+| 1 day | 20 |
+| 2 days | 55 |
+| 3 days | 85 |
+| 4 days | 95 |
+| 5 days | 100 |
+
+How many deliveries were completed within 3 days?
+
+What percentage of deliveries were completed within 3 days?
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The number of deliveries completed within 3 days is:
+
+$$
+85
+$$
+
+The total number of deliveries is:
+
+$$
+100
+$$
+
+Therefore, the percentage completed within 3 days is:
+
+$$
+\frac{85}{100} \times 100 = 85\%
+$$
+
+So, 85% of deliveries were completed within 3 days.
+
+</details>
+
+## Dot Plots
+
+A dot plot displays individual data values using dots on a number line.
+
+Each dot represents one observation.
+
+Dot plots are useful for small numerical data sets because they show the
+actual data values clearly.
+
+### Practical Example
+
+Suppose the number of daily customer complaints over ten days is:
+
+$$
+2,\ 3,\ 3,\ 4,\ 5,\ 5,\ 5,\ 6,\ 7,\ 8
+$$
+
+A dot plot would place dots above each value. Values with repeated
+observations will have stacked dots.
+
+### Interpretation
+
+A dot plot helps us see:
+
+- where the data are concentrated;
+- whether there are repeated values;
+- whether there are gaps;
+- whether there are unusual observations.
+
+### When to Use a Dot Plot
+
+Use a dot plot when:
+
+- the data are numerical;
+- the data set is small;
+- you want to show individual values;
+- you want students or managers to see the actual observations.
+
+### Activity 3.6
+
+The number of products returned over eight days is:
+
+$$
+1,\ 2,\ 2,\ 3,\ 3,\ 3,\ 4,\ 8
+$$
+
+What value appears most often?
+
+Is there any value that looks unusual?
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The value that appears most often is:
+
+$$
+3
+$$
+
+because it appears three times.
+
+The value 8 may be unusual because it is much larger than the other values.
+
+</details>
+
+## Histograms
+
+A histogram is used to display the distribution of quantitative data.
+
+In a histogram, data values are grouped into intervals called classes or
+bins. The height of each bar shows the frequency of observations in that
+interval.
+
+Unlike bar graphs, the bars in a histogram usually touch because the
+intervals are continuous.
+
+### Practical Example
+
+Suppose a company records the monthly spending of customers.
+
+| Monthly Spending Interval | Frequency |
+|---|---:|
+| 0--999 | 12 |
+| 1000--1999 | 25 |
+| 2000--2999 | 40 |
+| 3000--3999 | 18 |
+| 4000--4999 | 5 |
+
+A histogram can show the distribution of customer spending.
+
+### Interpretation
+
+A histogram helps us understand:
+
+- the shape of the data;
+- the centre of the data;
+- the spread of the data;
+- skewness;
+- unusual values;
+- whether there are one or more peaks.
+
+### Shape of a Histogram
+
+A histogram may show different shapes.
+
+A symmetric distribution has a balanced shape.
+
+A right-skewed distribution has a long tail to the right.
+
+A left-skewed distribution has a long tail to the left.
+
+### Business Analytics Example
+
+Customer spending is often right-skewed.
+
+Many customers spend small or moderate amounts, while a few customers spend
+very large amounts.
+
+This is important because the mean may be pulled upward by a few high-value
+customers.
+
+### Activity 3.7
+
+A business finds that most customers spend less than Rs. 5,000, but a few
+customers spend more than Rs. 50,000.
+
+What shape would you expect in the histogram?
+
+Which measure of centre may be more suitable: mean or median?
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The histogram is likely to be right-skewed because a few very large values
+create a long tail to the right.
+
+The median may be more suitable because it is less affected by very large
+values.
+
+</details>
+
+## Stem-and-Leaf Plots
+
+A stem-and-leaf plot is a method for displaying numerical data while keeping
+the original values visible.
+
+Each value is split into a stem and a leaf.
+
+The stem usually represents the leading digit or digits.
+
+The leaf usually represents the final digit.
+
+### Practical Example
+
+Suppose the marks of students are:
+
+$$
+42,\ 45,\ 47,\ 51,\ 53,\ 56,\ 62,\ 65,\ 68,\ 72
+$$
+
+A stem-and-leaf plot can be written as:
+
+```{r, echo=FALSE, results='asis'}
+cat("
+Stem | Leaf
+  4  | 2 5 7
+  5  | 1 3 6
+  6  | 2 5 8
+  7  | 2
+")
+```
+
+Here, the stem 4 and leaf 2 represent 42.
+
+The stem 5 and leaf 6 represent 56.
+
+### Interpretation
+
+A stem-and-leaf plot shows the shape of the data and preserves the original
+data values.
+
+It is useful for small to moderate data sets.
+
+### When to Use a Stem-and-Leaf Plot
+
+Use a stem-and-leaf plot when:
+
+- the data are numerical;
+- the data set is not too large;
+- you want to see both the distribution and the actual values.
+
+### Activity 3.8
+
+The ages of ten customers are:
+
+$$
+21,\ 24,\ 25,\ 28,\ 31,\ 33,\ 35,\ 42,\ 45,\ 49
+$$
+
+Construct a stem-and-leaf plot.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The stem-and-leaf plot is:
+
+```{r, echo=FALSE, results='asis'}
+cat("
+Stem | Leaf
+  2  | 1 4 5 8
+  3  | 1 3 5
+  4  | 2 5 9
+")
+```
+
+Here, 2 | 1 represents 21 and 4 | 9 represents 49.
+
+</details>
+
+## Measures of Centre
+
+Measures of centre describe the typical or central value of a data set.
+
+The three common measures of centre are:
+
+- mean;
+- median;
+- mode.
+
+## Mean
+
+The mean is the arithmetic average.
+
+It is calculated by adding all values and dividing by the number of values.
+
+For a sample, the mean is:
+
+$$
+\bar{x} = \frac{x_1 + x_2 + x_3 + \cdots + x_n}{n}
+$$
+
+### Example
+
+Suppose the daily sales values for five days are:
+
+$$
+100,\ 120,\ 130,\ 150,\ 200
+$$
+
+The mean is:
+
+$$
+\bar{x} = \frac{100 + 120 + 130 + 150 + 200}{5}
+$$
+
+$$
+\bar{x} = \frac{700}{5} = 140
+$$
+
+So, the average daily sales value is 140.
+
+### Practical Interpretation
+
+The mean uses every value in the data set.
+
+It is useful when the data are reasonably balanced.
+
+However, the mean can be affected by extreme values.
+
+## Median
+
+The median is the middle value when the data are arranged in order.
+
+If the number of observations is odd, the median is the middle value.
+
+If the number of observations is even, the median is the average of the two
+middle values.
+
+### Example with Odd Number of Values
+
+Consider:
+
+$$
+100,\ 120,\ 130,\ 150,\ 200
+$$
+
+The middle value is:
+
+$$
+130
+$$
+
+So, the median is 130.
+
+### Example with Even Number of Values
+
+Consider:
+
+$$
+100,\ 120,\ 130,\ 150
+$$
+
+The two middle values are 120 and 130.
+
+Therefore:
+
+$$
+\text{Median} = \frac{120 + 130}{2} = 125
+$$
+
+### Practical Interpretation
+
+The median is useful when data are skewed or contain outliers.
+
+For example, income data are often skewed. A few very high incomes can pull
+the mean upward. In such cases, the median may better represent the typical
+person.
+
+## Mode
+
+The mode is the value that occurs most often.
+
+A data set may have:
+
+- no mode;
+- one mode;
+- more than one mode.
+
+### Example
+
+Consider the customer complaint counts:
+
+$$
+1,\ 2,\ 2,\ 3,\ 4,\ 4,\ 4,\ 5
+$$
+
+The value 4 occurs most often.
+
+So, the mode is:
+
+$$
+4
+$$
+
+### Practical Interpretation
+
+The mode is useful for identifying the most common value or category.
+
+For example, the most common payment method, most common product size, or
+most common customer rating can be identified using the mode.
+
+### Activity 3.9
+
+The monthly purchases of seven customers are:
+
+$$
+2,\ 3,\ 3,\ 4,\ 5,\ 8,\ 10
+$$
+
+Find the mean, median, and mode.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Mean:
+
+$$
+\bar{x} = \frac{2 + 3 + 3 + 4 + 5 + 8 + 10}{7}
+$$
+
+$$
+\bar{x} = \frac{35}{7} = 5
+$$
+
+Median:
+
+The ordered data are:
+
+$$
+2,\ 3,\ 3,\ 4,\ 5,\ 8,\ 10
+$$
+
+The middle value is:
+
+$$
+4
+$$
+
+So, the median is 4.
+
+Mode:
+
+The value 3 occurs most often.
+
+So, the mode is 3.
+
+</details>
+
+## Measures of Spread
+
+Measures of spread describe how much the data values vary.
+
+Two data sets may have the same mean but very different levels of variation.
+
+In business analytics, variation is very important because it represents
+uncertainty, inconsistency, or risk.
+
+## Range
+
+The range is the difference between the maximum value and the minimum value.
+
+$$
+\text{Range} = \text{Maximum} - \text{Minimum}
+$$
+
+### Example
+
+Suppose delivery times in hours are:
+
+$$
+12,\ 15,\ 18,\ 20,\ 25
+$$
+
+The range is:
+
+$$
+25 - 12 = 13
+$$
+
+So, the delivery times vary across a range of 13 hours.
+
+### Practical Interpretation
+
+The range is easy to calculate, but it uses only two values: the minimum and
+the maximum.
+
+Therefore, it can be strongly affected by outliers.
+
+## Interquartile Range
+
+The interquartile range, or IQR, measures the spread of the middle 50% of
+the data.
+
+It is calculated as:
+
+$$
+IQR = Q_3 - Q_1
+$$
+
+where:
+
+- $Q_1$ is the first quartile;
+- $Q_3$ is the third quartile.
+
+### Meaning of Quartiles
+
+The first quartile, $Q_1$, is the value below which about 25% of the data
+fall.
+
+The second quartile, $Q_2$, is the median.
+
+The third quartile, $Q_3$, is the value below which about 75% of the data
+fall.
+
+### Example
+
+Suppose the ordered data are:
+
+$$
+10,\ 12,\ 14,\ 15,\ 18,\ 20,\ 22,\ 24,\ 30
+$$
+
+The median is:
+
+$$
+18
+$$
+
+The lower half is:
+
+$$
+10,\ 12,\ 14,\ 15
+$$
+
+The upper half is:
+
+$$
+20,\ 22,\ 24,\ 30
+$$
+
+Therefore:
+
+$$
+Q_1 = \frac{12 + 14}{2} = 13
+$$
+
+and:
+
+$$
+Q_3 = \frac{22 + 24}{2} = 23
+$$
+
+So:
+
+$$
+IQR = Q_3 - Q_1 = 23 - 13 = 10
+$$
+
+### Practical Interpretation
+
+The IQR is useful because it focuses on the middle 50% of the data.
+
+It is less affected by extreme values than the range.
+
+In business analytics, the IQR is useful when data are skewed or contain
+outliers.
+
+### Activity 3.10
+
+The ordered delivery times are:
+
+$$
+8,\ 10,\ 12,\ 14,\ 16,\ 18,\ 20,\ 22,\ 30
+$$
+
+Find the median, $Q_1$, $Q_3$, and IQR.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The median is the middle value:
+
+$$
+16
+$$
+
+The lower half is:
+
+$$
+8,\ 10,\ 12,\ 14
+$$
+
+So:
+
+$$
+Q_1 = \frac{10 + 12}{2} = 11
+$$
+
+The upper half is:
+
+$$
+18,\ 20,\ 22,\ 30
+$$
+
+So:
+
+$$
+Q_3 = \frac{20 + 22}{2} = 21
+$$
+
+Therefore:
+
+$$
+IQR = Q_3 - Q_1 = 21 - 11 = 10
+$$
+
+</details>
+
+## Outliers
+
+An outlier is an observation that is unusually small or unusually large
+compared with the rest of the data.
+
+Outliers are important because they can affect numerical summaries,
+especially the mean and range.
+
+### Why Outliers Matter
+
+In business analytics, outliers may represent:
+
+- data entry errors;
+- unusual customer behaviour;
+- fraud;
+- exceptional performance;
+- system failure;
+- rare but important events.
+
+Outliers should not be removed automatically. They should be investigated.
+
+### IQR Rule for Detecting Outliers
+
+A common rule for detecting outliers uses the interquartile range.
+
+A value may be considered an outlier if it is below:
+
+$$
+Q_1 - 1.5(IQR)
+$$
+
+or above:
+
+$$
+Q_3 + 1.5(IQR)
+$$
+
+These are called the lower fence and upper fence.
+
+### Example
+
+Suppose:
+
+$$
+Q_1 = 20
+$$
+
+$$
+Q_3 = 40
+$$
+
+Then:
+
+$$
+IQR = 40 - 20 = 20
+$$
+
+The lower fence is:
+
+$$
+20 - 1.5(20) = 20 - 30 = -10
+$$
+
+The upper fence is:
+
+$$
+40 + 1.5(20) = 40 + 30 = 70
+$$
+
+Values below -10 or above 70 may be considered outliers.
+
+### Business Interpretation
+
+Suppose the data represent customer spending.
+
+A customer spending more than 70 may be unusual compared with other
+customers.
+
+This may be a very valuable customer, a corporate buyer, a data error, or a
+special transaction.
+
+The analyst should investigate before deciding what to do.
+
+### Activity 3.11
+
+Suppose:
+
+$$
+Q_1 = 15
+$$
+
+$$
+Q_3 = 35
+$$
+
+Find the IQR, lower fence, and upper fence.
+
+Would a value of 70 be considered an outlier?
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The IQR is:
+
+$$
+IQR = Q_3 - Q_1 = 35 - 15 = 20
+$$
+
+The lower fence is:
+
+$$
+Q_1 - 1.5(IQR) = 15 - 1.5(20)
+$$
+
+$$
+= 15 - 30 = -15
+$$
+
+The upper fence is:
+
+$$
+Q_3 + 1.5(IQR) = 35 + 1.5(20)
+$$
+
+$$
+= 35 + 30 = 65
+$$
+
+A value of 70 is greater than 65, so it would be considered an outlier.
+
+</details>
+
+## Box-and-Whisker Plots
+
+A box-and-whisker plot, or boxplot, is a graph that summarizes a numerical
+data set using five key values.
+
+These five values are:
+
+- minimum;
+- first quartile, $Q_1$;
+- median, $Q_2$;
+- third quartile, $Q_3$;
+- maximum.
+
+Together, these are called the five-number summary.
+
+### Structure of a Boxplot
+
+In a boxplot:
+
+- the box extends from $Q_1$ to $Q_3$;
+- the line inside the box represents the median;
+- the length of the box represents the IQR;
+- the whiskers extend toward the smallest and largest non-outlier values;
+- outliers may be shown as separate points.
+
+### Practical Example
+
+Suppose the five-number summary of customer spending is:
+
+| Summary Measure | Value |
+|---|---:|
+| Minimum | 500 |
+| $Q_1$ | 1200 |
+| Median | 1800 |
+| $Q_3$ | 3000 |
+| Maximum | 7000 |
+
+A boxplot can summarize the spread, centre, and possible skewness of customer
+spending.
+
+### Interpretation
+
+The median spending is 1800.
+
+The middle 50% of customers spend between 1200 and 3000.
+
+The IQR is:
+
+$$
+3000 - 1200 = 1800
+$$
+
+If the upper whisker is much longer than the lower whisker, the data may be
+right-skewed.
+
+### Comparing Groups Using Boxplots
+
+Boxplots are useful for comparing numerical data across groups.
+
+Examples include:
+
+- customer spending by region;
+- salaries by department;
+- delivery times by branch;
+- marks by class;
+- waiting times by service type.
+
+### Business Analytics Example
+
+Suppose a company compares delivery times for three branches using boxplots.
+
+A branch with a lower median delivery time is generally faster.
+
+A branch with a smaller IQR is more consistent.
+
+A branch with many outliers may have occasional serious delays.
+
+### Activity 3.12
+
+A company compares customer waiting times at two branches.
+
+Branch A has a median waiting time of 10 minutes and IQR of 4 minutes.
+
+Branch B has a median waiting time of 12 minutes and IQR of 10 minutes.
+
+Which branch is faster on average?
+
+Which branch is more consistent?
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Branch A is faster because it has a lower median waiting time:
+
+$$
+10 < 12
+$$
+
+Branch A is also more consistent because it has a smaller IQR:
+
+$$
+4 < 10
+$$
+
+Therefore, Branch A performs better in terms of both typical waiting time and
+consistency.
+
+</details>
+
+## Choosing the Right Graph or Summary
+
+Choosing the correct graph or summary depends on the type of data and the
+purpose of the analysis.
+
+### For Categorical Data
+
+Useful methods include:
+
+- frequency table;
+- relative frequency table;
+- bar graph;
+- pie chart.
+
+### For Numerical Data
+
+Useful methods include:
+
+- dot plot;
+- histogram;
+- stem-and-leaf plot;
+- ogive;
+- box-and-whisker plot;
+- mean;
+- median;
+- mode;
+- range;
+- interquartile range.
+
+### Practical Guideline
+
+Use a bar graph when comparing categories.
+
+Use a pie chart when showing parts of a whole with few categories.
+
+Use a line graph when showing change over time.
+
+Use a histogram when showing the distribution of numerical data.
+
+Use an ogive when studying cumulative frequencies or percentiles.
+
+Use a dot plot for small numerical data sets.
+
+Use a stem-and-leaf plot when you want to keep original values visible.
+
+Use a boxplot when comparing centre, spread, and outliers.
+
+Use the mean when the data are roughly symmetric.
+
+Use the median when the data are skewed or contain outliers.
+
+Use the IQR when you want a spread measure that is less affected by outliers.
+
+## Integrated Practice and Mini Case Study
+
+This section connects graphs, numerical summaries, outliers, and business
+interpretation in one practical problem.
+
+### Mini Case Study: Customer Spending Analysis
+
+A retail company records the monthly spending of 15 customers.
+
+The values in rupees are:
+
+$$
+1200,\ 1500,\ 1500,\ 1800,\ 2000,\ 2200,\ 2400,\ 2500,\ 2700,\ 3000,\ 3200,\ 3500,\ 4000,\ 4200,\ 12000
+$$
+
+Answer the following questions.
+
+1. What type of data is this?
+2. Find the mean.
+3. Find the median.
+4. Find the mode.
+5. Find the range.
+6. Identify whether there may be an outlier.
+7. Which measure of centre is more suitable: mean or median?
+8. Which graphs would be useful for this data?
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Question 1: What type of data is this?
+
+The data are quantitative because the values are numerical.
+
+Question 2: Find the mean.
+
+The sum of the values is:
+
+$$
+1200 + 1500 + 1500 + 1800 + 2000 + 2200 + 2400 + 2500 + 2700 + 3000 + 3200 + 3500 + 4000 + 4200 + 12000 = 45500
+$$
+
+There are 15 observations.
+
+Therefore:
+
+$$
+\bar{x} = \frac{45500}{15} = 3033.33
+$$
+
+Question 3: Find the median.
+
+There are 15 observations, so the median is the 8th value.
+
+The 8th value is:
+
+$$
+2500
+$$
+
+So, the median is Rs. 2,500.
+
+Question 4: Find the mode.
+
+The value 1500 occurs twice. All other values occur once.
+
+Therefore, the mode is:
+
+$$
+1500
+$$
+
+Question 5: Find the range.
+
+The minimum value is 1200 and the maximum value is 12000.
+
+$$
+\text{Range} = 12000 - 1200 = 10800
+$$
+
+Question 6: Identify whether there may be an outlier.
+
+The value 12000 is much larger than the other values and may be an outlier.
+
+Question 7: Which measure of centre is more suitable?
+
+The median is more suitable because the data contain a very large value,
+which pulls the mean upward.
+
+Question 8: Which graphs would be useful?
+
+A histogram can show the distribution.
+
+A boxplot can show spread and possible outliers.
+
+A dot plot can show individual observations because the data set is small.
+
+</details>
+
+### Practical Business Interpretation
+
+Most customers spend between Rs. 1,200 and Rs. 4,200, but one customer spends
+Rs. 12,000. This large value increases the mean.
+
+Therefore, the median gives a better description of a typical customer.
+
+The Rs. 12,000 customer should not be ignored automatically. This may be a
+high-value customer, a special purchase, or a data entry issue. A good data
+analyst should investigate it.
+
+## Summary
+
+In this topic, students learned how to use graphs and numerical summaries to
+understand data.
+
+The main ideas covered were:
+
+- qualitative and quantitative data;
+- frequency tables;
+- relative frequency tables;
+- bar graphs;
+- pie charts;
+- line graphs;
+- ogives;
+- dot plots;
+- histograms;
+- stem-and-leaf plots;
+- mean;
+- median;
+- mode;
+- range;
+- interquartile range;
+- outliers;
+- box-and-whisker plots;
+- choosing suitable graphs and summaries;
+- practical interpretation in business analytics.
+
+## Quick Formula Summary
+
+### Relative Frequency
+
+$$
+\text{Relative Frequency} =
+\frac{\text{Frequency}}{\text{Total Frequency}}
+$$
+
+### Sample Mean
+
+$$
+\bar{x} = \frac{x_1 + x_2 + x_3 + \cdots + x_n}{n}
+$$
+
+### Range
+
+$$
+\text{Range} = \text{Maximum} - \text{Minimum}
+$$
+
+### Interquartile Range
+
+$$
+IQR = Q_3 - Q_1
+$$
+
+### Lower Fence for Outliers
+
+$$
+Q_1 - 1.5(IQR)
+$$
+
+### Upper Fence for Outliers
+
+$$
+Q_3 + 1.5(IQR)
+$$
+
+## Suggested End-of-Topic Practice Questions
+
+### Question 1
+
+A company records the preferred delivery method of 80 customers.
+
+| Delivery Method | Frequency |
+|---|---:|
+| Home Delivery | 40 |
+| Store Pickup | 25 |
+| Courier Point | 15 |
+
+Find the relative frequency for each delivery method.
+
+Which graph is suitable for this data?
+
+### Question 2
+
+A business records daily sales over five days.
+
+$$
+15000,\ 18000,\ 17000,\ 22000,\ 28000
+$$
+
+Find the mean, median, range, and mode.
+
+### Question 3
+
+The ordered waiting times of customers are:
+
+$$
+4,\ 6,\ 7,\ 8,\ 10,\ 12,\ 15,\ 18,\ 30
+$$
+
+Find the median, $Q_1$, $Q_3$, and IQR.
+
+### Question 4
+
+Suppose:
+
+$$
+Q_1 = 25
+$$
+
+and:
+
+$$
+Q_3 = 45
+$$
+
+Find the IQR, lower fence, and upper fence.
+
+Would a value of 90 be considered an outlier?
+
+### Question 5
+
+A company wants to compare monthly salaries across three departments.
+
+Which graph is suitable for comparing the centre, spread, and outliers of
+the three departments?
+
+### Question 6
+
+A business wants to show monthly profit over a year.
+
+Which graph is most suitable?
+
+Explain why.
+
+## Suggested Short R Activity
+
+The following R code can be used to produce basic graphs and numerical
+summaries.
+
+```{r}
+# Customer monthly spending data
+
+spending <- c(
+  1200, 1500, 1500, 1800, 2000,
+  2200, 2400, 2500, 2700, 3000,
+  3200, 3500, 4000, 4200, 12000
+)
+
+spending
+```
+
+### Mean, Median, Mode, Range, and Quartiles
+
+```{r}
+mean(spending)
+
+median(spending)
+
+# Mode
+names(sort(table(spending), decreasing = TRUE))[1]
+
+range(spending)
+
+max(spending) - min(spending)
+
+quantile(spending)
+
+IQR(spending)
+```
+
+### Histogram
+
+```{r}
+hist(
+  spending,
+  main = "Histogram of Customer Spending",
+  xlab = "Monthly Spending"
+)
+```
+
+### Boxplot
+
+```{r}
+boxplot(
+  spending,
+  main = "Boxplot of Customer Spending",
+  ylab = "Monthly Spending"
+)
+```
+
+### Dot Plot
+
+```{r}
+stripchart(
+  spending,
+  method = "stack",
+  main = "Dot Plot of Customer Spending",
+  xlab = "Monthly Spending"
+)
+```
+
+### Bar Graph for Categorical Data
+
+```{r}
+payment_method <- c("Cash", "Card", "Bank Transfer", "Mobile Payment")
+frequency <- c(20, 45, 15, 20)
+
+barplot(
+  frequency,
+  names.arg = payment_method,
+  main = "Preferred Payment Methods",
+  ylab = "Frequency"
+)
+```
+
+### Pie Chart
+
+```{r}
+pie(
+  frequency,
+  labels = payment_method,
+  main = "Preferred Payment Methods"
+)
+```
+
+### Line Graph
+
+```{r}
+month <- 1:5
+sales <- c(120000, 135000, 128000, 150000, 165000)
+
+plot(
+  month,
+  sales,
+  type = "o",
+  main = "Monthly Sales",
+  xlab = "Month",
+  ylab = "Sales"
+)
+```
+
+### Ogive
+
+```{r}
+waiting_time <- c(5, 10, 15, 20, 25)
+cumulative_frequency <- c(10, 25, 45, 60, 70)
+
+plot(
+  waiting_time,
+  cumulative_frequency,
+  type = "o",
+  main = "Ogive of Customer Waiting Time",
+  xlab = "Waiting Time",
+  ylab = "Cumulative Frequency"
+)
+```
+
+## Practical Closing Note for Students
+
+Descriptive statistics is not only about producing numbers and graphs.
+
+A good data analyst should be able to explain what those numbers and graphs
+mean in real life.
+
+For example, saying:
+
+$$
+\bar{x} = 3033.33
+$$
+
+is not enough.
+
+A better interpretation is:
+
+"The average monthly customer spending is Rs. 3,033.33, but this value is
+influenced by one unusually large spending value. Therefore, the median may
+better describe a typical customer."
+
+That is the type of interpretation expected in data science and business
+analytics.
