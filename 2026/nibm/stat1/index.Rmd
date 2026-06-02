@@ -6,7 +6,7 @@ output: html_document
 # Module Information
 
 |  |  |
-|----|----|
+|------------------------------------|------------------------------------|
 | **Institution:** | National Institute of Business Management |
 | **Centre:** | National Innovation Center |
 | **Programme:** | Advanced Diploma in Data Science -- Full Time (1st Year) |
@@ -28,10 +28,10 @@ By the end of the module, students should be comfortable moving from raw data to
 
 ::: {style="text-align: center;"}
 | **Topic** | **Practical Focus for Students** | **Teaching Hours** |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | [Fundamentals of sets and probability theory](topic1.html) | Using sets, events, Venn diagrams, probability rules, conditional probability, independence, and Bayes' theorem to reason about uncertainty in real problems. | 6 |
 | [Introduction to Statistics](topic2.html) | Understanding samples, populations, sampling distributions, the sampling distribution of the sample mean, the central limit theorem, and sampling error. | 6 |
-| [Introduction to descriptive statistics](Introduction_to_Descriptive_Statistics_Topic_3.html)| Using graphs and numerical summaries to understand data: bar graphs, pie charts, line graphs, ogives, relative frequency tables, dot plots, histograms, stem-and-leaf plots, mean, median, mode, range, interquartile range, outliers, and box-and-whisker plots. | 6 |
+| [Introduction to descriptive statistics](Introduction_to_Descriptive_Statistics_Topic_3.html) | Using graphs and numerical summaries to understand data: bar graphs, pie charts, line graphs, ogives, relative frequency tables, dot plots, histograms, stem-and-leaf plots, mean, median, mode, range, interquartile range, outliers, and box-and-whisker plots. | 6 |
 | Discrete probability distributions | Identifying and working with discrete random variables and performing probability calculations using discrete distributions. | 6 |
 | Continuous probability distributions | Identifying and working with continuous random variables and performing probability calculations using continuous distributions. | 6 |
 | Hypothesis testing using one sample for normal and t distributions | Applying null and alternative hypotheses, test statistics, p-values, confidence intervals, and one-sample tests for practical decision-making. | 6 |
@@ -39,6 +39,12 @@ By the end of the module, students should be comfortable moving from raw data to
 :::
 
 ------------------------------------------------------------------------
+
+# Assignments
+
+-   Assignment 1 - Practice Questions on topic 1
+
+-   [Assignment 2](assignment2.html)- Based on Topic 3
 
 # Intended Learning Outcomes (ILOs)
 

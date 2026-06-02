@@ -1,0 +1,246 @@
+---
+title: "Assignment2"
+output: html_document
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Assignment: Descriptive Statistics for Data Science and Business Analytics
+
+## Instructions for Students
+
+This assignment is based on the topic **Introduction to Descriptive
+Statistics**.
+
+You are expected to use graphs and numerical summaries to understand,
+describe, and interpret data in a practical business analytics context.
+
+Show all important working steps. Interpret every answer in simple business
+language. You may use a calculator or R for numerical calculations, but your
+final answers must include clear explanations.
+
+## Learning Focus
+
+This assignment assesses your ability to:
+
+- construct frequency and relative frequency tables;
+- choose suitable graphs for different types of data;
+- interpret bar graphs, pie charts, line graphs, ogives, dot plots,
+  histograms, stem-and-leaf plots, and boxplots;
+- calculate mean, median, mode, range, quartiles, and interquartile range;
+- identify and interpret outliers;
+- compare groups using numerical and graphical summaries;
+- communicate statistical findings in a business context.
+
+# Assignment Scenario
+
+A retail company operates both physical branches and an online store. The
+management team wants to understand customer behaviour, delivery
+performance, payment preferences, and customer spending patterns.
+
+You are working as a junior data analyst. Your task is to summarize the data
+and present useful insights to management.
+
+The following data sets are available.
+
+## Data Set A: Preferred Payment Method
+
+A sample of 120 customers was asked about their preferred payment method.
+
+| Payment Method | Frequency |
+|---|---:|
+| Cash | 18 |
+| Card | 52 |
+| Bank Transfer | 20 |
+| Mobile Payment | 30 |
+
+## Data Set B: Monthly Sales
+
+The company recorded monthly sales, in thousands of rupees, over six months.
+
+| Month | Sales |
+|---|---:|
+| January | 950 |
+| February | 1020 |
+| March | 980 |
+| April | 1120 |
+| May | 1250 |
+| June | 1380 |
+
+## Data Set C: Customer Waiting Time
+
+The following table gives cumulative frequencies for customer waiting times
+at the service counter.
+
+| Waiting Time Less Than or Equal To | Cumulative Frequency |
+|---|---:|
+| 5 minutes | 12 |
+| 10 minutes | 32 |
+| 15 minutes | 55 |
+| 20 minutes | 70 |
+| 25 minutes | 78 |
+| 30 minutes | 80 |
+
+## Data Set D: Number of Complaints per Day
+
+The number of customer complaints recorded over 12 days is:
+
+$$
+2,\ 3,\ 3,\ 4,\ 4,\ 4,\ 5,\ 5,\ 6,\ 7,\ 8,\ 12
+$$
+
+## Data Set E: Monthly Spending of Customers
+
+The monthly spending values, in rupees, for 20 selected customers are:
+
+$$
+1200,\ 1500,\ 1600,\ 1700,\ 1800,\ 2000,\ 2100,\ 2200,\ 2300,\ 2500,
+2700,\ 3000,\ 3200,\ 3500,\ 3700,\ 4000,\ 4500,\ 5200,\ 6000,\ 15000
+$$
+
+## Data Set F: Delivery Time by Branch
+
+The delivery times, in hours, for two branches are shown below.
+
+Branch A:
+
+$$
+22,\ 24,\ 25,\ 26,\ 27,\ 28,\ 30,\ 31,\ 32,\ 35
+$$
+
+Branch B:
+
+$$
+18,\ 20,\ 21,\ 22,\ 23,\ 24,\ 28,\ 35,\ 40,\ 55
+$$
+
+# Questions
+
+## Question 1: Frequency and Relative Frequency Table
+
+Using Data Set A:
+
+1. Construct a relative frequency table.
+2. Find the percentage of customers who prefer each payment method.
+3. Identify the most common payment method.
+4. Give a short business interpretation.
+
+## Question 2: Bar Graph and Pie Chart
+
+Using Data Set A:
+
+1. State whether a bar graph is suitable for this data.
+2. State whether a pie chart is suitable for this data.
+3. Explain which graph would be clearer for management and why.
+
+## Question 3: Line Graph and Trend Interpretation
+
+Using Data Set B:
+
+1. Identify the appropriate graph for displaying monthly sales.
+2. Describe the overall sales trend from January to June.
+3. Calculate the increase in sales from January to June.
+4. Give one possible business interpretation of the trend.
+
+## Question 4: Ogive and Cumulative Interpretation
+
+Using Data Set C:
+
+1. What type of graph is suitable for this data?
+2. How many customers waited 15 minutes or less?
+3. What percentage of customers waited 20 minutes or less?
+4. What percentage of customers waited more than 20 minutes?
+5. Give a practical interpretation for management.
+
+## Question 5: Dot Plot and Stem-and-Leaf Plot
+
+Using Data Set D:
+
+1. State whether a dot plot is suitable for this data.
+2. Identify the value that occurs most often.
+3. Identify any value that may look unusual.
+4. Construct a stem-and-leaf plot.
+5. Interpret the distribution of complaints.
+
+## Question 6: Mean, Median, Mode, and Range
+
+Using Data Set E:
+
+1. Calculate the mean monthly spending.
+2. Calculate the median monthly spending.
+3. Identify the mode.
+4. Calculate the range.
+5. Explain why the mean and median are different.
+
+## Question 7: Quartiles, IQR, and Outlier Detection
+
+Using Data Set E:
+
+1. Find $Q_1$.
+2. Find $Q_3$.
+3. Calculate the interquartile range.
+4. Calculate the lower fence and upper fence using the IQR rule.
+5. Identify whether there is an outlier.
+6. Explain what the outlier may represent in a business context.
+
+## Question 8: Histogram and Shape of Distribution
+
+Using Data Set E:
+
+1. State whether a histogram is suitable for this data.
+2. Describe the likely shape of the distribution.
+3. Explain whether the mean or median is more suitable to describe a typical
+   customer.
+4. Give a practical business interpretation.
+
+## Question 9: Box-and-Whisker Plot Interpretation
+
+Using Data Set E:
+
+1. Give the five-number summary.
+2. Explain what the box in a boxplot represents.
+3. Explain what the median tells us.
+4. Explain how the outlier would appear in a boxplot.
+
+## Question 10: Comparing Two Branches
+
+Using Data Set F:
+
+1. Calculate the median delivery time for Branch A.
+2. Calculate the median delivery time for Branch B.
+3. Calculate the range for each branch.
+4. Calculate the IQR for each branch.
+5. Which branch is faster in terms of median delivery time?
+6. Which branch is more consistent?
+7. Give a recommendation to management.
+
+## Question 11: Choosing Suitable Graphs
+
+For each business objective below, choose the most suitable graph.
+
+1. Compare customer counts across payment methods.
+2. Show monthly sales over time.
+3. Display the distribution of customer spending.
+4. Show cumulative waiting time information.
+5. Compare delivery times across two branches.
+6. Show individual values for a small complaint data set.
+
+## Question 12: Business Report
+
+Write a short business report of about 150--200 words summarizing the key
+findings from the assignment.
+
+Your report should mention:
+
+- payment preference;
+- sales trend;
+- waiting time performance;
+- customer spending pattern;
+- outlier issue;
+- branch delivery comparison.
+
