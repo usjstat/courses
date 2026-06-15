@@ -1,0 +1,1668 @@
+---
+title: "Discrete Probability Distributions"
+author: "Rajitha M. Silva"
+output: html_document
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Topic 4: Discrete Probability Distributions
+
+This topic introduces discrete random variables and discrete probability
+distributions. Students will learn how to identify discrete random variables,
+construct probability distributions, calculate probabilities, and interpret
+results in practical data science and business analytics problems.
+
+In business and data science, many variables are counts. For example:
+
+- number of customers arriving at a counter;
+- number of products returned in a day;
+- number of defective items in a batch;
+- number of successful sales calls;
+- number of loan defaults;
+- number of complaints received;
+- number of clicks on an advertisement;
+- number of fraud alerts.
+
+These variables take separate countable values. Therefore, they are modeled
+using discrete random variables and discrete probability distributions.
+
+The purpose of this topic is to help students understand how discrete
+probability models can be used to describe uncertain count-based outcomes.
+
+## Discrete Random Variables
+
+A random variable is a numerical value assigned to the outcome of a random
+experiment.
+
+A discrete random variable is a random variable that takes countable values.
+
+The values may be finite or countably infinite.
+
+### Examples
+
+The following are examples of discrete random variables:
+
+- number of customers entering a shop in one hour;
+- number of defective items in a sample;
+- number of successful marketing calls out of 20 calls;
+- number of complaints received in a day;
+- number of students absent from a class;
+- number of times a customer buys a product in a month.
+
+### Non-Examples
+
+The following are not discrete random variables. They are continuous random
+variables:
+
+- delivery time;
+- customer waiting time;
+- monthly income;
+- body weight;
+- temperature;
+- product lifetime.
+
+These variables can take values over intervals.
+
+### Practical Example
+
+Suppose a call centre receives customer complaints. Let:
+
+$$
+X = \text{number of complaints received in one hour}
+$$
+
+Possible values of $X$ are:
+
+$$
+0,\ 1,\ 2,\ 3,\ldots
+$$
+
+Since the number of complaints is a count, $X$ is a discrete random
+variable.
+
+### Activity 4.1
+
+For each variable, state whether it is discrete or continuous.
+
+1. Number of customers who buy a product in a day.
+2. Time taken to deliver an order.
+3. Number of defective items in a sample of 50 items.
+4. Monthly spending of a customer.
+5. Number of loan defaults among 100 customers.
+6. Waiting time at a bank counter.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+1. Discrete, because it is a count.
+
+2. Continuous, because time can take values over an interval.
+
+3. Discrete, because it is a count.
+
+4. Continuous, because spending can be measured over an interval.
+
+5. Discrete, because it is a count.
+
+6. Continuous, because waiting time can take values over an interval.
+
+</details>
+
+### Key Message for Students
+
+A discrete random variable counts something. If the possible values are
+separate countable numbers, the variable is discrete.
+
+## Probability Distribution of a Discrete Random Variable
+
+A probability distribution gives the possible values of a random variable and
+the probability attached to each value.
+
+For a discrete random variable $X$, the probability distribution lists:
+
+- the possible values of $X$;
+- the probability of each value.
+
+### Probability Mass Function
+
+The probability mass function, or pmf, gives the probability that a discrete
+random variable equals a particular value.
+
+It is written as:
+
+$$
+P(X = x)
+$$
+
+or:
+
+$$
+p(x)
+$$
+
+### Conditions for a Probability Distribution
+
+For a discrete probability distribution to be valid, two conditions must be
+satisfied.
+
+First, every probability must be between 0 and 1:
+
+$$
+0 \leq P(X = x) \leq 1
+$$
+
+Second, the probabilities must add up to 1:
+
+$$
+\sum P(X = x) = 1
+$$
+
+### Example
+
+Suppose $X$ is the number of products returned by a customer in a month.
+
+| $x$ | 0 | 1 | 2 | 3 |
+|---:|---:|---:|---:|---:|
+| $P(X=x)$ | 0.50 | 0.30 | 0.15 | 0.05 |
+
+This is a valid probability distribution because:
+
+$$
+0.50 + 0.30 + 0.15 + 0.05 = 1
+$$
+
+### Interpretation
+
+The probability that a customer returns no products is:
+
+$$
+P(X=0) = 0.50
+$$
+
+The probability that a customer returns exactly two products is:
+
+$$
+P(X=2) = 0.15
+$$
+
+The probability that a customer returns at least one product is:
+
+$$
+P(X \geq 1) = P(X=1) + P(X=2) + P(X=3)
+$$
+
+$$
+P(X \geq 1) = 0.30 + 0.15 + 0.05 = 0.50
+$$
+
+Alternatively:
+
+$$
+P(X \geq 1) = 1 - P(X=0) = 1 - 0.50 = 0.50
+$$
+
+### Activity 4.2
+
+A random variable $X$ represents the number of complaints received by a
+company in one day.
+
+| $x$ | 0 | 1 | 2 | 3 | 4 |
+|---:|---:|---:|---:|---:|---:|
+| $P(X=x)$ | 0.10 | 0.25 | 0.30 | 0.20 | 0.15 |
+
+Answer the following.
+
+1. Is this a valid probability distribution?
+2. Find $P(X=2)$.
+3. Find $P(X \leq 2)$.
+4. Find $P(X > 2)$.
+5. Interpret $P(X > 2)$ in words.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The probabilities add to:
+
+$$
+0.10 + 0.25 + 0.30 + 0.20 + 0.15 = 1.00
+$$
+
+All probabilities are between 0 and 1. Therefore, this is a valid probability
+distribution.
+
+$$
+P(X=2) = 0.30
+$$
+
+$$
+P(X \leq 2) = P(X=0) + P(X=1) + P(X=2)
+$$
+
+$$
+P(X \leq 2) = 0.10 + 0.25 + 0.30 = 0.65
+$$
+
+$$
+P(X > 2) = P(X=3) + P(X=4)
+$$
+
+$$
+P(X > 2) = 0.20 + 0.15 = 0.35
+$$
+
+Interpretation:
+
+There is a 35% chance that the company receives more than two complaints in
+one day.
+
+</details>
+
+## Expected Value of a Discrete Random Variable
+
+The expected value is the long-run average value of a random variable.
+
+For a discrete random variable $X$, the expected value is:
+
+$$
+E(X) = \sum xP(X=x)
+$$
+
+The expected value is also called the mean of the random variable.
+
+It is commonly denoted by:
+
+$$
+\mu
+$$
+
+### Practical Meaning
+
+The expected value does not necessarily have to be a possible value of the
+random variable.
+
+For example, the expected number of complaints may be 2.4. This does not mean
+that exactly 2.4 complaints can occur. It means that the long-run average is
+2.4 complaints per period.
+
+### Example
+
+Suppose $X$ is the number of products returned by a customer in a month.
+
+| $x$ | 0 | 1 | 2 | 3 |
+|---:|---:|---:|---:|---:|
+| $P(X=x)$ | 0.50 | 0.30 | 0.15 | 0.05 |
+
+Then:
+
+$$
+E(X) = 0(0.50) + 1(0.30) + 2(0.15) + 3(0.05)
+$$
+
+$$
+E(X) = 0 + 0.30 + 0.30 + 0.15 = 0.75
+$$
+
+The expected number of product returns per customer is 0.75.
+
+### Business Interpretation
+
+If the company has many similar customers, the long-run average number of
+returns is expected to be about 0.75 per customer per month.
+
+This can help the company plan return handling, staffing, and inventory
+adjustments.
+
+### Activity 4.3
+
+A company records the number of warranty claims per customer.
+
+| $x$ | 0 | 1 | 2 | 3 |
+|---:|---:|---:|---:|---:|
+| $P(X=x)$ | 0.60 | 0.25 | 0.10 | 0.05 |
+
+Find $E(X)$ and interpret the result.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+$$
+E(X) = 0(0.60) + 1(0.25) + 2(0.10) + 3(0.05)
+$$
+
+$$
+E(X) = 0 + 0.25 + 0.20 + 0.15 = 0.60
+$$
+
+The expected number of warranty claims per customer is 0.60.
+
+Interpretation:
+
+In the long run, the company expects about 0.60 warranty claims per customer.
+
+</details>
+
+## Variance and Standard Deviation of a Discrete Random Variable
+
+The variance measures how much the values of a random variable vary around
+the expected value.
+
+For a discrete random variable:
+
+$$
+Var(X) = E[(X-\mu)^2]
+$$
+
+where:
+
+$$
+\mu = E(X)
+$$
+
+An equivalent formula is:
+
+$$
+Var(X) = E(X^2) - [E(X)]^2
+$$
+
+where:
+
+$$
+E(X^2) = \sum x^2P(X=x)
+$$
+
+The standard deviation is:
+
+$$
+SD(X) = \sqrt{Var(X)}
+$$
+
+### Practical Meaning
+
+The expected value tells us the average outcome.
+
+The variance and standard deviation tell us how much uncertainty or
+variation exists around that average.
+
+In business analytics, a larger standard deviation means less predictable
+outcomes.
+
+### Example
+
+Suppose $X$ is the number of products returned by a customer in a month.
+
+| $x$ | 0 | 1 | 2 | 3 |
+|---:|---:|---:|---:|---:|
+| $P(X=x)$ | 0.50 | 0.30 | 0.15 | 0.05 |
+
+We already found:
+
+$$
+E(X) = 0.75
+$$
+
+Now calculate:
+
+$$
+E(X^2) = 0^2(0.50) + 1^2(0.30) + 2^2(0.15) + 3^2(0.05)
+$$
+
+$$
+E(X^2) = 0 + 0.30 + 0.60 + 0.45 = 1.35
+$$
+
+Therefore:
+
+$$
+Var(X) = E(X^2) - [E(X)]^2
+$$
+
+$$
+Var(X) = 1.35 - (0.75)^2
+$$
+
+$$
+Var(X) = 1.35 - 0.5625 = 0.7875
+$$
+
+The standard deviation is:
+
+$$
+SD(X) = \sqrt{0.7875} = 0.8874
+$$
+
+### Business Interpretation
+
+The average number of returns is 0.75, and the standard deviation is about
+0.89.
+
+This gives the company an idea of the typical variation in returns from
+customer to customer.
+
+### Activity 4.4
+
+For the warranty claim distribution below:
+
+| $x$ | 0 | 1 | 2 | 3 |
+|---:|---:|---:|---:|---:|
+| $P(X=x)$ | 0.60 | 0.25 | 0.10 | 0.05 |
+
+Find:
+
+1. $E(X^2)$
+2. $Var(X)$
+3. $SD(X)$
+
+Use the value $E(X)=0.60$ from Activity 4.3.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Calculate $E(X^2)$:
+
+$$
+E(X^2) = 0^2(0.60) + 1^2(0.25) + 2^2(0.10) + 3^2(0.05)
+$$
+
+$$
+E(X^2) = 0 + 0.25 + 0.40 + 0.45 = 1.10
+$$
+
+Now:
+
+$$
+Var(X) = E(X^2) - [E(X)]^2
+$$
+
+$$
+Var(X) = 1.10 - (0.60)^2
+$$
+
+$$
+Var(X) = 1.10 - 0.36 = 0.74
+$$
+
+Therefore:
+
+$$
+SD(X) = \sqrt{0.74} = 0.8602
+$$
+
+</details>
+
+## Bernoulli Distribution
+
+A Bernoulli distribution is used when there are only two possible outcomes.
+
+These outcomes are often called:
+
+- success;
+- failure.
+
+A Bernoulli random variable takes values:
+
+$$
+X = 1
+$$
+
+for success, and:
+
+$$
+X = 0
+$$
+
+for failure.
+
+If the probability of success is $p$, then:
+
+$$
+P(X=1) = p
+$$
+
+and:
+
+$$
+P(X=0) = 1-p
+$$
+
+We write:
+
+$$
+X \sim Bernoulli(p)
+$$
+
+### Expected Value and Variance
+
+For a Bernoulli random variable:
+
+$$
+E(X) = p
+$$
+
+and:
+
+$$
+Var(X) = p(1-p)
+$$
+
+### Business Analytics Example
+
+Suppose a customer either purchases or does not purchase after clicking an
+advertisement.
+
+Let:
+
+$$
+X =
+\begin{cases}
+1, & \text{if the customer purchases} \\
+0, & \text{if the customer does not purchase}
+\end{cases}
+$$
+
+If the probability of purchase is:
+
+$$
+p = 0.20
+$$
+
+then:
+
+$$
+X \sim Bernoulli(0.20)
+$$
+
+The expected value is:
+
+$$
+E(X) = 0.20
+$$
+
+The variance is:
+
+$$
+Var(X) = 0.20(0.80) = 0.16
+$$
+
+### Interpretation
+
+The expected value 0.20 means that the long-run purchase rate is 20%.
+
+This does not mean a single customer purchases 0.20 times. It means that
+over many similar customers, about 20% are expected to purchase.
+
+### Activity 4.5
+
+A loan applicant either defaults or does not default.
+
+Let:
+
+$$
+X =
+\begin{cases}
+1, & \text{if the applicant defaults} \\
+0, & \text{if the applicant does not default}
+\end{cases}
+$$
+
+Suppose:
+
+$$
+P(X=1)=0.08
+$$
+
+Find:
+
+1. $P(X=0)$
+2. $E(X)$
+3. $Var(X)$
+4. Interpret $E(X)$.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Since $P(X=1)=0.08$:
+
+$$
+P(X=0) = 1 - 0.08 = 0.92
+$$
+
+The expected value is:
+
+$$
+E(X) = p = 0.08
+$$
+
+The variance is:
+
+$$
+Var(X) = p(1-p) = 0.08(0.92)
+$$
+
+$$
+Var(X) = 0.0736
+$$
+
+Interpretation:
+
+The expected value 0.08 means that the long-run default rate is 8%.
+
+</details>
+
+## Binomial Distribution
+
+The binomial distribution is used to model the number of successes in a
+fixed number of independent Bernoulli trials.
+
+A binomial random variable counts how many successes occur.
+
+We write:
+
+$$
+X \sim Binomial(n,p)
+$$
+
+where:
+
+- $n$ is the number of trials;
+- $p$ is the probability of success in each trial.
+
+### Conditions for the Binomial Distribution
+
+The binomial distribution is appropriate when:
+
+1. there is a fixed number of trials;
+2. each trial has two possible outcomes;
+3. the probability of success is the same for every trial;
+4. the trials are independent;
+5. the random variable counts the number of successes.
+
+### Binomial Probability Formula
+
+If:
+
+$$
+X \sim Binomial(n,p)
+$$
+
+then:
+
+$$
+P(X=x) = {n \choose x}p^x(1-p)^{n-x}
+$$
+
+where:
+
+$$
+{n \choose x} = \frac{n!}{x!(n-x)!}
+$$
+
+### Expected Value and Variance
+
+For a binomial random variable:
+
+$$
+E(X) = np
+$$
+
+and:
+
+$$
+Var(X) = np(1-p)
+$$
+
+The standard deviation is:
+
+$$
+SD(X) = \sqrt{np(1-p)}
+$$
+
+### Business Analytics Example
+
+Suppose a company calls 10 potential customers. Each customer independently
+has a 0.30 probability of making a purchase.
+
+Let:
+
+$$
+X = \text{number of customers who make a purchase}
+$$
+
+Then:
+
+$$
+X \sim Binomial(10, 0.30)
+$$
+
+### Probability of Exactly 4 Purchases
+
+We want:
+
+$$
+P(X=4)
+$$
+
+Using the binomial formula:
+
+$$
+P(X=4) = {10 \choose 4}(0.30)^4(0.70)^6
+$$
+
+Since:
+
+$$
+{10 \choose 4} = 210
+$$
+
+we get:
+
+$$
+P(X=4) = 210(0.30)^4(0.70)^6
+$$
+
+$$
+P(X=4) = 0.2001
+$$
+
+approximately.
+
+### Probability of At Least One Purchase
+
+The probability of at least one purchase is:
+
+$$
+P(X \geq 1)
+$$
+
+It is easier to use the complement rule:
+
+$$
+P(X \geq 1) = 1 - P(X=0)
+$$
+
+Now:
+
+$$
+P(X=0) = {10 \choose 0}(0.30)^0(0.70)^{10}
+$$
+
+$$
+P(X=0) = (0.70)^{10} = 0.0282
+$$
+
+Therefore:
+
+$$
+P(X \geq 1) = 1 - 0.0282 = 0.9718
+$$
+
+### Expected Number of Purchases
+
+$$
+E(X) = np = 10(0.30) = 3
+$$
+
+The expected number of purchases is 3.
+
+### Activity 4.6
+
+A digital advertisement is shown to 8 customers. Each customer independently
+has a 0.25 probability of clicking the advertisement.
+
+Let:
+
+$$
+X = \text{number of customers who click}
+$$
+
+Answer the following.
+
+1. State the distribution of $X$.
+2. Find $P(X=2)$.
+3. Find $P(X=0)$.
+4. Find $P(X \geq 1)$.
+5. Find $E(X)$.
+6. Interpret $E(X)$.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+There are 8 independent trials, each with probability of success 0.25.
+
+Therefore:
+
+$$
+X \sim Binomial(8,0.25)
+$$
+
+For $P(X=2)$:
+
+$$
+P(X=2) = {8 \choose 2}(0.25)^2(0.75)^6
+$$
+
+$$
+{8 \choose 2} = 28
+$$
+
+So:
+
+$$
+P(X=2) = 28(0.25)^2(0.75)^6
+$$
+
+$$
+P(X=2) = 0.3115
+$$
+
+approximately.
+
+For $P(X=0)$:
+
+$$
+P(X=0) = {8 \choose 0}(0.25)^0(0.75)^8
+$$
+
+$$
+P(X=0) = 0.75^8 = 0.1001
+$$
+
+approximately.
+
+For $P(X \geq 1)$:
+
+$$
+P(X \geq 1) = 1 - P(X=0)
+$$
+
+$$
+P(X \geq 1) = 1 - 0.1001 = 0.8999
+$$
+
+The expected value is:
+
+$$
+E(X) = np = 8(0.25) = 2
+$$
+
+Interpretation:
+
+Out of 8 customers, the expected number of clicks is 2.
+
+</details>
+
+## Poisson Distribution
+
+The Poisson distribution is used to model the number of times an event
+occurs in a fixed interval of time, space, area, or volume.
+
+Examples include:
+
+- number of customer arrivals per hour;
+- number of website visits per minute;
+- number of defects per product batch;
+- number of accidents per week;
+- number of complaints per day;
+- number of system failures per month.
+
+We write:
+
+$$
+X \sim Poisson(\lambda)
+$$
+
+where:
+
+$$
+\lambda
+$$
+
+is the average number of events in the given interval.
+
+### Poisson Probability Formula
+
+If:
+
+$$
+X \sim Poisson(\lambda)
+$$
+
+then:
+
+$$
+P(X=x) = \frac{e^{-\lambda}\lambda^x}{x!}
+$$
+
+where:
+
+$$
+x = 0,1,2,\ldots
+$$
+
+### Expected Value and Variance
+
+For a Poisson random variable:
+
+$$
+E(X) = \lambda
+$$
+
+and:
+
+$$
+Var(X) = \lambda
+$$
+
+The standard deviation is:
+
+$$
+SD(X) = \sqrt{\lambda}
+$$
+
+### When to Use the Poisson Distribution
+
+Use the Poisson distribution when:
+
+- the random variable counts events;
+- events occur in a fixed interval;
+- events occur independently;
+- the average rate is approximately constant;
+- two events do not occur at exactly the same instant in a very small
+  interval.
+
+### Business Analytics Example
+
+Suppose a call centre receives an average of 3 complaints per hour.
+
+Let:
+
+$$
+X = \text{number of complaints received in one hour}
+$$
+
+Then:
+
+$$
+X \sim Poisson(3)
+$$
+
+### Probability of Exactly 5 Complaints
+
+We want:
+
+$$
+P(X=5)
+$$
+
+Using the Poisson formula:
+
+$$
+P(X=5) = \frac{e^{-3}3^5}{5!}
+$$
+
+$$
+P(X=5) = 0.1008
+$$
+
+approximately.
+
+### Probability of No Complaints
+
+$$
+P(X=0) = \frac{e^{-3}3^0}{0!}
+$$
+
+$$
+P(X=0) = e^{-3} = 0.0498
+$$
+
+approximately.
+
+### Probability of At Most 2 Complaints
+
+$$
+P(X \leq 2) = P(X=0) + P(X=1) + P(X=2)
+$$
+
+$$
+P(X \leq 2) =
+\frac{e^{-3}3^0}{0!} +
+\frac{e^{-3}3^1}{1!} +
+\frac{e^{-3}3^2}{2!}
+$$
+
+$$
+P(X \leq 2) = 0.4232
+$$
+
+approximately.
+
+### Activity 4.7
+
+A website receives an average of 4 support requests per hour.
+
+Let:
+
+$$
+X = \text{number of support requests in one hour}
+$$
+
+Assume:
+
+$$
+X \sim Poisson(4)
+$$
+
+Find:
+
+1. $P(X=2)$
+2. $P(X=0)$
+3. $P(X \leq 2)$
+4. $E(X)$
+5. $SD(X)$
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+For $P(X=2)$:
+
+$$
+P(X=2) = \frac{e^{-4}4^2}{2!}
+$$
+
+$$
+P(X=2) = 0.1465
+$$
+
+approximately.
+
+For $P(X=0)$:
+
+$$
+P(X=0) = \frac{e^{-4}4^0}{0!}
+$$
+
+$$
+P(X=0) = e^{-4} = 0.0183
+$$
+
+approximately.
+
+For $P(X \leq 2)$:
+
+$$
+P(X \leq 2) = P(X=0) + P(X=1) + P(X=2)
+$$
+
+$$
+P(X \leq 2) = 0.0183 + 0.0733 + 0.1465
+$$
+
+$$
+P(X \leq 2) = 0.2381
+$$
+
+The expected value is:
+
+$$
+E(X) = \lambda = 4
+$$
+
+The standard deviation is:
+
+$$
+SD(X) = \sqrt{4} = 2
+$$
+
+</details>
+
+## Binomial versus Poisson Distribution
+
+Both binomial and Poisson distributions are used for count data, but they
+are used in different situations.
+
+### Binomial Distribution
+
+Use the binomial distribution when:
+
+- there is a fixed number of trials;
+- each trial has success or failure;
+- the probability of success is fixed;
+- we count the number of successes.
+
+Example:
+
+Number of customers who click an advertisement out of 50 customers.
+
+### Poisson Distribution
+
+Use the Poisson distribution when:
+
+- events occur over a fixed interval;
+- there is no fixed number of trials;
+- we count the number of events in that interval;
+- the average rate is known.
+
+Example:
+
+Number of customer complaints received per hour.
+
+### Practical Comparison
+
+| Situation | Suitable Distribution |
+|---|---|
+| Number of defective items in a sample of 100 items | Binomial |
+| Number of calls arriving per hour | Poisson |
+| Number of customers who respond to 20 sales calls | Binomial |
+| Number of accidents per week | Poisson |
+| Number of loan defaults among 500 customers | Binomial |
+| Number of website errors per day | Poisson |
+
+### Activity 4.8
+
+For each situation, identify whether the binomial or Poisson distribution is
+more suitable.
+
+1. Number of customers who buy a product out of 30 contacted customers.
+2. Number of website crashes in a month.
+3. Number of defective items in a sample of 50 items.
+4. Number of calls received by a call centre in one hour.
+5. Number of students who pass an exam out of 80 students.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+1. Binomial, because there is a fixed number of contacted customers and each
+   customer either buys or does not buy.
+
+2. Poisson, because it counts events over a fixed time interval.
+
+3. Binomial, because there is a fixed sample size and each item is defective
+   or not defective.
+
+4. Poisson, because it counts arrivals over a fixed time interval.
+
+5. Binomial, because there is a fixed number of students and each student
+   either passes or does not pass.
+
+</details>
+
+## Integrated Practice and Mini Case Study
+
+This section connects discrete random variables, probability distributions,
+expected value, binomial distribution, Poisson distribution, and business
+interpretation.
+
+### Mini Case Study: Online Retail Analytics
+
+An online retailer studies two business problems.
+
+Problem A: Advertisement clicks
+
+The retailer sends a promotional advertisement to 12 customers. Based on
+past data, each customer has a 0.20 probability of clicking the
+advertisement. Assume customers behave independently.
+
+Let:
+
+$$
+X = \text{number of customers who click the advertisement}
+$$
+
+Problem B: Customer complaints
+
+The retailer receives an average of 2 complaints per day.
+
+Let:
+
+$$
+Y = \text{number of complaints received in one day}
+$$
+
+Assume:
+
+$$
+Y \sim Poisson(2)
+$$
+
+Answer the following questions.
+
+1. What is the distribution of $X$?
+2. Find $P(X=3)$.
+3. Find $P(X \geq 1)$.
+4. Find $E(X)$.
+5. Find $Var(X)$.
+6. Find $P(Y=0)$.
+7. Find $P(Y \leq 2)$.
+8. Find $E(Y)$.
+9. Interpret the results for management.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Problem A is binomial because there is a fixed number of customers, each
+customer either clicks or does not click, and the probability of clicking is
+constant.
+
+Therefore:
+
+$$
+X \sim Binomial(12,0.20)
+$$
+
+For $P(X=3)$:
+
+$$
+P(X=3) = {12 \choose 3}(0.20)^3(0.80)^9
+$$
+
+$$
+{12 \choose 3} = 220
+$$
+
+$$
+P(X=3) = 220(0.20)^3(0.80)^9
+$$
+
+$$
+P(X=3) = 0.2362
+$$
+
+approximately.
+
+For $P(X \geq 1)$:
+
+$$
+P(X \geq 1) = 1 - P(X=0)
+$$
+
+$$
+P(X=0) = {12 \choose 0}(0.20)^0(0.80)^{12}
+$$
+
+$$
+P(X=0) = 0.80^{12} = 0.0687
+$$
+
+Therefore:
+
+$$
+P(X \geq 1) = 1 - 0.0687 = 0.9313
+$$
+
+The expected value is:
+
+$$
+E(X) = np = 12(0.20) = 2.4
+$$
+
+The variance is:
+
+$$
+Var(X) = np(1-p) = 12(0.20)(0.80)
+$$
+
+$$
+Var(X) = 1.92
+$$
+
+For complaints:
+
+$$
+Y \sim Poisson(2)
+$$
+
+For $P(Y=0)$:
+
+$$
+P(Y=0) = \frac{e^{-2}2^0}{0!}
+$$
+
+$$
+P(Y=0) = e^{-2} = 0.1353
+$$
+
+For $P(Y \leq 2)$:
+
+$$
+P(Y \leq 2) = P(Y=0) + P(Y=1) + P(Y=2)
+$$
+
+$$
+P(Y \leq 2)
+= \frac{e^{-2}2^0}{0!}
++ \frac{e^{-2}2^1}{1!}
++ \frac{e^{-2}2^2}{2!}
+$$
+
+$$
+P(Y \leq 2) = 0.1353 + 0.2707 + 0.2707 = 0.6767
+$$
+
+The expected value is:
+
+$$
+E(Y) = \lambda = 2
+$$
+
+Management interpretation:
+
+The advertisement is expected to generate about 2.4 clicks out of 12
+customers. There is a high probability, about 93.13%, of receiving at least
+one click. For complaints, the company expects about 2 complaints per day,
+and there is about a 67.67% chance of receiving at most 2 complaints in a
+day.
+
+</details>
+
+## Summary
+
+In this topic, students learned how to identify and work with discrete
+random variables and discrete probability distributions.
+
+The main ideas covered were:
+
+- discrete random variables;
+- probability mass functions;
+- valid probability distributions;
+- probability calculations using tables;
+- expected value;
+- variance and standard deviation;
+- Bernoulli distribution;
+- binomial distribution;
+- Poisson distribution;
+- choosing between binomial and Poisson models;
+- practical interpretation in business analytics.
+
+## Quick Formula Summary
+
+### Valid Probability Distribution
+
+$$
+0 \leq P(X=x) \leq 1
+$$
+
+and:
+
+$$
+\sum P(X=x) = 1
+$$
+
+### Expected Value
+
+$$
+E(X) = \sum xP(X=x)
+$$
+
+### Variance
+
+$$
+Var(X) = E(X^2) - [E(X)]^2
+$$
+
+where:
+
+$$
+E(X^2) = \sum x^2P(X=x)
+$$
+
+### Standard Deviation
+
+$$
+SD(X) = \sqrt{Var(X)}
+$$
+
+### Bernoulli Distribution
+
+$$
+X \sim Bernoulli(p)
+$$
+
+$$
+P(X=1)=p,\quad P(X=0)=1-p
+$$
+
+$$
+E(X)=p
+$$
+
+$$
+Var(X)=p(1-p)
+$$
+
+### Binomial Distribution
+
+$$
+X \sim Binomial(n,p)
+$$
+
+$$
+P(X=x) = {n \choose x}p^x(1-p)^{n-x}
+$$
+
+$$
+E(X)=np
+$$
+
+$$
+Var(X)=np(1-p)
+$$
+
+### Poisson Distribution
+
+$$
+X \sim Poisson(\lambda)
+$$
+
+$$
+P(X=x) = \frac{e^{-\lambda}\lambda^x}{x!}
+$$
+
+$$
+E(X)=\lambda
+$$
+
+$$
+Var(X)=\lambda
+$$
+
+## Suggested End-of-Topic Practice Questions
+
+### Question 1
+
+A random variable $X$ represents the number of defective items in a small
+sample.
+
+| $x$ | 0 | 1 | 2 | 3 |
+|---:|---:|---:|---:|---:|
+| $P(X=x)$ | 0.40 | 0.35 | 0.20 | 0.05 |
+
+Find:
+
+1. $P(X=1)$
+2. $P(X \leq 1)$
+3. $P(X > 1)$
+4. $E(X)$
+
+### Question 2
+
+A customer either buys or does not buy a product after receiving an email.
+The probability of buying is 0.12.
+
+Let $X=1$ if the customer buys and $X=0$ otherwise.
+
+1. State the distribution of $X$.
+2. Find $E(X)$.
+3. Find $Var(X)$.
+4. Interpret $E(X)$.
+
+### Question 3
+
+A company contacts 15 customers. Each customer independently has a 0.20
+probability of buying.
+
+Let $X$ be the number of customers who buy.
+
+1. State the distribution of $X$.
+2. Find $P(X=3)$.
+3. Find $P(X=0)$.
+4. Find $P(X \geq 1)$.
+5. Find $E(X)$.
+
+### Question 4
+
+A call centre receives an average of 5 calls per minute.
+
+Let $X$ be the number of calls received in one minute.
+
+Assume $X \sim Poisson(5)$.
+
+Find:
+
+1. $P(X=4)$
+2. $P(X=0)$
+3. $P(X \leq 2)$
+4. $E(X)$
+5. $SD(X)$
+
+### Question 5
+
+For each situation, state whether Bernoulli, binomial, or Poisson is most
+suitable.
+
+1. Whether one customer clicks an advertisement.
+2. Number of customers who click out of 100 customers.
+3. Number of complaints received per day.
+4. Whether one loan applicant defaults.
+5. Number of defective items in a sample of 30 items.
+
+## Suggested Short R Activity
+
+The following R code can be used to calculate probabilities for discrete
+distributions.
+
+### Discrete Probability Distribution from a Table
+
+```{r}
+x <- c(0, 1, 2, 3)
+prob <- c(0.50, 0.30, 0.15, 0.05)
+
+sum(prob)
+
+expected_value <- sum(x * prob)
+expected_value
+
+expected_x2 <- sum(x^2 * prob)
+variance <- expected_x2 - expected_value^2
+variance
+
+standard_deviation <- sqrt(variance)
+standard_deviation
+```
+
+### Binomial Distribution in R
+
+```{r}
+# X ~ Binomial(10, 0.30)
+
+# P(X = 4)
+dbinom(4, size = 10, prob = 0.30)
+
+# P(X = 0)
+dbinom(0, size = 10, prob = 0.30)
+
+# P(X >= 1)
+1 - dbinom(0, size = 10, prob = 0.30)
+
+# P(X <= 4)
+pbinom(4, size = 10, prob = 0.30)
+```
+
+### Poisson Distribution in R
+
+```{r}
+# X ~ Poisson(3)
+
+# P(X = 5)
+dpois(5, lambda = 3)
+
+# P(X = 0)
+dpois(0, lambda = 3)
+
+# P(X <= 2)
+ppois(2, lambda = 3)
+
+# P(X > 2)
+1 - ppois(2, lambda = 3)
+```
+
+### Plotting a Binomial Distribution
+
+```{r}
+x_values <- 0:10
+binomial_probs <- dbinom(x_values, size = 10, prob = 0.30)
+
+barplot(
+  binomial_probs,
+  names.arg = x_values,
+  main = "Binomial Distribution: n = 10, p = 0.30",
+  xlab = "Number of Purchases",
+  ylab = "Probability"
+)
+```
+
+### Plotting a Poisson Distribution
+
+```{r}
+x_values <- 0:12
+poisson_probs <- dpois(x_values, lambda = 3)
+
+barplot(
+  poisson_probs,
+  names.arg = x_values,
+  main = "Poisson Distribution: lambda = 3",
+  xlab = "Number of Complaints",
+  ylab = "Probability"
+)
+```
+
+## Practical Closing Note for Students
+
+Discrete probability distributions are useful when the outcome is a count.
+
+In data science and business analytics, many important problems involve
+counting events: purchases, clicks, defaults, complaints, arrivals, defects,
+and failures.
+
+A good analyst should not only calculate probabilities but also explain what
+they mean for decision-making.
+
+For example, saying:
+
+$$
+P(X \geq 1) = 0.9313
+$$
+
+is not enough.
+
+A better interpretation is:
+
+"There is about a 93.13% chance that at least one customer will click the
+advertisement among the 12 customers contacted."
+
+That is the type of interpretation expected in data science and business
+analytics.

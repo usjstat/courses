@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Rajitha M. Silva" />
 
 
-<title>STATISTICS 1 FOR DATA SCIENCE AND BUSINESS ANALYTICS</title>
+<title>Discrete Probability Distributions</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -348,329 +349,1527 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">STATISTICS 1 FOR DATA SCIENCE AND BUSINESS
-ANALYTICS</h1>
+<h1 class="title toc-ignore">Discrete Probability Distributions</h1>
+<h4 class="author">Rajitha M. Silva</h4>
 
 </div>
 
 
-<div id="module-information" class="section level1">
-<h1>Module Information</h1>
-<table>
-<colgroup>
-<col width="50%" />
-<col width="50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td><strong>Institution:</strong></td>
-<td>National Institute of Business Management</td>
-</tr>
-<tr class="even">
-<td><strong>Centre:</strong></td>
-<td>National Innovation Center</td>
-</tr>
-<tr class="odd">
-<td><strong>Programme:</strong></td>
-<td>Advanced Diploma in Data Science – Full Time (1st Year)</td>
-</tr>
-<tr class="even">
-<td><strong>Module Title:</strong></td>
-<td>STATISTICS 1 FOR DATA SCIENCE AND BUSINESS ANALYTICS</td>
-</tr>
-<tr class="odd">
-<td><strong>Total Teaching Hours:</strong></td>
-<td>36 hours</td>
-</tr>
-<tr class="even">
-<td><strong>Schedule Note:</strong></td>
-<td>Held on weekdays, except Friday</td>
-</tr>
-</tbody>
-</table>
-<hr />
-</div>
-<div id="aim-of-the-module" class="section level1">
-<h1>Aim of the Module</h1>
-<p>This module introduces students to the practical foundations of
-statistics for data science and business analytics. The emphasis is on
-using statistical thinking to understand data, summarize business and
-scientific information, model uncertainty, and make evidence-based
-decisions.</p>
-<p>By the end of the module, students should be comfortable moving from
-raw data to useful insight: visualizing data, describing patterns,
-understanding probability, working with common probability
-distributions, and applying one-sample hypothesis testing in realistic
-data-driven contexts.</p>
-<hr />
-</div>
-<div id="course-content-and-teaching-hours" class="section level1">
-<h1>Course Content and Teaching Hours</h1>
-<div style="text-align: center;">
-<table>
-<colgroup>
-<col width="33%" />
-<col width="33%" />
-<col width="33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Topic</strong></th>
-<th><strong>Practical Focus for Students</strong></th>
-<th><strong>Teaching Hours</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="topic1.html">Fundamentals of sets and probability
-theory</a></td>
-<td>Using sets, events, Venn diagrams, probability rules, conditional
-probability, independence, and Bayes’ theorem to reason about
-uncertainty in real problems.</td>
-<td>6</td>
-</tr>
-<tr class="even">
-<td><a href="topic2.html">Introduction to Statistics</a></td>
-<td>Understanding samples, populations, sampling distributions, the
-sampling distribution of the sample mean, the central limit theorem, and
-sampling error.</td>
-<td>6</td>
-</tr>
-<tr class="odd">
-<td><a href="Introduction_to_Descriptive_Statistics_Topic_3.html">Introduction
-to descriptive statistics</a></td>
-<td>Using graphs and numerical summaries to understand data: bar graphs,
-pie charts, line graphs, ogives, relative frequency tables, dot plots,
-histograms, stem-and-leaf plots, mean, median, mode, range,
-interquartile range, outliers, and box-and-whisker plots.</td>
-<td>6</td>
-</tr>
-<tr class="even">
-<td><a href="Discrete_Probability_Distributions_Topic_4.html">Discrete
-probability distributions</a></td>
-<td>Identifying and working with discrete random variables and
-performing probability calculations using discrete distributions.</td>
-<td>6</td>
-</tr>
-<tr class="odd">
-<td>Continuous probability distributions</td>
-<td>Identifying and working with continuous random variables and
-performing probability calculations using continuous distributions.</td>
-<td>6</td>
-</tr>
-<tr class="even">
-<td>Hypothesis testing using one sample for normal and t
-distributions</td>
-<td>Applying null and alternative hypotheses, test statistics, p-values,
-confidence intervals, and one-sample tests for practical
-decision-making.</td>
-<td>6</td>
-</tr>
-<tr class="odd">
-<td><strong>Total</strong></td>
-<td></td>
-<td><strong>36</strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<hr />
-</div>
-<div id="assignments" class="section level1">
-<h1>Assignments</h1>
+<div id="topic-4-discrete-probability-distributions" class="section level1">
+<h1>Topic 4: Discrete Probability Distributions</h1>
+<p>This topic introduces discrete random variables and discrete
+probability distributions. Students will learn how to identify discrete
+random variables, construct probability distributions, calculate
+probabilities, and interpret results in practical data science and
+business analytics problems.</p>
+<p>In business and data science, many variables are counts. For
+example:</p>
 <ul>
-<li><p>Assignment 1 - Practice Questions on topic 1</p></li>
-<li><p><a href="assignment2.html">Assignment 2</a>- Based on Topic
-3</p></li>
+<li>number of customers arriving at a counter;</li>
+<li>number of products returned in a day;</li>
+<li>number of defective items in a batch;</li>
+<li>number of successful sales calls;</li>
+<li>number of loan defaults;</li>
+<li>number of complaints received;</li>
+<li>number of clicks on an advertisement;</li>
+<li>number of fraud alerts.</li>
+</ul>
+<p>These variables take separate countable values. Therefore, they are
+modeled using discrete random variables and discrete probability
+distributions.</p>
+<p>The purpose of this topic is to help students understand how discrete
+probability models can be used to describe uncertain count-based
+outcomes.</p>
+<div id="discrete-random-variables" class="section level2">
+<h2>Discrete Random Variables</h2>
+<p>A random variable is a numerical value assigned to the outcome of a
+random experiment.</p>
+<p>A discrete random variable is a random variable that takes countable
+values.</p>
+<p>The values may be finite or countably infinite.</p>
+<div id="examples" class="section level3">
+<h3>Examples</h3>
+<p>The following are examples of discrete random variables:</p>
+<ul>
+<li>number of customers entering a shop in one hour;</li>
+<li>number of defective items in a sample;</li>
+<li>number of successful marketing calls out of 20 calls;</li>
+<li>number of complaints received in a day;</li>
+<li>number of students absent from a class;</li>
+<li>number of times a customer buys a product in a month.</li>
 </ul>
 </div>
-<div id="intended-learning-outcomes-ilos" class="section level1">
-<h1>Intended Learning Outcomes (ILOs)</h1>
-<p>On completion of this module, a successful student should be able
-to:</p>
+<div id="non-examples" class="section level3">
+<h3>Non-Examples</h3>
+<p>The following are not discrete random variables. They are continuous
+random variables:</p>
+<ul>
+<li>delivery time;</li>
+<li>customer waiting time;</li>
+<li>monthly income;</li>
+<li>body weight;</li>
+<li>temperature;</li>
+<li>product lifetime.</li>
+</ul>
+<p>These variables can take values over intervals.</p>
+</div>
+<div id="practical-example" class="section level3">
+<h3>Practical Example</h3>
+<p>Suppose a call centre receives customer complaints. Let:</p>
+<p><span class="math display">\[
+X = \text{number of complaints received in one hour}
+\]</span></p>
+<p>Possible values of <span class="math inline">\(X\)</span> are:</p>
+<p><span class="math display">\[
+0,\ 1,\ 2,\ 3,\ldots
+\]</span></p>
+<p>Since the number of complaints is a count, <span class="math inline">\(X\)</span> is a discrete random variable.</p>
+</div>
+<div id="activity-4.1" class="section level3">
+<h3>Activity 4.1</h3>
+<p>For each variable, state whether it is discrete or continuous.</p>
 <ol style="list-style-type: decimal">
-<li>Use bar graphs, pie charts, line graphs and ogives, Venn diagrams,
-relative frequency tables, joint distributions, dot plots, histograms,
-and stem-and-leaf plots to visualize data.</li>
-<li>Use mean, median, mode, range, interquartile range, outliers, and
-box-and-whisker plots to analyze data.</li>
-<li>Understand the concepts of union, intersection, complement of sets,
-independent events, and dependent events.</li>
-<li>Understand conditional probability, the addition and multiplication
-rules of probability, and Bayes’ theorem.</li>
-<li>Understand different discrete and continuous random variables and
-perform calculations using distributions.</li>
-<li>Explain the concepts of sample, population, sampling distribution of
-the sample mean, central limit theorem, and sampling error.</li>
-<li>Understand the concepts of null and alternative hypotheses, test
-statistics, p-values, and confidence intervals, and perform hypothesis
-testing involving one sample.</li>
+<li>Number of customers who buy a product in a day.</li>
+<li>Time taken to deliver an order.</li>
+<li>Number of defective items in a sample of 50 items.</li>
+<li>Monthly spending of a customer.</li>
+<li>Number of loan defaults among 100 customers.</li>
+<li>Waiting time at a bank counter.</li>
 </ol>
-<hr />
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<ol style="list-style-type: decimal">
+<li><p>Discrete, because it is a count.</p></li>
+<li><p>Continuous, because time can take values over an
+interval.</p></li>
+<li><p>Discrete, because it is a count.</p></li>
+<li><p>Continuous, because spending can be measured over an
+interval.</p></li>
+<li><p>Discrete, because it is a count.</p></li>
+<li><p>Continuous, because waiting time can take values over an
+interval.</p></li>
+</ol>
+</details>
 </div>
-<div id="assessment-and-course-work-breakdown" class="section level1">
-<h1>Assessment and Course Work Breakdown</h1>
-<p>Each module contains the following assessments and course work based
-on the Outcome Based Learning (OBL) system.</p>
-<div style="text-align: center;">
-<table>
-<thead>
-<tr class="header">
-<th><strong>Assessment Component</strong></th>
-<th><strong>Weight</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Automated assessment / in-class lab session</td>
-<td>10%</td>
-</tr>
-<tr class="even">
-<td>In-class course work 1</td>
-<td>25%</td>
-</tr>
-<tr class="odd">
-<td>In-class course work 2</td>
-<td>25%</td>
-</tr>
-<tr class="even">
-<td>End module course work</td>
-<td>40%</td>
-</tr>
-<tr class="odd">
-<td><strong>Total</strong></td>
-<td><strong>100%</strong></td>
-</tr>
-</tbody>
-</table>
+<div id="key-message-for-students" class="section level3">
+<h3>Key Message for Students</h3>
+<p>A discrete random variable counts something. If the possible values
+are separate countable numbers, the variable is discrete.</p>
 </div>
-<p>One in-class course work will be individualized, and the other one
-will be a group evaluation.</p>
-<p>To pass the module, students must obtain at least 50% from the final
-examination, and the overall pass mark is at least 50%.</p>
-<hr />
 </div>
-<div id="grading-criteria" class="section level1">
-<h1>Grading Criteria</h1>
-<div style="text-align: center;">
-<table>
-<colgroup>
-<col width="29%" />
-<col width="16%" />
-<col width="25%" />
-<col width="29%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Range of Marks</strong></th>
-<th><strong>Grade</strong></th>
-<th><strong>Grade Point</strong></th>
-<th><strong>Classification</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>85–100</td>
-<td>A+</td>
-<td>4.0</td>
-<td>Distinction</td>
-</tr>
-<tr class="even">
-<td>70–84</td>
-<td>A</td>
-<td>4.0</td>
-<td>Distinction</td>
-</tr>
-<tr class="odd">
-<td>65–69</td>
-<td>A-</td>
-<td>3.8</td>
-<td>Merit</td>
-</tr>
-<tr class="even">
-<td>60–64</td>
-<td>B+</td>
-<td>3.3</td>
-<td>Merit</td>
-</tr>
-<tr class="odd">
-<td>55–59</td>
-<td>B</td>
-<td>3.0</td>
-<td>Pass</td>
-</tr>
-<tr class="even">
-<td>50–54</td>
-<td>B-</td>
-<td>2.7</td>
-<td>Pass</td>
-</tr>
-<tr class="odd">
-<td>45–49</td>
-<td>C+</td>
-<td>2.3</td>
-<td>N/A</td>
-</tr>
-<tr class="even">
-<td>40–44</td>
-<td>C</td>
-<td>2.0</td>
-<td>N/A</td>
-</tr>
-<tr class="odd">
-<td>35–39</td>
-<td>C-</td>
-<td>1.7</td>
-<td>N/A</td>
-</tr>
-<tr class="even">
-<td>30–34</td>
-<td>D+</td>
-<td>1.3</td>
-<td>N/A</td>
-</tr>
-<tr class="odd">
-<td>25–29</td>
-<td>D</td>
-<td>1.0</td>
-<td>N/A</td>
-</tr>
-<tr class="even">
-<td>00–24</td>
-<td>E</td>
-<td>0.0</td>
-<td>N/A</td>
-</tr>
-</tbody>
-</table>
-</div>
-<hr />
-</div>
-<div id="learning-approach" class="section level1">
-<h1>Learning Approach</h1>
-<p>Students are expected to learn statistics as a practical language for
-data-based reasoning. Each topic should be studied with examples,
-calculations, visualizations, and interpretation. In business analytics
-and data science, the goal is not only to compute an answer, but also to
-explain what the answer means for a decision.</p>
-<p>A successful student should therefore practise:</p>
+<div id="probability-distribution-of-a-discrete-random-variable" class="section level2">
+<h2>Probability Distribution of a Discrete Random Variable</h2>
+<p>A probability distribution gives the possible values of a random
+variable and the probability attached to each value.</p>
+<p>For a discrete random variable <span class="math inline">\(X\)</span>, the probability distribution
+lists:</p>
 <ul>
-<li>drawing and interpreting statistical graphs;</li>
-<li>summarizing data using appropriate numerical measures;</li>
-<li>translating real situations into probability statements;</li>
-<li>identifying suitable random variables and probability
-distributions;</li>
-<li>interpreting uncertainty using sampling distributions, confidence
-intervals, and p-values;</li>
-<li>communicating statistical conclusions clearly and responsibly.</li>
+<li>the possible values of <span class="math inline">\(X\)</span>;</li>
+<li>the probability of each value.</li>
+</ul>
+<div id="probability-mass-function" class="section level3">
+<h3>Probability Mass Function</h3>
+<p>The probability mass function, or pmf, gives the probability that a
+discrete random variable equals a particular value.</p>
+<p>It is written as:</p>
+<p><span class="math display">\[
+P(X = x)
+\]</span></p>
+<p>or:</p>
+<p><span class="math display">\[
+p(x)
+\]</span></p>
+</div>
+<div id="conditions-for-a-probability-distribution" class="section level3">
+<h3>Conditions for a Probability Distribution</h3>
+<p>For a discrete probability distribution to be valid, two conditions
+must be satisfied.</p>
+<p>First, every probability must be between 0 and 1:</p>
+<p><span class="math display">\[
+0 \leq P(X = x) \leq 1
+\]</span></p>
+<p>Second, the probabilities must add up to 1:</p>
+<p><span class="math display">\[
+\sum P(X = x) = 1
+\]</span></p>
+</div>
+<div id="example" class="section level3">
+<h3>Example</h3>
+<p>Suppose <span class="math inline">\(X\)</span> is the number of
+products returned by a customer in a month.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right"><span class="math inline">\(x\)</span></th>
+<th align="right">0</th>
+<th align="right">1</th>
+<th align="right">2</th>
+<th align="right">3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right"><span class="math inline">\(P(X=x)\)</span></td>
+<td align="right">0.50</td>
+<td align="right">0.30</td>
+<td align="right">0.15</td>
+<td align="right">0.05</td>
+</tr>
+</tbody>
+</table>
+<p>This is a valid probability distribution because:</p>
+<p><span class="math display">\[
+0.50 + 0.30 + 0.15 + 0.05 = 1
+\]</span></p>
+</div>
+<div id="interpretation" class="section level3">
+<h3>Interpretation</h3>
+<p>The probability that a customer returns no products is:</p>
+<p><span class="math display">\[
+P(X=0) = 0.50
+\]</span></p>
+<p>The probability that a customer returns exactly two products is:</p>
+<p><span class="math display">\[
+P(X=2) = 0.15
+\]</span></p>
+<p>The probability that a customer returns at least one product is:</p>
+<p><span class="math display">\[
+P(X \geq 1) = P(X=1) + P(X=2) + P(X=3)
+\]</span></p>
+<p><span class="math display">\[
+P(X \geq 1) = 0.30 + 0.15 + 0.05 = 0.50
+\]</span></p>
+<p>Alternatively:</p>
+<p><span class="math display">\[
+P(X \geq 1) = 1 - P(X=0) = 1 - 0.50 = 0.50
+\]</span></p>
+</div>
+<div id="activity-4.2" class="section level3">
+<h3>Activity 4.2</h3>
+<p>A random variable <span class="math inline">\(X\)</span> represents
+the number of complaints received by a company in one day.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right"><span class="math inline">\(x\)</span></th>
+<th align="right">0</th>
+<th align="right">1</th>
+<th align="right">2</th>
+<th align="right">3</th>
+<th align="right">4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right"><span class="math inline">\(P(X=x)\)</span></td>
+<td align="right">0.10</td>
+<td align="right">0.25</td>
+<td align="right">0.30</td>
+<td align="right">0.20</td>
+<td align="right">0.15</td>
+</tr>
+</tbody>
+</table>
+<p>Answer the following.</p>
+<ol style="list-style-type: decimal">
+<li>Is this a valid probability distribution?</li>
+<li>Find <span class="math inline">\(P(X=2)\)</span>.</li>
+<li>Find <span class="math inline">\(P(X \leq 2)\)</span>.</li>
+<li>Find <span class="math inline">\(P(X &gt; 2)\)</span>.</li>
+<li>Interpret <span class="math inline">\(P(X &gt; 2)\)</span> in
+words.</li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>The probabilities add to:</p>
+<p><span class="math display">\[
+0.10 + 0.25 + 0.30 + 0.20 + 0.15 = 1.00
+\]</span></p>
+<p>All probabilities are between 0 and 1. Therefore, this is a valid
+probability distribution.</p>
+<p><span class="math display">\[
+P(X=2) = 0.30
+\]</span></p>
+<p><span class="math display">\[
+P(X \leq 2) = P(X=0) + P(X=1) + P(X=2)
+\]</span></p>
+<p><span class="math display">\[
+P(X \leq 2) = 0.10 + 0.25 + 0.30 = 0.65
+\]</span></p>
+<p><span class="math display">\[
+P(X &gt; 2) = P(X=3) + P(X=4)
+\]</span></p>
+<p><span class="math display">\[
+P(X &gt; 2) = 0.20 + 0.15 = 0.35
+\]</span></p>
+<p>Interpretation:</p>
+<p>There is a 35% chance that the company receives more than two
+complaints in one day.</p>
+</details>
+</div>
+</div>
+<div id="expected-value-of-a-discrete-random-variable" class="section level2">
+<h2>Expected Value of a Discrete Random Variable</h2>
+<p>The expected value is the long-run average value of a random
+variable.</p>
+<p>For a discrete random variable <span class="math inline">\(X\)</span>, the expected value is:</p>
+<p><span class="math display">\[
+E(X) = \sum xP(X=x)
+\]</span></p>
+<p>The expected value is also called the mean of the random
+variable.</p>
+<p>It is commonly denoted by:</p>
+<p><span class="math display">\[
+\mu
+\]</span></p>
+<div id="practical-meaning" class="section level3">
+<h3>Practical Meaning</h3>
+<p>The expected value does not necessarily have to be a possible value
+of the random variable.</p>
+<p>For example, the expected number of complaints may be 2.4. This does
+not mean that exactly 2.4 complaints can occur. It means that the
+long-run average is 2.4 complaints per period.</p>
+</div>
+<div id="example-1" class="section level3">
+<h3>Example</h3>
+<p>Suppose <span class="math inline">\(X\)</span> is the number of
+products returned by a customer in a month.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right"><span class="math inline">\(x\)</span></th>
+<th align="right">0</th>
+<th align="right">1</th>
+<th align="right">2</th>
+<th align="right">3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right"><span class="math inline">\(P(X=x)\)</span></td>
+<td align="right">0.50</td>
+<td align="right">0.30</td>
+<td align="right">0.15</td>
+<td align="right">0.05</td>
+</tr>
+</tbody>
+</table>
+<p>Then:</p>
+<p><span class="math display">\[
+E(X) = 0(0.50) + 1(0.30) + 2(0.15) + 3(0.05)
+\]</span></p>
+<p><span class="math display">\[
+E(X) = 0 + 0.30 + 0.30 + 0.15 = 0.75
+\]</span></p>
+<p>The expected number of product returns per customer is 0.75.</p>
+</div>
+<div id="business-interpretation" class="section level3">
+<h3>Business Interpretation</h3>
+<p>If the company has many similar customers, the long-run average
+number of returns is expected to be about 0.75 per customer per
+month.</p>
+<p>This can help the company plan return handling, staffing, and
+inventory adjustments.</p>
+</div>
+<div id="activity-4.3" class="section level3">
+<h3>Activity 4.3</h3>
+<p>A company records the number of warranty claims per customer.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right"><span class="math inline">\(x\)</span></th>
+<th align="right">0</th>
+<th align="right">1</th>
+<th align="right">2</th>
+<th align="right">3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right"><span class="math inline">\(P(X=x)\)</span></td>
+<td align="right">0.60</td>
+<td align="right">0.25</td>
+<td align="right">0.10</td>
+<td align="right">0.05</td>
+</tr>
+</tbody>
+</table>
+<p>Find <span class="math inline">\(E(X)\)</span> and interpret the
+result.</p>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p><span class="math display">\[
+E(X) = 0(0.60) + 1(0.25) + 2(0.10) + 3(0.05)
+\]</span></p>
+<p><span class="math display">\[
+E(X) = 0 + 0.25 + 0.20 + 0.15 = 0.60
+\]</span></p>
+<p>The expected number of warranty claims per customer is 0.60.</p>
+<p>Interpretation:</p>
+<p>In the long run, the company expects about 0.60 warranty claims per
+customer.</p>
+</details>
+</div>
+</div>
+<div id="variance-and-standard-deviation-of-a-discrete-random-variable" class="section level2">
+<h2>Variance and Standard Deviation of a Discrete Random Variable</h2>
+<p>The variance measures how much the values of a random variable vary
+around the expected value.</p>
+<p>For a discrete random variable:</p>
+<p><span class="math display">\[
+Var(X) = E[(X-\mu)^2]
+\]</span></p>
+<p>where:</p>
+<p><span class="math display">\[
+\mu = E(X)
+\]</span></p>
+<p>An equivalent formula is:</p>
+<p><span class="math display">\[
+Var(X) = E(X^2) - [E(X)]^2
+\]</span></p>
+<p>where:</p>
+<p><span class="math display">\[
+E(X^2) = \sum x^2P(X=x)
+\]</span></p>
+<p>The standard deviation is:</p>
+<p><span class="math display">\[
+SD(X) = \sqrt{Var(X)}
+\]</span></p>
+<div id="practical-meaning-1" class="section level3">
+<h3>Practical Meaning</h3>
+<p>The expected value tells us the average outcome.</p>
+<p>The variance and standard deviation tell us how much uncertainty or
+variation exists around that average.</p>
+<p>In business analytics, a larger standard deviation means less
+predictable outcomes.</p>
+</div>
+<div id="example-2" class="section level3">
+<h3>Example</h3>
+<p>Suppose <span class="math inline">\(X\)</span> is the number of
+products returned by a customer in a month.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right"><span class="math inline">\(x\)</span></th>
+<th align="right">0</th>
+<th align="right">1</th>
+<th align="right">2</th>
+<th align="right">3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right"><span class="math inline">\(P(X=x)\)</span></td>
+<td align="right">0.50</td>
+<td align="right">0.30</td>
+<td align="right">0.15</td>
+<td align="right">0.05</td>
+</tr>
+</tbody>
+</table>
+<p>We already found:</p>
+<p><span class="math display">\[
+E(X) = 0.75
+\]</span></p>
+<p>Now calculate:</p>
+<p><span class="math display">\[
+E(X^2) = 0^2(0.50) + 1^2(0.30) + 2^2(0.15) + 3^2(0.05)
+\]</span></p>
+<p><span class="math display">\[
+E(X^2) = 0 + 0.30 + 0.60 + 0.45 = 1.35
+\]</span></p>
+<p>Therefore:</p>
+<p><span class="math display">\[
+Var(X) = E(X^2) - [E(X)]^2
+\]</span></p>
+<p><span class="math display">\[
+Var(X) = 1.35 - (0.75)^2
+\]</span></p>
+<p><span class="math display">\[
+Var(X) = 1.35 - 0.5625 = 0.7875
+\]</span></p>
+<p>The standard deviation is:</p>
+<p><span class="math display">\[
+SD(X) = \sqrt{0.7875} = 0.8874
+\]</span></p>
+</div>
+<div id="business-interpretation-1" class="section level3">
+<h3>Business Interpretation</h3>
+<p>The average number of returns is 0.75, and the standard deviation is
+about 0.89.</p>
+<p>This gives the company an idea of the typical variation in returns
+from customer to customer.</p>
+</div>
+<div id="activity-4.4" class="section level3">
+<h3>Activity 4.4</h3>
+<p>For the warranty claim distribution below:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right"><span class="math inline">\(x\)</span></th>
+<th align="right">0</th>
+<th align="right">1</th>
+<th align="right">2</th>
+<th align="right">3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right"><span class="math inline">\(P(X=x)\)</span></td>
+<td align="right">0.60</td>
+<td align="right">0.25</td>
+<td align="right">0.10</td>
+<td align="right">0.05</td>
+</tr>
+</tbody>
+</table>
+<p>Find:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(E(X^2)\)</span></li>
+<li><span class="math inline">\(Var(X)\)</span></li>
+<li><span class="math inline">\(SD(X)\)</span></li>
+</ol>
+<p>Use the value <span class="math inline">\(E(X)=0.60\)</span> from
+Activity 4.3.</p>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>Calculate <span class="math inline">\(E(X^2)\)</span>:</p>
+<p><span class="math display">\[
+E(X^2) = 0^2(0.60) + 1^2(0.25) + 2^2(0.10) + 3^2(0.05)
+\]</span></p>
+<p><span class="math display">\[
+E(X^2) = 0 + 0.25 + 0.40 + 0.45 = 1.10
+\]</span></p>
+<p>Now:</p>
+<p><span class="math display">\[
+Var(X) = E(X^2) - [E(X)]^2
+\]</span></p>
+<p><span class="math display">\[
+Var(X) = 1.10 - (0.60)^2
+\]</span></p>
+<p><span class="math display">\[
+Var(X) = 1.10 - 0.36 = 0.74
+\]</span></p>
+<p>Therefore:</p>
+<p><span class="math display">\[
+SD(X) = \sqrt{0.74} = 0.8602
+\]</span></p>
+</details>
+</div>
+</div>
+<div id="bernoulli-distribution" class="section level2">
+<h2>Bernoulli Distribution</h2>
+<p>A Bernoulli distribution is used when there are only two possible
+outcomes.</p>
+<p>These outcomes are often called:</p>
+<ul>
+<li>success;</li>
+<li>failure.</li>
+</ul>
+<p>A Bernoulli random variable takes values:</p>
+<p><span class="math display">\[
+X = 1
+\]</span></p>
+<p>for success, and:</p>
+<p><span class="math display">\[
+X = 0
+\]</span></p>
+<p>for failure.</p>
+<p>If the probability of success is <span class="math inline">\(p\)</span>, then:</p>
+<p><span class="math display">\[
+P(X=1) = p
+\]</span></p>
+<p>and:</p>
+<p><span class="math display">\[
+P(X=0) = 1-p
+\]</span></p>
+<p>We write:</p>
+<p><span class="math display">\[
+X \sim Bernoulli(p)
+\]</span></p>
+<div id="expected-value-and-variance" class="section level3">
+<h3>Expected Value and Variance</h3>
+<p>For a Bernoulli random variable:</p>
+<p><span class="math display">\[
+E(X) = p
+\]</span></p>
+<p>and:</p>
+<p><span class="math display">\[
+Var(X) = p(1-p)
+\]</span></p>
+</div>
+<div id="business-analytics-example" class="section level3">
+<h3>Business Analytics Example</h3>
+<p>Suppose a customer either purchases or does not purchase after
+clicking an advertisement.</p>
+<p>Let:</p>
+<p><span class="math display">\[
+X =
+\begin{cases}
+1, &amp; \text{if the customer purchases} \\
+0, &amp; \text{if the customer does not purchase}
+\end{cases}
+\]</span></p>
+<p>If the probability of purchase is:</p>
+<p><span class="math display">\[
+p = 0.20
+\]</span></p>
+<p>then:</p>
+<p><span class="math display">\[
+X \sim Bernoulli(0.20)
+\]</span></p>
+<p>The expected value is:</p>
+<p><span class="math display">\[
+E(X) = 0.20
+\]</span></p>
+<p>The variance is:</p>
+<p><span class="math display">\[
+Var(X) = 0.20(0.80) = 0.16
+\]</span></p>
+</div>
+<div id="interpretation-1" class="section level3">
+<h3>Interpretation</h3>
+<p>The expected value 0.20 means that the long-run purchase rate is
+20%.</p>
+<p>This does not mean a single customer purchases 0.20 times. It means
+that over many similar customers, about 20% are expected to
+purchase.</p>
+</div>
+<div id="activity-4.5" class="section level3">
+<h3>Activity 4.5</h3>
+<p>A loan applicant either defaults or does not default.</p>
+<p>Let:</p>
+<p><span class="math display">\[
+X =
+\begin{cases}
+1, &amp; \text{if the applicant defaults} \\
+0, &amp; \text{if the applicant does not default}
+\end{cases}
+\]</span></p>
+<p>Suppose:</p>
+<p><span class="math display">\[
+P(X=1)=0.08
+\]</span></p>
+<p>Find:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(P(X=0)\)</span></li>
+<li><span class="math inline">\(E(X)\)</span></li>
+<li><span class="math inline">\(Var(X)\)</span></li>
+<li>Interpret <span class="math inline">\(E(X)\)</span>.</li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>Since <span class="math inline">\(P(X=1)=0.08\)</span>:</p>
+<p><span class="math display">\[
+P(X=0) = 1 - 0.08 = 0.92
+\]</span></p>
+<p>The expected value is:</p>
+<p><span class="math display">\[
+E(X) = p = 0.08
+\]</span></p>
+<p>The variance is:</p>
+<p><span class="math display">\[
+Var(X) = p(1-p) = 0.08(0.92)
+\]</span></p>
+<p><span class="math display">\[
+Var(X) = 0.0736
+\]</span></p>
+<p>Interpretation:</p>
+<p>The expected value 0.08 means that the long-run default rate is
+8%.</p>
+</details>
+</div>
+</div>
+<div id="binomial-distribution" class="section level2">
+<h2>Binomial Distribution</h2>
+<p>The binomial distribution is used to model the number of successes in
+a fixed number of independent Bernoulli trials.</p>
+<p>A binomial random variable counts how many successes occur.</p>
+<p>We write:</p>
+<p><span class="math display">\[
+X \sim Binomial(n,p)
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(n\)</span> is the number of trials;</li>
+<li><span class="math inline">\(p\)</span> is the probability of success
+in each trial.</li>
+</ul>
+<div id="conditions-for-the-binomial-distribution" class="section level3">
+<h3>Conditions for the Binomial Distribution</h3>
+<p>The binomial distribution is appropriate when:</p>
+<ol style="list-style-type: decimal">
+<li>there is a fixed number of trials;</li>
+<li>each trial has two possible outcomes;</li>
+<li>the probability of success is the same for every trial;</li>
+<li>the trials are independent;</li>
+<li>the random variable counts the number of successes.</li>
+</ol>
+</div>
+<div id="binomial-probability-formula" class="section level3">
+<h3>Binomial Probability Formula</h3>
+<p>If:</p>
+<p><span class="math display">\[
+X \sim Binomial(n,p)
+\]</span></p>
+<p>then:</p>
+<p><span class="math display">\[
+P(X=x) = {n \choose x}p^x(1-p)^{n-x}
+\]</span></p>
+<p>where:</p>
+<p><span class="math display">\[
+{n \choose x} = \frac{n!}{x!(n-x)!}
+\]</span></p>
+</div>
+<div id="expected-value-and-variance-1" class="section level3">
+<h3>Expected Value and Variance</h3>
+<p>For a binomial random variable:</p>
+<p><span class="math display">\[
+E(X) = np
+\]</span></p>
+<p>and:</p>
+<p><span class="math display">\[
+Var(X) = np(1-p)
+\]</span></p>
+<p>The standard deviation is:</p>
+<p><span class="math display">\[
+SD(X) = \sqrt{np(1-p)}
+\]</span></p>
+</div>
+<div id="business-analytics-example-1" class="section level3">
+<h3>Business Analytics Example</h3>
+<p>Suppose a company calls 10 potential customers. Each customer
+independently has a 0.30 probability of making a purchase.</p>
+<p>Let:</p>
+<p><span class="math display">\[
+X = \text{number of customers who make a purchase}
+\]</span></p>
+<p>Then:</p>
+<p><span class="math display">\[
+X \sim Binomial(10, 0.30)
+\]</span></p>
+</div>
+<div id="probability-of-exactly-4-purchases" class="section level3">
+<h3>Probability of Exactly 4 Purchases</h3>
+<p>We want:</p>
+<p><span class="math display">\[
+P(X=4)
+\]</span></p>
+<p>Using the binomial formula:</p>
+<p><span class="math display">\[
+P(X=4) = {10 \choose 4}(0.30)^4(0.70)^6
+\]</span></p>
+<p>Since:</p>
+<p><span class="math display">\[
+{10 \choose 4} = 210
+\]</span></p>
+<p>we get:</p>
+<p><span class="math display">\[
+P(X=4) = 210(0.30)^4(0.70)^6
+\]</span></p>
+<p><span class="math display">\[
+P(X=4) = 0.2001
+\]</span></p>
+<p>approximately.</p>
+</div>
+<div id="probability-of-at-least-one-purchase" class="section level3">
+<h3>Probability of At Least One Purchase</h3>
+<p>The probability of at least one purchase is:</p>
+<p><span class="math display">\[
+P(X \geq 1)
+\]</span></p>
+<p>It is easier to use the complement rule:</p>
+<p><span class="math display">\[
+P(X \geq 1) = 1 - P(X=0)
+\]</span></p>
+<p>Now:</p>
+<p><span class="math display">\[
+P(X=0) = {10 \choose 0}(0.30)^0(0.70)^{10}
+\]</span></p>
+<p><span class="math display">\[
+P(X=0) = (0.70)^{10} = 0.0282
+\]</span></p>
+<p>Therefore:</p>
+<p><span class="math display">\[
+P(X \geq 1) = 1 - 0.0282 = 0.9718
+\]</span></p>
+</div>
+<div id="expected-number-of-purchases" class="section level3">
+<h3>Expected Number of Purchases</h3>
+<p><span class="math display">\[
+E(X) = np = 10(0.30) = 3
+\]</span></p>
+<p>The expected number of purchases is 3.</p>
+</div>
+<div id="activity-4.6" class="section level3">
+<h3>Activity 4.6</h3>
+<p>A digital advertisement is shown to 8 customers. Each customer
+independently has a 0.25 probability of clicking the advertisement.</p>
+<p>Let:</p>
+<p><span class="math display">\[
+X = \text{number of customers who click}
+\]</span></p>
+<p>Answer the following.</p>
+<ol style="list-style-type: decimal">
+<li>State the distribution of <span class="math inline">\(X\)</span>.</li>
+<li>Find <span class="math inline">\(P(X=2)\)</span>.</li>
+<li>Find <span class="math inline">\(P(X=0)\)</span>.</li>
+<li>Find <span class="math inline">\(P(X \geq 1)\)</span>.</li>
+<li>Find <span class="math inline">\(E(X)\)</span>.</li>
+<li>Interpret <span class="math inline">\(E(X)\)</span>.</li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>There are 8 independent trials, each with probability of success
+0.25.</p>
+<p>Therefore:</p>
+<p><span class="math display">\[
+X \sim Binomial(8,0.25)
+\]</span></p>
+<p>For <span class="math inline">\(P(X=2)\)</span>:</p>
+<p><span class="math display">\[
+P(X=2) = {8 \choose 2}(0.25)^2(0.75)^6
+\]</span></p>
+<p><span class="math display">\[
+{8 \choose 2} = 28
+\]</span></p>
+<p>So:</p>
+<p><span class="math display">\[
+P(X=2) = 28(0.25)^2(0.75)^6
+\]</span></p>
+<p><span class="math display">\[
+P(X=2) = 0.3115
+\]</span></p>
+<p>approximately.</p>
+<p>For <span class="math inline">\(P(X=0)\)</span>:</p>
+<p><span class="math display">\[
+P(X=0) = {8 \choose 0}(0.25)^0(0.75)^8
+\]</span></p>
+<p><span class="math display">\[
+P(X=0) = 0.75^8 = 0.1001
+\]</span></p>
+<p>approximately.</p>
+<p>For <span class="math inline">\(P(X \geq 1)\)</span>:</p>
+<p><span class="math display">\[
+P(X \geq 1) = 1 - P(X=0)
+\]</span></p>
+<p><span class="math display">\[
+P(X \geq 1) = 1 - 0.1001 = 0.8999
+\]</span></p>
+<p>The expected value is:</p>
+<p><span class="math display">\[
+E(X) = np = 8(0.25) = 2
+\]</span></p>
+<p>Interpretation:</p>
+<p>Out of 8 customers, the expected number of clicks is 2.</p>
+</details>
+</div>
+</div>
+<div id="poisson-distribution" class="section level2">
+<h2>Poisson Distribution</h2>
+<p>The Poisson distribution is used to model the number of times an
+event occurs in a fixed interval of time, space, area, or volume.</p>
+<p>Examples include:</p>
+<ul>
+<li>number of customer arrivals per hour;</li>
+<li>number of website visits per minute;</li>
+<li>number of defects per product batch;</li>
+<li>number of accidents per week;</li>
+<li>number of complaints per day;</li>
+<li>number of system failures per month.</li>
+</ul>
+<p>We write:</p>
+<p><span class="math display">\[
+X \sim Poisson(\lambda)
+\]</span></p>
+<p>where:</p>
+<p><span class="math display">\[
+\lambda
+\]</span></p>
+<p>is the average number of events in the given interval.</p>
+<div id="poisson-probability-formula" class="section level3">
+<h3>Poisson Probability Formula</h3>
+<p>If:</p>
+<p><span class="math display">\[
+X \sim Poisson(\lambda)
+\]</span></p>
+<p>then:</p>
+<p><span class="math display">\[
+P(X=x) = \frac{e^{-\lambda}\lambda^x}{x!}
+\]</span></p>
+<p>where:</p>
+<p><span class="math display">\[
+x = 0,1,2,\ldots
+\]</span></p>
+</div>
+<div id="expected-value-and-variance-2" class="section level3">
+<h3>Expected Value and Variance</h3>
+<p>For a Poisson random variable:</p>
+<p><span class="math display">\[
+E(X) = \lambda
+\]</span></p>
+<p>and:</p>
+<p><span class="math display">\[
+Var(X) = \lambda
+\]</span></p>
+<p>The standard deviation is:</p>
+<p><span class="math display">\[
+SD(X) = \sqrt{\lambda}
+\]</span></p>
+</div>
+<div id="when-to-use-the-poisson-distribution" class="section level3">
+<h3>When to Use the Poisson Distribution</h3>
+<p>Use the Poisson distribution when:</p>
+<ul>
+<li>the random variable counts events;</li>
+<li>events occur in a fixed interval;</li>
+<li>events occur independently;</li>
+<li>the average rate is approximately constant;</li>
+<li>two events do not occur at exactly the same instant in a very small
+interval.</li>
 </ul>
 </div>
-<div id="instructor-information" class="section level1">
-<h1>Instructor Information</h1>
-<p><strong>Lecturer:</strong> Dr. Rajitha M. Silva<br />
-<strong>Email:</strong> <a href="mailto:rajithas@vl.nibm.lk">rajithas@vl.nibm.lk</a></p>
-<hr />
-<p><em>This course is effective from 7th May 2026.</em></p>
+<div id="business-analytics-example-2" class="section level3">
+<h3>Business Analytics Example</h3>
+<p>Suppose a call centre receives an average of 3 complaints per
+hour.</p>
+<p>Let:</p>
+<p><span class="math display">\[
+X = \text{number of complaints received in one hour}
+\]</span></p>
+<p>Then:</p>
+<p><span class="math display">\[
+X \sim Poisson(3)
+\]</span></p>
+</div>
+<div id="probability-of-exactly-5-complaints" class="section level3">
+<h3>Probability of Exactly 5 Complaints</h3>
+<p>We want:</p>
+<p><span class="math display">\[
+P(X=5)
+\]</span></p>
+<p>Using the Poisson formula:</p>
+<p><span class="math display">\[
+P(X=5) = \frac{e^{-3}3^5}{5!}
+\]</span></p>
+<p><span class="math display">\[
+P(X=5) = 0.1008
+\]</span></p>
+<p>approximately.</p>
+</div>
+<div id="probability-of-no-complaints" class="section level3">
+<h3>Probability of No Complaints</h3>
+<p><span class="math display">\[
+P(X=0) = \frac{e^{-3}3^0}{0!}
+\]</span></p>
+<p><span class="math display">\[
+P(X=0) = e^{-3} = 0.0498
+\]</span></p>
+<p>approximately.</p>
+</div>
+<div id="probability-of-at-most-2-complaints" class="section level3">
+<h3>Probability of At Most 2 Complaints</h3>
+<p><span class="math display">\[
+P(X \leq 2) = P(X=0) + P(X=1) + P(X=2)
+\]</span></p>
+<p><span class="math display">\[
+P(X \leq 2) =
+\frac{e^{-3}3^0}{0!} +
+\frac{e^{-3}3^1}{1!} +
+\frac{e^{-3}3^2}{2!}
+\]</span></p>
+<p><span class="math display">\[
+P(X \leq 2) = 0.4232
+\]</span></p>
+<p>approximately.</p>
+</div>
+<div id="activity-4.7" class="section level3">
+<h3>Activity 4.7</h3>
+<p>A website receives an average of 4 support requests per hour.</p>
+<p>Let:</p>
+<p><span class="math display">\[
+X = \text{number of support requests in one hour}
+\]</span></p>
+<p>Assume:</p>
+<p><span class="math display">\[
+X \sim Poisson(4)
+\]</span></p>
+<p>Find:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(P(X=2)\)</span></li>
+<li><span class="math inline">\(P(X=0)\)</span></li>
+<li><span class="math inline">\(P(X \leq 2)\)</span></li>
+<li><span class="math inline">\(E(X)\)</span></li>
+<li><span class="math inline">\(SD(X)\)</span></li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>For <span class="math inline">\(P(X=2)\)</span>:</p>
+<p><span class="math display">\[
+P(X=2) = \frac{e^{-4}4^2}{2!}
+\]</span></p>
+<p><span class="math display">\[
+P(X=2) = 0.1465
+\]</span></p>
+<p>approximately.</p>
+<p>For <span class="math inline">\(P(X=0)\)</span>:</p>
+<p><span class="math display">\[
+P(X=0) = \frac{e^{-4}4^0}{0!}
+\]</span></p>
+<p><span class="math display">\[
+P(X=0) = e^{-4} = 0.0183
+\]</span></p>
+<p>approximately.</p>
+<p>For <span class="math inline">\(P(X \leq 2)\)</span>:</p>
+<p><span class="math display">\[
+P(X \leq 2) = P(X=0) + P(X=1) + P(X=2)
+\]</span></p>
+<p><span class="math display">\[
+P(X \leq 2) = 0.0183 + 0.0733 + 0.1465
+\]</span></p>
+<p><span class="math display">\[
+P(X \leq 2) = 0.2381
+\]</span></p>
+<p>The expected value is:</p>
+<p><span class="math display">\[
+E(X) = \lambda = 4
+\]</span></p>
+<p>The standard deviation is:</p>
+<p><span class="math display">\[
+SD(X) = \sqrt{4} = 2
+\]</span></p>
+</details>
+</div>
+</div>
+<div id="binomial-versus-poisson-distribution" class="section level2">
+<h2>Binomial versus Poisson Distribution</h2>
+<p>Both binomial and Poisson distributions are used for count data, but
+they are used in different situations.</p>
+<div id="binomial-distribution-1" class="section level3">
+<h3>Binomial Distribution</h3>
+<p>Use the binomial distribution when:</p>
+<ul>
+<li>there is a fixed number of trials;</li>
+<li>each trial has success or failure;</li>
+<li>the probability of success is fixed;</li>
+<li>we count the number of successes.</li>
+</ul>
+<p>Example:</p>
+<p>Number of customers who click an advertisement out of 50
+customers.</p>
+</div>
+<div id="poisson-distribution-1" class="section level3">
+<h3>Poisson Distribution</h3>
+<p>Use the Poisson distribution when:</p>
+<ul>
+<li>events occur over a fixed interval;</li>
+<li>there is no fixed number of trials;</li>
+<li>we count the number of events in that interval;</li>
+<li>the average rate is known.</li>
+</ul>
+<p>Example:</p>
+<p>Number of customer complaints received per hour.</p>
+</div>
+<div id="practical-comparison" class="section level3">
+<h3>Practical Comparison</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Situation</th>
+<th>Suitable Distribution</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Number of defective items in a sample of 100 items</td>
+<td>Binomial</td>
+</tr>
+<tr class="even">
+<td>Number of calls arriving per hour</td>
+<td>Poisson</td>
+</tr>
+<tr class="odd">
+<td>Number of customers who respond to 20 sales calls</td>
+<td>Binomial</td>
+</tr>
+<tr class="even">
+<td>Number of accidents per week</td>
+<td>Poisson</td>
+</tr>
+<tr class="odd">
+<td>Number of loan defaults among 500 customers</td>
+<td>Binomial</td>
+</tr>
+<tr class="even">
+<td>Number of website errors per day</td>
+<td>Poisson</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="activity-4.8" class="section level3">
+<h3>Activity 4.8</h3>
+<p>For each situation, identify whether the binomial or Poisson
+distribution is more suitable.</p>
+<ol style="list-style-type: decimal">
+<li>Number of customers who buy a product out of 30 contacted
+customers.</li>
+<li>Number of website crashes in a month.</li>
+<li>Number of defective items in a sample of 50 items.</li>
+<li>Number of calls received by a call centre in one hour.</li>
+<li>Number of students who pass an exam out of 80 students.</li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<ol style="list-style-type: decimal">
+<li><p>Binomial, because there is a fixed number of contacted customers
+and each customer either buys or does not buy.</p></li>
+<li><p>Poisson, because it counts events over a fixed time
+interval.</p></li>
+<li><p>Binomial, because there is a fixed sample size and each item is
+defective or not defective.</p></li>
+<li><p>Poisson, because it counts arrivals over a fixed time
+interval.</p></li>
+<li><p>Binomial, because there is a fixed number of students and each
+student either passes or does not pass.</p></li>
+</ol>
+</details>
+</div>
+</div>
+<div id="integrated-practice-and-mini-case-study" class="section level2">
+<h2>Integrated Practice and Mini Case Study</h2>
+<p>This section connects discrete random variables, probability
+distributions, expected value, binomial distribution, Poisson
+distribution, and business interpretation.</p>
+<div id="mini-case-study-online-retail-analytics" class="section level3">
+<h3>Mini Case Study: Online Retail Analytics</h3>
+<p>An online retailer studies two business problems.</p>
+<p>Problem A: Advertisement clicks</p>
+<p>The retailer sends a promotional advertisement to 12 customers. Based
+on past data, each customer has a 0.20 probability of clicking the
+advertisement. Assume customers behave independently.</p>
+<p>Let:</p>
+<p><span class="math display">\[
+X = \text{number of customers who click the advertisement}
+\]</span></p>
+<p>Problem B: Customer complaints</p>
+<p>The retailer receives an average of 2 complaints per day.</p>
+<p>Let:</p>
+<p><span class="math display">\[
+Y = \text{number of complaints received in one day}
+\]</span></p>
+<p>Assume:</p>
+<p><span class="math display">\[
+Y \sim Poisson(2)
+\]</span></p>
+<p>Answer the following questions.</p>
+<ol style="list-style-type: decimal">
+<li>What is the distribution of <span class="math inline">\(X\)</span>?</li>
+<li>Find <span class="math inline">\(P(X=3)\)</span>.</li>
+<li>Find <span class="math inline">\(P(X \geq 1)\)</span>.</li>
+<li>Find <span class="math inline">\(E(X)\)</span>.</li>
+<li>Find <span class="math inline">\(Var(X)\)</span>.</li>
+<li>Find <span class="math inline">\(P(Y=0)\)</span>.</li>
+<li>Find <span class="math inline">\(P(Y \leq 2)\)</span>.</li>
+<li>Find <span class="math inline">\(E(Y)\)</span>.</li>
+<li>Interpret the results for management.</li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>Problem A is binomial because there is a fixed number of customers,
+each customer either clicks or does not click, and the probability of
+clicking is constant.</p>
+<p>Therefore:</p>
+<p><span class="math display">\[
+X \sim Binomial(12,0.20)
+\]</span></p>
+<p>For <span class="math inline">\(P(X=3)\)</span>:</p>
+<p><span class="math display">\[
+P(X=3) = {12 \choose 3}(0.20)^3(0.80)^9
+\]</span></p>
+<p><span class="math display">\[
+{12 \choose 3} = 220
+\]</span></p>
+<p><span class="math display">\[
+P(X=3) = 220(0.20)^3(0.80)^9
+\]</span></p>
+<p><span class="math display">\[
+P(X=3) = 0.2362
+\]</span></p>
+<p>approximately.</p>
+<p>For <span class="math inline">\(P(X \geq 1)\)</span>:</p>
+<p><span class="math display">\[
+P(X \geq 1) = 1 - P(X=0)
+\]</span></p>
+<p><span class="math display">\[
+P(X=0) = {12 \choose 0}(0.20)^0(0.80)^{12}
+\]</span></p>
+<p><span class="math display">\[
+P(X=0) = 0.80^{12} = 0.0687
+\]</span></p>
+<p>Therefore:</p>
+<p><span class="math display">\[
+P(X \geq 1) = 1 - 0.0687 = 0.9313
+\]</span></p>
+<p>The expected value is:</p>
+<p><span class="math display">\[
+E(X) = np = 12(0.20) = 2.4
+\]</span></p>
+<p>The variance is:</p>
+<p><span class="math display">\[
+Var(X) = np(1-p) = 12(0.20)(0.80)
+\]</span></p>
+<p><span class="math display">\[
+Var(X) = 1.92
+\]</span></p>
+<p>For complaints:</p>
+<p><span class="math display">\[
+Y \sim Poisson(2)
+\]</span></p>
+<p>For <span class="math inline">\(P(Y=0)\)</span>:</p>
+<p><span class="math display">\[
+P(Y=0) = \frac{e^{-2}2^0}{0!}
+\]</span></p>
+<p><span class="math display">\[
+P(Y=0) = e^{-2} = 0.1353
+\]</span></p>
+<p>For <span class="math inline">\(P(Y \leq 2)\)</span>:</p>
+<p><span class="math display">\[
+P(Y \leq 2) = P(Y=0) + P(Y=1) + P(Y=2)
+\]</span></p>
+<p><span class="math display">\[
+P(Y \leq 2)
+= \frac{e^{-2}2^0}{0!}
++ \frac{e^{-2}2^1}{1!}
++ \frac{e^{-2}2^2}{2!}
+\]</span></p>
+<p><span class="math display">\[
+P(Y \leq 2) = 0.1353 + 0.2707 + 0.2707 = 0.6767
+\]</span></p>
+<p>The expected value is:</p>
+<p><span class="math display">\[
+E(Y) = \lambda = 2
+\]</span></p>
+<p>Management interpretation:</p>
+<p>The advertisement is expected to generate about 2.4 clicks out of 12
+customers. There is a high probability, about 93.13%, of receiving at
+least one click. For complaints, the company expects about 2 complaints
+per day, and there is about a 67.67% chance of receiving at most 2
+complaints in a day.</p>
+</details>
+</div>
+</div>
+<div id="summary" class="section level2">
+<h2>Summary</h2>
+<p>In this topic, students learned how to identify and work with
+discrete random variables and discrete probability distributions.</p>
+<p>The main ideas covered were:</p>
+<ul>
+<li>discrete random variables;</li>
+<li>probability mass functions;</li>
+<li>valid probability distributions;</li>
+<li>probability calculations using tables;</li>
+<li>expected value;</li>
+<li>variance and standard deviation;</li>
+<li>Bernoulli distribution;</li>
+<li>binomial distribution;</li>
+<li>Poisson distribution;</li>
+<li>choosing between binomial and Poisson models;</li>
+<li>practical interpretation in business analytics.</li>
+</ul>
+</div>
+<div id="quick-formula-summary" class="section level2">
+<h2>Quick Formula Summary</h2>
+<div id="valid-probability-distribution" class="section level3">
+<h3>Valid Probability Distribution</h3>
+<p><span class="math display">\[
+0 \leq P(X=x) \leq 1
+\]</span></p>
+<p>and:</p>
+<p><span class="math display">\[
+\sum P(X=x) = 1
+\]</span></p>
+</div>
+<div id="expected-value" class="section level3">
+<h3>Expected Value</h3>
+<p><span class="math display">\[
+E(X) = \sum xP(X=x)
+\]</span></p>
+</div>
+<div id="variance" class="section level3">
+<h3>Variance</h3>
+<p><span class="math display">\[
+Var(X) = E(X^2) - [E(X)]^2
+\]</span></p>
+<p>where:</p>
+<p><span class="math display">\[
+E(X^2) = \sum x^2P(X=x)
+\]</span></p>
+</div>
+<div id="standard-deviation" class="section level3">
+<h3>Standard Deviation</h3>
+<p><span class="math display">\[
+SD(X) = \sqrt{Var(X)}
+\]</span></p>
+</div>
+<div id="bernoulli-distribution-1" class="section level3">
+<h3>Bernoulli Distribution</h3>
+<p><span class="math display">\[
+X \sim Bernoulli(p)
+\]</span></p>
+<p><span class="math display">\[
+P(X=1)=p,\quad P(X=0)=1-p
+\]</span></p>
+<p><span class="math display">\[
+E(X)=p
+\]</span></p>
+<p><span class="math display">\[
+Var(X)=p(1-p)
+\]</span></p>
+</div>
+<div id="binomial-distribution-2" class="section level3">
+<h3>Binomial Distribution</h3>
+<p><span class="math display">\[
+X \sim Binomial(n,p)
+\]</span></p>
+<p><span class="math display">\[
+P(X=x) = {n \choose x}p^x(1-p)^{n-x}
+\]</span></p>
+<p><span class="math display">\[
+E(X)=np
+\]</span></p>
+<p><span class="math display">\[
+Var(X)=np(1-p)
+\]</span></p>
+</div>
+<div id="poisson-distribution-2" class="section level3">
+<h3>Poisson Distribution</h3>
+<p><span class="math display">\[
+X \sim Poisson(\lambda)
+\]</span></p>
+<p><span class="math display">\[
+P(X=x) = \frac{e^{-\lambda}\lambda^x}{x!}
+\]</span></p>
+<p><span class="math display">\[
+E(X)=\lambda
+\]</span></p>
+<p><span class="math display">\[
+Var(X)=\lambda
+\]</span></p>
+</div>
+</div>
+<div id="suggested-end-of-topic-practice-questions" class="section level2">
+<h2>Suggested End-of-Topic Practice Questions</h2>
+<div id="question-1" class="section level3">
+<h3>Question 1</h3>
+<p>A random variable <span class="math inline">\(X\)</span> represents
+the number of defective items in a small sample.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right"><span class="math inline">\(x\)</span></th>
+<th align="right">0</th>
+<th align="right">1</th>
+<th align="right">2</th>
+<th align="right">3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right"><span class="math inline">\(P(X=x)\)</span></td>
+<td align="right">0.40</td>
+<td align="right">0.35</td>
+<td align="right">0.20</td>
+<td align="right">0.05</td>
+</tr>
+</tbody>
+</table>
+<p>Find:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(P(X=1)\)</span></li>
+<li><span class="math inline">\(P(X \leq 1)\)</span></li>
+<li><span class="math inline">\(P(X &gt; 1)\)</span></li>
+<li><span class="math inline">\(E(X)\)</span></li>
+</ol>
+</div>
+<div id="question-2" class="section level3">
+<h3>Question 2</h3>
+<p>A customer either buys or does not buy a product after receiving an
+email. The probability of buying is 0.12.</p>
+<p>Let <span class="math inline">\(X=1\)</span> if the customer buys and
+<span class="math inline">\(X=0\)</span> otherwise.</p>
+<ol style="list-style-type: decimal">
+<li>State the distribution of <span class="math inline">\(X\)</span>.</li>
+<li>Find <span class="math inline">\(E(X)\)</span>.</li>
+<li>Find <span class="math inline">\(Var(X)\)</span>.</li>
+<li>Interpret <span class="math inline">\(E(X)\)</span>.</li>
+</ol>
+</div>
+<div id="question-3" class="section level3">
+<h3>Question 3</h3>
+<p>A company contacts 15 customers. Each customer independently has a
+0.20 probability of buying.</p>
+<p>Let <span class="math inline">\(X\)</span> be the number of customers
+who buy.</p>
+<ol style="list-style-type: decimal">
+<li>State the distribution of <span class="math inline">\(X\)</span>.</li>
+<li>Find <span class="math inline">\(P(X=3)\)</span>.</li>
+<li>Find <span class="math inline">\(P(X=0)\)</span>.</li>
+<li>Find <span class="math inline">\(P(X \geq 1)\)</span>.</li>
+<li>Find <span class="math inline">\(E(X)\)</span>.</li>
+</ol>
+</div>
+<div id="question-4" class="section level3">
+<h3>Question 4</h3>
+<p>A call centre receives an average of 5 calls per minute.</p>
+<p>Let <span class="math inline">\(X\)</span> be the number of calls
+received in one minute.</p>
+<p>Assume <span class="math inline">\(X \sim Poisson(5)\)</span>.</p>
+<p>Find:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(P(X=4)\)</span></li>
+<li><span class="math inline">\(P(X=0)\)</span></li>
+<li><span class="math inline">\(P(X \leq 2)\)</span></li>
+<li><span class="math inline">\(E(X)\)</span></li>
+<li><span class="math inline">\(SD(X)\)</span></li>
+</ol>
+</div>
+<div id="question-5" class="section level3">
+<h3>Question 5</h3>
+<p>For each situation, state whether Bernoulli, binomial, or Poisson is
+most suitable.</p>
+<ol style="list-style-type: decimal">
+<li>Whether one customer clicks an advertisement.</li>
+<li>Number of customers who click out of 100 customers.</li>
+<li>Number of complaints received per day.</li>
+<li>Whether one loan applicant defaults.</li>
+<li>Number of defective items in a sample of 30 items.</li>
+</ol>
+</div>
+</div>
+<div id="suggested-short-r-activity" class="section level2">
+<h2>Suggested Short R Activity</h2>
+<p>The following R code can be used to calculate probabilities for
+discrete distributions.</p>
+<div id="discrete-probability-distribution-from-a-table" class="section level3">
+<h3>Discrete Probability Distribution from a Table</h3>
+<pre class="r"><code>x &lt;- c(0, 1, 2, 3)
+prob &lt;- c(0.50, 0.30, 0.15, 0.05)
+
+sum(prob)</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code>expected_value &lt;- sum(x * prob)
+expected_value</code></pre>
+<pre><code>## [1] 0.75</code></pre>
+<pre class="r"><code>expected_x2 &lt;- sum(x^2 * prob)
+variance &lt;- expected_x2 - expected_value^2
+variance</code></pre>
+<pre><code>## [1] 0.7875</code></pre>
+<pre class="r"><code>standard_deviation &lt;- sqrt(variance)
+standard_deviation</code></pre>
+<pre><code>## [1] 0.887412</code></pre>
+</div>
+<div id="binomial-distribution-in-r" class="section level3">
+<h3>Binomial Distribution in R</h3>
+<pre class="r"><code># X ~ Binomial(10, 0.30)
+
+# P(X = 4)
+dbinom(4, size = 10, prob = 0.30)</code></pre>
+<pre><code>## [1] 0.2001209</code></pre>
+<pre class="r"><code># P(X = 0)
+dbinom(0, size = 10, prob = 0.30)</code></pre>
+<pre><code>## [1] 0.02824752</code></pre>
+<pre class="r"><code># P(X &gt;= 1)
+1 - dbinom(0, size = 10, prob = 0.30)</code></pre>
+<pre><code>## [1] 0.9717525</code></pre>
+<pre class="r"><code># P(X &lt;= 4)
+pbinom(4, size = 10, prob = 0.30)</code></pre>
+<pre><code>## [1] 0.8497317</code></pre>
+</div>
+<div id="poisson-distribution-in-r" class="section level3">
+<h3>Poisson Distribution in R</h3>
+<pre class="r"><code># X ~ Poisson(3)
+
+# P(X = 5)
+dpois(5, lambda = 3)</code></pre>
+<pre><code>## [1] 0.1008188</code></pre>
+<pre class="r"><code># P(X = 0)
+dpois(0, lambda = 3)</code></pre>
+<pre><code>## [1] 0.04978707</code></pre>
+<pre class="r"><code># P(X &lt;= 2)
+ppois(2, lambda = 3)</code></pre>
+<pre><code>## [1] 0.4231901</code></pre>
+<pre class="r"><code># P(X &gt; 2)
+1 - ppois(2, lambda = 3)</code></pre>
+<pre><code>## [1] 0.5768099</code></pre>
+</div>
+<div id="plotting-a-binomial-distribution" class="section level3">
+<h3>Plotting a Binomial Distribution</h3>
+<pre class="r"><code>x_values &lt;- 0:10
+binomial_probs &lt;- dbinom(x_values, size = 10, prob = 0.30)
+
+barplot(
+  binomial_probs,
+  names.arg = x_values,
+  main = &quot;Binomial Distribution: n = 10, p = 0.30&quot;,
+  xlab = &quot;Number of Purchases&quot;,
+  ylab = &quot;Probability&quot;
+)</code></pre>
+<p><img role="img" src="data:image/png;base64,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" width="672" /></p>
+</div>
+<div id="plotting-a-poisson-distribution" class="section level3">
+<h3>Plotting a Poisson Distribution</h3>
+<pre class="r"><code>x_values &lt;- 0:12
+poisson_probs &lt;- dpois(x_values, lambda = 3)
+
+barplot(
+  poisson_probs,
+  names.arg = x_values,
+  main = &quot;Poisson Distribution: lambda = 3&quot;,
+  xlab = &quot;Number of Complaints&quot;,
+  ylab = &quot;Probability&quot;
+)</code></pre>
+<p><img role="img" src="data:image/png;base64,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" width="672" /></p>
+</div>
+</div>
+<div id="practical-closing-note-for-students" class="section level2">
+<h2>Practical Closing Note for Students</h2>
+<p>Discrete probability distributions are useful when the outcome is a
+count.</p>
+<p>In data science and business analytics, many important problems
+involve counting events: purchases, clicks, defaults, complaints,
+arrivals, defects, and failures.</p>
+<p>A good analyst should not only calculate probabilities but also
+explain what they mean for decision-making.</p>
+<p>For example, saying:</p>
+<p><span class="math display">\[
+P(X \geq 1) = 0.9313
+\]</span></p>
+<p>is not enough.</p>
+<p>A better interpretation is:</p>
+<p>“There is about a 93.13% chance that at least one customer will click
+the advertisement among the 12 customers contacted.”</p>
+<p>That is the type of interpretation expected in data science and
+business analytics.</p>
+</div>
 </div>
 
 
