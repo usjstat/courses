@@ -1,0 +1,2059 @@
+---
+title: "Continuous Probability Distributions"
+author: "Rajitha M. Silva"
+output:
+  html_document:
+    theme: flatly
+    toc: true
+    toc_float: true
+    number_sections: false
+---
+
+## Learning objectives
+
+By the end of this lesson, students should be able to:
+
+1. distinguish continuous random variables from discrete random variables;
+2. explain the role of a probability density function;
+3. compute probabilities using density functions, cumulative distribution functions, and statistical tables;
+4. identify the parameters, expectation, and variance of common continuous distributions;
+5. use standardization to solve normal distribution problems;
+6. recognize the use of chi-square and F distributions in statistical inference;
+7. solve beginner, intermediate, and advanced problems involving continuous distributions.
+
+---
+
+
+# Continuous random variables
+
+A random variable \(X\) is called **continuous** if it can take any value in an interval of the real line.
+
+Examples include:
+
+- height of a student;
+- time taken to complete an examination;
+- lifetime of a machine component;
+- rainfall amount;
+- blood pressure;
+- measurement error.
+
+For a continuous random variable, probabilities are described using a **probability density function**, abbreviated as **pdf**.
+
+A function \(f(x)\) is a valid pdf if
+
+\[
+f(x)\ge 0
+\]
+
+for all \(x\), and
+
+\[
+\int_{-\infty}^{\infty} f(x)\,dx=1.
+\]
+
+For a continuous random variable,
+
+\[
+P(a<X<b)=\int_a^b f(x)\,dx.
+\]
+
+A very important point is that
+
+\[
+P(X=x)=0
+\]
+
+for any exact value \(x\). Therefore, for continuous random variables,
+
+\[
+P(a<X<b)=P(a\le X\le b)=P(a\le X<b)=P(a<X\le b).
+\]
+
+---
+
+# Expectation and variance
+
+The **expectation** or **mean** of a continuous random variable \(X\) with pdf \(f(x)\) is
+
+\[
+E(X)=\int_{-\infty}^{\infty} x f(x)\,dx.
+\]
+
+The expectation represents the long-run average value of the random variable.
+
+The **variance** of \(X\) is
+
+\[
+\mathrm{Var}(X)=E[(X-E(X))^2].
+\]
+
+Equivalently,
+
+\[
+\mathrm{Var}(X)=E(X^2)-[E(X)]^2,
+\]
+
+where
+
+\[
+E(X^2)=\int_{-\infty}^{\infty} x^2 f(x)\,dx.
+\]
+
+The variance measures the spread of the distribution around its mean.
+
+The standard deviation is
+
+\[
+\mathrm{SD}(X)=\sqrt{\mathrm{Var}(X)}.
+\]
+
+---
+
+# Summary of continuous distributions
+
+| Distribution | Notation | Support | Parameter(s) | Mean | Variance |
+|---|---|---:|---|---:|---:|
+| Uniform | \(X\sim U(a,b)\) | \(a<x<b\) | \(a,b\) | \(\frac{a+b}{2}\) | \(\frac{(b-a)^2}{12}\) |
+| Beta | \(X\sim \mathrm{Beta}(\alpha,\beta)\) | \(0<x<1\) | \(\alpha,\beta\) | \(\frac{\alpha}{\alpha+\beta}\) | \(\frac{\alpha\beta}{(\alpha+\beta)^2(\alpha+\beta+1)}\) |
+| Exponential | \(X\sim \mathrm{Exp}(\lambda)\) | \(x>0\) | \(\lambda\) | \(\frac{1}{\lambda}\) | \(\frac{1}{\lambda^2}\) |
+| Normal | \(X\sim N(\mu,\sigma^2)\) | \(-\infty<x<\infty\) | \(\mu,\sigma^2\) | \(\mu\) | \(\sigma^2\) |
+| Standard Normal | \(Z\sim N(0,1)\) | \(-\infty<z<\infty\) | none | \(0\) | \(1\) |
+| Chi-square | \(X\sim \chi^2_\nu\) | \(x>0\) | \(\nu\) | \(\nu\) | \(2\nu\) |
+| F | \(X\sim F_{\nu_1,\nu_2}\) | \(x>0\) | \(\nu_1,\nu_2\) | \(\frac{\nu_2}{\nu_2-2}\), \(\nu_2>2\) | \(\frac{2\nu_2^2(\nu_1+\nu_2-2)}{\nu_1(\nu_2-2)^2(\nu_2-4)}\), \(\nu_2>4\) |
+
+---
+
+# Uniform distribution
+
+## Definition
+
+A random variable \(X\) follows a **Uniform distribution** on \((a,b)\), written as
+
+\[
+X\sim U(a,b),
+\]
+
+if its pdf is
+
+\[
+f(x)=\frac{1}{b-a}, \qquad a<x<b.
+\]
+
+The density is constant over the interval \((a,b)\). This means that all intervals of the same length inside \((a,b)\) have the same probability.
+
+## Mean and variance
+
+If
+
+\[
+X\sim U(a,b),
+\]
+
+then
+
+\[
+E(X)=\frac{a+b}{2}
+\]
+
+and
+
+\[
+\mathrm{Var}(X)=\frac{(b-a)^2}{12}.
+\]
+
+## Cumulative distribution function
+
+The cdf is
+
+\[
+F(x)=
+\begin{cases}
+0, & x\le a,\\
+\frac{x-a}{b-a}, & a<x<b,\\
+1, & x\ge b.
+\end{cases}
+\]
+
+## Example
+
+Suppose
+
+\[
+X\sim U(10,30).
+\]
+
+Find
+
+\[
+P(15<X<24).
+\]
+
+Since the density is uniform,
+
+\[
+P(15<X<24)=\frac{24-15}{30-10}.
+\]
+
+Therefore,
+
+\[
+P(15<X<24)=\frac{9}{20}=0.45.
+\]
+
+The mean is
+
+\[
+E(X)=\frac{10+30}{2}=20.
+\]
+
+The variance is
+
+\[
+\mathrm{Var}(X)=\frac{(30-10)^2}{12}
+=\frac{400}{12}
+=33.33.
+\]
+
+---
+
+# Beta distribution
+
+## Definition
+
+A random variable \(X\) follows a **Beta distribution**, written as
+
+\[
+X\sim \mathrm{Beta}(\alpha,\beta),
+\]
+
+if its pdf is
+
+\[
+f(x)=\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}
+x^{\alpha-1}(1-x)^{\beta-1}, \qquad 0<x<1,
+\]
+
+where
+
+\[
+\alpha>0,\qquad \beta>0.
+\]
+
+The Beta distribution is used for modelling random variables that lie between 0 and 1.
+
+Examples include:
+
+- proportions;
+- probabilities;
+- rates;
+- percentages expressed as decimals;
+- prior distributions in Bayesian statistics.
+
+## Beta function form
+
+The pdf may also be written as
+
+\[
+f(x)=\frac{1}{B(\alpha,\beta)}
+x^{\alpha-1}(1-x)^{\beta-1}, \qquad 0<x<1,
+\]
+
+where
+
+\[
+B(\alpha,\beta)=\frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)}.
+\]
+
+For positive integers,
+
+\[
+\Gamma(n)=(n-1)!.
+\]
+
+## Mean and variance
+
+If
+
+\[
+X\sim \mathrm{Beta}(\alpha,\beta),
+\]
+
+then
+
+\[
+E(X)=\frac{\alpha}{\alpha+\beta}.
+\]
+
+The variance is
+
+\[
+\mathrm{Var}(X)=
+\frac{\alpha\beta}{(\alpha+\beta)^2(\alpha+\beta+1)}.
+\]
+
+## Shape of the Beta distribution
+
+The Beta distribution is very flexible.
+
+| Parameter values | Shape |
+|---|---|
+| \(\alpha=\beta=1\) | Uniform on \((0,1)\) |
+| \(\alpha>1,\beta>1\) | Unimodal |
+| \(\alpha<1,\beta<1\) | U-shaped |
+| \(\alpha>\beta\) | More mass near 1 |
+| \(\alpha<\beta\) | More mass near 0 |
+
+## Example
+
+Suppose
+
+\[
+X\sim \mathrm{Beta}(2,5).
+\]
+
+Then
+
+\[
+E(X)=\frac{2}{2+5}=\frac{2}{7}=0.2857.
+\]
+
+The variance is
+
+\[
+\mathrm{Var}(X)
+=
+\frac{(2)(5)}{(2+5)^2(2+5+1)}
+=
+\frac{10}{49(8)}
+=
+\frac{10}{392}
+=0.0255.
+\]
+
+Interpretation: the distribution is concentrated more toward smaller values because \(\beta>\alpha\).
+
+---
+
+# Exponential distribution
+
+## Definition
+
+A random variable \(X\) follows an **Exponential distribution**, written as
+
+\[
+X\sim \mathrm{Exp}(\lambda),
+\]
+
+if its pdf is
+
+\[
+f(x)=\lambda e^{-\lambda x}, \qquad x>0,
+\]
+
+where
+
+\[
+\lambda>0.
+\]
+
+The parameter \(\lambda\) is called the **rate parameter**.
+
+The exponential distribution is commonly used to model waiting time until the next event.
+
+Examples include:
+
+- waiting time until the next phone call;
+- lifetime of an electronic component;
+- time between customer arrivals;
+- time until machine failure.
+
+## Mean and variance
+
+If
+
+\[
+X\sim \mathrm{Exp}(\lambda),
+\]
+
+then
+
+\[
+E(X)=\frac{1}{\lambda}.
+\]
+
+The variance is
+
+\[
+\mathrm{Var}(X)=\frac{1}{\lambda^2}.
+\]
+
+## Cumulative distribution function
+
+The cdf is
+
+\[
+F(x)=P(X\le x)=1-e^{-\lambda x}, \qquad x>0.
+\]
+
+Therefore,
+
+\[
+P(X>x)=e^{-\lambda x}.
+\]
+
+This is called the survival probability.
+
+## Memoryless property
+
+The exponential distribution has the memoryless property:
+
+\[
+P(X>s+t\mid X>s)=P(X>t).
+\]
+
+This means that if the event has not occurred up to time \(s\), the additional waiting time still follows the same exponential distribution.
+
+## Example
+
+Suppose the lifetime of a machine component follows an exponential distribution with mean 5 years.
+
+Since
+
+\[
+E(X)=\frac{1}{\lambda},
+\]
+
+we have
+
+\[
+5=\frac{1}{\lambda}.
+\]
+
+Therefore,
+
+\[
+\lambda=\frac{1}{5}=0.2.
+\]
+
+Find
+
+\[
+P(X>8).
+\]
+
+Using the survival function,
+
+\[
+P(X>8)=e^{-0.2(8)}=e^{-1.6}.
+\]
+
+Using \(e^{-1.6}\approx 0.2019\),
+
+\[
+P(X>8)=0.2019.
+\]
+
+---
+
+# Normal distribution
+
+## Definition
+
+A random variable \(X\) follows a **Normal distribution**, written as
+
+\[
+X\sim N(\mu,\sigma^2),
+\]
+
+if its pdf is
+
+\[
+f(x)=
+\frac{1}{\sigma\sqrt{2\pi}}
+\exp\left[
+-\frac{1}{2}
+\left(\frac{x-\mu}{\sigma}\right)^2
+\right],
+\qquad -\infty<x<\infty.
+\]
+
+Here, \(\mu\) is the mean and \(\sigma^2\) is the variance. The standard deviation is \(\sigma\).
+
+## Mean and variance
+
+If
+
+\[
+X\sim N(\mu,\sigma^2),
+\]
+
+then
+
+\[
+E(X)=\mu
+\]
+
+and
+
+\[
+\mathrm{Var}(X)=\sigma^2.
+\]
+
+## Properties of the normal distribution
+
+The normal distribution has the following properties:
+
+1. It is bell-shaped.
+2. It is symmetric about \(\mu\).
+3. Mean = median = mode.
+4. The total area under the curve is 1.
+5. Approximately 68.27% of observations lie within \(\mu\pm\sigma\).
+6. Approximately 95.45% lie within \(\mu\pm2\sigma\).
+7. Approximately 99.73% lie within \(\mu\pm3\sigma\).
+
+This is often called the **empirical rule**.
+
+---
+
+# Standard normal distribution
+
+## Definition
+
+A random variable \(Z\) follows a **standard normal distribution**, written as
+
+\[
+Z\sim N(0,1),
+\]
+
+if it has mean 0 and variance 1.
+
+The standard normal pdf is
+
+\[
+f(z)=
+\frac{1}{\sqrt{2\pi}}
+e^{-z^2/2},
+\qquad -\infty<z<\infty.
+\]
+
+## Standardization
+
+If
+
+\[
+X\sim N(\mu,\sigma^2),
+\]
+
+then
+
+\[
+Z=\frac{X-\mu}{\sigma}
+\]
+
+has a standard normal distribution.
+
+That is,
+
+\[
+Z\sim N(0,1).
+\]
+
+This transformation is called **standardization**.
+
+## How to use the standard normal table
+
+The standard normal table gives
+
+\[
+\Phi(z)=P(Z\le z).
+\]
+
+For example, if the table gives
+
+\[
+\Phi(1.25)=0.8944,
+\]
+
+then
+
+\[
+P(Z\le 1.25)=0.8944.
+\]
+
+For negative values, use symmetry:
+
+\[
+\Phi(-z)=1-\Phi(z).
+\]
+
+For example,
+
+\[
+P(Z\le -1.25)=1-P(Z\le 1.25).
+\]
+
+Therefore,
+
+\[
+P(Z\le -1.25)=1-0.8944=0.1056.
+\]
+
+## Common probability forms
+
+For \(Z\sim N(0,1)\),
+
+\[
+P(Z>z)=1-\Phi(z).
+\]
+
+Also,
+
+\[
+P(a<Z<b)=\Phi(b)-\Phi(a).
+\]
+
+For a normal random variable \(X\sim N(\mu,\sigma^2)\),
+
+\[
+P(a<X<b)
+=
+P\left(
+\frac{a-\mu}{\sigma}
+<
+Z
+<
+\frac{b-\mu}{\sigma}
+\right).
+\]
+
+## Example
+
+Suppose exam marks follow
+
+\[
+X\sim N(70,10^2).
+\]
+
+Find
+
+\[
+P(X>85).
+\]
+
+First standardize:
+
+\[
+Z=\frac{X-\mu}{\sigma}.
+\]
+
+When \(X=85\),
+
+\[
+z=\frac{85-70}{10}=1.5.
+\]
+
+Therefore,
+
+\[
+P(X>85)=P(Z>1.5).
+\]
+
+From the standard normal table,
+
+\[
+\Phi(1.50)=0.9332.
+\]
+
+Therefore,
+
+\[
+P(Z>1.5)=1-0.9332=0.0668.
+\]
+
+So,
+
+\[
+P(X>85)=0.0668.
+\]
+
+---
+
+# Chi-square distribution
+
+## Definition
+
+Let
+
+\[
+Z_1,Z_2,\ldots,Z_\nu
+\]
+
+be independent standard normal random variables.
+
+Then
+
+\[
+X=Z_1^2+Z_2^2+\cdots+Z_\nu^2
+\]
+
+follows a **chi-square distribution** with \(\nu\) degrees of freedom.
+
+We write
+
+\[
+X\sim \chi^2_\nu.
+\]
+
+The parameter \(\nu\) is called the **degrees of freedom**.
+
+## Mean and variance
+
+If
+
+\[
+X\sim \chi^2_\nu,
+\]
+
+then
+
+\[
+E(X)=\nu
+\]
+
+and
+
+\[
+\mathrm{Var}(X)=2\nu.
+\]
+
+## Important properties
+
+1. The chi-square distribution is always non-negative.
+2. It is right-skewed.
+3. As \(\nu\) increases, the distribution becomes more symmetric.
+4. It is widely used in statistical inference.
+
+## Uses of the chi-square distribution
+
+The chi-square distribution is used in:
+
+- confidence intervals for variance;
+- hypothesis testing for variance;
+- chi-square goodness-of-fit tests;
+- chi-square tests of independence;
+- likelihood ratio tests.
+
+## Example
+
+Suppose
+
+\[
+X\sim \chi^2_{10}.
+\]
+
+Then
+
+\[
+E(X)=10.
+\]
+
+The variance is
+
+\[
+\mathrm{Var}(X)=2(10)=20.
+\]
+
+The standard deviation is
+
+\[
+\sqrt{20}=4.472.
+\]
+
+Interpretation: a chi-square random variable with 10 degrees of freedom is centred around 10, but it is right-skewed.
+
+---
+
+# F distribution
+
+## Definition
+
+Let
+
+\[
+U\sim \chi^2_{\nu_1}
+\]
+
+and
+
+\[
+V\sim \chi^2_{\nu_2}
+\]
+
+be independent chi-square random variables.
+
+Then
+
+\[
+F=
+\frac{U/\nu_1}{V/\nu_2}
+\]
+
+follows an **F distribution** with \(\nu_1\) numerator degrees of freedom and \(\nu_2\) denominator degrees of freedom.
+
+We write
+
+\[
+F\sim F_{\nu_1,\nu_2}.
+\]
+
+## Mean and variance
+
+If
+
+\[
+F\sim F_{\nu_1,\nu_2},
+\]
+
+then the mean is
+
+\[
+E(F)=\frac{\nu_2}{\nu_2-2},
+\qquad \nu_2>2.
+\]
+
+The variance is
+
+\[
+\mathrm{Var}(F)
+=
+\frac{2\nu_2^2(\nu_1+\nu_2-2)}
+{\nu_1(\nu_2-2)^2(\nu_2-4)},
+\qquad \nu_2>4.
+\]
+
+## Important properties
+
+1. The F distribution is always non-negative.
+2. It is right-skewed.
+3. It depends on two degrees of freedom: \(\nu_1\) and \(\nu_2\).
+4. It is commonly used when comparing variances.
+
+## Uses of the F distribution
+
+The F distribution is used in:
+
+- analysis of variance;
+- comparing two population variances;
+- regression model testing;
+- testing overall significance of a linear regression model.
+
+## Example
+
+Suppose
+
+\[
+F\sim F_{5,20}.
+\]
+
+The mean is
+
+\[
+E(F)=\frac{20}{20-2}
+=
+\frac{20}{18}
+=1.111.
+\]
+
+The variance is
+
+\[
+\mathrm{Var}(F)
+=
+\frac{2(20)^2(5+20-2)}
+{5(20-2)^2(20-4)}.
+\]
+
+So,
+
+\[
+\mathrm{Var}(F)
+=
+\frac{800(23)}
+{5(324)(16)}.
+\]
+
+Therefore,
+
+\[
+\mathrm{Var}(F)
+=
+\frac{18400}{25920}
+=0.710.
+\]
+
+---
+
+# Standard normal table
+
+The following table gives
+
+\[
+\Phi(z)=P(Z\le z)
+\]
+
+for
+
+\[
+Z\sim N(0,1).
+\]
+
+For negative values, use
+
+\[
+\Phi(-z)=1-\Phi(z).
+\]
+
+| z | .00 | .01 | .02 | .03 | .04 | .05 | .06 | .07 | .08 | .09 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 0.0 | 0.5000 | 0.5040 | 0.5080 | 0.5120 | 0.5160 | 0.5199 | 0.5239 | 0.5279 | 0.5319 | 0.5359 |
+| 0.1 | 0.5398 | 0.5438 | 0.5478 | 0.5517 | 0.5557 | 0.5596 | 0.5636 | 0.5675 | 0.5714 | 0.5753 |
+| 0.2 | 0.5793 | 0.5832 | 0.5871 | 0.5910 | 0.5948 | 0.5987 | 0.6026 | 0.6064 | 0.6103 | 0.6141 |
+| 0.3 | 0.6179 | 0.6217 | 0.6255 | 0.6293 | 0.6331 | 0.6368 | 0.6406 | 0.6443 | 0.6480 | 0.6517 |
+| 0.4 | 0.6554 | 0.6591 | 0.6628 | 0.6664 | 0.6700 | 0.6736 | 0.6772 | 0.6808 | 0.6844 | 0.6879 |
+| 0.5 | 0.6915 | 0.6950 | 0.6985 | 0.7019 | 0.7054 | 0.7088 | 0.7123 | 0.7157 | 0.7190 | 0.7224 |
+| 0.6 | 0.7257 | 0.7291 | 0.7324 | 0.7357 | 0.7389 | 0.7422 | 0.7454 | 0.7486 | 0.7517 | 0.7549 |
+| 0.7 | 0.7580 | 0.7611 | 0.7642 | 0.7673 | 0.7704 | 0.7734 | 0.7764 | 0.7794 | 0.7823 | 0.7852 |
+| 0.8 | 0.7881 | 0.7910 | 0.7939 | 0.7967 | 0.7995 | 0.8023 | 0.8051 | 0.8078 | 0.8106 | 0.8133 |
+| 0.9 | 0.8159 | 0.8186 | 0.8212 | 0.8238 | 0.8264 | 0.8289 | 0.8315 | 0.8340 | 0.8365 | 0.8389 |
+| 1.0 | 0.8413 | 0.8438 | 0.8461 | 0.8485 | 0.8508 | 0.8531 | 0.8554 | 0.8577 | 0.8599 | 0.8621 |
+| 1.1 | 0.8643 | 0.8665 | 0.8686 | 0.8708 | 0.8729 | 0.8749 | 0.8770 | 0.8790 | 0.8810 | 0.8830 |
+| 1.2 | 0.8849 | 0.8869 | 0.8888 | 0.8907 | 0.8925 | 0.8944 | 0.8962 | 0.8980 | 0.8997 | 0.9015 |
+| 1.3 | 0.9032 | 0.9049 | 0.9066 | 0.9082 | 0.9099 | 0.9115 | 0.9131 | 0.9147 | 0.9162 | 0.9177 |
+| 1.4 | 0.9192 | 0.9207 | 0.9222 | 0.9236 | 0.9251 | 0.9265 | 0.9279 | 0.9292 | 0.9306 | 0.9319 |
+| 1.5 | 0.9332 | 0.9345 | 0.9357 | 0.9370 | 0.9382 | 0.9394 | 0.9406 | 0.9418 | 0.9429 | 0.9441 |
+| 1.6 | 0.9452 | 0.9463 | 0.9474 | 0.9484 | 0.9495 | 0.9505 | 0.9515 | 0.9525 | 0.9535 | 0.9545 |
+| 1.7 | 0.9554 | 0.9564 | 0.9573 | 0.9582 | 0.9591 | 0.9599 | 0.9608 | 0.9616 | 0.9625 | 0.9633 |
+| 1.8 | 0.9641 | 0.9649 | 0.9656 | 0.9664 | 0.9671 | 0.9678 | 0.9686 | 0.9693 | 0.9699 | 0.9706 |
+| 1.9 | 0.9713 | 0.9719 | 0.9726 | 0.9732 | 0.9738 | 0.9744 | 0.9750 | 0.9756 | 0.9761 | 0.9767 |
+| 2.0 | 0.9772 | 0.9778 | 0.9783 | 0.9788 | 0.9793 | 0.9798 | 0.9803 | 0.9808 | 0.9812 | 0.9817 |
+| 2.1 | 0.9821 | 0.9826 | 0.9830 | 0.9834 | 0.9838 | 0.9842 | 0.9846 | 0.9850 | 0.9854 | 0.9857 |
+| 2.2 | 0.9861 | 0.9864 | 0.9868 | 0.9871 | 0.9875 | 0.9878 | 0.9881 | 0.9884 | 0.9887 | 0.9890 |
+| 2.3 | 0.9893 | 0.9896 | 0.9898 | 0.9901 | 0.9904 | 0.9906 | 0.9909 | 0.9911 | 0.9913 | 0.9916 |
+| 2.4 | 0.9918 | 0.9920 | 0.9922 | 0.9925 | 0.9927 | 0.9929 | 0.9931 | 0.9932 | 0.9934 | 0.9936 |
+| 2.5 | 0.9938 | 0.9940 | 0.9941 | 0.9943 | 0.9945 | 0.9946 | 0.9948 | 0.9949 | 0.9951 | 0.9952 |
+| 2.6 | 0.9953 | 0.9955 | 0.9956 | 0.9957 | 0.9959 | 0.9960 | 0.9961 | 0.9962 | 0.9963 | 0.9964 |
+| 2.7 | 0.9965 | 0.9966 | 0.9967 | 0.9968 | 0.9969 | 0.9970 | 0.9971 | 0.9972 | 0.9973 | 0.9974 |
+| 2.8 | 0.9974 | 0.9975 | 0.9976 | 0.9977 | 0.9977 | 0.9978 | 0.9979 | 0.9979 | 0.9980 | 0.9981 |
+| 2.9 | 0.9981 | 0.9982 | 0.9982 | 0.9983 | 0.9984 | 0.9984 | 0.9985 | 0.9985 | 0.9986 | 0.9986 |
+| 3.0 | 0.9987 | 0.9987 | 0.9987 | 0.9988 | 0.9988 | 0.9989 | 0.9989 | 0.9989 | 0.9990 | 0.9990 |
+
+---
+
+# Exercises
+
+The following questions are written as practical applications. 
+
+## Exercise 1: Uniform distribution -- arrival time at a clinic
+
+Patients are given an appointment window from 9:00 a.m. to 9:30 a.m. Suppose the arrival time of a patient, measured in minutes after 9:00 a.m., follows
+
+\[
+X\sim U(0,30).
+\]
+
+Find:
+
+1. the probability that the patient arrives within the first 10 minutes;
+2. the probability that the patient arrives between 12 and 20 minutes after 9:00 a.m.;
+3. the expected arrival time after 9:00 a.m.;
+4. the variance of the arrival time.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Since
+
+\[
+X\sim U(0,30),
+\]
+
+probabilities are proportional to interval lengths.
+
+For the first 10 minutes,
+
+\[
+P(0<X<10)=\frac{10-0}{30-0}=\frac{10}{30}=0.3333.
+\]
+
+For arrivals between 12 and 20 minutes,
+
+\[
+P(12<X<20)=\frac{20-12}{30-0}=\frac{8}{30}=0.2667.
+\]
+
+The expectation is
+
+\[
+E(X)=\frac{0+30}{2}=15.
+\]
+
+The variance is
+
+\[
+\mathrm{Var}(X)=\frac{(30-0)^2}{12}=\frac{900}{12}=75.
+\]
+
+Therefore, the expected arrival time is 15 minutes after 9:00 a.m., and the variance is 75.
+
+</details>
+
+---
+
+## Exercise 2: Uniform distribution -- quality control measurement
+
+A machine fills bottles with a liquid volume that is uniformly distributed between 495 ml and 505 ml. Let
+
+\[
+X\sim U(495,505).
+\]
+
+A bottle is considered acceptable if its volume is between 498 ml and 503 ml. Find the probability that a randomly selected bottle is acceptable.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The acceptable interval is from 498 ml to 503 ml.
+
+Since the distribution is uniform,
+
+\[
+P(498<X<503)=\frac{503-498}{505-495}.
+\]
+
+Therefore,
+
+\[
+P(498<X<503)=\frac{5}{10}=0.5.
+\]
+
+Hence, the probability that a bottle is acceptable is 0.5.
+
+</details>
+
+---
+
+## Exercise 3: Beta distribution -- student completion proportion
+
+A lecturer models the proportion of a weekly assignment completed by a randomly selected student as
+
+\[
+X\sim \mathrm{Beta}(4,2).
+\]
+
+Find:
+
+1. the expected completion proportion;
+2. the variance;
+3. whether the distribution is more concentrated toward low or high completion proportions.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+For a Beta distribution,
+
+\[
+E(X)=\frac{\alpha}{\alpha+\beta}.
+\]
+
+Here,
+
+\[
+\alpha=4,\qquad \beta=2.
+\]
+
+Therefore,
+
+\[
+E(X)=\frac{4}{4+2}=\frac{4}{6}=0.6667.
+\]
+
+The variance is
+
+\[
+\mathrm{Var}(X)=\frac{\alpha\beta}{(\alpha+\beta)^2(\alpha+\beta+1)}.
+\]
+
+Therefore,
+
+\[
+\mathrm{Var}(X)=\frac{(4)(2)}{(4+2)^2(4+2+1)}
+=\frac{8}{36(7)}
+=\frac{8}{252}
+=0.0317.
+\]
+
+Since \(\alpha>\beta\), the distribution has more mass toward larger values. Therefore, the completion proportion is more concentrated toward high completion levels.
+
+</details>
+
+---
+
+## Exercise 4: Beta distribution -- prior belief about pass probability
+
+Before observing the results of a new training programme, an analyst models the pass probability of a participant as
+
+\[
+\Theta\sim \mathrm{Beta}(6,6).
+\]
+
+Find the mean and variance. Interpret the shape of this prior distribution.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The mean is
+
+\[
+E(\Theta)=\frac{6}{6+6}=\frac{6}{12}=0.5.
+\]
+
+The variance is
+
+\[
+\mathrm{Var}(\Theta)=\frac{(6)(6)}{(6+6)^2(6+6+1)}.
+\]
+
+Therefore,
+
+\[
+\mathrm{Var}(\Theta)=\frac{36}{144(13)}=\frac{36}{1872}=0.0192.
+\]
+
+Because \(\alpha=\beta\), the distribution is symmetric around 0.5. Since both parameters are greater than 1, the distribution is unimodal and concentrated near the centre.
+
+</details>
+
+---
+
+## Exercise 5: Exponential distribution -- waiting time for a service call
+
+A technical support centre receives calls according to a process where the waiting time until the next call follows an exponential distribution with rate
+
+\[
+\lambda=0.25
+\]
+
+per minute. Let \(X\) be the waiting time in minutes.
+
+Find:
+
+1. the expected waiting time;
+2. the variance of the waiting time;
+3. the probability that the next call arrives after more than 6 minutes.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+For an exponential distribution,
+
+\[
+E(X)=\frac{1}{\lambda}.
+\]
+
+Therefore,
+
+\[
+E(X)=\frac{1}{0.25}=4.
+\]
+
+The variance is
+
+\[
+\mathrm{Var}(X)=\frac{1}{\lambda^2}
+=\frac{1}{0.25^2}
+=\frac{1}{0.0625}=16.
+\]
+
+The survival probability is
+
+\[
+P(X>x)=e^{-\lambda x}.
+\]
+
+Therefore,
+
+\[
+P(X>6)=e^{-0.25(6)}=e^{-1.5}.
+\]
+
+Using
+
+\[
+e^{-1.5}\approx 0.2231,
+\]
+
+we get
+
+\[
+P(X>6)=0.2231.
+\]
+
+</details>
+
+---
+
+## Exercise 6: Exponential distribution -- lifetime of an LED bulb
+
+The lifetime of an LED bulb, measured in years, follows an exponential distribution with mean 8 years.
+
+Find the probability that a bulb fails before 3 years.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Since
+
+\[
+E(X)=\frac{1}{\lambda}=8,
+\]
+
+we get
+
+\[
+\lambda=\frac{1}{8}=0.125.
+\]
+
+We need
+
+\[
+P(X<3).
+\]
+
+Using the exponential cdf,
+
+\[
+P(X<3)=1-e^{-\lambda(3)}.
+\]
+
+Therefore,
+
+\[
+P(X<3)=1-e^{-0.125(3)}=1-e^{-0.375}.
+\]
+
+Using
+
+\[
+e^{-0.375}\approx 0.6873,
+\]
+
+we get
+
+\[
+P(X<3)=1-0.6873=0.3127.
+\]
+
+Hence, the probability that the bulb fails before 3 years is approximately 0.3127.
+
+</details>
+
+---
+
+## Exercise 7: Exponential distribution -- memoryless property in hospital waiting time
+
+The waiting time for a patient to be seen by a doctor follows
+
+\[
+X\sim \mathrm{Exp}(0.1),
+\]
+
+where time is measured in minutes. Given that the patient has already waited 15 minutes, find the probability that the patient must wait at least another 10 minutes.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+We need
+
+\[
+P(X>25\mid X>15).
+\]
+
+Using the memoryless property of the exponential distribution,
+
+\[
+P(X>25\mid X>15)=P(X>10).
+\]
+
+Therefore,
+
+\[
+P(X>10)=e^{-0.1(10)}=e^{-1}.
+\]
+
+Using
+
+\[
+e^{-1}\approx 0.3679,
+\]
+
+we get
+
+\[
+P(X>25\mid X>15)=0.3679.
+\]
+
+</details>
+
+---
+
+## Exercise 8: Standard normal distribution -- scholarship screening score
+
+A standardized scholarship screening score is denoted by
+
+\[
+Z\sim N(0,1).
+\]
+
+Find the probability that a randomly selected applicant has a standardized score below 1.35.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+We need
+
+\[
+P(Z<1.35)=\Phi(1.35).
+\]
+
+From the standard normal table,
+
+\[
+\Phi(1.35)=0.9115.
+\]
+
+Therefore,
+
+\[
+P(Z<1.35)=0.9115.
+\]
+
+</details>
+
+---
+
+## Exercise 9: Standard normal distribution -- unusually low performance
+
+A standardized performance index follows
+
+\[
+Z\sim N(0,1).
+\]
+
+Find the probability that a randomly selected individual has a standardized performance index less than \(-1.20\).
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+We need
+
+\[
+P(Z<-1.20).
+\]
+
+Using symmetry,
+
+\[
+P(Z<-1.20)=1-P(Z<1.20).
+\]
+
+From the standard normal table,
+
+\[
+\Phi(1.20)=0.8849.
+\]
+
+Therefore,
+
+\[
+P(Z<-1.20)=1-0.8849=0.1151.
+\]
+
+</details>
+
+---
+
+## Exercise 10: Standard normal distribution -- middle range of scores
+
+In a standardized aptitude test, the standardized score follows
+
+\[
+Z\sim N(0,1).
+\]
+
+Find the probability that a student has a standardized score between \(-0.75\) and 1.50.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+We need
+
+\[
+P(-0.75<Z<1.50)=\Phi(1.50)-\Phi(-0.75).
+\]
+
+From the standard normal table,
+
+\[
+\Phi(1.50)=0.9332.
+\]
+
+Also,
+
+\[
+\Phi(-0.75)=1-\Phi(0.75).
+\]
+
+From the table,
+
+\[
+\Phi(0.75)=0.7734.
+\]
+
+Therefore,
+
+\[
+\Phi(-0.75)=1-0.7734=0.2266.
+\]
+
+Hence,
+
+\[
+P(-0.75<Z<1.50)=0.9332-0.2266=0.7066.
+\]
+
+</details>
+
+---
+
+## Exercise 11: Normal distribution -- university entrance marks
+
+University entrance marks for a particular examination are approximately normally distributed with mean 68 and standard deviation 12. Let
+
+\[
+X\sim N(68,12^2).
+\]
+
+Find the probability that a randomly selected student scores more than 85.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+First standardize:
+
+\[
+z=\frac{x-\mu}{\sigma}.
+\]
+
+Here,
+
+\[
+x=85,\qquad \mu=68,\qquad \sigma=12.
+\]
+
+Therefore,
+
+\[
+z=\frac{85-68}{12}=\frac{17}{12}=1.42.
+\]
+
+Thus,
+
+\[
+P(X>85)=P(Z>1.42).
+\]
+
+From the standard normal table,
+
+\[
+\Phi(1.42)=0.9222.
+\]
+
+Therefore,
+
+\[
+P(Z>1.42)=1-0.9222=0.0778.
+\]
+
+Hence,
+
+\[
+P(X>85)=0.0778.
+\]
+
+</details>
+
+---
+
+## Exercise 12: Normal distribution -- weights of packed rice bags
+
+The weight of a packed rice bag is normally distributed with mean 5.00 kg and standard deviation 0.08 kg. Let
+
+\[
+X\sim N(5.00,0.08^2).
+\]
+
+A bag is accepted if its weight is between 4.90 kg and 5.10 kg. Find the probability that a randomly selected bag is accepted.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+We need
+
+\[
+P(4.90<X<5.10).
+\]
+
+Standardize the lower limit:
+
+\[
+z_1=\frac{4.90-5.00}{0.08}=\frac{-0.10}{0.08}=-1.25.
+\]
+
+Standardize the upper limit:
+
+\[
+z_2=\frac{5.10-5.00}{0.08}=\frac{0.10}{0.08}=1.25.
+\]
+
+Therefore,
+
+\[
+P(4.90<X<5.10)=P(-1.25<Z<1.25).
+\]
+
+This is
+
+\[
+\Phi(1.25)-\Phi(-1.25).
+\]
+
+From the standard normal table,
+
+\[
+\Phi(1.25)=0.8944.
+\]
+
+Also,
+
+\[
+\Phi(-1.25)=1-0.8944=0.1056.
+\]
+
+Therefore,
+
+\[
+P(-1.25<Z<1.25)=0.8944-0.1056=0.7888.
+\]
+
+Hence, the probability that a bag is accepted is 0.7888.
+
+</details>
+
+---
+
+## Exercise 13: Normal distribution -- hospital systolic blood pressure
+
+Suppose systolic blood pressure among a population of adults is approximately normally distributed with mean 120 mmHg and standard deviation 15 mmHg. Let
+
+\[
+X\sim N(120,15^2).
+\]
+
+Find the blood pressure value below which approximately 90% of adults fall.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+We need a value \(c\) such that
+
+\[
+P(X<c)=0.90.
+\]
+
+Standardizing,
+
+\[
+P\left(Z<\frac{c-120}{15}\right)=0.90.
+\]
+
+From the standard normal table,
+
+\[
+z_{0.90}\approx 1.28.
+\]
+
+Therefore,
+
+\[
+\frac{c-120}{15}=1.28.
+\]
+
+Solving for \(c\),
+
+\[
+c-120=1.28(15)=19.2.
+\]
+
+Hence,
+
+\[
+c=139.2.
+\]
+
+Therefore, approximately 90% of adults have systolic blood pressure below 139.2 mmHg.
+
+</details>
+
+---
+
+## Exercise 14: Normal distribution -- electricity consumption threshold
+
+Monthly household electricity consumption is assumed to follow a normal distribution with mean 74 units and standard deviation 22 units:
+
+\[
+X\sim N(74,22^2).
+\]
+
+Find the threshold \(c\) such that approximately 80% of households consume less than \(c\).
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+We need
+
+\[
+P(X<c)=0.80.
+\]
+
+Standardizing,
+
+\[
+P\left(Z<\frac{c-74}{22}\right)=0.80.
+\]
+
+From the standard normal table,
+
+\[
+z_{0.80}\approx 0.84.
+\]
+
+Therefore,
+
+\[
+\frac{c-74}{22}=0.84.
+\]
+
+Solving for \(c\),
+
+\[
+c-74=0.84(22)=18.48.
+\]
+
+Thus,
+
+\[
+c=92.48.
+\]
+
+Therefore, the threshold is approximately 92.5 units.
+
+</details>
+
+---
+
+## Exercise 15: Chi-square distribution -- variability in manufacturing
+
+A quality engineer studies the variability of a manufacturing process. A statistic used in the variance analysis follows a chi-square distribution with 9 degrees of freedom:
+
+\[
+X\sim \chi^2_9.
+\]
+
+Find:
+
+1. the expected value of \(X\);
+2. the variance of \(X\);
+3. the standard deviation of \(X\).
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+For a chi-square distribution,
+
+\[
+E(X)=\nu.
+\]
+
+Therefore,
+
+\[
+E(X)=9.
+\]
+
+The variance is
+
+\[
+\mathrm{Var}(X)=2\nu.
+\]
+
+Therefore,
+
+\[
+\mathrm{Var}(X)=2(9)=18.
+\]
+
+The standard deviation is
+
+\[
+\mathrm{SD}(X)=\sqrt{18}=4.243.
+\]
+
+</details>
+
+---
+
+## Exercise 16: Chi-square distribution -- squared standardized errors
+
+Suppose five independent measurement errors are standardized and denoted by
+
+\[
+Z_1,Z_2,Z_3,Z_4,Z_5,
+\]
+
+where each
+
+\[
+Z_i\sim N(0,1).
+\]
+
+Define
+
+\[
+X=Z_1^2+Z_2^2+Z_3^2+Z_4^2+Z_5^2.
+\]
+
+Identify the distribution of \(X\). Find its expectation and variance.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+A sum of squares of independent standard normal random variables follows a chi-square distribution.
+
+Since there are five independent standard normal variables,
+
+\[
+X\sim \chi^2_5.
+\]
+
+Therefore,
+
+\[
+E(X)=5.
+\]
+
+The variance is
+
+\[
+\mathrm{Var}(X)=2(5)=10.
+\]
+
+</details>
+
+---
+
+## Exercise 17: F distribution -- comparing two laboratory variances
+
+Two laboratories measure the same chemical concentration using different instruments. A statistic for comparing their sample variances follows
+
+\[
+F\sim F_{6,18}.
+\]
+
+Find the expected value of this F random variable.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+For
+
+\[
+F\sim F_{\nu_1,\nu_2},
+\]
+
+we have
+
+\[
+E(F)=\frac{\nu_2}{\nu_2-2}, \qquad \nu_2>2.
+\]
+
+Here,
+
+\[
+\nu_1=6,\qquad \nu_2=18.
+\]
+
+Therefore,
+
+\[
+E(F)=\frac{18}{18-2}=\frac{18}{16}=1.125.
+\]
+
+</details>
+
+---
+
+## Exercise 18: F distribution -- ANOVA mean square ratio
+
+In a one-way ANOVA problem, the ratio of the between-group mean square to the within-group mean square follows an F distribution under the null hypothesis. Suppose the relevant distribution is
+
+\[
+F\sim F_{4,20}.
+\]
+
+Find the mean and variance of this distribution.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The mean is
+
+\[
+E(F)=\frac{\nu_2}{\nu_2-2}, \qquad \nu_2>2.
+\]
+
+Here,
+
+\[
+\nu_1=4,\qquad \nu_2=20.
+\]
+
+Therefore,
+
+\[
+E(F)=\frac{20}{20-2}=\frac{20}{18}=1.111.
+\]
+
+The variance is
+
+\[
+\mathrm{Var}(F)
+=
+\frac{2\nu_2^2(\nu_1+\nu_2-2)}
+{\nu_1(\nu_2-2)^2(\nu_2-4)},
+\qquad \nu_2>4.
+\]
+
+Substitute \(\nu_1=4\) and \(\nu_2=20\):
+
+\[
+\mathrm{Var}(F)
+=
+\frac{2(20)^2(4+20-2)}
+{4(20-2)^2(20-4)}.
+\]
+
+\[
+\mathrm{Var}(F)
+=
+\frac{800(22)}{4(324)(16)}.
+\]
+
+\[
+\mathrm{Var}(F)
+=
+\frac{17600}{20736}=0.849.
+\]
+
+</details>
+
+---
+
+## Exercise 19: Integrated application -- choosing a distribution
+
+For each situation, identify the most suitable continuous distribution from the list below:
+
+- Uniform;
+- Beta;
+- Exponential;
+- Normal;
+- Standard Normal;
+- Chi-square;
+- F.
+
+Situations:
+
+1. The random waiting time until the next customer arrives at a service counter.
+2. The proportion of defective items in a production batch, treated as an uncertain quantity between 0 and 1.
+3. The distribution of exam marks in a large class where marks are approximately symmetric and bell-shaped.
+4. A statistic formed by summing the squares of eight independent standard normal variables.
+5. A statistic formed as the ratio of two independent scaled chi-square variables.
+6. The arrival time of a randomly arriving passenger within a fixed 20-minute interval.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+1. Waiting time until the next customer: Exponential distribution.
+2. Uncertain proportion between 0 and 1: Beta distribution.
+3. Approximately symmetric bell-shaped marks: Normal distribution.
+4. Sum of squares of eight independent standard normal variables: Chi-square distribution with 8 degrees of freedom.
+5. Ratio of two independent scaled chi-square variables: F distribution.
+6. Random arrival within a fixed interval where all times are equally likely: Uniform distribution.
+
+</details>
+
+---
+
+## Exercise 20: Integrated application -- statistical reasoning
+
+A university wants to classify students based on a standardized academic performance score. The raw score follows
+
+\[
+X\sim N(65,10^2).
+\]
+
+Students scoring above 80 are classified as high-performing.
+
+1. Find the probability that a randomly selected student is classified as high-performing.
+2. Find the score above which approximately the top 5% of students fall.
+3. Explain why the standard normal distribution is useful in this calculation.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+For part 1, we need
+
+\[
+P(X>80).
+\]
+
+Standardize:
+
+\[
+z=\frac{80-65}{10}=1.50.
+\]
+
+Therefore,
+
+\[
+P(X>80)=P(Z>1.50).
+\]
+
+From the standard normal table,
+
+\[
+\Phi(1.50)=0.9332.
+\]
+
+Hence,
+
+\[
+P(Z>1.50)=1-0.9332=0.0668.
+\]
+
+Therefore, the probability that a randomly selected student is classified as high-performing is 0.0668.
+
+For part 2, the top 5% corresponds to the 95th percentile. We need \(c\) such that
+
+\[
+P(X<c)=0.95.
+\]
+
+From the standard normal table,
+
+\[
+z_{0.95}\approx 1.645.
+\]
+
+Therefore,
+
+\[
+\frac{c-65}{10}=1.645.
+\]
+
+Solving,
+
+\[
+c-65=16.45,
+\]
+
+so
+
+\[
+c=81.45.
+\]
+
+Thus, approximately the top 5% of students score above 81.45.
+
+For part 3, the standard normal distribution is useful because any normal random variable can be transformed into a standard normal random variable using
+
+\[
+Z=\frac{X-\mu}{\sigma}.
+\]
+
+This allows probabilities and percentiles to be obtained using one common table.
+
+</details>
+
+---
+
+
+# Key takeaways
+
+1. Continuous probabilities are calculated over intervals, not at exact points.
+2. A pdf can be greater than 1, but the total area under the pdf must be 1.
+3. The Uniform distribution assigns equal probability to equal-length intervals.
+4. The Beta distribution is useful for modelling proportions and probabilities.
+5. The Exponential distribution is used for waiting times and has the memoryless property.
+6. The Normal distribution is symmetric and central in statistics.
+7. The Standard Normal distribution allows manual normal calculations using a Z table.
+8. The Chi-square distribution arises from sums of squared standard normal variables.
+9. The F distribution arises from ratios of scaled chi-square variables.
+10. Expectation describes centre, while variance describes spread.
+
+---
+
+# Short revision checklist
+
+Before the next class, students should be able to answer the following:
+
+1. What is the difference between a pdf and a pmf?
+2. Why is \(P(X=x)=0\) for continuous random variables?
+3. What are the mean and variance of \(U(a,b)\)?
+4. What are the mean and variance of \(\mathrm{Beta}(\alpha,\beta)\)?
+5. How do we calculate \(P(X>x)\) for an exponential random variable?
+6. How do we standardize a normal random variable?
+7. How do we use the standard normal table for negative \(z\)-values?
+8. What is the relationship between the normal and chi-square distributions?
+9. What is the relationship between chi-square and F distributions?
+10. In which statistical procedures do chi-square and F distributions appear?
+
