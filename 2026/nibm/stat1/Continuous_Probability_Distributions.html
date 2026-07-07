@@ -1514,8 +1514,10 @@ distribution functions, and statistical tables;</li>
 <li>identify the parameters, expectation, and variance of common
 continuous distributions;</li>
 <li>use standardization to solve normal distribution problems;</li>
-<li>recognize the use of chi-square and F distributions in statistical
-inference;</li>
+<li>understand the Student’s t distribution and its connection with the
+standard normal and chi-square distributions;</li>
+<li>recognize the use of chi-square, t, and F distributions in
+statistical inference;</li>
 <li>solve beginner, intermediate, and advanced problems involving
 continuous distributions.</li>
 </ol>
@@ -1657,6 +1659,14 @@ mean.</p>
 <td align="right"><span class="math inline">\(1\)</span></td>
 </tr>
 <tr class="even">
+<td>Student’s t</td>
+<td><span class="math inline">\(T\sim t_\nu\)</span></td>
+<td align="right"><span class="math inline">\(-\infty&lt;t&lt;\infty\)</span></td>
+<td><span class="math inline">\(\nu\)</span></td>
+<td align="right"><span class="math inline">\(0\)</span>, <span class="math inline">\(\nu&gt;1\)</span></td>
+<td align="right"><span class="math inline">\(\frac{\nu}{\nu-2}\)</span>, <span class="math inline">\(\nu&gt;2\)</span></td>
+</tr>
+<tr class="odd">
 <td>Chi-square</td>
 <td><span class="math inline">\(X\sim \chi^2_\nu\)</span></td>
 <td align="right"><span class="math inline">\(x&gt;0\)</span></td>
@@ -1664,7 +1674,7 @@ mean.</p>
 <td align="right"><span class="math inline">\(\nu\)</span></td>
 <td align="right"><span class="math inline">\(2\nu\)</span></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>F</td>
 <td><span class="math inline">\(X\sim F_{\nu_1,\nu_2}\)</span></td>
 <td align="right"><span class="math inline">\(x&gt;0\)</span></td>
@@ -2146,9 +2156,268 @@ P(X&gt;85)=0.0668.
 <hr />
 </div>
 </div>
+<div id="students-t-distribution" class="section level1">
+<h1>Student’s t distribution</h1>
+<div id="definition-5" class="section level2">
+<h2>Definition</h2>
+<p>The <strong>Student’s t distribution</strong> is an important
+continuous distribution used mainly in statistical inference when the
+population standard deviation is unknown and the sample size is small or
+moderate.</p>
+<p>A random variable <span class="math inline">\(T\)</span> follows a
+Student’s t distribution with <span class="math inline">\(\nu\)</span>
+degrees of freedom, written as</p>
+<p><span class="math display">\[
+T\sim t_\nu,
+\]</span></p>
+<p>if it has pdf</p>
+<p><span class="math display">\[
+f(t)=
+\frac{\Gamma\left(\frac{\nu+1}{2}\right)}
+{\sqrt{\nu\pi}\,\Gamma\left(\frac{\nu}{2}\right)}
+\left(1+\frac{t^2}{\nu}\right)^{-\frac{\nu+1}{2}},
+\qquad -\infty&lt;t&lt;\infty,
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+\nu&gt;0.
+\]</span></p>
+<p>The parameter <span class="math inline">\(\nu\)</span> is called the
+<strong>degrees of freedom</strong>.</p>
+</div>
+<div id="construction-from-standard-normal-and-chi-square-distributions" class="section level2">
+<h2>Construction from standard normal and chi-square distributions</h2>
+<p>Let</p>
+<p><span class="math display">\[
+Z\sim N(0,1)
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+V\sim \chi^2_\nu
+\]</span></p>
+<p>be independent. Then</p>
+<p><span class="math display">\[
+T=\frac{Z}{\sqrt{V/\nu}}
+\]</span></p>
+<p>follows a Student’s t distribution with <span class="math inline">\(\nu\)</span> degrees of freedom:</p>
+<p><span class="math display">\[
+T\sim t_\nu.
+\]</span></p>
+<p>This relationship explains why the t distribution is closely
+connected to both the normal and chi-square distributions.</p>
+</div>
+<div id="mean-and-variance-4" class="section level2">
+<h2>Mean and variance</h2>
+<p>If</p>
+<p><span class="math display">\[
+T\sim t_\nu,
+\]</span></p>
+<p>then the mean is</p>
+<p><span class="math display">\[
+E(T)=0, \qquad \nu&gt;1.
+\]</span></p>
+<p>The variance is</p>
+<p><span class="math display">\[
+\mathrm{Var}(T)=\frac{\nu}{\nu-2}, \qquad \nu&gt;2.
+\]</span></p>
+<p>For <span class="math inline">\(1&lt;\nu\le 2\)</span>, the mean
+exists but the variance does not exist. For <span class="math inline">\(0&lt;\nu\le 1\)</span>, the mean does not
+exist.</p>
+</div>
+<div id="important-properties" class="section level2">
+<h2>Important properties</h2>
+<ol style="list-style-type: decimal">
+<li>The t distribution is symmetric about 0.</li>
+<li>It has heavier tails than the standard normal distribution.</li>
+<li>The shape depends on the degrees of freedom <span class="math inline">\(\nu\)</span>.</li>
+<li>As <span class="math inline">\(\nu\)</span> increases, the t
+distribution approaches the standard normal distribution.</li>
+<li>It is widely used when estimating a population mean with unknown
+population variance.</li>
+</ol>
+</div>
+<div id="comparison-with-the-standard-normal-distribution" class="section level2">
+<h2>Comparison with the standard normal distribution</h2>
+<p>The t distribution looks similar to the standard normal distribution,
+but it has more probability in the tails. This reflects the additional
+uncertainty caused by estimating the population standard deviation using
+the sample standard deviation.</p>
+<p>When the degrees of freedom are small, the tails are much heavier.
+When the degrees of freedom are large, the t distribution becomes almost
+identical to the standard normal distribution.</p>
+</div>
+<div id="uses-of-the-t-distribution" class="section level2">
+<h2>Uses of the t distribution</h2>
+<p>The t distribution is used in:</p>
+<ul>
+<li>confidence intervals for a population mean when <span class="math inline">\(\sigma\)</span> is unknown;</li>
+<li>one-sample t tests;</li>
+<li>paired t tests;</li>
+<li>two-sample t tests;</li>
+<li>testing regression coefficients;</li>
+<li>small-sample inference under approximate normality.</li>
+</ul>
+</div>
+<div id="example-4" class="section level2">
+<h2>Example</h2>
+<p>Suppose</p>
+<p><span class="math display">\[
+T\sim t_{10}.
+\]</span></p>
+<p>Then the mean is</p>
+<p><span class="math display">\[
+E(T)=0.
+\]</span></p>
+<p>The variance is</p>
+<p><span class="math display">\[
+\mathrm{Var}(T)=\frac{10}{10-2}=\frac{10}{8}=1.25.
+\]</span></p>
+<p>Interpretation: the distribution is centred at 0 and is symmetric,
+but it is more spread out than the standard normal distribution because
+its variance is greater than 1.</p>
+</div>
+<div id="t-critical-values-for-common-confidence-levels" class="section level2">
+<h2>t critical values for common confidence levels</h2>
+<p>The following table gives two-sided critical values <span class="math inline">\(t_{\alpha/2,\nu}\)</span>, where</p>
+<p><span class="math display">\[
+P(T&gt;t_{\alpha/2,\nu})=\frac{\alpha}{2}.
+\]</span></p>
+<p>These values are useful for confidence intervals of the form</p>
+<p><span class="math display">\[
+\bar{x}\pm t_{\alpha/2,\nu}\frac{s}{\sqrt{n}}.
+\]</span></p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Degrees of freedom <span class="math inline">\(\nu\)</span></th>
+<th align="right">90% CI</th>
+<th align="right">95% CI</th>
+<th align="right">99% CI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">6.314</td>
+<td align="right">12.706</td>
+<td align="right">63.657</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">2.920</td>
+<td align="right">4.303</td>
+<td align="right">9.925</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">2.353</td>
+<td align="right">3.182</td>
+<td align="right">5.841</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">2.132</td>
+<td align="right">2.776</td>
+<td align="right">4.604</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">2.015</td>
+<td align="right">2.571</td>
+<td align="right">4.032</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="right">1.943</td>
+<td align="right">2.447</td>
+<td align="right">3.707</td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="right">1.895</td>
+<td align="right">2.365</td>
+<td align="right">3.499</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="right">1.860</td>
+<td align="right">2.306</td>
+<td align="right">3.355</td>
+</tr>
+<tr class="odd">
+<td align="right">9</td>
+<td align="right">1.833</td>
+<td align="right">2.262</td>
+<td align="right">3.250</td>
+</tr>
+<tr class="even">
+<td align="right">10</td>
+<td align="right">1.812</td>
+<td align="right">2.228</td>
+<td align="right">3.169</td>
+</tr>
+<tr class="odd">
+<td align="right">12</td>
+<td align="right">1.782</td>
+<td align="right">2.179</td>
+<td align="right">3.055</td>
+</tr>
+<tr class="even">
+<td align="right">15</td>
+<td align="right">1.753</td>
+<td align="right">2.131</td>
+<td align="right">2.947</td>
+</tr>
+<tr class="odd">
+<td align="right">20</td>
+<td align="right">1.725</td>
+<td align="right">2.086</td>
+<td align="right">2.845</td>
+</tr>
+<tr class="even">
+<td align="right">25</td>
+<td align="right">1.708</td>
+<td align="right">2.060</td>
+<td align="right">2.787</td>
+</tr>
+<tr class="odd">
+<td align="right">30</td>
+<td align="right">1.697</td>
+<td align="right">2.042</td>
+<td align="right">2.750</td>
+</tr>
+<tr class="even">
+<td align="right">40</td>
+<td align="right">1.684</td>
+<td align="right">2.021</td>
+<td align="right">2.704</td>
+</tr>
+<tr class="odd">
+<td align="right">60</td>
+<td align="right">1.671</td>
+<td align="right">2.000</td>
+<td align="right">2.660</td>
+</tr>
+<tr class="even">
+<td align="right">120</td>
+<td align="right">1.658</td>
+<td align="right">1.980</td>
+<td align="right">2.617</td>
+</tr>
+<tr class="odd">
+<td align="right"><span class="math inline">\(\infty\)</span></td>
+<td align="right">1.645</td>
+<td align="right">1.960</td>
+<td align="right">2.576</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+</div>
 <div id="chi-square-distribution" class="section level1">
 <h1>Chi-square distribution</h1>
-<div id="definition-5" class="section level2">
+<div id="definition-6" class="section level2">
 <h2>Definition</h2>
 <p>Let</p>
 <p><span class="math display">\[
@@ -2167,7 +2436,7 @@ X\sim \chi^2_\nu.
 <p>The parameter <span class="math inline">\(\nu\)</span> is called the
 <strong>degrees of freedom</strong>.</p>
 </div>
-<div id="mean-and-variance-4" class="section level2">
+<div id="mean-and-variance-5" class="section level2">
 <h2>Mean and variance</h2>
 <p>If</p>
 <p><span class="math display">\[
@@ -2182,7 +2451,7 @@ E(X)=\nu
 \mathrm{Var}(X)=2\nu.
 \]</span></p>
 </div>
-<div id="important-properties" class="section level2">
+<div id="important-properties-1" class="section level2">
 <h2>Important properties</h2>
 <ol style="list-style-type: decimal">
 <li>The chi-square distribution is always non-negative.</li>
@@ -2203,7 +2472,7 @@ distribution becomes more symmetric.</li>
 <li>likelihood ratio tests.</li>
 </ul>
 </div>
-<div id="example-4" class="section level2">
+<div id="example-5" class="section level2">
 <h2>Example</h2>
 <p>Suppose</p>
 <p><span class="math display">\[
@@ -2228,7 +2497,7 @@ freedom is centred around 10, but it is right-skewed.</p>
 </div>
 <div id="f-distribution" class="section level1">
 <h1>F distribution</h1>
-<div id="definition-6" class="section level2">
+<div id="definition-7" class="section level2">
 <h2>Definition</h2>
 <p>Let</p>
 <p><span class="math display">\[
@@ -2252,7 +2521,7 @@ freedom.</p>
 F\sim F_{\nu_1,\nu_2}.
 \]</span></p>
 </div>
-<div id="mean-and-variance-5" class="section level2">
+<div id="mean-and-variance-6" class="section level2">
 <h2>Mean and variance</h2>
 <p>If</p>
 <p><span class="math display">\[
@@ -2272,7 +2541,7 @@ E(F)=\frac{\nu_2}{\nu_2-2},
 \qquad \nu_2&gt;4.
 \]</span></p>
 </div>
-<div id="important-properties-1" class="section level2">
+<div id="important-properties-2" class="section level2">
 <h2>Important properties</h2>
 <ol style="list-style-type: decimal">
 <li>The F distribution is always non-negative.</li>
@@ -2291,7 +2560,7 @@ E(F)=\frac{\nu_2}{\nu_2-2},
 <li>testing overall significance of a linear regression model.</li>
 </ul>
 </div>
-<div id="example-5" class="section level2">
+<div id="example-6" class="section level2">
 <h2>Example</h2>
 <p>Suppose</p>
 <p><span class="math display">\[
@@ -3529,6 +3798,7 @@ distribution from the list below:</p>
 <li>Exponential;</li>
 <li>Normal;</li>
 <li>Standard Normal;</li>
+<li>Student’s t;</li>
 <li>Chi-square;</li>
 <li><ol start="6" style="list-style-type: upper-alpha">
 <li></li>
@@ -3544,6 +3814,8 @@ an uncertain quantity between 0 and 1.</li>
 approximately symmetric and bell-shaped.</li>
 <li>A statistic formed by summing the squares of eight independent
 standard normal variables.</li>
+<li>A statistic used for inference about a population mean when the
+population standard deviation is unknown.</li>
 <li>A statistic formed as the ratio of two independent scaled chi-square
 variables.</li>
 <li>The arrival time of a randomly arriving passenger within a fixed
@@ -3559,6 +3831,8 @@ variables.</li>
 <li>Approximately symmetric bell-shaped marks: Normal distribution.</li>
 <li>Sum of squares of eight independent standard normal variables:
 Chi-square distribution with 8 degrees of freedom.</li>
+<li>Inference about a population mean with unknown population standard
+deviation: Student’s t distribution.</li>
 <li>Ratio of two independent scaled chi-square variables: F
 distribution.</li>
 <li>Random arrival within a fixed interval where all times are equally
@@ -3642,6 +3916,100 @@ common table.</p>
 </details>
 <hr />
 </div>
+<div id="exercise-21-students-t-distribution-sample-mean-with-unknown-population-variance" class="section level2">
+<h2>Exercise 21: Student’s t distribution – sample mean with unknown
+population variance</h2>
+<p>A lecturer studies the time taken by a small group of students to
+complete an online quiz. The completion times are approximately normally
+distributed, but the population standard deviation is unknown. A sample
+of <span class="math inline">\(n=16\)</span> students is taken.</p>
+<ol style="list-style-type: decimal">
+<li>Identify the appropriate distribution for inference about the
+population mean.</li>
+<li>State the degrees of freedom.</li>
+<li>Find the 95% two-sided critical value.</li>
+<li>Explain why the t distribution is used instead of the standard
+normal distribution.</li>
+</ol>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>Since the population standard deviation is unknown and the sample
+size is relatively small, inference about the population mean should use
+the Student’s t distribution.</p>
+<p>The degrees of freedom are</p>
+<p><span class="math display">\[
+\nu=n-1=16-1=15.
+\]</span></p>
+<p>Therefore, the appropriate distribution is</p>
+<p><span class="math display">\[
+T\sim t_{15}.
+\]</span></p>
+<p>From the t critical value table, for a 95% confidence interval with
+<span class="math inline">\(\nu=15\)</span>,</p>
+<p><span class="math display">\[
+t_{0.025,15}=2.131.
+\]</span></p>
+<p>The t distribution is used instead of the standard normal
+distribution because the population standard deviation <span class="math inline">\(\sigma\)</span> is unknown and must be estimated
+using the sample standard deviation <span class="math inline">\(s\)</span>. This introduces extra uncertainty,
+which is reflected by the heavier tails of the t distribution.</p>
+</details>
+<hr />
+</div>
+<div id="exercise-22-students-t-distribution-confidence-interval-for-mean-delivery-time" class="section level2">
+<h2>Exercise 22: Student’s t distribution – confidence interval for mean
+delivery time</h2>
+<p>A logistics company records the delivery times, in minutes, for a
+random sample of 10 deliveries. The sample mean is 42 minutes and the
+sample standard deviation is 6 minutes. Assume delivery times are
+approximately normally distributed.</p>
+<p>Construct a 95% confidence interval for the true mean delivery
+time.</p>
+<details>
+<summary>
+<strong>Solution</strong>
+</summary>
+<p>The population standard deviation is unknown, so we use a t
+confidence interval:</p>
+<p><span class="math display">\[
+\bar{x}\pm t_{\alpha/2,\nu}\frac{s}{\sqrt{n}}.
+\]</span></p>
+<p>Here,</p>
+<p><span class="math display">\[
+\bar{x}=42,\qquad s=6,\qquad n=10.
+\]</span></p>
+<p>The degrees of freedom are</p>
+<p><span class="math display">\[
+\nu=n-1=10-1=9.
+\]</span></p>
+<p>For a 95% confidence interval with <span class="math inline">\(\nu=9\)</span>, the critical value is</p>
+<p><span class="math display">\[
+t_{0.025,9}=2.262.
+\]</span></p>
+<p>The standard error is</p>
+<p><span class="math display">\[
+\frac{s}{\sqrt{n}}=\frac{6}{\sqrt{10}}=1.897.
+\]</span></p>
+<p>The margin of error is</p>
+<p><span class="math display">\[
+2.262(1.897)=4.290.
+\]</span></p>
+<p>Therefore, the 95% confidence interval is</p>
+<p><span class="math display">\[
+42\pm 4.290.
+\]</span></p>
+<p>Thus,</p>
+<p><span class="math display">\[
+(37.71,46.29).
+\]</span></p>
+<p>Interpretation: based on this sample, the true mean delivery time is
+estimated to lie between 37.71 minutes and 46.29 minutes with 95%
+confidence.</p>
+</details>
+<hr />
+</div>
 </div>
 <div id="key-takeaways" class="section level1">
 <h1>Key takeaways</h1>
@@ -3659,6 +4027,8 @@ memoryless property.</li>
 <li>The Normal distribution is symmetric and central in statistics.</li>
 <li>The Standard Normal distribution allows manual normal calculations
 using a Z table.</li>
+<li>The Student’s t distribution is used when making inference about a
+mean with unknown population standard deviation.</li>
 <li>The Chi-square distribution arises from sums of squared standard
 normal variables.</li>
 <li>The F distribution arises from ratios of scaled chi-square
@@ -3681,11 +4051,13 @@ random variables?</li>
 for an exponential random variable?</li>
 <li>How do we standardize a normal random variable?</li>
 <li>How do we use the standard normal table for negative <span class="math inline">\(z\)</span>-values?</li>
+<li>Why does the t distribution have heavier tails than the standard
+normal distribution?</li>
 <li>What is the relationship between the normal and chi-square
 distributions?</li>
 <li>What is the relationship between chi-square and F
 distributions?</li>
-<li>In which statistical procedures do chi-square and F distributions
+<li>In which statistical procedures do t, chi-square and F distributions
 appear?</li>
 </ol>
 </div>

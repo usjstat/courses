@@ -18,8 +18,9 @@ By the end of this lesson, students should be able to:
 3. compute probabilities using density functions, cumulative distribution functions, and statistical tables;
 4. identify the parameters, expectation, and variance of common continuous distributions;
 5. use standardization to solve normal distribution problems;
-6. recognize the use of chi-square and F distributions in statistical inference;
-7. solve beginner, intermediate, and advanced problems involving continuous distributions.
+6. understand the Student's t distribution and its connection with the standard normal and chi-square distributions;
+7. recognize the use of chi-square, t, and F distributions in statistical inference;
+8. solve beginner, intermediate, and advanced problems involving continuous distributions.
 
 ---
 
@@ -118,6 +119,7 @@ The standard deviation is
 | Exponential | \(X\sim \mathrm{Exp}(\lambda)\) | \(x>0\) | \(\lambda\) | \(\frac{1}{\lambda}\) | \(\frac{1}{\lambda^2}\) |
 | Normal | \(X\sim N(\mu,\sigma^2)\) | \(-\infty<x<\infty\) | \(\mu,\sigma^2\) | \(\mu\) | \(\sigma^2\) |
 | Standard Normal | \(Z\sim N(0,1)\) | \(-\infty<z<\infty\) | none | \(0\) | \(1\) |
+| Student's t | \(T\sim t_\nu\) | \(-\infty<t<\infty\) | \(\nu\) | \(0\), \(\nu>1\) | \(\frac{\nu}{\nu-2}\), \(\nu>2\) |
 | Chi-square | \(X\sim \chi^2_\nu\) | \(x>0\) | \(\nu\) | \(\nu\) | \(2\nu\) |
 | F | \(X\sim F_{\nu_1,\nu_2}\) | \(x>0\) | \(\nu_1,\nu_2\) | \(\frac{\nu_2}{\nu_2-2}\), \(\nu_2>2\) | \(\frac{2\nu_2^2(\nu_1+\nu_2-2)}{\nu_1(\nu_2-2)^2(\nu_2-4)}\), \(\nu_2>4\) |
 
@@ -675,6 +677,171 @@ So,
 \[
 P(X>85)=0.0668.
 \]
+
+---
+
+# Student's t distribution
+
+## Definition
+
+The **Student's t distribution** is an important continuous distribution used mainly in statistical inference when the population standard deviation is unknown and the sample size is small or moderate.
+
+A random variable \(T\) follows a Student's t distribution with \(\nu\) degrees of freedom, written as
+
+\[
+T\sim t_\nu,
+\]
+
+if it has pdf
+
+\[
+f(t)=
+\frac{\Gamma\left(\frac{\nu+1}{2}\right)}
+{\sqrt{\nu\pi}\,\Gamma\left(\frac{\nu}{2}\right)}
+\left(1+\frac{t^2}{\nu}\right)^{-\frac{\nu+1}{2}},
+\qquad -\infty<t<\infty,
+\]
+
+where
+
+\[
+\nu>0.
+\]
+
+The parameter \(\nu\) is called the **degrees of freedom**.
+
+## Construction from standard normal and chi-square distributions
+
+Let
+
+\[
+Z\sim N(0,1)
+\]
+
+and
+
+\[
+V\sim \chi^2_\nu
+\]
+
+be independent. Then
+
+\[
+T=\frac{Z}{\sqrt{V/\nu}}
+\]
+
+follows a Student's t distribution with \(\nu\) degrees of freedom:
+
+\[
+T\sim t_\nu.
+\]
+
+This relationship explains why the t distribution is closely connected to both the normal and chi-square distributions.
+
+## Mean and variance
+
+If
+
+\[
+T\sim t_\nu,
+\]
+
+then the mean is
+
+\[
+E(T)=0, \qquad \nu>1.
+\]
+
+The variance is
+
+\[
+\mathrm{Var}(T)=\frac{\nu}{\nu-2}, \qquad \nu>2.
+\]
+
+For \(1<\nu\le 2\), the mean exists but the variance does not exist. For \(0<\nu\le 1\), the mean does not exist.
+
+## Important properties
+
+1. The t distribution is symmetric about 0.
+2. It has heavier tails than the standard normal distribution.
+3. The shape depends on the degrees of freedom \(\nu\).
+4. As \(\nu\) increases, the t distribution approaches the standard normal distribution.
+5. It is widely used when estimating a population mean with unknown population variance.
+
+## Comparison with the standard normal distribution
+
+The t distribution looks similar to the standard normal distribution, but it has more probability in the tails. This reflects the additional uncertainty caused by estimating the population standard deviation using the sample standard deviation.
+
+When the degrees of freedom are small, the tails are much heavier. When the degrees of freedom are large, the t distribution becomes almost identical to the standard normal distribution.
+
+## Uses of the t distribution
+
+The t distribution is used in:
+
+- confidence intervals for a population mean when \(\sigma\) is unknown;
+- one-sample t tests;
+- paired t tests;
+- two-sample t tests;
+- testing regression coefficients;
+- small-sample inference under approximate normality.
+
+## Example
+
+Suppose
+
+\[
+T\sim t_{10}.
+\]
+
+Then the mean is
+
+\[
+E(T)=0.
+\]
+
+The variance is
+
+\[
+\mathrm{Var}(T)=\frac{10}{10-2}=\frac{10}{8}=1.25.
+\]
+
+Interpretation: the distribution is centred at 0 and is symmetric, but it is more spread out than the standard normal distribution because its variance is greater than 1.
+
+## t critical values for common confidence levels
+
+The following table gives two-sided critical values \(t_{\alpha/2,\nu}\), where
+
+\[
+P(T>t_{\alpha/2,\nu})=\frac{\alpha}{2}.
+\]
+
+These values are useful for confidence intervals of the form
+
+\[
+\bar{x}\pm t_{\alpha/2,\nu}\frac{s}{\sqrt{n}}.
+\]
+
+| Degrees of freedom \(\nu\) | 90% CI | 95% CI | 99% CI |
+|---:|---:|---:|---:|
+| 1 | 6.314 | 12.706 | 63.657 |
+| 2 | 2.920 | 4.303 | 9.925 |
+| 3 | 2.353 | 3.182 | 5.841 |
+| 4 | 2.132 | 2.776 | 4.604 |
+| 5 | 2.015 | 2.571 | 4.032 |
+| 6 | 1.943 | 2.447 | 3.707 |
+| 7 | 1.895 | 2.365 | 3.499 |
+| 8 | 1.860 | 2.306 | 3.355 |
+| 9 | 1.833 | 2.262 | 3.250 |
+| 10 | 1.812 | 2.228 | 3.169 |
+| 12 | 1.782 | 2.179 | 3.055 |
+| 15 | 1.753 | 2.131 | 2.947 |
+| 20 | 1.725 | 2.086 | 2.845 |
+| 25 | 1.708 | 2.060 | 2.787 |
+| 30 | 1.697 | 2.042 | 2.750 |
+| 40 | 1.684 | 2.021 | 2.704 |
+| 60 | 1.671 | 2.000 | 2.660 |
+| 120 | 1.658 | 1.980 | 2.617 |
+| \(\infty\) | 1.645 | 1.960 | 2.576 |
 
 ---
 
@@ -1905,6 +2072,7 @@ For each situation, identify the most suitable continuous distribution from the 
 - Exponential;
 - Normal;
 - Standard Normal;
+- Student's t;
 - Chi-square;
 - F.
 
@@ -1914,8 +2082,9 @@ Situations:
 2. The proportion of defective items in a production batch, treated as an uncertain quantity between 0 and 1.
 3. The distribution of exam marks in a large class where marks are approximately symmetric and bell-shaped.
 4. A statistic formed by summing the squares of eight independent standard normal variables.
-5. A statistic formed as the ratio of two independent scaled chi-square variables.
-6. The arrival time of a randomly arriving passenger within a fixed 20-minute interval.
+5. A statistic used for inference about a population mean when the population standard deviation is unknown.
+6. A statistic formed as the ratio of two independent scaled chi-square variables.
+7. The arrival time of a randomly arriving passenger within a fixed 20-minute interval.
 
 <details>
 
@@ -1925,8 +2094,9 @@ Situations:
 2. Uncertain proportion between 0 and 1: Beta distribution.
 3. Approximately symmetric bell-shaped marks: Normal distribution.
 4. Sum of squares of eight independent standard normal variables: Chi-square distribution with 8 degrees of freedom.
-5. Ratio of two independent scaled chi-square variables: F distribution.
-6. Random arrival within a fixed interval where all times are equally likely: Uniform distribution.
+5. Inference about a population mean with unknown population standard deviation: Student's t distribution.
+6. Ratio of two independent scaled chi-square variables: F distribution.
+7. Random arrival within a fixed interval where all times are equally likely: Uniform distribution.
 
 </details>
 
@@ -2026,6 +2196,109 @@ This allows probabilities and percentiles to be obtained using one common table.
 
 ---
 
+## Exercise 21: Student's t distribution -- sample mean with unknown population variance
+
+A lecturer studies the time taken by a small group of students to complete an online quiz. The completion times are approximately normally distributed, but the population standard deviation is unknown. A sample of \(n=16\) students is taken.
+
+1. Identify the appropriate distribution for inference about the population mean.
+2. State the degrees of freedom.
+3. Find the 95% two-sided critical value.
+4. Explain why the t distribution is used instead of the standard normal distribution.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Since the population standard deviation is unknown and the sample size is relatively small, inference about the population mean should use the Student's t distribution.
+
+The degrees of freedom are
+
+\[
+\nu=n-1=16-1=15.
+\]
+
+Therefore, the appropriate distribution is
+
+\[
+T\sim t_{15}.
+\]
+
+From the t critical value table, for a 95% confidence interval with \(\nu=15\),
+
+\[
+t_{0.025,15}=2.131.
+\]
+
+The t distribution is used instead of the standard normal distribution because the population standard deviation \(\sigma\) is unknown and must be estimated using the sample standard deviation \(s\). This introduces extra uncertainty, which is reflected by the heavier tails of the t distribution.
+
+</details>
+
+---
+
+## Exercise 22: Student's t distribution -- confidence interval for mean delivery time
+
+A logistics company records the delivery times, in minutes, for a random sample of 10 deliveries. The sample mean is 42 minutes and the sample standard deviation is 6 minutes. Assume delivery times are approximately normally distributed.
+
+Construct a 95% confidence interval for the true mean delivery time.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The population standard deviation is unknown, so we use a t confidence interval:
+
+\[
+\bar{x}\pm t_{\alpha/2,\nu}\frac{s}{\sqrt{n}}.
+\]
+
+Here,
+
+\[
+\bar{x}=42,\qquad s=6,\qquad n=10.
+\]
+
+The degrees of freedom are
+
+\[
+\nu=n-1=10-1=9.
+\]
+
+For a 95% confidence interval with \(\nu=9\), the critical value is
+
+\[
+t_{0.025,9}=2.262.
+\]
+
+The standard error is
+
+\[
+\frac{s}{\sqrt{n}}=\frac{6}{\sqrt{10}}=1.897.
+\]
+
+The margin of error is
+
+\[
+2.262(1.897)=4.290.
+\]
+
+Therefore, the 95% confidence interval is
+
+\[
+42\pm 4.290.
+\]
+
+Thus,
+
+\[
+(37.71,46.29).
+\]
+
+Interpretation: based on this sample, the true mean delivery time is estimated to lie between 37.71 minutes and 46.29 minutes with 95% confidence.
+
+</details>
+
+---
+
 
 # Key takeaways
 
@@ -2036,9 +2309,10 @@ This allows probabilities and percentiles to be obtained using one common table.
 5. The Exponential distribution is used for waiting times and has the memoryless property.
 6. The Normal distribution is symmetric and central in statistics.
 7. The Standard Normal distribution allows manual normal calculations using a Z table.
-8. The Chi-square distribution arises from sums of squared standard normal variables.
-9. The F distribution arises from ratios of scaled chi-square variables.
-10. Expectation describes centre, while variance describes spread.
+8. The Student's t distribution is used when making inference about a mean with unknown population standard deviation.
+9. The Chi-square distribution arises from sums of squared standard normal variables.
+10. The F distribution arises from ratios of scaled chi-square variables.
+11. Expectation describes centre, while variance describes spread.
 
 ---
 
@@ -2053,7 +2327,8 @@ Before the next class, students should be able to answer the following:
 5. How do we calculate \(P(X>x)\) for an exponential random variable?
 6. How do we standardize a normal random variable?
 7. How do we use the standard normal table for negative \(z\)-values?
-8. What is the relationship between the normal and chi-square distributions?
-9. What is the relationship between chi-square and F distributions?
-10. In which statistical procedures do chi-square and F distributions appear?
+8. Why does the t distribution have heavier tails than the standard normal distribution?
+9. What is the relationship between the normal and chi-square distributions?
+10. What is the relationship between chi-square and F distributions?
+11. In which statistical procedures do t, chi-square and F distributions appear?
 
