@@ -1,0 +1,1614 @@
+---
+title: "Hypothesis Testing: One-Sample Tests Using Normal and t Distributions"
+author: "Rajitha M. Silva"
+output:
+  html_document:
+    theme: flatly
+    toc: true
+    toc_float: true
+    number_sections: false
+---
+
+## Learning objectives
+
+By the end of this 6-hour lecture, students should be able to:
+
+1. explain the purpose of hypothesis testing in statistical decision-making;
+2. formulate null and alternative hypotheses for one-sample problems;
+3. distinguish between one-tailed and two-tailed tests;
+4. compute one-sample test statistics using the normal and t distributions;
+5. interpret p-values correctly;
+6. use confidence intervals to support hypothesis testing conclusions;
+7. decide whether to use a one-sample z test or a one-sample t test;
+8. write practical conclusions in the context of the problem;
+9. identify common errors in hypothesis testing;
+10. solve beginner, intermediate, and advanced one-sample hypothesis testing problems.
+
+---
+
+
+# 1. Motivation: Why hypothesis testing?
+
+In statistics, we often use sample data to make decisions about a population.
+
+Examples include:
+
+- Is the mean lifetime of a battery greater than 500 hours?
+- Has the average examination mark changed from the historical mean of 60?
+- Is the mean filling volume of a machine equal to the target value of 500 ml?
+- Is the average waiting time at a hospital less than 30 minutes?
+- Is the mean systolic blood pressure of a population different from 120 mmHg?
+
+A **hypothesis test** is a formal statistical procedure for deciding whether sample evidence is strong enough to reject a proposed claim about a population parameter.
+
+In this lesson, we focus on **one-sample tests for a population mean**.
+
+The population mean is denoted by
+
+\[
+\mu.
+\]
+
+The sample mean is denoted by
+
+\[
+\bar{x}.
+\]
+
+The main question is:
+
+> Is the observed sample mean sufficiently far from the hypothesized population mean to conclude that the population mean is different from the claimed value?
+
+---
+
+## Section exercises: Motivation
+
+## Exercise 1.1: Identifying the population mean
+
+For each situation, identify the population mean of interest.
+
+1. A university wants to know whether the average study time of students is more than 20 hours per week.
+2. A factory wants to test whether the mean weight of packed rice bags is 5 kg.
+3. A hospital wants to know whether the average patient waiting time is below 30 minutes.
+4. A sports scientist wants to test whether the mean sprint time of athletes has improved from 12 seconds.
+
+
+
+---
+
+## Exercise 1.2: Statistical decision or descriptive summary?
+
+Decide whether each situation requires only descriptive statistics or a hypothesis test.
+
+1. A lecturer reports the average mark of 40 students in one class.
+2. A lecturer wants to know whether the mean mark of all students taking a course is different from 60.
+3. A company reports the average daily sales during last week.
+4. A company wants to test whether the average daily sales have increased after a new advertisement campaign.
+
+
+---
+
+# 2. Null and alternative hypotheses
+
+A hypothesis test begins with two competing statements.
+
+## Null hypothesis
+
+The **null hypothesis** is denoted by
+
+\[
+H_0.
+\]
+
+It usually represents:
+
+- no change;
+- no difference;
+- the current belief;
+- the status quo;
+- the claimed value.
+
+For a one-sample mean test, the null hypothesis usually has the form
+
+\[
+H_0: \mu=\mu_0,
+\]
+
+where \(\mu_0\) is the hypothesized value of the population mean.
+
+## Alternative hypothesis
+
+The **alternative hypothesis** is denoted by
+
+\[
+H_1
+\]
+
+or sometimes
+
+\[
+H_a.
+\]
+
+It represents what we want to find evidence for.
+
+There are three common forms.
+
+| Type of test | Alternative hypothesis | Meaning |
+|---|---|---|
+| Right-tailed test | \(H_1: \mu>\mu_0\) | Mean is greater than the claimed value |
+| Left-tailed test | \(H_1: \mu<\mu_0\) | Mean is less than the claimed value |
+| Two-tailed test | \(H_1: \mu\ne\mu_0\) | Mean is different from the claimed value |
+
+---
+
+## Example 2.1: Battery lifetime
+
+A manufacturer claims that the mean lifetime of a battery is 500 hours. A consumer group believes that the mean lifetime is less than 500 hours.
+
+The hypotheses are
+
+\[
+H_0: \mu=500
+\]
+
+and
+
+\[
+H_1: \mu<500.
+\]
+
+This is a **left-tailed test**.
+
+---
+
+## Example 2.2: Examination marks
+
+A department historically expects the mean examination mark to be 60. A lecturer wants to test whether the mean mark has changed.
+
+The hypotheses are
+
+\[
+H_0: \mu=60
+\]
+
+and
+
+\[
+H_1: \mu\ne 60.
+\]
+
+This is a **two-tailed test**.
+
+---
+
+## Example 2.3: Training programme
+
+A training programme is designed to increase the mean score from 70. The researcher wants to test whether the mean score after training is greater than 70.
+
+The hypotheses are
+
+\[
+H_0: \mu=70
+\]
+
+and
+
+\[
+H_1: \mu>70.
+\]
+
+This is a **right-tailed test**.
+
+---
+
+# 3. Type I error, Type II error, and level of significance
+
+In hypothesis testing, decisions are made using sample data. Because samples vary, mistakes are possible.
+
+## Type I error
+
+A **Type I error** occurs when we reject \(H_0\) even though \(H_0\) is true.
+
+The probability of a Type I error is denoted by
+
+\[
+\alpha.
+\]
+
+This is called the **level of significance**.
+
+Common choices are:
+
+\[
+\alpha=0.10,\quad \alpha=0.05,\quad \alpha=0.01.
+\]
+
+The most common value is
+
+\[
+\alpha=0.05.
+\]
+
+## Type II error
+
+A **Type II error** occurs when we fail to reject \(H_0\) even though \(H_0\) is false.
+
+The probability of a Type II error is denoted by
+
+\[
+\beta.
+\]
+
+## Power
+
+The **power** of a test is the probability of correctly rejecting a false null hypothesis:
+
+\[
+\text{Power}=1-\beta.
+\]
+
+---
+
+## Decision table
+
+| True situation | Decision: Reject \(H_0\) | Decision: Fail to reject \(H_0\) |
+|---|---|---|
+| \(H_0\) is true | Type I error | Correct decision |
+| \(H_0\) is false | Correct decision | Type II error |
+
+---
+
+## Section exercises: Hypotheses and errors
+
+## Exercise 3.1: Writing hypotheses
+
+Write the null and alternative hypotheses for each situation. Also identify whether the test is left-tailed, right-tailed, or two-tailed.
+
+1. A filling machine is expected to fill bottles with an average of 500 ml. The quality engineer wants to test whether the mean volume differs from 500 ml.
+2. A university claims that students spend an average of 18 hours per week on self-study. A researcher suspects the mean is higher.
+3. A public office wants to test whether the mean waiting time is below 20 minutes.
+4. A coach wants to test whether the mean running time after training is lower than 15 seconds.
+
+
+
+---
+
+## Exercise 3.2: Identifying errors
+
+A school claims that the mean mathematics score of students is 65. A researcher tests
+
+\[
+H_0:\mu=65
+\]
+
+against
+
+\[
+H_1:\mu\ne65.
+\]
+
+Describe a Type I error and a Type II error in this context.
+
+
+---
+
+## Exercise 3.3: Significance level interpretation
+
+Suppose a hypothesis test is conducted at the 5% level of significance. Explain what this means in terms of Type I error.
+
+
+---
+
+# 4. Test statistics
+
+A **test statistic** measures how far the sample result is from the null-hypothesized value, relative to the standard error.
+
+For testing a population mean, the general idea is
+
+\[
+\text{Test statistic}
+=
+\frac{\text{sample estimate}-\text{hypothesized value}}
+{\text{standard error}}.
+\]
+
+For a sample mean,
+
+\[
+\text{sample estimate}=\bar{x}.
+\]
+
+The hypothesized value is
+
+\[
+\mu_0.
+\]
+
+The standard error measures the sampling variability of \(\bar{X}\).
+
+---
+
+# 5. One-sample z test using the normal distribution
+
+## When do we use the one-sample z test?
+
+A one-sample z test for a population mean is used when:
+
+1. the population standard deviation \(\sigma\) is known;
+2. the population distribution is normal, or the sample size is large enough for the Central Limit Theorem to apply;
+3. the objective is to test a claim about one population mean.
+
+The hypotheses are based on
+
+\[
+H_0:\mu=\mu_0.
+\]
+
+## Test statistic
+
+If \(\sigma\) is known, the test statistic is
+
+\[
+z=
+\frac{\bar{x}-\mu_0}{\sigma/\sqrt{n}}.
+\]
+
+Under \(H_0\), this test statistic follows approximately a standard normal distribution:
+
+\[
+Z\sim N(0,1).
+\]
+
+---
+
+## p-value for the z test
+
+The p-value depends on the alternative hypothesis.
+
+| Alternative hypothesis | p-value |
+|---|---|
+| \(H_1:\mu>\mu_0\) | \(P(Z\ge z_{obs})\) |
+| \(H_1:\mu<\mu_0\) | \(P(Z\le z_{obs})\) |
+| \(H_1:\mu\ne\mu_0\) | \(2P(Z\ge |z_{obs}|)\) |
+
+The p-value is the probability, assuming \(H_0\) is true, of observing a test statistic at least as extreme as the one obtained from the sample.
+
+## Decision rule using p-value
+
+At significance level \(\alpha\):
+
+- if \(p\text{-value}\le \alpha\), reject \(H_0\);
+- if \(p\text{-value}>\alpha\), fail to reject \(H_0\).
+
+Important wording:
+
+> We do not usually say “accept \(H_0\)”. We say “fail to reject \(H_0\)” because the data may simply be insufficient to prove the alternative.
+
+---
+
+## Critical values for the standard normal distribution
+
+| Test type | \(\alpha=0.10\) | \(\alpha=0.05\) | \(\alpha=0.01\) |
+|---|---:|---:|---:|
+| Right-tailed | 1.282 | 1.645 | 2.326 |
+| Left-tailed | -1.282 | -1.645 | -2.326 |
+| Two-tailed | \(\pm1.645\) | \(\pm1.960\) | \(\pm2.576\) |
+
+---
+
+## Example 5.1: One-sample z test, two-tailed
+
+A machine is designed to fill bottles with mean volume 500 ml. The population standard deviation is known to be 8 ml. A random sample of 64 bottles has mean volume 497.5 ml.
+
+Test at the 5% level whether the mean filling volume differs from 500 ml.
+
+## Step 1: State the hypotheses
+
+\[
+H_0:\mu=500
+\]
+
+\[
+H_1:\mu\ne500
+\]
+
+This is a two-tailed test.
+
+## Step 2: Identify information
+
+\[
+\bar{x}=497.5,\quad \mu_0=500,\quad \sigma=8,\quad n=64.
+\]
+
+## Step 3: Compute the test statistic
+
+\[
+z=\frac{\bar{x}-\mu_0}{\sigma/\sqrt{n}}
+=
+\frac{497.5-500}{8/\sqrt{64}}.
+\]
+
+Since
+
+\[
+\frac{8}{\sqrt{64}}=\frac{8}{8}=1,
+\]
+
+we get
+
+\[
+z=\frac{-2.5}{1}=-2.50.
+\]
+
+## Step 4: Find the p-value
+
+For a two-tailed test,
+
+\[
+p\text{-value}=2P(Z>|-2.50|)=2P(Z>2.50).
+\]
+
+From the standard normal table,
+
+\[
+P(Z<2.50)=0.9938.
+\]
+
+Therefore,
+
+\[
+P(Z>2.50)=1-0.9938=0.0062.
+\]
+
+Hence,
+
+\[
+p\text{-value}=2(0.0062)=0.0124.
+\]
+
+## Step 5: Decision
+
+Since
+
+\[
+0.0124<0.05,
+\]
+
+we reject \(H_0\).
+
+## Step 6: Practical conclusion
+
+There is sufficient statistical evidence at the 5% level to conclude that the mean filling volume differs from 500 ml.
+
+---
+
+## Example 5.2: One-sample z test, right-tailed
+
+A training centre claims that after a new programme, the mean score is greater than 70. Assume the population standard deviation is known to be 12. A sample of 49 students gives
+
+\[
+\bar{x}=73.5.
+\]
+
+Test the claim at the 5% level.
+
+## Hypotheses
+
+\[
+H_0:\mu=70
+\]
+
+\[
+H_1:\mu>70.
+\]
+
+## Test statistic
+
+\[
+z=
+\frac{73.5-70}{12/\sqrt{49}}
+=
+\frac{3.5}{12/7}
+=
+\frac{3.5}{1.714}
+=2.04.
+\]
+
+## p-value
+
+For a right-tailed test,
+
+\[
+p\text{-value}=P(Z>2.04).
+\]
+
+From the standard normal table,
+
+\[
+P(Z<2.04)=0.9793.
+\]
+
+Therefore,
+
+\[
+p\text{-value}=1-0.9793=0.0207.
+\]
+
+Since
+
+\[
+0.0207<0.05,
+\]
+
+we reject \(H_0\).
+
+There is sufficient evidence at the 5% level to conclude that the mean score after the training programme is greater than 70.
+
+---
+
+## Section exercises: One-sample z test
+
+## Exercise 5.1: Bottle filling process
+
+A machine is supposed to fill bottles with an average of 1000 ml. The population standard deviation is known to be 20 ml. A random sample of 36 bottles gives a sample mean of 992 ml.
+
+Test at the 5% significance level whether the mean filling volume is different from 1000 ml.
+
+
+
+---
+
+## Exercise 5.2: Mean lifetime of a component
+
+The lifetime of an electronic component is claimed to be at least 800 hours. The population standard deviation is known to be 60 hours. A sample of 64 components has a mean lifetime of 785 hours.
+
+Test at the 5% level whether the mean lifetime is less than 800 hours.
+
+
+## Exercise 5.3: Average study hours
+
+A university believes that students study on average 15 hours per week. A researcher believes the mean study time is higher. Assume the population standard deviation is 5 hours. A sample of 100 students gives a mean of 15.9 hours.
+
+Test the researcher's claim at the 5% level.
+
+
+
+---
+
+# 6. One-sample t test using the t distribution
+
+## Why do we need the t distribution?
+
+In practice, the population standard deviation \(\sigma\) is usually unknown.
+
+When \(\sigma\) is unknown, we estimate it using the sample standard deviation
+
+\[
+s.
+\]
+
+This additional uncertainty is accounted for by the **Student's t distribution**.
+
+## When do we use the one-sample t test?
+
+A one-sample t test is used when:
+
+1. the population standard deviation \(\sigma\) is unknown;
+2. the sample standard deviation \(s\) is used;
+3. the sample is random and independent;
+4. the population is approximately normal, especially for small samples;
+5. the objective is to test a claim about one population mean.
+
+## Test statistic
+
+The one-sample t test statistic is
+
+\[
+t=
+\frac{\bar{x}-\mu_0}{s/\sqrt{n}}.
+\]
+
+Under \(H_0\), this statistic follows a t distribution with
+
+\[
+\nu=n-1
+\]
+
+degrees of freedom.
+
+We write
+
+\[
+T\sim t_{n-1}.
+\]
+
+---
+
+## p-value for the t test
+
+| Alternative hypothesis | p-value |
+|---|---|
+| \(H_1:\mu>\mu_0\) | \(P(T\ge t_{obs})\) |
+| \(H_1:\mu<\mu_0\) | \(P(T\le t_{obs})\) |
+| \(H_1:\mu\ne\mu_0\) | \(2P(T\ge |t_{obs}|)\) |
+
+where
+
+\[
+T\sim t_{n-1}.
+\]
+
+---
+
+## Small t critical value table
+
+The following table gives selected positive t critical values.
+
+| df | \(t_{0.10}\) one-tail | \(t_{0.05}\) one-tail | \(t_{0.025}\) one-tail | \(t_{0.005}\) one-tail |
+|---:|---:|---:|---:|---:|
+| 5 | 1.476 | 2.015 | 2.571 | 4.032 |
+| 6 | 1.440 | 1.943 | 2.447 | 3.707 |
+| 7 | 1.415 | 1.895 | 2.365 | 3.499 |
+| 8 | 1.397 | 1.860 | 2.306 | 3.355 |
+| 9 | 1.383 | 1.833 | 2.262 | 3.250 |
+| 10 | 1.372 | 1.812 | 2.228 | 3.169 |
+| 12 | 1.356 | 1.782 | 2.179 | 3.055 |
+| 15 | 1.341 | 1.753 | 2.131 | 2.947 |
+| 20 | 1.325 | 1.725 | 2.086 | 2.845 |
+| 25 | 1.316 | 1.708 | 2.060 | 2.787 |
+| 30 | 1.310 | 1.697 | 2.042 | 2.750 |
+| 40 | 1.303 | 1.684 | 2.021 | 2.704 |
+| 60 | 1.296 | 1.671 | 2.000 | 2.660 |
+| 120 | 1.289 | 1.658 | 1.980 | 2.617 |
+| \(\infty\) | 1.282 | 1.645 | 1.960 | 2.576 |
+
+For a two-tailed test at \(\alpha=0.05\), use \(t_{0.025}\), because the 5% significance level is split into two tails.
+
+---
+
+## Example 6.1: One-sample t test, two-tailed
+
+A lecturer wants to test whether the mean mark of a class differs from 60. A random sample of 16 students gives
+
+\[
+\bar{x}=64.2,
+\qquad
+s=8.4.
+\]
+
+Test at the 5% level.
+
+## Step 1: State the hypotheses
+
+\[
+H_0:\mu=60
+\]
+
+\[
+H_1:\mu\ne60.
+\]
+
+This is a two-tailed test.
+
+## Step 2: Compute the test statistic
+
+\[
+t=
+\frac{64.2-60}{8.4/\sqrt{16}}.
+\]
+
+Since
+
+\[
+8.4/\sqrt{16}=8.4/4=2.1,
+\]
+
+we get
+
+\[
+t=\frac{4.2}{2.1}=2.00.
+\]
+
+## Step 3: Degrees of freedom
+
+\[
+df=n-1=16-1=15.
+\]
+
+## Step 4: Critical value approach
+
+For a two-tailed test with \(\alpha=0.05\) and \(df=15\), the critical values are approximately
+
+\[
+\pm 2.131.
+\]
+
+The observed value is
+
+\[
+t=2.00.
+\]
+
+Since
+
+\[
+-2.131<2.00<2.131,
+\]
+
+we fail to reject \(H_0\).
+
+## Step 5: Practical conclusion
+
+There is insufficient evidence at the 5% level to conclude that the mean mark differs from 60.
+
+---
+
+## Example 6.2: One-sample t test, left-tailed
+
+A hospital has a target mean waiting time of 30 minutes. After a process improvement, a sample of 25 patients gives
+
+\[
+\bar{x}=27.8,
+\qquad
+s=6.0.
+\]
+
+Test at the 5% level whether the mean waiting time is less than 30 minutes.
+
+## Hypotheses
+
+\[
+H_0:\mu=30
+\]
+
+\[
+H_1:\mu<30.
+\]
+
+## Test statistic
+
+\[
+t=
+\frac{27.8-30}{6.0/\sqrt{25}}
+=
+\frac{-2.2}{6/5}
+=
+\frac{-2.2}{1.2}
+=-1.83.
+\]
+
+## Degrees of freedom
+
+\[
+df=25-1=24.
+\]
+
+For a left-tailed test at \(\alpha=0.05\), the critical value is approximately
+
+\[
+-1.711.
+\]
+
+Since
+
+\[
+-1.83<-1.711,
+\]
+
+we reject \(H_0\).
+
+There is sufficient evidence at the 5% level to conclude that the mean waiting time is less than 30 minutes.
+
+---
+
+## Section exercises: One-sample t test
+
+## Exercise 6.1: Mean exam mark
+
+A lecturer wants to test whether the mean examination mark differs from 50. A random sample of 12 students gives
+
+\[
+\bar{x}=54.5,
+\qquad
+s=7.2.
+\]
+
+Test at the 5% level.
+
+
+
+---
+
+## Exercise 6.2: Mean waiting time
+
+A transport authority claims that the mean waiting time for a bus is 15 minutes. A passenger group believes that the mean waiting time is greater than 15 minutes. A random sample of 20 passengers gives
+
+\[
+\bar{x}=17.1,
+\qquad
+s=4.5.
+\]
+
+Test the passenger group's claim at the 5% level.
+
+
+---
+
+## Exercise 6.3: Mean systolic blood pressure
+
+A medical researcher wants to test whether the mean systolic blood pressure of a group differs from 120 mmHg. A random sample of 18 adults gives
+
+\[
+\bar{x}=126.4,
+\qquad
+s=13.5.
+\]
+
+Conduct the test at the 1% level.
+
+
+
+---
+
+## Exercise 6.4: Mean tensile strength
+
+A manufacturer claims that the mean tensile strength of a material is at least 75 units. A quality inspector suspects that the mean is below 75. A random sample of 10 specimens gives
+
+\[
+\bar{x}=71.8,
+\qquad
+s=5.6.
+\]
+
+Test at the 5% level.
+
+
+
+---
+
+# 7. Choosing between z and t tests
+
+A common mistake is using a z test when the population standard deviation is unknown.
+
+| Situation | Test to use |
+|---|---|
+| \(\sigma\) known | One-sample z test |
+| \(\sigma\) unknown and \(s\) used | One-sample t test |
+| Small sample and population approximately normal | One-sample t test |
+| Large sample and \(\sigma\) unknown | One-sample t test, although z and t values become very close |
+
+## Important note
+
+The t distribution has heavier tails than the standard normal distribution. This reflects the extra uncertainty caused by estimating \(\sigma\) using \(s\).
+
+As the degrees of freedom increase, the t distribution becomes closer to the standard normal distribution.
+
+---
+
+## Section exercises: Choosing the correct test
+
+## Exercise 7.1: z or t?
+
+Decide whether a z test or t test is more appropriate.
+
+1. \(n=64\), \(\bar{x}=102\), population standard deviation \(\sigma=12\) is known.
+2. \(n=15\), \(\bar{x}=48\), sample standard deviation \(s=6\), population is approximately normal.
+3. \(n=100\), \(\bar{x}=20.5\), sample standard deviation \(s=3.2\), \(\sigma\) unknown.
+4. \(n=9\), \(\bar{x}=12\), \(s=4\), population is highly skewed.
+
+
+
+---
+
+## Exercise 7.2: Identifying the mistake
+
+A researcher has a sample of 12 observations. The population standard deviation is unknown, so the researcher uses the sample standard deviation. However, the researcher conducts a z test.
+
+Explain the mistake.
+
+
+
+---
+
+# 8. Confidence intervals and hypothesis testing
+
+A confidence interval gives a range of plausible values for the population mean \(\mu\).
+
+Hypothesis testing and confidence intervals are closely related.
+
+For a two-tailed test at significance level \(\alpha\):
+
+- if \(\mu_0\) lies inside the \((1-\alpha)100\%\) confidence interval, fail to reject \(H_0\);
+- if \(\mu_0\) lies outside the \((1-\alpha)100\%\) confidence interval, reject \(H_0\).
+
+---
+
+## z confidence interval for \(\mu\)
+
+When \(\sigma\) is known,
+
+\[
+\bar{x}\pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}}.
+\]
+
+## t confidence interval for \(\mu\)
+
+When \(\sigma\) is unknown,
+
+\[
+\bar{x}\pm t_{\alpha/2,n-1}\frac{s}{\sqrt{n}}.
+\]
+
+---
+
+## Example 8.1: z confidence interval and hypothesis test
+
+A sample of 64 observations gives
+
+\[
+\bar{x}=52.4.
+\]
+
+Assume
+
+\[
+\sigma=8.
+\]
+
+Construct a 95% confidence interval for \(\mu\). Then use it to test
+
+\[
+H_0:\mu=50
+\]
+
+against
+
+\[
+H_1:\mu\ne50.
+\]
+
+The 95% z critical value is
+
+\[
+z_{0.025}=1.96.
+\]
+
+The confidence interval is
+
+\[
+52.4\pm 1.96\frac{8}{\sqrt{64}}.
+\]
+
+Since
+
+\[
+\frac{8}{\sqrt{64}}=1,
+\]
+
+we get
+
+\[
+52.4\pm 1.96.
+\]
+
+Therefore, the 95% confidence interval is
+
+\[
+(50.44,54.36).
+\]
+
+Since 50 is not inside the interval, we reject \(H_0\) at the 5% level.
+
+There is sufficient evidence that the population mean differs from 50.
+
+---
+
+## Example 8.2: t confidence interval and hypothesis test
+
+A sample of 25 observations gives
+
+\[
+\bar{x}=18.6,
+\qquad
+s=4.0.
+\]
+
+Construct a 95% confidence interval for \(\mu\). Then use it to test
+
+\[
+H_0:\mu=20
+\]
+
+against
+
+\[
+H_1:\mu\ne20.
+\]
+
+Degrees of freedom:
+
+\[
+df=25-1=24.
+\]
+
+For a 95% confidence interval,
+
+\[
+t_{0.025,24}\approx 2.064.
+\]
+
+The confidence interval is
+
+\[
+18.6\pm 2.064\frac{4.0}{\sqrt{25}}.
+\]
+
+Since
+
+\[
+\frac{4.0}{\sqrt{25}}=0.8,
+\]
+
+we get
+
+\[
+18.6\pm 2.064(0.8).
+\]
+
+\[
+18.6\pm 1.651.
+\]
+
+Therefore, the interval is approximately
+
+\[
+(16.95,20.25).
+\]
+
+Since 20 lies inside the interval, we fail to reject \(H_0\) at the 5% level.
+
+There is insufficient evidence that the population mean differs from 20.
+
+---
+
+## Section exercises: Confidence intervals and tests
+
+## Exercise 8.1: z confidence interval
+
+A sample of 100 packages has mean weight 2.04 kg. The population standard deviation is known to be 0.20 kg.
+
+1. Construct a 95% confidence interval for the population mean.
+2. Use the interval to test whether the mean differs from 2.00 kg at the 5% level.
+
+
+---
+
+## Exercise 8.2: t confidence interval
+
+A sample of 16 athletes has mean reaction time 0.42 seconds and sample standard deviation 0.08 seconds.
+
+1. Construct a 95% confidence interval for the mean reaction time.
+2. Use the interval to test whether the mean reaction time differs from 0.40 seconds at the 5% level.
+
+
+---
+
+## Exercise 8.3: Confidence interval interpretation
+
+A 95% confidence interval for the mean waiting time is
+
+\[
+(22.4,29.8).
+\]
+
+A manager wants to test
+
+\[
+H_0:\mu=30
+\]
+
+against
+
+\[
+H_1:\mu\ne30
+\]
+
+at the 5% level. What conclusion should be made?
+
+
+
+
+---
+
+# 9. Rejection-region method
+
+The p-value method is usually preferred because it gives more information. However, hypothesis tests may also be conducted using the rejection-region method.
+
+The rejection region contains values of the test statistic that are considered too extreme under \(H_0\).
+
+## z test rejection regions
+
+| Alternative hypothesis | Rejection region |
+|---|---|
+| \(H_1:\mu>\mu_0\) | \(z>z_\alpha\) |
+| \(H_1:\mu<\mu_0\) | \(z<-z_\alpha\) |
+| \(H_1:\mu\ne\mu_0\) | \(|z|>z_{\alpha/2}\) |
+
+## t test rejection regions
+
+| Alternative hypothesis | Rejection region |
+|---|---|
+| \(H_1:\mu>\mu_0\) | \(t>t_{\alpha,n-1}\) |
+| \(H_1:\mu<\mu_0\) | \(t<-t_{\alpha,n-1}\) |
+| \(H_1:\mu\ne\mu_0\) | \(|t|>t_{\alpha/2,n-1}\) |
+
+---
+
+## Section exercises: Rejection-region method
+
+## Exercise 9.1: z rejection region
+
+A z test gives
+
+\[
+z=1.72.
+\]
+
+The alternative hypothesis is
+
+\[
+H_1:\mu>\mu_0.
+\]
+
+At \(\alpha=0.05\), should \(H_0\) be rejected?
+
+
+
+---
+
+## Exercise 9.2: t rejection region
+
+A t test with \(n=21\) gives
+
+\[
+t=-2.05.
+\]
+
+The alternative hypothesis is
+
+\[
+H_1:\mu<\mu_0.
+\]
+
+At \(\alpha=0.05\), should \(H_0\) be rejected?
+
+
+# 10. Writing conclusions correctly
+
+A statistical conclusion should include:
+
+1. the decision about \(H_0\);
+2. the significance level;
+3. the practical interpretation in the context of the problem.
+
+## Recommended wording
+
+If rejecting \(H_0\):
+
+> Since the p-value is less than \(\alpha\), we reject \(H_0\). There is sufficient evidence at the 5% level to conclude that ...
+
+If failing to reject \(H_0\):
+
+> Since the p-value is greater than \(\alpha\), we fail to reject \(H_0\). There is insufficient evidence at the 5% level to conclude that ...
+
+## Avoid these statements
+
+Avoid saying:
+
+- “We accept the null hypothesis.”
+- “The null hypothesis is true.”
+- “The alternative hypothesis is proven.”
+- “The p-value is the probability that \(H_0\) is true.”
+
+The p-value is not the probability that the null hypothesis is true.
+
+---
+
+## Section exercises: Writing conclusions
+
+## Exercise 10.1: Interpreting a small p-value
+
+A test of
+
+\[
+H_0:\mu=100
+\]
+
+against
+
+\[
+H_1:\mu>100
+\]
+
+produces a p-value of 0.018. The significance level is 0.05.
+
+Write the correct conclusion.
+
+
+---
+
+## Exercise 10.2: Interpreting a large p-value
+
+A test of
+
+\[
+H_0:\mu=40
+\]
+
+against
+
+\[
+H_1:\mu\ne40
+\]
+
+produces a p-value of 0.284. The significance level is 0.05.
+
+Write the correct conclusion.
+
+
+
+---
+
+# 11. Common mistakes in one-sample hypothesis testing
+
+## Mistake 1: Confusing \(H_0\) and \(H_1\)
+
+The null hypothesis should usually contain equality.
+
+Correct:
+
+\[
+H_0:\mu=50
+\]
+
+Incorrect:
+
+\[
+H_0:\mu>50
+\]
+
+In introductory hypothesis testing, equality is usually placed in \(H_0\).
+
+## Mistake 2: Choosing the wrong tail
+
+The direction of the alternative hypothesis must match the research question.
+
+- “Greater than” means right-tailed.
+- “Less than” means left-tailed.
+- “Different from” means two-tailed.
+
+## Mistake 3: Using z when t is required
+
+Use t when \(\sigma\) is unknown and \(s\) is used.
+
+## Mistake 4: Saying “accept \(H_0\)”
+
+Failing to reject \(H_0\) does not prove that \(H_0\) is true.
+
+## Mistake 5: Misinterpreting the p-value
+
+The p-value is calculated assuming \(H_0\) is true. It is not the probability that \(H_0\) is true.
+
+---
+
+# 12. Integrated worked example
+
+A manufacturer claims that the average weight of a product is 250 grams. A quality inspector takes a random sample of 36 products and obtains
+
+\[
+\bar{x}=247.8,
+\qquad
+s=6.0.
+\]
+
+The inspector wants to test whether the mean weight differs from 250 grams at the 5% level.
+
+## Step 1: Choose the correct test
+
+The population standard deviation is not given. The sample standard deviation is used.
+
+Therefore, use a one-sample t test.
+
+## Step 2: State hypotheses
+
+\[
+H_0:\mu=250
+\]
+
+\[
+H_1:\mu\ne250.
+\]
+
+## Step 3: Compute test statistic
+
+\[
+t=\frac{247.8-250}{6.0/\sqrt{36}}
+=
+\frac{-2.2}{6/6}
+=
+-2.20.
+\]
+
+## Step 4: Degrees of freedom
+
+\[
+df=36-1=35.
+\]
+
+## Step 5: Decision using critical values
+
+For \(df=35\), the two-tailed 5% critical value is approximately
+
+\[
+\pm 2.03.
+\]
+
+Since
+
+\[
+|-2.20|>2.03,
+\]
+
+we reject \(H_0\).
+
+## Step 6: Practical conclusion
+
+There is sufficient evidence at the 5% level to conclude that the mean product weight differs from 250 grams.
+
+---
+
+# 13. Integrated exercises
+
+## Exercise 13.1: Complete hypothesis test using z
+
+A company claims that the mean daily output of a machine is 120 units. The population standard deviation is known to be 15 units. A random sample of 49 days gives a mean output of 124.5 units.
+
+Test at the 5% level whether the mean daily output is greater than 120 units.
+
+
+
+---
+
+## Exercise 13.2: Complete hypothesis test using t
+
+A nutritionist claims that the mean calorie content of a snack is 200 calories. A random sample of 15 packets gives
+
+\[
+\bar{x}=207.4,
+\qquad
+s=12.6.
+\]
+
+Test at the 5% level whether the mean calorie content differs from 200 calories.
+
+
+
+---
+
+## Exercise 13.3: Decision using p-value
+
+A one-sample t test is conducted for
+
+\[
+H_0:\mu=35
+\]
+
+against
+
+\[
+H_1:\mu<35.
+\]
+
+The p-value is 0.064.
+
+1. What is the decision at \(\alpha=0.05\)?
+2. What is the decision at \(\alpha=0.10\)?
+3. Explain why the conclusion changes.
+
+
+
+---
+
+## Exercise 13.4: Test and confidence interval agreement
+
+A one-sample t test for
+
+\[
+H_0:\mu=75
+\]
+
+against
+
+\[
+H_1:\mu\ne75
+\]
+
+is conducted at the 5% level. The 95% confidence interval for \(\mu\) is
+
+\[
+(70.2,74.6).
+\]
+
+What conclusion should be made?
+
+
+
+---
+
+## Exercise 13.5: Selecting the test and completing the analysis
+
+A researcher wants to test whether the mean sleep duration of university students is less than 7 hours. A random sample of 30 students gives
+
+\[
+\bar{x}=6.6,
+\qquad
+s=1.1.
+\]
+
+Conduct the test at the 5% level.
+
+
+---
+
+# 14. Practice set for class discussion
+
+The following questions may be used as in-class practice, group discussion, or tutorial work.
+
+## Question 14.1
+
+A machine produces rods with target mean length 100 cm. The population standard deviation is known to be 2 cm. A sample of 25 rods has mean length 99.1 cm.
+
+Test whether the mean length is different from 100 cm at the 5% level.
+
+
+
+---
+
+## Question 14.2
+
+A sample of 10 water samples has mean pH 7.4 and sample standard deviation 0.5. Test whether the mean pH differs from 7.0 at the 5% level.
+
+
+
+---
+
+## Question 14.3
+
+A call centre wants to test whether the mean call duration is less than 4 minutes. A sample of 36 calls has mean duration 3.7 minutes and sample standard deviation 0.9 minutes.
+
+Test at the 5% level.
+
+
+---
+
+## Question 14.4
+
+A researcher conducts a two-tailed one-sample test and obtains a p-value of 0.049. The significance level is 0.05.
+
+Explain the statistical and practical conclusion.
+
+
+---
+
+## Question 14.5
+
+A researcher conducts a test at the 1% level and fails to reject \(H_0\). Can the researcher conclude that \(H_0\) is true? Explain.
+
+
+
+---
+
+# 15. Summary of one-sample hypothesis tests
+
+| Case | Population SD | Test statistic | Distribution under \(H_0\) |
+|---|---|---|---|
+| One-sample z test | \(\sigma\) known | \(z=\frac{\bar{x}-\mu_0}{\sigma/\sqrt{n}}\) | \(N(0,1)\) |
+| One-sample t test | \(\sigma\) unknown | \(t=\frac{\bar{x}-\mu_0}{s/\sqrt{n}}\) | \(t_{n-1}\) |
+
+---
+
+# Key takeaways
+
+1. Hypothesis testing is used to make decisions about population parameters using sample data.
+2. The null hypothesis usually contains equality and represents the status quo or claimed value.
+3. The alternative hypothesis determines whether the test is left-tailed, right-tailed, or two-tailed.
+4. A test statistic measures how far the sample result is from the hypothesized value in standard error units.
+5. The p-value measures how extreme the sample result is under the assumption that \(H_0\) is true.
+6. If the p-value is less than or equal to \(\alpha\), reject \(H_0\).
+7. Use a one-sample z test when the population standard deviation is known.
+8. Use a one-sample t test when the population standard deviation is unknown and the sample standard deviation is used.
+9. Confidence intervals and two-tailed hypothesis tests are closely connected.
+10. Statistical significance does not always imply practical importance.
+
+---
+
+# Short revision checklist
+
+Before the next class, students should be able to answer the following:
+
+1. What is the difference between \(H_0\) and \(H_1\)?
+2. When should a left-tailed test be used?
+3. When should a right-tailed test be used?
+4. When should a two-tailed test be used?
+5. What is a Type I error?
+6. What is a Type II error?
+7. What is the meaning of the significance level \(\alpha\)?
+8. What is a p-value?
+9. Why should we avoid saying “accept \(H_0\)”?
+10. When should a z test be used?
+11. When should a t test be used?
+12. What are the degrees of freedom for a one-sample t test?
+13. How is a confidence interval related to a two-tailed hypothesis test?
+14. What should be included in a proper conclusion?
+15. Why is practical significance important?
+
+---
+
+# Additional homework exercises
+
+## Homework 1
+
+A manufacturer claims that a packet contains an average of 500 grams of product. The population standard deviation is known to be 10 grams. A sample of 36 packets has mean 496.5 grams.
+
+Test at the 5% level whether the mean content is less than 500 grams.
+
+
+
+---
+
+## Homework 2
+
+A teacher claims that the mean score of students is 70. A sample of 22 students has mean 74.2 and sample standard deviation 9.5.
+
+Test at the 5% level whether the mean score is greater than 70.
+
+
+
+---
+
+## Homework 3
+
+A laboratory claims that the mean concentration of a chemical solution is 8.0 units. A sample of 12 measurements gives mean 7.6 and sample standard deviation 0.7.
+
+Test at the 1% level whether the mean concentration differs from 8.0 units.
+
+
+
+---
+
+## Homework 4
+
+A 95% confidence interval for the mean daily sales after a campaign is
+
+\[
+(102.5,118.6).
+\]
+
+Before the campaign, the mean daily sales were 100 units. Based on this interval, is there evidence at the 5% level that the mean sales changed?
+
+
+
+---
+
+## Homework 5
+
+A student writes the following conclusion:
+
+> Since the p-value is 0.08, the null hypothesis is true.
+
+Explain why this conclusion is incorrect and rewrite it correctly for \(\alpha=0.05\).
+
+
+
+---

@@ -34,7 +34,7 @@ By the end of the module, students should be comfortable moving from raw data to
 | [Introduction to descriptive statistics](Introduction_to_Descriptive_Statistics_Topic_3.html) | Using graphs and numerical summaries to understand data: bar graphs, pie charts, line graphs, ogives, relative frequency tables, dot plots, histograms, stem-and-leaf plots, mean, median, mode, range, interquartile range, outliers, and box-and-whisker plots. | 6 |
 | [Discrete probability distributions](Discrete_Probability_Distributions_Topic_4.html) | Identifying and working with discrete random variables and performing probability calculations using discrete distributions. | 6 |
 | [Continuous probability distributions](Continuous_Probability_Distributions.html) | Identifying and working with continuous random variables and performing probability calculations using continuous distributions. | 6 |
-| Hypothesis testing using one sample for normal and t distributions | Applying null and alternative hypotheses, test statistics, p-values, confidence intervals, and one-sample tests for practical decision-making. | 6 |
+| [Hypothesis testing using one sample for normal and t distributions](hypothesis_testing.html) | Applying null and alternative hypotheses, test statistics, p-values, confidence intervals, and one-sample tests for practical decision-making. | 6 |
 | **Total** |  | **36** |
 :::
 
