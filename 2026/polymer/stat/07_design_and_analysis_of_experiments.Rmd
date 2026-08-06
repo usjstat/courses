@@ -1533,4 +1533,4 @@ Describe what each pattern may indicate:
 
 [Return to Course Outline](index.html)
 
-[Next: Correlation and Regression Analysis](08_regression_analysis.html)
+[Next: Correlation and Regression Analysis](08_correlation_and_regression_analysis.html)

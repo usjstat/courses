@@ -1,6 +1,6 @@
 ---
 title: "MPST 520 1.0 - Statistics"
-subtitle: "Postgraduate Programme in Polymer Science"
+subtitle: " M.Sc. in Polymer Sciences & Technolog - University of Sri Jayewardenepura"
 author: "Dr. R. M. Silva"
 output:
   html_document:
@@ -394,7 +394,7 @@ The examples used in the course will be based on variables such as:
 7.  [`07_design_and_analysis_of_experiments`](07_design_and_analysis_of_experiments.html)\
     Experimental designs, factorial experiments, and ANOVA
 
-8.  [`08_regression_analysis`](08_regression_analysis.html)\
+8.  [`08_regression_analysis`](08_correlation_and_regression_analysis.html)\
     Correlation, regression, and prediction
 
 # General Statistical Analysis Framework
