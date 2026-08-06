@@ -1,0 +1,1697 @@
+---
+title: "Parametric Statistical Tests"
+author: "Dr. R. M. Silva"
+output:
+  html_document:
+    theme: flatly
+    toc: true
+    toc_depth: 2
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+    number_sections: false
+---
+
+<style>
+body {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+h1 {
+  color: #1f4e79;
+  border-bottom: 2px solid #d9e6f2;
+  padding-bottom: 6px;
+  margin-top: 35px;
+}
+
+h2 {
+  color: #2f5597;
+  margin-top: 25px;
+}
+
+h3 {
+  color: #4472c4;
+  margin-top: 20px;
+}
+
+.learning-box {
+  background-color: #f4f8fb;
+  border-left: 5px solid #2f75b5;
+  padding: 18px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.example-box {
+  background-color: #f7f7f7;
+  border-left: 5px solid #70ad47;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.excel-box {
+  background-color: #eef7ee;
+  border-left: 5px solid #548235;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.warning-box {
+  background-color: #fff8e5;
+  border-left: 5px solid #ffc000;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.question-box {
+  background-color: #f4f4f4;
+  border-left: 5px solid #7f7f7f;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  background-color: #d9eaf7;
+}
+
+.tocify {
+  width: 280px;
+  max-height: 85vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.tocify-item {
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+@media (min-width: 992px) {
+  .col-md-9 {
+    padding-left: 35px;
+  }
+}
+
+@media (max-width: 991px) {
+  .tocify {
+    position: relative !important;
+    width: 100% !important;
+    max-height: none;
+    margin-bottom: 25px;
+  }
+}
+</style>
+
+<div class="learning-box">
+
+## Learning Objectives
+
+At the end of this lesson, students should be able to:
+
+1. formulate null and alternative hypotheses
+2. explain test statistics, p-values, and levels of significance
+3. distinguish between Type I and Type II errors
+4. conduct and interpret a one-sample \(t\) test
+5. conduct and interpret an independent two-sample \(t\) test
+6. conduct and interpret a paired \(t\) test
+7. conduct and interpret a one-way analysis of variance
+8. identify the assumptions of common parametric tests
+9. interpret statistical output produced by Microsoft Excel
+10. write conclusions in the context of Polymer Science
+
+</div>
+
+# Introduction
+
+Parametric statistical tests use sample data to evaluate claims about population parameters such as means.
+
+In Polymer Science, these tests may be used to investigate questions such as:
+
+- Is the mean tensile strength different from a specified target?
+- Do two polymer formulations have different mean impact strengths?
+- Does accelerated ageing change the mean strength of the same specimens?
+- Do several additive concentrations produce different mean elongation values?
+
+A formal hypothesis test begins with a scientific question and ends with a contextual conclusion.
+
+# Statistical Hypotheses
+
+A statistical hypothesis is a claim about a population parameter.
+
+## Null Hypothesis
+
+The null hypothesis, denoted by \(H_0\), usually represents:
+
+- no difference
+- no effect
+- no change
+- equality with a target value
+
+## Alternative Hypothesis
+
+The alternative hypothesis, denoted by \(H_1\) or \(H_a\), represents the research claim.
+
+<div class="example-box">
+
+### Example
+
+A manufacturer claims that the population mean tensile strength is 50 MPa.
+
+A researcher wants to determine whether the true mean differs from 50 MPa.
+
+\[
+H_0:\mu=50
+\]
+
+\[
+H_1:\mu\neq 50
+\]
+
+</div>
+
+# One-Sided and Two-Sided Alternatives
+
+## Two-Sided Test
+
+Use when any difference is relevant.
+
+\[
+H_0:\mu=\mu_0
+\]
+
+\[
+H_1:\mu\neq\mu_0
+\]
+
+## Right-Sided Test
+
+Use when the research question concerns an increase.
+
+\[
+H_0:\mu=\mu_0
+\]
+
+\[
+H_1:\mu>\mu_0
+\]
+
+## Left-Sided Test
+
+Use when the research question concerns a decrease.
+
+\[
+H_0:\mu=\mu_0
+\]
+
+\[
+H_1:\mu<\mu_0
+\]
+
+<div class="warning-box">
+
+The direction of the alternative hypothesis must be chosen before examining the results. It should be determined by the research question, not by the observed sample mean.
+
+</div>
+
+# Test Statistic
+
+A test statistic measures how far the sample result is from the value expected under the null hypothesis, relative to its standard error.
+
+A general form is:
+
+\[
+\text{Test statistic}
+=
+\frac{\text{Observed estimate}-\text{Null value}}
+{\text{Standard error}}
+\]
+
+A large absolute test statistic indicates that the sample result is relatively far from the null value.
+
+# p-Value
+
+The p-value is the probability, assuming the null hypothesis is true, of obtaining a result at least as extreme as the observed result.
+
+A small p-value indicates that the observed data are difficult to explain under the null hypothesis.
+
+The p-value is not:
+
+- the probability that \(H_0\) is true
+- the probability that the result occurred by chance
+- the size of the effect
+- a measure of practical importance
+
+# Level of Significance
+
+The level of significance is denoted by \(\alpha\).
+
+A common choice is:
+
+\[
+\alpha=0.05
+\]
+
+Decision rule:
+
+- if \(p\text{-value}\leq\alpha\), reject \(H_0\)
+- if \(p\text{-value}>\alpha\), do not reject \(H_0\)
+
+<div class="warning-box">
+
+Use the phrase **do not reject \(H_0\)** rather than **accept \(H_0\)**. A non-significant result does not prove that the null hypothesis is true.
+
+</div>
+
+# Type I and Type II Errors
+
+## Type I Error
+
+A Type I error occurs when \(H_0\) is rejected even though it is true.
+
+Its probability is:
+
+\[
+P(\text{Type I error})=\alpha
+\]
+
+## Type II Error
+
+A Type II error occurs when \(H_0\) is not rejected even though it is false.
+
+Its probability is:
+
+\[
+P(\text{Type II error})=\beta
+\]
+
+## Power
+
+Power is the probability of correctly rejecting a false null hypothesis.
+
+\[
+\text{Power}=1-\beta
+\]
+
+| Actual situation | Do not reject \(H_0\) | Reject \(H_0\) |
+|:--|:--|:--|
+| \(H_0\) is true | Correct decision | Type I error |
+| \(H_0\) is false | Type II error | Correct decision |
+
+<div class="example-box">
+
+### Polymer Science Interpretation
+
+Suppose:
+
+\[
+H_0:\text{A new additive does not improve mean tensile strength}
+\]
+
+A Type I error means concluding that the additive improves strength when it actually does not.
+
+A Type II error means failing to detect a genuine improvement.
+
+</div>
+
+# General Testing Procedure
+
+Use the following sequence:
+
+1. state the research question
+2. define the population parameter
+3. write \(H_0\) and \(H_1\)
+4. choose \(\alpha\)
+5. check assumptions
+6. calculate the test statistic
+7. obtain the p-value
+8. make the statistical decision
+9. write a conclusion in context
+10. assess practical significance
+
+# One-Sample t Test
+
+A one-sample \(t\) test compares a population mean with a specified value when the population standard deviation is unknown.
+
+## Hypotheses
+
+\[
+H_0:\mu=\mu_0
+\]
+
+For a two-sided test:
+
+\[
+H_1:\mu\neq\mu_0
+\]
+
+## Test Statistic
+
+\[
+t
+=
+\frac{\bar{x}-\mu_0}
+{s/\sqrt{n}}
+\]
+
+with:
+
+\[
+df=n-1
+\]
+
+## Assumptions
+
+- observations are independent
+- the sample is random or reasonably representative
+- the response is numerical
+- the population is approximately normal for small samples
+- there are no serious outliers
+
+# One-Sample t Test in Excel
+
+Excel does not provide a direct one-sample \(t\) test through the Analysis ToolPak.
+
+Suppose the observations are in `B2:B21` and the null mean is 50.
+
+Sample mean:
+
+```text
+=AVERAGE(B2:B21)
+```
+
+Sample standard deviation:
+
+```text
+=STDEV.S(B2:B21)
+```
+
+Sample size:
+
+```text
+=COUNT(B2:B21)
+```
+
+Test statistic:
+
+```text
+=(AVERAGE(B2:B21)-50)/
+(STDEV.S(B2:B21)/SQRT(COUNT(B2:B21)))
+```
+
+Two-sided p-value:
+
+```text
+=T.DIST.2T(ABS(test_statistic),COUNT(B2:B21)-1)
+```
+
+Right-sided p-value:
+
+```text
+=T.DIST.RT(test_statistic,COUNT(B2:B21)-1)
+```
+
+For a left-sided test:
+
+```text
+=T.DIST(test_statistic,COUNT(B2:B21)-1,TRUE)
+```
+
+<div class="excel-box">
+
+### Excel Practical 1: One-Sample t Test
+
+A sample of 16 polymer specimens has:
+
+\[
+\bar{x}=52.1\text{ MPa}
+\]
+
+and:
+
+\[
+s=3.2\text{ MPa}
+\]
+
+Test whether the population mean tensile strength differs from 50 MPa using:
+
+\[
+\alpha=0.05
+\]
+
+Calculate:
+
+1. the hypotheses
+2. the standard error
+3. the test statistic
+4. the degrees of freedom
+5. the two-sided p-value
+6. the decision
+7. the contextual conclusion
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The hypotheses are:
+
+\[
+H_0:\mu=50
+\]
+
+\[
+H_1:\mu\neq 50
+\]
+
+The standard error is:
+
+\[
+SE
+=
+\frac{3.2}{\sqrt{16}}
+=
+0.8
+\]
+
+The test statistic is:
+
+\[
+t
+=
+\frac{52.1-50}{0.8}
+=
+2.625
+\]
+
+The degrees of freedom are:
+
+\[
+df=16-1=15
+\]
+
+Excel formula:
+
+```text
+=T.DIST.2T(ABS(2.625),15)
+```
+
+The p-value is approximately 0.019.
+
+Because:
+
+\[
+p<0.05
+\]
+
+reject \(H_0\).
+
+A suitable conclusion is:
+
+> At the 5% significance level, there is sufficient evidence that the population mean tensile strength differs from 50 MPa. The sample mean indicates that the true mean may be higher than 50 MPa.
+
+</details>
+
+# Independent Two-Sample t Test
+
+An independent two-sample \(t\) test compares the means of two unrelated populations.
+
+Examples:
+
+- Polymer A versus Polymer B
+- Supplier 1 versus Supplier 2
+- Process condition 1 versus process condition 2
+
+## Hypotheses
+
+\[
+H_0:\mu_1=\mu_2
+\]
+
+or:
+
+\[
+H_0:\mu_1-\mu_2=0
+\]
+
+For a two-sided test:
+
+\[
+H_1:\mu_1\neq\mu_2
+\]
+
+## Independence
+
+The observations in one group must not be naturally matched with observations in the other group.
+
+## Welch Two-Sample t Test
+
+The unequal-variance or Welch test is generally preferred unless equal population variances can be justified.
+
+In Excel:
+
+```text
+=T.TEST(array1,array2,2,3)
+```
+
+where:
+
+- `2` specifies a two-sided test
+- `3` specifies two samples with unequal variances
+
+ToolPak route:
+
+```text
+Data > Data Analysis >
+t-Test: Two-Sample Assuming Unequal Variances
+```
+
+<div class="warning-box">
+
+Do not use a paired test merely because the two groups have the same sample size. Pairing must arise from the study design.
+
+</div>
+
+<div class="excel-box">
+
+### Excel Practical 2: Independent Two-Sample t Test
+
+Tensile-strength measurements are obtained from two independent polymer formulations.
+
+**Polymer A**
+
+```text
+52.1, 51.7, 53.4, 50.9, 52.8, 51.5, 53.0, 52.4
+```
+
+**Polymer B**
+
+```text
+49.8, 50.2, 48.9, 50.5, 49.4, 51.0, 49.7, 50.1
+```
+
+Test whether the population mean tensile strengths differ at the 5% significance level.
+
+Use:
+
+```text
+=T.TEST(A_range,B_range,2,3)
+```
+
+Also use the Analysis ToolPak and interpret the output.
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The hypotheses are:
+
+\[
+H_0:\mu_A=\mu_B
+\]
+
+\[
+H_1:\mu_A\neq\mu_B
+\]
+
+In Excel:
+
+```text
+=T.TEST(B2:B9,C2:C9,2,3)
+```
+
+The sample mean for Polymer A is higher than that for Polymer B.
+
+The p-value is expected to be below 0.05.
+
+Therefore, reject \(H_0\).
+
+A suitable conclusion is:
+
+> At the 5% significance level, there is sufficient evidence that the population mean tensile strengths of Polymer A and Polymer B differ. The sample results indicate that Polymer A has the higher mean tensile strength.
+
+When interpreting the ToolPak output, use:
+
+- `Mean` to compare sample averages
+- `Variance` to compare sample variability
+- `Observations` to confirm sample sizes
+- `t Stat` as the observed test statistic
+- `P(T<=t) two-tail` as the two-sided p-value
+- `t Critical two-tail` as the critical value for a two-sided test
+
+</details>
+
+
+# Analysis ToolPak Example: Independent Two-Sample t Test
+
+The Analysis ToolPak can be used to compare two independent population means.
+
+## Data Layout
+
+Enter the two samples in separate columns.
+
+| Polymer A | Polymer B |
+|--:|--:|
+| 52.1 | 49.8 |
+| 51.7 | 50.2 |
+| 53.4 | 48.9 |
+| 50.9 | 50.5 |
+| 52.8 | 49.4 |
+| 51.5 | 51.0 |
+| 53.0 | 49.7 |
+| 52.4 | 50.1 |
+
+## ToolPak Procedure
+
+1. select `Data`
+2. select `Data Analysis`
+3. choose `t-Test: Two-Sample Assuming Unequal Variances`
+4. set `Variable 1 Range` to the Polymer A values
+5. set `Variable 2 Range` to the Polymer B values
+6. enter `0` for `Hypothesized Mean Difference`
+7. select `Labels` if column headings are included
+8. enter `0.05` for `Alpha`
+9. choose an output range or a new worksheet
+10. click `OK`
+
+<div class="excel-box">
+
+### Excel Practical 2A: ToolPak Output
+
+Use the data above and generate the ToolPak output.
+
+Identify:
+
+1. the two sample means
+2. the two sample variances
+3. the sample sizes
+4. the hypothesised mean difference
+5. the test statistic
+6. the degrees of freedom
+7. the two-sided p-value
+8. the two-sided critical value
+9. the statistical decision
+10. the contextual conclusion
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The hypotheses are:
+
+\[
+H_0:\mu_A-\mu_B=0
+\]
+
+\[
+H_1:\mu_A-\mu_B\neq 0
+\]
+
+The sample means are approximately:
+
+\[
+\bar{x}_A=52.225
+\]
+
+\[
+\bar{x}_B=49.950
+\]
+
+The observed mean difference is:
+
+\[
+52.225-49.950=2.275\text{ MPa}
+\]
+
+In the ToolPak output, use:
+
+- `Mean` for each sample mean
+- `Variance` for each sample variance
+- `Observations` for the sample sizes
+- `Hypothesized Mean Difference` to confirm that the null difference is zero
+- `t Stat` for the test statistic
+- `df` for the Welch degrees of freedom
+- `P(T<=t) two-tail` for the two-sided p-value
+- `t Critical two-tail` for the two-sided critical value
+
+The two-sided p-value is below 0.05.
+
+Therefore, reject \(H_0\).
+
+A suitable conclusion is:
+
+> At the 5% significance level, there is sufficient evidence that the population mean tensile strengths of Polymer A and Polymer B differ. Polymer A has the higher observed mean tensile strength, with an estimated sample difference of approximately 2.28 MPa.
+
+The ToolPak result can be checked using:
+
+```text
+=T.TEST(B2:B9,C2:C9,2,3)
+```
+
+</details>
+
+<div class="warning-box">
+
+For independent samples, the Analysis ToolPak offers both equal-variance and unequal-variance tests. The unequal-variance or Welch procedure is generally the safer default unless equality of population variances can be justified.
+
+</div>
+
+# Equal-Variance and Unequal-Variance Options
+
+Excel provides:
+
+```text
+t-Test: Two-Sample Assuming Equal Variances
+```
+
+and:
+
+```text
+t-Test: Two-Sample Assuming Unequal Variances
+```
+
+The equal-variance test assumes:
+
+\[
+\sigma_1^2=\sigma_2^2
+\]
+
+The unequal-variance test does not require this assumption.
+
+For most practical applications, the unequal-variance test is safer.
+
+# Paired t Test
+
+A paired \(t\) test is used when observations occur in natural pairs.
+
+Examples:
+
+- strength before and after ageing for the same specimens
+- measurements before and after treatment
+- matched specimens from the same batch
+- repeated measurements under two conditions
+
+The test is applied to the within-pair differences.
+
+Let:
+
+\[
+d_i=\text{After}_i-\text{Before}_i
+\]
+
+The hypotheses are:
+
+\[
+H_0:\mu_d=0
+\]
+
+\[
+H_1:\mu_d\neq 0
+\]
+
+The test statistic is:
+
+\[
+t
+=
+\frac{\bar{d}}
+{s_d/\sqrt{n}}
+\]
+
+with:
+
+\[
+df=n-1
+\]
+
+# Paired t Test in Excel
+
+Function:
+
+```text
+=T.TEST(before_range,after_range,2,1)
+```
+
+where:
+
+- `2` specifies a two-sided test
+- `1` specifies paired observations
+
+ToolPak route:
+
+```text
+Data > Data Analysis >
+t-Test: Paired Two Sample for Means
+```
+
+<div class="excel-box">
+
+### Excel Practical 3: Paired t Test
+
+The tensile strength of eight specimens is measured before and after accelerated ageing.
+
+| Specimen | Before | After |
+|:--|--:|--:|
+| 1 | 55.2 | 52.8 |
+| 2 | 54.7 | 52.5 |
+| 3 | 56.1 | 53.4 |
+| 4 | 55.5 | 53.1 |
+| 5 | 54.9 | 52.9 |
+| 6 | 56.4 | 53.8 |
+| 7 | 55.8 | 53.6 |
+| 8 | 55.0 | 52.7 |
+
+Test whether ageing changes the population mean tensile strength.
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Define:
+
+\[
+d=\text{After}-\text{Before}
+\]
+
+The hypotheses are:
+
+\[
+H_0:\mu_d=0
+\]
+
+\[
+H_1:\mu_d\neq 0
+\]
+
+Excel formula:
+
+```text
+=T.TEST(B2:B9,C2:C9,2,1)
+```
+
+The after-ageing values are consistently lower than the before-ageing values.
+
+The p-value is expected to be below 0.05.
+
+Therefore, reject \(H_0\).
+
+A suitable conclusion is:
+
+> At the 5% significance level, there is sufficient evidence that accelerated ageing changes the population mean tensile strength. The observed paired differences indicate a reduction in tensile strength after ageing.
+
+The scientific interpretation should focus on the mean change and its direction, not only the p-value.
+
+</details>
+
+
+# Analysis ToolPak Example: Paired t Test
+
+The paired ToolPak procedure is appropriate when the same specimens are measured twice or when observations are naturally matched.
+
+## Data Layout
+
+| Specimen | Before Ageing | After Ageing |
+|:--|--:|--:|
+| 1 | 55.2 | 52.8 |
+| 2 | 54.7 | 52.5 |
+| 3 | 56.1 | 53.4 |
+| 4 | 55.5 | 53.1 |
+| 5 | 54.9 | 52.9 |
+| 6 | 56.4 | 53.8 |
+| 7 | 55.8 | 53.6 |
+| 8 | 55.0 | 52.7 |
+
+## ToolPak Procedure
+
+1. select `Data`
+2. select `Data Analysis`
+3. choose `t-Test: Paired Two Sample for Means`
+4. set `Variable 1 Range` to the before-ageing values
+5. set `Variable 2 Range` to the after-ageing values
+6. enter `0` for `Hypothesized Mean Difference`
+7. select `Labels` if headings are included
+8. enter `0.05` for `Alpha`
+9. choose an output location
+10. click `OK`
+
+<div class="excel-box">
+
+### Excel Practical 3A: ToolPak Paired Test
+
+Generate the ToolPak output and identify:
+
+1. the before and after means
+2. the before and after variances
+3. the number of pairs
+4. the Pearson correlation
+5. the hypothesised mean difference
+6. the degrees of freedom
+7. the test statistic
+8. the two-sided p-value
+9. the decision
+10. the scientific conclusion
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Let:
+
+\[
+d=\text{Before}-\text{After}
+\]
+
+The hypotheses are:
+
+\[
+H_0:\mu_d=0
+\]
+
+\[
+H_1:\mu_d\neq 0
+\]
+
+The mean before ageing is higher than the mean after ageing.
+
+In the ToolPak output:
+
+- `Mean` gives the before and after sample means
+- `Variance` gives the corresponding sample variances
+- `Observations` gives the number of pairs
+- `Pearson Correlation` describes the linear association between paired measurements
+- `Hypothesized Mean Difference` should be zero
+- `df` should equal the number of pairs minus one
+- `t Stat` is the paired test statistic
+- `P(T<=t) two-tail` is the correct p-value for a two-sided question
+
+The two-sided p-value is below 0.05.
+
+Therefore, reject \(H_0\).
+
+A suitable conclusion is:
+
+> At the 5% significance level, there is sufficient evidence that accelerated ageing changes the population mean tensile strength. The observed paired measurements show a reduction in tensile strength after ageing.
+
+The ToolPak result can be checked using:
+
+```text
+=T.TEST(B2:B9,C2:C9,2,1)
+```
+
+The paired test must be used because each after-ageing value corresponds to the same specimen measured before ageing.
+
+</details>
+
+# Independent or Paired?
+
+| Situation | Appropriate test |
+|:--|:--|
+| Different specimens from Polymer A and Polymer B | Independent two-sample \(t\) test |
+| Same specimens before and after ageing | Paired \(t\) test |
+| Matched specimens from the same production batch | Paired \(t\) test |
+| Unrelated specimens from two suppliers | Independent two-sample \(t\) test |
+
+# One-Way Analysis of Variance
+
+One-way analysis of variance, or one-way ANOVA, compares the means of three or more independent populations.
+
+Examples:
+
+- three polymer formulations
+- four additive concentrations
+- several curing temperatures
+- multiple suppliers
+
+## Hypotheses
+
+For \(k\) groups:
+
+\[
+H_0:\mu_1=\mu_2=\cdots=\mu_k
+\]
+
+The alternative is:
+
+\[
+H_1:\text{not all population means are equal}
+\]
+
+ANOVA does not initially specify which means differ.
+
+# ANOVA Test Statistic
+
+The ANOVA \(F\)-statistic compares between-group variability with within-group variability.
+
+\[
+F
+=
+\frac{\text{Mean square between groups}}
+{\text{Mean square within groups}}
+\]
+
+A large \(F\)-value indicates that group means differ more than expected from within-group variation alone.
+
+# One-Way ANOVA in Excel
+
+Arrange each group in a separate column.
+
+Then use:
+
+```text
+Data > Data Analysis > ANOVA: Single Factor
+```
+
+Select:
+
+- the full input range
+- `Grouped By: Columns`
+- `Labels in First Row`, where applicable
+- an alpha value such as 0.05
+
+<div class="excel-box">
+
+### Excel Practical 4: One-Way ANOVA
+
+Tensile strength is measured for specimens prepared using three additive concentrations.
+
+**2% additive**
+
+```text
+47.8, 48.5, 49.1, 48.9, 47.6
+```
+
+**4% additive**
+
+```text
+51.2, 50.8, 52.1, 51.7, 50.9
+```
+
+**6% additive**
+
+```text
+52.0, 52.7, 53.1, 52.4, 53.3
+```
+
+Use one-way ANOVA to test whether the population mean tensile strengths differ.
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The hypotheses are:
+
+\[
+H_0:\mu_{2\%}=\mu_{4\%}=\mu_{6\%}
+\]
+
+\[
+H_1:\text{not all population means are equal}
+\]
+
+Excel route:
+
+```text
+Data > Data Analysis > ANOVA: Single Factor
+```
+
+The group means increase as additive concentration increases.
+
+The ANOVA p-value is expected to be below 0.05.
+
+Therefore, reject \(H_0\).
+
+A suitable conclusion is:
+
+> At the 5% significance level, there is sufficient evidence that mean tensile strength is not the same across all three additive concentrations.
+
+ANOVA alone does not identify every pair of concentrations that differs. Follow-up multiple-comparison procedures would be needed for that purpose.
+
+</details>
+
+
+# Analysis ToolPak Example: One-Way ANOVA
+
+The Analysis ToolPak can compare three or more independent population means using `ANOVA: Single Factor`.
+
+## Data Layout
+
+Enter each treatment group in a separate column.
+
+| 2% Additive | 4% Additive | 6% Additive |
+|--:|--:|--:|
+| 47.8 | 51.2 | 52.0 |
+| 48.5 | 50.8 | 52.7 |
+| 49.1 | 52.1 | 53.1 |
+| 48.9 | 51.7 | 52.4 |
+| 47.6 | 50.9 | 53.3 |
+
+## ToolPak Procedure
+
+1. select `Data`
+2. select `Data Analysis`
+3. choose `ANOVA: Single Factor`
+4. select the complete input range
+5. select `Grouped By: Columns`
+6. select `Labels in First Row`
+7. enter `0.05` for `Alpha`
+8. choose an output location
+9. click `OK`
+
+<div class="excel-box">
+
+### Excel Practical 4A: ToolPak One-Way ANOVA
+
+Use the output to identify:
+
+1. the count for each treatment
+2. the treatment means
+3. the treatment variances
+4. the between-groups sum of squares
+5. the within-groups sum of squares
+6. the degrees of freedom
+7. the mean squares
+8. the \(F\)-statistic
+9. the p-value
+10. the critical \(F\)-value
+11. the statistical decision
+12. the contextual conclusion
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The hypotheses are:
+
+\[
+H_0:\mu_{2\%}=\mu_{4\%}=\mu_{6\%}
+\]
+
+\[
+H_1:\text{not all population means are equal}
+\]
+
+The summary section of the ToolPak output provides:
+
+- `Count` for each treatment
+- `Sum` for each treatment
+- `Average` for each treatment
+- `Variance` for each treatment
+
+The ANOVA section provides:
+
+- `Between Groups` variation
+- `Within Groups` variation
+- `Total` variation
+- sums of squares
+- degrees of freedom
+- mean squares
+- \(F\)
+- p-value
+- `F crit`
+
+The treatment means increase across the three additive concentrations.
+
+The ANOVA p-value is below 0.05.
+
+Therefore, reject \(H_0\).
+
+A suitable conclusion is:
+
+> At the 5% significance level, there is sufficient evidence that mean tensile strength is not the same across the three additive concentrations.
+
+An equivalent decision can be obtained because:
+
+\[
+F>F_{\text{critical}}
+\]
+
+The significant ANOVA result shows that at least one population mean differs. It does not identify which specific pairs differ.
+
+</details>
+
+# Interpreting the ANOVA Table
+
+A typical Excel ANOVA table contains:
+
+| Source of Variation | SS | df | MS | F | P-value | F crit |
+|:--|--:|--:|--:|--:|--:|--:|
+| Between Groups |  |  |  |  |  |  |
+| Within Groups |  |  |  |  |  |  |
+| Total |  |  |  |  |  |  |
+
+## SS
+
+`SS` represents sums of squares.
+
+- `Between Groups` measures differences among group means
+- `Within Groups` measures variation among observations within groups
+
+## df
+
+Degrees of freedom:
+
+\[
+df_{\text{between}}=k-1
+\]
+
+\[
+df_{\text{within}}=N-k
+\]
+
+\[
+df_{\text{total}}=N-1
+\]
+
+## MS
+
+Mean square:
+
+\[
+MS=\frac{SS}{df}
+\]
+
+## F
+
+\[
+F
+=
+\frac{MS_{\text{between}}}
+{MS_{\text{within}}}
+\]
+
+## P-value
+
+Use the ANOVA p-value for the decision.
+
+If:
+
+\[
+p\leq\alpha
+\]
+
+reject \(H_0\).
+
+## F crit
+
+An equivalent decision can be made by comparing:
+
+\[
+F>F_{\text{critical}}
+\]
+
+The p-value approach is usually easier to report.
+
+# What a Significant ANOVA Means
+
+A significant ANOVA result means:
+
+> At least one population mean differs from another.
+
+It does not mean:
+
+- every population mean differs
+- the largest sample mean is necessarily practically superior
+- the factor causes the difference unless the study was properly experimental
+- the differences are industrially important
+
+# Assumptions of Parametric Tests
+
+## Numerical Response Variable
+
+The response should be numerical and measured on an interval or ratio scale.
+
+## Independence
+
+Observations should be independent unless the paired structure is explicitly modelled.
+
+Independence comes mainly from the study design.
+
+## Approximate Normality
+
+For a one-sample \(t\) test, the population distribution should be approximately normal for small samples.
+
+For a paired \(t\) test, the distribution of the paired differences should be approximately normal.
+
+For two-sample tests and ANOVA, the response distribution within each group should be approximately normal, especially for small samples.
+
+## Equal Variances
+
+The pooled two-sample \(t\) test and classical one-way ANOVA assume equal population variances.
+
+The Welch two-sample \(t\) test does not assume equal variances.
+
+## Absence of Serious Outliers
+
+Strong outliers can substantially affect means, standard deviations, and test results.
+
+# Checking Assumptions in Excel
+
+Use:
+
+- histograms
+- boxplots
+- descriptive statistics
+- scatterplots where relevant
+- examination of paired differences
+- comparison of group standard deviations
+- knowledge of the sampling and experimental design
+
+<div class="warning-box">
+
+A hypothesis test for normality is not always necessary in a short applied analysis. Graphical examination and scientific knowledge are often more useful, especially with small datasets.
+
+</div>
+
+# Practical Activity: Select the Appropriate Test
+
+Identify the appropriate parametric test.
+
+1. Compare mean tensile strength with a target of 50 MPa.
+2. Compare independent specimens from Polymer A and Polymer B.
+3. Compare the same specimens before and after ageing.
+4. Compare four curing temperatures.
+5. Compare matched specimens from two laboratory methods.
+6. Compare three unrelated suppliers.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+| Situation | Appropriate test |
+|:--|:--|
+| Mean compared with 50 MPa | One-sample \(t\) test |
+| Independent Polymer A and B specimens | Independent two-sample \(t\) test |
+| Same specimens before and after ageing | Paired \(t\) test |
+| Four curing temperatures | One-way ANOVA |
+| Matched specimens under two laboratory methods | Paired \(t\) test |
+| Three unrelated suppliers | One-way ANOVA |
+
+</details>
+
+
+# Analysis ToolPak Procedures Used in This Lesson
+
+| Statistical procedure | Analysis ToolPak option |
+|:--|:--|
+| One-sample \(t\) test | No direct ToolPak option; calculate manually |
+| Independent two-sample \(t\) test | `t-Test: Two-Sample Assuming Unequal Variances` |
+| Paired \(t\) test | `t-Test: Paired Two Sample for Means` |
+| One-way ANOVA | `ANOVA: Single Factor` |
+
+<div class="warning-box">
+
+The ToolPak output must be interpreted according to the research design. Selecting the wrong procedure cannot be corrected by interpreting the output more carefully.
+
+</div>
+
+# Interpretation of Excel Output
+
+## One-Sample Test
+
+A one-sample test must be constructed manually.
+
+Report:
+
+- sample mean
+- sample standard deviation
+- sample size
+- hypothesised mean
+- \(t\)-statistic
+- degrees of freedom
+- p-value
+- conclusion
+
+## Two-Sample ToolPak Output
+
+Focus on:
+
+- `Mean`
+- `Variance`
+- `Observations`
+- `Hypothesized Mean Difference`
+- `df`
+- `t Stat`
+- `P(T<=t) two-tail`
+- `t Critical two-tail`
+
+For a two-sided research question, use:
+
+```text
+P(T<=t) two-tail
+```
+
+## Paired Test Output
+
+Focus on:
+
+- means before and after
+- `Pearson Correlation`, as descriptive information
+- hypothesised mean difference
+- degrees of freedom
+- test statistic
+- two-sided p-value
+
+The test concerns the mean paired difference.
+
+## ANOVA Output
+
+Focus on:
+
+- group means and variances
+- between-group and within-group variation
+- \(F\)-statistic
+- p-value
+- decision concerning equality of all means
+
+# Reporting Template
+
+Use the following structure.
+
+> A [name of test] was conducted to examine whether [research question]. The sample results showed [key descriptive result]. The test produced [test statistic and degrees of freedom, where available] with a p-value of [value]. Since the p-value was [less/greater] than 0.05, the null hypothesis was [rejected/not rejected]. Therefore, [contextual scientific conclusion].
+
+## Example
+
+> An independent two-sample \(t\) test was conducted to compare mean tensile strength between Polymer A and Polymer B. Polymer A had the higher sample mean. The two-sided p-value was below 0.05, so the null hypothesis of equal population means was rejected. The data provide evidence that the two formulations differ in mean tensile strength.
+
+# Statistical and Practical Significance
+
+A statistically significant result may have a small effect.
+
+Always consider:
+
+- estimated mean difference
+- confidence interval
+- engineering specification
+- manufacturing cost
+- product performance
+- scientific relevance
+
+<div class="example-box">
+
+### Example
+
+A new process increases mean tensile strength by only 0.3 MPa.
+
+With a very large sample, the p-value may be below 0.05.
+
+However, if an improvement of at least 2 MPa is required, the result is not practically important.
+
+</div>
+
+# Practical Activity: Interpret an Excel Output
+
+Suppose Excel reports the following for an independent two-sample \(t\) test:
+
+| Quantity | Value |
+|:--|--:|
+| Mean for Polymer A | 52.6 |
+| Mean for Polymer B | 51.9 |
+| t Stat | 2.18 |
+| P(T<=t) two-tail | 0.034 |
+| t Critical two-tail | 2.03 |
+| Alpha | 0.05 |
+
+<div class="question-box">
+
+### Questions
+
+1. State the null and alternative hypotheses.
+2. Make the statistical decision.
+3. Interpret the p-value.
+4. Compare the observed and critical \(t\)-values.
+5. Write a contextual conclusion.
+6. Can practical significance be determined from this output alone?
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The hypotheses are:
+
+\[
+H_0:\mu_A=\mu_B
+\]
+
+\[
+H_1:\mu_A\neq\mu_B
+\]
+
+Because:
+
+\[
+0.034<0.05
+\]
+
+reject \(H_0\).
+
+The p-value means that, if the population means were truly equal, the probability of obtaining a sample difference at least as extreme as the observed result is approximately 0.034.
+
+Also:
+
+\[
+|2.18|>2.03
+\]
+
+so the test statistic lies beyond the two-sided critical boundary. This gives the same decision.
+
+A suitable conclusion is:
+
+> At the 5% significance level, there is sufficient evidence that Polymer A and Polymer B differ in population mean tensile strength. Polymer A has the higher sample mean.
+
+Practical significance cannot be determined from the p-value alone. The mean difference, confidence interval, engineering requirements, and cost implications should also be considered.
+
+</details>
+
+# Common Mistakes
+
+Avoid:
+
+- writing hypotheses about sample means instead of population means
+- choosing a one-sided alternative after examining the data
+- interpreting the p-value as the probability that \(H_0\) is true
+- using `accept \(H_0\)` instead of `do not reject \(H_0\)`
+- treating independent observations as paired
+- treating paired observations as independent
+- using the equal-variance test without justification
+- using a paired test only because group sizes are equal
+- ignoring serious outliers
+- reporting a significant ANOVA as proof that all group means differ
+- reporting only the p-value without descriptive results
+- confusing statistical significance with practical importance
+- using the one-tail p-value for a two-sided research question
+
+# Section Exercises
+
+## Exercise 1: One-Sample t Test
+
+A sample of 25 specimens has:
+
+\[
+\bar{x}=61.2\text{ MPa}
+\]
+
+and:
+
+\[
+s=4.5\text{ MPa}
+\]
+
+Test whether the population mean differs from 60 MPa at the 5% significance level.
+
+## Exercise 2: Independent Two-Sample t Test
+
+Two unrelated polymer formulations produce the following values.
+
+**Formulation A**
+
+```text
+48.2, 49.5, 50.1, 51.3, 52.0, 53.4
+```
+
+**Formulation B**
+
+```text
+46.8, 47.9, 48.6, 49.2, 50.0, 50.7
+```
+
+Use Excel to test whether the population means differ.
+
+## Exercise 3: Paired t Test
+
+The hardness of six specimens is measured before and after treatment.
+
+| Specimen | Before | After |
+|:--|--:|--:|
+| 1 | 70 | 74 |
+| 2 | 72 | 75 |
+| 3 | 69 | 73 |
+| 4 | 71 | 76 |
+| 5 | 73 | 77 |
+| 6 | 70 | 72 |
+
+Test whether the treatment changes mean hardness.
+
+## Exercise 4: One-Way ANOVA
+
+Compare mean viscosity across four processing temperatures using `ANOVA: Single Factor`.
+
+State:
+
+1. hypotheses
+2. assumptions
+3. decision rule
+4. interpretation of the p-value
+5. limitation of ANOVA after a significant result
+
+## Exercise 5: Errors
+
+For each situation, describe the practical meaning of Type I and Type II errors.
+
+1. Testing whether a new additive improves strength.
+2. Testing whether a product meets a target thickness.
+3. Testing whether ageing reduces durability.
+
+# Take-Home Messages
+
+- Hypothesis tests evaluate population claims using sample evidence.
+- The null hypothesis usually represents no effect or no difference.
+- The p-value measures compatibility between the data and the null hypothesis.
+- The significance level determines the Type I error rate.
+- A one-sample \(t\) test compares one population mean with a target.
+- An independent two-sample \(t\) test compares unrelated population means.
+- A paired \(t\) test analyses within-pair differences.
+- One-way ANOVA compares three or more population means.
+- Parametric tests require suitable numerical data, independence, and reasonable distributional assumptions.
+- Excel output must be interpreted in relation to the research question.
+- Statistical significance does not automatically imply practical importance.
+
+# Course Navigation
+
+[Previous: Statistical Inference](04_statistical_inference.html)
+
+[Return to Course Outline](index.html)
+
+[Next: Non-Parametric Statistical Tests](06_nonparametric_tests.html)

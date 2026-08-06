@@ -1,0 +1,1324 @@
+---
+title: "Non-Parametric Statistical Tests"
+author: "Dr. R. M. Silva"
+output:
+  html_document:
+    theme: flatly
+    toc: true
+    toc_depth: 2
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+    number_sections: false
+---
+
+<style>
+body {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+h1 {
+  color: #1f4e79;
+  border-bottom: 2px solid #d9e6f2;
+  padding-bottom: 6px;
+  margin-top: 35px;
+}
+
+h2 {
+  color: #2f5597;
+  margin-top: 25px;
+}
+
+h3 {
+  color: #4472c4;
+  margin-top: 20px;
+}
+
+.learning-box {
+  background-color: #f4f8fb;
+  border-left: 5px solid #2f75b5;
+  padding: 18px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.example-box {
+  background-color: #f7f7f7;
+  border-left: 5px solid #70ad47;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.excel-box {
+  background-color: #eef7ee;
+  border-left: 5px solid #548235;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.warning-box {
+  background-color: #fff8e5;
+  border-left: 5px solid #ffc000;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.question-box {
+  background-color: #f4f4f4;
+  border-left: 5px solid #7f7f7f;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  background-color: #d9eaf7;
+}
+
+.tocify {
+  width: 280px;
+  max-height: 85vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.tocify-item {
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+@media (min-width: 992px) {
+  .col-md-9 {
+    padding-left: 35px;
+  }
+}
+
+@media (max-width: 991px) {
+  .tocify {
+    position: relative !important;
+    width: 100% !important;
+    max-height: none;
+    margin-bottom: 25px;
+  }
+}
+</style>
+
+<div class="learning-box">
+
+## Learning Objectives
+
+At the end of this lesson, students should be able to:
+
+1. explain the purpose of non-parametric methods
+2. distinguish between parametric and non-parametric procedures
+3. identify situations requiring rank-based or categorical-data methods
+4. conduct and interpret a Wilcoxon signed-rank test
+5. conduct and interpret a Mann–Whitney test
+6. conduct and interpret a Kruskal–Wallis test
+7. conduct and interpret a chi-square test of association
+8. select an appropriate non-parametric procedure
+9. perform basic non-parametric calculations using Microsoft Excel
+10. write conclusions in the context of Polymer Science
+
+</div>
+
+# Introduction
+
+Non-parametric statistical methods provide alternatives to common parametric procedures when the assumptions required for those procedures are not reasonable.
+
+They are especially useful when:
+
+- the response variable is ordinal
+- the distribution is strongly skewed
+- serious outliers are present
+- the sample size is small and normality is doubtful
+- measurements are represented by ranks
+- categorical frequencies are analysed
+- numerical differences cannot be interpreted meaningfully on the original scale
+
+Many non-parametric tests use the ranks of the observations rather than the original measurements.
+
+<div class="example-box">
+
+### Polymer Science Example
+
+Suppose surface quality is rated as:
+
+```text
+Poor, Acceptable, Good, Excellent
+```
+
+These categories have a natural order, but the difference between `Poor` and `Acceptable` is not necessarily equal to the difference between `Good` and `Excellent`.
+
+A rank-based non-parametric method may therefore be more appropriate than a \(t\) test.
+
+</div>
+
+# Purpose of Non-Parametric Methods
+
+Non-parametric methods are used to answer statistical questions without relying heavily on a specific population distribution such as the normal distribution.
+
+They can be useful for:
+
+- ordinal quality ratings
+- skewed curing-time data
+- defect severity scores
+- adhesion ranks
+- small-sample comparisons
+- data containing influential outliers
+- categorical pass or failure outcomes
+
+The term **non-parametric** does not mean that no population characteristics are involved. It means that the procedure does not depend on a fully specified parametric distribution in the same way as a normal-theory test.
+
+# Parametric and Non-Parametric Procedures
+
+| Research design | Parametric procedure | Non-parametric alternative |
+|:--|:--|:--|
+| One sample or paired observations | One-sample or paired \(t\) test | Wilcoxon signed-rank test |
+| Two independent groups | Independent two-sample \(t\) test | Mann–Whitney test |
+| Three or more independent groups | One-way ANOVA | Kruskal–Wallis test |
+| Two categorical variables | Not applicable | Chi-square test of association |
+
+# Parametric and Non-Parametric Methods Compared
+
+| Parametric methods | Non-parametric methods |
+|:--|:--|
+| Often analyse means | Often analyse ranks or frequencies |
+| Usually require numerical interval or ratio data | Can be used with ordinal data |
+| Often assume approximate normality | Require fewer distributional assumptions |
+| Can be more powerful when assumptions hold | Can be more robust to skewness and outliers |
+| Results concern population means | Results often concern distributions, ranks, or association |
+
+<div class="warning-box">
+
+A non-parametric test is not automatically better than a parametric test. When parametric assumptions are reasonable, a parametric procedure may use the information in the data more efficiently.
+
+</div>
+
+# Important Interpretation Point
+
+A rank-based test does not always test equality of medians.
+
+A general rank-based test compares the locations or distributions of groups.
+
+A median interpretation is most reasonable when the group distributions have similar shapes and spreads.
+
+# Ranking Data in Excel
+
+Many non-parametric tests require observations to be converted into ranks.
+
+Use:
+
+```text
+=RANK.AVG(number,reference,1)
+```
+
+The final argument `1` assigns ranks in ascending order.
+
+Example:
+
+```text
+=RANK.AVG(B2,$B$2:$B$11,1)
+```
+
+`RANK.AVG` assigns average ranks when ties occur.
+
+<div class="excel-box">
+
+### Excel Practical 1: Rank a Dataset
+
+Enter the following surface adhesion scores:
+
+```text
+12, 18, 15, 15, 21, 17
+```
+
+Use:
+
+```text
+=RANK.AVG(B2,$B$2:$B$7,1)
+```
+
+to calculate ascending ranks.
+
+Check how Excel handles the tied values of 15.
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The ordered scores are:
+
+```text
+12, 15, 15, 17, 18, 21
+```
+
+The two values of 15 occupy positions 2 and 3.
+
+Their average rank is:
+
+\[
+\frac{2+3}{2}=2.5
+\]
+
+The ranks are therefore:
+
+| Score | Rank |
+|--:|--:|
+| 12 | 1 |
+| 18 | 5 |
+| 15 | 2.5 |
+| 15 | 2.5 |
+| 21 | 6 |
+| 17 | 4 |
+
+</details>
+
+# Wilcoxon Signed-Rank Test
+
+The Wilcoxon signed-rank test is used for:
+
+- paired observations
+- before-and-after measurements
+- matched specimens
+- one-sample comparisons with a specified median or location
+
+It is a non-parametric alternative to the paired \(t\) test or one-sample \(t\) test.
+
+# Hypotheses for Paired Data
+
+Suppose:
+
+\[
+d_i=\text{After}_i-\text{Before}_i
+\]
+
+A common two-sided formulation is:
+
+\[
+H_0:\text{the distribution of paired differences is centred at }0
+\]
+
+\[
+H_1:\text{the distribution of paired differences is not centred at }0
+\]
+
+If the differences are symmetrically distributed, this is often interpreted as a test of whether the median difference is zero.
+
+# Wilcoxon Signed-Rank Procedure
+
+1. calculate each paired difference
+2. remove differences equal to zero
+3. take the absolute values
+4. rank the absolute differences
+5. attach the original signs to the ranks
+6. sum positive ranks
+7. sum negative ranks
+8. use the smaller rank sum as the test statistic for a two-sided small-sample test
+9. obtain the p-value from appropriate software or a critical-value table
+
+<div class="warning-box">
+
+Excel does not contain a direct built-in Wilcoxon signed-rank test. Excel can be used to calculate differences and ranks, but the exact p-value normally requires specialised statistical software or a reference table.
+
+For this introductory course, the emphasis is on constructing the rank table and interpreting a supplied p-value or critical value.
+
+</div>
+
+# Wilcoxon Signed-Rank Test in Excel
+
+Suppose:
+
+- before measurements are in `B2:B9`
+- after measurements are in `C2:C9`
+
+Difference:
+
+```text
+=C2-B2
+```
+
+Absolute difference:
+
+```text
+=ABS(D2)
+```
+
+Rank of non-zero absolute difference:
+
+```text
+=IF(E2=0,"",RANK.AVG(E2,$E$2:$E$9,1))
+```
+
+Signed rank:
+
+```text
+=SIGN(D2)*F2
+```
+
+Positive-rank sum:
+
+```text
+=SUMIF(G2:G9,">0",G2:G9)
+```
+
+Absolute negative-rank sum:
+
+```text
+=ABS(SUMIF(G2:G9,"<0",G2:G9))
+```
+
+<div class="excel-box">
+
+### Excel Practical 2: Wilcoxon Signed-Rank Test
+
+Adhesion strength is measured before and after a surface treatment.
+
+| Specimen | Before | After |
+|:--|--:|--:|
+| 1 | 18 | 22 |
+| 2 | 21 | 23 |
+| 3 | 20 | 19 |
+| 4 | 17 | 21 |
+| 5 | 19 | 22 |
+| 6 | 23 | 24 |
+| 7 | 16 | 20 |
+| 8 | 22 | 21 |
+
+Using Excel:
+
+1. calculate `After - Before`
+2. calculate absolute differences
+3. rank the absolute differences
+4. calculate signed ranks
+5. calculate the sum of positive ranks
+6. calculate the absolute sum of negative ranks
+7. identify the smaller rank sum
+8. interpret a supplied two-sided p-value of 0.078
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The differences are:
+
+```text
+4, 2, -1, 4, 3, 1, 4, -1
+```
+
+The absolute differences are:
+
+```text
+4, 2, 1, 4, 3, 1, 4, 1
+```
+
+The signed-rank table should be constructed using average ranks for tied absolute differences.
+
+The positive-rank sum is larger than the negative-rank sum because most specimens show increased adhesion strength after treatment.
+
+The supplied p-value is:
+
+\[
+p=0.078
+\]
+
+At:
+
+\[
+\alpha=0.05
+\]
+
+we have:
+
+\[
+p>0.05
+\]
+
+Therefore, do not reject \(H_0\).
+
+A suitable conclusion is:
+
+> At the 5% significance level, the data do not provide sufficient evidence that the surface treatment changes the distribution of adhesion strength. Although most observed differences are positive, the evidence is not strong enough to establish a population-level change.
+
+</details>
+
+# Mann–Whitney Test
+
+The Mann–Whitney test compares two independent groups.
+
+It is also called:
+
+- Mann–Whitney \(U\) test
+- Wilcoxon rank-sum test
+
+It is a non-parametric alternative to the independent two-sample \(t\) test.
+
+# When to Use the Mann–Whitney Test
+
+Use it when:
+
+- there are two independent groups
+- the response is ordinal or numerical
+- normality is doubtful
+- serious outliers are present
+- a comparison based on ranks is suitable
+
+Examples:
+
+- surface-quality scores for Polymer A and Polymer B
+- skewed curing times from two processes
+- adhesion scores from two independent formulations
+- defect severity ratings from two suppliers
+
+# Hypotheses
+
+A general formulation is:
+
+\[
+H_0:\text{the two population distributions are the same}
+\]
+
+\[
+H_1:\text{the two population distributions differ}
+\]
+
+If group shapes are similar, the test may be interpreted as a comparison of population locations or medians.
+
+# Mann–Whitney Procedure
+
+1. combine observations from both groups
+2. rank all observations from smallest to largest
+3. use average ranks for ties
+4. calculate the rank sum for each group
+5. calculate the \(U\)-statistics
+6. use the smaller \(U\)-value
+7. obtain the exact or approximate p-value
+
+For Group 1:
+
+\[
+U_1
+=
+R_1-\frac{n_1(n_1+1)}{2}
+\]
+
+For Group 2:
+
+\[
+U_2
+=
+R_2-\frac{n_2(n_2+1)}{2}
+\]
+
+where:
+
+- \(R_1\) and \(R_2\) are rank sums
+- \(n_1\) and \(n_2\) are sample sizes
+
+Also:
+
+\[
+U_1+U_2=n_1n_2
+\]
+
+# Mann–Whitney Calculations in Excel
+
+Arrange the data in long format:
+
+| Value | Group |
+|--:|:--|
+|  | A |
+|  | A |
+|  | B |
+|  | B |
+
+Rank:
+
+```text
+=RANK.AVG(A2,$A$2:$A$13,1)
+```
+
+Rank sum for Group A:
+
+```text
+=SUMIF(B2:B13,"A",C2:C13)
+```
+
+Group A sample size:
+
+```text
+=COUNTIF(B2:B13,"A")
+```
+
+Calculate \(U_A\):
+
+```text
+=RankSum_A-n_A*(n_A+1)/2
+```
+
+<div class="warning-box">
+
+Excel does not provide a direct Mann–Whitney test. It can calculate ranks and \(U\), but the exact p-value usually requires specialised statistical software or a critical-value table.
+
+</div>
+
+<div class="excel-box">
+
+### Excel Practical 3: Mann–Whitney Test
+
+Surface-quality scores are recorded on an ordinal scale from 1 to 10.
+
+**Polymer A**
+
+```text
+8, 7, 9, 8, 6, 9
+```
+
+**Polymer B**
+
+```text
+5, 6, 7, 5, 6, 4
+```
+
+Using Excel:
+
+1. combine the observations
+2. assign average ranks
+3. calculate the rank sum for each group
+4. calculate \(U_A\) and \(U_B\)
+5. verify that \(U_A+U_B=n_An_B\)
+6. interpret a supplied two-sided p-value of 0.012
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The hypotheses are:
+
+\[
+H_0:\text{the distributions of surface-quality scores are the same}
+\]
+
+\[
+H_1:\text{the distributions differ}
+\]
+
+The Polymer A observations are generally larger and therefore receive larger ranks.
+
+The supplied p-value is:
+
+\[
+p=0.012
+\]
+
+Because:
+
+\[
+0.012<0.05
+\]
+
+reject \(H_0\).
+
+A suitable conclusion is:
+
+> At the 5% significance level, there is sufficient evidence that the distributions of surface-quality scores differ between Polymer A and Polymer B. Polymer A generally receives higher surface-quality ranks.
+
+If the distributions have similar shapes, this may also be described as evidence that Polymer A has a higher typical surface-quality score.
+
+</details>
+
+# Kruskal–Wallis Test
+
+The Kruskal–Wallis test compares three or more independent groups.
+
+It is a non-parametric alternative to one-way ANOVA.
+
+# When to Use the Kruskal–Wallis Test
+
+Use it when:
+
+- there are three or more independent groups
+- the response is ordinal or numerical
+- normality is doubtful
+- serious outliers are present
+- comparisons based on ranks are suitable
+
+Examples:
+
+- surface-quality scores across three formulations
+- skewed curing times across four temperatures
+- defect-severity ratings across several suppliers
+- adhesion ranks across multiple treatment levels
+
+# Hypotheses
+
+\[
+H_0:\text{all population distributions are the same}
+\]
+
+\[
+H_1:\text{at least one population distribution differs}
+\]
+
+If group distributions have similar shapes, the test can be interpreted as a comparison of population locations or medians.
+
+# Kruskal–Wallis Test Statistic
+
+Ignoring the tie correction for introductory presentation:
+
+\[
+H
+=
+\frac{12}{N(N+1)}
+\sum_{j=1}^{k}
+\frac{R_j^2}{n_j}
+-
+3(N+1)
+\]
+
+where:
+
+- \(N\) is the total number of observations
+- \(k\) is the number of groups
+- \(R_j\) is the rank sum for group \(j\)
+- \(n_j\) is the sample size for group \(j\)
+
+For moderate sample sizes, \(H\) is compared with a chi-square distribution with:
+
+\[
+df=k-1
+\]
+
+# Kruskal–Wallis Calculations in Excel
+
+Arrange data in long format.
+
+Rank all observations:
+
+```text
+=RANK.AVG(A2,$A$2:$A$16,1)
+```
+
+Rank sum for a group:
+
+```text
+=SUMIF(B2:B16,"A",C2:C16)
+```
+
+Sample size for a group:
+
+```text
+=COUNTIF(B2:B16,"A")
+```
+
+Approximate upper-tail p-value:
+
+```text
+=CHISQ.DIST.RT(H,k-1)
+```
+
+<div class="warning-box">
+
+Ties require a correction to the Kruskal–Wallis statistic. For datasets with many ties, specialised statistical software is preferable. The introductory Excel exercise below focuses on the main ranking logic.
+
+</div>
+
+<div class="excel-box">
+
+### Excel Practical 4: Kruskal–Wallis Test
+
+Defect-severity scores are recorded for three polymer formulations.
+
+**Formulation A**
+
+```text
+2, 3, 2, 4, 3
+```
+
+**Formulation B**
+
+```text
+5, 6, 5, 7, 6
+```
+
+**Formulation C**
+
+```text
+3, 4, 4, 5, 3
+```
+
+Using Excel:
+
+1. combine all observations
+2. assign average ranks
+3. calculate group rank sums
+4. calculate the uncorrected \(H\)-statistic
+5. calculate the approximate p-value using:
+
+```text
+=CHISQ.DIST.RT(H,2)
+```
+
+6. interpret a computed p-value below 0.05
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The hypotheses are:
+
+\[
+H_0:\text{the three population distributions are the same}
+\]
+
+\[
+H_1:\text{at least one population distribution differs}
+\]
+
+Formulation B generally has the highest defect-severity scores and therefore the highest ranks.
+
+If the calculated p-value is below 0.05, reject \(H_0\).
+
+A suitable conclusion is:
+
+> At the 5% significance level, there is sufficient evidence that defect-severity distributions are not the same across the three polymer formulations.
+
+The Kruskal–Wallis test does not identify exactly which pairs differ. Follow-up pairwise comparisons are required.
+
+</details>
+
+# Interpreting a Significant Kruskal–Wallis Test
+
+A significant result means that at least one group differs.
+
+It does not mean:
+
+- every group differs from every other group
+- the group with the highest median differs significantly from all others
+- the observed difference is practically important
+
+Possible follow-up methods include:
+
+- pairwise Mann–Whitney tests
+- suitable multiple-comparison procedures
+- adjustment for multiple testing
+
+These follow-up procedures are beyond the main scope of this short course.
+
+# Chi-Square Test of Association
+
+The chi-square test of association examines whether two categorical variables are associated.
+
+It is also called the chi-square test of independence.
+
+Examples include:
+
+- polymer type and pass or failure status
+- supplier and defect category
+- processing method and surface-quality classification
+- formulation and product rejection status
+
+# Hypotheses
+
+\[
+H_0:\text{the two categorical variables are independent}
+\]
+
+\[
+H_1:\text{the two categorical variables are associated}
+\]
+
+# Contingency Table
+
+Suppose products from two polymer formulations are classified as Pass or Fail.
+
+| Polymer Type | Pass | Fail | Total |
+|:--|--:|--:|--:|
+| A | 42 | 8 | 50 |
+| B | 32 | 18 | 50 |
+| **Total** | **74** | **26** | **100** |
+
+# Expected Frequencies
+
+Under independence, the expected frequency in a cell is:
+
+\[
+E
+=
+\frac{
+(\text{Row total})(\text{Column total})
+}{
+\text{Grand total}
+}
+\]
+
+For Polymer A and Pass:
+
+\[
+E
+=
+\frac{50\times 74}{100}
+=
+37
+\]
+
+# Chi-Square Statistic
+
+\[
+\chi^2
+=
+\sum
+\frac{(O-E)^2}{E}
+\]
+
+where:
+
+- \(O\) is the observed frequency
+- \(E\) is the expected frequency
+
+The degrees of freedom are:
+
+\[
+df=(r-1)(c-1)
+\]
+
+where:
+
+- \(r\) is the number of rows
+- \(c\) is the number of columns
+
+# Chi-Square Test in Excel
+
+## Using `CHISQ.TEST`
+
+Create separate observed and expected tables.
+
+Then use:
+
+```text
+=CHISQ.TEST(observed_range,expected_range)
+```
+
+This returns the p-value.
+
+## Expected Count Formula
+
+If:
+
+- row total is in `D2`
+- column total is in `B4`
+- grand total is in `D4`
+
+use:
+
+```text
+=$D2*B$4/$D$4
+```
+
+Copy the formula across the expected-frequency table.
+
+<div class="excel-box">
+
+### Excel Practical 5: Chi-Square Test of Association
+
+The following results are observed.
+
+| Polymer Type | Pass | Fail |
+|:--|--:|--:|
+| A | 42 | 8 |
+| B | 32 | 18 |
+
+Using Excel:
+
+1. calculate row totals
+2. calculate column totals
+3. calculate the grand total
+4. calculate expected frequencies
+5. use `CHISQ.TEST`
+6. make a decision at \(\alpha=0.05\)
+7. write a contextual conclusion
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The observed table is:
+
+| Polymer Type | Pass | Fail | Total |
+|:--|--:|--:|--:|
+| A | 42 | 8 | 50 |
+| B | 32 | 18 | 50 |
+| **Total** | **74** | **26** | **100** |
+
+The expected frequencies are:
+
+| Polymer Type | Pass | Fail |
+|:--|--:|--:|
+| A | 37 | 13 |
+| B | 37 | 13 |
+
+For example:
+
+\[
+E_{A,\text{Pass}}
+=
+\frac{50\times74}{100}
+=
+37
+\]
+
+Excel formula:
+
+```text
+=CHISQ.TEST(B2:C3,F2:G3)
+```
+
+The p-value is approximately 0.018.
+
+Because:
+
+\[
+p<0.05
+\]
+
+reject \(H_0\).
+
+A suitable conclusion is:
+
+> At the 5% significance level, there is sufficient evidence of an association between polymer type and pass or failure status. Polymer A has a higher observed pass rate than Polymer B.
+
+This result indicates association, not necessarily causation.
+
+</details>
+
+# Assumptions of the Chi-Square Test
+
+The chi-square test requires:
+
+- frequency counts rather than percentages alone
+- mutually exclusive categories
+- independent observations
+- each observation included in only one cell
+- expected frequencies sufficiently large
+
+A common guideline is:
+
+- all expected counts should ideally be at least 5
+
+For a \(2\times2\) table with small expected counts, an exact procedure such as Fisher's exact test may be more appropriate.
+
+# Chi-Square Contributions
+
+Each cell contributes:
+
+\[
+\frac{(O-E)^2}{E}
+\]
+
+Large contributions identify cells where observed and expected counts differ strongly.
+
+In Excel:
+
+```text
+=(Observed-Expected)^2/Expected
+```
+
+<div class="excel-box">
+
+### Excel Practical 6: Cell Contributions
+
+For the Polymer Type by Pass/Fail example:
+
+1. calculate each cell's chi-square contribution
+2. sum the four contributions
+3. verify the statistic using:
+
+```text
+=CHISQ.DIST.RT(chi_square_statistic,1)
+```
+
+4. identify which cells contribute most strongly
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+For Polymer A and Pass:
+
+\[
+\frac{(42-37)^2}{37}
+=
+\frac{25}{37}
+\]
+
+For Polymer A and Fail:
+
+\[
+\frac{(8-13)^2}{13}
+=
+\frac{25}{13}
+\]
+
+The two cells in the Fail column contribute more because the same absolute difference is divided by a smaller expected frequency.
+
+The total chi-square statistic is the sum of all four cell contributions.
+
+The degrees of freedom are:
+
+\[
+df=(2-1)(2-1)=1
+\]
+
+The p-value can be calculated using:
+
+```text
+=CHISQ.DIST.RT(chi_square_statistic,1)
+```
+
+</details>
+
+# Selecting an Appropriate Non-Parametric Procedure
+
+Use the design of the study and the type of response variable.
+
+| Research question | Data structure | Procedure |
+|:--|:--|:--|
+| Did the same specimens change after treatment? | Paired ordinal or non-normal numerical data | Wilcoxon signed-rank test |
+| Do two independent formulations differ? | Two independent ordinal or non-normal numerical groups | Mann–Whitney test |
+| Do three or more independent groups differ? | Three or more ordinal or non-normal numerical groups | Kruskal–Wallis test |
+| Are two categorical variables associated? | Frequency table | Chi-square test of association |
+
+# Decision Flow
+
+Ask the following questions.
+
+## Question 1
+
+Is the response categorical?
+
+- **Yes:** consider the chi-square test of association.
+- **No:** continue.
+
+## Question 2
+
+Are there two measurements from the same or matched units?
+
+- **Yes:** consider the Wilcoxon signed-rank test.
+- **No:** continue.
+
+## Question 3
+
+Are there two independent groups?
+
+- **Yes:** consider the Mann–Whitney test.
+- **No:** continue.
+
+## Question 4
+
+Are there three or more independent groups?
+
+- **Yes:** consider the Kruskal–Wallis test.
+
+# Practical Activity: Select the Procedure
+
+Choose the most suitable procedure.
+
+1. Surface-quality ratings are compared before and after treatment for the same specimens.
+2. Curing times are compared between two independent processes and are strongly right-skewed.
+3. Defect-severity scores are compared across four suppliers.
+4. Polymer type and pass or failure status are recorded for 300 products.
+5. Adhesion strength is compared before and after ageing for matched specimens with strong outliers.
+6. Ordinal flexibility ratings are compared between two unrelated formulations.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+| Situation | Procedure |
+|:--|:--|
+| Same specimens before and after treatment | Wilcoxon signed-rank test |
+| Two independent skewed curing-time groups | Mann–Whitney test |
+| Four independent supplier groups | Kruskal–Wallis test |
+| Polymer type and pass/fail status | Chi-square test of association |
+| Matched specimens before and after ageing | Wilcoxon signed-rank test |
+| Two unrelated ordinal-rating groups | Mann–Whitney test |
+
+</details>
+
+# Reporting Non-Parametric Results
+
+A report should include:
+
+- research question
+- test used
+- sample sizes
+- medians or rank summaries where suitable
+- test statistic
+- p-value
+- decision
+- contextual conclusion
+- practical interpretation
+
+## Example
+
+> A Mann–Whitney test was used to compare surface-quality scores between Polymer A and Polymer B. Polymer A had generally higher observed ranks. The two-sided p-value was 0.012, so the null hypothesis was rejected at the 5% significance level. The data provide evidence that the distributions of surface-quality scores differ between the two formulations.
+
+# Practical and Statistical Significance
+
+A statistically significant rank-based result does not automatically imply a large or useful difference.
+
+Also examine:
+
+- group medians
+- quartiles
+- rank patterns
+- boxplots
+- magnitude of the difference
+- engineering relevance
+- production cost
+- product specifications
+
+# Common Mistakes
+
+Avoid:
+
+- assuming non-parametric tests require no assumptions
+- calling every rank-based test a test of medians
+- using the Wilcoxon signed-rank test for independent groups
+- using the Mann–Whitney test for paired data
+- using Kruskal–Wallis for repeated measurements
+- ignoring tied observations
+- calculating ordinary ranks instead of average ranks for ties
+- using percentages rather than counts in a chi-square test
+- using a chi-square test when observations are not independent
+- ignoring small expected frequencies
+- interpreting association as causation
+- reporting only a p-value without describing group patterns
+- concluding practical importance from statistical significance alone
+
+# Section Exercises
+
+## Exercise 1: Wilcoxon Signed-Rank Test
+
+Flexibility scores are measured before and after treatment.
+
+| Specimen | Before | After |
+|:--|--:|--:|
+| 1 | 6 | 8 |
+| 2 | 7 | 9 |
+| 3 | 8 | 7 |
+| 4 | 5 | 8 |
+| 5 | 6 | 7 |
+| 6 | 9 | 10 |
+
+Construct the signed-rank table and interpret a supplied p-value of 0.093.
+
+## Exercise 2: Mann–Whitney Test
+
+Compare the following independent groups.
+
+**Polymer A**
+
+```text
+12, 15, 14, 16, 18
+```
+
+**Polymer B**
+
+```text
+9, 11, 10, 13, 12
+```
+
+Calculate average ranks, rank sums, and the two \(U\)-statistics.
+
+## Exercise 3: Kruskal–Wallis Test
+
+Compare defect ratings for three suppliers.
+
+**Supplier 1**
+
+```text
+2, 3, 2, 4
+```
+
+**Supplier 2**
+
+```text
+5, 6, 5, 7
+```
+
+**Supplier 3**
+
+```text
+3, 4, 3, 5
+```
+
+Construct the combined rank table and calculate the uncorrected \(H\)-statistic.
+
+## Exercise 4: Chi-Square Test
+
+The following table records product quality.
+
+| Process | Pass | Fail |
+|:--|--:|--:|
+| Process 1 | 55 | 15 |
+| Process 2 | 40 | 30 |
+
+Calculate:
+
+1. expected frequencies
+2. the chi-square statistic
+3. degrees of freedom
+4. p-value
+5. contextual conclusion
+
+## Exercise 5: Procedure Selection
+
+Select the appropriate procedure for each case.
+
+1. Three independent ordinal surface ratings.
+2. Two matched non-normal strength measurements.
+3. Two independent skewed viscosity groups.
+4. Formulation category and defect category.
+5. Four independent curing-time groups.
+
+# Take-Home Messages
+
+- Non-parametric methods are useful for ordinal data, skewed distributions, serious outliers, and categorical frequencies.
+- Rank-based methods require fewer distributional assumptions than normal-theory procedures.
+- The Wilcoxon signed-rank test is used for paired or one-sample rank-based comparisons.
+- The Mann–Whitney test compares two independent groups.
+- The Kruskal–Wallis test compares three or more independent groups.
+- The chi-square test of association examines relationships between categorical variables.
+- Rank-based tests do not automatically test equality of medians.
+- Excel can support ranking and chi-square calculations, but direct exact rank-test p-values usually require specialised software.
+- Test selection depends on the study design, response type, and assumptions.
+- Statistical conclusions should be written in the scientific context.
+
+# Course Navigation
+
+[Previous: Parametric Statistical Tests](05_parametric_tests.html)
+
+[Return to Course Outline](index.html)
+
+[Next: Design and Analysis of Experiments](07_design_and_analysis_of_experiments.html)

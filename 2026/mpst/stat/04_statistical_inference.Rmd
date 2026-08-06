@@ -1,0 +1,1384 @@
+---
+title: "Statistical Inference"
+author: "Dr. R. M. Silva"
+output:
+  html_document:
+    theme: flatly
+    toc: true
+    toc_depth: 2
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+    number_sections: false
+---
+
+<style>
+body {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+h1 {
+  color: #1f4e79;
+  border-bottom: 2px solid #d9e6f2;
+  padding-bottom: 6px;
+  margin-top: 35px;
+}
+
+h2 {
+  color: #2f5597;
+  margin-top: 25px;
+}
+
+h3 {
+  color: #4472c4;
+  margin-top: 20px;
+}
+
+.learning-box {
+  background-color: #f4f8fb;
+  border-left: 5px solid #2f75b5;
+  padding: 18px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.example-box {
+  background-color: #f7f7f7;
+  border-left: 5px solid #70ad47;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.excel-box {
+  background-color: #eef7ee;
+  border-left: 5px solid #548235;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.warning-box {
+  background-color: #fff8e5;
+  border-left: 5px solid #ffc000;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.question-box {
+  background-color: #f4f4f4;
+  border-left: 5px solid #7f7f7f;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  background-color: #d9eaf7;
+}
+
+.tocify {
+  width: 280px;
+  max-height: 85vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.tocify-item {
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+@media (min-width: 992px) {
+  .col-md-9 {
+    padding-left: 35px;
+  }
+}
+
+@media (max-width: 991px) {
+  .tocify {
+    position: relative !important;
+    width: 100% !important;
+    max-height: none;
+    margin-bottom: 25px;
+  }
+}
+</style>
+
+<div class="learning-box">
+
+## Learning Objectives
+
+At the end of this lesson, students should be able to:
+
+1. distinguish between a population and a sample
+2. explain sampling variability
+3. calculate and interpret the standard error
+4. distinguish between point estimation and interval estimation
+5. construct a confidence interval for a population mean
+6. construct a confidence interval for a population proportion
+7. interpret a confidence interval correctly
+8. explain how sample size and variability affect precision
+9. distinguish between statistical significance and practical significance
+10. perform basic inferential calculations using Microsoft Excel
+
+</div>
+
+# Introduction
+
+Statistical inference uses sample data to draw conclusions about a wider population.
+
+In Polymer Science, it is often impossible or unnecessary to test every possible specimen, batch, or manufactured product. Instead, a sample is selected and analysed.
+
+Examples include:
+
+- estimating the mean tensile strength of a polymer formulation
+- estimating the proportion of products that fail inspection
+- estimating the mean thickness of polymer sheets
+- assessing whether a manufacturing process meets a target
+- quantifying uncertainty around an estimated material property
+
+Descriptive statistics summarise the observed sample. Statistical inference goes further by using the sample to learn about the population.
+
+# Populations and Samples
+
+## Population
+
+A population is the complete collection of units about which a conclusion is required.
+
+Examples:
+
+- all polymer sheets produced during a month
+- all specimens that could be produced using a selected formulation
+- all products manufactured under a specified curing condition
+- all batches produced by a particular process
+
+## Sample
+
+A sample is the subset selected from the population.
+
+Examples:
+
+- 30 sheets selected from monthly production
+- 15 specimens prepared from a new formulation
+- 50 products inspected for defects
+- 10 batches selected for laboratory testing
+
+<div class="example-box">
+
+### Example
+
+A factory produces 20,000 polymer containers in one month. A random sample of 200 containers is inspected for wall thickness.
+
+- **Population:** all 20,000 containers
+- **Sample:** the 200 inspected containers
+- **Population parameter:** the true mean wall thickness of all 20,000 containers
+- **Sample statistic:** the mean wall thickness calculated from the 200 inspected containers
+
+</div>
+
+# Parameters and Statistics
+
+A **parameter** is a numerical characteristic of a population.
+
+A **statistic** is a numerical value calculated from a sample.
+
+| Quantity | Population parameter | Sample statistic |
+|:--|:--|:--|
+| Mean | \(\mu\) | \(\bar{x}\) |
+| Standard deviation | \(\sigma\) | \(s\) |
+| Proportion | \(p\) | \(\hat{p}\) |
+
+Sample statistics are used to estimate unknown population parameters.
+
+# Sampling Variability
+
+Different random samples from the same population will usually produce different results.
+
+For example, if several independent samples of 20 polymer specimens are selected, their sample means may not be identical.
+
+This natural variation from sample to sample is called **sampling variability**.
+
+<div class="example-box">
+
+### Example
+
+Suppose the true mean tensile strength of a polymer population is 50 MPa.
+
+Five random samples may produce the following sample means:
+
+```text
+49.7, 50.4, 49.9, 50.2, 49.5
+```
+
+The sample means vary even though all samples come from the same population.
+
+</div>
+
+Sampling variability does not necessarily indicate a measurement error or a poor study. It is an expected consequence of random sampling.
+
+# Sampling Distribution
+
+A sampling distribution is the probability distribution of a statistic calculated from all possible samples of the same size.
+
+For the sample mean, the sampling distribution describes how \(\bar{X}\) varies across repeated samples.
+
+The centre of the sampling distribution of the sample mean is:
+
+\[
+E(\bar{X})=\mu
+\]
+
+This means that the sample mean is an unbiased estimator of the population mean.
+
+# Standard Error
+
+The standard error measures the typical sampling variability of a statistic.
+
+## Standard Error of the Sample Mean
+
+When the population standard deviation is known:
+
+\[
+SE(\bar{X})=\frac{\sigma}{\sqrt{n}}
+\]
+
+In practice, \(\sigma\) is usually unknown and is estimated using the sample standard deviation:
+
+\[
+SE(\bar{X})=\frac{s}{\sqrt{n}}
+\]
+
+where:
+
+- \(s\) is the sample standard deviation
+- \(n\) is the sample size
+
+## Excel Formula
+
+Suppose the sample observations are in cells `B2:B21`.
+
+```text
+=STDEV.S(B2:B21)/SQRT(COUNT(B2:B21))
+```
+
+<div class="example-box">
+
+### Example
+
+A sample of 25 polymer specimens has:
+
+\[
+\bar{x}=52.4\text{ MPa}
+\]
+
+and:
+
+\[
+s=3.0\text{ MPa}
+\]
+
+The standard error is:
+
+\[
+SE(\bar{X})
+=
+\frac{3.0}{\sqrt{25}}
+=
+0.6\text{ MPa}
+\]
+
+</div>
+
+# Effect of Sample Size on Standard Error
+
+The standard error decreases as sample size increases.
+
+Because:
+
+\[
+SE(\bar{X})=\frac{s}{\sqrt{n}}
+\]
+
+doubling the sample size does not halve the standard error.
+
+To halve the standard error, the sample size must be multiplied by four.
+
+<div class="excel-box">
+
+### Excel Practical 1: Standard Error and Sample Size
+
+Assume the sample standard deviation is 4 MPa.
+
+Calculate the standard error for:
+
+1. \(n=16\)
+2. \(n=25\)
+3. \(n=64\)
+4. \(n=100\)
+
+Use:
+
+```text
+=4/SQRT(n)
+```
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+| Sample size | Standard error |
+|--:|--:|
+| 16 | 1.00 |
+| 25 | 0.80 |
+| 64 | 0.50 |
+| 100 | 0.40 |
+
+As the sample size increases, the standard error decreases.
+
+A larger sample therefore provides a more precise estimate of the population mean, assuming the variability remains unchanged.
+
+</details>
+
+# Point Estimation
+
+A point estimate is a single numerical value used to estimate an unknown population parameter.
+
+Examples:
+
+- \(\bar{x}\) estimates \(\mu\)
+- \(\hat{p}\) estimates \(p\)
+- \(s\) estimates \(\sigma\)
+
+<div class="example-box">
+
+### Example
+
+A sample of 30 polymer specimens has a mean tensile strength of 51.8 MPa.
+
+The point estimate of the population mean tensile strength is:
+
+\[
+\hat{\mu}=\bar{x}=51.8\text{ MPa}
+\]
+
+</div>
+
+A point estimate does not show the uncertainty associated with the estimate.
+
+# Interval Estimation
+
+An interval estimate gives a range of plausible values for the population parameter.
+
+A confidence interval has the general form:
+
+\[
+\text{Point estimate}
+\pm
+\text{Margin of error}
+\]
+
+The margin of error depends on:
+
+- the confidence level
+- the variability in the data
+- the sample size
+- the sampling distribution used
+
+# Confidence Level
+
+Common confidence levels include:
+
+- 90%
+- 95%
+- 99%
+
+A higher confidence level produces a wider interval, all else being equal.
+
+A wider interval gives greater confidence but lower precision.
+
+# Confidence Interval for a Population Mean
+
+When the population standard deviation is unknown, a confidence interval for the population mean is based on the \(t\)-distribution.
+
+The confidence interval is:
+
+\[
+\bar{x}
+\pm
+t_{\alpha/2,n-1}
+\frac{s}{\sqrt{n}}
+\]
+
+where:
+
+- \(\bar{x}\) is the sample mean
+- \(s\) is the sample standard deviation
+- \(n\) is the sample size
+- \(t_{\alpha/2,n-1}\) is the critical value
+- \(n-1\) is the degrees of freedom
+
+## Conditions
+
+The procedure is appropriate when:
+
+- the sample is randomly selected or reasonably representative
+- observations are independent
+- the population is approximately normal, especially for small samples
+- there are no serious outliers
+
+For larger samples, the method is usually more robust to moderate non-normality.
+
+# Confidence Interval for a Mean Using Excel
+
+Suppose:
+
+\[
+\bar{x}=52.4,\qquad s=3.0,\qquad n=25
+\]
+
+for a 95% confidence interval.
+
+## Step 1: Calculate the critical value
+
+```text
+=T.INV.2T(0.05,24)
+```
+
+## Step 2: Calculate the standard error
+
+```text
+=3/SQRT(25)
+```
+
+## Step 3: Calculate the margin of error
+
+```text
+=T.INV.2T(0.05,24)*(3/SQRT(25))
+```
+
+Alternatively:
+
+```text
+=CONFIDENCE.T(0.05,3,25)
+```
+
+## Step 4: Calculate the confidence limits
+
+Lower limit:
+
+```text
+=52.4-CONFIDENCE.T(0.05,3,25)
+```
+
+Upper limit:
+
+```text
+=52.4+CONFIDENCE.T(0.05,3,25)
+```
+
+<div class="excel-box">
+
+### Excel Practical 2: Confidence Interval for Mean Tensile Strength
+
+A random sample of 20 polymer specimens has:
+
+\[
+\bar{x}=48.6\text{ MPa}
+\]
+
+and:
+
+\[
+s=2.8\text{ MPa}
+\]
+
+Construct a 95% confidence interval for the population mean tensile strength.
+
+Calculate:
+
+1. degrees of freedom
+2. critical \(t\)-value
+3. standard error
+4. margin of error
+5. lower confidence limit
+6. upper confidence limit
+7. a contextual interpretation
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Given:
+
+\[
+\bar{x}=48.6,\qquad s=2.8,\qquad n=20
+\]
+
+The degrees of freedom are:
+
+\[
+df=n-1=19
+\]
+
+**Critical value**
+
+```text
+=T.INV.2T(0.05,19)
+```
+
+This gives approximately:
+
+\[
+t_{0.025,19}=2.093
+\]
+
+**Standard error**
+
+\[
+SE(\bar{X})
+=
+\frac{2.8}{\sqrt{20}}
+\approx 0.626
+\]
+
+Excel:
+
+```text
+=2.8/SQRT(20)
+```
+
+**Margin of error**
+
+\[
+ME
+=
+2.093(0.626)
+\approx 1.31
+\]
+
+Excel:
+
+```text
+=CONFIDENCE.T(0.05,2.8,20)
+```
+
+**Confidence interval**
+
+\[
+48.6\pm 1.31
+\]
+
+Therefore:
+
+\[
+47.29<\mu<49.91
+\]
+
+A suitable interpretation is:
+
+> We are 95% confident that the population mean tensile strength of specimens produced under the specified conditions lies between approximately 47.29 MPa and 49.91 MPa.
+
+</details>
+
+# Confidence Interval from Raw Data
+
+Suppose tensile-strength values are stored in `B2:B21`.
+
+Mean:
+
+```text
+=AVERAGE(B2:B21)
+```
+
+Standard deviation:
+
+```text
+=STDEV.S(B2:B21)
+```
+
+Sample size:
+
+```text
+=COUNT(B2:B21)
+```
+
+Margin of error:
+
+```text
+=CONFIDENCE.T(
+0.05,
+STDEV.S(B2:B21),
+COUNT(B2:B21)
+)
+```
+
+Lower limit:
+
+```text
+=AVERAGE(B2:B21)
+-CONFIDENCE.T(
+0.05,
+STDEV.S(B2:B21),
+COUNT(B2:B21)
+)
+```
+
+Upper limit:
+
+```text
+=AVERAGE(B2:B21)
++CONFIDENCE.T(
+0.05,
+STDEV.S(B2:B21),
+COUNT(B2:B21)
+)
+```
+
+# Practical Activity: Confidence Interval from Polymer Data
+
+The tensile-strength values of 12 specimens are:
+
+```text
+48.2, 49.5, 50.1, 51.3, 52.0, 53.4,
+47.8, 49.0, 50.5, 51.2, 52.3, 53.0
+```
+
+<div class="question-box">
+
+### Tasks
+
+Using Excel:
+
+1. calculate the sample mean
+2. calculate the sample standard deviation
+3. calculate the sample size
+4. calculate the standard error
+5. construct a 95% confidence interval
+6. interpret the interval in context
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Assume the data are in cells `B2:B13`.
+
+**Sample mean**
+
+```text
+=AVERAGE(B2:B13)
+```
+
+**Sample standard deviation**
+
+```text
+=STDEV.S(B2:B13)
+```
+
+**Sample size**
+
+```text
+=COUNT(B2:B13)
+```
+
+**Standard error**
+
+```text
+=STDEV.S(B2:B13)/SQRT(COUNT(B2:B13))
+```
+
+**Margin of error**
+
+```text
+=CONFIDENCE.T(
+0.05,
+STDEV.S(B2:B13),
+COUNT(B2:B13)
+)
+```
+
+**Lower confidence limit**
+
+```text
+=AVERAGE(B2:B13)
+-CONFIDENCE.T(
+0.05,
+STDEV.S(B2:B13),
+COUNT(B2:B13)
+)
+```
+
+**Upper confidence limit**
+
+```text
+=AVERAGE(B2:B13)
++CONFIDENCE.T(
+0.05,
+STDEV.S(B2:B13),
+COUNT(B2:B13)
+)
+```
+
+The interpretation should be written as:
+
+> We are 95% confident that the population mean tensile strength for specimens produced under these conditions lies between the calculated lower and upper confidence limits.
+
+</details>
+
+# Confidence Interval for a Population Proportion
+
+Suppose:
+
+- \(x\) observations have the characteristic of interest
+- \(n\) observations are inspected
+
+The sample proportion is:
+
+\[
+\hat{p}
+=
+\frac{x}{n}
+\]
+
+An approximate confidence interval for the population proportion is:
+
+\[
+\hat{p}
+\pm
+z_{\alpha/2}
+\sqrt{
+\frac{\hat{p}(1-\hat{p})}{n}
+}
+\]
+
+For a 95% confidence interval:
+
+\[
+z_{\alpha/2}\approx 1.96
+\]
+
+## Conditions for the Normal Approximation
+
+A common guideline is:
+
+\[
+n\hat{p}\geq 5
+\]
+
+and:
+
+\[
+n(1-\hat{p})\geq 5
+\]
+
+For very small samples or rare outcomes, more advanced methods are preferred.
+
+# Confidence Interval for a Proportion Using Excel
+
+Suppose 18 of 200 polymer products fail inspection.
+
+The sample proportion is:
+
+```text
+=18/200
+```
+
+The standard error is:
+
+```text
+=SQRT((18/200)*(1-18/200)/200)
+```
+
+The 95% critical value is:
+
+```text
+=NORM.S.INV(0.975)
+```
+
+The margin of error is:
+
+```text
+=NORM.S.INV(0.975)
+*SQRT((18/200)*(1-18/200)/200)
+```
+
+Lower limit:
+
+```text
+=(18/200)
+-NORM.S.INV(0.975)
+*SQRT((18/200)*(1-18/200)/200)
+```
+
+Upper limit:
+
+```text
+=(18/200)
++NORM.S.INV(0.975)
+*SQRT((18/200)*(1-18/200)/200)
+```
+
+<div class="excel-box">
+
+### Excel Practical 3: Confidence Interval for a Defect Proportion
+
+A random sample of 150 polymer sheets is inspected. Twelve sheets contain a major surface defect.
+
+Construct a 95% confidence interval for the population proportion of sheets with a major surface defect.
+
+Calculate:
+
+1. the sample proportion
+2. the standard error
+3. the margin of error
+4. the lower confidence limit
+5. the upper confidence limit
+6. a contextual interpretation
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Given:
+
+\[
+x=12,\qquad n=150
+\]
+
+The sample proportion is:
+
+\[
+\hat{p}
+=
+\frac{12}{150}
+=
+0.08
+\]
+
+**Standard error**
+
+\[
+SE(\hat{p})
+=
+\sqrt{
+\frac{0.08(1-0.08)}{150}
+}
+\approx 0.0222
+\]
+
+Excel:
+
+```text
+=SQRT((12/150)*(1-12/150)/150)
+```
+
+**Margin of error**
+
+\[
+ME
+=
+1.96(0.0222)
+\approx 0.0434
+\]
+
+Excel:
+
+```text
+=NORM.S.INV(0.975)
+*SQRT((12/150)*(1-12/150)/150)
+```
+
+**Confidence interval**
+
+\[
+0.08\pm 0.0434
+\]
+
+Therefore:
+
+\[
+0.0366<p<0.1234
+\]
+
+In percentage form:
+
+\[
+3.66\%<p<12.34\%
+\]
+
+A suitable interpretation is:
+
+> We are 95% confident that the population proportion of polymer sheets with a major surface defect lies between approximately 3.66% and 12.34%.
+
+</details>
+
+# Interpretation of Confidence Intervals
+
+A confidence interval should be interpreted in relation to repeated sampling.
+
+A correct interpretation is:
+
+> We are 95% confident that the population mean tensile strength lies between the lower and upper confidence limits.
+
+A more precise repeated-sampling interpretation is:
+
+> If many random samples were selected and a 95% confidence interval were constructed from each sample, approximately 95% of those intervals would contain the true population parameter.
+
+# Incorrect Interpretations
+
+Avoid:
+
+> There is a 95% probability that the population mean lies in this particular interval.
+
+Once the interval is calculated, the population parameter is fixed. The interval either contains it or does not.
+
+Avoid:
+
+> 95% of individual tensile-strength observations lie inside the confidence interval.
+
+A confidence interval for the mean concerns the population mean, not individual observations.
+
+Avoid:
+
+> The sample mean has a 95% chance of lying inside the interval.
+
+The sample mean is used to construct the interval and lies at its centre.
+
+# Precision of a Confidence Interval
+
+The width of a confidence interval reflects precision.
+
+A narrower interval gives a more precise estimate.
+
+The interval becomes narrower when:
+
+- sample size increases
+- variability decreases
+- confidence level decreases
+
+The interval becomes wider when:
+
+- sample size decreases
+- variability increases
+- confidence level increases
+
+<div class="excel-box">
+
+### Excel Practical 4: Effect of Confidence Level
+
+A sample has:
+
+\[
+\bar{x}=50,\qquad s=4,\qquad n=25
+\]
+
+Construct:
+
+1. a 90% confidence interval
+2. a 95% confidence interval
+3. a 99% confidence interval
+
+Use:
+
+```text
+=CONFIDENCE.T(alpha,4,25)
+```
+
+with:
+
+```text
+alpha = 0.10, 0.05, 0.01
+```
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The 90% confidence interval will be the narrowest.
+
+The 95% confidence interval will be wider.
+
+The 99% confidence interval will be the widest.
+
+This occurs because greater confidence requires a larger critical value and therefore a larger margin of error.
+
+</details>
+
+# Confidence Intervals and Target Values
+
+A confidence interval can be compared with a target or specification value.
+
+<div class="example-box">
+
+### Example
+
+Suppose the target mean tensile strength is 50 MPa.
+
+A 95% confidence interval is:
+
+\[
+51.2\text{ MPa to }53.1\text{ MPa}
+\]
+
+Because 50 MPa is outside the interval, the sample provides evidence that the population mean differs from 50 MPa at the 5% significance level.
+
+</div>
+
+This connection will be developed further in hypothesis testing.
+
+# Statistical Significance
+
+A result is statistically significant when the observed evidence is sufficiently inconsistent with a specified null hypothesis.
+
+For a two-sided test at the 5% significance level, a population value outside the corresponding 95% confidence interval would be rejected.
+
+Statistical significance depends on:
+
+- the size of the observed effect
+- sample variability
+- sample size
+- selected significance level
+
+# Practical Significance
+
+Practical significance concerns whether the size of the effect is scientifically, industrially, or economically meaningful.
+
+A result may be statistically significant but practically unimportant.
+
+<div class="example-box">
+
+### Example
+
+A new formulation increases mean tensile strength by 0.2 MPa.
+
+With a very large sample, this difference may be statistically significant.
+
+However, if the increase:
+
+- does not improve product performance
+- does not affect compliance with specifications
+- requires a costly additive
+- creates processing difficulties
+
+then the difference may not be practically important.
+
+</div>
+
+# Statistical and Practical Significance Compared
+
+| Statistical significance | Practical significance |
+|:--|:--|
+| Assesses evidence against a null hypothesis | Assesses whether the effect matters in practice |
+| Influenced strongly by sample size | Influenced by scientific and industrial context |
+| Often summarised using a p-value | Considered using effect size, cost, specifications, and consequences |
+| Does not automatically imply importance | May be important even when statistical evidence is limited |
+
+# Practical Activity: Evaluate Significance
+
+A study compares a new polymer formulation with a current formulation.
+
+The estimated increase in mean tensile strength is:
+
+\[
+0.4\text{ MPa}
+\]
+
+The 95% confidence interval for the increase is:
+
+\[
+0.1\text{ MPa to }0.7\text{ MPa}
+\]
+
+The new formulation costs 20% more to produce. Engineers consider an increase of at least 2 MPa necessary to justify implementation.
+
+<div class="question-box">
+
+### Questions
+
+1. Is the result statistically significant at the 5% level?
+2. Is the result practically significant?
+3. What conclusion should be reported?
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+**1. Statistical significance**
+
+Yes. The confidence interval does not contain zero, so the estimated increase is statistically significant at the 5% level.
+
+**2. Practical significance**
+
+No. The entire confidence interval lies below the 2 MPa improvement considered necessary by the engineers.
+
+**3. Conclusion**
+
+A suitable conclusion is:
+
+> The new formulation produced a statistically detectable increase in mean tensile strength. However, the estimated improvement was too small to meet the engineering requirement of at least 2 MPa and may not justify the 20% increase in production cost.
+
+</details>
+
+# Practical Activity: Build an Excel Confidence Interval Calculator
+
+Create an Excel worksheet with two sections.
+
+## Section A: Population Mean
+
+Include input cells for:
+
+- sample mean
+- sample standard deviation
+- sample size
+- confidence level
+
+Calculate:
+
+- degrees of freedom
+- critical \(t\)-value
+- standard error
+- margin of error
+- lower confidence limit
+- upper confidence limit
+
+## Section B: Population Proportion
+
+Include input cells for:
+
+- number with the characteristic
+- sample size
+- confidence level
+
+Calculate:
+
+- sample proportion
+- critical \(z\)-value
+- standard error
+- margin of error
+- lower confidence limit
+- upper confidence limit
+
+<div class="question-box">
+
+### Task
+
+Design the worksheet so that changing the inputs automatically updates both confidence intervals.
+
+Format proportions as percentages and numerical estimates to a suitable number of decimal places.
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+**Mean section**
+
+Critical value:
+
+```text
+=T.INV.2T(1-Confidence_Level,Sample_Size-1)
+```
+
+Standard error:
+
+```text
+=Sample_SD/SQRT(Sample_Size)
+```
+
+Margin of error:
+
+```text
+=Critical_t*Standard_Error
+```
+
+Lower limit:
+
+```text
+=Sample_Mean-Margin_of_Error
+```
+
+Upper limit:
+
+```text
+=Sample_Mean+Margin_of_Error
+```
+
+**Proportion section**
+
+Sample proportion:
+
+```text
+=Number_With_Characteristic/Sample_Size
+```
+
+Critical value:
+
+```text
+=NORM.S.INV(1+(Confidence_Level))/2
+```
+
+A clearer equivalent formula is:
+
+```text
+=NORM.S.INV(1-(1-Confidence_Level)/2)
+```
+
+Standard error:
+
+```text
+=SQRT(
+Sample_Proportion
+*(1-Sample_Proportion)
+/Sample_Size
+)
+```
+
+Margin of error:
+
+```text
+=Critical_z*Standard_Error
+```
+
+Lower limit:
+
+```text
+=Sample_Proportion-Margin_of_Error
+```
+
+Upper limit:
+
+```text
+=Sample_Proportion+Margin_of_Error
+```
+
+</details>
+
+# Common Mistakes
+
+Avoid:
+
+- treating the sample as the population
+- assuming a sample statistic equals the population parameter
+- ignoring sampling variability
+- confusing standard deviation with standard error
+- using `STDEV.P` for sample data
+- using the normal critical value when a small-sample \(t\)-interval is required
+- entering variance instead of standard deviation
+- interpreting a confidence interval as a range for individual observations
+- claiming that a 95% interval contains 95% of the data
+- reporting only the point estimate without uncertainty
+- concluding practical importance from statistical significance alone
+- using an approximate proportion interval when the sample is extremely small or the outcome is very rare
+
+# Section Exercises
+
+## Exercise 1: Standard Error
+
+A sample of 36 specimens has a standard deviation of 4.8 MPa.
+
+1. calculate the standard error
+2. calculate the standard error if the sample size increases to 144
+3. explain the effect of increasing the sample size
+
+## Exercise 2: Confidence Interval for a Mean
+
+A sample of 18 specimens has:
+
+\[
+\bar{x}=62.5\text{ MPa}
+\]
+
+and:
+
+\[
+s=5.4\text{ MPa}
+\]
+
+Construct and interpret a 95% confidence interval for the population mean.
+
+## Exercise 3: Confidence Interval for a Proportion
+
+Among 250 inspected products, 20 fail the final quality test.
+
+1. calculate the sample failure proportion
+2. calculate the standard error
+3. construct a 95% confidence interval
+4. interpret the interval as a percentage
+
+## Exercise 4: Comparing Precision
+
+Two studies estimate the same population mean.
+
+Study A:
+
+\[
+n=25,\qquad s=3
+\]
+
+Study B:
+
+\[
+n=100,\qquad s=3
+\]
+
+1. calculate the standard error for each study
+2. identify which study gives the more precise estimate
+3. explain why
+
+## Exercise 5: Statistical and Practical Significance
+
+A new process increases mean elongation by 1.5 percentage points.
+
+The 95% confidence interval is:
+
+\[
+0.8\text{ to }2.2
+\]
+
+Engineers require an improvement of at least 5 percentage points.
+
+Discuss:
+
+1. statistical significance
+2. practical significance
+3. the appropriate scientific conclusion
+
+# Take-Home Messages
+
+- Statistical inference uses sample data to learn about populations.
+- Sample statistics vary from sample to sample.
+- The standard error measures the sampling variability of an estimator.
+- Point estimates provide single estimates, while confidence intervals quantify uncertainty.
+- Confidence intervals for means are commonly based on the \(t\)-distribution.
+- Confidence intervals for proportions estimate the population percentage with a specified level of confidence.
+- Confidence intervals concern population parameters, not individual observations.
+- Larger samples usually produce narrower and more precise intervals.
+- Statistical significance does not automatically imply practical importance.
+- Scientific conclusions should consider effect size, uncertainty, specifications, cost, and context.
+
+# Course Navigation
+
+[Previous: Probability Distributions](03_probability_distributions.html)
+
+[Return to Course Outline](index.html)
+
+[Next: Parametric Statistical Tests](05_parametric_tests.html)

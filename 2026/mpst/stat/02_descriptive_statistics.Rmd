@@ -1,0 +1,1220 @@
+---
+title: "Descriptive Statistics"
+author: "Dr. R. M. Silva"
+output:
+  html_document:
+    theme: flatly
+    toc: true
+    toc_float: true
+    number_sections: false
+---
+
+<style>
+body {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+h1 {
+  color: #1f4e79;
+  border-bottom: 2px solid #d9e6f2;
+  padding-bottom: 6px;
+  margin-top: 35px;
+}
+
+h2 {
+  color: #2f5597;
+  margin-top: 25px;
+}
+
+h3 {
+  color: #4472c4;
+  margin-top: 20px;
+}
+
+.learning-box {
+  background-color: #f4f8fb;
+  border-left: 5px solid #2f75b5;
+  padding: 18px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.example-box {
+  background-color: #f7f7f7;
+  border-left: 5px solid #70ad47;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.excel-box {
+  background-color: #eef7ee;
+  border-left: 5px solid #548235;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.warning-box {
+  background-color: #fff8e5;
+  border-left: 5px solid #ffc000;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.question-box {
+  background-color: #f4f4f4;
+  border-left: 5px solid #7f7f7f;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  background-color: #d9eaf7;
+}
+</style>
+
+<div class="learning-box">
+
+## Learning Objectives
+
+At the end of this lesson, students should be able to:
+
+1. construct and interpret frequency distributions
+2. prepare summary tables and PivotTables in Microsoft Excel
+3. select suitable charts for categorical and numerical data
+4. calculate and interpret the mean, median, and mode
+5. calculate and interpret the range, variance, and standard deviation
+6. calculate quartiles, percentiles, and the interquartile range
+7. calculate and interpret the coefficient of variation
+8. describe skewness and identify possible outliers
+9. compare distributions across two or more polymer groups
+10. communicate descriptive findings in the context of Polymer Science
+
+</div>
+
+# Introduction
+
+Descriptive statistics consists of methods used to organise, summarise, present, and interpret the main features of a dataset.
+
+In Polymer Science, descriptive statistics may be used to:
+
+- summarise tensile-strength measurements
+- compare polymer formulations
+- examine the consistency of a manufacturing process
+- identify unusual observations
+- describe defect patterns
+- assess the distribution of curing time
+- compare variability across materials or process conditions
+
+Descriptive analysis should normally be completed before formal statistical inference.
+
+<div class="example-box">
+
+### Polymer Science Example
+
+Suppose tensile strength is recorded for specimens produced using two polymer formulations.
+
+Before conducting a formal statistical test, the researcher should examine:
+
+- the number of observations in each group
+- the mean and median tensile strength
+- the variability within each formulation
+- the presence of skewness
+- possible outliers
+- graphical differences between the groups
+
+</div>
+
+# Example Dataset
+
+The following dataset will be used throughout this lesson.
+
+| Specimen_ID | Polymer_Type | Temperature_C | Tensile_Strength_MPa | Elongation_Percent | Defect_Count | Surface_Quality |
+|:--|:--|--:|--:|--:|--:|:--|
+| S01 | A | 160 | 48.2 | 205 | 3 | Good |
+| S02 | A | 160 | 49.5 | 212 | 2 | Good |
+| S03 | A | 170 | 50.1 | 219 | 2 | Excellent |
+| S04 | A | 170 | 51.3 | 225 | 1 | Excellent |
+| S05 | A | 180 | 52.0 | 231 | 1 | Excellent |
+| S06 | A | 180 | 53.4 | 238 | 0 | Excellent |
+| S07 | B | 160 | 45.8 | 190 | 5 | Acceptable |
+| S08 | B | 160 | 46.7 | 196 | 4 | Acceptable |
+| S09 | B | 170 | 47.9 | 202 | 3 | Good |
+| S10 | B | 170 | 49.0 | 208 | 3 | Good |
+| S11 | B | 180 | 50.5 | 214 | 2 | Good |
+| S12 | B | 180 | 51.2 | 220 | 2 | Excellent |
+
+<div class="excel-box">
+
+### Excel Practical 1: Enter and Format the Data
+
+1. enter the dataset in a new Excel worksheet
+2. select the full range
+3. press `Ctrl + T`
+4. confirm that the table has headers
+5. name the table `PolymerData`
+6. save the file as `polymer_descriptive_statistics.xlsx`
+
+</div>
+
+# Frequency Distributions
+
+A frequency distribution shows how often each value or category occurs.
+
+## Frequency Distribution for Categorical Data
+
+For categorical data, calculate:
+
+- frequency
+- relative frequency
+- percentage
+
+Example for `Surface_Quality`:
+
+| Surface Quality | Frequency | Percentage |
+|:--|--:|--:|
+| Acceptable | 2 | 16.7 |
+| Good | 6 | 50.0 |
+| Excellent | 4 | 33.3 |
+| **Total** | **12** | **100.0** |
+
+The percentage is calculated as:
+
+\[
+\text{Percentage}
+=
+\frac{\text{Frequency}}{\text{Total number of observations}}
+\times 100
+\]
+
+## Frequency Distribution for Numerical Data
+
+Numerical observations may be grouped into intervals.
+
+Example for tensile strength:
+
+| Tensile Strength (MPa) | Frequency |
+|:--|--:|
+| 45 to less than 47 | 2 |
+| 47 to less than 49 | 2 |
+| 49 to less than 51 | 4 |
+| 51 to less than 53 | 3 |
+| 53 to less than 55 | 1 |
+
+<div class="warning-box">
+
+The appearance of a grouped frequency distribution depends on the selected class intervals. Different intervals may show different visual patterns.
+
+</div>
+
+# Frequency Tables in Excel
+
+## Using `COUNTIF`
+
+Suppose `Surface_Quality` is in cells `G2:G13`.
+
+Frequency of `Good`:
+
+```text
+=COUNTIF(G2:G13,"Good")
+```
+
+Frequency of `Excellent`:
+
+```text
+=COUNTIF(G2:G13,"Excellent")
+```
+
+## Using `COUNTIFS`
+
+To count Type A specimens with excellent surface quality:
+
+```text
+=COUNTIFS(B2:B13,"A",G2:G13,"Excellent")
+```
+
+## Using `FREQUENCY`
+
+For grouped numerical data, specify upper class limits in a separate column.
+
+Example upper limits:
+
+```text
+47
+49
+51
+53
+55
+```
+
+Then use:
+
+```text
+=FREQUENCY(D2:D13,I2:I6)
+```
+
+In recent versions of Excel, this formula spills automatically.
+
+<div class="excel-box">
+
+### Excel Practical 2: Construct Frequency Tables
+
+Using the example dataset:
+
+1. construct a frequency table for `Polymer_Type`
+2. construct a frequency table for `Surface_Quality`
+3. calculate percentages for each category
+4. construct a grouped frequency distribution for `Tensile_Strength_MPa`
+5. verify that the total frequency equals 12
+
+</div>
+
+
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+<br>
+
+**Polymer Type**
+
+| Polymer Type | Frequency | Percentage |
+|:--|--:|--:|
+| A | 6 | 50.0 |
+| B | 6 | 50.0 |
+| **Total** | **12** | **100.0** |
+
+**Surface Quality**
+
+| Surface Quality | Frequency | Percentage |
+|:--|--:|--:|
+| Acceptable | 2 | 16.7 |
+| Good | 6 | 50.0 |
+| Excellent | 4 | 33.3 |
+| **Total** | **12** | **100.0** |
+
+</details>
+
+
+# Tables and PivotTables
+
+A PivotTable provides a quick way to summarise categorical and numerical data.
+
+## Creating a PivotTable
+
+1. click inside the Excel Table
+2. select `Insert > PivotTable`
+3. choose `New Worksheet`
+4. click `OK`
+5. drag variables into the required areas
+
+## Example 1: Frequency by Polymer Type
+
+- drag `Polymer_Type` to `Rows`
+- drag `Specimen_ID` to `Values`
+- ensure the summary is `Count`
+
+## Example 2: Mean Tensile Strength by Polymer Type
+
+- drag `Polymer_Type` to `Rows`
+- drag `Tensile_Strength_MPa` to `Values`
+- change the summary from `Sum` to `Average`
+
+## Example 3: Cross-Tabulation
+
+- drag `Polymer_Type` to `Rows`
+- drag `Surface_Quality` to `Columns`
+- drag `Specimen_ID` to `Values`
+
+<div class="excel-box">
+
+### Excel Practical 3: Create PivotTables
+
+Create PivotTables showing:
+
+1. the number of specimens by polymer type
+2. the average tensile strength by polymer type
+3. the average elongation by processing temperature
+4. the number of specimens by polymer type and surface quality
+
+</div>
+
+# Bar Charts
+
+A bar chart is used for categorical data.
+
+Suitable examples include:
+
+- number of specimens by polymer type
+- number of products by surface-quality category
+- pass and failure counts
+- number of defects by production line
+
+## Creating a Bar or Column Chart
+
+1. select the frequency table
+2. choose `Insert`
+3. select a bar or column chart
+4. add a descriptive title
+5. label the axes where appropriate
+6. avoid unnecessary visual effects
+
+<div class="warning-box">
+
+A bar chart is appropriate for categorical data. The bars are separated because categories are distinct.
+
+</div>
+
+<div class="excel-box">
+
+### Excel Practical 4: Create a Bar Chart
+
+Create a bar chart for `Surface_Quality`.
+
+Use the title:
+
+```text
+Distribution of Surface Quality
+```
+
+Ensure that:
+
+- categories are shown clearly
+- the frequency scale begins at zero
+- the chart does not use a three-dimensional effect
+
+</div>
+
+# Histograms
+
+A histogram displays the distribution of a numerical variable.
+
+Examples include:
+
+- tensile strength
+- elongation at break
+- thickness
+- viscosity
+- curing time
+
+Unlike a bar chart, histogram bars touch because the intervals represent a continuous numerical scale.
+
+## Creating a Histogram in Excel
+
+Method 1:
+
+```text
+Insert > Insert Statistic Chart > Histogram
+```
+
+Method 2:
+
+```text
+Data > Data Analysis > Histogram
+```
+
+## Interpreting a Histogram
+
+Examine:
+
+- centre
+- spread
+- symmetry
+- skewness
+- gaps
+- clusters
+- possible outliers
+
+<div class="excel-box">
+
+### Excel Practical 5: Create a Histogram
+
+Create a histogram for `Tensile_Strength_MPa`.
+
+Experiment with different bin widths.
+
+Then answer:
+
+1. where is the centre of the distribution?
+2. is the distribution approximately symmetric?
+3. are there any gaps?
+4. are there any possible outliers?
+5. how does changing the bin width affect the appearance?
+
+</div>
+
+# Boxplots
+
+A boxplot summarises a numerical distribution using:
+
+- minimum non-outlying value
+- first quartile
+- median
+- third quartile
+- maximum non-outlying value
+- possible outliers
+
+The box contains the middle 50% of the observations.
+
+## Creating a Boxplot in Excel
+
+1. arrange each group in a separate column
+2. select the data
+3. choose `Insert`
+4. select `Insert Statistic Chart`
+5. choose `Box and Whisker`
+
+## Interpreting a Boxplot
+
+Compare:
+
+- medians
+- interquartile ranges
+- overall spreads
+- skewness
+- possible outliers
+
+<div class="excel-box">
+
+### Excel Practical 6: Compare Polymer Types Using Boxplots
+
+Create side-by-side boxplots of tensile strength for Polymer Types A and B.
+
+Describe:
+
+1. which formulation has the higher median
+2. which formulation has greater variability
+3. whether either group is skewed
+4. whether any possible outliers are present
+
+</div>
+
+# Scatterplots
+
+A scatterplot displays the relationship between two numerical variables.
+
+Examples include:
+
+- temperature and tensile strength
+- molecular weight and viscosity
+- curing time and hardness
+- additive concentration and elongation
+
+## Creating a Scatterplot
+
+1. select the explanatory variable and response variable
+2. choose `Insert`
+3. select `Scatter`
+4. choose the basic scatterplot
+5. label both axes
+6. add a meaningful title
+
+## Interpreting a Scatterplot
+
+Examine:
+
+- direction
+- form
+- strength
+- unusual observations
+
+<div class="excel-box">
+
+### Excel Practical 7: Create a Scatterplot
+
+Create a scatterplot of:
+
+- `Temperature_C` on the horizontal axis
+- `Tensile_Strength_MPa` on the vertical axis
+
+Use different marker groups for Polymer Types A and B if possible.
+
+Describe the apparent relationship.
+
+</div>
+
+# Measures of Central Tendency
+
+Measures of central tendency describe a typical or central value.
+
+# Mean
+
+The sample mean is:
+
+\[
+\bar{x}
+=
+\frac{1}{n}
+\sum_{i=1}^{n}x_i
+\]
+
+In Excel:
+
+```text
+=AVERAGE(D2:D13)
+```
+
+The mean uses every observation and is sensitive to extreme values.
+
+# Median
+
+The median is the middle value after the observations are arranged in ascending order.
+
+In Excel:
+
+```text
+=MEDIAN(D2:D13)
+```
+
+The median is less sensitive to extreme values.
+
+# Mode
+
+The mode is the most frequently occurring value.
+
+In Excel:
+
+```text
+=MODE.SNGL(range)
+```
+
+For categorical data, the mode is the most common category.
+
+<div class="example-box">
+
+### Choosing Between Mean and Median
+
+Use the mean when the distribution is approximately symmetric and does not contain serious outliers.
+
+Use the median when the distribution is strongly skewed or contains influential outliers.
+
+</div>
+
+<div class="excel-box">
+
+### Excel Practical 8: Calculate Measures of Centre
+
+Calculate the mean and median tensile strength for:
+
+1. all specimens
+2. Polymer Type A
+3. Polymer Type B
+
+Use:
+
+```text
+=AVERAGE(range)
+=MEDIAN(range)
+```
+
+For grouped calculations in modern Excel, `FILTER()` may be used:
+
+```text
+=AVERAGE(FILTER(D2:D13,B2:B13="A"))
+```
+
+</div>
+
+# Measures of Variability
+
+Measures of variability describe how widely observations are spread.
+
+# Range
+
+The range is:
+
+\[
+\text{Range}
+=
+\text{Maximum}
+-
+\text{Minimum}
+\]
+
+In Excel:
+
+```text
+=MAX(D2:D13)-MIN(D2:D13)
+```
+
+The range uses only the smallest and largest observations.
+
+# Sample Variance
+
+The sample variance is:
+
+\[
+s^2
+=
+\frac{\sum_{i=1}^{n}(x_i-\bar{x})^2}{n-1}
+\]
+
+In Excel:
+
+```text
+=VAR.S(D2:D13)
+```
+
+Variance is expressed in squared units.
+
+# Sample Standard Deviation
+
+The sample standard deviation is:
+
+\[
+s
+=
+\sqrt{
+\frac{\sum_{i=1}^{n}(x_i-\bar{x})^2}{n-1}
+}
+\]
+
+In Excel:
+
+```text
+=STDEV.S(D2:D13)
+```
+
+The standard deviation is expressed in the original measurement units.
+
+<div class="example-box">
+
+### Interpretation
+
+Suppose the mean tensile strength is 50 MPa and the standard deviation is 2 MPa.
+
+The observations typically vary by about 2 MPa around the mean.
+
+</div>
+
+<div class="excel-box">
+
+### Excel Practical 9: Calculate Measures of Spread
+
+For tensile strength, calculate:
+
+1. minimum
+2. maximum
+3. range
+4. sample variance
+5. sample standard deviation
+
+Repeat the calculations separately for Polymer Types A and B.
+
+</div>
+
+# Quartiles and Percentiles
+
+Quartiles divide ordered data into four parts.
+
+- \(Q_1\): first quartile
+- \(Q_2\): median
+- \(Q_3\): third quartile
+
+In Excel:
+
+```text
+=QUARTILE.INC(range,1)
+=QUARTILE.INC(range,2)
+=QUARTILE.INC(range,3)
+```
+
+Percentiles divide ordered data into 100 parts.
+
+Example:
+
+```text
+=PERCENTILE.INC(range,0.90)
+```
+
+This gives the 90th percentile.
+
+<div class="example-box">
+
+### Interpretation of a Percentile
+
+If the 90th percentile of tensile strength is 52.8 MPa, approximately 90% of observed tensile-strength values are at or below 52.8 MPa.
+
+</div>
+
+# Interquartile Range
+
+The interquartile range is:
+
+\[
+IQR
+=
+Q_3-Q_1
+\]
+
+In Excel:
+
+```text
+=QUARTILE.INC(range,3)-QUARTILE.INC(range,1)
+```
+
+The IQR describes the spread of the middle 50% of the data.
+
+It is resistant to extreme observations.
+
+<div class="excel-box">
+
+### Excel Practical 10: Calculate Quartiles and Percentiles
+
+For tensile strength, calculate:
+
+1. \(Q_1\)
+2. the median
+3. \(Q_3\)
+4. the IQR
+5. the 10th percentile
+6. the 90th percentile
+
+Interpret the IQR in the context of tensile strength.
+
+</div>
+
+# Coefficient of Variation
+
+The coefficient of variation expresses the standard deviation as a percentage of the mean.
+
+\[
+CV
+=
+\frac{s}{\bar{x}}
+\times 100\%
+\]
+
+In Excel:
+
+```text
+=STDEV.S(range)/AVERAGE(range)*100
+```
+
+The CV is useful when comparing variability between variables or groups with different means.
+
+<div class="warning-box">
+
+The coefficient of variation is meaningful mainly for ratio-scale variables with a meaningful zero. It should not usually be used for temperatures measured in degrees Celsius.
+
+</div>
+
+<div class="example-box">
+
+### Interpretation
+
+Suppose:
+
+- Polymer A has \(CV=3.5\%\)
+- Polymer B has \(CV=6.8\%\)
+
+Polymer A has lower variability relative to its mean and is therefore more consistent.
+
+</div>
+
+<div class="excel-box">
+
+### Excel Practical 11: Compare Relative Variability
+
+Calculate the coefficient of variation of tensile strength for Polymer Types A and B.
+
+State which polymer type is more consistent relative to its mean.
+
+</div>
+
+# Skewness
+
+Skewness describes the asymmetry of a distribution.
+
+## Symmetric Distribution
+
+For a roughly symmetric distribution:
+
+\[
+\text{Mean}
+\approx
+\text{Median}
+\]
+
+## Right-Skewed Distribution
+
+A right-skewed distribution has a longer tail toward larger values.
+
+Typically:
+
+\[
+\text{Mean}
+>
+\text{Median}
+\]
+
+Examples may include:
+
+- defect counts
+- waiting times
+- failure times
+
+## Left-Skewed Distribution
+
+A left-skewed distribution has a longer tail toward smaller values.
+
+Typically:
+
+\[
+\text{Mean}
+<
+\text{Median}
+\]
+
+## Excel Skewness Function
+
+```text
+=SKEW(range)
+```
+
+A value near zero suggests approximate symmetry.
+
+<div class="warning-box">
+
+The numerical skewness value should be interpreted together with a histogram or boxplot.
+
+</div>
+
+# Outliers
+
+An outlier is an observation that lies unusually far from the rest of the data.
+
+Possible causes include:
+
+- data-entry error
+- measurement error
+- specimen contamination
+- equipment malfunction
+- genuinely unusual material behaviour
+
+## IQR Rule
+
+Possible lower outliers are values below:
+
+\[
+Q_1-1.5(IQR)
+\]
+
+Possible upper outliers are values above:
+
+\[
+Q_3+1.5(IQR)
+\]
+
+In Excel:
+
+```text
+Lower fence = Q1 - 1.5*IQR
+Upper fence = Q3 + 1.5*IQR
+```
+
+<div class="warning-box">
+
+An outlier should not be removed automatically. First investigate why it occurred and assess its scientific relevance.
+
+</div>
+
+<div class="excel-box">
+
+### Excel Practical 12: Identify Possible Outliers
+
+For tensile strength:
+
+1. calculate \(Q_1\)
+2. calculate \(Q_3\)
+3. calculate the IQR
+4. calculate the lower fence
+5. calculate the upper fence
+6. identify any observations outside the fences
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Using the given tensile-strength values:
+
+```text
+48.2, 49.5, 50.1, 51.3, 52.0, 53.4,
+45.8, 46.7, 47.9, 49.0, 50.5, 51.2
+```
+
+The ordered values are:
+
+```text
+45.8, 46.7, 47.9, 48.2, 49.0, 49.5,
+50.1, 50.5, 51.2, 51.3, 52.0, 53.4
+```
+
+Using Excel's inclusive quartile method:
+
+```text
+Q1 = QUARTILE.INC(range,1)
+Q3 = QUARTILE.INC(range,3)
+IQR = Q3-Q1
+```
+
+The lower and upper fences are:
+
+```text
+Lower fence = Q1-1.5*IQR
+Upper fence = Q3+1.5*IQR
+```
+
+No observation is expected to fall outside the fences for this dataset.
+
+</details>
+
+# Comparison of Groups
+
+When comparing groups, examine both centre and variability.
+
+For each group, consider:
+
+- sample size
+- mean
+- median
+- standard deviation
+- IQR
+- coefficient of variation
+- shape
+- possible outliers
+
+## Suitable Graphs
+
+Use:
+
+- side-by-side boxplots
+- grouped bar charts for categorical outcomes
+- separate histograms
+- scatterplots with different symbols
+- summary tables
+
+## Example Comparison
+
+| Statistic | Polymer A | Polymer B |
+|:--|--:|--:|
+| Mean tensile strength | Higher | Lower |
+| Median tensile strength | Higher | Lower |
+| Standard deviation | To be calculated | To be calculated |
+| Coefficient of variation | To be calculated | To be calculated |
+| Surface quality | More excellent ratings | More acceptable ratings |
+
+<div class="excel-box">
+
+### Excel Practical 13: Compare Polymer Types
+
+Prepare a descriptive comparison of Polymer Types A and B using:
+
+1. sample size
+2. mean tensile strength
+3. median tensile strength
+4. standard deviation
+5. interquartile range
+6. coefficient of variation
+7. side-by-side boxplots
+8. a short scientific interpretation
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+**Polymer Type A**
+
+Tensile strength values:
+
+```text
+48.2, 49.5, 50.1, 51.3, 52.0, 53.4
+```
+
+**Polymer Type B**
+
+Tensile strength values:
+
+```text
+45.8, 46.7, 47.9, 49.0, 50.5, 51.2
+```
+
+The expected descriptive pattern is:
+
+- Polymer A has the higher mean tensile strength.
+- Polymer A also has the higher median tensile strength.
+- Both groups show moderate spread.
+- Polymer B contains generally lower tensile-strength values.
+- The boxplots should show a clear upward shift for Polymer A.
+- Formal inference would still be required before concluding that the population means differ.
+
+A suitable scientific statement is:
+
+> In this sample, Polymer Type A shows higher tensile strength than Polymer Type B. The difference is visible in both the mean and median, while the within-group variability appears broadly comparable. This descriptive result suggests a potential formulation effect, but inferential analysis is required before generalising beyond the observed specimens.
+
+</details>
+
+# Descriptive Statistics Using the Analysis ToolPak
+
+Excel can generate a descriptive summary automatically.
+
+## Procedure
+
+1. select `Data`
+2. select `Data Analysis`
+3. choose `Descriptive Statistics`
+4. select the input range
+5. indicate whether labels are included
+6. choose an output location
+7. select `Summary Statistics`
+8. click `OK`
+
+The output may include:
+
+- mean
+- standard error
+- median
+- mode
+- standard deviation
+- sample variance
+- kurtosis
+- skewness
+- range
+- minimum
+- maximum
+- sum
+- count
+- confidence level
+
+<div class="excel-box">
+
+### Excel Practical 14: Use the Analysis ToolPak
+
+Use the ToolPak to generate descriptive statistics for:
+
+- tensile strength
+- elongation percentage
+- defect count
+
+Compare the output with results obtained using Excel functions.
+
+</div>
+
+# Reporting Descriptive Results
+
+A good descriptive statement should include the variable, group, centre, spread, and relevant distributional features.
+
+## Example
+
+> The mean tensile strength of Polymer A was 50.75 MPa, while the corresponding median was 50.70 MPa. The similarity between the mean and median suggests an approximately symmetric distribution. Tensile-strength measurements showed moderate variability, and no obvious outliers were identified from the boxplot.
+
+Avoid statements such as:
+
+> The result is significant.
+
+Descriptive statistics alone do not establish statistical significance.
+
+# Common Mistakes
+
+Avoid:
+
+- using a bar chart for continuous numerical data
+- using a histogram for categorical data
+- reporting the mean without a measure of variability
+- using only the range to describe spread
+- treating the variance as if it has the original measurement unit
+- using the CV for interval-scale variables such as Celsius temperature
+- deleting outliers without investigation
+- comparing means without examining distributions
+- interpreting descriptive differences as proof of population differences
+- using three-dimensional charts that distort the data
+
+# Section Exercises
+
+## Exercise 1
+
+For the tensile-strength data:
+
+1. calculate the mean
+2. calculate the median
+3. calculate the range
+4. calculate the variance
+5. calculate the standard deviation
+6. calculate \(Q_1\)
+7. calculate \(Q_3\)
+8. calculate the IQR
+9. calculate the coefficient of variation
+10. calculate skewness
+
+## Exercise 2
+
+Create:
+
+1. a bar chart for surface quality
+2. a histogram for tensile strength
+3. a boxplot for tensile strength
+4. side-by-side boxplots by polymer type
+5. a scatterplot of temperature and tensile strength
+
+## Exercise 3
+
+Prepare a PivotTable showing:
+
+1. count of specimens by polymer type
+2. average tensile strength by polymer type
+3. average defect count by temperature
+4. polymer type by surface quality
+
+## Exercise 4
+
+A third formulation produces tensile-strength values:
+
+```text
+47.0, 47.5, 47.8, 48.1, 48.3, 48.5
+```
+
+Compare this formulation with Polymer Types A and B using:
+
+- mean
+- median
+- standard deviation
+- IQR
+- coefficient of variation
+- boxplots
+
+State which formulation appears strongest and which appears most consistent.
+
+# Take-Home Messages
+
+- Frequency distributions and tables organise raw data.
+- PivotTables provide fast summaries across groups.
+- Bar charts are used for categorical data.
+- Histograms and boxplots describe numerical distributions.
+- Scatterplots examine relationships between numerical variables.
+- The mean is sensitive to extreme values, while the median is more resistant.
+- Standard deviation and IQR describe spread in different ways.
+- The coefficient of variation compares relative variability.
+- Skewness and outliers should be examined graphically and numerically.
+- Group comparisons should consider both centre and variability.
+- Descriptive differences do not by themselves establish statistical significance.
+
+# Course Navigation
+
+[Previous: Introduction to Statistics and Excel](01_introduction_to_statistics_and_excel.html)
+
+[Return to Course Outline](index.html)
+
+[Next: Probability Distributions](03_probability_distributions.html)

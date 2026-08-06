@@ -1,0 +1,1536 @@
+---
+title: "Design and Analysis of Experiments"
+author: "Rajitha M. Silva"
+output:
+  html_document:
+    theme: flatly
+    toc: true
+    toc_depth: 2
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+    number_sections: false
+---
+
+<style>
+body {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+h1 {
+  color: #1f4e79;
+  border-bottom: 2px solid #d9e6f2;
+  padding-bottom: 6px;
+  margin-top: 35px;
+}
+
+h2 {
+  color: #2f5597;
+  margin-top: 25px;
+}
+
+h3 {
+  color: #4472c4;
+  margin-top: 20px;
+}
+
+.learning-box {
+  background-color: #f4f8fb;
+  border-left: 5px solid #2f75b5;
+  padding: 18px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.example-box {
+  background-color: #f7f7f7;
+  border-left: 5px solid #70ad47;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.excel-box {
+  background-color: #eef7ee;
+  border-left: 5px solid #548235;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.warning-box {
+  background-color: #fff8e5;
+  border-left: 5px solid #ffc000;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.question-box {
+  background-color: #f4f4f4;
+  border-left: 5px solid #7f7f7f;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  background-color: #d9eaf7;
+}
+
+.tocify {
+  width: 280px;
+  max-height: 85vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.tocify-item {
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+@media (min-width: 992px) {
+  .col-md-9 {
+    padding-left: 35px;
+  }
+}
+
+@media (max-width: 991px) {
+  .tocify {
+    position: relative !important;
+    width: 100% !important;
+    max-height: none;
+    margin-bottom: 25px;
+  }
+}
+</style>
+
+<div class="learning-box">
+
+## Learning Objectives
+
+At the end of this lesson, students should be able to:
+
+1. identify response variables, factors, factor levels, treatments, and experimental units
+2. explain the roles of replication, randomisation, and blocking
+3. distinguish experimental error from avoidable measurement or data-entry errors
+4. describe completely randomised and randomised block designs
+5. explain the structure of a factorial experiment
+6. distinguish between main effects and interaction effects
+7. perform basic analysis of variance using Microsoft Excel
+8. construct and interpret main-effects and interaction plots
+9. calculate residuals and assess basic model assumptions
+10. interpret experimental findings in the context of Polymer Science
+
+</div>
+
+# Introduction
+
+A well-designed experiment allows researchers to study how controlled changes in one or more factors affect a response.
+
+In Polymer Science, experiments may investigate:
+
+- the effect of processing temperature on tensile strength
+- the effect of additive concentration on elongation
+- the effect of curing time on hardness
+- the combined effects of temperature and pressure
+- differences among polymer formulations
+- variation caused by raw-material batches
+- the influence of laboratory or testing conditions
+
+Statistical analysis cannot fully correct a badly designed experiment. Design decisions must therefore be made before data are collected.
+
+<div class="example-box">
+
+### Polymer Science Example
+
+A researcher wants to determine whether additive concentration affects tensile strength.
+
+Three concentrations are selected:
+
+```text
+2%, 4%, and 6%
+```
+
+Five independent specimens are prepared at each concentration.
+
+The researcher must decide:
+
+- what response will be measured
+- what factor will be controlled
+- how specimens will be assigned to concentrations
+- how many replicates will be used
+- whether batches or testing days should be blocked
+- which statistical model will be used
+
+</div>
+
+# Response Variables
+
+A response variable is the outcome measured in an experiment.
+
+Examples include:
+
+- tensile strength
+- elongation at break
+- hardness
+- viscosity
+- density
+- curing time
+- defect count
+- adhesion strength
+- impact resistance
+- surface-quality score
+
+A good response variable should be:
+
+- directly related to the research objective
+- measured consistently
+- sufficiently sensitive to treatment differences
+- recorded with suitable precision
+- scientifically interpretable
+
+<div class="example-box">
+
+### Example
+
+Research question:
+
+> Does additive concentration affect tensile strength?
+
+- **Response variable:** tensile strength in MPa
+- **Factor:** additive concentration
+- **Factor levels:** 2%, 4%, and 6%
+
+</div>
+
+# Factors and Factor Levels
+
+## Factor
+
+A factor is an explanatory variable deliberately varied or controlled in an experiment.
+
+Examples:
+
+- polymer formulation
+- processing temperature
+- additive concentration
+- curing time
+- pressure
+- cooling method
+
+## Factor Levels
+
+Factor levels are the specific settings or categories of a factor.
+
+Example:
+
+| Factor | Levels |
+|:--|:--|
+| Temperature | 160°C, 180°C |
+| Additive concentration | 2%, 4%, 6% |
+| Formulation | A, B, C |
+| Cooling method | Air, Water |
+
+Factors may be:
+
+- categorical, such as formulation
+- numerical but treated as selected experimental settings, such as 160°C and 180°C
+
+# Treatments
+
+A treatment is a particular experimental condition assigned to an experimental unit.
+
+In a one-factor experiment, each factor level is a treatment.
+
+In a factorial experiment, each combination of factor levels is a treatment.
+
+<div class="example-box">
+
+### Example: Two-Factor Experiment
+
+Factors:
+
+- temperature: 160°C and 180°C
+- additive concentration: 2%, 4%, and 6%
+
+The treatments are:
+
+```text
+160°C with 2%
+160°C with 4%
+160°C with 6%
+180°C with 2%
+180°C with 4%
+180°C with 6%
+```
+
+There are:
+
+\[
+2\times 3=6
+\]
+
+treatment combinations.
+
+</div>
+
+# Experimental Units
+
+An experimental unit is the smallest unit that can independently receive a treatment.
+
+Examples include:
+
+- one polymer specimen
+- one production batch
+- one sheet
+- one mould
+- one reaction vessel
+- one test panel
+
+<div class="warning-box">
+
+The experimental unit is determined by treatment assignment, not merely by the number of measurements.
+
+If one batch receives a treatment and five pieces are cut from that batch, the batch may be the true experimental unit. The five pieces may be subsamples rather than five independent replicates.
+
+</div>
+
+# Observational Units and Subsamples
+
+The observational unit is the unit on which a measurement is recorded.
+
+It may differ from the experimental unit.
+
+<div class="example-box">
+
+### Example
+
+Three production batches receive each treatment. Four specimens are cut from each batch and measured.
+
+- **Experimental unit:** batch
+- **Observational unit:** specimen
+- **True replication per treatment:** three batches
+- **Subsamples per batch:** four specimens
+
+Treating all 12 specimens as independent replicates would exaggerate the sample size. This problem is called pseudoreplication.
+
+</div>
+
+# Replication
+
+Replication means applying the same treatment independently to more than one experimental unit.
+
+Replication allows researchers to:
+
+- estimate experimental variability
+- improve precision
+- detect treatment differences
+- assess consistency
+- reduce the influence of unusual units
+
+<div class="example-box">
+
+### Example
+
+If five independently prepared specimens receive each additive concentration, there are five replicates per concentration.
+
+If all five pieces are cut from one treated batch, they are not necessarily five independent treatment replicates.
+
+</div>
+
+# Randomisation
+
+Randomisation means using a random procedure to assign treatments to experimental units or to determine run order.
+
+Randomisation helps protect the experiment against:
+
+- time trends
+- equipment drift
+- operator effects
+- environmental changes
+- systematic allocation bias
+- unknown nuisance factors
+
+# Randomisation in Excel
+
+Use:
+
+```text
+=RAND()
+```
+
+to generate a random number for each experimental unit.
+
+Then sort by the random-number column.
+
+<div class="excel-box">
+
+### Excel Practical 1: Randomise an Experimental Run Order
+
+Suppose six treatments are each replicated three times, producing 18 runs.
+
+1. create a column containing the 18 treatment labels
+2. create a second column called `Random_Number`
+3. enter:
+
+```text
+=RAND()
+```
+
+4. copy the formula down
+5. copy and paste the random values as values if the order must be fixed
+6. sort the table by `Random_Number`
+7. label the resulting order as `Run_Order`
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+A suitable worksheet structure is:
+
+| Treatment | Replicate | Random_Number | Run_Order |
+|:--|--:|--:|--:|
+| T1 | 1 | `=RAND()` | Assigned after sorting |
+| T1 | 2 | `=RAND()` | Assigned after sorting |
+| T1 | 3 | `=RAND()` | Assigned after sorting |
+| T2 | 1 | `=RAND()` | Assigned after sorting |
+| ... | ... | ... | ... |
+
+After generating the random numbers, sort the full table by `Random_Number`.
+
+The treatment sequence after sorting becomes the randomised experimental run order.
+
+Because `RAND()` recalculates, copy the random-number column and paste it as values before finalising the experiment.
+
+</details>
+
+# Blocking
+
+Blocking is used to control known sources of nuisance variation.
+
+A block is a group of experimental units that are similar with respect to a nuisance factor.
+
+Possible blocking variables include:
+
+- raw-material batch
+- production day
+- machine
+- operator
+- laboratory
+- location within an oven
+- testing session
+
+Treatments are compared within blocks.
+
+<div class="example-box">
+
+### Example
+
+Suppose three additive concentrations are tested on four production days.
+
+Each day, one specimen is prepared at each concentration.
+
+- **Treatment factor:** additive concentration
+- **Block factor:** production day
+- **Experimental unit:** specimen prepared under one concentration on one day
+
+Blocking separates day-to-day variation from treatment variation.
+
+</div>
+
+# Experimental Error
+
+Experimental error is the variation among experimental units receiving the same treatment.
+
+Possible sources include:
+
+- natural material variation
+- small processing differences
+- environmental fluctuations
+- measurement variation
+- uncontrolled factors
+- specimen-preparation differences
+
+Experimental error does not mean that someone made a mistake.
+
+<div class="warning-box">
+
+Data-entry mistakes, incorrect treatment assignment, equipment failure, and protocol violations are not desirable components of experimental error. They should be prevented, documented, or handled explicitly.
+
+</div>
+
+# Principles of Experimental Design
+
+The three core principles are:
+
+1. replication
+2. randomisation
+3. blocking
+
+## Replication
+
+Provides information about experimental variability.
+
+## Randomisation
+
+Protects against systematic bias and supports valid inference.
+
+## Blocking
+
+Reduces unexplained variation by accounting for known nuisance factors.
+
+# Completely Randomised Design
+
+A completely randomised design assigns treatments to experimental units entirely at random.
+
+It is appropriate when experimental units are reasonably homogeneous.
+
+## One-Factor Model
+
+For treatment \(i\) and replicate \(j\):
+
+\[
+Y_{ij}
+=
+\mu+\tau_i+\varepsilon_{ij}
+\]
+
+where:
+
+- \(Y_{ij}\) is the response
+- \(\mu\) is the overall mean
+- \(\tau_i\) is the treatment effect
+- \(\varepsilon_{ij}\) is random error
+
+## Hypotheses
+
+For \(k\) treatments:
+
+\[
+H_0:\mu_1=\mu_2=\cdots=\mu_k
+\]
+
+\[
+H_1:\text{not all treatment means are equal}
+\]
+
+# Completely Randomised Design Example
+
+Tensile strength is measured at three additive concentrations.
+
+| 2% | 4% | 6% |
+|--:|--:|--:|
+| 47.8 | 51.2 | 52.0 |
+| 48.5 | 50.8 | 52.7 |
+| 49.1 | 52.1 | 53.1 |
+| 48.9 | 51.7 | 52.4 |
+| 47.6 | 50.9 | 53.3 |
+
+The 15 experimental units are randomly assigned to the three concentration levels.
+
+# One-Way ANOVA in Excel
+
+Arrange each treatment in a separate column.
+
+Use:
+
+```text
+Data > Data Analysis > ANOVA: Single Factor
+```
+
+Select:
+
+- the complete input range
+- `Grouped By: Columns`
+- `Labels in First Row`
+- \(\alpha=0.05\)
+- an output range or new worksheet
+
+<div class="excel-box">
+
+### Excel Practical 2: Analyse a Completely Randomised Design
+
+Use the tensile-strength dataset above.
+
+1. calculate treatment means
+2. create side-by-side boxplots
+3. conduct `ANOVA: Single Factor`
+4. identify the \(F\)-statistic
+5. identify the p-value
+6. make a decision at the 5% level
+7. write a contextual conclusion
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The hypotheses are:
+
+\[
+H_0:\mu_{2\%}=\mu_{4\%}=\mu_{6\%}
+\]
+
+\[
+H_1:\text{not all mean tensile strengths are equal}
+\]
+
+Excel route:
+
+```text
+Data > Data Analysis > ANOVA: Single Factor
+```
+
+The treatment means increase as additive concentration increases.
+
+The ANOVA p-value is expected to be below 0.05.
+
+Therefore, reject \(H_0\).
+
+A suitable conclusion is:
+
+> At the 5% significance level, there is sufficient evidence that mean tensile strength is not the same across all three additive concentrations.
+
+The ANOVA result does not identify every pair of concentrations that differs. Follow-up multiple comparisons would be required.
+
+</details>
+
+# ANOVA Decomposition
+
+ANOVA separates total variation into:
+
+- between-treatment variation
+- within-treatment variation
+
+\[
+SS_{\text{Total}}
+=
+SS_{\text{Treatment}}
++
+SS_{\text{Error}}
+\]
+
+The \(F\)-statistic is:
+
+\[
+F
+=
+\frac{MS_{\text{Treatment}}}
+{MS_{\text{Error}}}
+\]
+
+A large value indicates that treatment means differ more than expected from experimental error alone.
+
+# ANOVA Table
+
+| Source | Sum of Squares | df | Mean Square | F | p-value |
+|:--|--:|--:|--:|--:|--:|
+| Treatments | \(SS_T\) | \(k-1\) | \(MS_T\) | \(F\) |  |
+| Error | \(SS_E\) | \(N-k\) | \(MS_E\) |  |  |
+| Total | \(SS_{\text{Total}}\) | \(N-1\) |  |  |  |
+
+# Randomised Block Design
+
+A randomised block design compares treatments while controlling a known nuisance source.
+
+Each block contains all treatments.
+
+## Additive Model
+
+\[
+Y_{ij}
+=
+\mu+\tau_i+\beta_j+\varepsilon_{ij}
+\]
+
+where:
+
+- \(\tau_i\) is the treatment effect
+- \(\beta_j\) is the block effect
+
+## Assumption
+
+The basic randomised block model assumes no treatment-by-block interaction.
+
+# Randomised Block Example
+
+Three formulations are tested on four production days.
+
+| Day | Formulation A | Formulation B | Formulation C |
+|:--|--:|--:|--:|
+| 1 | 48.2 | 50.5 | 52.0 |
+| 2 | 47.8 | 50.1 | 51.7 |
+| 3 | 49.0 | 51.0 | 52.6 |
+| 4 | 48.5 | 50.7 | 52.2 |
+
+- treatments: formulations
+- blocks: production days
+- response: tensile strength
+
+# Randomised Block Analysis in Excel
+
+For one observation per treatment-block combination, use:
+
+```text
+Data > Data Analysis > ANOVA: Two-Factor Without Replication
+```
+
+Arrange:
+
+- blocks in rows
+- treatments in columns
+
+The row test evaluates block effects.
+
+The column test evaluates treatment effects.
+
+<div class="excel-box">
+
+### Excel Practical 3: Analyse a Randomised Block Design
+
+Use the production-day dataset above.
+
+1. calculate the mean for each formulation
+2. calculate the mean for each day
+3. run `ANOVA: Two-Factor Without Replication`
+4. identify the treatment p-value
+5. identify the block p-value
+6. interpret both results
+7. explain why blocking may improve precision
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The treatment hypotheses are:
+
+\[
+H_0:\mu_A=\mu_B=\mu_C
+\]
+
+\[
+H_1:\text{not all formulation means are equal}
+\]
+
+The block hypotheses are:
+
+\[
+H_0:\text{there is no production-day effect}
+\]
+
+\[
+H_1:\text{production days differ}
+\]
+
+In the Excel output:
+
+- the `Columns` row corresponds to formulation effects
+- the `Rows` row corresponds to production-day effects
+
+The formulation means show an increasing pattern from A to C.
+
+If the column p-value is below 0.05, conclude that formulation affects mean tensile strength.
+
+If the row p-value is below 0.05, conclude that production days differ.
+
+Blocking improves precision by separating day-to-day variation from residual experimental error.
+
+</details>
+
+# Limitations of Two-Factor ANOVA Without Replication
+
+The Excel procedure `ANOVA: Two-Factor Without Replication` cannot separately estimate interaction.
+
+It assumes the treatment and block effects are additive.
+
+If interaction may be scientifically important, replicate observations within combinations or use more advanced statistical software.
+
+# Factorial Experiments
+
+A factorial experiment studies two or more factors simultaneously.
+
+Every selected level of one factor is combined with every selected level of the other factors.
+
+## Example
+
+Factor A: temperature
+
+```text
+160°C, 180°C
+```
+
+Factor B: additive concentration
+
+```text
+2%, 4%, 6%
+```
+
+This is a:
+
+\[
+2\times 3
+\]
+
+factorial experiment with six treatment combinations.
+
+# Advantages of Factorial Designs
+
+Factorial experiments allow researchers to:
+
+- study several factors efficiently
+- estimate main effects
+- detect interactions
+- identify useful combinations
+- avoid conducting separate one-factor experiments
+
+# Main Effects
+
+The main effect of a factor is the change in mean response across its levels, averaged over the levels of the other factor.
+
+## Main Effect of Temperature
+
+Compare the mean response at 160°C with the mean response at 180°C, averaging across additive concentrations.
+
+## Main Effect of Additive Concentration
+
+Compare concentration-level means, averaging across temperatures.
+
+# Interaction Effects
+
+An interaction occurs when the effect of one factor depends on the level of another factor.
+
+<div class="example-box">
+
+### Example
+
+Increasing temperature may improve tensile strength at 2% additive concentration but reduce it at 6%.
+
+The effect of temperature is therefore not constant across additive concentrations.
+
+This is a temperature-by-concentration interaction.
+
+</div>
+
+# Interaction Plots
+
+An interaction plot shows treatment-combination means.
+
+Interpretation:
+
+- roughly parallel lines suggest little interaction
+- clearly non-parallel lines suggest interaction
+- crossing lines indicate a strong qualitative interaction
+
+<div class="warning-box">
+
+When interaction is strong, main effects should not be interpreted in isolation. The treatment combinations become the main focus.
+
+</div>
+
+# Factorial Example Dataset
+
+The response is tensile strength in MPa.
+
+| Temperature | 2% | 4% | 6% |
+|:--|--:|--:|--:|
+| 160°C | 46 | 50 | 54 |
+| 180°C | 52 | 53 | 51 |
+
+At 160°C, tensile strength increases with concentration.
+
+At 180°C, the highest mean occurs at 4%, followed by a decline at 6%.
+
+This pattern suggests interaction.
+
+<div class="excel-box">
+
+### Excel Practical 4: Create Main-Effects and Interaction Plots
+
+Using the factorial mean table:
+
+1. create a line chart with concentration on the horizontal axis
+2. use separate lines for 160°C and 180°C
+3. label the chart `Interaction Plot for Tensile Strength`
+4. inspect whether the lines are parallel
+5. calculate the marginal means for temperature
+6. calculate the marginal means for concentration
+7. interpret the main effects and interaction
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Temperature means:
+
+\[
+\bar{Y}_{160}
+=
+\frac{46+50+54}{3}
+=
+50
+\]
+
+\[
+\bar{Y}_{180}
+=
+\frac{52+53+51}{3}
+=
+52
+\]
+
+The average response is higher at 180°C.
+
+Concentration means:
+
+\[
+\bar{Y}_{2\%}
+=
+\frac{46+52}{2}
+=
+49
+\]
+
+\[
+\bar{Y}_{4\%}
+=
+\frac{50+53}{2}
+=
+51.5
+\]
+
+\[
+\bar{Y}_{6\%}
+=
+\frac{54+51}{2}
+=
+52.5
+\]
+
+However, the lines are not parallel.
+
+At 160°C, increasing concentration consistently increases tensile strength.
+
+At 180°C, the response increases from 2% to 4% but decreases at 6%.
+
+A suitable interpretation is:
+
+> The effect of additive concentration depends on processing temperature. Therefore, the treatment combinations should be interpreted rather than relying only on the overall main effects.
+
+</details>
+
+# Replicated Factorial Experiments
+
+To test interaction statistically, replicate observations are required within treatment combinations.
+
+Example structure:
+
+| Temperature | Concentration | Replicate | Tensile Strength |
+|:--|:--|--:|--:|
+| 160 | 2 | 1 | 45.8 |
+| 160 | 2 | 2 | 46.2 |
+| 160 | 2 | 3 | 46.0 |
+| ... | ... | ... | ... |
+
+Excel provides:
+
+```text
+Data > Data Analysis > ANOVA: Two-Factor With Replication
+```
+
+This procedure requires a balanced layout and equal replication.
+
+# Two-Factor ANOVA Model
+
+For two factors:
+
+\[
+Y_{ijk}
+=
+\mu+\alpha_i+\beta_j+(\alpha\beta)_{ij}+\varepsilon_{ijk}
+\]
+
+where:
+
+- \(\alpha_i\) is the effect of Factor A
+- \(\beta_j\) is the effect of Factor B
+- \((\alpha\beta)_{ij}\) is the interaction effect
+- \(\varepsilon_{ijk}\) is random error
+
+# Hypotheses in a Two-Factor Experiment
+
+## Factor A Main Effect
+
+\[
+H_0:\text{Factor A has no effect}
+\]
+
+## Factor B Main Effect
+
+\[
+H_0:\text{Factor B has no effect}
+\]
+
+## Interaction
+
+\[
+H_0:\text{there is no interaction between Factors A and B}
+\]
+
+# Excel Two-Factor ANOVA With Replication
+
+Use:
+
+```text
+Data > Data Analysis > ANOVA: Two-Factor With Replication
+```
+
+Excel will provide tests for:
+
+- rows or Factor A
+- columns or Factor B
+- interaction
+- within-cell error
+
+<div class="excel-box">
+
+### Excel Practical 5: Interpret a Two-Factor ANOVA Output
+
+Suppose Excel gives:
+
+| Source | F | p-value |
+|:--|--:|--:|
+| Temperature | 9.40 | 0.008 |
+| Additive concentration | 14.20 | 0.001 |
+| Interaction | 6.75 | 0.006 |
+| Within |  |  |
+
+Interpret each result at:
+
+\[
+\alpha=0.05
+\]
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+**Temperature**
+
+\[
+p=0.008<0.05
+\]
+
+There is evidence of a temperature effect.
+
+**Additive concentration**
+
+\[
+p=0.001<0.05
+\]
+
+There is evidence of an additive-concentration effect.
+
+**Interaction**
+
+\[
+p=0.006<0.05
+\]
+
+There is evidence that the effect of additive concentration depends on temperature.
+
+Because the interaction is significant, the main effects should be interpreted cautiously.
+
+A suitable conclusion is:
+
+> Tensile strength is affected by both temperature and additive concentration. More importantly, the effect of additive concentration changes across temperature levels. The treatment-combination means and interaction plot should therefore be examined before recommending process settings.
+
+</details>
+
+# Analysis of Variance Assumptions
+
+ANOVA commonly assumes:
+
+1. independent errors
+2. normally distributed errors
+3. equal error variances
+4. a correctly specified model
+5. additive effects when interaction is not included
+
+Independence is established mainly through proper design and randomisation.
+
+Normality and equal variance are assessed using residuals.
+
+# Residuals
+
+A residual is:
+
+\[
+e_i
+=
+y_i-\hat{y}_i
+\]
+
+where:
+
+- \(y_i\) is the observed response
+- \(\hat{y}_i\) is the fitted value
+
+For a one-way ANOVA, the fitted value is the mean of the treatment group.
+
+Example:
+
+If a specimen has observed tensile strength 52.4 MPa and its treatment mean is 51.8 MPa:
+
+\[
+e=52.4-51.8=0.6
+\]
+
+# Calculating Residuals in Excel
+
+Suppose:
+
+- treatment is in column `B`
+- response is in column `C`
+
+For modern Excel, a treatment mean may be calculated using:
+
+```text
+=AVERAGEIF($B$2:$B$16,B2,$C$2:$C$16)
+```
+
+Residual:
+
+```text
+=C2-D2
+```
+
+where column `D` contains the fitted treatment mean.
+
+# Residual Analysis
+
+Residual analysis examines whether the ANOVA assumptions are reasonable.
+
+Useful plots include:
+
+- histogram of residuals
+- boxplot of residuals
+- residuals versus fitted values
+- residuals versus run order
+- residuals by treatment
+- normal probability plot, where available
+
+# Residuals Versus Fitted Values
+
+Look for:
+
+- random scatter around zero
+- roughly constant vertical spread
+- no curved pattern
+- no funnel shape
+- no extreme residuals
+
+A funnel shape may suggest non-constant variance.
+
+# Residuals Versus Run Order
+
+Look for:
+
+- no upward or downward trend
+- no cycles
+- no sudden shift
+- no long sequence of positive or negative residuals
+
+Patterns may indicate:
+
+- equipment drift
+- warming effects
+- time trends
+- operator changes
+- unmodelled process changes
+
+<div class="excel-box">
+
+### Excel Practical 6: Calculate and Plot Residuals
+
+Using the completely randomised additive-concentration experiment:
+
+1. arrange the data in long format
+2. calculate each treatment mean using `AVERAGEIF`
+3. calculate fitted values
+4. calculate residuals
+5. create a histogram of residuals
+6. create a scatterplot of residuals versus fitted values
+7. create a scatterplot of residuals versus run order
+8. assess the assumptions
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Suggested structure:
+
+| Run | Concentration | Response | Fitted Value | Residual |
+|--:|:--|--:|--:|--:|
+| 1 | 2% | 47.8 | treatment mean | observed minus fitted |
+| 2 | 2% | 48.5 | treatment mean | observed minus fitted |
+| ... | ... | ... | ... | ... |
+
+Fitted value:
+
+```text
+=AVERAGEIF($B$2:$B$16,B2,$C$2:$C$16)
+```
+
+Residual:
+
+```text
+=C2-D2
+```
+
+The residuals should be centred around zero.
+
+If the plots show no strong pattern, no serious outliers, and approximately constant spread, the ANOVA assumptions appear reasonable.
+
+A formal conclusion should avoid claiming that assumptions are proven. A suitable statement is:
+
+> The residual plots do not show strong evidence of non-normality, unequal variance, or time-related structure. The ANOVA assumptions therefore appear reasonable for this dataset.
+
+</details>
+
+# Outliers and Influential Observations
+
+An unusual residual may arise from:
+
+- measurement error
+- data-entry error
+- specimen damage
+- treatment misapplication
+- genuine material heterogeneity
+- an omitted factor
+
+Do not remove an observation automatically.
+
+Investigate:
+
+1. whether the recorded value is correct
+2. whether the procedure was followed
+3. whether the specimen was damaged
+4. whether the result is scientifically plausible
+5. whether conclusions change substantially when it is included or excluded
+
+# Interpretation of Experimental Results
+
+A good interpretation should consider:
+
+- treatment means
+- uncertainty and variability
+- p-values
+- interaction effects
+- residual diagnostics
+- practical importance
+- process feasibility
+- material cost
+- product specifications
+
+# Reporting a One-Factor Experiment
+
+A useful reporting structure is:
+
+> A completely randomised experiment was conducted to examine the effect of additive concentration on tensile strength. Five independent specimens were tested at each of three concentration levels. Mean tensile strength increased across the observed concentrations. The one-way ANOVA produced a p-value below 0.05, providing evidence that not all population means are equal. Residual plots did not reveal serious violations of the model assumptions. Follow-up comparisons are required to identify which concentration levels differ.
+
+# Reporting a Factorial Experiment
+
+> A replicated factorial experiment was conducted to study the effects of processing temperature and additive concentration on tensile strength. Both main effects were statistically significant. The temperature-by-concentration interaction was also significant, showing that the effect of concentration changes with temperature. Therefore, recommendations should be based on specific treatment combinations rather than the main effects alone.
+
+# Statistical and Practical Significance
+
+A treatment effect may be statistically significant but too small to matter in production.
+
+Consider:
+
+- minimum useful improvement
+- manufacturing cost
+- energy use
+- durability requirements
+- safety limits
+- specification compliance
+- environmental effects
+- ease of implementation
+
+<div class="example-box">
+
+### Example
+
+An additive increases mean tensile strength by 0.4 MPa with a p-value below 0.05.
+
+If engineers require an increase of at least 2 MPa, the result is statistically significant but not practically important.
+
+</div>
+
+# Practical Activity: Identify Design Components
+
+A researcher studies the effect of:
+
+- curing temperature: 140°C, 160°C, 180°C
+- formulation: A and B
+
+on hardness.
+
+Four independently prepared specimens are tested for every temperature-formulation combination.
+
+<div class="question-box">
+
+### Questions
+
+1. What is the response variable?
+2. What are the factors?
+3. What are the factor levels?
+4. How many treatment combinations are present?
+5. What is the experimental unit?
+6. How many replicates are used per treatment?
+7. What design is being used?
+8. Which effects can be studied?
+9. What should be randomised?
+10. What would indicate an interaction?
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+1. **Response variable:** hardness.
+
+2. **Factors:** curing temperature and formulation.
+
+3. **Factor levels:**
+   - temperature: 140°C, 160°C, 180°C
+   - formulation: A, B
+
+4. **Number of treatment combinations:**
+
+\[
+3\times2=6
+\]
+
+5. **Experimental unit:** one independently prepared specimen receiving one temperature-formulation combination.
+
+6. **Replication:** four independent specimens per treatment combination.
+
+7. **Design:** a replicated \(3\times2\) factorial experiment, assuming treatments are assigned completely at random.
+
+8. **Effects studied:**
+   - temperature main effect
+   - formulation main effect
+   - temperature-by-formulation interaction
+
+9. **Randomisation:** the order of preparation, treatment assignment, and testing should be randomised where practical.
+
+10. **Interaction:** the effect of formulation changes across temperature levels, or the effect of temperature differs between formulations.
+
+</details>
+
+# Practical Activity: Choose the Design
+
+Select an appropriate design.
+
+1. Three formulations are tested on 18 homogeneous specimens.
+2. Four additives are tested on each of five raw-material batches.
+3. Two temperatures and three concentrations are studied together.
+4. Three treatments are tested on different days, with every treatment used each day.
+5. Six specimens are cut from one treated batch and treated as six independent replicates.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+| Situation | Recommended interpretation or design |
+|:--|:--|
+| Three formulations on homogeneous specimens | Completely randomised design |
+| Four additives within five raw-material batches | Randomised block design, with batch as block |
+| Two temperatures and three concentrations | \(2\times3\) factorial design |
+| Every treatment tested each day | Randomised block design, with day as block |
+| Six pieces from one treated batch | Pseudoreplication risk; batch is likely the experimental unit |
+
+</details>
+
+# Practical Activity: Interpret Experimental Findings
+
+A two-factor experiment reports:
+
+| Source | p-value |
+|:--|--:|
+| Temperature | 0.180 |
+| Concentration | 0.004 |
+| Temperature × Concentration | 0.009 |
+
+<div class="question-box">
+
+### Questions
+
+1. Is the temperature main effect significant?
+2. Is the concentration main effect significant?
+3. Is the interaction significant?
+4. Should concentration be interpreted only through its overall main effect?
+5. What should the researcher examine next?
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+1. The temperature main effect is not statistically significant because:
+
+\[
+0.180>0.05
+\]
+
+2. The concentration main effect is statistically significant because:
+
+\[
+0.004<0.05
+\]
+
+3. The interaction is statistically significant because:
+
+\[
+0.009<0.05
+\]
+
+4. No. Because the interaction is significant, the effect of concentration depends on temperature. The overall concentration main effect may hide important treatment-specific patterns.
+
+5. The researcher should examine:
+   - treatment-combination means
+   - an interaction plot
+   - simple effects within each temperature
+   - residual diagnostics
+   - practical importance of the observed differences
+
+</details>
+
+# Common Mistakes
+
+Avoid:
+
+- confusing the response variable with a factor
+- treating factor levels as separate factors
+- counting subsamples as independent replicates
+- omitting randomisation
+- blocking on a variable unrelated to response variation
+- using a completely randomised design when major nuisance variation is known
+- analysing a blocked design as if blocks did not exist
+- interpreting a significant ANOVA as evidence that all means differ
+- interpreting main effects without checking interaction
+- assuming parallel-looking lines prove no interaction
+- using `Two-Factor Without Replication` when interaction is of scientific interest
+- ignoring residual analysis
+- removing unusual observations without investigation
+- reporting only p-values
+- confusing statistical significance with industrial importance
+
+# Section Exercises
+
+## Exercise 1: Experimental Components
+
+A study evaluates three cooling methods on impact strength.
+
+Identify:
+
+1. response
+2. factor
+3. levels
+4. treatments
+5. experimental unit
+6. suitable replication
+7. randomisation procedure
+
+## Exercise 2: Completely Randomised Design
+
+Four formulations are tested using six independent specimens per formulation.
+
+1. write the ANOVA hypotheses
+2. explain the source of within-treatment variation
+3. describe the Excel layout
+4. identify the ToolPak procedure
+5. state how a significant result should be interpreted
+
+## Exercise 3: Randomised Block Design
+
+Three curing methods are tested on each of six raw-material batches.
+
+1. identify treatment and block factors
+2. explain why blocking is useful
+3. state the appropriate Excel ToolPak procedure
+4. explain the row and column tests
+5. state the limitation of the no-replication analysis
+
+## Exercise 4: Factorial Experiment
+
+A \(2\times4\) factorial experiment studies:
+
+- pressure: low and high
+- curing time: 20, 30, 40, and 50 minutes
+
+Three replicates are used.
+
+Determine:
+
+1. number of treatment combinations
+2. total number of experimental units
+3. main effects
+4. interaction
+5. suitable Excel analysis
+6. what a significant interaction means
+
+## Exercise 5: Residual Analysis
+
+Describe what each pattern may indicate:
+
+1. funnel-shaped residual plot
+2. curved residual pattern
+3. trend against run order
+4. one very large residual
+5. roughly random residual cloud around zero
+
+# Take-Home Messages
+
+- Experimental design determines the quality of causal evidence.
+- The response is the measured outcome, while factors are controlled explanatory variables.
+- Treatments are factor levels or combinations assigned to experimental units.
+- Replication estimates experimental variability.
+- Randomisation protects against bias and hidden time-related effects.
+- Blocking controls known nuisance variation.
+- Completely randomised designs suit relatively homogeneous experimental units.
+- Randomised block designs compare treatments within similar blocks.
+- Factorial experiments estimate main effects and interactions efficiently.
+- A significant interaction means one factor's effect depends on another factor.
+- ANOVA compares treatment variation with experimental error.
+- Residual analysis is required to assess model assumptions.
+- Experimental results should be interpreted using statistical evidence, effect size, feasibility, and scientific context.
+
+# Course Navigation
+
+[Previous: Non-Parametric Statistical Tests](06_nonparametric_tests.html)
+
+[Return to Course Outline](index.html)
+
+[Next: Correlation and Regression Analysis](08_regression_analysis.html)

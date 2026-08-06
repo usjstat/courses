@@ -1,0 +1,1245 @@
+---
+title: "Introduction to Statistics and Excel"
+author: "Dr. R. M. Silva"
+output:
+  html_document:
+    theme: flatly
+    toc: true
+    toc_float: true
+    number_sections: false
+---
+
+<style>
+body { font-size: 16px; line-height: 1.6; }
+h1 { color: #1f4e79; border-bottom: 2px solid #d9e6f2; padding-bottom: 6px; margin-top: 35px; }
+h2 { color: #2f5597; margin-top: 25px; }
+h3 { color: #4472c4; margin-top: 20px; }
+.learning-box { background-color: #f4f8fb; border-left: 5px solid #2f75b5; padding: 18px; margin: 20px 0; border-radius: 4px; }
+.example-box { background-color: #f7f7f7; border-left: 5px solid #70ad47; padding: 16px; margin: 20px 0; border-radius: 4px; }
+.excel-box { background-color: #eef7ee; border-left: 5px solid #548235; padding: 16px; margin: 20px 0; border-radius: 4px; }
+.warning-box { background-color: #fff8e5; border-left: 5px solid #ffc000; padding: 16px; margin: 20px 0; border-radius: 4px; }
+.question-box { background-color: #f4f4f4; border-left: 5px solid #7f7f7f; padding: 16px; margin: 20px 0; border-radius: 4px; }
+table { width: 100%; }
+th { background-color: #d9eaf7; }
+</style>
+
+<div class="learning-box">
+
+## Learning Objectives
+
+At the end of this lesson, students should be able to:
+
+1. explain the role of statistics in Polymer Science
+2. distinguish between a population and a sample
+3. identify observations, variables, parameters, and statistics
+4. classify variables according to type and measurement scale
+5. distinguish between observational studies and experiments
+6. organise a dataset correctly in Microsoft Excel
+7. sort, filter, and clean data using Excel
+8. enable the Data Analysis ToolPak
+
+</div>
+
+# Why Statistics Matters in Polymer Science
+
+Polymer Science involves variation.
+
+Even when specimens are produced under apparently identical conditions, measured properties may differ because of:
+
+- variation in raw materials
+- differences in processing conditions
+- measurement error
+- environmental conditions
+- operator effects
+- equipment variation
+- natural material variation
+
+Statistics provides methods for collecting, organising, summarising, analysing, and interpreting data so that decisions are based on evidence rather than impressions.
+
+Statistical methods can help answer questions such as:
+
+- Does a new polymer formulation increase tensile strength?
+- Does processing temperature affect elongation at break?
+- Is the manufacturing process producing a consistent thickness?
+- Does an additive reduce the number of surface defects?
+- Is the observed difference between two formulations large enough to be scientifically meaningful?
+- Can viscosity be predicted using molecular weight or processing temperature?
+
+<div class="example-box">
+
+### Polymer Science Example
+
+A researcher develops two polymer formulations, A and B. Ten specimens are prepared from each formulation and tensile strength is measured.
+
+Statistics can be used to:
+
+- summarise the tensile strength values
+- compare the average strength of the two formulations
+- assess the variability within each formulation
+- determine whether the observed difference is likely to be real
+- quantify the uncertainty associated with the conclusion
+
+</div>
+
+# Population and Sample
+
+## Population
+
+A **population** is the complete collection of individuals, specimens, products, measurements, or experimental units about which a conclusion is required.
+
+Examples include:
+
+- all polymer sheets produced by a factory during a month
+- all specimens that could be produced using a particular formulation
+- all batches manufactured under a specified process condition
+- all possible measurements of tensile strength for a polymer product
+
+## Sample
+
+A **sample** is a subset of the population selected for measurement or observation.
+
+Examples include:
+
+- 25 sheets selected from one month of production
+- 12 specimens prepared using a new formulation
+- 8 batches selected for quality testing
+- 30 products chosen for inspection
+
+<div class="example-box">
+
+### Example
+
+Suppose a factory produces 10,000 polymer containers during one week. A quality-control officer randomly selects 100 containers and measures wall thickness.
+
+- **Population:** all 10,000 containers
+- **Sample:** the 100 selected containers
+- **Variable:** wall thickness
+- **Observation:** the wall-thickness value recorded for one selected container
+
+</div>
+
+## Why Sampling Is Used
+
+Studying the entire population may be:
+
+- too expensive
+- too time-consuming
+- impractical
+- destructive
+- unnecessary
+
+For example, tensile-strength testing may destroy the specimen. Testing every manufactured product would therefore be impossible.
+
+A well-selected sample can provide useful information about the population.
+
+<div class="warning-box">
+
+### Key Point
+
+A large sample is not automatically a good sample. The sample must also represent the population of interest.
+
+</div>
+
+# Observations and Variables
+
+## Observation
+
+An **observation** is the set of values recorded for one experimental unit, specimen, batch, or product.
+
+In an Excel worksheet, one observation should normally occupy one row.
+
+## Variable
+
+A **variable** is a characteristic measured or recorded for each observation.
+
+Examples include:
+
+- tensile strength
+- elongation at break
+- processing temperature
+- polymer type
+- additive concentration
+- surface quality
+- pass or failure status
+
+<div class="example-box">
+
+### Example Dataset
+
+| Specimen ID | Polymer Type | Temperature | Tensile Strength | Surface Quality |
+|:--|:--|--:|--:|:--|
+| S01 | A | 160 | 48.2 | Good |
+| S02 | A | 160 | 49.7 | Good |
+| S03 | B | 180 | 54.3 | Excellent |
+
+In this dataset:
+
+- each row represents one specimen
+- each column represents one variable
+- `S01`, `S02`, and `S03` identify the observations
+- `Polymer Type`, `Temperature`, `Tensile Strength`, and `Surface Quality` are variables
+
+</div>
+
+# Types of Data
+
+Variables can be classified as categorical or numerical.
+
+## Categorical Variables
+
+Categorical variables describe groups, labels, or categories.
+
+Examples include:
+
+- polymer type
+- supplier
+- surface quality category
+- pass or failure status
+- production line
+
+Categorical variables can be divided into nominal and ordinal variables.
+
+## Numerical Variables
+
+Numerical variables represent counts or measurements.
+
+Examples include:
+
+- tensile strength
+- thickness
+- number of surface defects
+- processing temperature
+- molecular weight
+- curing time
+
+Numerical variables can be divided into discrete and continuous variables.
+
+<div class="row">
+
+<div class="col-md-6">
+
+### Discrete Variables
+
+Discrete variables take countable values.
+
+Examples:
+
+- number of defects
+- number of failed specimens
+- number of production interruptions
+- number of bubbles observed
+
+</div>
+
+<div class="col-md-6">
+
+### Continuous Variables
+
+Continuous variables can take any value within a range.
+
+Examples:
+
+- tensile strength
+- thickness
+- temperature
+- viscosity
+- molecular weight
+- curing time
+
+</div>
+
+</div>
+
+# Measurement Scales
+
+The measurement scale determines which summaries and statistical procedures are appropriate.
+
+## Nominal Scale
+
+A nominal variable consists of categories without a natural order.
+
+Examples:
+
+- polymer type: A, B, C
+- supplier: Supplier 1, Supplier 2
+- product status: pass, fail
+- production line: Line 1, Line 2, Line 3
+
+Permitted summaries include:
+
+- frequencies
+- percentages
+- mode
+- bar charts
+
+## Ordinal Scale
+
+An ordinal variable consists of categories with a meaningful order.
+
+Examples:
+
+- surface quality: poor, acceptable, good, excellent
+- defect severity: low, moderate, high
+- adhesion rating: weak, medium, strong
+
+The order is meaningful, but the distance between categories is not necessarily equal.
+
+## Interval Scale
+
+An interval variable has meaningful differences between values, but zero does not represent the complete absence of the characteristic.
+
+Example:
+
+- temperature measured in degrees Celsius
+
+The difference between 160째C and 170째C is meaningful, but 0째C does not mean that temperature is absent.
+
+## Ratio Scale
+
+A ratio variable has meaningful differences and a meaningful zero.
+
+Examples:
+
+- tensile strength
+- thickness
+- mass
+- density
+- curing time
+- molecular weight
+- defect count
+
+For ratio-scale data, both differences and ratios are meaningful.
+
+# Summary of Variable Types
+
+| Variable | Data type | Measurement scale |
+|:--|:--|:--|
+| Polymer type | Categorical | Nominal |
+| Surface quality | Categorical | Ordinal |
+| Number of defects | Numerical, discrete | Ratio |
+| Processing temperature in 째C | Numerical, continuous | Interval |
+| Tensile strength | Numerical, continuous | Ratio |
+| Pass or failure status | Categorical | Nominal |
+| Additive concentration | Numerical, continuous | Ratio |
+
+# Parameters and Statistics
+
+## Parameter
+
+A **parameter** is a numerical characteristic of a population.
+
+Examples include:
+
+- the true mean tensile strength of all products
+- the true proportion of defective items
+- the true standard deviation of product thickness
+- the true correlation between molecular weight and viscosity
+
+Common notation includes:
+
+\[
+\mu = \text{population mean}
+\]
+
+\[
+\sigma = \text{population standard deviation}
+\]
+
+\[
+p = \text{population proportion}
+\]
+
+## Statistic
+
+A **statistic** is a numerical value calculated from a sample.
+
+Examples include:
+
+- the sample mean tensile strength
+- the sample proportion of defective products
+- the sample standard deviation of thickness
+- the sample correlation coefficient
+
+Common notation includes:
+
+\[
+\bar{x} = \text{sample mean}
+\]
+
+\[
+s = \text{sample standard deviation}
+\]
+
+\[
+\hat{p} = \text{sample proportion}
+\]
+
+<div class="example-box">
+
+### Example
+
+A sample of 20 specimens has a mean tensile strength of 52.4 MPa.
+
+- 52.4 MPa is a **statistic**
+- it is used to estimate the unknown population mean tensile strength, \(\mu\)
+- the population mean is a **parameter**
+
+</div>
+
+# Observational Studies and Experiments
+
+## Observational Study
+
+In an observational study, researchers observe and record variables without deliberately assigning treatments or changing conditions.
+
+Examples include:
+
+- recording production temperature and defect count for existing batches
+- studying the association between storage time and product deterioration
+- comparing products supplied by different manufacturers
+- monitoring thickness over several weeks
+
+Observational studies can identify associations, but they may not establish causation.
+
+## Experiment
+
+In an experiment, researchers deliberately assign treatments or change one or more factors and measure the response.
+
+Examples include:
+
+- assigning specimens to different curing temperatures
+- testing several additive concentrations
+- comparing formulations under controlled conditions
+- studying combinations of temperature and pressure
+
+Experiments are generally stronger for investigating causal relationships.
+
+<div class="example-box">
+
+### Example
+
+A researcher wants to study whether curing temperature affects tensile strength.
+
+**Observational approach:**  
+Use historical data from batches produced at different temperatures.
+
+**Experimental approach:**  
+Randomly assign specimens to selected curing temperatures and measure tensile strength under controlled conditions.
+
+The experimental approach provides stronger evidence about the effect of curing temperature.
+
+</div>
+
+# Explanatory and Response Variables
+
+## Explanatory Variable
+
+An explanatory variable is used to explain or predict changes in another variable.
+
+Examples:
+
+- processing temperature
+- additive concentration
+- polymer formulation
+- curing time
+
+## Response Variable
+
+A response variable is the outcome being measured.
+
+Examples:
+
+- tensile strength
+- elongation at break
+- hardness
+- defect count
+- viscosity
+
+<div class="example-box">
+
+### Example
+
+A researcher studies the effect of additive concentration on tensile strength.
+
+- **Explanatory variable:** additive concentration
+- **Response variable:** tensile strength
+
+</div>
+
+# Organising Data in Excel
+
+A well-organised dataset is essential for reliable statistical analysis.
+
+## Basic Data Structure
+
+Use the following principles:
+
+1. one row for each observation
+2. one column for each variable
+3. one cell for each recorded value
+4. one header row containing variable names
+5. no completely blank rows or columns inside the dataset
+6. no merged cells
+7. no totals or subtotals inside the raw-data table
+8. use consistent coding for categories
+9. record missing values consistently
+10. keep raw data separate from analysis results
+
+<div class="excel-box">
+
+### Excel Practical 1: Create a Polymer Dataset
+
+Open a new Excel worksheet and enter the following data.
+
+| Specimen_ID | Polymer_Type | Temperature_C | Additive_Percent | Tensile_Strength_MPa | Surface_Quality |
+|:--|:--|--:|--:|--:|:--|
+| S01 | A | 160 | 2 | 48.2 | Good |
+| S02 | A | 160 | 4 | 50.1 | Good |
+| S03 | A | 180 | 2 | 51.5 | Excellent |
+| S04 | A | 180 | 4 | 53.4 | Excellent |
+| S05 | B | 160 | 2 | 46.8 | Acceptable |
+| S06 | B | 160 | 4 | 49.2 | Good |
+| S07 | B | 180 | 2 | 50.7 | Good |
+| S08 | B | 180 | 4 | 52.6 | Excellent |
+
+Then:
+
+1. select the full data range
+2. press `Ctrl + T`
+3. confirm that the table has headers
+4. name the table `PolymerData`
+5. save the file as `polymer_intro.xlsx`
+
+</div>
+
+## Variable Naming
+
+Use short, clear, and consistent variable names.
+
+Recommended:
+
+```text
+Specimen_ID
+Polymer_Type
+Temperature_C
+Tensile_Strength_MPa
+Defect_Count
+Pass_Status
+```
+
+Avoid:
+
+```text
+Variable 1
+Column A
+Tensile strength of specimens measured in MPa
+Temp.
+```
+
+## Data Coding
+
+Use consistent category labels.
+
+Recommended:
+
+```text
+A
+B
+C
+```
+
+Avoid inconsistent coding such as:
+
+```text
+A
+Type A
+type a
+Polymer-A
+```
+
+## Missing Values
+
+A missing value is a value that was not observed or recorded.
+
+Possible reasons include:
+
+- specimen damage
+- equipment failure
+- data-entry omission
+- test not performed
+- value below detection limit
+
+In raw data, leave a truly missing numerical cell blank or use a clearly documented code.
+
+Do not enter:
+
+```text
+0
+-
+N/A
+not available
+```
+
+inside a numerical column unless the coding is deliberate and documented.
+
+<div class="warning-box">
+
+A zero is a real numerical value. It should not be used to represent missing data unless zero is genuinely observed.
+
+</div>
+
+# Sorting Data in Excel
+
+Sorting rearranges rows based on the values in one or more columns.
+
+## Basic Sorting
+
+1. click any cell inside the dataset
+2. select the `Data` tab
+3. choose `Sort`
+4. select the variable to sort by
+5. choose ascending or descending order
+
+<div class="excel-box">
+
+### Excel Practical 2: Sort the Dataset
+
+Using the `PolymerData` table:
+
+1. sort the data by `Polymer_Type`
+2. within each polymer type, sort by `Temperature_C`
+3. within each temperature, sort by `Additive_Percent`
+
+Check that complete rows move together.
+
+</div>
+
+<div class="warning-box">
+
+Never sort a single column independently from the rest of the dataset. Doing so can destroy the relationship between variables.
+
+</div>
+
+# Filtering Data in Excel
+
+Filtering temporarily displays only rows that meet selected conditions.
+
+## Applying a Filter
+
+1. click any cell in the table
+2. select the filter arrow in the relevant column
+3. select the required category or condition
+
+Examples:
+
+- display only Polymer Type A
+- display specimens processed at 180째C
+- display tensile-strength values greater than 50 MPa
+- display specimens with excellent surface quality
+
+<div class="excel-box">
+
+### Excel Practical 3: Filter the Dataset
+
+Use the filter controls to display:
+
+1. only Polymer Type B
+2. only specimens processed at 180째C
+3. only specimens with tensile strength greater than 50 MPa
+4. only specimens classified as `Excellent`
+
+Record the number of observations remaining after each filter.
+
+</div>
+
+# Cleaning Data in Excel
+
+Data cleaning involves identifying and correcting errors before analysis.
+
+Common issues include:
+
+- duplicate observations
+- inconsistent category names
+- blank cells
+- impossible values
+- text stored as numbers
+- numbers stored as text
+- unnecessary spaces
+- mixed units
+- incorrect decimal points
+- inconsistent date formats
+
+## Checking for Duplicates
+
+1. select the dataset
+2. select `Data`
+3. choose `Remove Duplicates`
+4. select the variables that identify a unique observation
+
+Use this carefully. Confirm that repeated values are genuine duplicates before removing them.
+
+## Removing Extra Spaces
+
+Use:
+
+```text
+=TRIM(cell)
+```
+
+Example:
+
+```text
+=TRIM(B2)
+```
+
+## Standardising Text
+
+Use:
+
+```text
+=UPPER(cell)
+=LOWER(cell)
+=PROPER(cell)
+```
+
+## Identifying Blank Cells
+
+Use:
+
+```text
+=COUNTBLANK(range)
+```
+
+## Checking Numerical Ranges
+
+Use logical rules to identify impossible values.
+
+For example, if additive concentration should be between 0% and 10%:
+
+```text
+=IF(OR(D2<0,D2>10),"Check","OK")
+```
+
+## Converting Text to Numbers
+
+Possible methods include:
+
+- selecting the warning icon and choosing `Convert to Number`
+- using `VALUE()`
+- multiplying by 1
+- using `Data > Text to Columns`
+
+<div class="excel-box">
+
+### Excel Practical 4: Clean a Dataset
+
+Create a copy of the dataset and deliberately introduce the following errors:
+
+- enter `type a` instead of `A`
+- add an extra space after one category
+- duplicate one specimen
+- leave one tensile-strength value blank
+- enter one temperature as text
+- enter an impossible additive concentration of 40%
+
+Then identify and correct each problem.
+
+</div>
+
+# Data Validation
+
+Data Validation reduces data-entry errors by restricting the type of values that can be entered.
+
+## Creating a Drop-Down List
+
+For `Polymer_Type`:
+
+1. select the relevant cells
+2. choose `Data > Data Validation`
+3. select `List`
+4. enter:
+
+```text
+A,B
+```
+
+## Restricting Numerical Values
+
+For `Additive_Percent`:
+
+1. choose `Data > Data Validation`
+2. select `Decimal`
+3. set the minimum to `0`
+4. set the maximum to `10`
+
+<div class="excel-box">
+
+### Excel Practical 5: Apply Data Validation
+
+Apply the following restrictions:
+
+- `Polymer_Type`: allow only A or B
+- `Temperature_C`: allow values from 100 to 250
+- `Additive_Percent`: allow values from 0 to 10
+- `Surface_Quality`: allow only Poor, Acceptable, Good, or Excellent
+
+Test each rule by attempting to enter an invalid value.
+
+</div>
+
+# Enabling the Data Analysis ToolPak
+
+The Analysis ToolPak provides several statistical procedures, including:
+
+- descriptive statistics
+- histograms
+- correlation
+- regression
+- t tests
+- analysis of variance
+
+## Windows Instructions
+
+1. select `File`
+2. select `Options`
+3. select `Add-ins`
+4. under `Manage`, choose `Excel Add-ins`
+5. click `Go`
+6. select `Analysis ToolPak`
+7. click `OK`
+
+The `Data Analysis` command should then appear under the `Data` tab.
+
+## Mac Instructions
+
+1. select `Tools`
+2. select `Excel Add-ins`
+3. select `Analysis ToolPak`
+4. click `OK`
+
+<div class="excel-box">
+
+### Excel Practical 6: Confirm the ToolPak
+
+After enabling the ToolPak:
+
+1. open the `Data` tab
+2. click `Data Analysis`
+3. confirm that the list includes `Descriptive Statistics`
+4. select `Cancel`
+
+No analysis is required at this stage.
+
+</div>
+
+<div class="warning-box">
+
+The Analysis ToolPak may not be fully available in Excel Online or some mobile versions. A desktop version of Excel is recommended.
+
+</div>
+
+# Practical Activity: Identify the Study Components
+
+A researcher investigates whether increasing processing temperature changes the tensile strength of a polymer.
+
+Twenty-four specimens are randomly assigned to three temperatures:
+
+- 150째C
+- 170째C
+- 190째C
+
+Tensile strength is measured for each specimen.
+
+<div class="question-box">
+
+### Questions
+
+1. What is the population of interest?
+2. What is the sample?
+3. What is the observational unit?
+4. What is the explanatory variable?
+5. What is the response variable?
+6. Is the explanatory variable categorical or numerical?
+7. What is the measurement scale of tensile strength?
+8. Is this an observational study or an experiment?
+9. Which value would be a parameter?
+10. Which value would be a statistic?
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+1. **Population of interest**
+
+   All polymer specimens that could be produced under the three processing-temperature conditions considered in the study.
+
+2. **Sample**
+
+   The 24 polymer specimens included in the experiment.
+
+3. **Observational unit**
+
+   One polymer specimen.
+
+4. **Explanatory variable**
+
+   Processing temperature.
+
+5. **Response variable**
+
+   Tensile strength.
+
+6. **Type of explanatory variable**
+
+   Processing temperature is numerical and continuous in principle.
+
+   In this experiment, however, it is used as a factor with three selected levels:
+
+   * 150캜
+   * 170캜
+   * 190캜
+
+7. **Measurement scale of tensile strength**
+
+   Tensile strength is measured on a ratio scale because it has a meaningful zero and both differences and ratios are meaningful.
+
+8. **Type of study**
+
+   This is an experiment because the researcher deliberately assigns the specimens to different processing temperatures.
+
+9. **Example of a parameter**
+
+   The true mean tensile strength of all polymer specimens produced at 170캜.
+
+   This may be represented by:
+
+\[
+\mu_{170}
+\]
+
+10. **Example of a statistic**
+
+The mean tensile strength calculated from the eight sampled specimens processed at 170캜.
+
+This may be represented by:
+
+\[
+\bar{x}_{170}
+\]
+
+
+
+</details>
+
+
+
+# Practical Activity: Design an Excel Worksheet
+
+Suppose a laboratory records the following information for each polymer specimen:
+
+- specimen identification number
+- polymer formulation
+- supplier
+- processing temperature
+- pressure
+- additive concentration
+- curing time
+- tensile strength
+- elongation at break
+- number of surface defects
+- surface quality
+- pass or failure status
+
+<div class="question-box">
+
+### Task
+
+Design an Excel worksheet for this study.
+
+For each variable:
+
+1. provide a suitable column name
+2. classify it as categorical or numerical
+3. identify its measurement scale
+4. state whether it is discrete or continuous, where applicable
+5. suggest a suitable Excel data-validation rule
+
+</div>
+
+<div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+A suitable Excel worksheet could be organised as follows.
+
+| Variable                       | Suggested Column Name            | Data Type   | Measurement Scale | Discrete or Continuous | Suggested Data Validation                                                 |
+| :----------------------------- | :------------------------------- | :---------- | :---------------- | :--------------------- | :------------------------------------------------------------------------ |
+| Specimen identification number | `Specimen_ID`                    | Categorical | Nominal           | Not applicable         | Text entry with a consistent format such as S001, S002, S003              |
+| Polymer formulation            | `Polymer_Formulation`            | Categorical | Nominal           | Not applicable         | Drop-down list containing the permitted formulations, such as A, B, and C |
+| Supplier                       | `Supplier`                       | Categorical | Nominal           | Not applicable         | Drop-down list containing approved supplier names or codes                |
+| Processing temperature         | `Processing_Temperature_C`       | Numerical   | Interval          | Continuous             | Decimal values within a reasonable range, such as 100 to 300              |
+| Pressure                       | `Pressure_MPa`                   | Numerical   | Ratio             | Continuous             | Decimal values greater than or equal to 0                                 |
+| Additive concentration         | `Additive_Concentration_Percent` | Numerical   | Ratio             | Continuous             | Decimal values within a specified range, such as 0 to 20                  |
+| Curing time                    | `Curing_Time_Min`                | Numerical   | Ratio             | Continuous             | Decimal values greater than or equal to 0                                 |
+| Tensile strength               | `Tensile_Strength_MPa`           | Numerical   | Ratio             | Continuous             | Decimal values greater than or equal to 0                                 |
+| Elongation at break            | `Elongation_at_Break_Percent`    | Numerical   | Ratio             | Continuous             | Decimal values greater than or equal to 0                                 |
+| Number of surface defects      | `Surface_Defect_Count`           | Numerical   | Ratio             | Discrete               | Whole numbers greater than or equal to 0                                  |
+| Surface quality                | `Surface_Quality`                | Categorical | Ordinal           | Not applicable         | Drop-down list such as Poor, Acceptable, Good, and Excellent              |
+| Pass or failure status         | `Pass_Status`                    | Categorical | Nominal           | Not applicable         | Drop-down list containing Pass and Fail                                   |
+
+
+### Suggested Excel Layout
+
+| Specimen_ID | Polymer_Formulation | Supplier   | Processing_Temperature_C | Pressure_MPa | Additive_Concentration_Percent | Curing_Time_Min | Tensile_Strength_MPa | Elongation_at_Break_Percent | Surface_Defect_Count | Surface_Quality | Pass_Status |
+| :---------- | :------------------ | :--------- | -----------------------: | -----------: | -----------------------------: | --------------: | -------------------: | --------------------------: | -------------------: | :-------------- | :---------- |
+| S001        | A                   | Supplier 1 |                      160 |          4.5 |                            2.0 |              30 |                 48.6 |                         215 |                    2 | Good            | Pass        |
+| S002        | A                   | Supplier 1 |                      170 |          4.5 |                            4.0 |              35 |                 51.2 |                         228 |                    1 | Excellent       | Pass        |
+| S003        | B                   | Supplier 2 |                      160 |          5.0 |                            2.0 |              30 |                 46.9 |                         198 |                    4 | Acceptable      | Fail        |
+
+### Recommended Data Validation Rules
+
+#### Polymer formulation
+
+Use:
+
+```text
+Data > Data Validation > List
+```
+
+Source:
+
+```text
+A,B,C
+```
+
+#### Supplier
+
+Use:
+
+```text
+Data > Data Validation > List
+```
+
+Source:
+
+```text
+Supplier 1,Supplier 2,Supplier 3
+```
+
+#### Processing temperature
+
+Use:
+
+```text
+Data > Data Validation > Decimal
+```
+
+Set:
+
+```text
+Minimum: 100
+Maximum: 300
+```
+
+#### Pressure
+
+Use:
+
+```text
+Data > Data Validation > Decimal
+```
+
+Set:
+
+```text
+Minimum: 0
+Maximum: 20
+```
+
+#### Additive concentration
+
+Use:
+
+```text
+Data > Data Validation > Decimal
+```
+
+Set:
+
+```text
+Minimum: 0
+Maximum: 20
+```
+
+#### Curing time
+
+Use:
+
+```text
+Data > Data Validation > Decimal
+```
+
+Set:
+
+```text
+Minimum: 0
+Maximum: 300
+```
+
+#### Tensile strength
+
+Use:
+
+```text
+Data > Data Validation > Decimal
+```
+
+Set:
+
+```text
+Minimum: 0
+Maximum: 500
+```
+
+#### Elongation at break
+
+Use:
+
+```text
+Data > Data Validation > Decimal
+```
+
+Set:
+
+```text
+Minimum: 0
+Maximum: 1000
+```
+
+#### Number of surface defects
+
+Use:
+
+```text
+Data > Data Validation > Whole Number
+```
+
+Set:
+
+```text
+Minimum: 0
+Maximum: 100
+```
+
+#### Surface quality
+
+Use:
+
+```text
+Data > Data Validation > List
+```
+
+Source:
+
+```text
+Poor,Acceptable,Good,Excellent
+```
+
+#### Pass or failure status
+
+Use:
+
+```text
+Data > Data Validation > List
+```
+
+Source:
+
+```text
+Pass,Fail
+```
+
+
+</details>
+
+
+
+# Section Exercises
+
+## Exercise 1
+
+Classify each variable by data type and measurement scale.
+
+1. polymer formulation
+2. tensile strength
+3. number of cracks
+4. surface-quality rating
+5. curing temperature in degrees Celsius
+6. mass of a specimen
+7. pass or failure status
+8. production line
+
+## Exercise 2
+
+A company produces 5,000 polymer pipes per week. Fifty pipes are selected and tested for impact strength.
+
+Identify:
+
+1. the population
+2. the sample
+3. the observational unit
+4. the variable
+5. a possible parameter
+6. a possible statistic
+
+## Exercise 3
+
+For each study, state whether it is observational or experimental.
+
+1. Researchers compare historical defect rates from three factories.
+2. Specimens are randomly assigned to four additive concentrations.
+3. A scientist records viscosity and molecular weight for existing samples.
+4. Products are randomly assigned to two curing procedures.
+5. Production records are used to examine temperature and failure rate.
+
+## Exercise 4
+
+Create an Excel worksheet containing at least 15 polymer specimens and the following variables:
+
+- specimen ID
+- polymer type
+- processing temperature
+- additive concentration
+- tensile strength
+- surface quality
+- pass or failure status
+
+Then:
+
+1. convert the range into an Excel Table
+2. sort by polymer type and temperature
+3. filter observations with tensile strength above a selected value
+4. check for missing values
+5. apply suitable data-validation rules
+6. save the file as `polymer_practical_01.xlsx`
+
+# Take-Home Messages
+
+- Statistics is used to understand variation and support evidence-based decisions.
+- A population is the complete group of interest, while a sample is a subset.
+- Rows should represent observations and columns should represent variables.
+- Variable type and measurement scale influence the choice of analysis.
+- Parameters describe populations, while statistics describe samples.
+- Experiments provide stronger evidence about causation than observational studies.
+- Data should be organised and cleaned before statistical analysis.
+- Excel Tables, sorting, filtering, validation, and the Analysis ToolPak provide a practical foundation for later analyses.
+
+# Course Navigation
+
+[Return to Course Outline](index.html)
+
+[Next: Descriptive Statistics](02_descriptive_statistics.html)

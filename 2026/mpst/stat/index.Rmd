@@ -1,0 +1,492 @@
+---
+title: "MPST 520 1.0 – Statistics"
+subtitle: "Postgraduate Programme in Polymer Science"
+author: "Dr. R. M. Silva"
+output:
+  html_document:
+    theme: flatly
+    toc: true
+    toc_float: true
+    number_sections: false
+    df_print: paged
+---
+
+```{=html}
+<style>
+body {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+h1 {
+  color: #1f4e79;
+  border-bottom: 2px solid #d9e6f2;
+  padding-bottom: 6px;
+  margin-top: 35px;
+}
+
+h2 {
+  color: #2f5597;
+  margin-top: 25px;
+}
+
+.course-box {
+  background-color: #f4f8fb;
+  border-left: 5px solid #2f75b5;
+  padding: 18px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.info-box {
+  background-color: #f7f7f7;
+  border-left: 5px solid #70ad47;
+  padding: 15px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.warning-box {
+  background-color: #fff8e5;
+  border-left: 5px solid #ffc000;
+  padding: 15px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.topic-card {
+  background-color: #ffffff;
+  border: 1px solid #d9e2f3;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  background-color: #d9eaf7;
+}
+</style>
+```
+
+::: course-box
+## Course Overview
+
+**Course Code:** MPST 520 1.0\
+**Course Title:** Statistics\
+**Programme:** Postgraduate Programme in Polymer Science\
+**Total Contact Hours:** 15 hours\
+**Statistical Software:** Microsoft Excel\
+**Lecturer:** Rajitha M. Silva, PhD
+:::
+
+# Introduction
+
+Statistics provides the tools required to organise data, describe variation, compare materials and processes, evaluate experimental evidence, and make decisions under uncertainty.
+
+In Polymer Science, statistical methods are commonly used to investigate questions such as:
+
+-   whether two polymer formulations differ in tensile strength
+-   whether processing temperature affects material performance
+-   whether an additive improves elongation or durability
+-   whether observed differences are scientifically meaningful
+-   whether a manufacturing process is consistent
+-   whether one variable can be used to predict another
+-   whether experimental factors interact with each other
+
+This course provides an applied introduction to statistical methods relevant to polymer research, laboratory investigations, product development, and manufacturing.
+
+The emphasis is on selecting suitable statistical methods, carrying out the analysis using Microsoft Excel, interpreting the results, and communicating conclusions in the context of Polymer Science.
+
+Detailed mathematical derivations are kept to a minimum.
+
+# Course Objectives
+
+The course aims:
+
+1.  to introduce basic statistical techniques required for analysing data
+2.  to introduce Microsoft Excel as a tool for statistical analysis
+3.  to develop the ability to organise, summarise, and visualise polymer-related data
+4.  to introduce frequently used probability distributions
+5.  to introduce basic parametric and non-parametric inferential methods
+6.  to explain the principles of experimental design and analysis of variance
+7.  to introduce correlation and regression analysis
+8.  to develop the ability to interpret statistical findings in a scientific context
+
+# Intended Learning Outcomes
+
+At the end of the course, students should be able to:
+
+1.  explain the role of statistics in polymer research and manufacturing
+2.  distinguish between populations, samples, parameters, and statistics
+3.  identify different types of variables and measurement scales
+4.  organise and clean data using Microsoft Excel
+5.  construct suitable tables, charts, and numerical summaries
+6.  calculate and interpret measures of central tendency and variability
+7.  recognise frequently used probability distributions
+8.  calculate and interpret basic probabilities using Excel
+9.  explain the basic principles of estimation and hypothesis testing
+10. select appropriate parametric and non-parametric statistical tests
+11. conduct basic statistical analyses using Excel
+12. explain the principles of randomisation, replication, and blocking
+13. analyse simple experimental data using analysis of variance
+14. investigate relationships between variables using correlation and regression
+15. interpret statistical results in the context of Polymer Science
+
+# Course Content
+
+The course consists of the following sections.
+
+::: topic-card
+## 1. Introduction to Statistics and Excel
+
+-   role of statistics in Polymer Science
+-   populations and samples
+-   variables and observations
+-   types of data
+-   measurement scales
+-   parameters and statistics
+-   observational studies and experiments
+-   organising data in Excel
+-   sorting, filtering, and cleaning data
+-   enabling the Data Analysis ToolPak
+:::
+
+::: topic-card
+## 2. Descriptive Statistics
+
+-   frequency distributions
+-   tables and PivotTables
+-   bar charts
+-   histograms
+-   boxplots
+-   scatterplots
+-   mean, median, and mode
+-   range, variance, and standard deviation
+-   quartiles and percentiles
+-   interquartile range
+-   coefficient of variation
+-   skewness and outliers
+-   comparison of groups
+:::
+
+::: topic-card
+## 3. Probability Distributions
+
+-   random variables
+-   discrete and continuous variables
+-   binomial distribution
+-   Poisson distribution
+-   normal distribution
+-   standard normal distribution
+-   standardisation
+-   probability calculations using Excel
+-   applications in defect analysis and material measurements
+:::
+
+::: topic-card
+## 4. Statistical Inference
+
+-   samples and populations
+-   sampling variability
+-   standard error
+-   point estimation
+-   confidence intervals
+-   confidence interval for a population mean
+-   confidence interval for a population proportion
+-   interpretation of confidence intervals
+-   statistical significance and practical significance
+:::
+
+::: topic-card
+## 5. Parametric Statistical Tests
+
+-   null and alternative hypotheses
+-   test statistics
+-   p-values
+-   level of significance
+-   Type I and Type II errors
+-   one-sample t test
+-   independent two-sample t test
+-   paired t test
+-   one-way analysis of variance
+-   assumptions of parametric tests
+-   interpretation of Excel output
+:::
+
+::: topic-card
+## 6. Non-Parametric Statistical Tests
+
+-   purpose of non-parametric methods
+-   parametric and non-parametric procedures
+-   Wilcoxon signed-rank test
+-   Mann–Whitney test
+-   Kruskal–Wallis test
+-   chi-square test of association
+-   selecting an appropriate non-parametric procedure
+:::
+
+::: topic-card
+## 7. Design and Analysis of Experiments
+
+-   response variables
+-   factors and factor levels
+-   treatments and experimental units
+-   replication
+-   randomisation
+-   blocking
+-   experimental error
+-   completely randomised designs
+-   randomised block designs
+-   factorial experiments
+-   main effects
+-   interaction effects
+-   analysis of variance
+-   residual analysis
+-   interpretation of experimental results
+:::
+
+::: topic-card
+## 8. Correlation and Regression Analysis
+
+-   scatterplots
+-   direction and strength of relationships
+-   Pearson correlation coefficient
+-   simple linear regression
+-   regression equation
+-   interpretation of the slope and intercept
+-   coefficient of determination
+-   prediction
+-   confidence and prediction intervals
+-   residual analysis
+-   limitations of extrapolation
+-   introduction to multiple regression
+:::
+
+# Time Allocation
+
+| Section | Topic                                |    Hours |
+|:--------|:-------------------------------------|---------:|
+| 1       | Introduction to Statistics and Excel |      1.0 |
+| 2       | Descriptive Statistics               |      2.0 |
+| 3       | Probability Distributions            |      1.5 |
+| 4       | Statistical Inference                |      1.5 |
+| 5       | Parametric Statistical Tests         |      2.5 |
+| 6       | Non-Parametric Statistical Tests     |      1.5 |
+| 7       | Design and Analysis of Experiments   |      3.0 |
+| 8       | Correlation and Regression Analysis  |      2.0 |
+|         | **Total**                            | **15.0** |
+
+# Teaching and Learning Approach
+
+The course will use a problem-oriented approach.
+
+Each section will generally include:
+
+1.  a Polymer Science research question
+2.  identification of the relevant variables
+3.  selection of a suitable statistical method
+4.  analysis using Microsoft Excel
+5.  interpretation of the numerical and graphical output
+6.  communication of the conclusion in scientific language
+
+The course will focus on understanding and application rather than lengthy mathematical derivations.
+
+::: info-box
+### Main principle
+
+A statistical analysis is not complete when a p-value or numerical result is obtained. The result must be interpreted in relation to the original Polymer Science question.
+:::
+
+# Use of Microsoft Excel
+
+Microsoft Excel will be used throughout the course for:
+
+-   entering and organising data
+-   importing data from external files
+-   cleaning and validating data
+-   creating tables and charts
+-   calculating descriptive statistics
+-   calculating probabilities
+-   constructing confidence intervals
+-   conducting t tests
+-   conducting analysis of variance
+-   performing correlation and regression analysis
+-   presenting and interpreting results
+
+Students should have access to a recent desktop version of Microsoft Excel.
+
+# Enabling the Data Analysis ToolPak
+
+The Data Analysis ToolPak is required for several analyses.
+
+Use the following steps in Microsoft Excel:
+
+1.  select `File`
+2.  select `Options`
+3.  select `Add-ins`
+4.  select `Excel Add-ins` under the `Manage` option
+5.  click `Go`
+6.  select `Analysis ToolPak`
+7.  click `OK`
+
+After activation, the `Data Analysis` option should appear under the `Data` tab.
+
+::: warning-box
+The Data Analysis ToolPak may not be fully available in Excel Online or some mobile versions. A desktop version of Excel is recommended.
+:::
+
+# Polymer Science Applications
+
+The examples used in the course will be based on variables such as:
+
+::::: row
+::: col-md-6
+-   tensile strength
+-   impact strength
+-   elongation at break
+-   hardness
+-   density
+-   viscosity
+-   molecular weight
+-   melt flow index
+:::
+
+::: col-md-6
+-   curing time
+-   processing temperature
+-   processing pressure
+-   additive concentration
+-   ageing time
+-   surface defect count
+-   product quality classification
+-   pass or failure status
+:::
+:::::
+
+|     |
+|:----|
+|     |
+
+# Course Navigation
+
+1.  [`01_introduction_to_statistics_and_excel`](01_introduction_to_statistics_and_excel.html)\
+    Statistical concepts, data types, and introduction to Excel
+
+2.  [`02_descriptive_statistics`](02_descriptive_statistics.html)\
+    Tables, charts, and numerical summaries
+
+3.  [`03_probability_distributions`](03_probability_distributions.html)\
+    Binomial, Poisson, and normal distributions
+
+4.  [`04_statistical_inference`](04_statistical_inference.html)\
+    Sampling, estimation, and confidence intervals
+
+5.  [`05_parametric_tests`](05_parametric_tests.html)\
+    t tests and analysis of variance
+
+6.  [`06_nonparametric_tests`](06_nonparametric_tests.html)\
+    Rank-based tests and chi-square analysis
+
+7.  [`07_design_and_analysis_of_experiments`](07_design_and_analysis_of_experiments.html)\
+    Experimental designs, factorial experiments, and ANOVA
+
+8.  [`08_regression_analysis`](08_regression_analysis.html)\
+    Correlation, regression, and prediction
+
+# General Statistical Analysis Framework
+
+For each statistical problem, students should consider the following sequence.
+
+## Step 1: Define the research question
+
+Clearly identify what needs to be investigated.
+
+For example:
+
+> Does increasing additive concentration improve the mean tensile strength of the polymer?
+
+## Step 2: Identify the variables
+
+Identify:
+
+-   the response variable
+-   the explanatory variable or grouping variable
+-   the type of each variable
+-   the measurement scale
+
+## Step 3: Examine the data
+
+Use:
+
+-   tables
+-   charts
+-   descriptive statistics
+-   identification of missing values
+-   identification of possible outliers
+
+## Step 4: Select a suitable method
+
+The method should be selected based on:
+
+-   the research question
+-   the number of groups
+-   whether groups are independent or paired
+-   the type of response variable
+-   the distribution of the data
+-   the assumptions of the method
+
+## Step 5: Conduct the analysis
+
+Use appropriate Excel functions, charts, or the Data Analysis ToolPak.
+
+## Step 6: Interpret the results
+
+Interpret:
+
+-   estimates
+-   confidence intervals
+-   p-values
+-   effect sizes
+-   graphical patterns
+-   practical importance
+
+## Step 7: State the conclusion
+
+The conclusion should answer the original Polymer Science question.
+
+# Statistical and Scientific Significance
+
+A statistically significant result is not necessarily scientifically important.
+
+A small difference may be statistically significant when the sample size is large. However, the difference may not be meaningful in terms of material performance, manufacturing cost, product durability, or industrial specifications.
+
+Therefore, conclusions should consider:
+
+-   the size of the observed effect
+-   the confidence interval
+-   the variability of the measurements
+-   engineering or industrial requirements
+-   the cost and feasibility of implementation
+-   the scientific relevance of the finding
+
+# Recommended References
+
+1.  Montgomery, D. C. *Design and Analysis of Experiments*. Wiley.
+
+2.  Montgomery, D. C. and Runger, G. C. *Applied Statistics and Probability for Engineers*. Wiley.
+
+3.  Devore, J. L. *Probability and Statistics for Engineering and the Sciences*. Cengage Learning.
+
+4.  Walpole, R. E., Myers, R. H., Myers, S. L. and Ye, K. *Probability and Statistics for Engineers and Scientists*. Pearson.
+
+5.  Microsoft Support documentation for Excel statistical functions and the Data Analysis ToolPak.
+
+# Contact
+
+**Dr. R. M. Silva ([rsilva\@sjp.ac.lk](mailto:rsilva@sjp.ac.lk){.email})**\
+Department of Statistics\
+University of Sri Jayewardenepura
