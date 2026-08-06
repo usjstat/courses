@@ -1,0 +1,1589 @@
+---
+title: "Correlation and Regression Analysis"
+author: "Dr. R. M. Silva"
+output:
+  html_document:
+    theme: flatly
+    toc: true
+    toc_depth: 2
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+    number_sections: false
+---
+
+<style>
+body {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+h1 {
+  color: #1f4e79;
+  border-bottom: 2px solid #d9e6f2;
+  padding-bottom: 6px;
+  margin-top: 35px;
+}
+
+h2 {
+  color: #2f5597;
+  margin-top: 25px;
+}
+
+h3 {
+  color: #4472c4;
+  margin-top: 20px;
+}
+
+.learning-box {
+  background-color: #f4f8fb;
+  border-left: 5px solid #2f75b5;
+  padding: 18px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.example-box {
+  background-color: #f7f7f7;
+  border-left: 5px solid #70ad47;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.excel-box {
+  background-color: #eef7ee;
+  border-left: 5px solid #548235;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.warning-box {
+  background-color: #fff8e5;
+  border-left: 5px solid #ffc000;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.question-box {
+  background-color: #f4f4f4;
+  border-left: 5px solid #7f7f7f;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  background-color: #d9eaf7;
+}
+
+.tocify {
+  width: 280px;
+  max-height: 85vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.tocify-item {
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+@media (min-width: 992px) {
+  .col-md-9 {
+    padding-left: 35px;
+  }
+}
+
+@media (max-width: 991px) {
+  .tocify {
+    position: relative !important;
+    width: 100% !important;
+    max-height: none;
+    margin-bottom: 25px;
+  }
+}
+</style>
+
+<div class="learning-box">
+
+## Learning Objectives
+
+At the end of this lesson, students should be able to:
+
+1. construct and interpret scatterplots
+2. describe the direction, form, and strength of relationships
+3. calculate and interpret Pearson's correlation coefficient
+4. fit a simple linear regression model
+5. interpret the regression slope and intercept
+6. interpret the coefficient of determination
+7. use a fitted regression equation for prediction
+8. distinguish between confidence and prediction intervals
+9. calculate and examine residuals
+10. explain the dangers of extrapolation
+11. use the Excel Analysis ToolPak for regression analysis
+12. describe the purpose of multiple regression
+
+</div>
+
+# Introduction
+
+Correlation and regression methods are used to study relationships between variables.
+
+In Polymer Science, these methods may be used to examine:
+
+- temperature and tensile strength
+- additive concentration and elongation
+- molecular weight and viscosity
+- curing time and hardness
+- filler content and density
+- thickness and burst strength
+- ageing time and remaining strength
+- pressure and defect rate
+
+Correlation measures the direction and strength of a linear relationship.
+
+Regression describes how a response variable changes with one or more explanatory variables and can be used for estimation and prediction.
+
+# Example Dataset
+
+The following data relate processing temperature to tensile strength.
+
+| Specimen | Temperature_C | Tensile_Strength_MPa |
+|:--|--:|--:|
+| 1 | 140 | 44.8 |
+| 2 | 145 | 46.1 |
+| 3 | 150 | 47.0 |
+| 4 | 155 | 48.7 |
+| 5 | 160 | 49.5 |
+| 6 | 165 | 51.0 |
+| 7 | 170 | 52.4 |
+| 8 | 175 | 53.0 |
+| 9 | 180 | 54.6 |
+| 10 | 185 | 55.1 |
+
+The explanatory variable is:
+
+\[
+X=\text{processing temperature}
+\]
+
+The response variable is:
+
+\[
+Y=\text{tensile strength}
+\]
+
+<div class="excel-box">
+
+### Excel Practical 1: Enter the Dataset
+
+1. enter the data in an Excel worksheet
+2. use the headings `Specimen`, `Temperature_C`, and `Tensile_Strength_MPa`
+3. convert the data range into an Excel Table using `Ctrl + T`
+4. save the workbook as `correlation_regression_analysis.xlsx`
+
+</div>
+
+# Scatterplots
+
+A scatterplot displays the relationship between two numerical variables.
+
+Each point represents one observational unit.
+
+The explanatory variable is placed on the horizontal axis.
+
+The response variable is placed on the vertical axis.
+
+# Creating a Scatterplot in Excel
+
+1. select the explanatory and response columns
+2. select `Insert`
+3. choose `Scatter`
+4. choose `Scatter with only Markers`
+5. add a meaningful title
+6. label both axes
+7. ensure that the axis units are displayed clearly
+
+For the example, use:
+
+```text
+Chart title: Processing Temperature and Tensile Strength
+Horizontal axis: Processing Temperature (°C)
+Vertical axis: Tensile Strength (MPa)
+```
+
+<div class="warning-box">
+
+Do not use a line chart for unordered paired measurements. A scatterplot is the appropriate chart for examining the relationship between two numerical variables.
+
+</div>
+
+# Direction and Strength of Relationships
+
+A relationship may be:
+
+## Positive
+
+Larger values of \(X\) tend to occur with larger values of \(Y\).
+
+## Negative
+
+Larger values of \(X\) tend to occur with smaller values of \(Y\).
+
+## No Clear Linear Relationship
+
+The points do not show a consistent upward or downward pattern.
+
+# Form of a Relationship
+
+A relationship may be:
+
+- approximately linear
+- curved
+- clustered
+- affected by outliers
+- affected by separate subgroups
+
+Correlation and simple linear regression focus mainly on linear relationships.
+
+# Strength of a Relationship
+
+A strong linear relationship has points close to a straight line.
+
+A weak linear relationship has points widely scattered around a possible line.
+
+<div class="excel-box">
+
+### Excel Practical 2: Interpret a Scatterplot
+
+Create the scatterplot for temperature and tensile strength.
+
+Describe:
+
+1. the direction
+2. the form
+3. the strength
+4. any unusual points
+5. whether linear regression appears reasonable
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The scatterplot should show:
+
+- a positive direction
+- an approximately linear form
+- a strong relationship
+- no obvious extreme outliers
+- increasing tensile strength as processing temperature increases
+
+A suitable interpretation is:
+
+> The scatterplot shows a strong positive approximately linear relationship between processing temperature and tensile strength. Within the observed range, specimens processed at higher temperatures tend to have higher tensile strength.
+
+</details>
+
+# Pearson Correlation Coefficient
+
+Pearson's correlation coefficient measures the direction and strength of a linear relationship between two numerical variables.
+
+It is denoted by:
+
+\[
+r
+\]
+
+The coefficient lies between:
+
+\[
+-1\leq r\leq 1
+\]
+
+Interpretation:
+
+- \(r\) near \(1\): strong positive linear relationship
+- \(r\) near \(-1\): strong negative linear relationship
+- \(r\) near \(0\): weak or no linear relationship
+
+# Correlation in Excel
+
+Use:
+
+```text
+=CORREL(B2:B11,C2:C11)
+```
+
+or:
+
+```text
+=PEARSON(B2:B11,C2:C11)
+```
+
+Both formulas calculate Pearson's correlation coefficient.
+
+# Analysis ToolPak: Correlation
+
+The Analysis ToolPak can generate a correlation matrix.
+
+## Procedure
+
+1. select `Data`
+2. select `Data Analysis`
+3. choose `Correlation`
+4. select the input range containing both numerical variables
+5. select `Grouped By: Columns`
+6. select `Labels in First Row`
+7. choose an output range or new worksheet
+8. click `OK`
+
+<div class="warning-box">
+
+The ToolPak correlation output gives correlation coefficients but does not automatically provide p-values for testing whether a correlation differs from zero.
+
+</div>
+
+<div class="excel-box">
+
+### Excel Practical 3: Pearson Correlation
+
+Using the example dataset:
+
+1. calculate \(r\) using `CORREL`
+2. generate a ToolPak correlation matrix
+3. compare the two results
+4. interpret the direction and strength
+5. explain why correlation does not prove causation
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Excel formula:
+
+```text
+=CORREL(B2:B11,C2:C11)
+```
+
+The correlation is expected to be very close to \(1\), indicating a strong positive linear relationship.
+
+The ToolPak correlation matrix should contain:
+
+|  | Temperature | Tensile Strength |
+|:--|--:|--:|
+| Temperature | 1 | \(r\) |
+| Tensile Strength | \(r\) | 1 |
+
+The diagonal entries equal 1 because each variable is perfectly correlated with itself.
+
+A suitable interpretation is:
+
+> Processing temperature and tensile strength have a very strong positive linear association in the observed sample. This does not by itself prove that temperature causes the change because correlation alone does not control for other factors or establish the experimental design.
+
+</details>
+
+# Limitations of Correlation
+
+Pearson correlation:
+
+- measures only linear association
+- can be strongly affected by outliers
+- does not establish causation
+- may be misleading when groups are mixed
+- does not show whether the slope is practically important
+- may be near zero even when a strong curved relationship exists
+
+Always examine the scatterplot before interpreting \(r\).
+
+# Simple Linear Regression
+
+Simple linear regression models the relationship between one explanatory variable and one response variable.
+
+The population model is:
+
+\[
+Y_i
+=
+\beta_0+\beta_1X_i+\varepsilon_i
+\]
+
+The fitted sample equation is:
+
+\[
+\hat{Y}
+=
+b_0+b_1X
+\]
+
+where:
+
+- \(b_0\) is the estimated intercept
+- \(b_1\) is the estimated slope
+- \(\hat{Y}\) is the predicted response
+
+# Regression Equation in Excel
+
+Use:
+
+```text
+=SLOPE(C2:C11,B2:B11)
+```
+
+to calculate the slope.
+
+Use:
+
+```text
+=INTERCEPT(C2:C11,B2:B11)
+```
+
+to calculate the intercept.
+
+The fitted equation is:
+
+```text
+Predicted tensile strength
+= Intercept + Slope*Temperature
+```
+
+# Adding a Trendline
+
+1. select the scatterplot
+2. right-click a data point
+3. choose `Add Trendline`
+4. select `Linear`
+5. select `Display Equation on chart`
+6. select `Display R-squared value on chart`
+
+<div class="excel-box">
+
+### Excel Practical 4: Obtain the Regression Equation
+
+Using the temperature and tensile-strength data:
+
+1. calculate the slope
+2. calculate the intercept
+3. write the fitted regression equation
+4. add a linear trendline
+5. display the equation and \(R^2\)
+6. compare the trendline equation with the Excel formulas
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Use:
+
+```text
+=SLOPE(C2:C11,B2:B11)
+```
+
+and:
+
+```text
+=INTERCEPT(C2:C11,B2:B11)
+```
+
+The fitted regression equation has the form:
+
+\[
+\widehat{\text{Tensile Strength}}
+=
+b_0+b_1(\text{Temperature})
+\]
+
+The slope should be positive.
+
+The trendline equation and the formula-based results should agree, apart from rounding displayed on the chart.
+
+</details>
+
+# Interpretation of the Slope
+
+The slope estimates the expected change in the mean response associated with a one-unit increase in the explanatory variable.
+
+<div class="example-box">
+
+### Example Interpretation
+
+Suppose the estimated slope is:
+
+\[
+b_1=0.26
+\]
+
+A suitable interpretation is:
+
+> Within the observed temperature range, a 1°C increase in processing temperature is associated with an estimated increase of 0.26 MPa in mean tensile strength.
+
+</div>
+
+The interpretation should include:
+
+- the change in the explanatory variable
+- the expected change in the mean response
+- the measurement units
+- the observed range where appropriate
+
+# Interpretation of the Intercept
+
+The intercept is the predicted response when:
+
+\[
+X=0
+\]
+
+Its practical interpretation depends on whether zero is meaningful and within the observed range.
+
+<div class="warning-box">
+
+If the observed temperatures range from 140°C to 185°C, the intercept corresponds to the predicted tensile strength at 0°C. This is far outside the observed range and may have no useful scientific interpretation.
+
+</div>
+
+# Analysis ToolPak: Regression
+
+The Analysis ToolPak provides a complete regression output.
+
+## Procedure
+
+1. select `Data`
+2. select `Data Analysis`
+3. choose `Regression`
+4. set `Input Y Range` to the response variable
+5. set `Input X Range` to the explanatory variable
+6. select `Labels` if headings are included
+7. keep the confidence level at 95%, or select another level if required
+8. select `Residuals`
+9. select `Standardized Residuals`
+10. select `Residual Plots`
+11. select `Line Fit Plots`
+12. choose an output range or new worksheet
+13. click `OK`
+
+<div class="excel-box">
+
+### Excel Practical 5: ToolPak Simple Linear Regression
+
+Use:
+
+- `Tensile_Strength_MPa` as the Y variable
+- `Temperature_C` as the X variable
+
+Generate the ToolPak output and identify:
+
+1. Multiple R
+2. R Square
+3. Adjusted R Square
+4. Standard Error
+5. Observations
+6. ANOVA \(F\)-statistic
+7. Significance F
+8. intercept coefficient
+9. temperature coefficient
+10. coefficient standard errors
+11. coefficient t-statistics
+12. coefficient p-values
+13. lower and upper 95% confidence limits
+14. predicted values
+15. residuals
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The ToolPak output contains three major sections.
+
+**Regression Statistics**
+
+- `Multiple R`: the absolute value of the correlation in simple regression
+- `R Square`: the proportion of response variation explained by the model
+- `Adjusted R Square`: an adjusted measure that accounts for the number of predictors
+- `Standard Error`: the residual standard deviation
+- `Observations`: the sample size
+
+**ANOVA**
+
+- `Regression`: variation explained by the model
+- `Residual`: unexplained variation
+- `Total`: total response variation
+- `F`: the overall regression test statistic
+- `Significance F`: the p-value for the overall regression test
+
+For simple regression, the overall test evaluates:
+
+\[
+H_0:\beta_1=0
+\]
+
+against:
+
+\[
+H_1:\beta_1\neq 0
+\]
+
+**Coefficients**
+
+- `Intercept`: estimate of \(b_0\)
+- `Temperature_C`: estimate of \(b_1\)
+- `Standard Error`: uncertainty of each coefficient
+- `t Stat`: coefficient divided by its standard error
+- `P-value`: evidence against a zero population coefficient
+- `Lower 95%` and `Upper 95%`: confidence interval for the coefficient
+
+The temperature coefficient should be positive and its p-value should be below 0.05.
+
+A suitable conclusion is:
+
+> At the 5% significance level, processing temperature is a statistically significant linear predictor of tensile strength within the observed range. Higher temperature is associated with higher mean tensile strength.
+
+</details>
+
+# Coefficient of Determination
+
+The coefficient of determination is:
+
+\[
+R^2
+\]
+
+It represents the proportion of observed variation in the response explained by the fitted regression model.
+
+<div class="example-box">
+
+### Interpretation
+
+Suppose:
+
+\[
+R^2=0.96
+\]
+
+A suitable interpretation is:
+
+> Approximately 96% of the observed variation in tensile strength is explained by its linear relationship with processing temperature in this dataset.
+
+</div>
+
+Do not interpret \(R^2\) as:
+
+- the probability that the model is correct
+- the percentage of predictions that are accurate
+- proof of causation
+- the proportion of the response caused by the predictor
+
+# Testing the Regression Slope
+
+The main hypothesis test in simple linear regression is:
+
+\[
+H_0:\beta_1=0
+\]
+
+\[
+H_1:\beta_1\neq 0
+\]
+
+If the slope p-value is below 0.05, there is evidence of a non-zero linear relationship.
+
+In simple regression, the slope p-value and `Significance F` lead to the same conclusion.
+
+# Prediction
+
+The regression equation can be used to predict the response for a selected explanatory value.
+
+Suppose:
+
+\[
+\hat{Y}=b_0+b_1X
+\]
+
+For a temperature of 172°C:
+
+\[
+\hat{Y}
+=
+b_0+b_1(172)
+\]
+
+# Prediction in Excel
+
+If:
+
+- intercept is in `F2`
+- slope is in `F3`
+- selected temperature is in `H2`
+
+use:
+
+```text
+=$F$2+$F$3*H2
+```
+
+Alternatively:
+
+```text
+=FORECAST.LINEAR(H2,C2:C11,B2:B11)
+```
+
+<div class="excel-box">
+
+### Excel Practical 6: Predict Tensile Strength
+
+Using the fitted model:
+
+1. predict tensile strength at 150°C
+2. predict tensile strength at 172°C
+3. predict tensile strength at 180°C
+4. compare the predicted values with nearby observations
+5. state whether these are interpolations or extrapolations
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+Use:
+
+```text
+=FORECAST.LINEAR(150,C2:C11,B2:B11)
+```
+
+```text
+=FORECAST.LINEAR(172,C2:C11,B2:B11)
+```
+
+```text
+=FORECAST.LINEAR(180,C2:C11,B2:B11)
+```
+
+All three selected values lie within the observed temperature range of 140°C to 185°C.
+
+Therefore, they are interpolations.
+
+A suitable interpretation is:
+
+> The regression equation estimates the mean tensile strength expected at each selected temperature, assuming that the linear relationship remains appropriate within the observed range.
+
+</details>
+
+# Confidence and Prediction Intervals
+
+A point prediction does not express uncertainty.
+
+Two different intervals may be required.
+
+## Confidence Interval for the Mean Response
+
+A confidence interval estimates the mean response for all units having a specified value of \(X\).
+
+Example:
+
+> Mean tensile strength of all specimens processed at 172°C.
+
+## Prediction Interval for an Individual Response
+
+A prediction interval estimates the response of one new individual unit at a specified value of \(X\).
+
+Example:
+
+> Tensile strength of one new specimen processed at 172°C.
+
+The prediction interval is wider because it includes:
+
+- uncertainty in the estimated mean response
+- individual specimen-to-specimen variation
+
+# Excel Formulas for Intervals
+
+Let:
+
+- \(x_0\) be the selected predictor value
+- \(\bar{x}\) be the mean predictor value
+- \(n\) be the sample size
+- \(s_e\) be the regression standard error
+- \(S_{xx}=\sum(x_i-\bar{x})^2\)
+
+The fitted value is:
+
+\[
+\hat{y}_0=b_0+b_1x_0
+\]
+
+The standard error for the estimated mean response is:
+
+\[
+SE_{\text{mean}}
+=
+s_e
+\sqrt{
+\frac{1}{n}
++
+\frac{(x_0-\bar{x})^2}{S_{xx}}
+}
+\]
+
+The standard error for an individual prediction is:
+
+\[
+SE_{\text{pred}}
+=
+s_e
+\sqrt{
+1+\frac{1}{n}
++
+\frac{(x_0-\bar{x})^2}{S_{xx}}
+}
+\]
+
+The critical value is:
+
+```text
+=T.INV.2T(0.05,n-2)
+```
+
+# Suggested Excel Calculations
+
+Mean of X:
+
+```text
+=AVERAGE(B2:B11)
+```
+
+Sample size:
+
+```text
+=COUNT(B2:B11)
+```
+
+\(S_{xx}\):
+
+```text
+=DEVSQ(B2:B11)
+```
+
+Predicted value:
+
+```text
+=FORECAST.LINEAR(x0,C2:C11,B2:B11)
+```
+
+Residual standard error can be taken from the ToolPak `Standard Error`.
+
+Confidence margin:
+
+```text
+=t_critical*se_regression*
+SQRT(1/n+(x0-mean_x)^2/Sxx)
+```
+
+Prediction margin:
+
+```text
+=t_critical*se_regression*
+SQRT(1+1/n+(x0-mean_x)^2/Sxx)
+```
+
+<div class="excel-box">
+
+### Excel Practical 7: Confidence and Prediction Intervals
+
+For a processing temperature of 172°C:
+
+1. calculate the fitted tensile strength
+2. calculate the 95% confidence interval for the mean tensile strength
+3. calculate the 95% prediction interval for one new specimen
+4. compare the widths of the intervals
+5. explain why the prediction interval is wider
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The fitted value is:
+
+```text
+=FORECAST.LINEAR(172,C2:C11,B2:B11)
+```
+
+The degrees of freedom are:
+
+\[
+df=n-2
+\]
+
+The critical value is:
+
+```text
+=T.INV.2T(0.05,COUNT(B2:B11)-2)
+```
+
+Calculate:
+
+```text
+Mean_X = AVERAGE(B2:B11)
+```
+
+```text
+Sxx = DEVSQ(B2:B11)
+```
+
+Use the regression `Standard Error` from the ToolPak output as \(s_e\).
+
+The confidence interval is:
+
+```text
+Predicted_Value
+± t_critical*se_regression*
+SQRT(1/n+(172-Mean_X)^2/Sxx)
+```
+
+The prediction interval is:
+
+```text
+Predicted_Value
+± t_critical*se_regression*
+SQRT(1+1/n+(172-Mean_X)^2/Sxx)
+```
+
+The prediction interval is wider because it must account for the variability of an individual new specimen in addition to uncertainty in the estimated mean response.
+
+</details>
+
+# Residuals
+
+A residual is the difference between an observed response and its fitted value.
+
+\[
+e_i
+=
+y_i-\hat{y}_i
+\]
+
+A positive residual means the observed response is above the fitted line.
+
+A negative residual means the observed response is below the fitted line.
+
+# Residuals in Excel
+
+Predicted response:
+
+```text
+=FORECAST.LINEAR(B2,$C$2:$C$11,$B$2:$B$11)
+```
+
+Residual:
+
+```text
+=C2-D2
+```
+
+where column `D` contains predicted values.
+
+The ToolPak can also generate residuals automatically.
+
+# Residual Analysis
+
+Residual analysis is used to assess whether the regression model is appropriate.
+
+Examine:
+
+- residuals versus fitted values
+- residuals versus the predictor
+- residuals versus observation order
+- histogram of residuals
+- possible influential observations
+
+# Desired Residual Pattern
+
+A satisfactory residual plot should show:
+
+- random scatter around zero
+- approximately constant vertical spread
+- no obvious curve
+- no funnel pattern
+- no time-related trend
+- no extreme residuals
+
+# Possible Problems
+
+## Curved Pattern
+
+May indicate that the relationship is not linear.
+
+## Funnel Shape
+
+May indicate non-constant variance.
+
+## Trend Against Observation Order
+
+May indicate process drift, ageing, or time-related dependence.
+
+## Extreme Residual
+
+May indicate an outlier, measurement problem, or unusual material behaviour.
+
+<div class="excel-box">
+
+### Excel Practical 8: Residual Analysis Using the ToolPak
+
+When running `Data Analysis > Regression`, select:
+
+- `Residuals`
+- `Standardized Residuals`
+- `Residual Plots`
+- `Line Fit Plots`
+
+Then:
+
+1. examine the residual plot
+2. check whether residuals are centred around zero
+3. look for curvature
+4. look for changing spread
+5. identify any unusually large standardized residuals
+6. decide whether the linear model appears reasonable
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+For the example dataset, the residuals should be relatively small and distributed around zero.
+
+The residual plot is expected to show:
+
+- no major curved pattern
+- no obvious funnel shape
+- no serious outlier
+- reasonably constant spread
+
+A suitable conclusion is:
+
+> The residual plot does not show strong evidence of non-linearity or unequal variance. The simple linear regression model appears reasonable for describing the relationship within the observed temperature range.
+
+This does not prove that all model assumptions are exactly satisfied.
+
+</details>
+
+# Regression Assumptions
+
+Simple linear regression commonly assumes:
+
+1. linearity
+2. independent errors
+3. constant error variance
+4. approximately normal errors for inference
+5. no highly influential observations
+6. a correctly specified model
+
+Independence is determined mainly by the experimental or sampling design.
+
+# Extrapolation
+
+Extrapolation means using the regression equation outside the observed range of the explanatory variable.
+
+The observed temperature range is:
+
+\[
+140^\circ\text{C to }185^\circ\text{C}
+\]
+
+Predicting at 172°C is interpolation.
+
+Predicting at 230°C is extrapolation.
+
+<div class="warning-box">
+
+A linear relationship observed over a limited range may not continue outside that range. At extreme temperatures, degradation, melting, structural changes, or other mechanisms may alter the relationship.
+
+</div>
+
+# Limitations of Extrapolation
+
+Extrapolation is risky because:
+
+- the relationship may become curved
+- the physical mechanism may change
+- the material may enter a different phase
+- the predictor may reach unsafe values
+- uncertainty increases away from the centre of the observed data
+- the model has not been validated in the new region
+
+<div class="excel-box">
+
+### Excel Practical 9: Interpolation and Extrapolation
+
+Use the fitted model to calculate predictions at:
+
+```text
+150°C
+172°C
+185°C
+200°C
+230°C
+```
+
+Classify each prediction as interpolation or extrapolation.
+
+Explain why the predictions at 200°C and 230°C require caution.
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+| Temperature | Classification |
+|--:|:--|
+| 150°C | Interpolation |
+| 172°C | Interpolation |
+| 185°C | Interpolation at the upper observed boundary |
+| 200°C | Extrapolation |
+| 230°C | Extrapolation |
+
+The 200°C and 230°C predictions are outside the observed data range.
+
+A suitable explanation is:
+
+> The fitted line was estimated using temperatures from 140°C to 185°C. Predictions above 185°C assume that the same linear relationship continues, but this has not been demonstrated. Polymer degradation or other process changes may occur at higher temperatures.
+
+</details>
+
+# Correlation and Regression Are Not Causation
+
+A strong relationship does not automatically establish causation.
+
+Possible explanations include:
+
+- a direct causal effect
+- a third variable affecting both variables
+- confounding
+- measurement or selection effects
+- an accidental association
+- separate groups producing an overall pattern
+
+Causal interpretation is strongest when:
+
+- treatments are deliberately assigned
+- randomisation is used
+- confounding variables are controlled
+- the experiment is replicated
+- the mechanism is scientifically plausible
+
+# Introduction to Multiple Regression
+
+Multiple regression uses two or more explanatory variables to predict one numerical response.
+
+The model is:
+
+\[
+Y
+=
+\beta_0+\beta_1X_1+\beta_2X_2+\cdots+\beta_kX_k+\varepsilon
+\]
+
+Example:
+
+\[
+\text{Tensile Strength}
+=
+\beta_0
++\beta_1(\text{Temperature})
++\beta_2(\text{Pressure})
++\beta_3(\text{Additive Concentration})
++\varepsilon
+\]
+
+# Purpose of Multiple Regression
+
+Multiple regression can be used to:
+
+- assess several predictors simultaneously
+- estimate an adjusted association
+- improve prediction
+- control for potential confounding variables
+- compare the relative contribution of predictors
+- model complex material and process relationships
+
+# Interpretation of a Multiple Regression Coefficient
+
+Suppose:
+
+\[
+b_1=0.20
+\]
+
+for temperature.
+
+A suitable interpretation is:
+
+> Holding pressure and additive concentration constant, a 1°C increase in processing temperature is associated with an estimated 0.20 MPa increase in mean tensile strength.
+
+The phrase **holding other predictors constant** is essential.
+
+# Analysis ToolPak: Multiple Regression
+
+Arrange the response in one column and all explanatory variables in adjacent columns.
+
+Example:
+
+| Tensile Strength | Temperature | Pressure | Additive Concentration |
+|--:|--:|--:|--:|
+|  |  |  |  |
+
+Then:
+
+1. select `Data`
+2. select `Data Analysis`
+3. choose `Regression`
+4. select the response column as `Input Y Range`
+5. select all predictor columns as `Input X Range`
+6. select `Labels`
+7. select residual output options
+8. choose an output location
+9. click `OK`
+
+# Multiple Regression Output
+
+Interpret:
+
+- `R Square`
+- `Adjusted R Square`
+- overall `Significance F`
+- coefficient estimates
+- coefficient p-values
+- confidence intervals
+- residual standard error
+
+Adjusted \(R^2\) is often preferred when comparing models with different numbers of predictors.
+
+<div class="warning-box">
+
+Adding more predictors cannot reduce ordinary \(R^2\), even when the new variables are not useful. Adjusted \(R^2\) includes a penalty for unnecessary predictors.
+
+</div>
+
+<div class="excel-box">
+
+### Excel Practical 10: Multiple Regression Interpretation
+
+Suppose Excel gives:
+
+| Predictor | Coefficient | P-value |
+|:--|--:|--:|
+| Intercept | 5.40 | 0.180 |
+| Temperature | 0.21 | 0.004 |
+| Pressure | 1.35 | 0.031 |
+| Additive Concentration | 0.48 | 0.220 |
+
+The overall `Significance F` is 0.002 and adjusted \(R^2=0.82\).
+
+Interpret:
+
+1. the overall model
+2. the temperature coefficient
+3. the pressure coefficient
+4. the additive-concentration coefficient
+5. adjusted \(R^2\)
+6. whether non-significant predictors should be removed automatically
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+**Overall model**
+
+Because:
+
+\[
+0.002<0.05
+\]
+
+the overall regression model is statistically significant.
+
+**Temperature**
+
+The coefficient is 0.21 with a p-value of 0.004.
+
+> Holding pressure and additive concentration constant, a 1°C increase in temperature is associated with an estimated increase of 0.21 MPa in mean tensile strength.
+
+**Pressure**
+
+The coefficient is 1.35 with a p-value of 0.031.
+
+> Holding the other predictors constant, a one-unit increase in pressure is associated with an estimated increase of 1.35 MPa in mean tensile strength.
+
+**Additive concentration**
+
+The p-value is 0.220, so the sample does not provide strong evidence of an adjusted linear effect after controlling for temperature and pressure.
+
+**Adjusted \(R^2\)**
+
+Approximately 82% of the observed variation in tensile strength is explained by the predictors after accounting for the number of variables in the model.
+
+A predictor should not be removed automatically based only on its p-value. Scientific importance, confounding, design, multicollinearity, hierarchy, and predictive purpose should also be considered.
+
+</details>
+
+# Correlation Matrix for Multiple Predictors
+
+Use:
+
+```text
+Data > Data Analysis > Correlation
+```
+
+to examine pairwise correlations among predictors.
+
+Very high correlations between predictors may indicate multicollinearity.
+
+Multicollinearity can:
+
+- increase coefficient standard errors
+- make coefficient signs unstable
+- make individual p-values difficult to interpret
+- produce different conclusions when predictors are added or removed
+
+A full treatment of multicollinearity is beyond the scope of this introductory lesson.
+
+# Reporting a Correlation Analysis
+
+A useful structure is:
+
+> A scatterplot indicated a strong positive approximately linear relationship between processing temperature and tensile strength. Pearson's correlation coefficient was \(r=\text{value}\), indicating a strong positive linear association. Correlation does not by itself establish causation.
+
+# Reporting a Regression Analysis
+
+A useful structure is:
+
+> A simple linear regression was fitted to predict tensile strength from processing temperature. The fitted equation was \(\hat{Y}=b_0+b_1X\). The temperature coefficient was positive and statistically significant. The model explained \(R^2\times100\%\) of the observed variation in tensile strength. Residual plots did not show serious departures from the model assumptions. Predictions should be restricted to the observed temperature range.
+
+# Practical Activity: Interpret a ToolPak Output
+
+Suppose Excel reports:
+
+| Quantity | Value |
+|:--|--:|
+| Multiple R | 0.94 |
+| R Square | 0.884 |
+| Adjusted R Square | 0.870 |
+| Standard Error | 1.10 |
+| Observations | 10 |
+| Significance F | 0.00005 |
+| Intercept | 8.20 |
+| Temperature coefficient | 0.25 |
+| Temperature p-value | 0.00005 |
+| Lower 95% for slope | 0.19 |
+| Upper 95% for slope | 0.31 |
+
+<div class="question-box">
+
+### Questions
+
+1. Describe the direction and strength of the relationship.
+2. Write the regression equation.
+3. Interpret the slope.
+4. Comment on the intercept.
+5. Interpret \(R^2\).
+6. State the slope-test decision.
+7. Interpret the slope confidence interval.
+8. Explain what the standard error represents.
+9. Can the model safely predict at 300°C?
+10. What residual information should be checked?
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+1. `Multiple R = 0.94` indicates a strong positive linear relationship because the slope is positive.
+
+2. The fitted equation is:
+
+\[
+\hat{Y}
+=
+8.20+0.25X
+\]
+
+3. Slope interpretation:
+
+> Within the observed temperature range, a 1°C increase in processing temperature is associated with an estimated increase of 0.25 MPa in mean tensile strength.
+
+4. The intercept predicts tensile strength at 0°C. It may not have a useful practical interpretation if 0°C is outside the observed range.
+
+5. \(R^2=0.884\) means that approximately 88.4% of the observed variation in tensile strength is explained by its linear relationship with temperature.
+
+6. Because the slope p-value is below 0.05, reject:
+
+\[
+H_0:\beta_1=0
+\]
+
+There is evidence of a non-zero linear relationship.
+
+7. The 95% confidence interval indicates that the population slope is estimated to lie between 0.19 and 0.31 MPa per °C.
+
+8. The regression standard error of 1.10 MPa describes the typical size of residual variation around the fitted line.
+
+9. Prediction at 300°C would be unsafe unless the original data include temperatures near that level. It would represent extreme extrapolation.
+
+10. Check:
+   - residuals versus fitted values
+   - residuals versus temperature
+   - residuals versus observation order
+   - standardized residuals
+   - possible curvature
+   - unequal spread
+   - influential observations
+
+</details>
+
+# Common Mistakes
+
+Avoid:
+
+- interpreting correlation without examining a scatterplot
+- assuming a high correlation proves causation
+- using correlation for a clearly curved relationship
+- reversing the response and explanatory variables without considering the research purpose
+- interpreting the intercept when zero is outside the meaningful range
+- describing \(R^2\) as the percentage of correct predictions
+- making predictions far outside the observed predictor range
+- reporting a fitted equation without units
+- ignoring residual diagnostics
+- assuming a significant slope guarantees practical importance
+- confusing a confidence interval with a prediction interval
+- using a confidence interval for the mean response to predict one new observation
+- including many predictors solely to increase \(R^2\)
+- interpreting multiple-regression coefficients without saying that other predictors are held constant
+- removing unusual observations without investigation
+
+# Section Exercises
+
+## Exercise 1: Scatterplot and Correlation
+
+The following data relate filler concentration to hardness.
+
+| Filler Percentage | Hardness |
+|--:|--:|
+| 1 | 62 |
+| 2 | 64 |
+| 3 | 65 |
+| 4 | 68 |
+| 5 | 70 |
+| 6 | 71 |
+| 7 | 74 |
+
+1. create a scatterplot
+2. describe direction, form, and strength
+3. calculate Pearson's correlation coefficient
+4. explain why correlation does not establish causation
+
+## Exercise 2: Simple Linear Regression
+
+Using the filler and hardness data:
+
+1. calculate the slope
+2. calculate the intercept
+3. write the fitted equation
+4. interpret the slope
+5. interpret the intercept
+6. calculate \(R^2\)
+7. predict hardness at 4.5% filler
+
+## Exercise 3: Analysis ToolPak
+
+Use `Data Analysis > Regression` to analyse the filler and hardness data.
+
+Report:
+
+1. regression statistics
+2. ANOVA results
+3. coefficients
+4. slope p-value
+5. slope confidence interval
+6. residual standard error
+7. contextual conclusion
+
+## Exercise 4: Confidence and Prediction Intervals
+
+Using the fitted filler model:
+
+1. calculate a 95% confidence interval for mean hardness at 4.5% filler
+2. calculate a 95% prediction interval for one new specimen
+3. explain why the prediction interval is wider
+
+## Exercise 5: Residual Analysis
+
+Create:
+
+1. predicted values
+2. residuals
+3. residuals versus fitted plot
+4. residuals versus run-order plot
+5. histogram of residuals
+
+Comment on linearity, constant variance, independence, and unusual observations.
+
+## Exercise 6: Multiple Regression
+
+A researcher predicts tensile strength using:
+
+- temperature
+- pressure
+- additive concentration
+
+Explain:
+
+1. the role of the response variable
+2. the role of each predictor
+3. interpretation of a temperature coefficient
+4. meaning of adjusted \(R^2\)
+5. purpose of the overall \(F\)-test
+6. why high predictor correlations may cause problems
+
+# Take-Home Messages
+
+- Scatterplots should be examined before calculating correlation or fitting regression.
+- Pearson's correlation coefficient measures linear direction and strength.
+- Correlation does not establish causation.
+- Simple linear regression models the mean response as a linear function of one predictor.
+- The slope describes the expected response change for a one-unit predictor increase.
+- The intercept may not have a useful interpretation when zero is outside the observed range.
+- \(R^2\) measures the proportion of observed response variation explained by the model.
+- Prediction intervals are wider than confidence intervals for the mean response.
+- Residual analysis is required to assess regression assumptions.
+- Extrapolation beyond the observed predictor range is risky.
+- The Analysis ToolPak provides regression statistics, ANOVA, coefficients, confidence intervals, fitted values, and residuals.
+- Multiple regression studies several predictors simultaneously.
+- Multiple-regression coefficients are interpreted while holding other predictors constant.
+
+# Course Navigation
+
+[Previous: Design and Analysis of Experiments](07_design_and_analysis_of_experiments.html)
+
+[Return to Course Outline](index.html)
+

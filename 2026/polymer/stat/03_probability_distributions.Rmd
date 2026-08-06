@@ -1,0 +1,1608 @@
+---
+title: "Probability Distributions"
+author: "Dr. R. M. Silva"
+output:
+  html_document:
+    theme: flatly
+    toc: true
+    toc_depth: 2
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+    number_sections: false
+---
+
+<style>
+body {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+h1 {
+  color: #1f4e79;
+  border-bottom: 2px solid #d9e6f2;
+  padding-bottom: 6px;
+  margin-top: 35px;
+}
+
+h2 {
+  color: #2f5597;
+  margin-top: 25px;
+}
+
+h3 {
+  color: #4472c4;
+  margin-top: 20px;
+}
+
+.learning-box {
+  background-color: #f4f8fb;
+  border-left: 5px solid #2f75b5;
+  padding: 18px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.example-box {
+  background-color: #f7f7f7;
+  border-left: 5px solid #70ad47;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.excel-box {
+  background-color: #eef7ee;
+  border-left: 5px solid #548235;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.warning-box {
+  background-color: #fff8e5;
+  border-left: 5px solid #ffc000;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.question-box {
+  background-color: #f4f4f4;
+  border-left: 5px solid #7f7f7f;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  background-color: #d9eaf7;
+}
+
+/* Control the floating table of contents */
+.tocify {
+  width: 280px;
+  max-height: 85vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.tocify-item {
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+@media (min-width: 992px) {
+  .col-md-9 {
+    padding-left: 35px;
+  }
+}
+
+@media (max-width: 991px) {
+  .tocify {
+    position: relative !important;
+    width: 100% !important;
+    max-height: none;
+    margin-bottom: 25px;
+  }
+}
+</style>
+
+<div class="learning-box">
+
+## Learning Objectives
+
+At the end of this lesson, students should be able to:
+
+1. explain the meaning of a random variable
+2. distinguish between discrete and continuous random variables
+3. recognise situations where the binomial, Poisson, and normal distributions may be appropriate
+4. calculate binomial, Poisson, and normal probabilities using Microsoft Excel
+5. standardise a normal random variable using a standard score
+6. interpret probabilities in the context of polymer defects and material measurements
+7. distinguish between exact, cumulative, and complementary probabilities
+8. communicate probability results clearly in scientific language
+
+</div>
+
+# Introduction
+
+A probability distribution describes the possible values of a random variable and the probabilities associated with those values.
+
+Probability distributions are useful in Polymer Science because measured properties and manufacturing outcomes vary.
+
+Examples include:
+
+- number of defective specimens in a sample
+- number of surface defects per sheet
+- tensile strength of a polymer
+- thickness of manufactured products
+- curing time
+- viscosity
+- molecular weight
+- pass or failure status
+
+Different types of variables require different probability models.
+
+# Random Variables
+
+A **random variable** assigns a numerical value to each possible outcome of a random process.
+
+Random variables are usually represented by capital letters such as \(X\), \(Y\), or \(Z\).
+
+The observed value of a random variable is usually represented by a lowercase letter such as \(x\).
+
+<div class="example-box">
+
+### Example
+
+Suppose ten polymer specimens are inspected.
+
+Let:
+
+\[
+X=\text{number of defective specimens among the ten inspected}
+\]
+
+The possible values of \(X\) are:
+
+\[
+0,1,2,\ldots,10
+\]
+
+</div>
+
+A random variable does not mean that the variable itself is chosen carelessly. It means that its value is determined by the outcome of a random process.
+
+# Discrete and Continuous Random Variables
+
+## Discrete Random Variables
+
+A discrete random variable takes a countable set of values.
+
+Examples include:
+
+- number of defective products in a batch
+- number of bubbles in a polymer sheet
+- number of cracks in a test specimen
+- number of production interruptions
+- number of specimens that pass inspection
+
+Discrete values are commonly counts such as:
+
+\[
+0,1,2,3,\ldots
+\]
+
+## Continuous Random Variables
+
+A continuous random variable can take any value within an interval.
+
+Examples include:
+
+- tensile strength
+- elongation at break
+- thickness
+- density
+- viscosity
+- molecular weight
+- processing temperature
+- curing time
+
+For a continuous random variable, probabilities are assigned to intervals rather than exact single values.
+
+<div class="warning-box">
+
+For a continuous random variable:
+
+\[
+P(X=x)=0
+\]
+
+for any exact value \(x\). Therefore, probabilities should be written over intervals such as \(P(X<50)\) or \(P(48<X<52)\).
+
+</div>
+
+# Probability Distribution of a Discrete Variable
+
+A discrete probability distribution must satisfy:
+
+\[
+0\leq P(X=x)\leq 1
+\]
+
+and
+
+\[
+\sum_x P(X=x)=1
+\]
+
+<div class="example-box">
+
+### Example
+
+Suppose the number of surface defects on a small polymer component has the following distribution.
+
+| Number of defects, \(x\) | 0 | 1 | 2 | 3 |
+|:--|--:|--:|--:|--:|
+| \(P(X=x)\) | 0.40 | 0.35 | 0.20 | 0.05 |
+
+The probabilities sum to:
+
+\[
+0.40+0.35+0.20+0.05=1
+\]
+
+</div>
+
+# Binomial Distribution
+
+The binomial distribution models the number of successes in a fixed number of independent trials.
+
+A random variable \(X\) follows a binomial distribution if:
+
+1. there is a fixed number of trials, \(n\)
+2. each trial has two possible outcomes
+3. the probability of success, \(p\), is constant
+4. the trials are independent
+
+The notation is:
+
+\[
+X\sim \operatorname{Bin}(n,p)
+\]
+
+The probability of exactly \(x\) successes is:
+
+\[
+P(X=x)
+=
+\binom{n}{x}p^x(1-p)^{n-x}
+\]
+
+## Interpretation of Success
+
+The word **success** means the outcome being counted. It does not necessarily mean a desirable outcome.
+
+For example, success may represent:
+
+- a defective specimen
+- a failed bond
+- a product that meets specification
+- a product with a surface crack
+
+## Polymer Science Example
+
+Suppose the probability that a randomly selected polymer specimen fails inspection is 0.08.
+
+Ten specimens are inspected independently.
+
+Let:
+
+\[
+X=\text{number of failed specimens}
+\]
+
+Then:
+
+\[
+X\sim \operatorname{Bin}(10,0.08)
+\]
+
+# Binomial Probabilities in Excel
+
+## Exactly \(x\) successes
+
+Use:
+
+```text
+=BINOM.DIST(x,n,p,FALSE)
+```
+
+Example:
+
+```text
+=BINOM.DIST(2,10,0.08,FALSE)
+```
+
+This calculates:
+
+\[
+P(X=2)
+\]
+
+## At most \(x\) successes
+
+Use:
+
+```text
+=BINOM.DIST(x,n,p,TRUE)
+```
+
+Example:
+
+```text
+=BINOM.DIST(2,10,0.08,TRUE)
+```
+
+This calculates:
+
+\[
+P(X\leq 2)
+\]
+
+## More than \(x\) successes
+
+Use the complement:
+
+```text
+=1-BINOM.DIST(x,n,p,TRUE)
+```
+
+Example:
+
+```text
+=1-BINOM.DIST(2,10,0.08,TRUE)
+```
+
+This calculates:
+
+\[
+P(X>2)
+\]
+
+## At least \(x\) successes
+
+Use:
+
+```text
+=1-BINOM.DIST(x-1,n,p,TRUE)
+```
+
+Example:
+
+```text
+=1-BINOM.DIST(2,10,0.08,TRUE)
+```
+
+This calculates:
+
+\[
+P(X\geq 3)
+\]
+
+<div class="excel-box">
+
+### Excel Practical 1: Binomial Probabilities
+
+The probability that a polymer seal fails a pressure test is 0.05. Twenty seals are tested independently.
+
+Let:
+
+\[
+X=\text{number of failed seals}
+\]
+
+Use Excel to calculate:
+
+1. \(P(X=0)\)
+2. \(P(X=2)\)
+3. \(P(X\leq 2)\)
+4. \(P(X>2)\)
+5. \(P(X\geq 1)\)
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The distribution is:
+
+\[
+X\sim \operatorname{Bin}(20,0.05)
+\]
+
+**1. No failed seals**
+
+```text
+=BINOM.DIST(0,20,0.05,FALSE)
+```
+
+**2. Exactly two failed seals**
+
+```text
+=BINOM.DIST(2,20,0.05,FALSE)
+```
+
+**3. At most two failed seals**
+
+```text
+=BINOM.DIST(2,20,0.05,TRUE)
+```
+
+**4. More than two failed seals**
+
+```text
+=1-BINOM.DIST(2,20,0.05,TRUE)
+```
+
+**5. At least one failed seal**
+
+```text
+=1-BINOM.DIST(0,20,0.05,TRUE)
+```
+
+A suitable interpretation for the final probability is:
+
+> The result gives the probability that at least one of the twenty tested polymer seals fails the pressure test, assuming the failure probability remains 0.05 and the test outcomes are independent.
+
+</details>
+
+# Mean and Variance of a Binomial Distribution
+
+For:
+
+\[
+X\sim \operatorname{Bin}(n,p)
+\]
+
+the mean is:
+
+\[
+E(X)=np
+\]
+
+and the variance is:
+
+\[
+\operatorname{Var}(X)=np(1-p)
+\]
+
+The standard deviation is:
+
+\[
+\sqrt{np(1-p)}
+\]
+
+<div class="example-box">
+
+### Example
+
+If:
+
+\[
+X\sim \operatorname{Bin}(100,0.04)
+\]
+
+then the expected number of defective items is:
+
+\[
+E(X)=100(0.04)=4
+\]
+
+This does not mean that exactly four defects must occur in every sample. It means that four is the long-run average number of defects per sample of 100.
+
+</div>
+
+# Poisson Distribution
+
+The Poisson distribution is used to model the number of events occurring within a fixed interval of time, area, length, volume, or exposure.
+
+Examples include:
+
+- number of bubbles per polymer sheet
+- number of surface defects per square metre
+- number of fibre breaks per metre
+- number of process interruptions per hour
+- number of contamination particles per sample
+
+The notation is:
+
+\[
+X\sim \operatorname{Poisson}(\lambda)
+\]
+
+where \(\lambda\) is the mean number of events per interval.
+
+The probability of exactly \(x\) events is:
+
+\[
+P(X=x)
+=
+\frac{e^{-\lambda}\lambda^x}{x!}
+\]
+
+For a Poisson distribution:
+
+\[
+E(X)=\lambda
+\]
+
+and:
+
+\[
+\operatorname{Var}(X)=\lambda
+\]
+
+# Conditions for a Poisson Model
+
+The Poisson model is most appropriate when:
+
+1. events are counted within a fixed interval
+2. events occur independently
+3. the average event rate is approximately constant
+4. two events do not occur at exactly the same point in the interval
+
+<div class="example-box">
+
+### Polymer Science Example
+
+A polymer sheet contains an average of 2.5 visible surface defects per square metre.
+
+Let:
+
+\[
+X=\text{number of visible defects in one square metre}
+\]
+
+Then:
+
+\[
+X\sim \operatorname{Poisson}(2.5)
+\]
+
+</div>
+
+# Poisson Probabilities in Excel
+
+## Exactly \(x\) events
+
+Use:
+
+```text
+=POISSON.DIST(x,mean,FALSE)
+```
+
+Example:
+
+```text
+=POISSON.DIST(4,2.5,FALSE)
+```
+
+This calculates:
+
+\[
+P(X=4)
+\]
+
+## At most \(x\) events
+
+Use:
+
+```text
+=POISSON.DIST(x,mean,TRUE)
+```
+
+Example:
+
+```text
+=POISSON.DIST(4,2.5,TRUE)
+```
+
+This calculates:
+
+\[
+P(X\leq 4)
+\]
+
+## More than \(x\) events
+
+Use:
+
+```text
+=1-POISSON.DIST(x,mean,TRUE)
+```
+
+## At least \(x\) events
+
+Use:
+
+```text
+=1-POISSON.DIST(x-1,mean,TRUE)
+```
+
+<div class="excel-box">
+
+### Excel Practical 2: Poisson Probabilities
+
+The number of air bubbles in a polymer sheet follows a Poisson distribution with a mean of 3.2 bubbles per sheet.
+
+Let:
+
+\[
+X=\text{number of air bubbles in a sheet}
+\]
+
+Use Excel to calculate:
+
+1. \(P(X=0)\)
+2. \(P(X=3)\)
+3. \(P(X\leq 2)\)
+4. \(P(X>5)\)
+5. \(P(X\geq 1)\)
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The distribution is:
+
+\[
+X\sim \operatorname{Poisson}(3.2)
+\]
+
+**1. No air bubbles**
+
+```text
+=POISSON.DIST(0,3.2,FALSE)
+```
+
+**2. Exactly three air bubbles**
+
+```text
+=POISSON.DIST(3,3.2,FALSE)
+```
+
+**3. At most two air bubbles**
+
+```text
+=POISSON.DIST(2,3.2,TRUE)
+```
+
+**4. More than five air bubbles**
+
+```text
+=1-POISSON.DIST(5,3.2,TRUE)
+```
+
+**5. At least one air bubble**
+
+```text
+=1-POISSON.DIST(0,3.2,TRUE)
+```
+
+</details>
+
+# Adjusting the Poisson Mean for a Different Interval
+
+The value of \(\lambda\) must correspond to the interval being studied.
+
+<div class="example-box">
+
+### Example
+
+The mean defect rate is 2 defects per square metre.
+
+For a sheet with an area of 3 square metres:
+
+\[
+\lambda=2\times 3=6
+\]
+
+Therefore:
+
+\[
+X\sim \operatorname{Poisson}(6)
+\]
+
+</div>
+
+<div class="excel-box">
+
+### Excel Practical 3: Changing the Exposure
+
+A production line records an average of 1.5 surface defects per square metre.
+
+A polymer sheet has an area of 4 square metres.
+
+1. calculate the appropriate Poisson mean
+2. find the probability of exactly four defects
+3. find the probability of more than six defects
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The mean for four square metres is:
+
+\[
+\lambda=1.5\times 4=6
+\]
+
+Therefore:
+
+\[
+X\sim \operatorname{Poisson}(6)
+\]
+
+**Exactly four defects**
+
+```text
+=POISSON.DIST(4,6,FALSE)
+```
+
+**More than six defects**
+
+```text
+=1-POISSON.DIST(6,6,TRUE)
+```
+
+</details>
+
+# Binomial and Poisson Distributions Compared
+
+| Feature | Binomial | Poisson |
+|:--|:--|:--|
+| Type of variable | Discrete count | Discrete count |
+| Number of trials | Fixed | Not expressed as a fixed number of trials |
+| Outcomes per trial | Two | Counts events in an interval |
+| Main parameters | \(n\) and \(p\) | \(\lambda\) |
+| Typical application | Number of failed specimens in a sample | Number of defects per sheet |
+| Possible values | \(0,1,\ldots,n\) | \(0,1,2,\ldots\) |
+
+<div class="warning-box">
+
+Use the binomial distribution when the number of trials is fixed and each trial has two outcomes.
+
+Use the Poisson distribution when events are counted over time, area, length, volume, or another exposure interval.
+
+</div>
+
+# Normal Distribution
+
+The normal distribution is a continuous, symmetric, bell-shaped probability distribution.
+
+It is determined by:
+
+- the mean, \(\mu\)
+- the standard deviation, \(\sigma\)
+
+The notation is:
+
+\[
+X\sim N(\mu,\sigma^2)
+\]
+
+The mean determines the centre of the distribution.
+
+The standard deviation determines the spread.
+
+## Main Properties
+
+A normal distribution:
+
+- is symmetric around the mean
+- has mean equal to median and mode
+- has total area equal to 1
+- extends indefinitely in both directions
+- has probabilities represented by areas under the curve
+
+# Applications in Polymer Science
+
+The normal distribution may provide a useful approximation for variables such as:
+
+- tensile strength
+- thickness
+- density
+- elongation at break
+- hardness
+- molecular weight
+- viscosity under controlled conditions
+- dimensional measurements
+
+The normal model should not be assumed automatically. The data should first be examined using:
+
+- a histogram
+- a boxplot
+- descriptive statistics
+- a normal probability plot where available
+
+# Empirical Rule
+
+For an approximately normal distribution:
+
+- about 68% of observations lie within one standard deviation of the mean
+- about 95% lie within two standard deviations
+- about 99.7% lie within three standard deviations
+
+<div class="example-box">
+
+### Example
+
+Suppose tensile strength is approximately normally distributed with:
+
+\[
+\mu=50\text{ MPa}
+\]
+
+and:
+
+\[
+\sigma=2\text{ MPa}
+\]
+
+Approximately 95% of tensile-strength measurements lie between:
+
+\[
+50-2(2)=46
+\]
+
+and:
+
+\[
+50+2(2)=54
+\]
+
+Therefore, approximately 95% lie between 46 MPa and 54 MPa.
+
+</div>
+
+# Normal Probabilities in Excel
+
+Suppose:
+
+\[
+X\sim N(\mu,\sigma^2)
+\]
+
+## Probability below a value
+
+Use:
+
+```text
+=NORM.DIST(x,mean,standard_deviation,TRUE)
+```
+
+Example:
+
+```text
+=NORM.DIST(52,50,2,TRUE)
+```
+
+This calculates:
+
+\[
+P(X\leq 52)
+\]
+
+## Probability above a value
+
+Use:
+
+```text
+=1-NORM.DIST(x,mean,standard_deviation,TRUE)
+```
+
+Example:
+
+```text
+=1-NORM.DIST(52,50,2,TRUE)
+```
+
+This calculates:
+
+\[
+P(X>52)
+\]
+
+## Probability between two values
+
+Use:
+
+```text
+=NORM.DIST(upper,mean,standard_deviation,TRUE)
+-NORM.DIST(lower,mean,standard_deviation,TRUE)
+```
+
+Example:
+
+```text
+=NORM.DIST(53,50,2,TRUE)-NORM.DIST(48,50,2,TRUE)
+```
+
+This calculates:
+
+\[
+P(48<X<53)
+\]
+
+## Finding a percentile or cut-off value
+
+Use:
+
+```text
+=NORM.INV(probability,mean,standard_deviation)
+```
+
+Example:
+
+```text
+=NORM.INV(0.95,50,2)
+```
+
+This gives the 95th percentile.
+
+<div class="excel-box">
+
+### Excel Practical 4: Normal Probabilities
+
+The tensile strength of a polymer is approximately normally distributed with a mean of 52 MPa and a standard deviation of 3 MPa.
+
+Let:
+
+\[
+X=\text{tensile strength}
+\]
+
+Use Excel to calculate:
+
+1. \(P(X<50)\)
+2. \(P(X>55)\)
+3. \(P(49<X<56)\)
+4. the tensile strength below which 10% of observations lie
+5. the tensile strength exceeded by only 5% of observations
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The distribution is:
+
+\[
+X\sim N(52,3^2)
+\]
+
+**1. Probability below 50 MPa**
+
+```text
+=NORM.DIST(50,52,3,TRUE)
+```
+
+**2. Probability above 55 MPa**
+
+```text
+=1-NORM.DIST(55,52,3,TRUE)
+```
+
+**3. Probability between 49 MPa and 56 MPa**
+
+```text
+=NORM.DIST(56,52,3,TRUE)-NORM.DIST(49,52,3,TRUE)
+```
+
+**4. Lower 10th percentile**
+
+```text
+=NORM.INV(0.10,52,3)
+```
+
+**5. Value exceeded by only 5%**
+
+This is the 95th percentile:
+
+```text
+=NORM.INV(0.95,52,3)
+```
+
+</details>
+
+# Standard Normal Distribution
+
+The standard normal distribution has:
+
+\[
+\mu=0
+\]
+
+and:
+
+\[
+\sigma=1
+\]
+
+It is represented by:
+
+\[
+Z\sim N(0,1)
+\]
+
+A value from another normal distribution can be converted to a standard score.
+
+# Standardisation
+
+The standard score is:
+
+\[
+z
+=
+\frac{x-\mu}{\sigma}
+\]
+
+The value of \(z\) indicates how many standard deviations the observation lies above or below the mean.
+
+- \(z>0\): observation is above the mean
+- \(z<0\): observation is below the mean
+- \(z=0\): observation equals the mean
+
+<div class="example-box">
+
+### Example
+
+Suppose tensile strength has:
+
+\[
+\mu=50
+\]
+
+and:
+
+\[
+\sigma=2
+\]
+
+For a specimen with tensile strength 54 MPa:
+
+\[
+z
+=
+\frac{54-50}{2}
+=
+2
+\]
+
+The specimen lies two standard deviations above the mean.
+
+</div>
+
+# Standardisation in Excel
+
+Use:
+
+```text
+=STANDARDIZE(x,mean,standard_deviation)
+```
+
+Example:
+
+```text
+=STANDARDIZE(54,50,2)
+```
+
+Alternatively:
+
+```text
+=(54-50)/2
+```
+
+# Standard Normal Probabilities in Excel
+
+## Probability below a z-score
+
+Use:
+
+```text
+=NORM.S.DIST(z,TRUE)
+```
+
+Example:
+
+```text
+=NORM.S.DIST(1.5,TRUE)
+```
+
+This calculates:
+
+\[
+P(Z\leq 1.5)
+\]
+
+## Probability above a z-score
+
+Use:
+
+```text
+=1-NORM.S.DIST(z,TRUE)
+```
+
+## Probability between two z-scores
+
+Use:
+
+```text
+=NORM.S.DIST(upper_z,TRUE)-NORM.S.DIST(lower_z,TRUE)
+```
+
+## Finding a z-score from a probability
+
+Use:
+
+```text
+=NORM.S.INV(probability)
+```
+
+Example:
+
+```text
+=NORM.S.INV(0.975)
+```
+
+<div class="excel-box">
+
+### Excel Practical 5: Standardisation
+
+A polymer has a mean elongation at break of 220% and a standard deviation of 15%.
+
+1. calculate the z-score for a specimen with elongation 250%
+2. calculate the z-score for a specimen with elongation 200%
+3. find the probability that elongation exceeds 250%
+4. find the probability that elongation lies between 200% and 240%
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+**1. z-score for 250%**
+
+```text
+=STANDARDIZE(250,220,15)
+```
+
+or:
+
+```text
+=(250-220)/15
+```
+
+**2. z-score for 200%**
+
+```text
+=STANDARDIZE(200,220,15)
+```
+
+**3. Probability above 250%**
+
+Direct method:
+
+```text
+=1-NORM.DIST(250,220,15,TRUE)
+```
+
+Standard normal method:
+
+```text
+=1-NORM.S.DIST(STANDARDIZE(250,220,15),TRUE)
+```
+
+**4. Probability between 200% and 240%**
+
+```text
+=NORM.DIST(240,220,15,TRUE)-NORM.DIST(200,220,15,TRUE)
+```
+
+</details>
+
+# Comparing Measurements Using z-Scores
+
+Standardisation allows measurements from different scales to be compared.
+
+<div class="example-box">
+
+### Example
+
+A tensile-strength value is 55 MPa in a process with:
+
+\[
+\mu=50,\qquad \sigma=2
+\]
+
+Its standard score is:
+
+\[
+z=\frac{55-50}{2}=2.5
+\]
+
+A viscosity value is 110 units in a process with:
+
+\[
+\mu=100,\qquad \sigma=8
+\]
+
+Its standard score is:
+
+\[
+z=\frac{110-100}{8}=1.25
+\]
+
+The tensile-strength result is more unusual relative to its own distribution because its z-score is farther from zero.
+
+</div>
+
+# Defect Analysis Applications
+
+Probability models can support quality and defect analysis.
+
+## Binomial Application
+
+Use the binomial distribution when:
+
+- a fixed number of products is inspected
+- each product is classified as defective or non-defective
+- the defect probability is stable
+- product outcomes are approximately independent
+
+Example:
+
+> Number of failed seals among 30 inspected seals.
+
+## Poisson Application
+
+Use the Poisson distribution when:
+
+- defects are counted over an area, length, time, or volume
+- the event rate is approximately constant
+
+Example:
+
+> Number of visible imperfections per square metre of polymer film.
+
+## Normal Application
+
+Use the normal distribution for continuous measurements that are approximately symmetric.
+
+Example:
+
+> Probability that sheet thickness falls below the lower specification limit.
+
+# Material Measurement Applications
+
+Suppose polymer thickness is normally distributed with:
+
+\[
+\mu=2.00\text{ mm}
+\]
+
+and:
+
+\[
+\sigma=0.05\text{ mm}
+\]
+
+The acceptable specification is from 1.90 mm to 2.10 mm.
+
+The probability that a product meets specification is:
+
+```text
+=NORM.DIST(2.10,2.00,0.05,TRUE)
+-NORM.DIST(1.90,2.00,0.05,TRUE)
+```
+
+The probability of being outside specification is:
+
+```text
+=1-(
+NORM.DIST(2.10,2.00,0.05,TRUE)
+-NORM.DIST(1.90,2.00,0.05,TRUE)
+)
+```
+
+<div class="excel-box">
+
+### Excel Practical 6: Specification Analysis
+
+The thickness of a polymer film is approximately normally distributed with a mean of 0.50 mm and a standard deviation of 0.02 mm.
+
+The acceptable specification is from 0.46 mm to 0.54 mm.
+
+Calculate:
+
+1. the probability that a film is below the lower specification
+2. the probability that a film is above the upper specification
+3. the probability that a film is within specification
+4. the expected number outside specification in a production batch of 5,000 films
+
+</div>
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+The distribution is:
+
+\[
+X\sim N(0.50,0.02^2)
+\]
+
+**1. Below 0.46 mm**
+
+```text
+=NORM.DIST(0.46,0.50,0.02,TRUE)
+```
+
+**2. Above 0.54 mm**
+
+```text
+=1-NORM.DIST(0.54,0.50,0.02,TRUE)
+```
+
+**3. Within specification**
+
+```text
+=NORM.DIST(0.54,0.50,0.02,TRUE)
+-NORM.DIST(0.46,0.50,0.02,TRUE)
+```
+
+**4. Expected number outside specification**
+
+First calculate:
+
+```text
+Probability outside specification
+=1-Probability within specification
+```
+
+Then:
+
+```text
+=5000*(1-(
+NORM.DIST(0.54,0.50,0.02,TRUE)
+-NORM.DIST(0.46,0.50,0.02,TRUE)
+))
+```
+
+</details>
+
+# Selecting an Appropriate Distribution
+
+| Research situation | Variable type | Possible distribution |
+|:--|:--|:--|
+| Number of failed specimens among 20 tested | Discrete | Binomial |
+| Number of defects per square metre | Discrete | Poisson |
+| Tensile strength | Continuous | Normal, if approximately symmetric |
+| Thickness | Continuous | Normal, if approximately symmetric |
+| Number of products meeting specification | Discrete | Binomial |
+| Number of process interruptions per hour | Discrete | Poisson |
+| Viscosity measurement | Continuous | Normal, if appropriate |
+
+# Practical Activity: Select the Distribution
+
+For each situation, identify the most appropriate distribution and justify your answer.
+
+1. The number of defective caps among 40 inspected caps.
+2. The number of surface cracks per metre of polymer pipe.
+3. The tensile strength of a randomly selected specimen.
+4. The number of seals that pass a pressure test among 25 tested seals.
+5. The number of contamination particles in one millilitre of polymer solution.
+6. The thickness of a manufactured polymer sheet.
+
+<details>
+
+<summary><strong>Solution</strong></summary>
+
+**1. Defective caps among 40 inspected caps**
+
+Binomial distribution, because there is a fixed number of products and each cap is classified as defective or non-defective.
+
+**2. Surface cracks per metre**
+
+Poisson distribution, because events are counted over a fixed length.
+
+**3. Tensile strength**
+
+A normal distribution may be appropriate if the measurements are continuous and approximately symmetric.
+
+**4. Seals passing among 25 tested seals**
+
+Binomial distribution, because there is a fixed number of independent pass-or-fail trials.
+
+**5. Contamination particles per millilitre**
+
+Poisson distribution may be appropriate because particles are counted within a fixed volume.
+
+**6. Sheet thickness**
+
+A normal distribution may be appropriate if thickness is continuous and approximately symmetric.
+
+</details>
+
+# Practical Activity: Build an Excel Probability Calculator
+
+Create an Excel worksheet with separate sections for:
+
+1. binomial probabilities
+2. Poisson probabilities
+3. normal probabilities
+4. standardisation
+
+The worksheet should contain input cells and formula cells.
+
+## Suggested Binomial Section
+
+| Input | Value |
+|:--|--:|
+| Number of trials, \(n\) | 20 |
+| Probability of success, \(p\) | 0.05 |
+| Number of successes, \(x\) | 2 |
+
+Use formulas for:
+
+- \(P(X=x)\)
+- \(P(X\leq x)\)
+- \(P(X>x)\)
+- \(P(X\geq x)\)
+
+## Suggested Poisson Section
+
+| Input | Value |
+|:--|--:|
+| Mean event rate, \(\lambda\) | 3.2 |
+| Number of events, \(x\) | 4 |
+
+## Suggested Normal Section
+
+| Input | Value |
+|:--|--:|
+| Mean, \(\mu\) | 52 |
+| Standard deviation, \(\sigma\) | 3 |
+| Lower value | 49 |
+| Upper value | 56 |
+
+## Suggested Standardisation Section
+
+| Input | Value |
+|:--|--:|
+| Observation, \(x\) | 55 |
+| Mean, \(\mu\) | 50 |
+| Standard deviation, \(\sigma\) | 2 |
+
+<div class="question-box">
+
+### Task
+
+Design the calculator so that changing the input values automatically updates all probabilities and z-scores.
+
+Use clear labels and format probability results to four decimal places.
+
+</div>
+
+# Common Mistakes
+
+Avoid:
+
+- using the binomial distribution when the probability changes across trials
+- using the binomial distribution when outcomes are not approximately independent
+- using the Poisson mean for the wrong time, area, or volume
+- confusing \(P(X<x)\) with \(P(X\leq x)\) for discrete variables
+- forgetting to use a complement for upper-tail probabilities
+- using `FALSE` when a cumulative probability is required
+- using `TRUE` when an exact probability is required
+- assuming every continuous variable follows a normal distribution
+- entering variance instead of standard deviation in Excel's normal-distribution functions
+- interpreting a z-score as a probability
+- reporting a numerical probability without explaining its scientific meaning
+
+# Section Exercises
+
+## Exercise 1: Binomial Distribution
+
+The probability that a polymer component fails quality inspection is 0.06. Fifteen components are selected independently.
+
+Calculate:
+
+1. the probability that none fail
+2. the probability that exactly two fail
+3. the probability that at most two fail
+4. the probability that more than two fail
+5. the expected number of failures
+
+## Exercise 2: Poisson Distribution
+
+Surface imperfections occur at an average rate of 1.8 per square metre.
+
+Calculate:
+
+1. the probability of no imperfections in one square metre
+2. the probability of exactly two imperfections
+3. the probability of at most three imperfections
+4. the probability of more than four imperfections
+5. the probability of exactly five imperfections on a sheet of area 2 square metres
+
+## Exercise 3: Normal Distribution
+
+Tensile strength is approximately normally distributed with a mean of 60 MPa and a standard deviation of 4 MPa.
+
+Calculate:
+
+1. \(P(X<55)\)
+2. \(P(X>65)\)
+3. \(P(58<X<66)\)
+4. the 25th percentile
+5. the value exceeded by only 10% of specimens
+
+## Exercise 4: Standardisation
+
+A material has mean hardness 75 units and standard deviation 6 units.
+
+Calculate and interpret the z-scores for:
+
+1. 81 units
+2. 69 units
+3. 90 units
+
+State which result is most unusual.
+
+## Exercise 5: Quality Specification
+
+Polymer thickness is approximately normally distributed with mean 3.00 mm and standard deviation 0.08 mm.
+
+The specification limits are 2.85 mm and 3.15 mm.
+
+Calculate:
+
+1. the proportion below the lower limit
+2. the proportion above the upper limit
+3. the proportion within specification
+4. the expected number outside specification among 10,000 products
+
+# Take-Home Messages
+
+- A random variable assigns numerical values to random outcomes.
+- Discrete random variables represent counts, while continuous random variables represent measurements.
+- The binomial distribution models the number of successes in a fixed number of independent trials.
+- The Poisson distribution models event counts over a fixed exposure interval.
+- The normal distribution is a continuous model for approximately symmetric measurements.
+- The standard normal distribution has mean zero and standard deviation one.
+- Standardisation expresses an observation in standard-deviation units.
+- Excel can calculate exact, cumulative, upper-tail, and interval probabilities.
+- Probability models should be selected using the scientific context and assumptions.
+- Defect counts and material measurements often require different distributions.
+
+# Course Navigation
+
+[Previous: Descriptive Statistics](02_descriptive_statistics.html)
+
+[Return to Course Outline](index.html)
+
+[Next: Statistical Inference](04_statistical_inference.html)
