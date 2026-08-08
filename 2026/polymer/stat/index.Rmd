@@ -1,6 +1,6 @@
 ---
 title: "MPST 520 1.0 - Statistics"
-subtitle: " M.Sc. in Polymer Sciences & Technology - University of Sri Jayewardenepura"
+subtitle: " M.Sc. in Polymer Sciences & Technology - University of Sri Jayewardenepura(USJ)"
 author: "Dr. R. M. Silva"
 output:
   html_document:
