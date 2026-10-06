@@ -1,0 +1,401 @@
+[
+  {
+    "objectID": "week01/index.html",
+    "href": "week01/index.html",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "",
+    "text": "← Back to course homepage"
+  },
+  {
+    "objectID": "week01/index.html#learning-outcomes",
+    "href": "week01/index.html#learning-outcomes",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "Learning outcomes",
+    "text": "Learning outcomes\nBy the end of this lesson, you should be able to:\n\nexplain why decision theory is useful when future outcomes are not fully known;\ndistinguish a decision alternative from a state of nature;\nidentify the consequence associated with an action-state combination;\nconstruct and interpret a simple payoff or loss table; and\ndescribe the four basic steps in the decision-theory approach.\n\n\nWeek 1 focus. Decision problems, alternatives, states of nature, consequences, payoff/loss tables, and the basic steps in the decision-theory approach."
+  },
+  {
+    "objectID": "week01/index.html#a-cricket-decision-before-the-theory",
+    "href": "week01/index.html#a-cricket-decision-before-the-theory",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "A cricket decision before the theory",
+    "text": "A cricket decision before the theory\nA cricket team is defending 12 runs in the final over.\nThe captain must choose one of three bowlers:\n\na fast bowler;\na spinner;\na medium-pace bowler.\n\nThe batting side may respond aggressively or may focus on rotating the strike.\n\nThink for one minute\nQuestion: Which bowler should the captain choose?\nDo not calculate anything yet.\nWhat information would you want before making the decision?\n\n\nClass discussion\nPossible answers include:\n\nHow has each bowler performed against aggressive batting?\nHow has each bowler performed when batters rotate the strike?\nWhat is the pitch like?\nIs one bowler more likely to concede boundaries?\nIs one bowler better at limiting singles?\nWhat is the estimated chance of successfully defending the target?\n\nThe key point is simple:\n\nA decision is made now, but its consequence often depends on something that happens later and is not fully under our control.\n\nThat is the setting in which decision theory becomes useful."
+  },
+  {
+    "objectID": "week01/index.html#decision-alternatives",
+    "href": "week01/index.html#decision-alternatives",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "3.1 Decision alternatives",
+    "text": "3.1 Decision alternatives\nA decision alternative is an action available to the decision maker.\nThe decision maker can choose among the alternatives.\n\nCricket example\nSuppose a captain must choose a bowler for the final over.\n\n(A_1): Fast bowler\n(A_2): Spin bowler\n(A_3): Medium-pace bowler\n\nThese are decision alternatives because the captain controls the choice.\n\n\nQuick question\nWhich of the following is a decision alternative?\n\nThe batter attacks\nThe pitch offers turn\nThe captain selects the spinner\nThe batting side scores 10 runs\n\nAnswer: 3. The captain selects the spinner."
+  },
+  {
+    "objectID": "week01/index.html#states-of-nature",
+    "href": "week01/index.html#states-of-nature",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "3.2 States of nature",
+    "text": "3.2 States of nature\nA state of nature is a possible future condition that affects the consequence of a decision but is not controlled by the decision maker.\n\nCricket example\nSuppose the captain chooses the final-over bowler.\nPossible states of nature could be:\n\n(S_1): The batter attacks aggressively\n(S_2): The batter focuses on strike rotation\n\nThe captain chooses the bowler.\nThe captain does not control how the batter responds.\nSo:\n\nBowler choice = decision alternative\nBatter response = state of nature\n\n\n\nAthletics example\nA 1500 m runner must decide on a pacing strategy.\nPossible alternatives:\n\n(A_1): Fast early pace\n(A_2): Even pace\n(A_3): Conservative start with fast finish\n\nPossible states of nature:\n\n(S_1): Competitors make the race fast\n(S_2): Competitors make the race tactical and slow\n\nThe athlete controls the race plan but does not control the pace chosen by the rest of the field.\n\n\nVolleyball example\nA volleyball team is receiving serve at 23–23.\nThe coach may choose:\n\n(A_1): Middle attack\n(A_2): Outside attack\n(A_3): Back-row attack\n\nPossible states of nature:\n\n(S_1): Opponent commits the middle block\n(S_2): Opponent forms a strong outside double block\n(S_3): Opponent uses a balanced block\n\nThe attacking team controls its own choice.\nThe opponent’s defensive response is not under its control."
+  },
+  {
+    "objectID": "week01/index.html#consequences",
+    "href": "week01/index.html#consequences",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "3.3 Consequences",
+    "text": "3.3 Consequences\nA consequence is the result obtained when a particular alternative is chosen and a particular state of nature occurs.\nThe consequence might be expressed as:\n\nruns conceded;\nprobability of winning;\npoints won;\nrace time;\nexpected medal probability;\ninjury risk;\nexpected performance score;\nor another quantity relevant to the decision.\n\nWe denote the consequence of choosing alternative (A_i) when state (S_j) occurs by (C_{ij}).\nFor example:\n\n(A_2): Spin bowler\n(S_1): Batter attacks aggressively\n\nThen (C_{21}) is the consequence of using the spinner when the batter attacks aggressively."
+  },
+  {
+    "objectID": "week01/index.html#identify-the-components",
+    "href": "week01/index.html#identify-the-components",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "Identify the components",
+    "text": "Identify the components\n\nDecision alternatives\n\n(A_1): Fast bowler\n(A_2): Spin bowler\n(A_3): Medium pace\n\n\n\nStates of nature\n\n(S_1): Batter attacks\n(S_2): Batter rotates strike\n\n\n\nConsequence\nExpected runs conceded.\nHere, smaller values are preferred.\nSo the table behaves like a loss table."
+  },
+  {
+    "objectID": "week01/index.html#how-to-read-the-table",
+    "href": "week01/index.html#how-to-read-the-table",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "How to read the table",
+    "text": "How to read the table\nIf the captain chooses the spinner and the batter attacks, then:\n[ C_{21}=8 ]\nInterpretation:\n\nIf the captain chooses the spinner and the batter attacks, the expected number of runs conceded is 8.\n\nSimilarly:\n[ C_{12}=7 ]\nInterpretation:\n\nIf the captain chooses the fast bowler and the batter rotates the strike, the expected number of runs conceded is 7.\n\n\nStop and interpret\n\nWhich bowler performs best if the batter attacks?\nWhich bowler performs best if the batter rotates the strike?\nWhich bowler has the largest possible expected runs conceded?\nCan we choose the overall best bowler from this table alone?\n\nAnswers\n\nSpin bowler, with 8 expected runs conceded.\nFast bowler, with 7 expected runs conceded.\nFast bowler, with 12 expected runs conceded.\nNot yet. We still need a rule for comparing alternatives when the future batting response is unknown."
+  },
+  {
+    "objectID": "week01/index.html#cricket-as-a-loss-problem",
+    "href": "week01/index.html#cricket-as-a-loss-problem",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "Cricket as a loss problem",
+    "text": "Cricket as a loss problem\nIf the consequence is runs conceded, smaller values are preferred.\n\n\n\nBowling decision\nBatter attacks\nBatter rotates strike\n\n\n\n\nFast bowler\n12\n7\n\n\nSpin bowler\n8\n10\n\n\nMedium pace\n10\n8\n\n\n\nThis is naturally interpreted as a loss table."
+  },
+  {
+    "objectID": "week01/index.html#cricket-as-a-payoff-problem",
+    "href": "week01/index.html#cricket-as-a-payoff-problem",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "Cricket as a payoff problem",
+    "text": "Cricket as a payoff problem\nSuppose the analyst instead estimates the probability of successfully defending the target.\n\n\n\nBowling decision\nBatter attacks\nBatter rotates strike\n\n\n\n\nFast bowler\n0.43\n0.71\n\n\nSpin bowler\n0.64\n0.56\n\n\nMedium pace\n0.51\n0.63\n\n\n\nNow larger values are preferred.\nThis is a payoff table.\n\nThe underlying decision problem may be similar, but the direction of preference changes with the consequence measure.\n\nRuns conceded: lower is better.\nProbability of winning: higher is better."
+  },
+  {
+    "objectID": "week01/index.html#the-same-athletics-problem-using-a-payoff",
+    "href": "week01/index.html#the-same-athletics-problem-using-a-payoff",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "The same athletics problem using a payoff",
+    "text": "The same athletics problem using a payoff\nSuppose instead the analysts estimate the probability of finishing in the top three.\n\n\n\nRace strategy\nFast race\nTactical race\n\n\n\n\nFast start\n0.44\n0.19\n\n\nEven pace\n0.35\n0.33\n\n\nConservative start\n0.21\n0.49\n\n\n\nNow larger values are preferred.\nThis immediately shows an important feature of decision problems:\n\nThe action that looks best depends on the state of nature.\n\nThere is no single strategy that dominates in both race conditions."
+  },
+  {
+    "objectID": "week01/index.html#template",
+    "href": "week01/index.html#template",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "Template",
+    "text": "Template\nFor any sports decision problem, identify:\n\nDecision maker\nWho chooses the action?\n\n\nAlternatives\nWhat can be chosen?\nUse notation such as (A_1, A_2, , A_m).\n\n\nStates of nature\nWhat uncertain future conditions may occur?\nUse notation such as (S_1, S_2, , S_n).\n\n\nConsequences\nWhat happens if (A_i) is selected and (S_j) occurs?\nUse (C_{ij}) for the corresponding consequence.\n\n\nAvailable information\nWhat is currently known about the states of nature?"
+  },
+  {
+    "objectID": "week01/index.html#minute-activity-volleyball-serving-decision",
+    "href": "week01/index.html#minute-activity-volleyball-serving-decision",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "8-minute activity: Volleyball serving decision",
+    "text": "8-minute activity: Volleyball serving decision\nA volleyball coach must decide whether to keep the current server or introduce a serving specialist late in the set.\nTwo possible reception states are considered:\n\nthe opponent receives well;\nthe opponent receives poorly.\n\nThe estimated probability of winning the rally is:\n\n\n\nDecision\nGood opponent reception\nPoor opponent reception\n\n\n\n\nKeep current server\n0.43\n0.62\n\n\nUse serving specialist\n0.35\n0.76\n\n\n\n\nWork in pairs\n\nIdentify the decision maker.\nIdentify the decision alternatives.\nIdentify the states of nature.\nIdentify the consequence.\nFind (C_{12}).\nFind (C_{21}).\nWhich action would be selected if good reception were known with certainty?\nWhich action would be selected if poor reception were known with certainty?\nCan one action be selected for the next serve without using an additional decision criterion? Explain briefly."
+  },
+  {
+    "objectID": "week01/index.html#independent-learning",
+    "href": "week01/index.html#independent-learning",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "Independent learning",
+    "text": "Independent learning\nBefore Week 2:\n\nReview the basic structure of a decision problem.\nCreate one sports example with:\n\nat least two alternatives;\nat least two states of nature;\none numerical consequence for every action-state combination.\n\nState clearly whether the consequence should be maximized or minimized.\nWrite one sentence explaining why your example involves uncertainty."
+  },
+  {
+    "objectID": "week01/index.html#next-week",
+    "href": "week01/index.html#next-week",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "Next week",
+    "text": "Next week\nWeek 02: Decision-Making Environments\nWe will distinguish decisions under:\n\ncertainty;\nuncertainty;\nrisk.\n\nWe will then use that distinction to decide what information is available before choosing a decision rule."
+  },
+  {
+    "objectID": "week01/index.html#reference",
+    "href": "week01/index.html#reference",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "Reference",
+    "text": "Reference\nGupta, P. K., Hira, D. S., & Kamboj, A. (2012). Introduction to Operations Research. S Chand and Company Limited. Chapter 9: Decision Theory, pp. 635–711."
+  },
+  {
+    "objectID": "week02/index.html",
+    "href": "week02/index.html",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "",
+    "text": "← Back to course homepage"
+  },
+  {
+    "objectID": "week02/index.html#learning-outcomes",
+    "href": "week02/index.html#learning-outcomes",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "Learning outcomes",
+    "text": "Learning outcomes\nBy the end of this lesson, you should be able to:\n\ndistinguish decision making under certainty, uncertainty, and risk;\nidentify the information available in each environment;\nformulate a statistical decision problem using alternatives, states of nature, consequences, and available information;\nclassify a sports decision problem into the appropriate decision-making environment; and\nexplain why the choice of decision rule depends on the information available.\n\n\nWeek 2 focus. Decisions under certainty, uncertainty, and risk, together with the formulation of statistical decision problems."
+  },
+  {
+    "objectID": "week02/index.html#situation-a-certainty",
+    "href": "week02/index.html#situation-a-certainty",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "Situation A: Certainty",
+    "text": "Situation A: Certainty\nThe captain knows that the next batter will play aggressively throughout the over.\nThere is only one relevant state for the decision."
+  },
+  {
+    "objectID": "week02/index.html#situation-b-uncertainty",
+    "href": "week02/index.html#situation-b-uncertainty",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "Situation B: Uncertainty",
+    "text": "Situation B: Uncertainty\nThe captain knows that the batter may either:\n\nattack aggressively; or\nfocus on rotating the strike.\n\nHowever, there is no reliable information about which response is more likely."
+  },
+  {
+    "objectID": "week02/index.html#situation-c-risk",
+    "href": "week02/index.html#situation-c-risk",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "Situation C: Risk",
+    "text": "Situation C: Risk\nThe captain has historical information suggesting:\n\n(P() = 0.65)\n(P() = 0.35)\n\nThese are three different decision-making environments.\n\nOpening question\nWhat changes across the three situations?\nNot the alternatives.\nThe captain still chooses between pace and spin.\nWhat changes is the information about the state of nature."
+  },
+  {
+    "objectID": "week02/index.html#definition",
+    "href": "week02/index.html#definition",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "Definition",
+    "text": "Definition\nA decision is made under certainty when the relevant future state is known.\nThe decision maker can directly compare the consequences of the available actions under that known state."
+  },
+  {
+    "objectID": "week02/index.html#athletics-example",
+    "href": "week02/index.html#athletics-example",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "Athletics example",
+    "text": "Athletics example\nA 400 m athlete is choosing between two warm-up routines before an indoor race.\nThe environmental conditions are already known and fixed.\nSuppose the estimated race times are:\n\n\n\nWarm-up routine\nExpected 400 m time\n\n\n\n\nRoutine A\n51.8 s\n\n\nRoutine B\n52.4 s\n\n\n\nSince lower race time is preferred,\n[ 51.8 &lt; 52.4 ]\nso Routine A is preferred.\n\nUnder certainty, we do not need probabilities for several future states because the relevant state is treated as known."
+  },
+  {
+    "objectID": "week02/index.html#cricket-example",
+    "href": "week02/index.html#cricket-example",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "Cricket example",
+    "text": "Cricket example\nSuppose the captain knows the next batter is especially weak against spin.\nEstimated runs conceded are:\n\n\n\nBowling decision\nKnown batter condition\n\n\n\n\nFast bowler\n9\n\n\nSpin bowler\n6\n\n\n\nSince fewer runs conceded are preferred, spin is the better action under the known condition."
+  },
+  {
+    "objectID": "week02/index.html#definition-1",
+    "href": "week02/index.html#definition-1",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "Definition",
+    "text": "Definition\nA decision is made under uncertainty when:\n\nmore than one state of nature is possible;\nthe decision maker does not know which state will occur; and\nreliable probabilities cannot be assigned to the states.\n\nThe important point is that the possible states can still be described.\nWhat is missing is their probability distribution."
+  },
+  {
+    "objectID": "week02/index.html#volleyball-example",
+    "href": "week02/index.html#volleyball-example",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "Volleyball example",
+    "text": "Volleyball example\nA volleyball coach must choose an attacking strategy at a critical point.\nThe alternatives are:\n\n(A_1): middle attack\n(A_2): outside attack\n(A_3): back-row attack\n\nPossible defensive states are:\n\n(S_1): opponent commits the middle block\n(S_2): opponent forms an outside double block\n(S_3): opponent uses a balanced block\n\nSuppose the estimated probability of winning the rally under each combination is:\n\n\n\nAttack\nMiddle block\nOutside double block\nBalanced block\n\n\n\n\nMiddle attack\n0.34\n0.63\n0.48\n\n\nOutside attack\n0.60\n0.31\n0.46\n\n\nBack-row attack\n0.50\n0.56\n0.43\n\n\n\nThe coach knows the possible defensive responses.\nBut suppose there is no reliable probability model for which blocking pattern will be used.\nThis is decision making under uncertainty.\n\nClass question\nCan we calculate an expected value for each attack?\nNo.\nTo calculate an expected value, we need probabilities for the states of nature."
+  },
+  {
+    "objectID": "week02/index.html#athletics-example-1",
+    "href": "week02/index.html#athletics-example-1",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "Athletics example",
+    "text": "Athletics example\nA 1500 m runner is preparing for a championship final.\nPossible race strategies are:\n\nfast early pace;\neven pace;\nconservative start with a fast finish.\n\nPossible race states are:\n\ncompetitors make the race fast;\ncompetitors keep the race slow and tactical.\n\nSuppose there is too little relevant information to assign reasonable probabilities to these two race states.\nThe athlete therefore faces a decision under uncertainty.\nA consequence table can still be constructed.\nWhat is missing is the probability distribution over the states."
+  },
+  {
+    "objectID": "week02/index.html#definition-2",
+    "href": "week02/index.html#definition-2",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "Definition",
+    "text": "Definition\nA decision is made under risk when:\n\nmore than one state of nature is possible; and\nprobabilities can be assigned to the states.\n\nThe probabilities may come from:\n\nhistorical data;\nstatistical models;\nexpert judgement;\nor a combination of these."
+  },
+  {
+    "objectID": "week02/index.html#cricket-example-1",
+    "href": "week02/index.html#cricket-example-1",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "Cricket example",
+    "text": "Cricket example\nSuppose the captain again chooses between a fast bowler and a spinner.\nThe two possible batting responses are:\n\n(S_1): aggressive batting\n(S_2): strike rotation\n\nSuppose recent match analysis gives:\n\n(P(S_1) = 0.65)\n(P(S_2) = 0.35)\n\nEstimated runs conceded are:\n\n\n\nBowling decision\nAggressive batting\nStrike rotation\n\n\n\n\nFast bowler\n11\n7\n\n\nSpin bowler\n8\n10\n\n\n\nNow the decision is under risk because probabilities are available for the possible states.\nThis does not mean the future is known.\nThe batter may still respond in either way.\nThe difference is that the captain now has quantitative information about how likely each response is."
+  },
+  {
+    "objectID": "week02/index.html#under-certainty",
+    "href": "week02/index.html#under-certainty",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "Under certainty",
+    "text": "Under certainty\nThe coach knows which reception state will occur.\nOnly that state needs to be considered."
+  },
+  {
+    "objectID": "week02/index.html#under-uncertainty",
+    "href": "week02/index.html#under-uncertainty",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "Under uncertainty",
+    "text": "Under uncertainty\nThe coach knows the opponent may receive either well or poorly, but has no useful probability information.\nThe states are known.\nTheir probabilities are not."
+  },
+  {
+    "objectID": "week02/index.html#under-risk",
+    "href": "week02/index.html#under-risk",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "Under risk",
+    "text": "Under risk\nSuppose the analyst estimates:\n\n(P() = 0.70)\n(P() = 0.30)\n\nThe problem is now under risk because probabilities are available.\n\nThe alternatives and possible consequences may remain exactly the same. What changes is the information available about the states of nature."
+  },
+  {
+    "objectID": "week02/index.html#decision-maker",
+    "href": "week02/index.html#decision-maker",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "7.1 Decision maker",
+    "text": "7.1 Decision maker\nWho chooses the action?\nExamples:\n\ncaptain;\ncoach;\nathlete;\nselection committee."
+  },
+  {
+    "objectID": "week02/index.html#alternatives",
+    "href": "week02/index.html#alternatives",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "7.2 Alternatives",
+    "text": "7.2 Alternatives\nWhat actions can be chosen?\nWe may denote them by:\n[ A_1, A_2, , A_m ]"
+  },
+  {
+    "objectID": "week02/index.html#states-of-nature",
+    "href": "week02/index.html#states-of-nature",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "7.3 States of nature",
+    "text": "7.3 States of nature\nWhat uncertain future conditions may occur?\nWe may denote them by:\n[ S_1, S_2, , S_n ]"
+  },
+  {
+    "objectID": "week02/index.html#consequences",
+    "href": "week02/index.html#consequences",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "7.4 Consequences",
+    "text": "7.4 Consequences\nWhat result follows from each action-state combination?\nWe may denote the consequence by:\n[ C_{ij} ]\nwhere (C_{ij}) is the consequence of choosing action (A_i) when state (S_j) occurs."
+  },
+  {
+    "objectID": "week02/index.html#available-information",
+    "href": "week02/index.html#available-information",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "7.5 Available information",
+    "text": "7.5 Available information\nWhat do we know about the states?\nThis final question determines the decision-making environment."
+  },
+  {
+    "objectID": "week02/index.html#step-1-identify-the-decision-maker",
+    "href": "week02/index.html#step-1-identify-the-decision-maker",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "Step 1: Identify the decision maker",
+    "text": "Step 1: Identify the decision maker\nThe relay coach."
+  },
+  {
+    "objectID": "week02/index.html#step-2-identify-the-alternatives",
+    "href": "week02/index.html#step-2-identify-the-alternatives",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "Step 2: Identify the alternatives",
+    "text": "Step 2: Identify the alternatives\n\n(A_1): select Athlete A\n(A_2): select Athlete B"
+  },
+  {
+    "objectID": "week02/index.html#step-3-identify-the-states-of-nature",
+    "href": "week02/index.html#step-3-identify-the-states-of-nature",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "Step 3: Identify the states of nature",
+    "text": "Step 3: Identify the states of nature\n\n(S_1): fast opening pace\n(S_2): moderate opening pace"
+  },
+  {
+    "objectID": "week02/index.html#step-4-identify-the-consequence",
+    "href": "week02/index.html#step-4-identify-the-consequence",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "Step 4: Identify the consequence",
+    "text": "Step 4: Identify the consequence\nThe consequence is expected 400 m split time.\nSmaller values are preferred."
+  },
+  {
+    "objectID": "week02/index.html#step-5-identify-the-information-environment",
+    "href": "week02/index.html#step-5-identify-the-information-environment",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "Step 5: Identify the information environment",
+    "text": "Step 5: Identify the information environment\nIf the coach knows the opening pace in advance, the decision is under certainty.\nIf both race states are possible but no reliable probabilities are available, the decision is under uncertainty.\nIf the analyst estimates:\n\n(P(S_1) = 0.55)\n(P(S_2) = 0.45)\n\nthen the decision is under risk.\nThe decision table itself has not changed.\nOnly the information available has changed."
+  },
+  {
+    "objectID": "week02/index.html#minute-activity-classify-the-environment",
+    "href": "week02/index.html#minute-activity-classify-the-environment",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "6-minute activity: Classify the environment",
+    "text": "6-minute activity: Classify the environment\nFor each scenario, identify:\n\nthe decision maker;\nthe alternatives;\nthe state or states of nature;\nthe consequence;\nwhether the problem is under certainty, uncertainty, or risk.\n\n\nScenario A: Cricket\nA captain must choose between spin and pace.\nThe pitch inspection confirms that the surface will strongly assist spin throughout the next session.\nEstimated runs conceded are available for both bowling choices under that known condition.\n\n\nScenario B: Athletics\nA 1500 m runner must choose between an aggressive and conservative pacing strategy.\nThe race may become fast or tactical, but the athlete has no reliable estimate of the probability of either race pattern.\n\n\nScenario C: Volleyball\nA coach chooses between a standard serve and a jump serve.\nVideo analysis estimates:\n\n(P() = 0.62)\n(P() = 0.38)\n\nThe probability of winning the rally is estimated for each serve-reception combination."
+  },
+  {
+    "objectID": "week02/index.html#suggested-answers",
+    "href": "week02/index.html#suggested-answers",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "Suggested answers",
+    "text": "Suggested answers\n\nScenario A\nEnvironment: Certainty\nThe relevant future condition is treated as known.\n\n\nScenario B\nEnvironment: Uncertainty\nSeveral states are possible, but no probabilities are available.\n\n\nScenario C\nEnvironment: Risk\nSeveral states are possible and probabilities are available."
+  },
+  {
+    "objectID": "week02/index.html#mistake-1-calling-every-unknown-future-event-risk",
+    "href": "week02/index.html#mistake-1-calling-every-unknown-future-event-risk",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "Mistake 1: Calling every unknown future event “risk”",
+    "text": "Mistake 1: Calling every unknown future event “risk”\nIn decision theory, uncertainty and risk are not the same.\nThe distinction depends on whether probabilities can be assigned."
+  },
+  {
+    "objectID": "week02/index.html#mistake-2-confusing-a-state-of-nature-with-an-alternative",
+    "href": "week02/index.html#mistake-2-confusing-a-state-of-nature-with-an-alternative",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "Mistake 2: Confusing a state of nature with an alternative",
+    "text": "Mistake 2: Confusing a state of nature with an alternative\nFor example:\n\nThe opponent receives poorly.\n\nThis is not the coach’s action.\nIt is a possible state of nature."
+  },
+  {
+    "objectID": "week02/index.html#mistake-3-ignoring-the-consequence-measure",
+    "href": "week02/index.html#mistake-3-ignoring-the-consequence-measure",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "Mistake 3: Ignoring the consequence measure",
+    "text": "Mistake 3: Ignoring the consequence measure\nIf the consequence is:\n\nrace time, lower is better;\nruns conceded, lower is better;\nwin probability, higher is better;\nexpected points, higher is better.\n\nThe direction of preference must be clear before applying a decision rule."
+  },
+  {
+    "objectID": "week02/index.html#independent-learning",
+    "href": "week02/index.html#independent-learning",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "Independent learning",
+    "text": "Independent learning\nBefore Week 3:\n\nCreate one sports decision problem under uncertainty.\nInclude at least three alternatives and three states of nature.\nConstruct a payoff or loss table.\nDo not assign probabilities to the states.\nState clearly whether larger or smaller consequences are preferred.\n\nThis problem will be useful next week when we introduce the first decision criteria under uncertainty."
+  },
+  {
+    "objectID": "week02/index.html#next-week",
+    "href": "week02/index.html#next-week",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "Next week",
+    "text": "Next week\nWeek 03: Decision Making under Uncertainty I\nWe will study:\n\nMaximax;\nMaximin;\nhow the interpretation changes for payoff and cost tables."
+  },
+  {
+    "objectID": "week02/index.html#reference",
+    "href": "week02/index.html#reference",
+    "title": "Week 02: Decision-Making Environments",
+    "section": "Reference",
+    "text": "Reference\nGupta, P. K., Hira, D. S., & Kamboj, A. (2012). Introduction to Operations Research. S Chand and Company Limited. Chapter 9: Decision Theory, pp. 635–711."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Statistical Decision Theory",
+    "section": "",
+    "text": "Year 3 · Semester 1 · Optional course\n\n\nA practical introduction to making rational decisions when outcomes are uncertain. We move from payoff and loss tables to decisions under uncertainty and risk, Bayesian updating, decision trees, the value of information, and utility-based choice.\n\nExplore weekly lessons View course structure"
+  },
+  {
+    "objectID": "index.html#course-overview",
+    "href": "index.html#course-overview",
+    "title": "Statistical Decision Theory",
+    "section": "Course overview",
+    "text": "Course overview\n\nCOURSE OVERVIEW\n\n\nFrom uncertainty to defensible decisions\nThe course is built around a simple question: when several actions are available and the future is not fully known, how should we choose?\nStudents first learn to formulate the decision problem clearly. Only then do we introduce a decision rule and interpret what that rule means in context.\n\n\n\nWhat we will study\n\nDecision alternatives, states of nature, consequences, payoff and loss tables\nDecision making under certainty, uncertainty, and risk\nMaximax, Maximin, Minimax Regret, Hurwicz, and Laplace criteria\nExpected Monetary Value, Expected Opportunity Loss, and EVPI\nBayesian updating, posterior decisions, and value of sample information\nDecision trees and rollback analysis for sequential decisions\nUtility, certainty equivalents, and risk attitudes\n\n\n\n\nPrerequisites\nProbability and Distribution Theory I & II, and Inferential Statistics.\n\n\nLearning approach. Each week starts with a decision problem. We identify the actions, uncertain events, and consequences before introducing the mathematical rule used to choose among the actions."
+  },
+  {
+    "objectID": "index.html#learning-outcomes",
+    "href": "index.html#learning-outcomes",
+    "title": "Statistical Decision Theory",
+    "section": "Intended learning outcomes",
+    "text": "Intended learning outcomes\n\nINTENDED LEARNING OUTCOMES\n\n\nWhat you should be able to do\n\n\n\n1\n\nFormulate statistical decision problems by identifying alternatives, states of nature, consequences, and available information.\n\n\n\n2\n\nApply and interpret decision criteria under uncertainty and risk, including expected value, opportunity loss, and value of information.\n\n\n\n3\n\nUse Bayes’ theorem, posterior probabilities, Bayes decision rules, and decision trees for sequential decision problems.\n\n\n\n4\n\nEvaluate decisions under risk using utility functions and explain how risk attitudes can alter an optimal decision."
+  },
+  {
+    "objectID": "index.html#weekly-lessons",
+    "href": "index.html#weekly-lessons",
+    "title": "Statistical Decision Theory",
+    "section": "Weekly lessons",
+    "text": "Weekly lessons\n\n15-WEEK LEARNING PATH\n\nOne focused lecture each week, supported by independent problem solving and reading.\n\n\nWeek 01\n\nIntroduction to Statistical Decision Theory\nDecision problems, alternatives, states of nature, consequences, payoff/loss tables, and the decision-theory process.\n\n\n\nWeek 02\n\nDecision-Making Environments\nCertainty, uncertainty, risk, and formulation of statistical decision problems.\n\n\n\nWeek 03\n\nDecision under Uncertainty I\nMaximax and Maximin criteria for payoff and cost tables.\n\n\n\nWeek 04\n\nDecision under Uncertainty II\nMinimax Regret, Hurwicz, and Laplace criteria.\n\n\n\nWeek 05\n\nDecision under Risk I\nExpected Monetary Value and optimal action under known probabilities.\n\n\n\nWeek 06\n\nDecision under Risk II\nExpected Opportunity Loss and Expected Value of Perfect Information.\n\n\n\nWeek 07\n\nExtensions of Expected-Value Decisions\nMaximum likelihood, continuous outcomes, salvage values, and applications.\n\n\n\nWeek 08\n\nPrior Information and Bayesian Updating\nPriors, likelihoods, Bayes’ theorem, and posterior probabilities.\n\n\n\nWeek 09\n\nBayes Decision Rule & Sample Information\nPrior and posterior decisions, value and cost of sample information.\n\n\n\nWeek 10\n\nBayesian Decision Analysis\nPosterior expected payoff/loss and the practical value of additional information.\n\n\n\nWeek 11\n\nDecision Trees I\nDecision nodes, chance nodes, branches, outcomes, probabilities, costs, and payoffs.\n\n\n\nWeek 12\n\nDecision Trees II\nRollback analysis, expected values, optimal choices, and sequential decisions.\n\n\n\nWeek 13\n\nDecision Trees III\nSample information, revised probabilities, and multi-stage decisions.\n\n\n\nWeek 14\n\nUtility Theory I\nUtility of money, certainty equivalent, expected utility, and limits of EMV.\n\n\n\nWeek 15\n\nUtility Theory II & Integrated Analysis\nRisk attitudes, utility-based decisions, and synthesis of decision criteria."
+  },
+  {
+    "objectID": "index.html#assessment",
+    "href": "index.html#assessment",
+    "title": "Statistical Decision Theory",
+    "section": "Assessment",
+    "text": "Assessment\n\nASSESSMENT\n\n\nHow the course is assessed\n\n\n10%\nQuiz\n\n\n10%\nMidterm examination\n\n\n10%\nProblem-based assignment\n\n\n70%\nEnd-semester examination"
+  },
+  {
+    "objectID": "index.html#reference",
+    "href": "index.html#reference",
+    "title": "Statistical Decision Theory",
+    "section": "Primary reference",
+    "text": "Primary reference\n\nGupta, Hira & Kamboj\nGupta, P. K., Hira, D. S., & Kamboj, A. (2012). Introduction to Operations Research. S Chand and Company Limited.\nChapter 9: Decision Theory, pp. 635–711."
+  },
+  {
+    "objectID": "index.html#instructor",
+    "href": "index.html#instructor",
+    "title": "Statistical Decision Theory",
+    "section": "Instructor",
+    "text": "Instructor\n\nDr. Rajitha M. Silva\nDepartment of Statistics\nFaculty of Applied Sciences\nUniversity of Sri Jayewardenepura"
+  }
+]
