@@ -152,7 +152,7 @@ Decision problems, alternatives, states of nature, consequences, payoff/loss tab
 ::: {.week-card}
 <span class="week-no">Week 02</span>
 
-### Decision-Making Environments
+### [Decision-Making Environments](week02/index.qmd)
 
 Certainty, uncertainty, risk, and formulation of statistical decision problems.
 :::
