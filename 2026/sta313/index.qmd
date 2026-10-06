@@ -144,7 +144,7 @@ One focused lecture each week, supported by independent problem solving and read
 ::: {.week-card .week-active}
 <span class="week-no">Week 01</span>
 
-### [Introduction to Statistical Decision Theory](week01/index.qmd)
+### [Introduction to Statistical Decision Theory](week01/index.html)
 
 Decision problems, alternatives, states of nature, consequences, payoff/loss tables, and the decision-theory process.
 :::
@@ -152,7 +152,7 @@ Decision problems, alternatives, states of nature, consequences, payoff/loss tab
 ::: {.week-card}
 <span class="week-no">Week 02</span>
 
-### [Decision-Making Environments](week02/index.qmd)
+### [Decision-Making Environments](week02/index.html)
 
 Certainty, uncertainty, risk, and formulation of statistical decision problems.
 :::
