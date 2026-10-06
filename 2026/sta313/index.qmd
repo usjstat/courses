@@ -1,0 +1,318 @@
+---
+title: "Statistical Decision Theory"
+subtitle: "STA 313 1.0 - 2026/27"
+author: "Dr. Rajitha M. Silva"
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: false
+    page-layout: full
+    smooth-scroll: true
+    link-external-newwindow: true
+title-block-banner: false
+---
+
+::: {.hero}
+::: {.hero-inner}
+
+<span class="eyebrow">Year 3 · Semester 1 · Optional course</span>
+
+# Statistical Decision Theory
+
+A practical introduction to making rational decisions when outcomes are uncertain. We move from payoff and loss tables to decisions under uncertainty and risk, Bayesian updating, decision trees, the value of information, and utility-based choice.
+
+::: {.hero-actions}
+[Explore weekly lessons](#weekly-lessons){.btn .btn-primary}
+[View course structure](#course-overview){.btn .btn-secondary}
+:::
+
+:::
+:::
+
+::: {.course-facts}
+
+::: {.fact-card}
+<span>Course code</span>
+**STA 313 1.0**
+:::
+
+::: {.fact-card}
+<span>Credit value</span>
+**1 credit**
+:::
+
+::: {.fact-card}
+<span>Contact hours</span>
+**15 lecture hours**
+:::
+
+::: {.fact-card}
+<span>Independent learning</span>
+**45 hours**
+:::
+
+:::
+
+## Course overview {#course-overview}
+
+::: {.section-kicker}
+COURSE OVERVIEW
+:::
+
+### From uncertainty to defensible decisions
+
+The course is built around a simple question: when several actions are available and the future is not fully known, how should we choose?
+
+Students first learn to formulate the decision problem clearly. Only then do we introduce a decision rule and interpret what that rule means in context.
+
+::: {.grid-two}
+
+::: {.panel}
+### What we will study
+
+- Decision alternatives, states of nature, consequences, payoff and loss tables
+- Decision making under certainty, uncertainty, and risk
+- Maximax, Maximin, Minimax Regret, Hurwicz, and Laplace criteria
+- Expected Monetary Value, Expected Opportunity Loss, and EVPI
+- Bayesian updating, posterior decisions, and value of sample information
+- Decision trees and rollback analysis for sequential decisions
+- Utility, certainty equivalents, and risk attitudes
+:::
+
+::: {.stack}
+
+::: {.panel}
+### Prerequisites
+
+Probability and Distribution Theory I & II, and Inferential Statistics.
+:::
+
+::: {.note}
+**Learning approach.** Each week starts with a decision problem. We identify the actions, uncertain events, and consequences before introducing the mathematical rule used to choose among the actions.
+:::
+
+:::
+:::
+
+## Intended learning outcomes {#learning-outcomes}
+
+::: {.section-kicker}
+INTENDED LEARNING OUTCOMES
+:::
+
+### What you should be able to do
+
+::: {.ilo-grid}
+
+::: {.ilo-card}
+<div class="ilo-num">1</div>
+
+Formulate statistical decision problems by identifying alternatives, states of nature, consequences, and available information.
+:::
+
+::: {.ilo-card}
+<div class="ilo-num">2</div>
+
+Apply and interpret decision criteria under uncertainty and risk, including expected value, opportunity loss, and value of information.
+:::
+
+::: {.ilo-card}
+<div class="ilo-num">3</div>
+
+Use Bayes’ theorem, posterior probabilities, Bayes decision rules, and decision trees for sequential decision problems.
+:::
+
+::: {.ilo-card}
+<div class="ilo-num">4</div>
+
+Evaluate decisions under risk using utility functions and explain how risk attitudes can alter an optimal decision.
+:::
+
+:::
+
+## Weekly lessons {#weekly-lessons}
+
+::: {.section-kicker}
+15-WEEK LEARNING PATH
+:::
+
+One focused lecture each week, supported by independent problem solving and reading.
+
+::: {.week-grid}
+
+::: {.week-card .week-active}
+<span class="week-no">Week 01</span>
+
+### [Introduction to Statistical Decision Theory](week01/index.qmd)
+
+Decision problems, alternatives, states of nature, consequences, payoff/loss tables, and the decision-theory process.
+:::
+
+::: {.week-card}
+<span class="week-no">Week 02</span>
+
+### Decision-Making Environments
+
+Certainty, uncertainty, risk, and formulation of statistical decision problems.
+:::
+
+::: {.week-card}
+<span class="week-no">Week 03</span>
+
+### Decision under Uncertainty I
+
+Maximax and Maximin criteria for payoff and cost tables.
+:::
+
+::: {.week-card}
+<span class="week-no">Week 04</span>
+
+### Decision under Uncertainty II
+
+Minimax Regret, Hurwicz, and Laplace criteria.
+:::
+
+::: {.week-card}
+<span class="week-no">Week 05</span>
+
+### Decision under Risk I
+
+Expected Monetary Value and optimal action under known probabilities.
+:::
+
+::: {.week-card}
+<span class="week-no">Week 06</span>
+
+### Decision under Risk II
+
+Expected Opportunity Loss and Expected Value of Perfect Information.
+:::
+
+::: {.week-card}
+<span class="week-no">Week 07</span>
+
+### Extensions of Expected-Value Decisions
+
+Maximum likelihood, continuous outcomes, salvage values, and applications.
+:::
+
+::: {.week-card}
+<span class="week-no">Week 08</span>
+
+### Prior Information and Bayesian Updating
+
+Priors, likelihoods, Bayes’ theorem, and posterior probabilities.
+:::
+
+::: {.week-card}
+<span class="week-no">Week 09</span>
+
+### Bayes Decision Rule & Sample Information
+
+Prior and posterior decisions, value and cost of sample information.
+:::
+
+::: {.week-card}
+<span class="week-no">Week 10</span>
+
+### Bayesian Decision Analysis
+
+Posterior expected payoff/loss and the practical value of additional information.
+:::
+
+::: {.week-card}
+<span class="week-no">Week 11</span>
+
+### Decision Trees I
+
+Decision nodes, chance nodes, branches, outcomes, probabilities, costs, and payoffs.
+:::
+
+::: {.week-card}
+<span class="week-no">Week 12</span>
+
+### Decision Trees II
+
+Rollback analysis, expected values, optimal choices, and sequential decisions.
+:::
+
+::: {.week-card}
+<span class="week-no">Week 13</span>
+
+### Decision Trees III
+
+Sample information, revised probabilities, and multi-stage decisions.
+:::
+
+::: {.week-card}
+<span class="week-no">Week 14</span>
+
+### Utility Theory I
+
+Utility of money, certainty equivalent, expected utility, and limits of EMV.
+:::
+
+::: {.week-card}
+<span class="week-no">Week 15</span>
+
+### Utility Theory II & Integrated Analysis
+
+Risk attitudes, utility-based decisions, and synthesis of decision criteria.
+:::
+
+:::
+
+## Assessment {#assessment}
+
+::: {.section-kicker}
+ASSESSMENT
+:::
+
+### How the course is assessed
+
+::: {.assessment-grid}
+
+::: {.assessment-card}
+**10%**
+
+Quiz
+:::
+
+::: {.assessment-card}
+**10%**
+
+Midterm examination
+:::
+
+::: {.assessment-card}
+**10%**
+
+Problem-based assignment
+:::
+
+::: {.assessment-card}
+**70%**
+
+End-semester examination
+:::
+
+:::
+
+## Primary reference {#reference}
+
+::: {.reference-card}
+### Gupta, Hira & Kamboj
+
+Gupta, P. K., Hira, D. S., & Kamboj, A. (2012). *Introduction to Operations Research*. S Chand and Company Limited.
+
+**Chapter 9: Decision Theory, pp. 635–711.**
+:::
+
+## Instructor
+
+### Dr. Rajitha M. Silva
+
+Department of Statistics  
+Faculty of Applied Sciences  
+University of Sri Jayewardenepura

@@ -1,0 +1,854 @@
+---
+title: "Week 01: Introduction to Statistical Decision Theory"
+subtitle: "STA 313 1.0"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    page-layout: full
+    smooth-scroll: true
+    anchor-sections: true
+---
+
+[← Back to course homepage](../index.qmd){.btn .btn-secondary}
+
+::: {.section-kicker}
+WEEK 01 · 60 MINUTES
+:::
+
+# Introduction to Statistical Decision Theory
+
+A decision problem begins before any calculation is made. We first identify **what can be chosen**, **what is uncertain**, and **what consequence follows from each action–state combination**.
+
+This first lesson focuses on the basic structure of a statistical decision problem. We will not yet use Maximax, Maximin, expected monetary value, or Bayesian decision rules. Those come in later weeks.
+
+## Learning outcomes
+
+By the end of this lesson, you should be able to:
+
+1. explain why decision theory is useful when future outcomes are not fully known;
+2. distinguish a **decision alternative** from a **state of nature**;
+3. identify the **consequence** associated with an action–state combination;
+4. construct and interpret a simple **payoff or loss table**; and
+5. describe the four basic steps in the decision-theory approach.
+
+::: {.note}
+**Week 1 focus.** Decision problems, alternatives, states of nature, consequences, payoff/loss tables, and the basic steps in the decision-theory approach.
+:::
+
+---
+
+# 1. Opening problem {#opening-problem}
+
+## A cricket decision before the theory
+
+A cricket team is defending 12 runs in the final over.
+
+The captain must choose one of three bowlers:
+
+- a fast bowler;
+- a spinner;
+- a medium-pace bowler.
+
+The batting side may respond aggressively or may focus on rotating the strike.
+
+::: {.panel}
+### Think for one minute
+
+**Question:** Which bowler should the captain choose?
+
+Do not calculate anything yet.
+
+What information would you want before making the decision?
+:::
+
+### Class discussion
+
+Possible answers include:
+
+- How has each bowler performed against aggressive batting?
+- How has each bowler performed when batters rotate the strike?
+- What is the pitch like?
+- Is one bowler more likely to concede boundaries?
+- Is one bowler better at limiting singles?
+- What is the estimated chance of successfully defending the target?
+
+The key point is simple:
+
+> A decision is made **now**, but its consequence often depends on something that happens **later** and is not fully under our control.
+
+That is the setting in which decision theory becomes useful.
+
+---
+
+# 2. What is statistical decision theory?
+
+Statistical decision theory provides a structured way to make choices when outcomes depend partly on uncertain future conditions.
+
+In this course, we will represent a decision problem using three basic ingredients:
+
+1. **Decision alternatives**
+2. **States of nature**
+3. **Consequences**
+
+A fourth ingredient, **available information**, becomes increasingly important later when we study risk, Bayesian updating, and the value of information.
+
+---
+
+# 3. Anatomy of a decision problem
+
+## 3.1 Decision alternatives
+
+A **decision alternative** is an action available to the decision maker.
+
+The decision maker can choose among the alternatives.
+
+### Cricket example
+
+Suppose a captain must choose a bowler for the final over.
+
+\[
+A_1 = \text{Fast bowler},
+\]
+
+\[
+A_2 = \text{Spin bowler},
+\]
+
+\[
+A_3 = \text{Medium-pace bowler}.
+\]
+
+These are decision alternatives because the captain controls the choice.
+
+::: {.panel}
+### Quick question
+
+Which of the following is a decision alternative?
+
+1. The batter attacks
+2. The pitch offers turn
+3. The captain selects the spinner
+4. The batting side scores 10 runs
+
+**Answer:** 3. The captain selects the spinner.
+:::
+
+---
+
+## 3.2 States of nature
+
+A **state of nature** is a possible future condition that affects the consequence of a decision but is not controlled by the decision maker.
+
+### Cricket example
+
+Suppose the captain chooses the final-over bowler.
+
+Possible states of nature could be:
+
+\[
+S_1 = \text{The batter attacks aggressively},
+\]
+
+\[
+S_2 = \text{The batter focuses on strike rotation}.
+\]
+
+The captain chooses the bowler.
+
+The captain does not control how the batter responds.
+
+So:
+
+- **Bowler choice = decision alternative**
+- **Batter response = state of nature**
+
+---
+
+### Athletics example
+
+A 1500 m runner must decide on a pacing strategy.
+
+Possible alternatives:
+
+\[
+A_1 = \text{Fast early pace},
+\]
+
+\[
+A_2 = \text{Even pace},
+\]
+
+\[
+A_3 = \text{Conservative start with fast finish}.
+\]
+
+Possible states of nature:
+
+\[
+S_1 = \text{Competitors make the race fast},
+\]
+
+\[
+S_2 = \text{Competitors make the race tactical and slow}.
+\]
+
+The athlete controls the race plan but does not control the pace chosen by the rest of the field.
+
+---
+
+### Volleyball example
+
+A volleyball team is receiving serve at 23--23.
+
+The coach may choose:
+
+\[
+A_1 = \text{Middle attack},
+\]
+
+\[
+A_2 = \text{Outside attack},
+\]
+
+\[
+A_3 = \text{Back-row attack}.
+\]
+
+Possible states of nature:
+
+\[
+S_1 = \text{Opponent commits the middle block},
+\]
+
+\[
+S_2 = \text{Opponent forms a strong outside double block},
+\]
+
+\[
+S_3 = \text{Opponent uses a balanced block}.
+\]
+
+The attacking team controls its own choice.
+
+The opponent's defensive response is not under its control.
+
+---
+
+## 3.3 Consequences
+
+A **consequence** is the result obtained when a particular alternative is chosen and a particular state of nature occurs.
+
+The consequence might be expressed as:
+
+- runs conceded;
+- probability of winning;
+- points won;
+- race time;
+- expected medal probability;
+- injury risk;
+- expected performance score;
+- or another quantity relevant to the decision.
+
+We can denote the consequence of choosing alternative \(A_i\) when state \(S_j\) occurs by
+
+\[
+C_{ij}.
+\]
+
+For example, if
+
+\[
+A_2=\text{Spin bowler}
+\]
+
+and
+
+\[
+S_1=\text{Batter attacks aggressively},
+\]
+
+then \(C_{21}\) is the consequence of using the spinner against aggressive batting.
+
+---
+
+# 4. The four-step decision-theory approach
+
+A useful decision-theory workflow is:
+
+::: {.panel}
+### Step 1: List the viable alternatives
+
+Identify the actions available to the decision maker.
+
+### Step 2: Identify the possible future events
+
+List the relevant states of nature.
+
+### Step 3: Construct a payoff or loss table
+
+Record the consequence for each action–state combination.
+
+### Step 4: Select an appropriate decision criterion
+
+Choose a rule for comparing the alternatives.
+
+The formal criteria are introduced in later weeks.
+:::
+
+A useful schematic representation is
+
+\[
+\text{Alternatives}
+\quad+\quad
+\text{States of nature}
+\quad\longrightarrow\quad
+\text{Consequences}.
+\]
+
+The decision rule then tells us how those consequences should be compared.
+
+---
+
+# 5. Cricket example: final-over bowling decision
+
+Suppose the coaching staff summarize recent match data and estimate the **expected runs conceded** under different batter responses.
+
+The captain must choose one bowler for the final over.
+
+| Bowling decision | Batter attacks | Batter rotates strike |
+|---|---:|---:|
+| Fast bowler | 12 | 7 |
+| Spin bowler | 8 | 10 |
+| Medium pace | 10 | 8 |
+
+## Identify the components
+
+### Decision alternatives
+
+\[
+A_1=\text{Fast bowler}
+\]
+
+\[
+A_2=\text{Spin bowler}
+\]
+
+\[
+A_3=\text{Medium pace}
+\]
+
+### States of nature
+
+\[
+S_1=\text{Batter attacks}
+\]
+
+\[
+S_2=\text{Batter rotates strike}
+\]
+
+### Consequence
+
+Expected runs conceded.
+
+Here, **smaller values are preferred**.
+
+So the table behaves like a **loss table**.
+
+---
+
+## How to read the table
+
+If
+
+\[
+A_2=\text{Spin bowler}
+\]
+
+and
+
+\[
+S_1=\text{Batter attacks},
+\]
+
+then
+
+\[
+C_{21}=8.
+\]
+
+Interpretation:
+
+> If the captain chooses the spinner and the batter attacks, the expected number of runs conceded is 8.
+
+Similarly,
+
+\[
+C_{12}=7.
+\]
+
+Interpretation:
+
+> If the captain chooses the fast bowler and the batter rotates the strike, the expected number of runs conceded is 7.
+
+::: {.panel}
+### Stop and interpret
+
+1. Which bowler performs best if the batter attacks?
+2. Which bowler performs best if the batter rotates the strike?
+3. Which bowler has the largest possible expected runs conceded?
+4. Can we choose the overall best bowler from this table alone?
+
+**Answers**
+
+1. Spin bowler, with 8 expected runs conceded.
+2. Fast bowler, with 7 expected runs conceded.
+3. Fast bowler, with 12 expected runs conceded.
+4. Not yet. We still need a rule for comparing alternatives when the future batting response is unknown.
+:::
+
+---
+
+# 6. Payoff and loss formulations
+
+The same sports decision can be expressed in different ways depending on the consequence being measured.
+
+## Cricket as a loss problem
+
+If the consequence is **runs conceded**, smaller values are preferred.
+
+| Bowling decision | Batter attacks | Batter rotates strike |
+|---|---:|---:|
+| Fast bowler | 12 | 7 |
+| Spin bowler | 8 | 10 |
+| Medium pace | 10 | 8 |
+
+This is naturally interpreted as a **loss table**.
+
+---
+
+## Cricket as a payoff problem
+
+Suppose the analyst instead estimates the **probability of successfully defending the target**.
+
+| Bowling decision | Batter attacks | Batter rotates strike |
+|---|---:|---:|
+| Fast bowler | 0.43 | 0.71 |
+| Spin bowler | 0.64 | 0.56 |
+| Medium pace | 0.51 | 0.63 |
+
+Now larger values are preferred.
+
+This is a **payoff table**.
+
+::: {.note}
+The underlying decision problem may be similar, but the direction of preference changes with the consequence measure.
+
+- Runs conceded: lower is better.
+- Probability of winning: higher is better.
+:::
+
+---
+
+# 7. Athletics example: pacing strategy in a 1500 m race
+
+Suppose a 1500 m runner must select a race strategy before the event.
+
+The likely race conditions are:
+
+\[
+S_1=\text{Fast race set by competitors}
+\]
+
+and
+
+\[
+S_2=\text{Slow tactical race}.
+\]
+
+Suppose the consequence is **finishing time in seconds**.
+
+| Race strategy | Fast race | Slow tactical race |
+|---|---:|---:|
+| Fast start | 222 | 230 |
+| Even pace | 224 | 225 |
+| Conservative start | 231 | 221 |
+
+Here, **smaller values are preferred**.
+
+### Class questions
+
+1. What are the decision alternatives?
+2. What are the states of nature?
+3. What is the consequence?
+4. Which strategy is best if the race is known to be fast?
+5. Which strategy is best if the race is known to be slow?
+6. Can one strategy be selected before the race condition is known?
+
+### Answers
+
+1. Fast start, even pace, conservative start.
+2. Fast race and slow tactical race.
+3. Finishing time in seconds.
+4. Fast start, because 222 seconds is the smallest time.
+5. Conservative start, because 221 seconds is the smallest time.
+6. Not from this table alone. We still need a decision criterion.
+
+---
+
+## The same athletics problem using a payoff
+
+Suppose instead the analysts estimate the probability of finishing in the top three.
+
+| Race strategy | Fast race | Tactical race |
+|---|---:|---:|
+| Fast start | 0.44 | 0.19 |
+| Even pace | 0.35 | 0.33 |
+| Conservative start | 0.21 | 0.49 |
+
+Now larger values are preferred.
+
+This immediately shows an important feature of decision problems:
+
+> The action that looks best depends on the state of nature.
+
+There is no single strategy that dominates in both race conditions.
+
+---
+
+# 8. Volleyball example
+
+Suppose the setter must choose an attacking option late in a close set.
+
+The consequence is the estimated **probability of winning the rally**.
+
+| Attack | Middle block | Outside double block | Balanced block |
+|---|---:|---:|---:|
+| Middle attack | 0.33 | 0.62 | 0.47 |
+| Outside attack | 0.59 | 0.30 | 0.45 |
+| Back-row attack | 0.51 | 0.55 | 0.42 |
+
+Let
+
+\[
+A_1=\text{Middle attack},
+\]
+
+\[
+A_2=\text{Outside attack},
+\]
+
+\[
+A_3=\text{Back-row attack}.
+\]
+
+Let
+
+\[
+S_1=\text{Middle commit block},
+\]
+
+\[
+S_2=\text{Outside double block},
+\]
+
+\[
+S_3=\text{Balanced block}.
+\]
+
+Then
+
+\[
+C_{21}=0.59.
+\]
+
+Interpretation:
+
+> If the team uses the outside attack and the opponent commits to the middle block, the estimated probability of winning the rally is 0.59.
+
+Similarly,
+
+\[
+C_{32}=0.55.
+\]
+
+Interpretation:
+
+> If the team uses the back-row attack and the opponent forms an outside double block, the estimated probability of winning the rally is 0.55.
+
+::: {.note}
+In sports analytics, the consequence may itself be an **estimated statistical quantity**, such as a win probability. Later in the course we will study how additional information can change those estimates and therefore change the decision.
+:::
+
+---
+
+# 9. Formulating a decision problem
+
+Before doing any calculation, write the problem in a structured form.
+
+## Template
+
+For any sports decision problem, identify:
+
+**Decision maker**
+
+Who chooses the action?
+
+**Alternatives**
+
+\[
+A_1,A_2,\ldots,A_m
+\]
+
+What can be chosen?
+
+**States of nature**
+
+\[
+S_1,S_2,\ldots,S_n
+\]
+
+What uncertain future conditions may occur?
+
+**Consequences**
+
+\[
+C_{ij}
+\]
+
+What happens if \(A_i\) is selected and \(S_j\) occurs?
+
+**Available information**
+
+What is currently known about the states of nature?
+
+---
+
+# 10. Student activity {#activity}
+
+::: {.panel}
+## 8-minute activity: Volleyball serving decision
+
+A volleyball coach must decide whether to keep the current server or introduce a serving specialist late in the set.
+
+Two possible reception states are considered:
+
+- the opponent receives well;
+- the opponent receives poorly.
+
+The estimated probability of winning the rally is:
+
+| Decision | Good opponent reception | Poor opponent reception |
+|---|---:|---:|
+| Keep current server | 0.43 | 0.62 |
+| Use serving specialist | 0.35 | 0.76 |
+
+### Work in pairs
+
+1. Identify the decision maker.
+2. Identify the decision alternatives.
+3. Identify the states of nature.
+4. Identify the consequence.
+5. Find \(C_{12}\).
+6. Find \(C_{21}\).
+7. Which action would be selected if good reception were known with certainty?
+8. Which action would be selected if poor reception were known with certainty?
+9. Can one action be selected for the next serve without using an additional decision criterion? Explain briefly.
+:::
+
+### Suggested answers
+
+**Decision maker**
+
+The coach.
+
+**Alternatives**
+
+\[
+A_1=\text{Keep current server}
+\]
+
+\[
+A_2=\text{Use serving specialist}
+\]
+
+**States of nature**
+
+\[
+S_1=\text{Good reception}
+\]
+
+\[
+S_2=\text{Poor reception}
+\]
+
+**Consequence**
+
+Probability of winning the rally.
+
+\[
+C_{12}=0.62
+\]
+
+and
+
+\[
+C_{21}=0.35.
+\]
+
+If good reception were known with certainty:
+
+\[
+0.43>0.35
+\]
+
+so the current server would be preferred.
+
+If poor reception were known with certainty:
+
+\[
+0.76>0.62
+\]
+
+so the serving specialist would be preferred.
+
+Before the reception state is known, the table alone does not provide a complete decision rule.
+
+---
+
+# 11. Why the distinction matters
+
+A common mistake is to mix up an **action** with an **event**.
+
+Consider:
+
+> "The batter attacks."
+
+That is not the captain's decision. It is a possible state of nature.
+
+Now consider:
+
+> "The captain selects the spinner."
+
+That is a decision alternative.
+
+Similarly in athletics:
+
+> "The race becomes tactical."
+
+is a state of nature.
+
+But:
+
+> "The athlete adopts an even pace."
+
+is a decision alternative.
+
+The same distinction will matter throughout the course.
+
+Later, probabilities may be attached to states of nature. Sample information may revise those probabilities. Utility may change how consequences are valued. But the underlying structure remains:
+
+\[
+\boxed{
+\text{Action}
+\;+\;
+\text{State of nature}
+\;\longrightarrow\;
+\text{Consequence}
+}
+\]
+
+---
+
+# 12. Exit check {#exit-check}
+
+Take the final four minutes individually.
+
+### Question 1
+
+A cricket captain chooses between spin and pace.
+
+The pitch may turn sharply or remain flat.
+
+Which is the **state of nature**?
+
+::: {.callout-tip collapse="true"}
+## Answer
+
+Pitch behaviour.
+:::
+
+### Question 2
+
+A 1500 m runner chooses between an aggressive and conservative pacing strategy.
+
+The consequence is finishing time.
+
+Should larger or smaller values be preferred?
+
+::: {.callout-tip collapse="true"}
+## Answer
+
+Smaller values are preferred.
+:::
+
+### Question 3
+
+A volleyball coach chooses an attack strategy while the opponent's block is uncertain.
+
+Complete:
+
+\[
+\boxed{
+\text{Action}
++
+\text{State of nature}
+\longrightarrow
+?
+}
+\]
+
+::: {.callout-tip collapse="true"}
+## Answer
+
+\[
+\boxed{
+\text{Consequence}
+}
+\]
+:::
+
+---
+
+# After class
+
+## Independent learning
+
+Before Week 2:
+
+1. Review the basic structure of a decision problem.
+2. Create one sports example with:
+   - at least two alternatives;
+   - at least two states of nature;
+   - one numerical consequence for every action–state combination.
+3. State clearly whether the consequence should be maximized or minimized.
+4. Write one sentence explaining why your example involves uncertainty.
+
+## Next week
+
+**Week 02: Decision-Making Environments**
+
+We will distinguish decisions under:
+
+- certainty,
+- uncertainty,
+- risk,
+
+and use that distinction to decide what information is available before choosing a decision rule.
+
+---
+
+## Reference
+
+Gupta, P. K., Hira, D. S., & Kamboj, A. (2012). *Introduction to Operations Research*. S Chand and Company Limited. Chapter 9: Decision Theory, pp. 635–711.

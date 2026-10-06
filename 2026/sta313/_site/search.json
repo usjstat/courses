@@ -1,0 +1,205 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Statistical Decision Theory",
+    "section": "",
+    "text": "Year 3 · Semester 1 · Optional course\n\n\nA practical introduction to making rational decisions when outcomes are uncertain. We move from payoff and loss tables to decisions under uncertainty and risk, Bayesian updating, decision trees, the value of information, and utility-based choice.\n\nExplore weekly lessons View course structure"
+  },
+  {
+    "objectID": "index.html#course-overview",
+    "href": "index.html#course-overview",
+    "title": "Statistical Decision Theory",
+    "section": "Course overview",
+    "text": "Course overview\n\nCOURSE OVERVIEW\n\n\nFrom uncertainty to defensible decisions\nThe course is built around a simple question: when several actions are available and the future is not fully known, how should we choose?\nStudents first learn to formulate the decision problem clearly. Only then do we introduce a decision rule and interpret what that rule means in context.\n\n\n\nWhat we will study\n\nDecision alternatives, states of nature, consequences, payoff and loss tables\nDecision making under certainty, uncertainty, and risk\nMaximax, Maximin, Minimax Regret, Hurwicz, and Laplace criteria\nExpected Monetary Value, Expected Opportunity Loss, and EVPI\nBayesian updating, posterior decisions, and value of sample information\nDecision trees and rollback analysis for sequential decisions\nUtility, certainty equivalents, and risk attitudes\n\n\n\n\nPrerequisites\nProbability and Distribution Theory I & II, and Inferential Statistics.\n\n\nLearning approach. Each week starts with a decision problem. We identify the actions, uncertain events, and consequences before introducing the mathematical rule used to choose among the actions."
+  },
+  {
+    "objectID": "index.html#learning-outcomes",
+    "href": "index.html#learning-outcomes",
+    "title": "Statistical Decision Theory",
+    "section": "Intended learning outcomes",
+    "text": "Intended learning outcomes\n\nINTENDED LEARNING OUTCOMES\n\n\nWhat you should be able to do\n\n\n\n1\n\nFormulate statistical decision problems by identifying alternatives, states of nature, consequences, and available information.\n\n\n\n2\n\nApply and interpret decision criteria under uncertainty and risk, including expected value, opportunity loss, and value of information.\n\n\n\n3\n\nUse Bayes’ theorem, posterior probabilities, Bayes decision rules, and decision trees for sequential decision problems.\n\n\n\n4\n\nEvaluate decisions under risk using utility functions and explain how risk attitudes can alter an optimal decision."
+  },
+  {
+    "objectID": "index.html#weekly-lessons",
+    "href": "index.html#weekly-lessons",
+    "title": "Statistical Decision Theory",
+    "section": "Weekly lessons",
+    "text": "Weekly lessons\n\n15-WEEK LEARNING PATH\n\nOne focused lecture each week, supported by independent problem solving and reading.\n\n\nWeek 01\n\nIntroduction to Statistical Decision Theory\nDecision problems, alternatives, states of nature, consequences, payoff/loss tables, and the decision-theory process.\n\n\n\nWeek 02\n\nDecision-Making Environments\nCertainty, uncertainty, risk, and formulation of statistical decision problems.\n\n\n\nWeek 03\n\nDecision under Uncertainty I\nMaximax and Maximin criteria for payoff and cost tables.\n\n\n\nWeek 04\n\nDecision under Uncertainty II\nMinimax Regret, Hurwicz, and Laplace criteria.\n\n\n\nWeek 05\n\nDecision under Risk I\nExpected Monetary Value and optimal action under known probabilities.\n\n\n\nWeek 06\n\nDecision under Risk II\nExpected Opportunity Loss and Expected Value of Perfect Information.\n\n\n\nWeek 07\n\nExtensions of Expected-Value Decisions\nMaximum likelihood, continuous outcomes, salvage values, and applications.\n\n\n\nWeek 08\n\nPrior Information and Bayesian Updating\nPriors, likelihoods, Bayes’ theorem, and posterior probabilities.\n\n\n\nWeek 09\n\nBayes Decision Rule & Sample Information\nPrior and posterior decisions, value and cost of sample information.\n\n\n\nWeek 10\n\nBayesian Decision Analysis\nPosterior expected payoff/loss and the practical value of additional information.\n\n\n\nWeek 11\n\nDecision Trees I\nDecision nodes, chance nodes, branches, outcomes, probabilities, costs, and payoffs.\n\n\n\nWeek 12\n\nDecision Trees II\nRollback analysis, expected values, optimal choices, and sequential decisions.\n\n\n\nWeek 13\n\nDecision Trees III\nSample information, revised probabilities, and multi-stage decisions.\n\n\n\nWeek 14\n\nUtility Theory I\nUtility of money, certainty equivalent, expected utility, and limits of EMV.\n\n\n\nWeek 15\n\nUtility Theory II & Integrated Analysis\nRisk attitudes, utility-based decisions, and synthesis of decision criteria."
+  },
+  {
+    "objectID": "index.html#assessment",
+    "href": "index.html#assessment",
+    "title": "Statistical Decision Theory",
+    "section": "Assessment",
+    "text": "Assessment\n\nASSESSMENT\n\n\nHow the course is assessed\n\n\n10%\nQuiz\n\n\n10%\nMidterm examination\n\n\n10%\nProblem-based assignment\n\n\n70%\nEnd-semester examination"
+  },
+  {
+    "objectID": "index.html#reference",
+    "href": "index.html#reference",
+    "title": "Statistical Decision Theory",
+    "section": "Primary reference",
+    "text": "Primary reference\n\nGupta, Hira & Kamboj\nGupta, P. K., Hira, D. S., & Kamboj, A. (2012). Introduction to Operations Research. S Chand and Company Limited.\nChapter 9: Decision Theory, pp. 635–711."
+  },
+  {
+    "objectID": "index.html#instructor",
+    "href": "index.html#instructor",
+    "title": "Statistical Decision Theory",
+    "section": "Instructor",
+    "text": "Instructor\n\nDr. Rajitha M. Silva\nDepartment of Statistics\nFaculty of Applied Sciences\nUniversity of Sri Jayewardenepura"
+  },
+  {
+    "objectID": "week01/index.html",
+    "href": "week01/index.html",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "",
+    "text": "← Back to course homepage"
+  },
+  {
+    "objectID": "week01/index.html#learning-outcomes",
+    "href": "week01/index.html#learning-outcomes",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "Learning outcomes",
+    "text": "Learning outcomes\nBy the end of this lesson, you should be able to:\n\nexplain why decision theory is useful when future outcomes are not fully known;\ndistinguish a decision alternative from a state of nature;\nidentify the consequence associated with an action–state combination;\nconstruct and interpret a simple payoff or loss table; and\ndescribe the four basic steps in the decision-theory approach.\n\n\nWeek 1 focus. Decision problems, alternatives, states of nature, consequences, payoff/loss tables, and the basic steps in the decision-theory approach."
+  },
+  {
+    "objectID": "week01/index.html#todays-plan",
+    "href": "week01/index.html#todays-plan",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "Today’s plan",
+    "text": "Today’s plan\n\n\n\n\n\n\n\n\nTime\nFocus\nWhat we will do\n\n\n\n\n0–5 min\nOpening sports decision\nMake a decision before any formal theory\n\n\n5–12 min\nWhy decision theory?\nSeparate an action from an uncertain future event\n\n\n12–25 min\nAnatomy of a decision problem\nAlternatives, states of nature, consequences\n\n\n25–38 min\nCricket example\nBuild and interpret a consequence table\n\n\n38–48 min\nAthletics example\nCompare payoff and loss formulations\n\n\n48–56 min\nVolleyball activity\nFormulate a new decision problem\n\n\n56–60 min\nExit check\nThree short questions"
+  },
+  {
+    "objectID": "week01/index.html#a-decision-before-the-theory",
+    "href": "week01/index.html#a-decision-before-the-theory",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "A decision before the theory",
+    "text": "A decision before the theory\nSuppose a manufacturing company expects demand for its product to increase.\nManagement is considering three possible actions:\n\nexpand the present plant;\nconstruct a new plant;\nsubcontract the extra production.\n\nBut future demand is not known in advance.\n\nThink for one minute\nQuestion: Which action should the company choose?\nDo not calculate anything yet.\nWhat information would you want before making the decision?\n\n\nClass discussion\nPossible answers include:\n\nHow high could future demand be?\nWhat would each action cost?\nWhat profit or loss would result under different demand levels?\nDo we know the probabilities of the demand levels?\nIs the decision maker willing to accept a large possible loss for a larger possible gain?\n\nThe key point is simple:\n\nA decision is made now, but its consequence often depends on something that happens later and is not fully under our control.\n\nThat is the setting in which decision theory becomes useful."
+  },
+  {
+    "objectID": "week01/index.html#decision-alternatives",
+    "href": "week01/index.html#decision-alternatives",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "3.1 Decision alternatives",
+    "text": "3.1 Decision alternatives\nA decision alternative is an action available to the decision maker.\nThe decision maker can choose among the alternatives.\n\nCricket example\nSuppose a captain must choose a bowler for the final over.\n[ A_1 = , ]\n[ A_2 = , ]\n[ A_3 = . ]\nThese are decision alternatives because the captain controls the choice.\n\n\nQuick question\nWhich of the following is a decision alternative?\n\nThe batter attacks\nThe pitch offers turn\nThe captain selects the spinner\nThe batting side scores 10 runs\n\nAnswer: 3. The captain selects the spinner."
+  },
+  {
+    "objectID": "week01/index.html#states-of-nature",
+    "href": "week01/index.html#states-of-nature",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "3.2 States of nature",
+    "text": "3.2 States of nature\nA state of nature is a possible future condition that affects the consequence of a decision but is not controlled by the decision maker.\n\nCricket example\nSuppose the captain chooses the final-over bowler.\nPossible states of nature could be:\n[ S_1 = , ]\n[ S_2 = . ]\nThe captain chooses the bowler.\nThe captain does not control how the batter responds.\nSo:\n\nBowler choice = decision alternative\nBatter response = state of nature\n\n\n\n\nAthletics example\nA 1500 m runner must decide on a pacing strategy.\nPossible alternatives:\n[ A_1 = , ]\n[ A_2 = , ]\n[ A_3 = . ]\nPossible states of nature:\n[ S_1 = , ]\n[ S_2 = . ]\nThe athlete controls the race plan but does not control the pace chosen by the rest of the field.\n\n\n\nVolleyball example\nA volleyball team is receiving serve at 23–23.\nThe coach may choose:\n[ A_1 = , ]\n[ A_2 = , ]\n[ A_3 = . ]\nPossible states of nature:\n[ S_1 = , ]\n[ S_2 = , ]\n[ S_3 = . ]\nThe attacking team controls its own choice.\nThe opponent’s defensive response is not under its control."
+  },
+  {
+    "objectID": "week01/index.html#consequences",
+    "href": "week01/index.html#consequences",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "3.3 Consequences",
+    "text": "3.3 Consequences\nA consequence is the result obtained when a particular alternative is chosen and a particular state of nature occurs.\nThe consequence might be expressed as:\n\nruns conceded;\nprobability of winning;\npoints won;\nrace time;\nexpected medal probability;\ninjury risk;\nexpected performance score;\nor another quantity relevant to the decision.\n\nWe can denote the consequence of choosing alternative (A_i) when state (S_j) occurs by\n[ C_{ij}. ]\nFor example, if\n[ A_2= ]\nand\n[ S_1=, ]\nthen (C_{21}) is the consequence of using the spinner against aggressive batting."
+  },
+  {
+    "objectID": "week01/index.html#how-to-read-the-table",
+    "href": "week01/index.html#how-to-read-the-table",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "How to read the table",
+    "text": "How to read the table\nIf\n[ A_2= ]\nand\n[ S_1=, ]\nthen\n[ C_{21}=8. ]\nInterpretation:\n\nIf the captain chooses the spinner and the batter attacks, the expected number of runs conceded is 8.\n\nSimilarly,\n[ C_{12}=7. ]\nInterpretation:\n\nIf the captain chooses the fast bowler and the batter rotates the strike, the expected number of runs conceded is 7.\n\n\nStop and interpret\n\nWhich bowler performs best if the batter attacks?\nWhich bowler performs best if the batter rotates the strike?\nWhich bowler has the largest possible expected runs conceded?\nCan we choose the overall best bowler from this table alone?\n\nAnswers\n\nSpin bowler, with 8 expected runs conceded.\nFast bowler, with 7 expected runs conceded.\nFast bowler, with 12 expected runs conceded.\nNot yet. We still need a rule for comparing alternatives when the future batting response is unknown."
+  },
+  {
+    "objectID": "week01/index.html#payoff-table",
+    "href": "week01/index.html#payoff-table",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "Payoff table",
+    "text": "Payoff table\nA payoff table records quantities for which larger values are generally preferred, such as:\n\nprofit,\nreturn,\nbenefit.\n\nIf profits are recorded, a negative payoff represents a loss."
+  },
+  {
+    "objectID": "week01/index.html#loss-or-cost-table",
+    "href": "week01/index.html#loss-or-cost-table",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "Loss or cost table",
+    "text": "Loss or cost table\nA loss table or cost table records quantities for which smaller values are preferred, such as:\n\nfinancial cost,\nwaiting time,\nerror,\nopportunity loss.\n\n\nDo not apply a decision rule mechanically without first checking whether the entries are payoffs to maximize or losses/costs to minimize."
+  },
+  {
+    "objectID": "week01/index.html#mini-example",
+    "href": "week01/index.html#mini-example",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "Mini-example",
+    "text": "Mini-example\nSuppose a company must choose between two supply plans.\n\n\n\nAlternative\nShortage\nNo shortage\n\n\n\n\nBuy extra stock\nRs. 20,000\nRs. 20,000\n\n\nDo not buy extra stock\nRs. 60,000\nRs. 0\n\n\n\nHere the entries are costs, not profits.\nSo Rs. 0 is preferable to Rs. 20,000, and Rs. 20,000 is preferable to Rs. 60,000.\nWe are not yet choosing between the two actions. The purpose here is to recognize the direction of preference."
+  },
+  {
+    "objectID": "week01/index.html#template",
+    "href": "week01/index.html#template",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "Template",
+    "text": "Template\nFor any sports decision problem, identify:\nDecision maker\nWho chooses the action?\nAlternatives\n[ A_1,A_2,,A_m ]\nWhat can be chosen?\nStates of nature\n[ S_1,S_2,,S_n ]\nWhat uncertain future conditions may occur?\nConsequences\n[ C_{ij} ]\nWhat happens if (A_i) is selected and (S_j) occurs?\nAvailable information\nWhat is currently known about the states of nature?"
+  },
+  {
+    "objectID": "week01/index.html#minute-activity-should-a-café-prepare-for-a-large-crowd",
+    "href": "week01/index.html#minute-activity-should-a-café-prepare-for-a-large-crowd",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "8-minute activity: Should a café prepare for a large crowd?",
+    "text": "8-minute activity: Should a café prepare for a large crowd?\nA café near the university expects either high or low customer demand tomorrow.\nThe manager must choose one of three preparation levels:\n\nprepare a small quantity;\nprepare a medium quantity;\nprepare a large quantity.\n\nThe estimated profit is:\n\n\n\nPreparation decision\nHigh demand\nLow demand\n\n\n\n\nSmall\nRs. 18,000\nRs. 14,000\n\n\nMedium\nRs. 28,000\nRs. 10,000\n\n\nLarge\nRs. 40,000\n−Rs. 8,000\n\n\n\n\nWork in pairs\n\nIdentify the decision alternatives.\nIdentify the states of nature.\nIdentify the consequence represented in the table.\nWrite the notation for the payoff obtained from preparing a large quantity when demand is low.\nWhich action would you choose if you somehow knew demand would be high?\nWhich action would you choose if you somehow knew demand would be low?\nCan you select one action for tomorrow without using an additional decision criterion? Explain briefly."
+  },
+  {
+    "objectID": "week01/index.html#independent-learning",
+    "href": "week01/index.html#independent-learning",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "Independent learning",
+    "text": "Independent learning\nBefore Week 2:\n\nReview the basic structure of a decision problem.\nCreate one sports example with:\n\nat least two alternatives;\nat least two states of nature;\none numerical consequence for every action–state combination.\n\nState clearly whether the consequence should be maximized or minimized.\nWrite one sentence explaining why your example involves uncertainty."
+  },
+  {
+    "objectID": "week01/index.html#next-week",
+    "href": "week01/index.html#next-week",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "Next week",
+    "text": "Next week\nWeek 02: Decision-Making Environments\nWe will distinguish decisions under:\n\ncertainty,\nuncertainty,\nrisk,\n\nand use that distinction to decide what information is available before choosing a decision rule."
+  },
+  {
+    "objectID": "week01/index.html#reference",
+    "href": "week01/index.html#reference",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "Reference",
+    "text": "Reference\nGupta, P. K., Hira, D. S., & Kamboj, A. (2012). Introduction to Operations Research. S Chand and Company Limited. Chapter 9: Decision Theory, pp. 635–711."
+  },
+  {
+    "objectID": "week01/index.html#a-cricket-decision-before-the-theory",
+    "href": "week01/index.html#a-cricket-decision-before-the-theory",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "A cricket decision before the theory",
+    "text": "A cricket decision before the theory\nA cricket team is defending 12 runs in the final over.\nThe captain must choose one of three bowlers:\n\na fast bowler;\na spinner;\na medium-pace bowler.\n\nThe batting side may respond aggressively or may focus on rotating the strike.\n\nThink for one minute\nQuestion: Which bowler should the captain choose?\nDo not calculate anything yet.\nWhat information would you want before making the decision?\n\n\nClass discussion\nPossible answers include:\n\nHow has each bowler performed against aggressive batting?\nHow has each bowler performed when batters rotate the strike?\nWhat is the pitch like?\nIs one bowler more likely to concede boundaries?\nIs one bowler better at limiting singles?\nWhat is the estimated chance of successfully defending the target?\n\nThe key point is simple:\n\nA decision is made now, but its consequence often depends on something that happens later and is not fully under our control.\n\nThat is the setting in which decision theory becomes useful."
+  },
+  {
+    "objectID": "week01/index.html#identify-the-components",
+    "href": "week01/index.html#identify-the-components",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "Identify the components",
+    "text": "Identify the components\n\nDecision alternatives\n[ A_1= ]\n[ A_2= ]\n[ A_3= ]\n\n\nStates of nature\n[ S_1= ]\n[ S_2= ]\n\n\nConsequence\nExpected runs conceded.\nHere, smaller values are preferred.\nSo the table behaves like a loss table."
+  },
+  {
+    "objectID": "week01/index.html#cricket-as-a-loss-problem",
+    "href": "week01/index.html#cricket-as-a-loss-problem",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "Cricket as a loss problem",
+    "text": "Cricket as a loss problem\nIf the consequence is runs conceded, smaller values are preferred.\n\n\n\nBowling decision\nBatter attacks\nBatter rotates strike\n\n\n\n\nFast bowler\n12\n7\n\n\nSpin bowler\n8\n10\n\n\nMedium pace\n10\n8\n\n\n\nThis is naturally interpreted as a loss table."
+  },
+  {
+    "objectID": "week01/index.html#cricket-as-a-payoff-problem",
+    "href": "week01/index.html#cricket-as-a-payoff-problem",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "Cricket as a payoff problem",
+    "text": "Cricket as a payoff problem\nSuppose the analyst instead estimates the probability of successfully defending the target.\n\n\n\nBowling decision\nBatter attacks\nBatter rotates strike\n\n\n\n\nFast bowler\n0.43\n0.71\n\n\nSpin bowler\n0.64\n0.56\n\n\nMedium pace\n0.51\n0.63\n\n\n\nNow larger values are preferred.\nThis is a payoff table.\n\nThe underlying decision problem may be similar, but the direction of preference changes with the consequence measure.\n\nRuns conceded: lower is better.\nProbability of winning: higher is better."
+  },
+  {
+    "objectID": "week01/index.html#the-same-athletics-problem-using-a-payoff",
+    "href": "week01/index.html#the-same-athletics-problem-using-a-payoff",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "The same athletics problem using a payoff",
+    "text": "The same athletics problem using a payoff\nSuppose instead the analysts estimate the probability of finishing in the top three.\n\n\n\nRace strategy\nFast race\nTactical race\n\n\n\n\nFast start\n0.44\n0.19\n\n\nEven pace\n0.35\n0.33\n\n\nConservative start\n0.21\n0.49\n\n\n\nNow larger values are preferred.\nThis immediately shows an important feature of decision problems:\n\nThe action that looks best depends on the state of nature.\n\nThere is no single strategy that dominates in both race conditions."
+  },
+  {
+    "objectID": "week01/index.html#minute-activity-volleyball-serving-decision",
+    "href": "week01/index.html#minute-activity-volleyball-serving-decision",
+    "title": "Week 01: Introduction to Statistical Decision Theory",
+    "section": "8-minute activity: Volleyball serving decision",
+    "text": "8-minute activity: Volleyball serving decision\nA volleyball coach must decide whether to keep the current server or introduce a serving specialist late in the set.\nTwo possible reception states are considered:\n\nthe opponent receives well;\nthe opponent receives poorly.\n\nThe estimated probability of winning the rally is:\n\n\n\nDecision\nGood opponent reception\nPoor opponent reception\n\n\n\n\nKeep current server\n0.43\n0.62\n\n\nUse serving specialist\n0.35\n0.76\n\n\n\n\nWork in pairs\n\nIdentify the decision maker.\nIdentify the decision alternatives.\nIdentify the states of nature.\nIdentify the consequence.\nFind (C_{12}).\nFind (C_{21}).\nWhich action would be selected if good reception were known with certainty?\nWhich action would be selected if poor reception were known with certainty?\nCan one action be selected for the next serve without using an additional decision criterion? Explain briefly."
+  }
+]

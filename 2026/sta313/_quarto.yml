@@ -1,0 +1,25 @@
+project:
+  type: website
+
+website:
+  title: "STA 313 1.0"
+  navbar:
+    background: light
+    left:
+      - href: index.qmd
+        text: Home
+      - href: index.qmd#course-overview
+        text: Overview
+      - href: index.qmd#weekly-lessons
+        text: Weekly Lessons
+      - href: index.qmd#assessment
+        text: Assessment
+      - href: index.qmd#reference
+        text: Reference
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: false
+    smooth-scroll: true
