@@ -1,0 +1,631 @@
+---
+title: "Week 02: Decision-Making Environments"
+subtitle: "STA 313 1.0"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    page-layout: full
+    smooth-scroll: true
+    anchor-sections: true
+---
+
+[← Back to course homepage](../index.qmd){.btn .btn-secondary}
+
+::: {.section-kicker}
+WEEK 02 · 60 MINUTES
+:::
+
+# Decision-Making Environments
+
+The same decision problem can look very different depending on how much we know about the future.
+
+This week we distinguish three settings:
+
+| Environment | What is known? |
+|---|---|
+| **Certainty** | The relevant future state is known |
+| **Uncertainty** | Several states are possible, but their probabilities are not available |
+| **Risk** | Several states are possible and probabilities can be assigned |
+
+The key question is not simply whether the future is unknown. It is **what information is available about the possible future states**.
+
+## Learning outcomes
+
+By the end of this lesson, you should be able to:
+
+1. distinguish decision making under **certainty**, **uncertainty**, and **risk**;
+2. identify the information available in each environment;
+3. formulate a statistical decision problem using alternatives, states of nature, consequences, and available information;
+4. classify a sports decision problem into the appropriate decision-making environment; and
+5. explain why the choice of decision rule depends on the information available.
+
+::: {.note}
+**Week 2 focus.** Decisions under certainty, uncertainty, and risk, together with the formulation of statistical decision problems.
+:::
+
+---
+
+# 1. One decision, three information settings
+
+Suppose a cricket captain must choose either a **fast bowler** or a **spinner** for the next over.
+
+The decision itself is the same in all three situations.
+
+What changes is the information available about the batter's likely response.
+
+## Situation A: Certainty
+
+The captain knows that the next batter will play aggressively throughout the over.
+
+There is only one relevant state for the decision.
+
+## Situation B: Uncertainty
+
+The captain knows that the batter may either:
+
+- attack aggressively; or
+- focus on rotating the strike.
+
+However, there is no reliable information about which response is more likely.
+
+## Situation C: Risk
+
+The captain has historical information suggesting:
+
+- \(P(\text{aggressive batting}) = 0.65\)
+- \(P(\text{strike rotation}) = 0.35\)
+
+These are three different decision-making environments.
+
+::: {.panel}
+### Opening question
+
+What changes across the three situations?
+
+**Not the alternatives.**
+
+The captain still chooses between pace and spin.
+
+What changes is the **information about the state of nature**.
+:::
+
+---
+
+# 2. Decision making under certainty
+
+## Definition
+
+A decision is made under **certainty** when the relevant future state is known.
+
+The decision maker can directly compare the consequences of the available actions under that known state.
+
+## Athletics example
+
+A 400 m athlete is choosing between two warm-up routines before an indoor race.
+
+The environmental conditions are already known and fixed.
+
+Suppose the estimated race times are:
+
+| Warm-up routine | Expected 400 m time |
+|---|---:|
+| Routine A | 51.8 s |
+| Routine B | 52.4 s |
+
+Since lower race time is preferred,
+
+\[
+51.8 < 52.4
+\]
+
+so Routine A is preferred.
+
+::: {.note}
+Under certainty, we do not need probabilities for several future states because the relevant state is treated as known.
+:::
+
+## Cricket example
+
+Suppose the captain knows the next batter is especially weak against spin.
+
+Estimated runs conceded are:
+
+| Bowling decision | Known batter condition |
+|---|---:|
+| Fast bowler | 9 |
+| Spin bowler | 6 |
+
+Since fewer runs conceded are preferred, spin is the better action under the known condition.
+
+---
+
+# 3. Decision making under uncertainty
+
+## Definition
+
+A decision is made under **uncertainty** when:
+
+- more than one state of nature is possible;
+- the decision maker does not know which state will occur; and
+- reliable probabilities cannot be assigned to the states.
+
+The important point is that the possible states can still be described.
+
+What is missing is their probability distribution.
+
+## Volleyball example
+
+A volleyball coach must choose an attacking strategy at a critical point.
+
+The alternatives are:
+
+- \(A_1\): middle attack
+- \(A_2\): outside attack
+- \(A_3\): back-row attack
+
+Possible defensive states are:
+
+- \(S_1\): opponent commits the middle block
+- \(S_2\): opponent forms an outside double block
+- \(S_3\): opponent uses a balanced block
+
+Suppose the estimated probability of winning the rally under each combination is:
+
+| Attack | Middle block | Outside double block | Balanced block |
+|---|---:|---:|---:|
+| Middle attack | 0.34 | 0.63 | 0.48 |
+| Outside attack | 0.60 | 0.31 | 0.46 |
+| Back-row attack | 0.50 | 0.56 | 0.43 |
+
+The coach knows the possible defensive responses.
+
+But suppose there is **no reliable probability model** for which blocking pattern will be used.
+
+This is decision making under uncertainty.
+
+::: {.panel}
+### Class question
+
+Can we calculate an expected value for each attack?
+
+**No.**
+
+To calculate an expected value, we need probabilities for the states of nature.
+:::
+
+## Athletics example
+
+A 1500 m runner is preparing for a championship final.
+
+Possible race strategies are:
+
+- fast early pace;
+- even pace;
+- conservative start with a fast finish.
+
+Possible race states are:
+
+- competitors make the race fast;
+- competitors keep the race slow and tactical.
+
+Suppose there is too little relevant information to assign reasonable probabilities to these two race states.
+
+The athlete therefore faces a decision under uncertainty.
+
+A consequence table can still be constructed.
+
+What is missing is the probability distribution over the states.
+
+---
+
+# 4. Decision making under risk
+
+## Definition
+
+A decision is made under **risk** when:
+
+- more than one state of nature is possible; and
+- probabilities can be assigned to the states.
+
+The probabilities may come from:
+
+- historical data;
+- statistical models;
+- expert judgement;
+- or a combination of these.
+
+## Cricket example
+
+Suppose the captain again chooses between a fast bowler and a spinner.
+
+The two possible batting responses are:
+
+- \(S_1\): aggressive batting
+- \(S_2\): strike rotation
+
+Suppose recent match analysis gives:
+
+- \(P(S_1) = 0.65\)
+- \(P(S_2) = 0.35\)
+
+Estimated runs conceded are:
+
+| Bowling decision | Aggressive batting | Strike rotation |
+|---|---:|---:|
+| Fast bowler | 11 | 7 |
+| Spin bowler | 8 | 10 |
+
+Now the decision is under risk because probabilities are available for the possible states.
+
+This does **not** mean the future is known.
+
+The batter may still respond in either way.
+
+The difference is that the captain now has quantitative information about how likely each response is.
+
+---
+
+# 5. Uncertainty versus risk
+
+This distinction is central to the course.
+
+| Feature | Uncertainty | Risk |
+|---|---|---|
+| More than one state possible | Yes | Yes |
+| State probabilities available | No | Yes |
+| Expected-value calculation possible | Not directly | Yes |
+| Example | Possible race patterns but no probability estimates | Race patterns with estimated probabilities |
+
+In notation:
+
+Under uncertainty, the states \(S_1, S_2, \ldots, S_n\) are known, but the values \(P(S_j)\) are not available.
+
+Under risk, both the states \(S_1, S_2, \ldots, S_n\) and their probabilities \(P(S_j)\) are available.
+
+---
+
+# 6. The same sports problem under all three environments
+
+Consider a volleyball coach deciding whether to keep the current server or introduce a serving specialist.
+
+The alternatives are:
+
+- \(A_1\): keep current server
+- \(A_2\): use serving specialist
+
+The possible reception states are:
+
+- \(S_1\): opponent receives well
+- \(S_2\): opponent receives poorly
+
+## Under certainty
+
+The coach knows which reception state will occur.
+
+Only that state needs to be considered.
+
+## Under uncertainty
+
+The coach knows the opponent may receive either well or poorly, but has no useful probability information.
+
+The states are known.
+
+Their probabilities are not.
+
+## Under risk
+
+Suppose the analyst estimates:
+
+- \(P(\text{good reception}) = 0.70\)
+- \(P(\text{poor reception}) = 0.30\)
+
+The problem is now under risk because probabilities are available.
+
+::: {.note}
+The alternatives and possible consequences may remain exactly the same. What changes is the **information available about the states of nature**.
+:::
+
+---
+
+# 7. Formulating a statistical decision problem
+
+Before selecting a decision rule, formulate the problem clearly.
+
+A useful formulation contains five parts.
+
+## 7.1 Decision maker
+
+Who chooses the action?
+
+Examples:
+
+- captain;
+- coach;
+- athlete;
+- selection committee.
+
+## 7.2 Alternatives
+
+What actions can be chosen?
+
+We may denote them by:
+
+\[
+A_1, A_2, \ldots, A_m
+\]
+
+## 7.3 States of nature
+
+What uncertain future conditions may occur?
+
+We may denote them by:
+
+\[
+S_1, S_2, \ldots, S_n
+\]
+
+## 7.4 Consequences
+
+What result follows from each action-state combination?
+
+We may denote the consequence by:
+
+\[
+C_{ij}
+\]
+
+where \(C_{ij}\) is the consequence of choosing action \(A_i\) when state \(S_j\) occurs.
+
+## 7.5 Available information
+
+What do we know about the states?
+
+This final question determines the decision-making environment.
+
+---
+
+# 8. A simple decision-environment checklist
+
+::: {.panel}
+### Decision problem checklist
+
+**1. What can I choose?**
+
+These are the alternatives.
+
+**2. What can happen that I do not control?**
+
+These are the states of nature.
+
+**3. What happens for each action-state combination?**
+
+These are the consequences.
+
+**4. Do I know which state will occur?**
+
+If yes, the problem is under **certainty**.
+
+**5. If I do not know the state, do I have probabilities for the possible states?**
+
+If yes, the problem is under **risk**.
+
+If no, the problem is under **uncertainty**.
+:::
+
+---
+
+# 9. Athletics formulation example
+
+A relay coach must choose one of two athletes for the final 400 m leg.
+
+The coach believes the race may develop in one of two ways:
+
+- \(S_1\): fast opening pace
+- \(S_2\): moderate opening pace
+
+Estimated split times are:
+
+| Athlete | Fast opening pace | Moderate opening pace |
+|---|---:|---:|
+| Athlete A | 46.8 s | 47.5 s |
+| Athlete B | 47.1 s | 46.9 s |
+
+## Step 1: Identify the decision maker
+
+The relay coach.
+
+## Step 2: Identify the alternatives
+
+- \(A_1\): select Athlete A
+- \(A_2\): select Athlete B
+
+## Step 3: Identify the states of nature
+
+- \(S_1\): fast opening pace
+- \(S_2\): moderate opening pace
+
+## Step 4: Identify the consequence
+
+The consequence is expected 400 m split time.
+
+Smaller values are preferred.
+
+## Step 5: Identify the information environment
+
+If the coach knows the opening pace in advance, the decision is under **certainty**.
+
+If both race states are possible but no reliable probabilities are available, the decision is under **uncertainty**.
+
+If the analyst estimates:
+
+- \(P(S_1) = 0.55\)
+- \(P(S_2) = 0.45\)
+
+then the decision is under **risk**.
+
+The decision table itself has not changed.
+
+Only the information available has changed.
+
+---
+
+# 10. Student activity {#activity}
+
+::: {.panel}
+## 6-minute activity: Classify the environment
+
+For each scenario, identify:
+
+1. the decision maker;
+2. the alternatives;
+3. the state or states of nature;
+4. the consequence;
+5. whether the problem is under certainty, uncertainty, or risk.
+
+### Scenario A: Cricket
+
+A captain must choose between spin and pace.
+
+The pitch inspection confirms that the surface will strongly assist spin throughout the next session.
+
+Estimated runs conceded are available for both bowling choices under that known condition.
+
+### Scenario B: Athletics
+
+A 1500 m runner must choose between an aggressive and conservative pacing strategy.
+
+The race may become fast or tactical, but the athlete has no reliable estimate of the probability of either race pattern.
+
+### Scenario C: Volleyball
+
+A coach chooses between a standard serve and a jump serve.
+
+Video analysis estimates:
+
+- \(P(\text{good opponent reception}) = 0.62\)
+- \(P(\text{poor opponent reception}) = 0.38\)
+
+The probability of winning the rally is estimated for each serve-reception combination.
+:::
+
+## Suggested answers
+
+### Scenario A
+
+**Environment:** Certainty
+
+The relevant future condition is treated as known.
+
+### Scenario B
+
+**Environment:** Uncertainty
+
+Several states are possible, but no probabilities are available.
+
+### Scenario C
+
+**Environment:** Risk
+
+Several states are possible and probabilities are available.
+
+---
+
+# 11. Common mistakes
+
+## Mistake 1: Calling every unknown future event "risk"
+
+In decision theory, uncertainty and risk are not the same.
+
+The distinction depends on whether probabilities can be assigned.
+
+## Mistake 2: Confusing a state of nature with an alternative
+
+For example:
+
+> The opponent receives poorly.
+
+This is not the coach's action.
+
+It is a possible state of nature.
+
+## Mistake 3: Ignoring the consequence measure
+
+If the consequence is:
+
+- race time, lower is better;
+- runs conceded, lower is better;
+- win probability, higher is better;
+- expected points, higher is better.
+
+The direction of preference must be clear before applying a decision rule.
+
+---
+
+# 12. Exit check {#exit-check}
+
+### Question 1
+
+A cricket analyst gives the captain three possible match states, but no probabilities.
+
+What is the decision environment?
+
+::: {.callout-tip collapse="true"}
+## Answer
+
+Uncertainty.
+:::
+
+### Question 2
+
+A volleyball coach has probabilities for three possible opponent blocking patterns.
+
+What is the decision environment?
+
+::: {.callout-tip collapse="true"}
+## Answer
+
+Risk.
+:::
+
+### Question 3
+
+An athletics coach knows that tomorrow's race will be run indoors under fixed conditions.
+
+What is the decision environment for those conditions?
+
+::: {.callout-tip collapse="true"}
+## Answer
+
+Certainty.
+:::
+
+---
+
+# After class
+
+## Independent learning
+
+Before Week 3:
+
+1. Create one sports decision problem under **uncertainty**.
+2. Include at least three alternatives and three states of nature.
+3. Construct a payoff or loss table.
+4. Do **not** assign probabilities to the states.
+5. State clearly whether larger or smaller consequences are preferred.
+
+This problem will be useful next week when we introduce the first decision criteria under uncertainty.
+
+## Next week
+
+**Week 03: Decision Making under Uncertainty I**
+
+We will study:
+
+- Maximax;
+- Maximin;
+- how the interpretation changes for payoff and cost tables.
+
+## Reference
+
+Gupta, P. K., Hira, D. S., & Kamboj, A. (2012). *Introduction to Operations Research*. S Chand and Company Limited. Chapter 9: Decision Theory, pp. 635–711.

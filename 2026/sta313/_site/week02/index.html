@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Week 02: Decision-Making Environments – STA 313 1.0</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-ea1971949f186b5d7ecce1fd3cf000e4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">STA 313 1.0</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html#course-overview"> 
+<span class="menu-text">Overview</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html#weekly-lessons"> 
+<span class="menu-text">Weekly Lessons</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html#assessment"> 
+<span class="menu-text">Assessment</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html#reference"> 
+<span class="menu-text">Reference</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#decision-making-environments" id="toc-decision-making-environments" class="nav-link active" data-scroll-target="#decision-making-environments">Decision-Making Environments</a>
+  <ul class="collapse">
+  <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link" data-scroll-target="#learning-outcomes">Learning outcomes</a></li>
+  </ul></li>
+  <li><a href="#one-decision-three-information-settings" id="toc-one-decision-three-information-settings" class="nav-link" data-scroll-target="#one-decision-three-information-settings">1. One decision, three information settings</a>
+  <ul class="collapse">
+  <li><a href="#situation-a-certainty" id="toc-situation-a-certainty" class="nav-link" data-scroll-target="#situation-a-certainty">Situation A: Certainty</a></li>
+  <li><a href="#situation-b-uncertainty" id="toc-situation-b-uncertainty" class="nav-link" data-scroll-target="#situation-b-uncertainty">Situation B: Uncertainty</a></li>
+  <li><a href="#situation-c-risk" id="toc-situation-c-risk" class="nav-link" data-scroll-target="#situation-c-risk">Situation C: Risk</a>
+  <ul class="collapse">
+  <li><a href="#opening-question" id="toc-opening-question" class="nav-link" data-scroll-target="#opening-question">Opening question</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#decision-making-under-certainty" id="toc-decision-making-under-certainty" class="nav-link" data-scroll-target="#decision-making-under-certainty">2. Decision making under certainty</a>
+  <ul class="collapse">
+  <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition">Definition</a></li>
+  <li><a href="#athletics-example" id="toc-athletics-example" class="nav-link" data-scroll-target="#athletics-example">Athletics example</a></li>
+  <li><a href="#cricket-example" id="toc-cricket-example" class="nav-link" data-scroll-target="#cricket-example">Cricket example</a></li>
+  </ul></li>
+  <li><a href="#decision-making-under-uncertainty" id="toc-decision-making-under-uncertainty" class="nav-link" data-scroll-target="#decision-making-under-uncertainty">3. Decision making under uncertainty</a>
+  <ul class="collapse">
+  <li><a href="#definition-1" id="toc-definition-1" class="nav-link" data-scroll-target="#definition-1">Definition</a></li>
+  <li><a href="#volleyball-example" id="toc-volleyball-example" class="nav-link" data-scroll-target="#volleyball-example">Volleyball example</a>
+  <ul class="collapse">
+  <li><a href="#class-question" id="toc-class-question" class="nav-link" data-scroll-target="#class-question">Class question</a></li>
+  </ul></li>
+  <li><a href="#athletics-example-1" id="toc-athletics-example-1" class="nav-link" data-scroll-target="#athletics-example-1">Athletics example</a></li>
+  </ul></li>
+  <li><a href="#decision-making-under-risk" id="toc-decision-making-under-risk" class="nav-link" data-scroll-target="#decision-making-under-risk">4. Decision making under risk</a>
+  <ul class="collapse">
+  <li><a href="#definition-2" id="toc-definition-2" class="nav-link" data-scroll-target="#definition-2">Definition</a></li>
+  <li><a href="#cricket-example-1" id="toc-cricket-example-1" class="nav-link" data-scroll-target="#cricket-example-1">Cricket example</a></li>
+  </ul></li>
+  <li><a href="#uncertainty-versus-risk" id="toc-uncertainty-versus-risk" class="nav-link" data-scroll-target="#uncertainty-versus-risk">5. Uncertainty versus risk</a></li>
+  <li><a href="#the-same-sports-problem-under-all-three-environments" id="toc-the-same-sports-problem-under-all-three-environments" class="nav-link" data-scroll-target="#the-same-sports-problem-under-all-three-environments">6. The same sports problem under all three environments</a>
+  <ul class="collapse">
+  <li><a href="#under-certainty" id="toc-under-certainty" class="nav-link" data-scroll-target="#under-certainty">Under certainty</a></li>
+  <li><a href="#under-uncertainty" id="toc-under-uncertainty" class="nav-link" data-scroll-target="#under-uncertainty">Under uncertainty</a></li>
+  <li><a href="#under-risk" id="toc-under-risk" class="nav-link" data-scroll-target="#under-risk">Under risk</a></li>
+  </ul></li>
+  <li><a href="#formulating-a-statistical-decision-problem" id="toc-formulating-a-statistical-decision-problem" class="nav-link" data-scroll-target="#formulating-a-statistical-decision-problem">7. Formulating a statistical decision problem</a>
+  <ul class="collapse">
+  <li><a href="#decision-maker" id="toc-decision-maker" class="nav-link" data-scroll-target="#decision-maker">7.1 Decision maker</a></li>
+  <li><a href="#alternatives" id="toc-alternatives" class="nav-link" data-scroll-target="#alternatives">7.2 Alternatives</a></li>
+  <li><a href="#states-of-nature" id="toc-states-of-nature" class="nav-link" data-scroll-target="#states-of-nature">7.3 States of nature</a></li>
+  <li><a href="#consequences" id="toc-consequences" class="nav-link" data-scroll-target="#consequences">7.4 Consequences</a></li>
+  <li><a href="#available-information" id="toc-available-information" class="nav-link" data-scroll-target="#available-information">7.5 Available information</a></li>
+  </ul></li>
+  <li><a href="#a-simple-decision-environment-checklist" id="toc-a-simple-decision-environment-checklist" class="nav-link" data-scroll-target="#a-simple-decision-environment-checklist">8. A simple decision-environment checklist</a>
+  <ul class="collapse">
+  <li><a href="#decision-problem-checklist" id="toc-decision-problem-checklist" class="nav-link" data-scroll-target="#decision-problem-checklist">Decision problem checklist</a></li>
+  </ul></li>
+  <li><a href="#athletics-formulation-example" id="toc-athletics-formulation-example" class="nav-link" data-scroll-target="#athletics-formulation-example">9. Athletics formulation example</a>
+  <ul class="collapse">
+  <li><a href="#step-1-identify-the-decision-maker" id="toc-step-1-identify-the-decision-maker" class="nav-link" data-scroll-target="#step-1-identify-the-decision-maker">Step 1: Identify the decision maker</a></li>
+  <li><a href="#step-2-identify-the-alternatives" id="toc-step-2-identify-the-alternatives" class="nav-link" data-scroll-target="#step-2-identify-the-alternatives">Step 2: Identify the alternatives</a></li>
+  <li><a href="#step-3-identify-the-states-of-nature" id="toc-step-3-identify-the-states-of-nature" class="nav-link" data-scroll-target="#step-3-identify-the-states-of-nature">Step 3: Identify the states of nature</a></li>
+  <li><a href="#step-4-identify-the-consequence" id="toc-step-4-identify-the-consequence" class="nav-link" data-scroll-target="#step-4-identify-the-consequence">Step 4: Identify the consequence</a></li>
+  <li><a href="#step-5-identify-the-information-environment" id="toc-step-5-identify-the-information-environment" class="nav-link" data-scroll-target="#step-5-identify-the-information-environment">Step 5: Identify the information environment</a></li>
+  </ul></li>
+  <li><a href="#activity" id="toc-activity" class="nav-link" data-scroll-target="#activity">10. Student activity</a>
+  <ul class="collapse">
+  <li><a href="#minute-activity-classify-the-environment" id="toc-minute-activity-classify-the-environment" class="nav-link" data-scroll-target="#minute-activity-classify-the-environment">6-minute activity: Classify the environment</a>
+  <ul class="collapse">
+  <li><a href="#scenario-a-cricket" id="toc-scenario-a-cricket" class="nav-link" data-scroll-target="#scenario-a-cricket">Scenario A: Cricket</a></li>
+  <li><a href="#scenario-b-athletics" id="toc-scenario-b-athletics" class="nav-link" data-scroll-target="#scenario-b-athletics">Scenario B: Athletics</a></li>
+  <li><a href="#scenario-c-volleyball" id="toc-scenario-c-volleyball" class="nav-link" data-scroll-target="#scenario-c-volleyball">Scenario C: Volleyball</a></li>
+  </ul></li>
+  <li><a href="#suggested-answers" id="toc-suggested-answers" class="nav-link" data-scroll-target="#suggested-answers">Suggested answers</a>
+  <ul class="collapse">
+  <li><a href="#scenario-a" id="toc-scenario-a" class="nav-link" data-scroll-target="#scenario-a">Scenario A</a></li>
+  <li><a href="#scenario-b" id="toc-scenario-b" class="nav-link" data-scroll-target="#scenario-b">Scenario B</a></li>
+  <li><a href="#scenario-c" id="toc-scenario-c" class="nav-link" data-scroll-target="#scenario-c">Scenario C</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#common-mistakes" id="toc-common-mistakes" class="nav-link" data-scroll-target="#common-mistakes">11. Common mistakes</a>
+  <ul class="collapse">
+  <li><a href="#mistake-1-calling-every-unknown-future-event-risk" id="toc-mistake-1-calling-every-unknown-future-event-risk" class="nav-link" data-scroll-target="#mistake-1-calling-every-unknown-future-event-risk">Mistake 1: Calling every unknown future event “risk”</a></li>
+  <li><a href="#mistake-2-confusing-a-state-of-nature-with-an-alternative" id="toc-mistake-2-confusing-a-state-of-nature-with-an-alternative" class="nav-link" data-scroll-target="#mistake-2-confusing-a-state-of-nature-with-an-alternative">Mistake 2: Confusing a state of nature with an alternative</a></li>
+  <li><a href="#mistake-3-ignoring-the-consequence-measure" id="toc-mistake-3-ignoring-the-consequence-measure" class="nav-link" data-scroll-target="#mistake-3-ignoring-the-consequence-measure">Mistake 3: Ignoring the consequence measure</a></li>
+  </ul></li>
+  <li><a href="#exit-check" id="toc-exit-check" class="nav-link" data-scroll-target="#exit-check">12. Exit check</a>
+  <ul class="collapse">
+  <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1">Question 1</a></li>
+  <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2">Question 2</a></li>
+  <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3">Question 3</a></li>
+  </ul></li>
+  <li><a href="#after-class" id="toc-after-class" class="nav-link" data-scroll-target="#after-class">After class</a>
+  <ul class="collapse">
+  <li><a href="#independent-learning" id="toc-independent-learning" class="nav-link" data-scroll-target="#independent-learning">Independent learning</a></li>
+  <li><a href="#next-week" id="toc-next-week" class="nav-link" data-scroll-target="#next-week">Next week</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Week 02: Decision-Making Environments</h1>
+<p class="subtitle lead">STA 313 1.0</p>
+</div>
+
+
+
+<div class="quarto-title-meta column-page-left">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><a href="../index.html" class="btn btn-secondary">← Back to course homepage</a></p>
+<div class="section-kicker">
+<p>WEEK 02 · 60 MINUTES</p>
+</div>
+<section id="decision-making-environments" class="level1">
+<h1>Decision-Making Environments</h1>
+<p>The same decision problem can look very different depending on how much we know about the future.</p>
+<p>This week we distinguish three settings:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Environment</th>
+<th>What is known?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Certainty</strong></td>
+<td>The relevant future state is known</td>
+</tr>
+<tr class="even">
+<td><strong>Uncertainty</strong></td>
+<td>Several states are possible, but their probabilities are not available</td>
+</tr>
+<tr class="odd">
+<td><strong>Risk</strong></td>
+<td>Several states are possible and probabilities can be assigned</td>
+</tr>
+</tbody>
+</table>
+<p>The key question is not simply whether the future is unknown. It is <strong>what information is available about the possible future states</strong>.</p>
+<section id="learning-outcomes" class="level2">
+<h2 class="anchored" data-anchor-id="learning-outcomes">Learning outcomes</h2>
+<p>By the end of this lesson, you should be able to:</p>
+<ol type="1">
+<li>distinguish decision making under <strong>certainty</strong>, <strong>uncertainty</strong>, and <strong>risk</strong>;</li>
+<li>identify the information available in each environment;</li>
+<li>formulate a statistical decision problem using alternatives, states of nature, consequences, and available information;</li>
+<li>classify a sports decision problem into the appropriate decision-making environment; and</li>
+<li>explain why the choice of decision rule depends on the information available.</li>
+</ol>
+<div class="note">
+<p><strong>Week 2 focus.</strong> Decisions under certainty, uncertainty, and risk, together with the formulation of statistical decision problems.</p>
+</div>
+<hr>
+</section>
+</section>
+<section id="one-decision-three-information-settings" class="level1">
+<h1>1. One decision, three information settings</h1>
+<p>Suppose a cricket captain must choose either a <strong>fast bowler</strong> or a <strong>spinner</strong> for the next over.</p>
+<p>The decision itself is the same in all three situations.</p>
+<p>What changes is the information available about the batter’s likely response.</p>
+<section id="situation-a-certainty" class="level2">
+<h2 class="anchored" data-anchor-id="situation-a-certainty">Situation A: Certainty</h2>
+<p>The captain knows that the next batter will play aggressively throughout the over.</p>
+<p>There is only one relevant state for the decision.</p>
+</section>
+<section id="situation-b-uncertainty" class="level2">
+<h2 class="anchored" data-anchor-id="situation-b-uncertainty">Situation B: Uncertainty</h2>
+<p>The captain knows that the batter may either:</p>
+<ul>
+<li>attack aggressively; or</li>
+<li>focus on rotating the strike.</li>
+</ul>
+<p>However, there is no reliable information about which response is more likely.</p>
+</section>
+<section id="situation-c-risk" class="level2">
+<h2 class="anchored" data-anchor-id="situation-c-risk">Situation C: Risk</h2>
+<p>The captain has historical information suggesting:</p>
+<ul>
+<li>(P() = 0.65)</li>
+<li>(P() = 0.35)</li>
+</ul>
+<p>These are three different decision-making environments.</p>
+<section id="opening-question" class="level3 panel">
+<h3 class="anchored" data-anchor-id="opening-question">Opening question</h3>
+<p>What changes across the three situations?</p>
+<p><strong>Not the alternatives.</strong></p>
+<p>The captain still chooses between pace and spin.</p>
+<p>What changes is the <strong>information about the state of nature</strong>.</p>
+</section>
+<hr>
+</section>
+</section>
+<section id="decision-making-under-certainty" class="level1">
+<h1>2. Decision making under certainty</h1>
+<section id="definition" class="level2">
+<h2 class="anchored" data-anchor-id="definition">Definition</h2>
+<p>A decision is made under <strong>certainty</strong> when the relevant future state is known.</p>
+<p>The decision maker can directly compare the consequences of the available actions under that known state.</p>
+</section>
+<section id="athletics-example" class="level2">
+<h2 class="anchored" data-anchor-id="athletics-example">Athletics example</h2>
+<p>A 400 m athlete is choosing between two warm-up routines before an indoor race.</p>
+<p>The environmental conditions are already known and fixed.</p>
+<p>Suppose the estimated race times are:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Warm-up routine</th>
+<th style="text-align: right;">Expected 400 m time</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Routine A</td>
+<td style="text-align: right;">51.8 s</td>
+</tr>
+<tr class="even">
+<td>Routine B</td>
+<td style="text-align: right;">52.4 s</td>
+</tr>
+</tbody>
+</table>
+<p>Since lower race time is preferred,</p>
+<p>[ 51.8 &lt; 52.4 ]</p>
+<p>so Routine A is preferred.</p>
+<div class="note">
+<p>Under certainty, we do not need probabilities for several future states because the relevant state is treated as known.</p>
+</div>
+</section>
+<section id="cricket-example" class="level2">
+<h2 class="anchored" data-anchor-id="cricket-example">Cricket example</h2>
+<p>Suppose the captain knows the next batter is especially weak against spin.</p>
+<p>Estimated runs conceded are:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Bowling decision</th>
+<th style="text-align: right;">Known batter condition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fast bowler</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="even">
+<td>Spin bowler</td>
+<td style="text-align: right;">6</td>
+</tr>
+</tbody>
+</table>
+<p>Since fewer runs conceded are preferred, spin is the better action under the known condition.</p>
+<hr>
+</section>
+</section>
+<section id="decision-making-under-uncertainty" class="level1">
+<h1>3. Decision making under uncertainty</h1>
+<section id="definition-1" class="level2">
+<h2 class="anchored" data-anchor-id="definition-1">Definition</h2>
+<p>A decision is made under <strong>uncertainty</strong> when:</p>
+<ul>
+<li>more than one state of nature is possible;</li>
+<li>the decision maker does not know which state will occur; and</li>
+<li>reliable probabilities cannot be assigned to the states.</li>
+</ul>
+<p>The important point is that the possible states can still be described.</p>
+<p>What is missing is their probability distribution.</p>
+</section>
+<section id="volleyball-example" class="level2">
+<h2 class="anchored" data-anchor-id="volleyball-example">Volleyball example</h2>
+<p>A volleyball coach must choose an attacking strategy at a critical point.</p>
+<p>The alternatives are:</p>
+<ul>
+<li>(A_1): middle attack</li>
+<li>(A_2): outside attack</li>
+<li>(A_3): back-row attack</li>
+</ul>
+<p>Possible defensive states are:</p>
+<ul>
+<li>(S_1): opponent commits the middle block</li>
+<li>(S_2): opponent forms an outside double block</li>
+<li>(S_3): opponent uses a balanced block</li>
+</ul>
+<p>Suppose the estimated probability of winning the rally under each combination is:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Attack</th>
+<th style="text-align: right;">Middle block</th>
+<th style="text-align: right;">Outside double block</th>
+<th style="text-align: right;">Balanced block</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Middle attack</td>
+<td style="text-align: right;">0.34</td>
+<td style="text-align: right;">0.63</td>
+<td style="text-align: right;">0.48</td>
+</tr>
+<tr class="even">
+<td>Outside attack</td>
+<td style="text-align: right;">0.60</td>
+<td style="text-align: right;">0.31</td>
+<td style="text-align: right;">0.46</td>
+</tr>
+<tr class="odd">
+<td>Back-row attack</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">0.56</td>
+<td style="text-align: right;">0.43</td>
+</tr>
+</tbody>
+</table>
+<p>The coach knows the possible defensive responses.</p>
+<p>But suppose there is <strong>no reliable probability model</strong> for which blocking pattern will be used.</p>
+<p>This is decision making under uncertainty.</p>
+<section id="class-question" class="level3 panel">
+<h3 class="anchored" data-anchor-id="class-question">Class question</h3>
+<p>Can we calculate an expected value for each attack?</p>
+<p><strong>No.</strong></p>
+<p>To calculate an expected value, we need probabilities for the states of nature.</p>
+</section>
+</section>
+<section id="athletics-example-1" class="level2">
+<h2 class="anchored" data-anchor-id="athletics-example-1">Athletics example</h2>
+<p>A 1500 m runner is preparing for a championship final.</p>
+<p>Possible race strategies are:</p>
+<ul>
+<li>fast early pace;</li>
+<li>even pace;</li>
+<li>conservative start with a fast finish.</li>
+</ul>
+<p>Possible race states are:</p>
+<ul>
+<li>competitors make the race fast;</li>
+<li>competitors keep the race slow and tactical.</li>
+</ul>
+<p>Suppose there is too little relevant information to assign reasonable probabilities to these two race states.</p>
+<p>The athlete therefore faces a decision under uncertainty.</p>
+<p>A consequence table can still be constructed.</p>
+<p>What is missing is the probability distribution over the states.</p>
+<hr>
+</section>
+</section>
+<section id="decision-making-under-risk" class="level1">
+<h1>4. Decision making under risk</h1>
+<section id="definition-2" class="level2">
+<h2 class="anchored" data-anchor-id="definition-2">Definition</h2>
+<p>A decision is made under <strong>risk</strong> when:</p>
+<ul>
+<li>more than one state of nature is possible; and</li>
+<li>probabilities can be assigned to the states.</li>
+</ul>
+<p>The probabilities may come from:</p>
+<ul>
+<li>historical data;</li>
+<li>statistical models;</li>
+<li>expert judgement;</li>
+<li>or a combination of these.</li>
+</ul>
+</section>
+<section id="cricket-example-1" class="level2">
+<h2 class="anchored" data-anchor-id="cricket-example-1">Cricket example</h2>
+<p>Suppose the captain again chooses between a fast bowler and a spinner.</p>
+<p>The two possible batting responses are:</p>
+<ul>
+<li>(S_1): aggressive batting</li>
+<li>(S_2): strike rotation</li>
+</ul>
+<p>Suppose recent match analysis gives:</p>
+<ul>
+<li>(P(S_1) = 0.65)</li>
+<li>(P(S_2) = 0.35)</li>
+</ul>
+<p>Estimated runs conceded are:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Bowling decision</th>
+<th style="text-align: right;">Aggressive batting</th>
+<th style="text-align: right;">Strike rotation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fast bowler</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr class="even">
+<td>Spin bowler</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">10</td>
+</tr>
+</tbody>
+</table>
+<p>Now the decision is under risk because probabilities are available for the possible states.</p>
+<p>This does <strong>not</strong> mean the future is known.</p>
+<p>The batter may still respond in either way.</p>
+<p>The difference is that the captain now has quantitative information about how likely each response is.</p>
+<hr>
+</section>
+</section>
+<section id="uncertainty-versus-risk" class="level1">
+<h1>5. Uncertainty versus risk</h1>
+<p>This distinction is central to the course.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th>Uncertainty</th>
+<th>Risk</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>More than one state possible</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>State probabilities available</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td>Expected-value calculation possible</td>
+<td>Not directly</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>Example</td>
+<td>Possible race patterns but no probability estimates</td>
+<td>Race patterns with estimated probabilities</td>
+</tr>
+</tbody>
+</table>
+<p>In notation:</p>
+<p>Under uncertainty, the states (S_1, S_2, , S_n) are known, but the values (P(S_j)) are not available.</p>
+<p>Under risk, both the states (S_1, S_2, , S_n) and their probabilities (P(S_j)) are available.</p>
+<hr>
+</section>
+<section id="the-same-sports-problem-under-all-three-environments" class="level1">
+<h1>6. The same sports problem under all three environments</h1>
+<p>Consider a volleyball coach deciding whether to keep the current server or introduce a serving specialist.</p>
+<p>The alternatives are:</p>
+<ul>
+<li>(A_1): keep current server</li>
+<li>(A_2): use serving specialist</li>
+</ul>
+<p>The possible reception states are:</p>
+<ul>
+<li>(S_1): opponent receives well</li>
+<li>(S_2): opponent receives poorly</li>
+</ul>
+<section id="under-certainty" class="level2">
+<h2 class="anchored" data-anchor-id="under-certainty">Under certainty</h2>
+<p>The coach knows which reception state will occur.</p>
+<p>Only that state needs to be considered.</p>
+</section>
+<section id="under-uncertainty" class="level2">
+<h2 class="anchored" data-anchor-id="under-uncertainty">Under uncertainty</h2>
+<p>The coach knows the opponent may receive either well or poorly, but has no useful probability information.</p>
+<p>The states are known.</p>
+<p>Their probabilities are not.</p>
+</section>
+<section id="under-risk" class="level2">
+<h2 class="anchored" data-anchor-id="under-risk">Under risk</h2>
+<p>Suppose the analyst estimates:</p>
+<ul>
+<li>(P() = 0.70)</li>
+<li>(P() = 0.30)</li>
+</ul>
+<p>The problem is now under risk because probabilities are available.</p>
+<div class="note">
+<p>The alternatives and possible consequences may remain exactly the same. What changes is the <strong>information available about the states of nature</strong>.</p>
+</div>
+<hr>
+</section>
+</section>
+<section id="formulating-a-statistical-decision-problem" class="level1">
+<h1>7. Formulating a statistical decision problem</h1>
+<p>Before selecting a decision rule, formulate the problem clearly.</p>
+<p>A useful formulation contains five parts.</p>
+<section id="decision-maker" class="level2">
+<h2 class="anchored" data-anchor-id="decision-maker">7.1 Decision maker</h2>
+<p>Who chooses the action?</p>
+<p>Examples:</p>
+<ul>
+<li>captain;</li>
+<li>coach;</li>
+<li>athlete;</li>
+<li>selection committee.</li>
+</ul>
+</section>
+<section id="alternatives" class="level2">
+<h2 class="anchored" data-anchor-id="alternatives">7.2 Alternatives</h2>
+<p>What actions can be chosen?</p>
+<p>We may denote them by:</p>
+<p>[ A_1, A_2, , A_m ]</p>
+</section>
+<section id="states-of-nature" class="level2">
+<h2 class="anchored" data-anchor-id="states-of-nature">7.3 States of nature</h2>
+<p>What uncertain future conditions may occur?</p>
+<p>We may denote them by:</p>
+<p>[ S_1, S_2, , S_n ]</p>
+</section>
+<section id="consequences" class="level2">
+<h2 class="anchored" data-anchor-id="consequences">7.4 Consequences</h2>
+<p>What result follows from each action-state combination?</p>
+<p>We may denote the consequence by:</p>
+<p>[ C_{ij} ]</p>
+<p>where (C_{ij}) is the consequence of choosing action (A_i) when state (S_j) occurs.</p>
+</section>
+<section id="available-information" class="level2">
+<h2 class="anchored" data-anchor-id="available-information">7.5 Available information</h2>
+<p>What do we know about the states?</p>
+<p>This final question determines the decision-making environment.</p>
+<hr>
+</section>
+</section>
+<section id="a-simple-decision-environment-checklist" class="level1">
+<h1>8. A simple decision-environment checklist</h1>
+<section id="decision-problem-checklist" class="level3 panel">
+<h3 class="anchored" data-anchor-id="decision-problem-checklist">Decision problem checklist</h3>
+<p><strong>1. What can I choose?</strong></p>
+<p>These are the alternatives.</p>
+<p><strong>2. What can happen that I do not control?</strong></p>
+<p>These are the states of nature.</p>
+<p><strong>3. What happens for each action-state combination?</strong></p>
+<p>These are the consequences.</p>
+<p><strong>4. Do I know which state will occur?</strong></p>
+<p>If yes, the problem is under <strong>certainty</strong>.</p>
+<p><strong>5. If I do not know the state, do I have probabilities for the possible states?</strong></p>
+<p>If yes, the problem is under <strong>risk</strong>.</p>
+<p>If no, the problem is under <strong>uncertainty</strong>.</p>
+</section>
+<hr>
+</section>
+<section id="athletics-formulation-example" class="level1">
+<h1>9. Athletics formulation example</h1>
+<p>A relay coach must choose one of two athletes for the final 400 m leg.</p>
+<p>The coach believes the race may develop in one of two ways:</p>
+<ul>
+<li>(S_1): fast opening pace</li>
+<li>(S_2): moderate opening pace</li>
+</ul>
+<p>Estimated split times are:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Athlete</th>
+<th style="text-align: right;">Fast opening pace</th>
+<th style="text-align: right;">Moderate opening pace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Athlete A</td>
+<td style="text-align: right;">46.8 s</td>
+<td style="text-align: right;">47.5 s</td>
+</tr>
+<tr class="even">
+<td>Athlete B</td>
+<td style="text-align: right;">47.1 s</td>
+<td style="text-align: right;">46.9 s</td>
+</tr>
+</tbody>
+</table>
+<section id="step-1-identify-the-decision-maker" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-identify-the-decision-maker">Step 1: Identify the decision maker</h2>
+<p>The relay coach.</p>
+</section>
+<section id="step-2-identify-the-alternatives" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-identify-the-alternatives">Step 2: Identify the alternatives</h2>
+<ul>
+<li>(A_1): select Athlete A</li>
+<li>(A_2): select Athlete B</li>
+</ul>
+</section>
+<section id="step-3-identify-the-states-of-nature" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-identify-the-states-of-nature">Step 3: Identify the states of nature</h2>
+<ul>
+<li>(S_1): fast opening pace</li>
+<li>(S_2): moderate opening pace</li>
+</ul>
+</section>
+<section id="step-4-identify-the-consequence" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-identify-the-consequence">Step 4: Identify the consequence</h2>
+<p>The consequence is expected 400 m split time.</p>
+<p>Smaller values are preferred.</p>
+</section>
+<section id="step-5-identify-the-information-environment" class="level2">
+<h2 class="anchored" data-anchor-id="step-5-identify-the-information-environment">Step 5: Identify the information environment</h2>
+<p>If the coach knows the opening pace in advance, the decision is under <strong>certainty</strong>.</p>
+<p>If both race states are possible but no reliable probabilities are available, the decision is under <strong>uncertainty</strong>.</p>
+<p>If the analyst estimates:</p>
+<ul>
+<li>(P(S_1) = 0.55)</li>
+<li>(P(S_2) = 0.45)</li>
+</ul>
+<p>then the decision is under <strong>risk</strong>.</p>
+<p>The decision table itself has not changed.</p>
+<p>Only the information available has changed.</p>
+<hr>
+</section>
+</section>
+<section id="activity" class="level1">
+<h1>10. Student activity</h1>
+<section id="minute-activity-classify-the-environment" class="level2 panel">
+<h2 class="anchored" data-anchor-id="minute-activity-classify-the-environment">6-minute activity: Classify the environment</h2>
+<p>For each scenario, identify:</p>
+<ol type="1">
+<li>the decision maker;</li>
+<li>the alternatives;</li>
+<li>the state or states of nature;</li>
+<li>the consequence;</li>
+<li>whether the problem is under certainty, uncertainty, or risk.</li>
+</ol>
+<section id="scenario-a-cricket" class="level3">
+<h3 class="anchored" data-anchor-id="scenario-a-cricket">Scenario A: Cricket</h3>
+<p>A captain must choose between spin and pace.</p>
+<p>The pitch inspection confirms that the surface will strongly assist spin throughout the next session.</p>
+<p>Estimated runs conceded are available for both bowling choices under that known condition.</p>
+</section>
+<section id="scenario-b-athletics" class="level3">
+<h3 class="anchored" data-anchor-id="scenario-b-athletics">Scenario B: Athletics</h3>
+<p>A 1500 m runner must choose between an aggressive and conservative pacing strategy.</p>
+<p>The race may become fast or tactical, but the athlete has no reliable estimate of the probability of either race pattern.</p>
+</section>
+<section id="scenario-c-volleyball" class="level3">
+<h3 class="anchored" data-anchor-id="scenario-c-volleyball">Scenario C: Volleyball</h3>
+<p>A coach chooses between a standard serve and a jump serve.</p>
+<p>Video analysis estimates:</p>
+<ul>
+<li>(P() = 0.62)</li>
+<li>(P() = 0.38)</li>
+</ul>
+<p>The probability of winning the rally is estimated for each serve-reception combination.</p>
+</section>
+</section>
+<section id="suggested-answers" class="level2">
+<h2 class="anchored" data-anchor-id="suggested-answers">Suggested answers</h2>
+<section id="scenario-a" class="level3">
+<h3 class="anchored" data-anchor-id="scenario-a">Scenario A</h3>
+<p><strong>Environment:</strong> Certainty</p>
+<p>The relevant future condition is treated as known.</p>
+</section>
+<section id="scenario-b" class="level3">
+<h3 class="anchored" data-anchor-id="scenario-b">Scenario B</h3>
+<p><strong>Environment:</strong> Uncertainty</p>
+<p>Several states are possible, but no probabilities are available.</p>
+</section>
+<section id="scenario-c" class="level3">
+<h3 class="anchored" data-anchor-id="scenario-c">Scenario C</h3>
+<p><strong>Environment:</strong> Risk</p>
+<p>Several states are possible and probabilities are available.</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="common-mistakes" class="level1">
+<h1>11. Common mistakes</h1>
+<section id="mistake-1-calling-every-unknown-future-event-risk" class="level2">
+<h2 class="anchored" data-anchor-id="mistake-1-calling-every-unknown-future-event-risk">Mistake 1: Calling every unknown future event “risk”</h2>
+<p>In decision theory, uncertainty and risk are not the same.</p>
+<p>The distinction depends on whether probabilities can be assigned.</p>
+</section>
+<section id="mistake-2-confusing-a-state-of-nature-with-an-alternative" class="level2">
+<h2 class="anchored" data-anchor-id="mistake-2-confusing-a-state-of-nature-with-an-alternative">Mistake 2: Confusing a state of nature with an alternative</h2>
+<p>For example:</p>
+<blockquote class="blockquote">
+<p>The opponent receives poorly.</p>
+</blockquote>
+<p>This is not the coach’s action.</p>
+<p>It is a possible state of nature.</p>
+</section>
+<section id="mistake-3-ignoring-the-consequence-measure" class="level2">
+<h2 class="anchored" data-anchor-id="mistake-3-ignoring-the-consequence-measure">Mistake 3: Ignoring the consequence measure</h2>
+<p>If the consequence is:</p>
+<ul>
+<li>race time, lower is better;</li>
+<li>runs conceded, lower is better;</li>
+<li>win probability, higher is better;</li>
+<li>expected points, higher is better.</li>
+</ul>
+<p>The direction of preference must be clear before applying a decision rule.</p>
+<hr>
+</section>
+</section>
+<section id="exit-check" class="level1">
+<h1>12. Exit check</h1>
+<section id="question-1" class="level3">
+<h3 class="anchored" data-anchor-id="question-1">Question 1</h3>
+<p>A cricket analyst gives the captain three possible match states, but no probabilities.</p>
+<p>What is the decision environment?</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Uncertainty.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="question-2" class="level3">
+<h3 class="anchored" data-anchor-id="question-2">Question 2</h3>
+<p>A volleyball coach has probabilities for three possible opponent blocking patterns.</p>
+<p>What is the decision environment?</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Risk.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="question-3" class="level3">
+<h3 class="anchored" data-anchor-id="question-3">Question 3</h3>
+<p>An athletics coach knows that tomorrow’s race will be run indoors under fixed conditions.</p>
+<p>What is the decision environment for those conditions?</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Certainty.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="after-class" class="level1">
+<h1>After class</h1>
+<section id="independent-learning" class="level2">
+<h2 class="anchored" data-anchor-id="independent-learning">Independent learning</h2>
+<p>Before Week 3:</p>
+<ol type="1">
+<li>Create one sports decision problem under <strong>uncertainty</strong>.</li>
+<li>Include at least three alternatives and three states of nature.</li>
+<li>Construct a payoff or loss table.</li>
+<li>Do <strong>not</strong> assign probabilities to the states.</li>
+<li>State clearly whether larger or smaller consequences are preferred.</li>
+</ol>
+<p>This problem will be useful next week when we introduce the first decision criteria under uncertainty.</p>
+</section>
+<section id="next-week" class="level2">
+<h2 class="anchored" data-anchor-id="next-week">Next week</h2>
+<p><strong>Week 03: Decision Making under Uncertainty I</strong></p>
+<p>We will study:</p>
+<ul>
+<li>Maximax;</li>
+<li>Maximin;</li>
+<li>how the interpretation changes for payoff and cost tables.</li>
+</ul>
+</section>
+<section id="reference" class="level2">
+<h2 class="anchored" data-anchor-id="reference">Reference</h2>
+<p>Gupta, P. K., Hira, D. S., &amp; Kamboj, A. (2012). <em>Introduction to Operations Research</em>. S Chand and Company Limited. Chapter 9: Decision Theory, pp.&nbsp;635–711.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

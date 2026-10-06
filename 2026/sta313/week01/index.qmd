@@ -18,7 +18,7 @@ WEEK 01 · 60 MINUTES
 
 # Introduction to Statistical Decision Theory
 
-A decision problem begins before any calculation is made. We first identify **what can be chosen**, **what is uncertain**, and **what consequence follows from each action–state combination**.
+A decision problem begins before any calculation is made. We first identify **what can be chosen**, **what is uncertain**, and **what consequence follows from each action-state combination**.
 
 This first lesson focuses on the basic structure of a statistical decision problem. We will not yet use Maximax, Maximin, expected monetary value, or Bayesian decision rules. Those come in later weeks.
 
@@ -28,7 +28,7 @@ By the end of this lesson, you should be able to:
 
 1. explain why decision theory is useful when future outcomes are not fully known;
 2. distinguish a **decision alternative** from a **state of nature**;
-3. identify the **consequence** associated with an action–state combination;
+3. identify the **consequence** associated with an action-state combination;
 4. construct and interpret a simple **payoff or loss table**; and
 5. describe the four basic steps in the decision-theory approach.
 
@@ -37,6 +37,7 @@ By the end of this lesson, you should be able to:
 :::
 
 ---
+
 
 # 1. Opening problem {#opening-problem}
 
@@ -93,6 +94,12 @@ In this course, we will represent a decision problem using three basic ingredien
 
 A fourth ingredient, **available information**, becomes increasingly important later when we study risk, Bayesian updating, and the value of information.
 
+::: {.panel}
+### Core decision structure
+
+**Action + State of nature → Consequence**
+:::
+
 ---
 
 # 3. Anatomy of a decision problem
@@ -107,17 +114,9 @@ The decision maker can choose among the alternatives.
 
 Suppose a captain must choose a bowler for the final over.
 
-\[
-A_1 = \text{Fast bowler},
-\]
-
-\[
-A_2 = \text{Spin bowler},
-\]
-
-\[
-A_3 = \text{Medium-pace bowler}.
-\]
+- \(A_1\): Fast bowler
+- \(A_2\): Spin bowler
+- \(A_3\): Medium-pace bowler
 
 These are decision alternatives because the captain controls the choice.
 
@@ -146,13 +145,8 @@ Suppose the captain chooses the final-over bowler.
 
 Possible states of nature could be:
 
-\[
-S_1 = \text{The batter attacks aggressively},
-\]
-
-\[
-S_2 = \text{The batter focuses on strike rotation}.
-\]
+- \(S_1\): The batter attacks aggressively
+- \(S_2\): The batter focuses on strike rotation
 
 The captain chooses the bowler.
 
@@ -163,71 +157,38 @@ So:
 - **Bowler choice = decision alternative**
 - **Batter response = state of nature**
 
----
-
 ### Athletics example
 
 A 1500 m runner must decide on a pacing strategy.
 
 Possible alternatives:
 
-\[
-A_1 = \text{Fast early pace},
-\]
-
-\[
-A_2 = \text{Even pace},
-\]
-
-\[
-A_3 = \text{Conservative start with fast finish}.
-\]
+- \(A_1\): Fast early pace
+- \(A_2\): Even pace
+- \(A_3\): Conservative start with fast finish
 
 Possible states of nature:
 
-\[
-S_1 = \text{Competitors make the race fast},
-\]
-
-\[
-S_2 = \text{Competitors make the race tactical and slow}.
-\]
+- \(S_1\): Competitors make the race fast
+- \(S_2\): Competitors make the race tactical and slow
 
 The athlete controls the race plan but does not control the pace chosen by the rest of the field.
 
----
-
 ### Volleyball example
 
-A volleyball team is receiving serve at 23--23.
+A volleyball team is receiving serve at 23–23.
 
 The coach may choose:
 
-\[
-A_1 = \text{Middle attack},
-\]
-
-\[
-A_2 = \text{Outside attack},
-\]
-
-\[
-A_3 = \text{Back-row attack}.
-\]
+- \(A_1\): Middle attack
+- \(A_2\): Outside attack
+- \(A_3\): Back-row attack
 
 Possible states of nature:
 
-\[
-S_1 = \text{Opponent commits the middle block},
-\]
-
-\[
-S_2 = \text{Opponent forms a strong outside double block},
-\]
-
-\[
-S_3 = \text{Opponent uses a balanced block}.
-\]
+- \(S_1\): Opponent commits the middle block
+- \(S_2\): Opponent forms a strong outside double block
+- \(S_3\): Opponent uses a balanced block
 
 The attacking team controls its own choice.
 
@@ -250,25 +211,14 @@ The consequence might be expressed as:
 - expected performance score;
 - or another quantity relevant to the decision.
 
-We can denote the consequence of choosing alternative \(A_i\) when state \(S_j\) occurs by
+We denote the consequence of choosing alternative \(A_i\) when state \(S_j\) occurs by \(C_{ij}\).
 
-\[
-C_{ij}.
-\]
+For example:
 
-For example, if
+- \(A_2\): Spin bowler
+- \(S_1\): Batter attacks aggressively
 
-\[
-A_2=\text{Spin bowler}
-\]
-
-and
-
-\[
-S_1=\text{Batter attacks aggressively},
-\]
-
-then \(C_{21}\) is the consequence of using the spinner against aggressive batting.
+Then \(C_{21}\) is the consequence of using the spinner when the batter attacks aggressively.
 
 ---
 
@@ -287,7 +237,7 @@ List the relevant states of nature.
 
 ### Step 3: Construct a payoff or loss table
 
-Record the consequence for each action–state combination.
+Record the consequence for each action-state combination.
 
 ### Step 4: Select an appropriate decision criterion
 
@@ -296,15 +246,13 @@ Choose a rule for comparing the alternatives.
 The formal criteria are introduced in later weeks.
 :::
 
-A useful schematic representation is
+A useful schematic representation is:
 
-\[
-\text{Alternatives}
-\quad+\quad
-\text{States of nature}
-\quad\longrightarrow\quad
-\text{Consequences}.
-\]
+::: {.panel}
+### Basic decision structure
+
+**Alternatives + States of nature → Consequences**
+:::
 
 The decision rule then tells us how those consequences should be compared.
 
@@ -326,27 +274,14 @@ The captain must choose one bowler for the final over.
 
 ### Decision alternatives
 
-\[
-A_1=\text{Fast bowler}
-\]
-
-\[
-A_2=\text{Spin bowler}
-\]
-
-\[
-A_3=\text{Medium pace}
-\]
+- \(A_1\): Fast bowler
+- \(A_2\): Spin bowler
+- \(A_3\): Medium pace
 
 ### States of nature
 
-\[
-S_1=\text{Batter attacks}
-\]
-
-\[
-S_2=\text{Batter rotates strike}
-\]
+- \(S_1\): Batter attacks
+- \(S_2\): Batter rotates strike
 
 ### Consequence
 
@@ -360,32 +295,20 @@ So the table behaves like a **loss table**.
 
 ## How to read the table
 
-If
+If the captain chooses the spinner and the batter attacks, then:
 
 \[
-A_2=\text{Spin bowler}
-\]
-
-and
-
-\[
-S_1=\text{Batter attacks},
-\]
-
-then
-
-\[
-C_{21}=8.
+C_{21}=8
 \]
 
 Interpretation:
 
 > If the captain chooses the spinner and the batter attacks, the expected number of runs conceded is 8.
 
-Similarly,
+Similarly:
 
 \[
-C_{12}=7.
+C_{12}=7
 \]
 
 Interpretation:
@@ -426,8 +349,6 @@ If the consequence is **runs conceded**, smaller values are preferred.
 
 This is naturally interpreted as a **loss table**.
 
----
-
 ## Cricket as a payoff problem
 
 Suppose the analyst instead estimates the **probability of successfully defending the target**.
@@ -457,15 +378,8 @@ Suppose a 1500 m runner must select a race strategy before the event.
 
 The likely race conditions are:
 
-\[
-S_1=\text{Fast race set by competitors}
-\]
-
-and
-
-\[
-S_2=\text{Slow tactical race}.
-\]
+- \(S_1\): Fast race set by competitors
+- \(S_2\): Slow tactical race
 
 Suppose the consequence is **finishing time in seconds**.
 
@@ -494,8 +408,6 @@ Here, **smaller values are preferred**.
 4. Fast start, because 222 seconds is the smallest time.
 5. Conservative start, because 221 seconds is the smallest time.
 6. Not from this table alone. We still need a decision criterion.
-
----
 
 ## The same athletics problem using a payoff
 
@@ -529,48 +441,32 @@ The consequence is the estimated **probability of winning the rally**.
 | Outside attack | 0.59 | 0.30 | 0.45 |
 | Back-row attack | 0.51 | 0.55 | 0.42 |
 
-Let
+Let:
+
+- \(A_1\): Middle attack
+- \(A_2\): Outside attack
+- \(A_3\): Back-row attack
+
+and:
+
+- \(S_1\): Middle commit block
+- \(S_2\): Outside double block
+- \(S_3\): Balanced block
+
+Then:
 
 \[
-A_1=\text{Middle attack},
-\]
-
-\[
-A_2=\text{Outside attack},
-\]
-
-\[
-A_3=\text{Back-row attack}.
-\]
-
-Let
-
-\[
-S_1=\text{Middle commit block},
-\]
-
-\[
-S_2=\text{Outside double block},
-\]
-
-\[
-S_3=\text{Balanced block}.
-\]
-
-Then
-
-\[
-C_{21}=0.59.
+C_{21}=0.59
 \]
 
 Interpretation:
 
 > If the team uses the outside attack and the opponent commits to the middle block, the estimated probability of winning the rally is 0.59.
 
-Similarly,
+Similarly:
 
 \[
-C_{32}=0.55.
+C_{32}=0.55
 \]
 
 Interpretation:
@@ -591,35 +487,29 @@ Before doing any calculation, write the problem in a structured form.
 
 For any sports decision problem, identify:
 
-**Decision maker**
+### Decision maker
 
 Who chooses the action?
 
-**Alternatives**
-
-\[
-A_1,A_2,\ldots,A_m
-\]
+### Alternatives
 
 What can be chosen?
 
-**States of nature**
+Use notation such as \(A_1, A_2, \ldots, A_m\).
 
-\[
-S_1,S_2,\ldots,S_n
-\]
+### States of nature
 
 What uncertain future conditions may occur?
 
-**Consequences**
+Use notation such as \(S_1, S_2, \ldots, S_n\).
 
-\[
-C_{ij}
-\]
+### Consequences
 
 What happens if \(A_i\) is selected and \(S_j\) occurs?
 
-**Available information**
+Use \(C_{ij}\) for the corresponding consequence.
+
+### Available information
 
 What is currently known about the states of nature?
 
@@ -665,23 +555,13 @@ The coach.
 
 **Alternatives**
 
-\[
-A_1=\text{Keep current server}
-\]
-
-\[
-A_2=\text{Use serving specialist}
-\]
+- \(A_1\): Keep current server
+- \(A_2\): Use serving specialist
 
 **States of nature**
 
-\[
-S_1=\text{Good reception}
-\]
-
-\[
-S_2=\text{Poor reception}
-\]
+- \(S_1\): Good reception
+- \(S_2\): Poor reception
 
 **Consequence**
 
@@ -694,7 +574,7 @@ C_{12}=0.62
 and
 
 \[
-C_{21}=0.35.
+C_{21}=0.35
 \]
 
 If good reception were known with certainty:
@@ -737,27 +617,23 @@ Similarly in athletics:
 
 > "The race becomes tactical."
 
-is a state of nature.
+This is a state of nature.
 
 But:
 
 > "The athlete adopts an even pace."
 
-is a decision alternative.
+This is a decision alternative.
 
 The same distinction will matter throughout the course.
 
 Later, probabilities may be attached to states of nature. Sample information may revise those probabilities. Utility may change how consequences are valued. But the underlying structure remains:
 
-\[
-\boxed{
-\text{Action}
-\;+\;
-\text{State of nature}
-\;\longrightarrow\;
-\text{Consequence}
-}
-\]
+::: {.panel}
+### Remember
+
+**Action + State of nature → Consequence**
+:::
 
 ---
 
@@ -799,24 +675,12 @@ A volleyball coach chooses an attack strategy while the opponent's block is unce
 
 Complete:
 
-\[
-\boxed{
-\text{Action}
-+
-\text{State of nature}
-\longrightarrow
-?
-}
-\]
+**Action + State of nature → ?**
 
 ::: {.callout-tip collapse="true"}
 ## Answer
 
-\[
-\boxed{
-\text{Consequence}
-}
-\]
+**Consequence**
 :::
 
 ---
@@ -831,7 +695,7 @@ Before Week 2:
 2. Create one sports example with:
    - at least two alternatives;
    - at least two states of nature;
-   - one numerical consequence for every action–state combination.
+   - one numerical consequence for every action-state combination.
 3. State clearly whether the consequence should be maximized or minimized.
 4. Write one sentence explaining why your example involves uncertainty.
 
@@ -841,11 +705,11 @@ Before Week 2:
 
 We will distinguish decisions under:
 
-- certainty,
-- uncertainty,
-- risk,
+- certainty;
+- uncertainty;
+- risk.
 
-and use that distinction to decide what information is available before choosing a decision rule.
+We will then use that distinction to decide what information is available before choosing a decision rule.
 
 ---
 
