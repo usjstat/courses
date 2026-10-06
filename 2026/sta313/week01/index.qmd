@@ -637,7 +637,7 @@ Later, probabilities may be attached to states of nature. Sample information may
 
 ---
 
-# 12. Exit check {#exit-check}
+# 12. Final tasks {#exit-check}
 
 Take the final four minutes individually.
 
