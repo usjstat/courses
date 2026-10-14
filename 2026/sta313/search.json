@@ -397,5 +397,96 @@
     "title": "Statistical Decision Theory",
     "section": "Instructor",
     "text": "Instructor\n\nDr. Rajitha M. Silva\nDepartment of Statistics\nFaculty of Applied Sciences\nUniversity of Sri Jayewardenepura"
+  },
+  {
+    "objectID": "week03/index.html",
+    "href": "week03/index.html",
+    "title": "Week 03: Decision-Making under Uncertainty I",
+    "section": "",
+    "text": "← Back to course homepage\nWEEK 03"
+  },
+  {
+    "objectID": "week03/index.html#learning-outcomes",
+    "href": "week03/index.html#learning-outcomes",
+    "title": "Week 03: Decision-Making under Uncertainty I",
+    "section": "Learning outcomes",
+    "text": "Learning outcomes\nBy the end of this lesson, you should be able to:\n\nDistinguish a decision under uncertainty from a decision under risk.\nConstruct and interpret payoff and cost matrices for a sports decision.\nApply Maximax and Maximin correctly to a payoff matrix.\nApply the corresponding optimistic and conservative rules to a cost matrix without confusing maximization and minimization.\nExplain why two decision makers may select different actions from the same table."
+  },
+  {
+    "objectID": "week03/index.html#minute-teaching-plan",
+    "href": "week03/index.html#minute-teaching-plan",
+    "title": "Week 03: Decision-Making under Uncertainty I",
+    "section": "60-minute teaching plan",
+    "text": "60-minute teaching plan\n\n\n\nTime\nActivity\n\n\n\n\n0–8 min\nRecall uncertainty and interpret a payoff table\n\n\n8–22 min\nMaximax with a cricket example\n\n\n22–35 min\nMaximin with the same cricket example\n\n\n35–47 min\nCost matrices with an athletics example\n\n\n47–56 min\nStudent exercise and discussion\n\n\n56–60 min\nExit check"
+  },
+  {
+    "objectID": "week03/index.html#recall-decisions-under-uncertainty",
+    "href": "week03/index.html#recall-decisions-under-uncertainty",
+    "title": "Week 03: Decision-Making under Uncertainty I",
+    "section": "1. Recall: Decisions under uncertainty",
+    "text": "1. Recall: Decisions under uncertainty\nA decision problem involves alternatives (actions available to the decision maker), states of nature (future circumstances outside the decision maker’s control), and consequences (payoffs, losses, or costs).\nUnder uncertainty, the possible states are identified but no defensible probabilities are available. Thus, we do not assign arbitrary probabilities or compute expected monetary values.\n\nDecision structure\nAction + State of nature → Consequence\nPayoff table: larger values are preferred.\nCost table: smaller values are preferred."
+  },
+  {
+    "objectID": "week03/index.html#maximax-the-optimistic-criterion-for-payoffs",
+    "href": "week03/index.html#maximax-the-optimistic-criterion-for-payoffs",
+    "title": "Week 03: Decision-Making under Uncertainty I",
+    "section": "2. Maximax: The optimistic criterion for payoffs",
+    "text": "2. Maximax: The optimistic criterion for payoffs\nSuppose a cricket captain must select one batter to send in during the final overs of a T20 match. The opposition may use a pace-dominated, spin-dominated, or mixed bowling attack, but the captain has no defensible probabilities for these possibilities.\nThe table shows the runs each batter could score under the three bowling approaches. The figures are hypothetical outcomes used to illustrate decision criteria, not predictions or probabilities. Because the entries are runs scored, larger payoffs are better.\n\n\n\n\n\n\n\n\n\nBatter\nPace-dominated attack\nSpin-dominated attack\nMixed attack\n\n\n\n\n\\(A_1\\): Batter A\n32\n14\n10\n\n\n\\(A_2\\): Batter B\n24\n20\n16\n\n\n\\(A_3\\): Batter C\n26\n23\n19\n\n\n\nMaximax selects the action with the largest row maximum.\nFor a payoff \\(P_{ij}\\), where \\(i\\) indexes the batter selected and \\(j\\) the opposition’s bowling approach:\n\\[\nA^*_{\\mathrm{Maximax}} = \\arg\\max_i \\left\\{\\max_j P_{ij}\\right\\}.\n\\]\nStep 1: Find the highest number of runs each batter could score.\n\n\n\nBatter\nRow maximum (runs)\n\n\n\n\nBatter A\n32\n\n\nBatter B\n24\n\n\nBatter C\n26\n\n\n\nStep 2: Choose the largest row maximum.\n\\[\n\\max\\{32,24,26\\}=32.\n\\]\nMaximax selects Batter A, whose best possible outcome is 32 runs against a pace-dominated attack.\nInterpretation: Maximax focuses on the highest attainable score. It does not mean that a pace-dominated attack is more likely than the other bowling approaches.\n\nAsk the class: Would Batter A still be attractive if the opposition used a mixed bowling attack, against which Batter A could score only 10 runs? What does Maximax overlook?\nDiscussion point: Maximax ignores Batter A’s lower payoffs in the other states. A captain concerned about a poor outcome might prefer a different batter."
+  },
+  {
+    "objectID": "week03/index.html#maximin-the-conservative-criterion-for-payoffs",
+    "href": "week03/index.html#maximin-the-conservative-criterion-for-payoffs",
+    "title": "Week 03: Decision-Making under Uncertainty I",
+    "section": "3. Maximin: The conservative criterion for payoffs",
+    "text": "3. Maximin: The conservative criterion for payoffs\nUsing the same cricket payoff table, Maximin selects the batter whose worst possible runs scored are greatest.\n\\[\nA^*_{\\mathrm{Maximin}} = \\arg\\max_i \\left\\{\\min_j P_{ij}\\right\\}.\n\\]\nStep 1: Find the lowest number of runs each batter could score.\n\n\n\nBatter\nRow minimum (runs)\n\n\n\n\nBatter A\n10\n\n\nBatter B\n16\n\n\nBatter C\n19\n\n\n\nStep 2: Choose the largest of the row minima.\n\\[\n\\max\\{10,16,19\\}=19.\n\\]\nMaximin selects Batter C, whose lowest projected score is 19 runs across the three listed bowling approaches, assuming the table describes the possible outcomes accurately.\nMaximin is conservative because it evaluates each batter by the least favorable outcome. It can be appropriate when avoiding a very low score matters more than achieving the highest possible score.\n\nCompare the two decisions\n\n\n\nCriterion\nHow each batter is evaluated\nSelected batter\n\n\n\n\nMaximax\nHighest runs scored in each row\nBatter A\n\n\nMaximin\nLowest runs scored in each row\nBatter C\n\n\n\nNeither rule uses probabilities. They reflect different decision attitudes, not different estimates of which bowling approach is most likely."
+  },
+  {
+    "objectID": "week03/index.html#cost-matrices-an-athletics-example",
+    "href": "week03/index.html#cost-matrices-an-athletics-example",
+    "title": "Week 03: Decision-Making under Uncertainty I",
+    "section": "4. Cost matrices: An athletics example",
+    "text": "4. Cost matrices: An athletics example\nAn athletics coach must choose a training plan for a 100 m sprinter before an important competition. The conditions on race day are uncertain. The table gives the athlete’s projected 100 m finishing time (in seconds) under three possible conditions. The times are hypothetical and used for teaching purposes. Smaller values are better.\n\n\n\nTraining plan\nDry track\nWet track\nWindy conditions\n\n\n\n\n\\(A_1\\): Speed-focused\n10.40\n11.10\n10.90\n\n\n\\(A_2\\): Endurance-focused\n10.80\n10.80\n10.90\n\n\n\\(A_3\\): Balanced\n10.60\n10.70\n10.80\n\n\n\nObjective: Choose a training plan that minimizes the athlete’s 100 m finishing time. Unlike runs scored in the cricket example, finishing time is a cost-type consequence: a lower value is preferable.\nImportant: Do not apply the payoff Maximax and Maximin formulas unchanged to a cost table. With finishing times, lower values are preferred.\n\n4.1 Optimistic choice for costs: Minimin\nAn optimistic coach considers the fastest possible time for each training plan and selects the smallest of these times.\n\\[\nA^*_{\\mathrm{Minimin}} = \\arg\\min_i \\left\\{\\min_j C_{ij}\\right\\}.\n\\]\n\n\n\nTraining plan\nMinimum time (seconds)\n\n\n\n\nSpeed-focused\n10.40\n\n\nEndurance-focused\n10.80\n\n\nBalanced\n10.60\n\n\n\n\\[\n\\min\\{10.40,10.80,10.60\\}=10.40.\n\\]\nMinimin selects the speed-focused plan, whose best-case finishing time is 10.40 seconds.\n\n\n4.2 Conservative choice for costs: Minimax cost\nA conservative coach considers the slowest possible time for each plan and selects the plan with the smallest worst-case time.\n\\[\nA^*_{\\mathrm{Minimax\\ cost}} = \\arg\\min_i \\left\\{\\max_j C_{ij}\\right\\}.\n\\]\n\n\n\nTraining plan\nMaximum time (seconds)\n\n\n\n\nSpeed-focused\n11.10\n\n\nEndurance-focused\n10.90\n\n\nBalanced\n10.80\n\n\n\n\\[\n\\min\\{11.10,10.90,10.80\\}=10.80.\n\\]\nMinimax cost selects the balanced plan, whose worst-case finishing time is 10.80 seconds.\nAsk the class: Why might a coach choose the balanced plan even though the speed-focused plan could produce the fastest race? The balanced plan limits the worst-case finishing time, whereas the speed-focused plan offers the fastest best-case result.\nNote: Wind direction and strength, not merely the presence of wind, affect sprint times. The three columns are simplified hypothetical race-day scenarios rather than measured performance predictions.\n\nPayoff versus cost: Keep the direction straight\n\n\n\n\n\n\n\n\nDecision attitude\nPayoff (larger is better)\nCost (smaller is better)\n\n\n\n\nOptimistic\nMaximax: largest row maximum\nMinimin: smallest row minimum\n\n\nConservative\nMaximin: largest row minimum\nMinimax cost: smallest row maximum\n\n\n\nThese are equivalent ways to express optimism and conservatism when the consequences are coded as benefits versus costs. The term Minimax cost here refers to worst-case costs, not the minimax regret criterion introduced in Week 04."
+  },
+  {
+    "objectID": "week03/index.html#guided-discussion-when-might-the-criteria-disagree",
+    "href": "week03/index.html#guided-discussion-when-might-the-criteria-disagree",
+    "title": "Week 03: Decision-Making under Uncertainty I",
+    "section": "5. Guided discussion: When might the criteria disagree?",
+    "text": "5. Guided discussion: When might the criteria disagree?\nReturn to the cricket example. Batter A could score as many as 32 runs, but only 10 runs against a mixed bowling attack. Batter C’s best-case score is 26 runs, but the lowest score in Batter C’s row is 19 runs.\nDiscuss with a partner:\n\nIf the team needs an exceptionally high score in the final overs to have a chance of winning, which batter might the captain select? Explain the optimistic reasoning.\nIf the captain’s priority is to avoid a very low contribution, which batter might be preferable? Explain the conservative reasoning.\nCan you justify either decision without assuming one bowling approach is more probable than another?\n\nTeaching point: Maximax recommends Batter A because of the 32-run best case. Maximin recommends Batter C because of the 19-run worst case. The appropriate rule depends on the team’s objective and how the captain evaluates unfavorable outcomes, not on invented probabilities."
+  },
+  {
+    "objectID": "week03/index.html#student-activity-volleyball-serving-strategy",
+    "href": "week03/index.html#student-activity-volleyball-serving-strategy",
+    "title": "Week 03: Decision-Making under Uncertainty I",
+    "section": "6. Student activity: Volleyball serving strategy",
+    "text": "6. Student activity: Volleyball serving strategy\nA volleyball coach chooses among three serving strategies. The following values are net points gained per set under three possible receiving formations. Larger values are better. Probabilities are unavailable.\n\n\n\nStrategy\nFormation 1\nFormation 2\nFormation 3\n\n\n\n\n\\(A_1\\): Power serve\n11\n2\n5\n\n\n\\(A_2\\): Float serve\n7\n6\n4\n\n\n\\(A_3\\): Targeted serve\n9\n5\n6\n\n\n\nTasks (6 minutes)\n\nIdentify the alternatives and states of nature.\nCompute each strategy’s row maximum and choose by Maximax.\nCompute each strategy’s row minimum and choose by Maximin.\nExplain the difference in one or two sentences.\n\n\n\n\n\n\n\nNoteInstructor solution\n\n\n\n\n\nRow maxima: power 11, float 7, targeted 9. Maximax chooses power serve.\nRow minima: power 2, float 4, targeted 5. Maximin chooses targeted serve.\nThe optimistic rule emphasizes the highest potential net gain. The conservative rule emphasizes protection against the least favorable receiving formation."
+  },
+  {
+    "objectID": "week03/index.html#common-mistakes-to-avoid",
+    "href": "week03/index.html#common-mistakes-to-avoid",
+    "title": "Week 03: Decision-Making under Uncertainty I",
+    "section": "7. Common mistakes to avoid",
+    "text": "7. Common mistakes to avoid\n\nMixing up payoffs and costs. First identify whether large or small values are desirable.\nChoosing the largest individual payoff for Maximin. Maximin first finds the minimum in each row.\nAssigning probabilities without evidence. That changes the decision setting and requires justification.\nInterpreting Maximax as a prediction. It selects the most attractive best case, not the most likely outcome.\nConfusing Minimax cost with Minimax Regret. Regret requires a separate opportunity-loss table, covered next week."
+  },
+  {
+    "objectID": "week03/index.html#exit-check-4-minutes",
+    "href": "week03/index.html#exit-check-4-minutes",
+    "title": "Week 03: Decision-Making under Uncertainty I",
+    "section": "8. Exit check (4 minutes)",
+    "text": "8. Exit check (4 minutes)\nA team chooses between two tactics with payoffs:\n\n\n\nTactic\nState 1\nState 2\n\n\n\n\n\\(A\\)\n15\n1\n\n\n\\(B\\)\n9\n7\n\n\n\nQuestion 1: Which tactic is selected by Maximax?\nQuestion 2: Which tactic is selected by Maximin?\nQuestion 3: If these numbers were costs instead of payoffs, what would the optimistic and conservative choices be?\n\n\n\n\n\n\nTipAnswers\n\n\n\n\n\n\nMaximax: \\(A\\), because \\(15 &gt; 9\\).\nMaximin: \\(B\\), because \\(7 &gt; 1\\).\nMinimin cost: \\(A\\), because \\(1 &lt; 7\\). Minimax cost: \\(B\\), because \\(9 &lt; 15\\)."
+  },
+  {
+    "objectID": "week03/index.html#independent-learning",
+    "href": "week03/index.html#independent-learning",
+    "title": "Week 03: Decision-Making under Uncertainty I",
+    "section": "Independent learning",
+    "text": "Independent learning\nCreate one payoff matrix and one cost matrix for a sports decision of your choice, each with at least three alternatives and three states. Apply both optimistic and conservative criteria. Explain the selected action in words, including why no probabilities were used.\nNext week: Minimax Regret, Hurwicz, and Laplace criteria."
+  },
+  {
+    "objectID": "week03/index.html#reference",
+    "href": "week03/index.html#reference",
+    "title": "Week 03: Decision-Making under Uncertainty I",
+    "section": "Reference",
+    "text": "Reference\nGupta, P. K., Hira, D. S., & Kamboj, A. (2012). Introduction to Operations Research. S Chand. Chapter 9: Decision Theory."
   }
 ]
