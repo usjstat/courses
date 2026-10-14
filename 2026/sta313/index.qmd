@@ -160,7 +160,7 @@ Certainty, uncertainty, risk, and formulation of statistical decision problems.
 ::: {.week-card}
 <span class="week-no">Week 03</span>
 
-### Decision under Uncertainty I
+### [Decision under Uncertainty I] (week03/index.html)
 
 Maximax and Maximin criteria for payoff and cost tables.
 :::
