@@ -13,50 +13,41 @@ format:
 title-block-banner: false
 ---
 
-::: {.hero}
-::: {.hero-inner}
-
-<span class="eyebrow">Year 3 · Semester 1 · Optional course</span>
+::::: hero
+:::: hero-inner
+[Year 3 · Semester 1 · Optional course]{.eyebrow}
 
 # Statistical Decision Theory
 
 A practical introduction to making rational decisions when outcomes are uncertain. We move from payoff and loss tables to decisions under uncertainty and risk, Bayesian updating, decision trees, the value of information, and utility-based choice.
 
-::: {.hero-actions}
-[Explore weekly lessons](#weekly-lessons){.btn .btn-primary}
-[View course structure](#course-overview){.btn .btn-secondary}
+::: hero-actions
+[Explore weekly lessons](#weekly-lessons){.btn .btn-primary} [View course structure](#course-overview){.btn .btn-secondary}
+:::
+::::
+:::::
+
+::::::: course-facts
+::: fact-card
+Course code **STA 313 1.0**
 :::
 
-:::
-:::
-
-::: {.course-facts}
-
-::: {.fact-card}
-<span>Course code</span>
-**STA 313 1.0**
+::: fact-card
+Credit value **1 credit**
 :::
 
-::: {.fact-card}
-<span>Credit value</span>
-**1 credit**
+::: fact-card
+Contact hours **15 lecture hours**
 :::
 
-::: {.fact-card}
-<span>Contact hours</span>
-**15 lecture hours**
+::: fact-card
+Independent learning **45 hours**
 :::
-
-::: {.fact-card}
-<span>Independent learning</span>
-**45 hours**
-:::
-
-:::
+:::::::
 
 ## Course overview {#course-overview}
 
-::: {.section-kicker}
+::: section-kicker
 COURSE OVERVIEW
 :::
 
@@ -66,9 +57,8 @@ The course is built around a simple question: when several actions are available
 
 Students first learn to formulate the decision problem clearly. Only then do we introduce a decision rule and interpret what that rule means in context.
 
-::: {.grid-two}
-
-::: {.panel}
+::::::: grid-two
+::: panel
 ### What we will study
 
 - Decision alternatives, states of nature, consequences, payoff and loss tables
@@ -80,228 +70,228 @@ Students first learn to formulate the decision problem clearly. Only then do we 
 - Utility, certainty equivalents, and risk attitudes
 :::
 
-::: {.stack}
-
-::: {.panel}
+::::: stack
+::: panel
 ### Prerequisites
 
 Probability and Distribution Theory I & II, and Inferential Statistics.
 :::
 
-::: {.note}
+::: note
 **Learning approach.** Each week starts with a decision problem. We identify the actions, uncertain events, and consequences before introducing the mathematical rule used to choose among the actions.
 :::
-
-:::
-:::
+:::::
+:::::::
 
 ## Intended learning outcomes {#learning-outcomes}
 
-::: {.section-kicker}
+::: section-kicker
 INTENDED LEARNING OUTCOMES
 :::
 
 ### What you should be able to do
 
-::: {.ilo-grid}
-
-::: {.ilo-card}
-<div class="ilo-num">1</div>
+::::::::::: ilo-grid
+:::: ilo-card
+::: ilo-num
+1
+:::
 
 Formulate statistical decision problems by identifying alternatives, states of nature, consequences, and available information.
-:::
+::::
 
-::: {.ilo-card}
-<div class="ilo-num">2</div>
+:::: ilo-card
+::: ilo-num
+2
+:::
 
 Apply and interpret decision criteria under uncertainty and risk, including expected value, opportunity loss, and value of information.
-:::
+::::
 
-::: {.ilo-card}
-<div class="ilo-num">3</div>
+:::: ilo-card
+::: ilo-num
+3
+:::
 
 Use Bayes’ theorem, posterior probabilities, Bayes decision rules, and decision trees for sequential decision problems.
-:::
+::::
 
-::: {.ilo-card}
-<div class="ilo-num">4</div>
+:::: ilo-card
+::: ilo-num
+4
+:::
 
 Evaluate decisions under risk using utility functions and explain how risk attitudes can alter an optimal decision.
-:::
-
-:::
+::::
+:::::::::::
 
 ## Weekly lessons {#weekly-lessons}
 
-::: {.section-kicker}
+::: section-kicker
 15-WEEK LEARNING PATH
 :::
 
 One focused lecture each week, supported by independent problem solving and reading.
 
-::: {.week-grid}
-
+:::::::::::::::::: week-grid
 ::: {.week-card .week-active}
-<span class="week-no">Week 01</span>
+[Week 01]{.week-no}
 
 ### [Introduction to Statistical Decision Theory](week01/index.html)
 
 Decision problems, alternatives, states of nature, consequences, payoff/loss tables, and the decision-theory process.
 :::
 
-::: {.week-card}
-<span class="week-no">Week 02</span>
+::: week-card
+[Week 02]{.week-no}
 
 ### [Decision-Making Environments](week02/index.html)
 
 Certainty, uncertainty, risk, and formulation of statistical decision problems.
 :::
 
-::: {.week-card}
-<span class="week-no">Week 03</span>
+::: week-card
+[Week 03]{.week-no}
 
-### [Decision under Uncertainty I] (week03/index.html)
+### [Decision under Uncertainty I](week03/index.html)
 
 Maximax and Maximin criteria for payoff and cost tables.
 :::
 
-::: {.week-card}
-<span class="week-no">Week 04</span>
+::: week-card
+[Week 04]{.week-no}
 
 ### Decision under Uncertainty II
 
 Minimax Regret, Hurwicz, and Laplace criteria.
 :::
 
-::: {.week-card}
-<span class="week-no">Week 05</span>
+::: week-card
+[Week 05]{.week-no}
 
 ### Decision under Risk I
 
 Expected Monetary Value and optimal action under known probabilities.
 :::
 
-::: {.week-card}
-<span class="week-no">Week 06</span>
+::: week-card
+[Week 06]{.week-no}
 
 ### Decision under Risk II
 
 Expected Opportunity Loss and Expected Value of Perfect Information.
 :::
 
-::: {.week-card}
-<span class="week-no">Week 07</span>
+::: week-card
+[Week 07]{.week-no}
 
 ### Extensions of Expected-Value Decisions
 
 Maximum likelihood, continuous outcomes, salvage values, and applications.
 :::
 
-::: {.week-card}
-<span class="week-no">Week 08</span>
+::: week-card
+[Week 08]{.week-no}
 
 ### Prior Information and Bayesian Updating
 
 Priors, likelihoods, Bayes’ theorem, and posterior probabilities.
 :::
 
-::: {.week-card}
-<span class="week-no">Week 09</span>
+::: week-card
+[Week 09]{.week-no}
 
 ### Bayes Decision Rule & Sample Information
 
 Prior and posterior decisions, value and cost of sample information.
 :::
 
-::: {.week-card}
-<span class="week-no">Week 10</span>
+::: week-card
+[Week 10]{.week-no}
 
 ### Bayesian Decision Analysis
 
 Posterior expected payoff/loss and the practical value of additional information.
 :::
 
-::: {.week-card}
-<span class="week-no">Week 11</span>
+::: week-card
+[Week 11]{.week-no}
 
 ### Decision Trees I
 
 Decision nodes, chance nodes, branches, outcomes, probabilities, costs, and payoffs.
 :::
 
-::: {.week-card}
-<span class="week-no">Week 12</span>
+::: week-card
+[Week 12]{.week-no}
 
 ### Decision Trees II
 
 Rollback analysis, expected values, optimal choices, and sequential decisions.
 :::
 
-::: {.week-card}
-<span class="week-no">Week 13</span>
+::: week-card
+[Week 13]{.week-no}
 
 ### Decision Trees III
 
 Sample information, revised probabilities, and multi-stage decisions.
 :::
 
-::: {.week-card}
-<span class="week-no">Week 14</span>
+::: week-card
+[Week 14]{.week-no}
 
 ### Utility Theory I
 
 Utility of money, certainty equivalent, expected utility, and limits of EMV.
 :::
 
-::: {.week-card}
-<span class="week-no">Week 15</span>
+::: week-card
+[Week 15]{.week-no}
 
 ### Utility Theory II & Integrated Analysis
 
 Risk attitudes, utility-based decisions, and synthesis of decision criteria.
 :::
-
-:::
+::::::::::::::::::
 
 ## Assessment {#assessment}
 
-::: {.section-kicker}
+::: section-kicker
 ASSESSMENT
 :::
 
 ### How the course is assessed
 
-::: {.assessment-grid}
-
-::: {.assessment-card}
+::::::: assessment-grid
+::: assessment-card
 **10%**
 
 Quiz
 :::
 
-::: {.assessment-card}
+::: assessment-card
 **10%**
 
 Midterm examination
 :::
 
-::: {.assessment-card}
+::: assessment-card
 **10%**
 
 Problem-based assignment
 :::
 
-::: {.assessment-card}
+::: assessment-card
 **70%**
 
 End-semester examination
 :::
-
-:::
+:::::::
 
 ## Primary reference {#reference}
 
-::: {.reference-card}
+::: reference-card
 ### Gupta, Hira & Kamboj
 
 Gupta, P. K., Hira, D. S., & Kamboj, A. (2012). *Introduction to Operations Research*. S Chand and Company Limited.
@@ -313,6 +303,6 @@ Gupta, P. K., Hira, D. S., & Kamboj, A. (2012). *Introduction to Operations Rese
 
 ### Dr. Rajitha M. Silva
 
-Department of Statistics  
-Faculty of Applied Sciences  
+Department of Statistics\
+Faculty of Applied Sciences\
 University of Sri Jayewardenepura
