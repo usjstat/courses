@@ -488,5 +488,110 @@
     "title": "Week 03: Decision-Making under Uncertainty I",
     "section": "Reference",
     "text": "Reference\nGupta, P. K., Hira, D. S., & Kamboj, A. (2012). Introduction to Operations Research. S Chand. Chapter 9: Decision Theory."
+  },
+  {
+    "objectID": "week04/index.html",
+    "href": "week04/index.html",
+    "title": "Week 04: Decision-Making under Uncertainty II",
+    "section": "",
+    "text": "← Back to course homepage\nWEEK 04 · 60 MINUTES"
+  },
+  {
+    "objectID": "week04/index.html#learning-outcomes",
+    "href": "week04/index.html#learning-outcomes",
+    "title": "Week 04: Decision-Making under Uncertainty II",
+    "section": "Learning outcomes",
+    "text": "Learning outcomes\nBy the end of the lesson, you should be able to:\n\nConstruct opportunity-loss (regret) matrices from payoff and cost tables.\nApply the Minimax Regret (Savage) criterion.\nApply the Hurwicz criterion using a coefficient of optimism.\nApply the Laplace criterion and explain its equal-weight assumption.\nCompare the selected actions and interpret disagreements."
+  },
+  {
+    "objectID": "week04/index.html#lesson-plan",
+    "href": "week04/index.html#lesson-plan",
+    "title": "Week 04: Decision-Making under Uncertainty II",
+    "section": "Lesson plan",
+    "text": "Lesson plan\n\n\n\nTopic\nMinutes\n\n\n\n\nReview of uncertainty and payoff tables\n5\n\n\nMinimax Regret worked example\n15\n\n\nHurwicz criterion and sensitivity\n12\n\n\nLaplace criterion and comparison\n10\n\n\nCost-matrix extension and supplier example\n8\n\n\nActivity and exit check\n10"
+  },
+  {
+    "objectID": "week04/index.html#cricket-decision-selecting-a-batter",
+    "href": "week04/index.html#cricket-decision-selecting-a-batter",
+    "title": "Week 04: Decision-Making under Uncertainty II",
+    "section": "1. Cricket decision: Selecting a batter",
+    "text": "1. Cricket decision: Selecting a batter\nA captain must select one batter for the final overs. The opposition may use one of four bowling approaches. The table gives hypothetical runs scored. Higher values are preferred. No probabilities are supplied.\n\n\n\nBatter\nPace-heavy\nSpin-heavy\nMixed\nSlower-ball-heavy\n\n\n\n\nBatter A\n36\n14\n22\n10\n\n\nBatter B\n28\n25\n24\n20\n\n\nBatter C\n22\n30\n27\n18\n\n\nBatter D\n40\n12\n16\n8\n\n\n\nRecall Week 03: Maximax chooses Batter D (best case \\(40\\)), while Maximin chooses Batter B (worst case \\(20\\))."
+  },
+  {
+    "objectID": "week04/index.html#minimax-regret-savage-criterion",
+    "href": "week04/index.html#minimax-regret-savage-criterion",
+    "title": "Week 04: Decision-Making under Uncertainty II",
+    "section": "2. Minimax Regret (Savage criterion)",
+    "text": "2. Minimax Regret (Savage criterion)\nRegret measures the payoff forgone by not choosing the best action for the state that actually occurs. For payoff \\(P_{ij}\\):\n\\[\nR_{ij}=\\max_k P_{kj}-P_{ij}.\n\\]\nThe Minimax Regret rule is\n\\[\nA^*=\\arg\\min_i\\left\\{\\max_j R_{ij}\\right\\}.\n\\]\n\nStep 1: Best payoff for each state\n\n\n\nState\nPace-heavy\nSpin-heavy\nMixed\nSlower-ball-heavy\n\n\n\n\nBest available runs\n40\n30\n27\n20\n\n\n\n\n\nStep 2: Regret table\nFor Batter A against pace-heavy bowling, regret is \\(40-36=4\\). Against spin-heavy bowling, it is \\(30-14=16\\).\n\n\n\n\n\n\n\n\n\n\n\nBatter\nPace-heavy\nSpin-heavy\nMixed\nSlower-ball-heavy\nMaximum regret\n\n\n\n\nBatter A\n4\n16\n5\n10\n16\n\n\nBatter B\n12\n5\n3\n0\n12\n\n\nBatter C\n18\n0\n0\n2\n18\n\n\nBatter D\n0\n18\n11\n12\n18\n\n\n\n\n\nStep 3: Choose the smallest maximum regret\n\\[\n\\min\\{16,12,18,18\\}=12.\n\\]\nMinimax Regret selects Batter B. Its maximum missed opportunity is 12 runs.\n\n\n\n\n\n\nNote\n\n\n\nDiscussion: Does a regret of 12 mean that Batter B scores 12 runs? No. It is the largest difference between Batter B’s runs and the best runs achievable in the same state.\n\n\nMinimax Regret and Maximin happen to choose the same batter here, but they are different rules. Maximin evaluates the smallest actual payoff. Minimax Regret evaluates the largest payoff forgone."
+  },
+  {
+    "objectID": "week04/index.html#hurwicz-criterion-criterion-of-realism",
+    "href": "week04/index.html#hurwicz-criterion-criterion-of-realism",
+    "title": "Week 04: Decision-Making under Uncertainty II",
+    "section": "3. Hurwicz criterion (criterion of realism)",
+    "text": "3. Hurwicz criterion (criterion of realism)\nHurwicz combines the best and worst possible outcomes using a coefficient of optimism, \\(\\alpha\\), where \\(0\\leq\\alpha\\leq1\\).\nFor a payoff matrix:\n\\[\nH_i(\\alpha)=\\alpha\\max_j P_{ij}+(1-\\alpha)\\min_j P_{ij}.\n\\]\nChoose the action with the largest \\(H_i(\\alpha)\\). When \\(\\alpha=1\\), this is Maximax. When \\(\\alpha=0\\), it is Maximin.\nThe coefficient \\(\\alpha\\) is not the probability of any state.\n\nWorked example: \\(\\alpha = 0.6\\)\nFor each batter, the maximum payoff receives weight 0.6 and the minimum payoff receives weight 0.4.\n\n\n\nBatter\nMinimum (runs)\nMaximum (runs)\nHurwicz score (runs)\n\n\n\n\nBatter A\n10\n36\n25.6\n\n\nBatter B\n20\n28\n24.8\n\n\nBatter C\n18\n30\n25.2\n\n\nBatter D\n8\n40\n27.2\n\n\n\nFor example, Batter A’s score is\n\\[\nH_A(0.6)=0.6(36)+0.4(10)=25.6.\n\\]\nThe corresponding calculations for the other batters are\n\\[\n\\begin{aligned}\nH_B(0.6)&=0.6(28)+0.4(20)=24.8,\\\\\nH_C(0.6)&=0.6(30)+0.4(18)=25.2,\\\\\nH_D(0.6)&=0.6(40)+0.4(8)=27.2.\n\\end{aligned}\n\\]\nHurwicz selects Batter D when \\(\\alpha=0.6\\), because its score of 27.2 is the largest.\n\n\nSensitivity to optimism\nSensitivity analysis asks whether the preferred batter changes when the coefficient of optimism, \\(\\alpha\\), changes. The payoffs in the table remain fixed. Only the relative importance given to the best and worst possible outcomes changes.\nRecall the Hurwicz formula for payoffs:\n\\[\nH_i(\\alpha)=\\alpha(\\text{maximum payoff})+(1-\\alpha)(\\text{minimum payoff}),\n\\qquad 0\\leq\\alpha\\leq1.\n\\]\nWhen \\(\\alpha=0\\), the decision is completely conservative (Maximin). When \\(\\alpha=1\\), it is completely optimistic (Maximax). At \\(\\alpha=0.5\\), the two extremes receive equal weight.\n\nStep 1: Express each score as a function of \\(\\alpha\\)\nFor Batter A, the minimum payoff is 10 runs and the maximum is 36 runs. Therefore,\n\\[\n\\begin{aligned}\nH_A(\\alpha)\n&=\\alpha(36)+(1-\\alpha)(10)\\\\\n&=36\\alpha+10-10\\alpha\\\\\n&=10+26\\alpha.\n\\end{aligned}\n\\]\nApplying the same calculation to the remaining batters gives:\n\n\n\nBatter\nMinimum\nMaximum\nHurwicz score as a function of \\(\\alpha\\)\n\n\n\n\nA\n10\n36\n\\(H_A(\\alpha)=10+26\\alpha\\)\n\n\nB\n20\n28\n\\(H_B(\\alpha)=20+8\\alpha\\)\n\n\nC\n18\n30\n\\(H_C(\\alpha)=18+12\\alpha\\)\n\n\nD\n8\n40\n\\(H_D(\\alpha)=8+32\\alpha\\)\n\n\n\n\n\nStep 2: Compare the scores for different values of \\(\\alpha\\)\n\n\n\n\n\n\n\n\n\n\n\n\\(\\alpha\\)\nBatter A\nBatter B\nBatter C\nBatter D\nPreferred batter\n\n\n\n\n0.2\n15.2\n21.6\n20.4\n14.4\nB\n\n\n0.5\n23.0\n24.0\n24.0\n24.0\nB, C and D (tie)\n\n\n0.6\n25.6\n24.8\n25.2\n27.2\nD\n\n\n0.8\n30.8\n26.4\n27.6\n33.6\nD\n\n\n\nFor low values of \\(\\alpha\\), Batter B is attractive because its minimum payoff is relatively high (20 runs). As \\(\\alpha\\) increases, Batter D becomes attractive because it has the largest maximum payoff (40 runs).\n\n\nStep 3: Find where the decision changes\nTo identify the switching value, equate the Hurwicz scores for Batters B and D:\n\\[\n\\begin{aligned}\n20+8\\alpha &= 8+32\\alpha\\\\\n12 &=24\\alpha\\\\\n\\alpha &=0.5.\n\\end{aligned}\n\\]\nAt \\(\\alpha=0.5\\), Batter C also has a score of 24, while Batter A has 23. Thus B, C and D tie at the switching value.\n\\[\n\\text{Preferred batter}=\\begin{cases}\n\\text{B}, & 0\\leq\\alpha&lt;0.5,\\\\\n\\text{B, C and D (tie)}, & \\alpha=0.5,\\\\\n\\text{D}, & 0.5&lt;\\alpha\\leq1.\n\\end{cases}\n\\]\n\n\nInterpretation\nThe coach’s degree of optimism is a subjective choice. Sensitivity analysis shows how much the recommendation depends on that choice. In this example, the decision changes at \\(\\alpha=0.5\\). A more conservative coach selects Batter B, whereas a more optimistic coach selects Batter D.\n\n\n\n\n\n\nImportantDo not interpret \\(\\alpha\\) as a probability\n\n\n\nIncreasing \\(\\alpha\\) does not mean favorable bowling conditions have become more likely. It means the decision maker gives more weight to the best possible payoff."
+  },
+  {
+    "objectID": "week04/index.html#laplace-criterion-equal-likelihood-criterion",
+    "href": "week04/index.html#laplace-criterion-equal-likelihood-criterion",
+    "title": "Week 04: Decision-Making under Uncertainty II",
+    "section": "4. Laplace criterion (equal-likelihood criterion)",
+    "text": "4. Laplace criterion (equal-likelihood criterion)\nLaplace assigns equal weights to all listed states when no probabilities are available. With \\(m\\) states:\n\\[\nL_i=\\frac{1}{m}\\sum_{j=1}^{m}P_{ij}.\n\\]\nFor payoffs, choose the largest \\(L_i\\). Here there are four states.\n\n\n\nBatter\nCalculation\nLaplace score\n\n\n\n\nA\n\\((36+14+22+10)/4\\)\n20.50\n\n\nB\n\\((28+25+24+20)/4\\)\n24.25\n\n\nC\n\\((22+30+27+18)/4\\)\n24.25\n\n\nD\n\\((40+12+16+8)/4\\)\n19.00\n\n\n\nLaplace produces a tie between Batters B and C.\nThe equal weights are an assumption of the criterion, not evidence that each bowling approach has probability \\(0.25\\). How states are defined can influence the result."
+  },
+  {
+    "objectID": "week04/index.html#compare-all-five-decision-rules",
+    "href": "week04/index.html#compare-all-five-decision-rules",
+    "title": "Week 04: Decision-Making under Uncertainty II",
+    "section": "5. Compare all five decision rules",
+    "text": "5. Compare all five decision rules\n\n\n\nCriterion\nPrinciple\nSelected batter\n\n\n\n\nMaximax\nLargest best-case payoff\nD\n\n\nMaximin\nLargest worst-case payoff\nB\n\n\nMinimax Regret\nSmallest maximum missed payoff\nB\n\n\nHurwicz (0.6 optimism)\nWeighted best and worst\nD\n\n\nLaplace\nHighest equal-weight average\nB and C (tie)\n\n\n\nClass discussion: If a poor performance eliminates the team, which criterion seems defensible? What if a very high score is essential? Explain without claiming any bowling approach is more probable."
+  },
+  {
+    "objectID": "week04/index.html#cost-matrices-100-m-athletics-example",
+    "href": "week04/index.html#cost-matrices-100-m-athletics-example",
+    "title": "Week 04: Decision-Making under Uncertainty II",
+    "section": "6. Cost matrices: 100 m athletics example",
+    "text": "6. Cost matrices: 100 m athletics example\nA coach chooses a training plan for a 100 m sprinter. The following hypothetical finishing times in seconds are projected for two possible track conditions. Smaller values are better.\n\n\n\nTraining plan\nDry track\nWet track\n\n\n\n\nSpeed-focused\n10.40\n11.10\n\n\nBalanced\n10.65\n10.75\n\n\n\n\n6.1 Minimax Regret for costs\nFor a cost matrix, regret is the excess cost over the lowest cost in that state:\n\\[\nR_{ij}=C_{ij}-\\min_k C_{kj}.\n\\]\n\n\n\nPlan\nDry-track regret\nWet-track regret\nMaximum regret\n\n\n\n\nSpeed-focused\n0\n0.35\n0.35\n\n\nBalanced\n0.25\n0\n0.25\n\n\n\nMinimax Regret selects the balanced plan, with maximum avoidable time loss of \\(0.25\\) seconds.\n\n\n6.2 Hurwicz for costs\nFor costs, weight the lowest cost as the optimistic outcome:\n\\[\nH_i^{(C)}(\\alpha)=\\alpha\\min_j C_{ij}+(1-\\alpha)\\max_j C_{ij}.\n\\]\nChoose the smallest score. With \\(\\alpha=0.6\\):\n\nSpeed-focused: \\(0.6(10.40)+0.4(11.10)=10.68\\) seconds.\nBalanced: \\(0.6(10.65)+0.4(10.75)=10.69\\) seconds.\n\nHurwicz selects the speed-focused plan.\n\n\n6.3 Laplace for costs\n\nSpeed-focused: \\((10.40+11.10)/2=10.75\\) seconds.\nBalanced: \\((10.65+10.75)/2=10.70\\) seconds.\n\nLaplace selects the balanced plan, which has the smaller equal-weight average time.\n\n\n\n\n\n\nNote\n\n\n\nPayoffs versus costs\n\n\n\n\n\n\n\n\nCriterion\nPayoff (higher is better)\nCost (lower is better)\n\n\n\n\nMinimax Regret\nState maximum minus payoff\nCost minus state minimum\n\n\nHurwicz\nMaximize weighted best and worst payoffs\nMinimize weighted lowest and highest costs\n\n\nLaplace\nMaximize equal-weight average\nMinimize equal-weight average"
+  },
+  {
+    "objectID": "week04/index.html#student-activity-volleyball-tactics-7-minutes",
+    "href": "week04/index.html#student-activity-volleyball-tactics-7-minutes",
+    "title": "Week 04: Decision-Making under Uncertainty II",
+    "section": "8. Student activity: Volleyball tactics (7 minutes)",
+    "text": "8. Student activity: Volleyball tactics (7 minutes)\nA volleyball coach must select an attack strategy without knowing the opponent’s defensive formation. Values are hypothetical net points gained during a fixed period.\n\n\n\nTactic\nDeep defence\nBlock-heavy\nFlexible defence\n\n\n\n\nFast middle attack\n18\n6\n12\n\n\nWing attack\n12\n14\n10\n\n\nMixed attack\n15\n11\n13\n\n\n\nTasks\n\nConstruct the regret matrix and apply Minimax Regret.\nApply Hurwicz with \\(\\alpha=0.7\\).\nApply Laplace.\nExplain any difference between the decisions.\n\n\n\n\n\n\n\nNoteInstructor solution\n\n\n\n\n\nBest payoff in each state: \\(18\\), \\(14\\), \\(13\\).\n\n\n\n\n\n\n\n\n\n\nTactic\nDeep regret\nBlock-heavy regret\nFlexible regret\nMaximum regret\n\n\n\n\nFast middle\n0\n8\n1\n8\n\n\nWing\n6\n0\n3\n6\n\n\nMixed\n3\n3\n0\n3\n\n\n\nMinimax Regret: Mixed attack.\nHurwicz (\\(\\alpha=0.7\\)):\n\nFast middle: \\(0.7(18)+0.3(6)=14.4\\).\nWing: \\(0.7(14)+0.3(10)=12.8\\).\nMixed: \\(0.7(15)+0.3(11)=13.8\\).\n\nHurwicz: Fast middle attack.\nLaplace:\n\nFast middle: \\((18+6+12)/3=12\\).\nWing: \\((12+14+10)/3=12\\).\nMixed: \\((15+11+13)/3=13\\).\n\nLaplace: Mixed attack."
+  },
+  {
+    "objectID": "week04/index.html#common-mistakes",
+    "href": "week04/index.html#common-mistakes",
+    "title": "Week 04: Decision-Making under Uncertainty II",
+    "section": "9. Common mistakes",
+    "text": "9. Common mistakes\n\nCalculating regret relative to the best payoff in a row rather than the best payoff within each state.\nConfusing regret with actual runs scored or finishing time.\nUsing payoff regret formulas without reversing the direction for costs.\nTreating Hurwicz’s \\(\\alpha\\) as a probability of a state.\nClaiming that Laplace has estimated equal state probabilities.\nIgnoring ties between actions."
+  },
+  {
+    "objectID": "week04/index.html#exit-check-3-minutes",
+    "href": "week04/index.html#exit-check-3-minutes",
+    "title": "Week 04: Decision-Making under Uncertainty II",
+    "section": "10. Exit check (3 minutes)",
+    "text": "10. Exit check (3 minutes)\n\n\n\nBatter\nState 1\nState 2\n\n\n\n\nBatter A\n20\n8\n\n\nBatter B\n15\n14\n\n\n\n\nConstruct the regret matrix and select by Minimax Regret.\nApply Hurwicz with \\(\\alpha=0.5\\).\nApply Laplace.\n\n\n\n\n\n\n\nTipAnswers\n\n\n\n\n\nBest statewise payoffs: \\(20\\) and \\(14\\).\nRegret for A: \\((0,6)\\). Regret for B: \\((5,0)\\). Minimax Regret selects B because \\(5&lt;6\\).\nHurwicz: \\(H_A=0.5(20)+0.5(8)=14\\); \\(H_B=0.5(15)+0.5(14)=14.5\\). Hurwicz selects B.\nLaplace: \\(L_A=14\\) and \\(L_B=14.5\\). Laplace selects B."
+  },
+  {
+    "objectID": "week04/index.html#independent-learning",
+    "href": "week04/index.html#independent-learning",
+    "title": "Week 04: Decision-Making under Uncertainty II",
+    "section": "Independent learning",
+    "text": "Independent learning\nConstruct a sports payoff matrix with four actions and four states, including at least one negative payoff. Apply Maximax, Maximin, Minimax Regret, Hurwicz for \\(\\alpha=0.3\\) and \\(0.8\\), and Laplace. Explain why the selected actions may differ. Repeat the regret calculation for a cost matrix.\nNext week: Decision-making under risk and Expected Monetary Value (EMV)."
+  },
+  {
+    "objectID": "week04/index.html#reference",
+    "href": "week04/index.html#reference",
+    "title": "Week 04: Decision-Making under Uncertainty II",
+    "section": "Reference",
+    "text": "Reference\nGupta, P. K., Hira, D. S., & Kamboj, A. (2012). Introduction to Operations Research. S Chand. Chapter 9: Decision Theory."
+  },
+  {
+    "objectID": "week04/index.html#worked-example-choosing-a-sports-equipment-supplier",
+    "href": "week04/index.html#worked-example-choosing-a-sports-equipment-supplier",
+    "title": "Week 04: Decision-Making under Uncertainty II",
+    "section": "7. Worked example: Choosing a sports equipment supplier",
+    "text": "7. Worked example: Choosing a sports equipment supplier\nAdapted from Example 9.4-4 in the reference textbook. The sporting context and amounts are hypothetical; the two-action, two-state cost structure is retained.\nA national athletics training centre purchases specialist starting-block components each year. It has two options:\n\nSupplier X: Continue using the existing imported components, currently costing LKR 100,000 per year. A possible international supply shortage could increase the annual price to four times its present value.\nSupplier Y: Switch to a compatible locally sourced component package that provides the same required function and costs LKR 300,000 per year, regardless of whether the shortage occurs.\n\nThe centre does not know whether the shortage will occur, and no probabilities are available. Which supplier should it choose under the optimistic, pessimistic and Hurwicz criteria? Use a coefficient of optimism of \\(\\alpha=0.4\\).\n\nStep 1: Construct the conditional cost matrix\nAll amounts below are in LKR 1,000 per year. Lower costs are preferable.\n\n\n\nProcurement decision\nShortage occurs\nNo shortage\n\n\n\n\n\\(A_1\\): Continue with Supplier X\n400\n100\n\n\n\\(A_2\\): Switch to Supplier Y\n300\n300\n\n\n\n\n\nStep 2: Optimistic criterion (Minimin cost)\nThe optimistic decision considers the lowest possible cost for each alternative and chooses the smallest of these values.\n\\[\n\\min_j C_{1j}=\\min(400,100)=100,\\qquad\n\\min_j C_{2j}=\\min(300,300)=300.\n\\]\nSince \\(100&lt;300\\), the optimistic decision is Supplier X, with a best-case annual cost of LKR 100,000.\nIn the textbook, Maximax is expressed for payoffs. For costs, the equivalent optimistic rule is Minimin, because a smaller cost is better. Equivalently, negate each cost to obtain a payoff and then apply Maximax.\n\n\nStep 3: Pessimistic criterion (Minimax cost)\nThe pessimistic decision considers the highest possible cost of each alternative and chooses the smaller of these worst-case costs.\n\\[\n\\max_j C_{1j}=\\max(400,100)=400,\\qquad\n\\max_j C_{2j}=\\max(300,300)=300.\n\\]\nSince \\(300&lt;400\\), the pessimistic decision is Supplier Y, with a worst-case annual cost of LKR 300,000. This is the cost-based form of the Maximin payoff criterion.\n\n\nStep 4: Hurwicz criterion with \\(\\alpha=0.4\\)\nFor costs, the coefficient of optimism weights the minimum cost, while \\(1-\\alpha\\) weights the maximum cost:\n\\[\nH_i^{(C)}(\\alpha)=\\alpha\\min_j C_{ij}+(1-\\alpha)\\max_j C_{ij}.\n\\]\nThe preferred alternative has the smallest Hurwicz cost score.\n\n\n\n\n\n\n\n\n\nSupplier\nMinimum cost (LKR 1,000)\nMaximum cost (LKR 1,000)\nHurwicz cost score (LKR 1,000)\n\n\n\n\nX\n100\n400\n280\n\n\nY\n300\n300\n300\n\n\n\nFor Supplier X:\n\\[\nH_X^{(C)}(0.4)=0.4(100)+0.6(400)=40+240=280.\n\\]\nFor Supplier Y:\n\\[\nH_Y^{(C)}(0.4)=0.4(300)+0.6(300)=120+180=300.\n\\]\nBecause \\(280&lt;300\\), Hurwicz selects Supplier X at \\(\\alpha=0.4\\). The score of 280 corresponds to LKR 280,000, but it is a decision score, not a probability-weighted forecast of actual expenditure.\n\n\n\n\n\n\nNoteAlternative solution using negative costs as payoffs\n\n\n\n\n\nAs in the reference textbook, define payoff as the negative of cost. In LKR 1,000, the payoff matrix becomes:\n\n\n\nSupplier\nShortage occurs\nNo shortage\n\n\n\n\nX\n-400\n-100\n\n\nY\n-300\n-300\n\n\n\n\nMaximax payoff: X, because its largest payoff is \\(-100\\), compared with \\(-300\\) for Y.\nMaximin payoff: Y, because its smallest payoff is \\(-300\\), compared with \\(-400\\) for X.\nHurwicz payoff, \\(\\alpha=0.4\\): X gives \\(0.4(-100)+0.6(-400)=-280\\); Y gives \\(-300\\). Maximize the score, so choose X.\n\nBoth representations give exactly the same decisions. For a cost table, Minimin is optimistic and Minimax cost is pessimistic. For the negative-cost payoff table, these correspond to Maximax and Maximin, respectively.\n\n\n\nDiscussion: Would the centre necessarily choose Supplier X if its annual budget could not exceed LKR 350,000 under any circumstances? No. A strict budget constraint would rule out Supplier X because its shortage-state cost is LKR 400,000. A decision criterion does not replace feasibility constraints."
   }
 ]
