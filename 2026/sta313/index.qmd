@@ -161,7 +161,7 @@ Maximax and Maximin criteria for payoff and cost tables.
 ::: week-card
 [Week 04]{.week-no}
 
-### Decision under Uncertainty II
+### [Decision under Uncertainty II](week04/index.html)
 
 Minimax Regret, Hurwicz, and Laplace criteria.
 :::
