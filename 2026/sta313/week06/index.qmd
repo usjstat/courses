@@ -1,0 +1,360 @@
+---
+title: "Week 06: Decision under Risk II"
+subtitle: "Value of information, salvage value and marginal analysis | STA 313 1.0"
+author: "Dr. Rajitha M. Silva"
+toc: true
+toc-depth: 3
+number-sections: false
+---
+
+<div class="back-home-wrap"><a href="../index.html" class="back-home">← Back to course homepage</a></div>
+
+**WEEK 06 · DECISION UNDER RISK II**
+
+# Perfect information and inventory decisions
+
+Week 05 introduced EMV and EOL through the cricket souvenir booklet example. This lesson extends those calculations to the value of perfect information, unsold stock with salvage value, and marginal stocking decisions. The sports examples retain the numerical complexity of the corresponding reference problems.
+
+## Learning outcomes
+
+1. Calculate expected profit with perfect information (EPPI) and EVPI.
+2. Interpret EVPI as an upper bound on the value of perfect information.
+3. Construct conditional profit tables when unsold stock has salvage value.
+4. Use marginal analysis to choose a stock quantity and recognize boundary ties.
+
+## Suggested lesson sequence
+
+| Activity | Time |
+|:---|---:|
+| Perfect information and EVPI | 20 min |
+| Worked example 9.5-3: souvenir stock and EVPI | 25 min |
+| Worked example 9.5-4: salvage value | 25 min |
+| Worked example 9.5-5: marginal analysis | 20 min |
+| Practice and discussion | 10 min |
+
+## Recap: Week 05 cricket souvenir booklet decision
+
+In Week 05, a cricket club considered printing **100, 150, 200, 250 or 300 souvenir booklets** for an exhibition match. Each booklet costs **LKR 200** to print, sells for **LKR 500**, and has no resale value if unsold. The hypothetical demand distribution was:
+
+| Demand (booklets) | 100 | 150 | 200 | 250 | 300 |
+|:---|---:|---:|---:|---:|---:|
+| Probability | 0.10 | 0.20 | 0.35 | 0.25 | 0.10 |
+
+Week 05 established the following expected profits and losses:
+
+| Print quantity | EMV (LKR) | EOL (LKR) |
+|---:|---:|---:|
+| 100 | 30,000 | 30,750 |
+| 150 | 42,500 | 18,250 |
+| **200** | **50,000** | **10,750** |
+| 250 | 48,750 | 12,000 |
+| 300 | 41,250 | 19,500 |
+
+Thus **printing 200 booklets** maximizes EMV and minimizes EOL. We now use the same example to value advance information about demand.
+
+## 1. Expected Value of Perfect Information (EVPI)
+
+Suppose the cricket club could know **exactly how many souvenir booklets spectators will buy** before placing its print order. It could then print precisely the demand quantity, avoiding both excess printing costs and missed sales. This is *perfect information*, not merely a forecast with some accuracy.
+
+Let $x_{ij}$ be the profit from action $i$ in demand state $j$, and $p_j$ the probability of state $j$. The expected profit with perfect information is
+
+$$
+EPPI=\sum_j p_j\max_i x_{ij}.
+$$
+
+The **expected value of perfect information** is the improvement over the best decision without that information:
+
+$$
+EVPI=EPPI-\max_i EMV(a_i).
+$$
+
+### Step 1: Identify the best action under each demand state
+
+With perfect advance information, the club prints exactly the number demanded. Profit per booklet sold is $500-200=300$ LKR, so the best conditional profit is $300D$.
+
+| Demand (booklets) | Probability | Best print quantity | Best profit (LKR) | Weighted best profit (LKR) |
+|---:|---:|---:|---:|---:|
+| 100 | 0.10 | 100 | 30,000 | 3,000 |
+| 150 | 0.20 | 150 | 45,000 | 9,000 |
+| 200 | 0.35 | 200 | 60,000 | 21,000 |
+| 250 | 0.25 | 250 | 75,000 | 18,750 |
+| 300 | 0.10 | 300 | 90,000 | 9,000 |
+| **Total** | **1.00** | | | **60,750** |
+
+### Step 2: Calculate EPPI and EVPI
+
+$$
+\begin{aligned}
+EPPI&=0.10(30,000)+0.20(45,000)+0.35(60,000)\\
+&\quad+0.25(75,000)+0.10(90,000)\\
+&=\boxed{\text{LKR }60,750}.
+\end{aligned}
+$$
+
+From Week 05, the maximum EMV without advance information is **LKR 50,000**, obtained by printing 200 booklets. Therefore,
+
+$$
+EVPI=60,750-50,000=\boxed{\text{LKR }10,750}.
+$$
+
+### Step 3: Interpret the result
+
+**LKR 10,750 is the maximum expected benefit per comparable match** of learning demand perfectly *before* printing. Under this model, the club should not pay more than this amount for such information. A prediction service that is less than perfectly accurate cannot be valued at EVPI without additional analysis.
+
+Notice the identity
+
+$$
+\boxed{EVPI=\min_i EOL(a_i)=\text{LKR }10,750.}
+$$
+
+This follows because, for each demand state, the best possible profit is fixed. Consequently, minimizing expected regret and maximizing expected profit lead to the same action.
+
+::: {.callout-important}
+Perfect information means the true demand is revealed **before the decision is made**. Learning demand after the match has no value for that match's printing decision. EVPI is not the total expected profit with perfect information: it is the **additional** expected profit.
+:::
+
+## 2. Worked example 9.5-3 adapted: Tournament souvenir stock based on past demand
+
+A sports tournament organizer sells a special souvenir item. The organizer pays **LKR 400 per item** and sells each item for **LKR 500**. Unsold items have no value after the event. Historical records from **200 comparable event-days** give the following demand frequencies:
+
+| Demand (items) | 15 | 20 | 25 | 30 | 35 | 40 | 50 |
+|:---|---:|---:|---:|---:|---:|---:|---:|
+| Number of event-days | 6 | 14 | 20 | 80 | 40 | 30 | 10 |
+
+Available storage restricts the stock choice to the seven quantities shown. Determine (i) the conditional profit table, (ii) the optimal stock using EMV, and (iii) EVPI.
+
+### Step 1: Estimate demand probabilities
+
+Divide each frequency by 200. The probabilities are **0.03, 0.07, 0.10, 0.40, 0.20, 0.15 and 0.05**, respectively. They sum to 1.
+
+### Step 2: Calculate conditional profits
+
+$$
+CP(S,D)=500\min(S,D)-400S
+=\begin{cases}
+100S,&D\ge S,\\
+500D-400S,&D<S.
+\end{cases}
+$$
+
+For example, stocking 30 when demand is 25 gives $500(25)-400(30)=500$ LKR. Stocking 25 when demand is 30 gives $100(25)=2{,}500$ LKR.
+
+### Step 3: Conditional profit table (LKR)
+
+| Demand | Probability | Stock 15 | Stock 20 | Stock 25 | Stock 30 | Stock 35 | Stock 40 | Stock 50 |
+|---|---|---|---|---|---|---|---|---|
+| 15 | 0.03 | 1,500 | -500 | -2,500 | -4,500 | -6,500 | -8,500 | -12,500 |
+| 20 | 0.07 | 1,500 | 2,000 | 0 | -2,000 | -4,000 | -6,000 | -10,000 |
+| 25 | 0.10 | 1,500 | 2,000 | 2,500 | 500 | -1,500 | -3,500 | -7,500 |
+| 30 | 0.40 | 1,500 | 2,000 | 2,500 | 3,000 | 1,000 | -1,000 | -5,000 |
+| 35 | 0.20 | 1,500 | 2,000 | 2,500 | 3,000 | 3,500 | 1,500 | -2,500 |
+| 40 | 0.15 | 1,500 | 2,000 | 2,500 | 3,000 | 3,500 | 4,000 | 0 |
+| 50 | 0.05 | 1,500 | 2,000 | 2,500 | 3,000 | 3,500 | 4,000 | 5,000 |
+
+### Step 4: Expected profit table (LKR)
+
+Each entry equals the conditional profit multiplied by the probability of that demand state.
+
+| Demand | Probability | Stock 15 | Stock 20 | Stock 25 | Stock 30 | Stock 35 | Stock 40 | Stock 50 |
+|---|---|---|---|---|---|---|---|---|
+| 15 | 0.03 | 45.00 | -15.00 | -75.00 | -135.00 | -195.00 | -255.00 | -375.00 |
+| 20 | 0.07 | 105.00 | 140.00 | 0.00 | -140.00 | -280.00 | -420.00 | -700.00 |
+| 25 | 0.10 | 150.00 | 200.00 | 250.00 | 50.00 | -150.00 | -350.00 | -750.00 |
+| 30 | 0.40 | 600.00 | 800.00 | 1,000.00 | 1,200.00 | 400.00 | -400.00 | -2,000.00 |
+| 35 | 0.20 | 300.00 | 400.00 | 500.00 | 600.00 | 700.00 | 300.00 | -500.00 |
+| 40 | 0.15 | 225.00 | 300.00 | 375.00 | 450.00 | 525.00 | 600.00 | 0.00 |
+| 50 | 0.05 | 75.00 | 100.00 | 125.00 | 150.00 | 175.00 | 200.00 | 250.00 |
+| **EMV** |  | **1,500.00** | **1,925.00** | **2,175.00** | **2,175.00** | **1,175.00** | **-325.00** | **-4,075.00** |
+
+The maximum EMV is **LKR 2,175**, achieved by **both stocking 25 and stocking 30 items**. These are equally good according to EMV; the criterion alone does not break the tie.
+
+### Step 5: Expected profit with perfect information and EVPI
+
+If exact demand were known before purchasing, the organizer would stock exactly the required quantity. The profit would be $100D$ LKR.
+
+| Demand | Probability | Best profit (LKR) | Weighted best profit (LKR) |
+|---|---|---|---|
+| 15 | 0.03 | 1,500 | 45.00 |
+| 20 | 0.07 | 2,000 | 140.00 |
+| 25 | 0.10 | 2,500 | 250.00 |
+| 30 | 0.40 | 3,000 | 1,200.00 |
+| 35 | 0.20 | 3,500 | 700.00 |
+| 40 | 0.15 | 4,000 | 600.00 |
+| 50 | 0.05 | 5,000 | 250.00 |
+| **Total** | 1.00 |  | **3,185.00** |
+
+$$
+EPPI=3{,}185\ \text{LKR},\qquad
+EVPI=3{,}185-2{,}175=\boxed{1{,}010\ \text{LKR}}.
+$$
+
+The maximum expected value of knowing demand perfectly is **LKR 1,010 per event**. The EMV tie between 25 and 30 items does not change this value.
+
+::: {.callout-note}
+The monetary inputs in this sports adaptation are ten times the reference example's unit costs and prices. Consequently, the profits and EVPI are ten times the reference values, while the probabilities, stock alternatives, ties and mathematical difficulty are unchanged.
+:::
+
+## 3. Salvage value: When unsold items retain some value
+
+If an unsold unit can be sold or disposed of for a salvage amount $v$, the conditional profit for stocking $S$ units with demand $D$, sale price $r$ and purchase cost $c$ is
+
+$$
+CP(S,D)=r\min(S,D)+v\max(S-D,0)-cS.
+$$
+
+The salvage amount is received **only for unsold units**.
+
+## 4. Worked example 9.5-4 adapted: Sports hydration cups with salvage value
+
+A sports festival vendor prepares sealed hydration cups for spectators. Each cup costs **LKR 500**, sells for **LKR 800**, and any unsold cup can be sold afterward to a partner facility for **LKR 200**. The expected demand is 15, 16, 17 or 18 cups, with probabilities 0.10, 0.20, 0.40 and 0.30.
+
+**Question:** How many cups should the vendor prepare to maximize expected profit?
+
+### Step 1: Calculate conditional profits
+
+$$
+CP(S,D)=800\min(S,D)+200\max(S-D,0)-500S.
+$$
+
+Equivalently,
+
+$$
+CP(S,D)=\begin{cases}
+300S,&D\ge S,\\
+800D-500S+200(S-D),&D<S.
+\end{cases}
+$$
+
+For example, preparing 16 cups when demand is 15 gives $800(15)-500(16)+200(1)=4{,}200$ LKR.
+
+### Step 2: Conditional profit table (LKR)
+
+| Demand | Probability | Prepare 15 | Prepare 16 | Prepare 17 | Prepare 18 |
+|---|---|---|---|---|---|
+| 15 | 0.10 | 4,500 | 4,200 | 3,900 | 3,600 |
+| 16 | 0.20 | 4,500 | 4,800 | 4,500 | 4,200 |
+| 17 | 0.40 | 4,500 | 4,800 | 5,100 | 4,800 |
+| 18 | 0.30 | 4,500 | 4,800 | 5,100 | 5,400 |
+
+### Step 3: Expected profit table (LKR)
+
+| Demand | Probability | Prepare 15 | Prepare 16 | Prepare 17 | Prepare 18 |
+|---|---|---|---|---|---|
+| 15 | 0.10 | 450.00 | 420.00 | 390.00 | 360.00 |
+| 16 | 0.20 | 900.00 | 960.00 | 900.00 | 840.00 |
+| 17 | 0.40 | 1,800.00 | 1,920.00 | 2,040.00 | 1,920.00 |
+| 18 | 0.30 | 1,350.00 | 1,440.00 | 1,530.00 | 1,620.00 |
+| **EMV** |  | **4,500.00** | **4,740.00** | **4,860.00** | **4,740.00** |
+
+The optimal decision is to prepare **17 cups**, with maximum EMV **LKR 4,860**.
+
+The salvage value reduces the financial penalty of overstocking. It does not eliminate it, because the salvage value (LKR 200) is below the purchase cost (LKR 500).
+
+## 5. Marginal (incremental) analysis
+
+When many stock quantities are possible, constructing every conditional-profit entry can be tedious. Instead, consider the decision to add **one more unit**.
+
+- If the additional unit is sold, the incremental profit is $IP=r-c$.
+- If it remains unsold, the incremental loss is $IL=c-v$, where $v=0$ if there is no salvage value.
+
+If $q=P(\text{the additional unit is sold})$, then
+
+$$
+\text{Expected incremental gain}=q(IP)-(1-q)(IL).
+$$
+
+Adding the unit is beneficial when
+
+$$
+q(IP)>(1-q)(IL),\qquad
+q>\frac{IL}{IP+IL}.
+$$
+
+At equality, adding the unit makes **no difference to EMV**. The threshold is the *critical probability* of selling the extra unit.
+
+## 6. Worked example 9.5-5 adapted: Sports training centre's daily hydration supply
+
+A sports training centre purchases a fresh hydration drink for **LKR 120 per litre** and sells it to participants for **LKR 150 per litre**. Any unsold drink must be discarded at the end of the day. Historical demand follows this distribution:
+
+| Demand (litres) | 46 | 48 | 50 | 52 | 54 | 56 | 58 | 60 | 62 | 64 |
+|:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Probability | 0.01 | 0.03 | 0.06 | 0.10 | 0.20 | 0.25 | 0.15 | 0.10 | 0.05 | 0.05 |
+
+Assume demand is independent from one day to the next and that the centre orders only in the listed two-litre quantities. Find the quantity that maximizes expected daily profit using marginal analysis.
+
+### Step 1: Calculate the marginal gain and loss
+
+$$
+IP=150-120=30\ \text{LKR per litre},\qquad
+IL=120\ \text{LKR per litre}.
+$$
+
+Thus the minimum probability needed to justify an additional litre is
+
+$$
+q^*=\frac{IL}{IP+IL}=\frac{120}{30+120}=\boxed{0.80}.
+$$
+
+### Step 2: Calculate the upper-tail demand probabilities
+
+For an additional litre to sell, daily demand must be at least as large as the new stock level. Compute $P(D\geq S)$:
+
+| Stock level / demand (litres) | P(D = level) | P(D ≥ level) |
+|---|---|---|
+| 46 | 0.01 | 1.00 |
+| 48 | 0.03 | 0.99 |
+| 50 | 0.06 | 0.96 |
+| 52 | 0.10 | 0.90 |
+| 54 | 0.20 | 0.80 |
+| 56 | 0.25 | 0.60 |
+| 58 | 0.15 | 0.35 |
+| 60 | 0.10 | 0.20 |
+| 62 | 0.05 | 0.10 |
+| 64 | 0.05 | 0.05 |
+
+### Step 3: Select the stock quantity
+
+At 54 litres, $P(D\geq54)=0.80$, exactly the critical probability. The expected gain from an additional litre at this boundary is
+
+$$
+0.80(30)-0.20(120)=24-24=0.
+$$
+
+At 56 litres, the probability falls to $0.60$ and
+
+$$
+0.60(30)-0.40(120)=18-48=-30\ \text{LKR per litre}.
+$$
+
+**Decision:** **54 litres is an optimal stocking quantity**, following the reference's recommendation. At the exact threshold, additional litres up to 54 do not change EMV, so **52 litres is also EMV-optimal** under these discrete demand and ordering assumptions. Ordering 56 litres reduces expected profit. This boundary tie is worth recognizing when applying the marginal rule.
+
+::: {.callout-important}
+The critical probability is a **sale probability for an additional unit**, not the probability of a single exact demand level. Use $P(D\geq S)$, not $P(D=S)$.
+:::
+
+## 7. Comparison of the criteria
+
+| Criterion | Calculation | Decision rule | Interpretation |
+|:---|:---|:---|:---|
+| EMV | $\sum_jp_jx_{ij}$ | Maximize expected payoff, or minimize expected cost | Average outcome using state probabilities |
+| EOL | $\sum_jp_j(\max_kx_{kj}-x_{ij})$ | Minimize | Expected shortfall relative to the best action in each state |
+| EVPI | $EPPI-\max_iEMV(a_i)$ | Information valuation, not a stocking rule | Maximum expected gain from perfect advance information |
+| Marginal analysis | $q(IP)-(1-q)(IL)$ | Add units while positive | Efficient alternative to a large EMV table |
+
+## 8. Practice questions
+
+**A. Perfect information.** Using the Week 05 cricket booklet example, explain why EVPI is LKR 10,750 rather than LKR 60,750. Then explain the corresponding EVPI of LKR 1,010 in Example 9.5-3.
+
+**B. Salvage.** In Example 9.5-4, suppose the salvage price falls from LKR 200 to zero. Recalculate EMVs for 15, 16, 17 and 18 cups. Does the optimal quantity change?
+
+**C. Marginal analysis.** In Example 9.5-5, explain why $P(D\geq54)=0.80$ produces a tie at the boundary. What practical considerations could distinguish equally optimal stock quantities?
+
+::: {.callout-tip collapse="true" title="Practice answers"}
+- **A:** Perfect information permits a different print quantity for each demand state. For booklets, the *incremental* expected value is $60{,}750-50{,}000=10{,}750$ LKR, not the total EPPI of LKR 60,750. For the separate souvenir inventory example, $3{,}185-2{,}175=1{,}010$ LKR.
+- **B:** With zero salvage, the EMVs for 15, 16, 17 and 18 cups are **LKR 4,500, 4,720, 4,780 and 4,520**. The optimum remains 17 cups.
+- **C:** The expected marginal gain is zero. Either 52 or 54 litres gives the same EMV under the assumed distribution. Waste, storage and logistics may distinguish them.
+:::
+
+## Reference
+
+Gupta, P. K., Hira, D. S., & Kamboj, A. (2012). *Introduction to Operations Research*. S. Chand. Chapter 9, Section 9.5, Examples 9.5-3 to 9.5-5, adapted to sports settings.

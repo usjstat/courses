@@ -1,0 +1,245 @@
+---
+title: "Week 05: Decision under Risk I"
+subtitle: "Expected Monetary Value and optimal action under known probabilities | STA 313 1.0"
+author: "Dr. Rajitha M. Silva"
+toc: true
+toc-depth: 3
+number-sections: false
+---
+
+<div class="back-home-wrap"><a href="../index.html" class="back-home">← Back to course homepage</a></div>
+
+**WEEK 05 · DECISION UNDER RISK I**
+
+# Expected Monetary Value and optimal action
+
+This lesson introduces decisions under risk, where probabilities are known or estimated. It develops EMV and expected opportunity loss (EOL) using a common sports-event example. The next lesson develops the value of information, salvage values and marginal analysis.
+
+## Learning outcomes
+
+1. Identify actions, states, probabilities and conditional payoffs.
+2. Calculate EMV for each action and select the optimal action.
+3. Construct opportunity-loss tables and minimize EOL.
+4. Explain why EMV maximization and EOL minimization agree.
+
+## Suggested lesson sequence
+
+| Activity | Time |
+|:---|---:|
+| Risk and EMV | 15 min |
+| Worked example 9.5-1: conditional profit and EMV | 25 min |
+| EOL and worked example 9.5-2 | 25 min |
+| Practice and discussion | 15 min |
+
+## 1. Decision-making under risk
+
+Let $a_i$ denote an available action, $s_j$ a state of nature, $x_{ij}$ the monetary payoff under action $a_i$ and state $s_j$, and $p_j=P(s_j)$ its probability. We require $p_j\geq 0$ and $\sum_j p_j=1$.
+
+For a **profit/payoff** problem:
+
+$$
+\operatorname{EMV}(a_i)=\sum_{j=1}^{m}p_jx_{ij},
+\qquad a^*=\arg\max_i\operatorname{EMV}(a_i).
+$$
+
+For a **cost** problem, calculate the same probability-weighted average but select the action with the **smallest expected cost**.
+
+**Procedure:** (1) specify feasible actions and states, (2) assign probabilities, (3) calculate conditional payoffs, (4) multiply each payoff by its state's probability and sum, and (5) select the action with the best expected outcome.
+
+::: {.callout-note}
+An EMV is a long-run probability-weighted average, not a promise about the next match or event. A decision with the largest EMV may still give a poor outcome in a particular state.
+:::
+
+## 2. Worked example 9.5-1 adapted: How many souvenir booklets should a cricket club print?
+
+A cricket club is organizing a special exhibition match featuring several well-known players. The club plans to sell **souvenir booklets** containing player profiles, photographs, team information and highlights of the club's history.
+
+Each booklet costs **LKR 200** to print and sells for **LKR 500**. Any unsold booklets have **no resale value** after the event. Based on attendance and souvenir sales at comparable events, the club estimates the following *hypothetical* demand distribution.
+
+| Demand (booklets) | 100 | 150 | 200 | 250 | 300 |
+|:---|---:|---:|---:|---:|---:|
+| Probability | 0.10 | 0.20 | 0.35 | 0.25 | 0.10 |
+
+The club must decide whether to print **100, 150, 200, 250 or 300 booklets** before knowing the demand.
+
+**Question:** Which printing quantity maximizes expected profit?
+
+::: {.callout-note}
+The probabilities are illustrative, not actual historical sales estimates. They sum to one, with moderate demand (200 booklets) more likely than either extreme. For a real decision, the club should estimate probabilities from relevant past events.
+:::
+
+### Step 1: Define conditional profit
+
+Let $Q$ be the number printed and $D$ the demand. The number sold is $\min(Q,D)$, so
+
+$$
+CP(Q,D)=500\min(Q,D)-200Q.
+$$
+
+Each booklet sold contributes **LKR 300** after printing costs. Each unsold booklet represents a **LKR 200** printing cost with no sales revenue.
+
+For example, printing 150 when demand is 100 gives
+
+$$
+CP(150,100)=500(100)-200(150)=\text{LKR }20,000.
+$$
+
+Printing 200 when demand is 250 gives
+
+$$
+CP(200,250)=500(200)-200(200)=\text{LKR }60,000.
+$$
+
+### Step 2: Construct the conditional profit table (LKR)
+
+| Demand (booklets) | Probability | Print 100 | Print 150 | Print 200 | Print 250 | Print 300 |
+|---:|---:|:---:|:---:|:---:|:---:|:---:|
+| 100 | 0.10 | 30,000 | 20,000 | 10,000 | 0 | -10,000 |
+| 150 | 0.20 | 30,000 | 45,000 | 35,000 | 25,000 | 15,000 |
+| 200 | 0.35 | 30,000 | 45,000 | 60,000 | 50,000 | 40,000 |
+| 250 | 0.25 | 30,000 | 45,000 | 60,000 | 75,000 | 65,000 |
+| 300 | 0.10 | 30,000 | 45,000 | 60,000 | 75,000 | 90,000 |
+
+### Step 3: Calculate the probability-weighted payoffs (LKR)
+
+Each entry below is $P(D=d)\times CP(Q,d)$.
+
+| Demand (booklets) | Probability | Print 100 | Print 150 | Print 200 | Print 250 | Print 300 |
+|---:|---:|:---:|:---:|:---:|:---:|:---:|
+| 100 | 0.10 | 3,000.00 | 2,000.00 | 1,000.00 | 0.00 | -1,000.00 |
+| 150 | 0.20 | 6,000.00 | 9,000.00 | 7,000.00 | 5,000.00 | 3,000.00 |
+| 200 | 0.35 | 10,500.00 | 15,750.00 | 21,000.00 | 17,500.00 | 14,000.00 |
+| 250 | 0.25 | 7,500.00 | 11,250.00 | 15,000.00 | 18,750.00 | 16,250.00 |
+| 300 | 0.10 | 3,000.00 | 4,500.00 | 6,000.00 | 7,500.00 | 9,000.00 |
+| **EMV** | | **30,000.00** | **42,500.00** | **50,000.00** | **48,750.00** | **41,250.00** |
+
+For printing 200 booklets,
+
+$$
+\begin{aligned}
+EMV(200)&=0.10(10,000)+0.20(35,000)+0.35(60,000)\\
+&\quad+0.25(60,000)+0.10(60,000)\\
+&=\boxed{\text{LKR }50,000}.
+\end{aligned}
+$$
+
+**Decision:** Print **200 booklets**, which gives the highest EMV of **LKR 50,000**. This is a probability-weighted average, not a guaranteed profit for this match.
+
+## 3. Expected Opportunity Loss (EOL)
+
+The *conditional opportunity loss* (regret) compares the payoff from a chosen action with the best payoff that could have been obtained if demand had been known:
+
+$$
+COL(a_i,s_j)=\max_k x_{kj}-x_{ij}.
+$$
+
+The expected opportunity loss is
+
+$$
+EOL(a_i)=\sum_j p_j COL(a_i,s_j).
+$$
+
+Select the action with the **smallest EOL**. Use the same states and probabilities as in the EMV calculation.
+
+## 4. Worked example 9.5-2 adapted: Solve the booklet problem using EOL
+
+### Step 1: Find the best conditional profit for each demand
+
+If demand were known in advance, the club would print exactly the number demanded. The best profits for demand levels 100, 150, 200, 250 and 300 are respectively **LKR 30,000, 45,000, 60,000, 75,000 and 90,000**.
+
+### Step 2: Construct the conditional opportunity-loss table (LKR)
+
+For example, if demand is 100 but the club prints 200, the regret is $30,000-10,000=20,000$ LKR. If demand is 300 but the club prints 200, regret is $90,000-60,000=30,000$ LKR.
+
+| Demand (booklets) | Probability | Print 100 | Print 150 | Print 200 | Print 250 | Print 300 |
+|---:|---:|:---:|:---:|:---:|:---:|:---:|
+| 100 | 0.10 | 0 | 10,000 | 20,000 | 30,000 | 40,000 |
+| 150 | 0.20 | 15,000 | 0 | 10,000 | 20,000 | 30,000 |
+| 200 | 0.35 | 30,000 | 15,000 | 0 | 10,000 | 20,000 |
+| 250 | 0.25 | 45,000 | 30,000 | 15,000 | 0 | 10,000 |
+| 300 | 0.10 | 60,000 | 45,000 | 30,000 | 15,000 | 0 |
+
+### Step 3: Calculate probability-weighted regrets (LKR)
+
+| Demand (booklets) | Probability | Print 100 | Print 150 | Print 200 | Print 250 | Print 300 |
+|---:|---:|:---:|:---:|:---:|:---:|:---:|
+| 100 | 0.10 | 0.00 | 1,000.00 | 2,000.00 | 3,000.00 | 4,000.00 |
+| 150 | 0.20 | 3,000.00 | 0.00 | 2,000.00 | 4,000.00 | 6,000.00 |
+| 200 | 0.35 | 10,500.00 | 5,250.00 | 0.00 | 3,500.00 | 7,000.00 |
+| 250 | 0.25 | 11,250.00 | 7,500.00 | 3,750.00 | 0.00 | 2,500.00 |
+| 300 | 0.10 | 6,000.00 | 4,500.00 | 3,000.00 | 1,500.00 | 0.00 |
+| **EOL** | | **30,750.00** | **18,250.00** | **10,750.00** | **12,000.00** | **19,500.00** |
+
+For printing 200 booklets,
+
+$$
+\begin{aligned}
+EOL(200)&=0.10(20,000)+0.20(10,000)+0.35(0)\\
+&\quad+0.25(15,000)+0.10(30,000)\\
+&=\boxed{\text{LKR }10,750}.
+\end{aligned}
+$$
+
+**Decision:** Print **200 booklets**, which gives the minimum EOL of **LKR 10,750**.
+
+### Why maximizing EMV and minimizing EOL agree
+
+Let $M_j=\max_i x_{ij}$. Then
+
+$$
+EOL(a_i)=\sum_j p_j(M_j-x_{ij})
+=\underbrace{\sum_j p_jM_j}_{\text{same for every action}}-EMV(a_i).
+$$
+
+For this example, the expected payoff under perfect knowledge of demand is
+
+$$
+EPPI=0.10(30,000)+0.20(45,000)+0.35(60,000)
++0.25(75,000)+0.10(90,000)
+=\text{LKR }60,750.
+$$
+
+Hence $EOL(200)=60,750-50,000=10,750$ LKR. This equality follows from the definition of regret for a common payoff table and probability distribution.
+
+::: {.callout-note}
+The expected value of perfect information (EVPI) equals the minimum EOL, here LKR 10,750. Its interpretation and use in valuing information are developed in Week 06.
+:::
+
+## 5. Practice questions
+
+**A.** Calculate all five conditional profits and the EMV when the club prints **250 booklets**. Explain why this is not the optimal action.
+
+**B.** Without copying the expected-loss table, calculate EOL when the club prints **150 booklets**. Verify the result using $EOL=EPPI-EMV$.
+
+**C.** Suppose the probability of demand 300 rises by 0.10, while the probability of demand 100 falls by 0.10. Recalculate the EMVs and identify whether the optimal printing quantity changes.
+
+::: {.callout-tip collapse="true" title="Practice answers"}
+- **A:** The conditional profits (for demands 100, 150, 200, 250, 300) are LKR 0, 25,000, 50,000, 75,000 and 75,000. $EMV(250)=\text{LKR }48,750$, less than LKR 50,000 for printing 200.
+- **B:** $EMV(150)=\text{LKR }42,500$, so $EOL(150)=60,750-42,500=\text{LKR }18,250$.
+- **C:** New probabilities are (0, 0.20, 0.35, 0.25, 0.20). The revised EMVs (for printing 100, 150, 200, 250, 300) are LKR 30,000, 45,000, 55,000, 56,250 and 51,250. The preferred quantity changes to **250 booklets**.
+:::
+
+## 6. R verification (optional)
+
+The following code checks Example 1 and can be adapted for other probability-weighted payoff tables.
+
+```{r}
+#| eval: false
+
+demand <- c(100, 150, 200, 250, 300)
+prob <- c(0.10, 0.20, 0.35, 0.25, 0.10)
+stock <- demand
+
+payoff <- outer(stock, demand,
+                Vectorize(function(s, d) 500 * min(s, d) - 200 * s))
+emv <- as.vector(payoff %*% prob)
+regret <- sweep(payoff, 2, apply(payoff, 2, max), FUN = function(x, m) m - x)
+eol <- as.vector(regret %*% prob)
+
+data.frame(stock, EMV = emv, EOL = eol)
+stock[which.max(emv)]
+```
+
+## Reference
+
+Gupta, P. K., Hira, D. S., & Kamboj, A. (2012). *Introduction to Operations Research*. S. Chand. Chapter 9, Section 9.5, Examples 9.5-1 and 9.5-2, adapted to a sports setting.
