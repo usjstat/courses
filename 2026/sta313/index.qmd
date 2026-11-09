@@ -169,7 +169,7 @@ Minimax Regret, Hurwicz, and Laplace criteria.
 ::: week-card
 [Week 05]{.week-no}
 
-### Decision under Risk I
+### [Decision under Risk I](week05/index.html)
 
 Expected Monetary Value and optimal action under known probabilities.
 :::
@@ -177,7 +177,7 @@ Expected Monetary Value and optimal action under known probabilities.
 ::: week-card
 [Week 06]{.week-no}
 
-### Decision under Risk II
+### [Decision under Risk II](week06/index.html)
 
 Expected Opportunity Loss and Expected Value of Perfect Information.
 :::
