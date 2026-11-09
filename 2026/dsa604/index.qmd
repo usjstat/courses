@@ -1,0 +1,187 @@
+---
+title: "DSA 604 — Bayesian Computation"
+subtitle: "MSc in Data Science & Artificial Intelligence | Intake 2026/2028"
+format:
+  html:
+    toc: false
+    smooth-scroll: true
+    code-copy: true
+    theme:
+      light: cosmo
+      dark: darkly
+    css: styles.css
+---
+
+::: {.course-hero}
+# DSA 604 — Bayesian Computation
+
+**MSc in Data Science & Artificial Intelligence**  
+**Intake:** 2026/2028  
+**Course:** DSA 604 2.0 Bayesian Computation  
+**Lecturer:** Dr RM Silva
+
+This page provides the course outline, teaching schedule, lecture materials, practical sessions, and related resources.
+:::
+
+## Course outline
+
+The course develops Bayesian statistical modelling through computation, with primary emphasis on **R** and selected comparisons using **Python/PyMC**.
+
+The main reference is **Bayes Rules! An Introduction to Applied Bayesian Modeling**, supported by selected material from **Bayesian Modeling and Computation in Python**.
+
+### Main topics
+
+- Bayesian probability and statistical reasoning
+- Prior distributions and likelihood construction
+- Posterior distributions and posterior summaries
+- Posterior simulation and Monte Carlo methods
+- Markov chain Monte Carlo
+- Bayesian regression
+- Generalized Bayesian models
+- Hierarchical models
+- MCMC diagnostics
+- Posterior predictive checking
+- Model comparison and predictive assessment
+- Bayesian workflow for Data Science
+
+## Teaching schedule
+
+::: {.callout-note}
+### Session format
+
+**Morning sessions:** Lectures and guided computational demonstrations  
+**Evening sessions:** Practical sessions
+:::
+
+| Week | Date | Time | Duration | Session |
+|---:|:---:|:---|:---:|:---|
+| 1 | 14 Nov 2026 | 08:00 am – 12:00 pm | 4 hrs | Lecture |
+| 2 | 21 Nov 2026 | 08:00 am – 12:00 pm | 4 hrs | Lecture |
+| 3 | 21 Nov 2026 | 01:00 pm – 05:00 pm | 4 hrs | **Practical** |
+| 4 | 28 Nov 2026 | 08:00 am – 12:00 pm | 4 hrs | Lecture |
+| 5 | 05 Dec 2026 | 08:00 am – 12:00 pm | 4 hrs | Lecture |
+| 6 | 12 Dec 2026 | 08:00 am – 12:00 pm | 4 hrs | Lecture |
+| 7 | 02 Jan 2027 | 08:00 am – 12:00 pm | 4 hrs | Lecture |
+| 8 | 02 Jan 2027 | 01:00 pm – 05:00 pm | 4 hrs | **Practical** |
+
+## Lecture and practical links
+
+::: {.resource-grid}
+
+### Week 1  
+**14 Nov 2026 · Lecture**
+
+Bayesian thinking, probability review, prior distributions, likelihood, and posterior distributions.
+
+[Lecture notes](week1/week1.html)
+
+
+### Week 2  
+**21 Nov 2026 · Lecture**
+
+Posterior computation, simulation, grid approximation, Monte Carlo ideas, and introduction to MCMC.
+
+[Lecture notes](#)  
+
+
+### Week 3  
+**21 Nov 2026 · Practical**
+
+Hands-on Bayesian computation in R.
+
+[Practical sheet](#)  
+[Data files](#)  
+[R script](#)
+
+### Week 4  
+**28 Nov 2026 · Lecture**
+
+Markov chain Monte Carlo, convergence, diagnostics, effective sample size, and posterior summaries.
+
+[Lecture notes](#)  
+
+
+### Week 5  
+**05 Dec 2026 · Lecture**
+
+Bayesian regression and prior specification.
+
+[Lecture notes](#)  
+
+
+### Week 6  
+**12 Dec 2026 · Lecture**
+
+Generalized Bayesian models, hierarchical modelling, and partial pooling.
+
+[Lecture notes](#)  
+
+
+### Week 7  
+**02 Jan 2027 · Lecture**
+
+Posterior predictive checking, model comparison, predictive assessment, and Bayesian workflow.
+
+[Lecture notes](#)  
+
+
+### Week 8  
+**02 Jan 2027 · Practical**
+
+Integrated Bayesian Data Science practical using R, with selected PyMC comparison.
+
+[Practical sheet](#)  
+[Data files](#)  
+[R script](#)  
+[Python/PyMC example](#)
+
+:::
+
+## Software
+
+The main computing environment is **R**.
+
+Recommended packages include:
+
+```r
+library(tidyverse)
+library(bayesrules)
+library(rstanarm)
+library(cmdstanr)
+library(posterior)
+library(bayesplot)
+library(tidybayes)
+library(loo)
+```
+
+Selected practical comparisons may use:
+
+```python
+import pymc as pm
+import arviz as az
+```
+
+## References
+
+### Primary reference
+
+**Johnson, A. A., Ott, M. Q., & Dogucu, M.**  
+*Bayes Rules! An Introduction to Applied Bayesian Modeling.*
+
+[Online book](https://www.bayesrulesbook.com/)
+
+### Python companion
+
+**Martin, O. A., Kumar, R., & Lao, J.**  
+*Bayesian Modeling and Computation in Python.*
+
+[Online book](https://bayesiancomputationbook.com/)
+
+## Course resources
+
+- [Announcements](#)
+- [Assignments](#)
+- [Datasets](#)
+- [R scripts](#)
+- [Practical materials](#)
+- [Reference material](#)
