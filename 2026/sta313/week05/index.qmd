@@ -33,7 +33,7 @@ This lesson introduces decisions under risk, where probabilities are known or es
 
 ## 1. Decision-making under risk
 
-Let $a_i$ denote an available action, $s_j$ a state of nature, $x_{ij}$ the monetary payoff under action $a_i$ and state $s_j$, and $p_j=P(s_j)$ its probability. We require $p_j\geq 0$ and $\sum_j p_j=1$.
+Let $a_i$ denote an available action, $s_j$ a state of nature, $x_{ij}$ the monetary payoff under action $a_i$ and state $s_j$, and $p_j=\Pr(s_j)$ its probability. We require $p_j\geq 0$ and $\sum_j p_j=1$.
 
 For a **profit/payoff** problem:
 
@@ -92,26 +92,28 @@ $$
 
 ### Step 2: Construct the conditional profit table (LKR)
 
-| Demand (booklets) | Probability | Print 100 | Print 150 | Print 200 | Print 250 | Print 300 |
-|---:|---:|:---:|:---:|:---:|:---:|:---:|
-| 100 | 0.10 | 30,000 | 20,000 | 10,000 | 0 | -10,000 |
-| 150 | 0.20 | 30,000 | 45,000 | 35,000 | 25,000 | 15,000 |
-| 200 | 0.35 | 30,000 | 45,000 | 60,000 | 50,000 | 40,000 |
-| 250 | 0.25 | 30,000 | 45,000 | 60,000 | 75,000 | 65,000 |
-| 300 | 0.10 | 30,000 | 45,000 | 60,000 | 75,000 | 90,000 |
+**Table convention throughout this lesson:** decision alternatives (printing quantities) are in **rows** and states of nature (demand levels) are in **columns**. The probabilities are shown directly below the demand headings.
+
+| Printing alternative | Demand 100 | Demand 150 | Demand 200 | Demand 250 | Demand 300 |
+|:---|---:|---:|---:|---:|---:|
+| **Probability** | **0.10** | **0.20** | **0.35** | **0.25** | **0.10** |
+| Print 100 | 30,000 | 30,000 | 30,000 | 30,000 | 30,000 |
+| Print 150 | 20,000 | 45,000 | 45,000 | 45,000 | 45,000 |
+| Print 200 | 10,000 | 35,000 | 60,000 | 60,000 | 60,000 |
+| Print 250 | 0 | 25,000 | 50,000 | 75,000 | 75,000 |
+| Print 300 | -10,000 | 15,000 | 40,000 | 65,000 | 90,000 |
 
 ### Step 3: Calculate the probability-weighted payoffs (LKR)
 
-Each entry below is $P(D=d)\times CP(Q,d)$.
+Multiply each conditional profit by the probability **at the top of its column**, then add across each alternative's row to obtain EMV.
 
-| Demand (booklets) | Probability | Print 100 | Print 150 | Print 200 | Print 250 | Print 300 |
-|---:|---:|:---:|:---:|:---:|:---:|:---:|
-| 100 | 0.10 | 3,000.00 | 2,000.00 | 1,000.00 | 0.00 | -1,000.00 |
-| 150 | 0.20 | 6,000.00 | 9,000.00 | 7,000.00 | 5,000.00 | 3,000.00 |
-| 200 | 0.35 | 10,500.00 | 15,750.00 | 21,000.00 | 17,500.00 | 14,000.00 |
-| 250 | 0.25 | 7,500.00 | 11,250.00 | 15,000.00 | 18,750.00 | 16,250.00 |
-| 300 | 0.10 | 3,000.00 | 4,500.00 | 6,000.00 | 7,500.00 | 9,000.00 |
-| **EMV** | | **30,000.00** | **42,500.00** | **50,000.00** | **48,750.00** | **41,250.00** |
+| Printing alternative | Demand 100 (0.10) | Demand 150 (0.20) | Demand 200 (0.35) | Demand 250 (0.25) | Demand 300 (0.10) | **EMV** |
+|:---|---:|---:|---:|---:|---:|---:|
+| Print 100 | 3,000 | 6,000 | 10,500 | 7,500 | 3,000 | **30,000** |
+| Print 150 | 2,000 | 9,000 | 15,750 | 11,250 | 4,500 | **42,500** |
+| Print 200 | 1,000 | 7,000 | 21,000 | 15,000 | 6,000 | **50,000** |
+| Print 250 | 0 | 5,000 | 17,500 | 18,750 | 7,500 | **48,750** |
+| Print 300 | -1,000 | 3,000 | 14,000 | 16,250 | 9,000 | **41,250** |
 
 For printing 200 booklets,
 
@@ -143,32 +145,76 @@ Select the action with the **smallest EOL**. Use the same states and probabiliti
 
 ## 4. Worked example 9.5-2 adapted: Solve the booklet problem using EOL
 
-### Step 1: Find the best conditional profit for each demand
+### Step 1: Identify the maximum profit for each state of nature
 
-If demand were known in advance, the club would print exactly the number demanded. The best profits for demand levels 100, 150, 200, 250 and 300 are respectively **LKR 30,000, 45,000, 60,000, 75,000 and 90,000**.
+Begin with the conditional profit table from Worked Example 9.5-1. **Keep the printing alternatives in rows and demand states in columns.** For each demand column, find the largest profit among all five printing alternatives. These column maxima are the profits achievable if the club knew demand before printing.
 
-### Step 2: Construct the conditional opportunity-loss table (LKR)
+| Printing alternative | Demand 100 | Demand 150 | Demand 200 | Demand 250 | Demand 300 |
+|:---|---:|---:|---:|---:|---:|
+| **Probability** | **0.10** | **0.20** | **0.35** | **0.25** | **0.10** |
+| Print 100 | 30,000 | 30,000 | 30,000 | 30,000 | 30,000 |
+| Print 150 | 20,000 | 45,000 | 45,000 | 45,000 | 45,000 |
+| Print 200 | 10,000 | 35,000 | 60,000 | 60,000 | 60,000 |
+| Print 250 | 0 | 25,000 | 50,000 | 75,000 | 75,000 |
+| Print 300 | -10,000 | 15,000 | 40,000 | 65,000 | 90,000 |
+| **Column maximum** | **30,000** | **45,000** | **60,000** | **75,000** | **90,000** |
 
-For example, if demand is 100 but the club prints 200, the regret is $30,000-10,000=20,000$ LKR. If demand is 300 but the club prints 200, regret is $90,000-60,000=30,000$ LKR.
+For instance, when demand is 200, the best profit is **LKR 60,000**, achieved by printing 200 booklets. When demand is 300, the best profit is **LKR 90,000**, achieved by printing 300 booklets.
 
-| Demand (booklets) | Probability | Print 100 | Print 150 | Print 200 | Print 250 | Print 300 |
-|---:|---:|:---:|:---:|:---:|:---:|:---:|
-| 100 | 0.10 | 0 | 10,000 | 20,000 | 30,000 | 40,000 |
-| 150 | 0.20 | 15,000 | 0 | 10,000 | 20,000 | 30,000 |
-| 200 | 0.35 | 30,000 | 15,000 | 0 | 10,000 | 20,000 |
-| 250 | 0.25 | 45,000 | 30,000 | 15,000 | 0 | 10,000 |
-| 300 | 0.10 | 60,000 | 45,000 | 30,000 | 15,000 | 0 |
+### Step 2: Subtract each payoff from its column maximum
 
-### Step 3: Calculate probability-weighted regrets (LKR)
+The conditional opportunity loss is
 
-| Demand (booklets) | Probability | Print 100 | Print 150 | Print 200 | Print 250 | Print 300 |
-|---:|---:|:---:|:---:|:---:|:---:|:---:|
-| 100 | 0.10 | 0.00 | 1,000.00 | 2,000.00 | 3,000.00 | 4,000.00 |
-| 150 | 0.20 | 3,000.00 | 0.00 | 2,000.00 | 4,000.00 | 6,000.00 |
-| 200 | 0.35 | 10,500.00 | 5,250.00 | 0.00 | 3,500.00 | 7,000.00 |
-| 250 | 0.25 | 11,250.00 | 7,500.00 | 3,750.00 | 0.00 | 2,500.00 |
-| 300 | 0.10 | 6,000.00 | 4,500.00 | 3,000.00 | 1,500.00 | 0.00 |
-| **EOL** | | **30,750.00** | **18,250.00** | **10,750.00** | **12,000.00** | **19,500.00** |
+$$
+COL(Q,D)=\max_{Q'}CP(Q',D)-CP(Q,D).
+$$
+
+**Work down each demand column**, subtracting every conditional profit from that column's maximum. Do not compare profits across different demand columns.
+
+For demand of **200 booklets**, the maximum conditional profit is LKR 60,000. The five opportunity losses, in the order of printing 100, 150, 200, 250 and 300, are:
+
+$$
+\begin{aligned}
+COL(100,200)&=60,000-30,000=30,000,\\
+COL(150,200)&=60,000-45,000=15,000,\\
+COL(200,200)&=60,000-60,000=0,\\
+COL(250,200)&=60,000-50,000=10,000,\\
+COL(300,200)&=60,000-40,000=20,000.
+\end{aligned}
+$$
+
+Similarly, when demand is 100 but the club prints 200, the opportunity loss is LKR $30,000-10,000=20,000$. When demand is 300 but the club prints 200, it is LKR $90,000-60,000=30,000$.
+
+### Step 3: Construct the conditional opportunity-loss table (LKR)
+
+Repeat the column-wise subtraction for every state of nature.
+
+| Printing alternative | Demand 100 | Demand 150 | Demand 200 | Demand 250 | Demand 300 |
+|:---|---:|---:|---:|---:|---:|
+| **Probability** | **0.10** | **0.20** | **0.35** | **0.25** | **0.10** |
+| Print 100 | 0 | 15,000 | 30,000 | 45,000 | 60,000 |
+| Print 150 | 10,000 | 0 | 15,000 | 30,000 | 45,000 |
+| Print 200 | 20,000 | 10,000 | 0 | 15,000 | 30,000 |
+| Print 250 | 30,000 | 20,000 | 10,000 | 0 | 15,000 |
+| Print 300 | 40,000 | 30,000 | 20,000 | 10,000 | 0 |
+
+Every opportunity loss is **nonnegative**, and each demand column contains a **zero** for the best action in that state. A positive opportunity loss does not necessarily mean the club made a financial loss. It means the club earned less profit than it could have earned with advance knowledge of demand.
+
+### Step 4: Calculate expected opportunity loss (EOL)
+
+Multiply each conditional opportunity loss by its demand probability and **sum across each printing alternative's row**:
+
+$$
+EOL(Q)=\sum_D\Pr(D)\,COL(Q,D).
+$$
+
+| Printing alternative | Demand 100 (0.10) | Demand 150 (0.20) | Demand 200 (0.35) | Demand 250 (0.25) | Demand 300 (0.10) | **EOL** |
+|:---|---:|---:|---:|---:|---:|---:|
+| Print 100 | 0 | 3,000 | 10,500 | 11,250 | 6,000 | **30,750** |
+| Print 150 | 1,000 | 0 | 5,250 | 7,500 | 4,500 | **18,250** |
+| Print 200 | 2,000 | 2,000 | 0 | 3,750 | 3,000 | **10,750** |
+| Print 250 | 3,000 | 4,000 | 3,500 | 0 | 1,500 | **12,000** |
+| Print 300 | 4,000 | 6,000 | 7,000 | 2,500 | 0 | **19,500** |
 
 For printing 200 booklets,
 
@@ -176,11 +222,12 @@ $$
 \begin{aligned}
 EOL(200)&=0.10(20,000)+0.20(10,000)+0.35(0)\\
 &\quad+0.25(15,000)+0.10(30,000)\\
+&=2,000+2,000+0+3,750+3,000\\
 &=\boxed{\text{LKR }10,750}.
 \end{aligned}
 $$
 
-**Decision:** Print **200 booklets**, which gives the minimum EOL of **LKR 10,750**.
+**Decision:** Print **200 booklets** because this alternative has the **minimum EOL of LKR 10,750**. This agrees with the EMV decision in Worked Example 9.5-1.
 
 ### Why maximizing EMV and minimizing EOL agree
 
