@@ -13,7 +13,7 @@ number-sections: false
 
 # Perfect information and inventory decisions
 
-Week 05 introduced EMV and EOL through the cricket souvenir booklet example. This lesson extends those calculations to the value of perfect information, unsold stock with salvage value, and marginal stocking decisions. The sports examples retain the numerical complexity of the corresponding reference problems.
+Week 05 introduced EMV and EOL through the cricket souvenir booklet example. This lesson extends those calculations to the value of perfect information, unsold stock with salvage value, and marginal stocking decisions. The sports examples retain the numerical complexity of the corresponding reference problems. Throughout the worked decision tables, **alternatives are rows and states of nature are columns**.
 
 ## Learning outcomes
 
@@ -36,19 +36,29 @@ Week 05 introduced EMV and EOL through the cricket souvenir booklet example. Thi
 
 In Week 05, a cricket club considered printing **100, 150, 200, 250 or 300 souvenir booklets** for an exhibition match. Each booklet costs **LKR 200** to print, sells for **LKR 500**, and has no resale value if unsold. The hypothetical demand distribution was:
 
-| Demand (booklets) | 100 | 150 | 200 | 250 | 300 |
+The **states of nature** are the possible demand levels, shown as columns. The **alternatives** are the quantities the club can print, shown as rows. We use this orientation for all decision tables in Week 06.
+
+| Printing alternative | Demand 100 | Demand 150 | Demand 200 | Demand 250 | Demand 300 |
 |:---|---:|---:|---:|---:|---:|
-| Probability | 0.10 | 0.20 | 0.35 | 0.25 | 0.10 |
+| **Probability** | **0.10** | **0.20** | **0.35** | **0.25** | **0.10** |
+| Print 100 | 30,000 | 30,000 | 30,000 | 30,000 | 30,000 |
+| Print 150 | 20,000 | 45,000 | 45,000 | 45,000 | 45,000 |
+| Print 200 | 10,000 | 35,000 | 60,000 | 60,000 | 60,000 |
+| Print 250 | 0 | 25,000 | 50,000 | 75,000 | 75,000 |
+| Print 300 | -10,000 | 15,000 | 40,000 | 65,000 | 90,000 |
+| **Best profit in each state** | **30,000** | **45,000** | **60,000** | **75,000** | **90,000** |
 
-Week 05 established the following expected profits and losses:
+The conditional profit at each intersection is $CP(Q,D)=500\min(Q,D)-200Q$. For example, the entry in the **Print 250** row and **Demand 150** column is $500(150)-200(250)=\text{LKR }25{,}000$.
 
-| Print quantity | EMV (LKR) | EOL (LKR) |
-|---:|---:|---:|
-| 100 | 30,000 | 30,750 |
-| 150 | 42,500 | 18,250 |
-| **200** | **50,000** | **10,750** |
-| 250 | 48,750 | 12,000 |
-| 300 | 41,250 | 19,500 |
+The Week 05 expected results, one for each **alternative (row)**, are:
+
+| Printing alternative | EMV (LKR) | EOL (LKR) |
+|:---|---:|---:|
+| Print 100 | 30,000 | 30,750 |
+| Print 150 | 42,500 | 18,250 |
+| **Print 200** | **50,000** | **10,750** |
+| Print 250 | 48,750 | 12,000 |
+| Print 300 | 41,250 | 19,500 |
 
 Thus **printing 200 booklets** maximizes EMV and minimizes EOL. We now use the same example to value advance information about demand.
 
@@ -68,20 +78,30 @@ $$
 EVPI=EPPI-\max_i EMV(a_i).
 $$
 
-### Step 1: Identify the best action under each demand state
+### Step 1: Find the maximum profit in each state-of-nature column
 
-With perfect advance information, the club prints exactly the number demanded. Profit per booklet sold is $500-200=300$ LKR, so the best conditional profit is $300D$.
+Start with the conditional profit table in the recap. For each **demand column**, compare the profits across all printing alternatives (rows) and identify the largest entry. This is the profit achievable if demand were known **before** printing.
 
-| Demand (booklets) | Probability | Best print quantity | Best profit (LKR) | Weighted best profit (LKR) |
-|---:|---:|---:|---:|---:|
-| 100 | 0.10 | 100 | 30,000 | 3,000 |
-| 150 | 0.20 | 150 | 45,000 | 9,000 |
-| 200 | 0.35 | 200 | 60,000 | 21,000 |
-| 250 | 0.25 | 250 | 75,000 | 18,750 |
-| 300 | 0.10 | 300 | 90,000 | 9,000 |
-| **Total** | **1.00** | | | **60,750** |
+For demand 150, the column contains LKR 30,000, 45,000, 35,000, 25,000 and 15,000. Its maximum is **LKR 45,000**, achieved by printing 150. Repeat for the other four columns.
 
-### Step 2: Calculate EPPI and EVPI
+### Step 2: Construct the perfect-information table
+
+Keep the **printing alternatives in rows** and **demand states in columns**. For each column, mark the alternative that achieves the maximum profit. The final row contains the column maxima, and the last row multiplies each maximum by its state's probability.
+
+| Printing alternative | Demand 100 | Demand 150 | Demand 200 | Demand 250 | Demand 300 |
+|:---|---:|---:|---:|---:|---:|
+| **Probability** | **0.10** | **0.20** | **0.35** | **0.25** | **0.10** |
+| Print 100 | **30,000** | 30,000 | 30,000 | 30,000 | 30,000 |
+| Print 150 | 20,000 | **45,000** | 45,000 | 45,000 | 45,000 |
+| Print 200 | 10,000 | 35,000 | **60,000** | 60,000 | 60,000 |
+| Print 250 | 0 | 25,000 | 50,000 | **75,000** | 75,000 |
+| Print 300 | -10,000 | 15,000 | 40,000 | 65,000 | **90,000** |
+| **Column maximum** | **30,000** | **45,000** | **60,000** | **75,000** | **90,000** |
+| **Probability × column maximum** | **3,000** | **9,000** | **21,000** | **18,750** | **9,000** |
+
+The last row is constructed by multiplying the column maximum by the probability in that column. For example, demand 250 contributes $0.25(75{,}000)=\text{LKR }18{,}750$ to EPPI. Add these five contributions to obtain EPPI.
+
+### Step 3: Calculate EPPI and EVPI
 
 $$
 \begin{aligned}
@@ -97,7 +117,7 @@ $$
 EVPI=60,750-50,000=\boxed{\text{LKR }10,750}.
 $$
 
-### Step 3: Interpret the result
+### Step 4: Interpret the result
 
 **LKR 10,750 is the maximum expected benefit per comparable match** of learning demand perfectly *before* printing. Under this model, the club should not pay more than this amount for such information. A prediction service that is less than perfectly accurate cannot be valued at EVPI without additional analysis.
 
@@ -117,7 +137,7 @@ Perfect information means the true demand is revealed **before the decision is m
 
 A sports tournament organizer sells a special souvenir item. The organizer pays **LKR 400 per item** and sells each item for **LKR 500**. Unsold items have no value after the event. Historical records from **200 comparable event-days** give the following demand frequencies:
 
-| Demand (items) | 15 | 20 | 25 | 30 | 35 | 40 | 50 |
+| State of nature (demand) | 15 | 20 | 25 | 30 | 35 | 40 | 50 |
 |:---|---:|---:|---:|---:|---:|---:|---:|
 | Number of event-days | 6 | 14 | 20 | 80 | 40 | 30 | 10 |
 
@@ -139,49 +159,64 @@ $$
 
 For example, stocking 30 when demand is 25 gives $500(25)-400(30)=500$ LKR. Stocking 25 when demand is 30 gives $100(25)=2{,}500$ LKR.
 
-### Step 3: Conditional profit table (LKR)
+### Step 3: Construct the conditional profit table (LKR)
 
-| Demand | Probability | Stock 15 | Stock 20 | Stock 25 | Stock 30 | Stock 35 | Stock 40 | Stock 50 |
-|---|---|---|---|---|---|---|---|---|
-| 15 | 0.03 | 1,500 | -500 | -2,500 | -4,500 | -6,500 | -8,500 | -12,500 |
-| 20 | 0.07 | 1,500 | 2,000 | 0 | -2,000 | -4,000 | -6,000 | -10,000 |
-| 25 | 0.10 | 1,500 | 2,000 | 2,500 | 500 | -1,500 | -3,500 | -7,500 |
-| 30 | 0.40 | 1,500 | 2,000 | 2,500 | 3,000 | 1,000 | -1,000 | -5,000 |
-| 35 | 0.20 | 1,500 | 2,000 | 2,500 | 3,000 | 3,500 | 1,500 | -2,500 |
-| 40 | 0.15 | 1,500 | 2,000 | 2,500 | 3,000 | 3,500 | 4,000 | 0 |
-| 50 | 0.05 | 1,500 | 2,000 | 2,500 | 3,000 | 3,500 | 4,000 | 5,000 |
+Place the **seven stocking alternatives in rows** and the **seven demand states in columns**. Put the demand probabilities directly below the column headings. At every intersection, substitute the row's stock quantity $S$ and the column's demand $D$ into $CP(S,D)=500\min(S,D)-400S$.
 
-### Step 4: Expected profit table (LKR)
+For instance:
 
-Each entry equals the conditional profit multiplied by the probability of that demand state.
+- **Stock 30, demand 25:** $500(25)-400(30)=\text{LKR }500$.
+- **Stock 25, demand 30:** $500(25)-400(25)=\text{LKR }2{,}500$.
 
-| Demand | Probability | Stock 15 | Stock 20 | Stock 25 | Stock 30 | Stock 35 | Stock 40 | Stock 50 |
-|---|---|---|---|---|---|---|---|---|
-| 15 | 0.03 | 45.00 | -15.00 | -75.00 | -135.00 | -195.00 | -255.00 | -375.00 |
-| 20 | 0.07 | 105.00 | 140.00 | 0.00 | -140.00 | -280.00 | -420.00 | -700.00 |
-| 25 | 0.10 | 150.00 | 200.00 | 250.00 | 50.00 | -150.00 | -350.00 | -750.00 |
-| 30 | 0.40 | 600.00 | 800.00 | 1,000.00 | 1,200.00 | 400.00 | -400.00 | -2,000.00 |
-| 35 | 0.20 | 300.00 | 400.00 | 500.00 | 600.00 | 700.00 | 300.00 | -500.00 |
-| 40 | 0.15 | 225.00 | 300.00 | 375.00 | 450.00 | 525.00 | 600.00 | 0.00 |
-| 50 | 0.05 | 75.00 | 100.00 | 125.00 | 150.00 | 175.00 | 200.00 | 250.00 |
-| **EMV** |  | **1,500.00** | **1,925.00** | **2,175.00** | **2,175.00** | **1,175.00** | **-325.00** | **-4,075.00** |
+| Stock alternative | Demand 15 | Demand 20 | Demand 25 | Demand 30 | Demand 35 | Demand 40 | Demand 50 |
+|:---|---:|---:|---:|---:|---:|---:|---:|
+| **Probability** | **0.03** | **0.07** | **0.10** | **0.40** | **0.20** | **0.15** | **0.05** |
+| Stock 15 | 1,500 | 1,500 | 1,500 | 1,500 | 1,500 | 1,500 | 1,500 |
+| Stock 20 | -500 | 2,000 | 2,000 | 2,000 | 2,000 | 2,000 | 2,000 |
+| Stock 25 | -2,500 | 0 | 2,500 | 2,500 | 2,500 | 2,500 | 2,500 |
+| Stock 30 | -4,500 | -2,000 | 500 | 3,000 | 3,000 | 3,000 | 3,000 |
+| Stock 35 | -6,500 | -4,000 | -1,500 | 1,000 | 3,500 | 3,500 | 3,500 |
+| Stock 40 | -8,500 | -6,000 | -3,500 | -1,000 | 1,500 | 4,000 | 4,000 |
+| Stock 50 | -12,500 | -10,000 | -7,500 | -5,000 | -2,500 | 0 | 5,000 |
 
-The maximum EMV is **LKR 2,175**, achieved by **both stocking 25 and stocking 30 items**. These are equally good according to EMV; the criterion alone does not break the tie.
+### Step 4: Construct the probability-weighted profit table (LKR)
+
+Multiply **each cell** in a demand column by the probability shown at the top of that column. For example, the entry for stock 30 and demand 25 is $0.10(500)=\text{LKR }50$. Sum the seven weighted entries **across each row** to calculate that stock alternative's EMV.
+
+| Stock alternative | Demand 15 | Demand 20 | Demand 25 | Demand 30 | Demand 35 | Demand 40 | Demand 50 | EMV (LKR) |
+|:---|---:|---:|---:|---:|---:|---:|---:|---:|
+| **Probability** | **0.03** | **0.07** | **0.10** | **0.40** | **0.20** | **0.15** | **0.05** |  |
+| Stock 15 | 45.00 | 105.00 | 150.00 | 600.00 | 300.00 | 225.00 | 75.00 | **1,500.00** |
+| Stock 20 | -15.00 | 140.00 | 200.00 | 800.00 | 400.00 | 300.00 | 100.00 | **1,925.00** |
+| Stock 25 | -75.00 | 0.00 | 250.00 | 1,000.00 | 500.00 | 375.00 | 125.00 | **2,175.00** |
+| Stock 30 | -135.00 | -140.00 | 50.00 | 1,200.00 | 600.00 | 450.00 | 150.00 | **2,175.00** |
+| Stock 35 | -195.00 | -280.00 | -150.00 | 400.00 | 700.00 | 525.00 | 175.00 | **1,175.00** |
+| Stock 40 | -255.00 | -420.00 | -350.00 | -400.00 | 300.00 | 600.00 | 200.00 | **-325.00** |
+| Stock 50 | -375.00 | -700.00 | -750.00 | -2,000.00 | -500.00 | 0.00 | 250.00 | **-4,075.00** |
+
+For stock 30, the row sum is
+
+$$
+\begin{aligned}
+EMV(30)&=0.03(-4{,}500)+0.07(-2{,}000)+0.10(500)\\
+&\quad+0.40(3{,}000)+0.20(3{,}000)+0.15(3{,}000)+0.05(3{,}000)\\
+&=\boxed{\text{LKR }2{,}175}.
+\end{aligned}
+$$
+
+The maximum EMV is **LKR 2,175**, achieved by **both stocking 25 and stocking 30 items**. The EMV criterion does not break this tie.
 
 ### Step 5: Expected profit with perfect information and EVPI
 
 If exact demand were known before purchasing, the organizer would stock exactly the required quantity. The profit would be $100D$ LKR.
 
-| Demand | Probability | Best profit (LKR) | Weighted best profit (LKR) |
-|---|---|---|---|
-| 15 | 0.03 | 1,500 | 45.00 |
-| 20 | 0.07 | 2,000 | 140.00 |
-| 25 | 0.10 | 2,500 | 250.00 |
-| 30 | 0.40 | 3,000 | 1,200.00 |
-| 35 | 0.20 | 3,500 | 700.00 |
-| 40 | 0.15 | 4,000 | 600.00 |
-| 50 | 0.05 | 5,000 | 250.00 |
-| **Total** | 1.00 |  | **3,185.00** |
+To construct EPPI, take the **largest profit in each demand column** of the conditional profit table. The column maximum is $100D$, since exact advance knowledge lets the organizer stock precisely the amount demanded. Multiply each column maximum by its probability and add across columns.
+
+| Quantity / calculation | Demand 15 | Demand 20 | Demand 25 | Demand 30 | Demand 35 | Demand 40 | Demand 50 |
+|:---|---:|---:|---:|---:|---:|---:|---:|
+| **Probability** | **0.03** | **0.07** | **0.10** | **0.40** | **0.20** | **0.15** | **0.05** |
+| **Best conditional profit (LKR)** | **1,500** | **2,000** | **2,500** | **3,000** | **3,500** | **4,000** | **5,000** |
+| **Probability × best profit (LKR)** | **45** | **140** | **250** | **1,200** | **700** | **600** | **250** |
 
 $$
 EPPI=3{,}185\ \text{LKR},\qquad
@@ -227,24 +262,42 @@ $$
 
 For example, preparing 16 cups when demand is 15 gives $800(15)-500(16)+200(1)=4{,}200$ LKR.
 
-### Step 2: Conditional profit table (LKR)
+### Step 2: Construct the conditional profit table (LKR)
 
-| Demand | Probability | Prepare 15 | Prepare 16 | Prepare 17 | Prepare 18 |
-|---|---|---|---|---|---|
-| 15 | 0.10 | 4,500 | 4,200 | 3,900 | 3,600 |
-| 16 | 0.20 | 4,500 | 4,800 | 4,500 | 4,200 |
-| 17 | 0.40 | 4,500 | 4,800 | 5,100 | 4,800 |
-| 18 | 0.30 | 4,500 | 4,800 | 5,100 | 5,400 |
+Put **preparation alternatives in rows** and **demand states in columns**. For each cell, calculate revenue from cups sold, add salvage revenue from any unsold cups, and subtract the preparation cost of **all** cups.
 
-### Step 3: Expected profit table (LKR)
+For example, preparing 18 cups when demand is 16 means 16 cups sold and 2 salvaged:
 
-| Demand | Probability | Prepare 15 | Prepare 16 | Prepare 17 | Prepare 18 |
-|---|---|---|---|---|---|
-| 15 | 0.10 | 450.00 | 420.00 | 390.00 | 360.00 |
-| 16 | 0.20 | 900.00 | 960.00 | 900.00 | 840.00 |
-| 17 | 0.40 | 1,800.00 | 1,920.00 | 2,040.00 | 1,920.00 |
-| 18 | 0.30 | 1,350.00 | 1,440.00 | 1,530.00 | 1,620.00 |
-| **EMV** |  | **4,500.00** | **4,740.00** | **4,860.00** | **4,740.00** |
+$$
+CP(18,16)=800(16)+200(2)-500(18)=\text{LKR }4{,}200.
+$$
+
+| Preparation alternative | Demand 15 | Demand 16 | Demand 17 | Demand 18 |
+|:---|---:|---:|---:|---:|
+| **Probability** | **0.10** | **0.20** | **0.40** | **0.30** |
+| Prepare 15 | 4,500 | 4,500 | 4,500 | 4,500 |
+| Prepare 16 | 4,200 | 4,800 | 4,800 | 4,800 |
+| Prepare 17 | 3,900 | 4,500 | 5,100 | 5,100 |
+| Prepare 18 | 3,600 | 4,200 | 4,800 | 5,400 |
+
+### Step 3: Construct the probability-weighted profit table (LKR)
+
+Multiply every entry by the **probability of its demand column**. Then sum **across each preparation row**. For example, the demand-15 contribution to the EMV of preparing 16 cups is $0.10(4{,}200)=\text{LKR }420$.
+
+| Preparation alternative | Demand 15 | Demand 16 | Demand 17 | Demand 18 | EMV (LKR) |
+|:---|---:|---:|---:|---:|---:|
+| **Probability** | **0.10** | **0.20** | **0.40** | **0.30** |  |
+| Prepare 15 | 450.00 | 900.00 | 1,800.00 | 1,350.00 | **4,500.00** |
+| Prepare 16 | 420.00 | 960.00 | 1,920.00 | 1,440.00 | **4,740.00** |
+| Prepare 17 | 390.00 | 900.00 | 2,040.00 | 1,530.00 | **4,860.00** |
+| Prepare 18 | 360.00 | 840.00 | 1,920.00 | 1,620.00 | **4,740.00** |
+
+For 17 cups,
+
+$$
+EMV(17)=0.10(3{,}900)+0.20(4{,}500)+0.40(5{,}100)+0.30(5{,}100)
+=\boxed{\text{LKR }4{,}860}.
+$$
 
 The optimal decision is to prepare **17 cups**, with maximum EMV **LKR 4,860**.
 
@@ -295,22 +348,32 @@ $$
 q^*=\frac{IL}{IP+IL}=\frac{120}{30+120}=\boxed{0.80}.
 $$
 
-### Step 2: Calculate the upper-tail demand probabilities
+### Step 2: Calculate upper-tail demand probabilities
 
-For an additional litre to sell, daily demand must be at least as large as the new stock level. Compute $P(D\geq S)$:
+The demand values are **states of nature (columns)**. To find whether an additional litre will be sold at a particular stock level, add the probabilities for **all demand columns at or above that stock level**. For example,
 
-| Stock level / demand (litres) | P(D = level) | P(D ≥ level) |
-|---|---|---|
-| 46 | 0.01 | 1.00 |
-| 48 | 0.03 | 0.99 |
-| 50 | 0.06 | 0.96 |
-| 52 | 0.10 | 0.90 |
-| 54 | 0.20 | 0.80 |
-| 56 | 0.25 | 0.60 |
-| 58 | 0.15 | 0.35 |
-| 60 | 0.10 | 0.20 |
-| 62 | 0.05 | 0.10 |
-| 64 | 0.05 | 0.05 |
+$$
+\Pr(D\geq54)=0.20+0.25+0.15+0.10+0.05+0.05=0.80.
+$$
+
+The following table puts **stock alternatives in rows** and **demand states in columns**. A check mark indicates that the demand in that column is at least the stock level in that row. The last column sums the probabilities of the checked demand states.
+
+| Stock alternative | D=46 | D=48 | D=50 | D=52 | D=54 | D=56 | D=58 | D=60 | D=62 | D=64 | $\Pr(D\geq S)$ |
+|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|---:|
+| **Probability** | **.01** | **.03** | **.06** | **.10** | **.20** | **.25** | **.15** | **.10** | **.05** | **.05** | |
+| Stock 46 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 1.00 |
+| Stock 48 | – | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 0.99 |
+| Stock 50 | – | – | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 0.96 |
+| Stock 52 | – | – | – | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 0.90 |
+| Stock 54 | – | – | – | – | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 0.80 |
+| Stock 56 | – | – | – | – | – | ✓ | ✓ | ✓ | ✓ | ✓ | 0.60 |
+| Stock 58 | – | – | – | – | – | – | ✓ | ✓ | ✓ | ✓ | 0.35 |
+| Stock 60 | – | – | – | – | – | – | – | ✓ | ✓ | ✓ | 0.20 |
+| Stock 62 | – | – | – | – | – | – | – | – | ✓ | ✓ | 0.10 |
+| Stock 64 | – | – | – | – | – | – | – | – | – | ✓ | 0.05 |
+
+
+Because the centre orders in **two-litre increments** and all possible demand values are even, both litres in an increment have the same sale probability. Therefore, the sign of the expected gain per litre determines whether the two-litre increment should be added.
 
 ### Step 3: Select the stock quantity
 
@@ -326,7 +389,7 @@ $$
 0.60(30)-0.40(120)=18-48=-30\ \text{LKR per litre}.
 $$
 
-**Decision:** **54 litres is an optimal stocking quantity**, following the reference's recommendation. At the exact threshold, additional litres up to 54 do not change EMV, so **52 litres is also EMV-optimal** under these discrete demand and ordering assumptions. Ordering 56 litres reduces expected profit. This boundary tie is worth recognizing when applying the marginal rule.
+**Decision:** **54 litres is an optimal stocking quantity**, following the reference's recommendation. At the exact threshold, the two-litre increment from 52 to 54 does not change EMV, so **52 litres is also EMV-optimal** under these discrete demand and ordering assumptions. Ordering 56 litres reduces expected profit. This boundary tie is worth recognizing when applying the marginal rule.
 
 ::: {.callout-important}
 The critical probability is a **sale probability for an additional unit**, not the probability of a single exact demand level. Use $P(D\geq S)$, not $P(D=S)$.
