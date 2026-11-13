@@ -114,58 +114,39 @@ window.Quarto = {
 
 <body class="week-notes quarto-light">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-full">
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
   <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
-  <ul>
+  <ul class="collapse">
   <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link active" data-scroll-target="#learning-outcomes">Learning outcomes</a></li>
   <li><a href="#block-1-thinking-like-a-bayesian" id="toc-block-1-thinking-like-a-bayesian" class="nav-link" data-scroll-target="#block-1-thinking-like-a-bayesian">Block 1 — Thinking like a Bayesian</a>
   <ul class="collapse">
   <li><a href="#what-problem-is-bayesian-statistics-solving" id="toc-what-problem-is-bayesian-statistics-solving" class="nav-link" data-scroll-target="#what-problem-is-bayesian-statistics-solving">1.1 What problem is Bayesian statistics solving?</a></li>
   <li><a href="#bayesian-probability" id="toc-bayesian-probability" class="nav-link" data-scroll-target="#bayesian-probability">1.2 Bayesian probability</a></li>
   <li><a href="#refresher-conditional-probability" id="toc-refresher-conditional-probability" class="nav-link" data-scroll-target="#refresher-conditional-probability">1.3 Refresher: conditional probability</a></li>
-  <li><a href="#why-reversing-a-conditional-probability-is-dangerous" id="toc-why-reversing-a-conditional-probability-is-dangerous" class="nav-link" data-scroll-target="#why-reversing-a-conditional-probability-is-dangerous">1.4 Why reversing a conditional probability is dangerous</a>
-  <ul class="collapse">
-  <li><a href="#exercise-1-conditional-probability-warm-up" id="toc-exercise-1-conditional-probability-warm-up" class="nav-link" data-scroll-target="#exercise-1-conditional-probability-warm-up">Exercise 1 — Conditional probability warm-up</a></li>
-  </ul></li>
+  <li><a href="#why-reversing-a-conditional-probability-is-dangerous" id="toc-why-reversing-a-conditional-probability-is-dangerous" class="nav-link" data-scroll-target="#why-reversing-a-conditional-probability-is-dangerous">1.4 Why reversing a conditional probability is dangerous</a></li>
   <li><a href="#random-variables-distributions-and-parameters" id="toc-random-variables-distributions-and-parameters" class="nav-link" data-scroll-target="#random-variables-distributions-and-parameters">1.5 Random variables, distributions and parameters</a></li>
-  <li><a href="#prior-information-is-not-necessarily-personal-opinion" id="toc-prior-information-is-not-necessarily-personal-opinion" class="nav-link" data-scroll-target="#prior-information-is-not-necessarily-personal-opinion">1.6 Prior information is not necessarily personal opinion</a>
-  <ul class="collapse">
-  <li><a href="#interactive-prompt" id="toc-interactive-prompt" class="nav-link" data-scroll-target="#interactive-prompt">Interactive prompt</a></li>
-  </ul></li>
+  <li><a href="#prior-information-is-not-necessarily-personal-opinion" id="toc-prior-information-is-not-necessarily-personal-opinion" class="nav-link" data-scroll-target="#prior-information-is-not-necessarily-personal-opinion">1.6 Prior information is not necessarily personal opinion</a></li>
   </ul></li>
   <li><a href="#block-2-bayes-rule-as-learning-from-evidence" id="toc-block-2-bayes-rule-as-learning-from-evidence" class="nav-link" data-scroll-target="#block-2-bayes-rule-as-learning-from-evidence">Block 2 — Bayes’ rule as learning from evidence</a>
   <ul class="collapse">
   <li><a href="#the-discrete-bayes-formula" id="toc-the-discrete-bayes-formula" class="nav-link" data-scroll-target="#the-discrete-bayes-formula">2.1 The discrete Bayes formula</a></li>
   <li><a href="#worked-example-fraud-screening" id="toc-worked-example-fraud-screening" class="nav-link" data-scroll-target="#worked-example-fraud-screening">2.2 Worked example: fraud screening</a></li>
   <li><a href="#prior-odds-likelihood-ratio-posterior-odds" id="toc-prior-odds-likelihood-ratio-posterior-odds" class="nav-link" data-scroll-target="#prior-odds-likelihood-ratio-posterior-odds">2.3 Prior odds, likelihood ratio, posterior odds</a></li>
-  <li><a href="#computing-the-discrete-example" id="toc-computing-the-discrete-example" class="nav-link" data-scroll-target="#computing-the-discrete-example">2.4 Computing the discrete example</a>
-  <ul class="collapse">
-  <li><a href="#exercise-2-base-rate-sensitivity" id="toc-exercise-2-base-rate-sensitivity" class="nav-link" data-scroll-target="#exercise-2-base-rate-sensitivity">Exercise 2 — Base-rate sensitivity</a></li>
-  </ul></li>
+  <li><a href="#computing-the-discrete-example" id="toc-computing-the-discrete-example" class="nav-link" data-scroll-target="#computing-the-discrete-example">2.4 Computing the discrete example</a></li>
   <li><a href="#from-events-to-parameters" id="toc-from-events-to-parameters" class="nav-link" data-scroll-target="#from-events-to-parameters">2.5 From events to parameters</a></li>
-  <li><a href="#sampling-distribution-versus-likelihood" id="toc-sampling-distribution-versus-likelihood" class="nav-link" data-scroll-target="#sampling-distribution-versus-likelihood">2.6 Sampling distribution versus likelihood</a>
-  <ul class="collapse">
-  <li><a href="#exercise-3-what-changes" id="toc-exercise-3-what-changes" class="nav-link" data-scroll-target="#exercise-3-what-changes">Exercise 3 — What changes?</a></li>
-  </ul></li>
+  <li><a href="#sampling-distribution-versus-likelihood" id="toc-sampling-distribution-versus-likelihood" class="nav-link" data-scroll-target="#sampling-distribution-versus-likelihood">2.6 Sampling distribution versus likelihood</a></li>
   </ul></li>
   <li><a href="#block-3-the-beta-binomial-model" id="toc-block-3-the-beta-binomial-model" class="nav-link" data-scroll-target="#block-3-the-beta-binomial-model">Block 3 — The Beta-Binomial model</a>
   <ul class="collapse">
   <li><a href="#why-use-a-beta-prior-for-a-probability" id="toc-why-use-a-beta-prior-for-a-probability" class="nav-link" data-scroll-target="#why-use-a-beta-prior-for-a-probability">3.1 Why use a Beta prior for a probability?</a></li>
-  <li><a href="#reading-beta-distributions" id="toc-reading-beta-distributions" class="nav-link" data-scroll-target="#reading-beta-distributions">3.2 Reading Beta distributions</a>
-  <ul class="collapse">
-  <li><a href="#visualising-beta-priors" id="toc-visualising-beta-priors" class="nav-link" data-scroll-target="#visualising-beta-priors">Visualising Beta priors</a></li>
-  <li><a href="#exercise-4-choose-a-prior" id="toc-exercise-4-choose-a-prior" class="nav-link" data-scroll-target="#exercise-4-choose-a-prior">Exercise 4 — Choose a prior</a></li>
-  </ul></li>
+  <li><a href="#reading-beta-distributions" id="toc-reading-beta-distributions" class="nav-link" data-scroll-target="#reading-beta-distributions">3.2 Reading Beta distributions</a></li>
   <li><a href="#constructing-the-beta-binomial-model" id="toc-constructing-the-beta-binomial-model" class="nav-link" data-scroll-target="#constructing-the-beta-binomial-model">3.3 Constructing the Beta-Binomial model</a></li>
   <li><a href="#interpreting-the-update" id="toc-interpreting-the-update" class="nav-link" data-scroll-target="#interpreting-the-update">3.4 Interpreting the update</a></li>
   <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">3.5 Worked example</a></li>
-  <li><a href="#posterior-mean-as-a-weighted-average" id="toc-posterior-mean-as-a-weighted-average" class="nav-link" data-scroll-target="#posterior-mean-as-a-weighted-average">3.6 Posterior mean as a weighted average</a>
-  <ul class="collapse">
-  <li><a href="#exercise-5-posterior-by-hand" id="toc-exercise-5-posterior-by-hand" class="nav-link" data-scroll-target="#exercise-5-posterior-by-hand">Exercise 5 — Posterior by hand</a></li>
-  </ul></li>
+  <li><a href="#posterior-mean-as-a-weighted-average" id="toc-posterior-mean-as-a-weighted-average" class="nav-link" data-scroll-target="#posterior-mean-as-a-weighted-average">3.6 Posterior mean as a weighted average</a></li>
   </ul></li>
   <li><a href="#block-4-bayesian-computation-begins" id="toc-block-4-bayesian-computation-begins" class="nav-link" data-scroll-target="#block-4-bayesian-computation-begins">Block 4 — Bayesian computation begins</a>
   <ul class="collapse">
@@ -174,15 +155,8 @@ window.Quarto = {
   <li><a href="#posterior-density-and-credible-interval" id="toc-posterior-density-and-credible-interval" class="nav-link" data-scroll-target="#posterior-density-and-credible-interval">4.3 Posterior density and credible interval</a></li>
   <li><a href="#prior-likelihood-and-posterior-on-one-plot" id="toc-prior-likelihood-and-posterior-on-one-plot" class="nav-link" data-scroll-target="#prior-likelihood-and-posterior-on-one-plot">4.4 Prior, likelihood and posterior on one plot</a></li>
   <li><a href="#prior-predictive-thinking" id="toc-prior-predictive-thinking" class="nav-link" data-scroll-target="#prior-predictive-thinking">4.5 Prior predictive thinking</a></li>
-  <li><a href="#prior-influence-and-sample-size" id="toc-prior-influence-and-sample-size" class="nav-link" data-scroll-target="#prior-influence-and-sample-size">4.6 Prior influence and sample size</a>
-  <ul class="collapse">
-  <li><a href="#exercise-6-prior-versus-data" id="toc-exercise-6-prior-versus-data" class="nav-link" data-scroll-target="#exercise-6-prior-versus-data">Exercise 6 — Prior versus data</a></li>
-  </ul></li>
-  <li><a href="#sequential-bayesian-updating" id="toc-sequential-bayesian-updating" class="nav-link" data-scroll-target="#sequential-bayesian-updating">4.7 Sequential Bayesian updating</a>
-  <ul class="collapse">
-  <li><a href="#batch-1" id="toc-batch-1" class="nav-link" data-scroll-target="#batch-1">Batch 1</a></li>
-  <li><a href="#batch-2" id="toc-batch-2" class="nav-link" data-scroll-target="#batch-2">Batch 2</a></li>
-  </ul></li>
+  <li><a href="#prior-influence-and-sample-size" id="toc-prior-influence-and-sample-size" class="nav-link" data-scroll-target="#prior-influence-and-sample-size">4.6 Prior influence and sample size</a></li>
+  <li><a href="#sequential-bayesian-updating" id="toc-sequential-bayesian-updating" class="nav-link" data-scroll-target="#sequential-bayesian-updating">4.7 Sequential Bayesian updating</a></li>
   <li><a href="#sequential-updating-in-code" id="toc-sequential-updating-in-code" class="nav-link" data-scroll-target="#sequential-updating-in-code">4.8 Sequential updating in code</a></li>
   <li><a href="#a-first-posterior-decision-statement" id="toc-a-first-posterior-decision-statement" class="nav-link" data-scroll-target="#a-first-posterior-decision-statement">4.9 A first posterior decision statement</a></li>
   </ul></li>
@@ -195,7 +169,7 @@ window.Quarto = {
   </ul>
 </nav>
 </div>
-<main class="content column-page-left" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -205,7 +179,7 @@ window.Quarto = {
 
 
 
-<div class="quarto-title-meta column-page-left">
+<div class="quarto-title-meta">
 
     <div>
     <div class="quarto-title-meta-heading">Author</div>
