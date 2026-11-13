@@ -1,34 +1,66 @@
 ---
-title: "DSA 604 Bayesian Computation"
-subtitle: "Week 1 — Bayesian Thinking, Bayes' Rule, Priors, Likelihoods and First Posterior Models"
+title: "DSA 604 | Week 1 (Student)"
+subtitle: "Bayesian thinking, Bayes' rule, priors, likelihoods and first posterior models"
 author: "Dr RM Silva"
 date: "14 November 2026"
 format:
   html:
+    theme: cosmo
+    css: ../styles.css
+    page-layout: full
     toc: true
     toc-depth: 3
-    number-sections: true
+    toc-location: right
+    number-sections: false
     smooth-scroll: true
     code-copy: true
     code-overflow: wrap
+    link-external-newwindow: true
+body-classes: week-notes
+title-block-banner: false
 ---
 
+::::: hero
+:::: hero-inner
+[DSA 604 2.0 · Bayesian Computation · Week 01]{.eyebrow}
 
-::: {.week-banner}
-## Week 1 · 4-hour lecture
+# Bayesian Thinking and First Posterior Models
 
-**MSc in Data Science & Artificial Intelligence**  
-**Course:** DSA 604 Bayesian Computation  
-**Main computational language:** R  
-**Parallel examples:** Python  
-**Main reference:** *Bayes Rules! An Introduction to Applied Bayesian Modeling*
+Bayes' rule, prior distributions, likelihoods, and the Beta-Binomial model. Build the reasoning first, then compute and interpret posterior distributions using **R** and **Python**.
 
-### Today’s question
-
-> How does a Bayesian analysis combine what we knew before observing the data with what the data tell us now?
-
-By the end of the session, you should be able to move from a scientific or Data Science question to a prior, likelihood, posterior distribution, posterior summary, and simple posterior prediction.
+::: hero-actions
+[Course homepage](../index.html){.btn .btn-secondary} [Start learning](#learning-outcomes){.btn .btn-primary}
 :::
+::::
+:::::
+
+::::: course-facts
+::: fact-card
+Week **01**
+:::
+::: fact-card
+Lecture **4 hours**
+:::
+::: fact-card
+Teaching date **14 Nov 2026**
+:::
+::: fact-card
+Notes **Student edition**
+:::
+:::::
+
+::: {.version-note}
+**Student edition.** Exercises are provided without worked solutions. Use the R and Python examples to check your reasoning as you proceed.
+:::
+
+**Today’s question:** How does a Bayesian analysis combine what we knew before observing the data with what the data tell us now?
+
+**Primary reference:** *Bayes Rules! An Introduction to Applied Bayesian Modeling* (Chapters 1–4). Main programming language: **R**, with parallel **Python** examples.
+
+::: quicknav
+[Learning outcomes](#learning-outcomes) · [Block 1](#block-1-thinking-like-a-bayesian) · [Block 2](#block-2-bayes-rule-as-learning-from-evidence) · [Block 3](#block-3-the-beta-binomial-model) · [Block 4](#block-4-bayesian-computation-begins) · [Glossary](#technical-terms)
+:::
+
 
 ## Learning outcomes
 
@@ -45,18 +77,6 @@ By the end of Week 1, you should be able to:
 9. explain how prior information and sample size jointly affect posterior inference;
 10. perform simple sequential Bayesian updating.
 
-## Session map
-
-| Approx. time | Topic | Activity |
-|---:|---|---|
-| 00:00–00:50 | Bayesian thinking and probability refresher | discussion + short exercises |
-| 00:50–01:00 | Break | |
-| 01:00–01:50 | Bayes' rule and diagnostic reasoning | hand calculation + computation |
-| 01:50–02:00 | Break | |
-| 02:00–02:50 | Prior, likelihood and posterior | Beta-Binomial model |
-| 02:50–03:00 | Break | |
-| 03:00–03:50 | Computation, prior influence and sequential updating | R + Python lab |
-| 03:50–04:00 | Exit exercise | synthesis |
 
 ::: {.callout-note}
 ## Reading guide
@@ -67,6 +87,12 @@ This lecture is mainly aligned with Chapters 1–4 of **Johnson, Ott and Dogucu,
 # Block 1 — Thinking like a Bayesian
 
 ## 1.1 What problem is Bayesian statistics solving?
+
+::: {.callout-tip collapse="false"}
+## First vocabulary: the objects of inference
+
+A **parameter** is an unknown quantity in a model, while a **statistic** is calculated from sample data. A **probability distribution** describes uncertainty across possible values. A **prior** describes parameter uncertainty before the current data, a **likelihood** describes how compatible observed data are with different parameter values, and a **posterior** describes updated uncertainty after observing data. These are different objects and shouldn't be used interchangeably.
+:::
 
 Suppose we want to learn an unknown population quantity:
 
@@ -137,6 +163,12 @@ After observing $Y=y$, the observed data value is fixed. Uncertainty remains in 
 :::
 
 ## 1.3 Refresher: conditional probability
+
+::: {.callout-tip}
+## Read the notation
+
+$\Pr(A\mid B)$ is the probability of $A$ **given** that $B$ occurred. The intersection $A\cap B$ means **both** events occur. A **partition** is a set of nonoverlapping cases that covers all possibilities. A **marginal probability** combines those cases, and the **normalizing constant** makes posterior probabilities sum or integrate to one.
+:::
 
 For events $A$ and $B$,
 
@@ -319,6 +351,12 @@ $$
 
 ## 2.2 Worked example: fraud screening
 
+::: {.callout-tip}
+## Screening terminology
+
+The **base rate** is the chance of fraud before looking at the screening result. **Sensitivity** is the probability of flagging a truly fraudulent transaction. **Specificity** is the probability of not flagging a legitimate transaction. A **false positive** is a legitimate transaction that is incorrectly flagged. These quantities determine the probability of fraud *given* a flag, which is not the same as the probability of a flag *given* fraud.
+:::
+
 Suppose:
 
 $$
@@ -371,6 +409,12 @@ Why? Fraud is rare.
 The low prior prevalence matters.
 
 ## 2.3 Prior odds, likelihood ratio, posterior odds
+
+::: {.callout-tip}
+## Odds are not probabilities
+
+For probability $p$, **odds** are $p/(1-p)$. A **likelihood ratio** compares how probable the observed evidence is under two hypotheses. **Posterior odds** are the updated odds after applying that evidence. Odds must be converted back to probabilities using $p=o/(1+o)$, where $o$ denotes odds.
+:::
 
 Bayes' rule can also be written in odds form:
 
@@ -558,6 +602,12 @@ Suppose 17 of 25 users click a recommended item.
 
 ## 3.1 Why use a Beta prior for a probability?
 
+::: {.callout-tip}
+## What the Beta parameters mean
+
+A **Beta distribution** is a flexible model for an unknown probability between 0 and 1, the distribution's **support**. Its parameters $\alpha$ and $\beta$ are **shape parameters** or, when used to specify a prior, **hyperparameters**. The **Gamma function** in its density is a generalization of the factorial and ensures the density integrates to one. Holding the mean fixed, larger $\alpha+\beta$ generally gives a more concentrated prior.
+:::
+
 For a probability parameter,
 
 $$
@@ -698,6 +748,12 @@ Explain both the prior center and prior concentration.
 
 
 ## 3.3 Constructing the Beta-Binomial model
+
+::: {.callout-tip}
+## Conjugacy
+
+A **conjugate prior** produces a posterior from the same family of distributions. With Binomial observations and a Beta prior, the posterior is also Beta. This permits exact updating with a short formula, without requiring computational sampling.
+:::
 
 Let
 
@@ -908,6 +964,12 @@ Find:
 
 ## 4.1 Why simulate when the posterior is known?
 
+::: {.callout-tip}
+## Simulation vocabulary
+
+A **posterior draw** is one simulated value of a parameter drawn from its posterior distribution. **Monte Carlo simulation** approximates quantities by averaging many such draws. An **indicator function** $I(C)$ equals 1 if condition $C$ holds and 0 otherwise. Therefore, the average of $I(\pi>0.5)$ over posterior draws approximates $\Pr(\pi>0.5\mid y)$.
+:::
+
 For the Beta-Binomial model, the posterior can be written analytically.
 
 But simulation is still useful because it prepares us for models where analytic formulas are unavailable.
@@ -996,6 +1058,12 @@ np.mean(draws > 0.5)
 :::
 
 ## 4.3 Posterior density and credible interval
+
+::: {.callout-tip}
+## Reading uncertainty intervals
+
+A **credible interval** covers a specified proportion of the posterior probability, conditional on the model and data. An **equal-tailed credible interval** leaves the same posterior probability outside each endpoint. A **quantile** is a point below which a specified proportion of a distribution lies. A 95% credible interval is not defined by repeating the experiment 95% of the time.
+:::
 
 ::: {.panel-tabset}
 
@@ -1125,6 +1193,12 @@ plt.show()
 The likelihood is scaled only for visual comparison. Its absolute vertical scale has no inferential meaning as a probability density for $\pi$.
 
 ## 4.5 Prior predictive thinking
+
+::: {.callout-tip}
+## Predictive distributions
+
+The **prior predictive distribution** describes data we might observe *before* seeing the current sample, accounting for uncertainty in the prior. The **posterior predictive distribution** describes future data *after* updating the prior with the current sample. A predictive distribution concerns observations, while a posterior distribution concerns unknown model quantities.
+:::
 
 Before seeing the current data, ask:
 
@@ -1262,6 +1336,12 @@ Then explain why the posterior changes even though the observed proportion is 0.
 
 
 ## 4.7 Sequential Bayesian updating
+
+::: {.callout-tip}
+## Updating in batches
+
+**Sequential updating** means processing observations in stages. After the first batch, the posterior becomes the prior for the next batch. When the model assumptions remain the same, this leads to the same posterior as analysing all observations together.
+:::
 
 Suppose
 
@@ -1498,6 +1578,118 @@ $$
 
 and posterior simulation converts distributional questions into numerical summaries.
 
+# Technical terms explained {#technical-terms}
+
+The definitions below are also used throughout the lecture. Read them when a term first appears, then return to the worked examples.
+
+**Parameter.** An unknown numerical feature of a population or a model, such as the probability of success $\pi$. It is not a computed summary of the sample.
+
+**Statistic.** A number calculated from observed data, such as the sample proportion $y/n$. A statistic changes from sample to sample.
+
+**Random variable.** A numerical quantity whose value is uncertain before an observation. We write $Y$ for the random variable and $y$ for an observed value.
+
+**Probability distribution.** A mathematical description of the probabilities of possible outcomes. For continuous variables, probabilities are obtained by integrating a density.
+
+**Probability mass function (PMF).** A function giving the probability of each possible value of a discrete random variable. Its probabilities sum to one.
+
+**Probability density function (PDF).** A function describing how probability is distributed over values of a continuous variable. Probabilities are areas under the density, not density heights at single points.
+
+**Conditional probability.** The probability of an event after restricting attention to cases in which another event occurred, written $\Pr(A\mid B)$.
+
+**Joint probability.** The probability of two events occurring together, written $\Pr(A\cap B)$.
+
+**Partition.** A collection of mutually exclusive events that together cover all possible outcomes.
+
+**Marginal probability.** The probability of an observed event after averaging or summing over possible values of an unobserved event or parameter.
+
+**Normalizing constant.** The quantity used to scale a nonnegative expression so that its probabilities sum to one or its density integrates to one.
+
+**Prior distribution.** A probability distribution for an unknown parameter before the current observations are used. It can reflect earlier evidence, substantive knowledge, or an explicitly chosen modelling assumption.
+
+**Sampling distribution.** A probability model for the possible data when a parameter value is specified, such as $Y\mid\pi\sim\mathrm{Binomial}(n,\pi)$.
+
+**Likelihood.** The sampling model viewed as a function of the unknown parameter after the data are fixed. It compares parameter values but is not itself a probability distribution over them.
+
+**Posterior distribution.** The updated probability distribution for a parameter after conditioning on the observed data, given the prior and sampling model.
+
+**Bayes factor.** A ratio of marginal likelihoods of two competing models. It is different from a likelihood ratio evaluated at two fixed parameter values.
+
+**Base rate.** The frequency or prior probability of the event of interest before considering the test or other evidence.
+
+**False positive.** A positive classification or test result when the event or condition is actually absent.
+
+**Sensitivity.** The probability of a positive test among cases that truly have the condition.
+
+**Specificity.** The probability of a negative test among cases that truly do not have the condition.
+
+**Odds.** A probability $p$ expressed as $p/(1-p)$. Odds of 3 mean three occurrences are expected for each non-occurrence under the model.
+
+**Likelihood ratio.** The ratio of how probable the same evidence is under two specified hypotheses or parameter values. It shows how that evidence changes their relative support.
+
+**Posterior odds.** The ratio of posterior probabilities for two hypotheses, obtained by multiplying prior odds by the relevant likelihood ratio.
+
+**Hyperparameter.** A fixed value specifying a prior distribution, such as $\alpha$ and $\beta$ in $\mathrm{Beta}(\alpha,\beta)$. In a hierarchical model a hyperparameter can itself have a prior.
+
+**Binomial distribution.** A model for the number of successes in $n$ independent trials that share one success probability $\pi$.
+
+**Beta distribution.** A family of probability distributions on $(0,1)$, indexed by positive shape parameters $\alpha$ and $\beta$. It is useful for modelling an unknown probability.
+
+**Support.** The values a distribution allows. For a Beta distribution, the parameter is between zero and one.
+
+**Gamma function.** A mathematical extension of the factorial, satisfying $\Gamma(k)=(k-1)!$ for positive integers $k$. It appears in the Beta density normalization.
+
+**Conjugate prior.** A prior distribution that produces a posterior in the same distribution family under a chosen sampling model. Beta is conjugate to Binomial.
+
+**Posterior predictive distribution.** A distribution for future observations obtained by averaging the sampling model over uncertainty in the parameter under the posterior.
+
+**Prior predictive distribution.** A distribution for hypothetical data before observing the current sample, obtained by averaging the sampling model over the prior.
+
+**Posterior mean.** The average value of a parameter under its posterior distribution. It may be used as an estimate when squared-error loss is appropriate.
+
+**Posterior mode.** The location where the posterior density is largest. It need not equal the posterior mean.
+
+**Posterior variance.** A numerical measure of the spread of a posterior distribution about its mean.
+
+**Credible interval.** An interval containing a stated posterior probability for a parameter, conditional on the prior, model, and observed data.
+
+**Quantile.** A cutoff such that a specified proportion of a distribution lies below it. For example, the 0.025 quantile leaves 2.5% below.
+
+**Equal-tailed interval.** A credible interval formed from lower and upper posterior quantiles with equal probability in the two excluded tails.
+
+**Monte Carlo simulation.** A numerical method that uses random draws from a probability distribution to approximate probabilities, expectations, or other quantities.
+
+**Posterior draw.** One simulated parameter value sampled from the posterior distribution.
+
+**Indicator function.** A function $I(C)$ equal to 1 when condition $C$ is true and 0 otherwise. Averaging indicators estimates the probability of $C$.
+
+**Sequential updating.** Updating a posterior as new batches of observations arrive. Under a consistent model, using the first posterior as the next prior reproduces an all-at-once update.
+
+**Prior influence.** The degree to which prior assumptions affect posterior results. It generally depends on prior concentration, sample size, and how strongly prior and data disagree.
+
+**Model checking.** Assessing whether a model adequately describes relevant features of the observed data, often using simulated predictions.
+
+**Model comparison.** Comparing alternative models using specified criteria, predictive performance, or posterior evidence.
+
+**Stan.** Software for fitting Bayesian statistical models, commonly using Hamiltonian Monte Carlo for complex posterior distributions.
+
+**PyMC.** A Python library for expressing and fitting probabilistic models, including Bayesian models.
+
+**Concentration.** How tightly a probability distribution gathers its mass around certain values. For a Beta prior, larger $\alpha+\beta$ at a fixed mean generally implies greater concentration.
+
+**Regression coefficient.** A model parameter that describes how a predictor is associated with a response, on the scale specified by the regression model.
+
+**Average treatment effect.** The population average difference between the outcomes people would have under treatment and under control, under a stated causal framework.
+
+**Churn.** A customer stopping use of a service over a defined time period.
+
+**Conversion rate.** The proportion of visits or users who complete a specified action.
+
+**Posterior inference.** Drawing conclusions about unknown quantities from their posterior distribution, for example probabilities, interval estimates, and decisions.
+
+**Analytic solution.** A mathematical formula for a result, rather than an approximation based only on numerical simulation.
+
+**Proportionality.** The symbol $\propto$ means two expressions differ only by a multiplicative factor that does not depend on the variable of interest.
+
 # Preparation for Week 2
 
 Before Week 2, make sure you can:
@@ -1519,3 +1711,7 @@ Martin, O. A., Kumar, R., & Lao, J. *Bayesian Modeling and Computation in Python
 <https://bayesiancomputationbook.com/>
 
 The structure of this week is primarily informed by the Bayesian learning sequence developed in Chapters 1–4 of *Bayes Rules!*.
+
+::: lecture-end
+[Back to DSA 604 course homepage](../index.html)
+:::

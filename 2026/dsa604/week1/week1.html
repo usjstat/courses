@@ -9,7 +9,7 @@
 <meta name="author" content="Dr RM Silva">
 <meta name="dcterms.date" content="2026-11-14">
 
-<title>DSA 604 Bayesian Computation</title>
+<title>DSA 604 | Week 1 (Student)</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -76,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="week1_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="week1_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="week1_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="week1_files/libs/bootstrap/bootstrap-7b5185e5ecc6ede1c7959190e1e6c378.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="week1_files/libs/bootstrap/bootstrap-d7a6c2cf76d12a63d7a00478dc4f37b1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <style>html{ scroll-behavior: smooth; }</style>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
@@ -109,106 +109,103 @@ window.Quarto = {
 };
 </script>
 
+<link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="quarto-light">
+<body class="week-notes quarto-light">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-full">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
   <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#week-1-4-hour-lecture" id="toc-week-1-4-hour-lecture" class="nav-link active" data-scroll-target="#week-1-4-hour-lecture"><span class="header-section-number">0.1</span> Week 1 · 4-hour lecture</a>
+  <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link active" data-scroll-target="#learning-outcomes">Learning outcomes</a></li>
+  <li><a href="#block-1-thinking-like-a-bayesian" id="toc-block-1-thinking-like-a-bayesian" class="nav-link" data-scroll-target="#block-1-thinking-like-a-bayesian">Block 1 — Thinking like a Bayesian</a>
   <ul class="collapse">
-  <li><a href="#todays-question" id="toc-todays-question" class="nav-link" data-scroll-target="#todays-question"><span class="header-section-number">0.1.1</span> Today’s question</a></li>
+  <li><a href="#what-problem-is-bayesian-statistics-solving" id="toc-what-problem-is-bayesian-statistics-solving" class="nav-link" data-scroll-target="#what-problem-is-bayesian-statistics-solving">1.1 What problem is Bayesian statistics solving?</a></li>
+  <li><a href="#bayesian-probability" id="toc-bayesian-probability" class="nav-link" data-scroll-target="#bayesian-probability">1.2 Bayesian probability</a></li>
+  <li><a href="#refresher-conditional-probability" id="toc-refresher-conditional-probability" class="nav-link" data-scroll-target="#refresher-conditional-probability">1.3 Refresher: conditional probability</a></li>
+  <li><a href="#why-reversing-a-conditional-probability-is-dangerous" id="toc-why-reversing-a-conditional-probability-is-dangerous" class="nav-link" data-scroll-target="#why-reversing-a-conditional-probability-is-dangerous">1.4 Why reversing a conditional probability is dangerous</a>
+  <ul class="collapse">
+  <li><a href="#exercise-1-conditional-probability-warm-up" id="toc-exercise-1-conditional-probability-warm-up" class="nav-link" data-scroll-target="#exercise-1-conditional-probability-warm-up">Exercise 1 — Conditional probability warm-up</a></li>
   </ul></li>
-  <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link" data-scroll-target="#learning-outcomes"><span class="header-section-number">0.2</span> Learning outcomes</a></li>
-  <li><a href="#session-map" id="toc-session-map" class="nav-link" data-scroll-target="#session-map"><span class="header-section-number">0.3</span> Session map</a></li>
-  <li><a href="#block-1-thinking-like-a-bayesian" id="toc-block-1-thinking-like-a-bayesian" class="nav-link" data-scroll-target="#block-1-thinking-like-a-bayesian"><span class="header-section-number">1</span> Block 1 — Thinking like a Bayesian</a>
+  <li><a href="#random-variables-distributions-and-parameters" id="toc-random-variables-distributions-and-parameters" class="nav-link" data-scroll-target="#random-variables-distributions-and-parameters">1.5 Random variables, distributions and parameters</a></li>
+  <li><a href="#prior-information-is-not-necessarily-personal-opinion" id="toc-prior-information-is-not-necessarily-personal-opinion" class="nav-link" data-scroll-target="#prior-information-is-not-necessarily-personal-opinion">1.6 Prior information is not necessarily personal opinion</a>
   <ul class="collapse">
-  <li><a href="#what-problem-is-bayesian-statistics-solving" id="toc-what-problem-is-bayesian-statistics-solving" class="nav-link" data-scroll-target="#what-problem-is-bayesian-statistics-solving"><span class="header-section-number">1.1</span> 1.1 What problem is Bayesian statistics solving?</a></li>
-  <li><a href="#bayesian-probability" id="toc-bayesian-probability" class="nav-link" data-scroll-target="#bayesian-probability"><span class="header-section-number">1.2</span> 1.2 Bayesian probability</a></li>
-  <li><a href="#refresher-conditional-probability" id="toc-refresher-conditional-probability" class="nav-link" data-scroll-target="#refresher-conditional-probability"><span class="header-section-number">1.3</span> 1.3 Refresher: conditional probability</a></li>
-  <li><a href="#why-reversing-a-conditional-probability-is-dangerous" id="toc-why-reversing-a-conditional-probability-is-dangerous" class="nav-link" data-scroll-target="#why-reversing-a-conditional-probability-is-dangerous"><span class="header-section-number">1.4</span> 1.4 Why reversing a conditional probability is dangerous</a>
-  <ul class="collapse">
-  <li><a href="#exercise-1-conditional-probability-warm-up" id="toc-exercise-1-conditional-probability-warm-up" class="nav-link" data-scroll-target="#exercise-1-conditional-probability-warm-up"><span class="header-section-number">1.4.1</span> Exercise 1 — Conditional probability warm-up</a></li>
-  </ul></li>
-  <li><a href="#random-variables-distributions-and-parameters" id="toc-random-variables-distributions-and-parameters" class="nav-link" data-scroll-target="#random-variables-distributions-and-parameters"><span class="header-section-number">1.5</span> 1.5 Random variables, distributions and parameters</a></li>
-  <li><a href="#prior-information-is-not-necessarily-personal-opinion" id="toc-prior-information-is-not-necessarily-personal-opinion" class="nav-link" data-scroll-target="#prior-information-is-not-necessarily-personal-opinion"><span class="header-section-number">1.6</span> 1.6 Prior information is not necessarily personal opinion</a>
-  <ul class="collapse">
-  <li><a href="#interactive-prompt" id="toc-interactive-prompt" class="nav-link" data-scroll-target="#interactive-prompt"><span class="header-section-number">1.6.1</span> Interactive prompt</a></li>
+  <li><a href="#interactive-prompt" id="toc-interactive-prompt" class="nav-link" data-scroll-target="#interactive-prompt">Interactive prompt</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#block-2-bayes-rule-as-learning-from-evidence" id="toc-block-2-bayes-rule-as-learning-from-evidence" class="nav-link" data-scroll-target="#block-2-bayes-rule-as-learning-from-evidence"><span class="header-section-number">2</span> Block 2 — Bayes’ rule as learning from evidence</a>
+  <li><a href="#block-2-bayes-rule-as-learning-from-evidence" id="toc-block-2-bayes-rule-as-learning-from-evidence" class="nav-link" data-scroll-target="#block-2-bayes-rule-as-learning-from-evidence">Block 2 — Bayes’ rule as learning from evidence</a>
   <ul class="collapse">
-  <li><a href="#the-discrete-bayes-formula" id="toc-the-discrete-bayes-formula" class="nav-link" data-scroll-target="#the-discrete-bayes-formula"><span class="header-section-number">2.1</span> 2.1 The discrete Bayes formula</a></li>
-  <li><a href="#worked-example-fraud-screening" id="toc-worked-example-fraud-screening" class="nav-link" data-scroll-target="#worked-example-fraud-screening"><span class="header-section-number">2.2</span> 2.2 Worked example: fraud screening</a></li>
-  <li><a href="#prior-odds-likelihood-ratio-posterior-odds" id="toc-prior-odds-likelihood-ratio-posterior-odds" class="nav-link" data-scroll-target="#prior-odds-likelihood-ratio-posterior-odds"><span class="header-section-number">2.3</span> 2.3 Prior odds, likelihood ratio, posterior odds</a></li>
-  <li><a href="#computing-the-discrete-example" id="toc-computing-the-discrete-example" class="nav-link" data-scroll-target="#computing-the-discrete-example"><span class="header-section-number">2.4</span> 2.4 Computing the discrete example</a>
+  <li><a href="#the-discrete-bayes-formula" id="toc-the-discrete-bayes-formula" class="nav-link" data-scroll-target="#the-discrete-bayes-formula">2.1 The discrete Bayes formula</a></li>
+  <li><a href="#worked-example-fraud-screening" id="toc-worked-example-fraud-screening" class="nav-link" data-scroll-target="#worked-example-fraud-screening">2.2 Worked example: fraud screening</a></li>
+  <li><a href="#prior-odds-likelihood-ratio-posterior-odds" id="toc-prior-odds-likelihood-ratio-posterior-odds" class="nav-link" data-scroll-target="#prior-odds-likelihood-ratio-posterior-odds">2.3 Prior odds, likelihood ratio, posterior odds</a></li>
+  <li><a href="#computing-the-discrete-example" id="toc-computing-the-discrete-example" class="nav-link" data-scroll-target="#computing-the-discrete-example">2.4 Computing the discrete example</a>
   <ul class="collapse">
-  <li><a href="#exercise-2-base-rate-sensitivity" id="toc-exercise-2-base-rate-sensitivity" class="nav-link" data-scroll-target="#exercise-2-base-rate-sensitivity"><span class="header-section-number">2.4.1</span> Exercise 2 — Base-rate sensitivity</a></li>
+  <li><a href="#exercise-2-base-rate-sensitivity" id="toc-exercise-2-base-rate-sensitivity" class="nav-link" data-scroll-target="#exercise-2-base-rate-sensitivity">Exercise 2 — Base-rate sensitivity</a></li>
   </ul></li>
-  <li><a href="#from-events-to-parameters" id="toc-from-events-to-parameters" class="nav-link" data-scroll-target="#from-events-to-parameters"><span class="header-section-number">2.5</span> 2.5 From events to parameters</a></li>
-  <li><a href="#sampling-distribution-versus-likelihood" id="toc-sampling-distribution-versus-likelihood" class="nav-link" data-scroll-target="#sampling-distribution-versus-likelihood"><span class="header-section-number">2.6</span> 2.6 Sampling distribution versus likelihood</a>
+  <li><a href="#from-events-to-parameters" id="toc-from-events-to-parameters" class="nav-link" data-scroll-target="#from-events-to-parameters">2.5 From events to parameters</a></li>
+  <li><a href="#sampling-distribution-versus-likelihood" id="toc-sampling-distribution-versus-likelihood" class="nav-link" data-scroll-target="#sampling-distribution-versus-likelihood">2.6 Sampling distribution versus likelihood</a>
   <ul class="collapse">
-  <li><a href="#exercise-3-what-changes" id="toc-exercise-3-what-changes" class="nav-link" data-scroll-target="#exercise-3-what-changes"><span class="header-section-number">2.6.1</span> Exercise 3 — What changes?</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#block-3-the-beta-binomial-model" id="toc-block-3-the-beta-binomial-model" class="nav-link" data-scroll-target="#block-3-the-beta-binomial-model"><span class="header-section-number">3</span> Block 3 — The Beta-Binomial model</a>
-  <ul class="collapse">
-  <li><a href="#why-use-a-beta-prior-for-a-probability" id="toc-why-use-a-beta-prior-for-a-probability" class="nav-link" data-scroll-target="#why-use-a-beta-prior-for-a-probability"><span class="header-section-number">3.1</span> 3.1 Why use a Beta prior for a probability?</a></li>
-  <li><a href="#reading-beta-distributions" id="toc-reading-beta-distributions" class="nav-link" data-scroll-target="#reading-beta-distributions"><span class="header-section-number">3.2</span> 3.2 Reading Beta distributions</a>
-  <ul class="collapse">
-  <li><a href="#visualising-beta-priors" id="toc-visualising-beta-priors" class="nav-link" data-scroll-target="#visualising-beta-priors"><span class="header-section-number">3.2.1</span> Visualising Beta priors</a></li>
-  <li><a href="#exercise-4-choose-a-prior" id="toc-exercise-4-choose-a-prior" class="nav-link" data-scroll-target="#exercise-4-choose-a-prior"><span class="header-section-number">3.2.2</span> Exercise 4 — Choose a prior</a></li>
-  </ul></li>
-  <li><a href="#constructing-the-beta-binomial-model" id="toc-constructing-the-beta-binomial-model" class="nav-link" data-scroll-target="#constructing-the-beta-binomial-model"><span class="header-section-number">3.3</span> 3.3 Constructing the Beta-Binomial model</a></li>
-  <li><a href="#interpreting-the-update" id="toc-interpreting-the-update" class="nav-link" data-scroll-target="#interpreting-the-update"><span class="header-section-number">3.4</span> 3.4 Interpreting the update</a></li>
-  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example"><span class="header-section-number">3.5</span> 3.5 Worked example</a></li>
-  <li><a href="#posterior-mean-as-a-weighted-average" id="toc-posterior-mean-as-a-weighted-average" class="nav-link" data-scroll-target="#posterior-mean-as-a-weighted-average"><span class="header-section-number">3.6</span> 3.6 Posterior mean as a weighted average</a>
-  <ul class="collapse">
-  <li><a href="#exercise-5-posterior-by-hand" id="toc-exercise-5-posterior-by-hand" class="nav-link" data-scroll-target="#exercise-5-posterior-by-hand"><span class="header-section-number">3.6.1</span> Exercise 5 — Posterior by hand</a></li>
+  <li><a href="#exercise-3-what-changes" id="toc-exercise-3-what-changes" class="nav-link" data-scroll-target="#exercise-3-what-changes">Exercise 3 — What changes?</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#block-4-bayesian-computation-begins" id="toc-block-4-bayesian-computation-begins" class="nav-link" data-scroll-target="#block-4-bayesian-computation-begins"><span class="header-section-number">4</span> Block 4 — Bayesian computation begins</a>
+  <li><a href="#block-3-the-beta-binomial-model" id="toc-block-3-the-beta-binomial-model" class="nav-link" data-scroll-target="#block-3-the-beta-binomial-model">Block 3 — The Beta-Binomial model</a>
   <ul class="collapse">
-  <li><a href="#why-simulate-when-the-posterior-is-known" id="toc-why-simulate-when-the-posterior-is-known" class="nav-link" data-scroll-target="#why-simulate-when-the-posterior-is-known"><span class="header-section-number">4.1</span> 4.1 Why simulate when the posterior is known?</a></li>
-  <li><a href="#posterior-simulation-in-r-and-python" id="toc-posterior-simulation-in-r-and-python" class="nav-link" data-scroll-target="#posterior-simulation-in-r-and-python"><span class="header-section-number">4.2</span> 4.2 Posterior simulation in R and Python</a></li>
-  <li><a href="#posterior-density-and-credible-interval" id="toc-posterior-density-and-credible-interval" class="nav-link" data-scroll-target="#posterior-density-and-credible-interval"><span class="header-section-number">4.3</span> 4.3 Posterior density and credible interval</a></li>
-  <li><a href="#prior-likelihood-and-posterior-on-one-plot" id="toc-prior-likelihood-and-posterior-on-one-plot" class="nav-link" data-scroll-target="#prior-likelihood-and-posterior-on-one-plot"><span class="header-section-number">4.4</span> 4.4 Prior, likelihood and posterior on one plot</a></li>
-  <li><a href="#prior-predictive-thinking" id="toc-prior-predictive-thinking" class="nav-link" data-scroll-target="#prior-predictive-thinking"><span class="header-section-number">4.5</span> 4.5 Prior predictive thinking</a></li>
-  <li><a href="#prior-influence-and-sample-size" id="toc-prior-influence-and-sample-size" class="nav-link" data-scroll-target="#prior-influence-and-sample-size"><span class="header-section-number">4.6</span> 4.6 Prior influence and sample size</a>
+  <li><a href="#why-use-a-beta-prior-for-a-probability" id="toc-why-use-a-beta-prior-for-a-probability" class="nav-link" data-scroll-target="#why-use-a-beta-prior-for-a-probability">3.1 Why use a Beta prior for a probability?</a></li>
+  <li><a href="#reading-beta-distributions" id="toc-reading-beta-distributions" class="nav-link" data-scroll-target="#reading-beta-distributions">3.2 Reading Beta distributions</a>
   <ul class="collapse">
-  <li><a href="#exercise-6-prior-versus-data" id="toc-exercise-6-prior-versus-data" class="nav-link" data-scroll-target="#exercise-6-prior-versus-data"><span class="header-section-number">4.6.1</span> Exercise 6 — Prior versus data</a></li>
+  <li><a href="#visualising-beta-priors" id="toc-visualising-beta-priors" class="nav-link" data-scroll-target="#visualising-beta-priors">Visualising Beta priors</a></li>
+  <li><a href="#exercise-4-choose-a-prior" id="toc-exercise-4-choose-a-prior" class="nav-link" data-scroll-target="#exercise-4-choose-a-prior">Exercise 4 — Choose a prior</a></li>
   </ul></li>
-  <li><a href="#sequential-bayesian-updating" id="toc-sequential-bayesian-updating" class="nav-link" data-scroll-target="#sequential-bayesian-updating"><span class="header-section-number">4.7</span> 4.7 Sequential Bayesian updating</a>
+  <li><a href="#constructing-the-beta-binomial-model" id="toc-constructing-the-beta-binomial-model" class="nav-link" data-scroll-target="#constructing-the-beta-binomial-model">3.3 Constructing the Beta-Binomial model</a></li>
+  <li><a href="#interpreting-the-update" id="toc-interpreting-the-update" class="nav-link" data-scroll-target="#interpreting-the-update">3.4 Interpreting the update</a></li>
+  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">3.5 Worked example</a></li>
+  <li><a href="#posterior-mean-as-a-weighted-average" id="toc-posterior-mean-as-a-weighted-average" class="nav-link" data-scroll-target="#posterior-mean-as-a-weighted-average">3.6 Posterior mean as a weighted average</a>
   <ul class="collapse">
-  <li><a href="#batch-1" id="toc-batch-1" class="nav-link" data-scroll-target="#batch-1"><span class="header-section-number">4.7.1</span> Batch 1</a></li>
-  <li><a href="#batch-2" id="toc-batch-2" class="nav-link" data-scroll-target="#batch-2"><span class="header-section-number">4.7.2</span> Batch 2</a></li>
+  <li><a href="#exercise-5-posterior-by-hand" id="toc-exercise-5-posterior-by-hand" class="nav-link" data-scroll-target="#exercise-5-posterior-by-hand">Exercise 5 — Posterior by hand</a></li>
   </ul></li>
-  <li><a href="#sequential-updating-in-code" id="toc-sequential-updating-in-code" class="nav-link" data-scroll-target="#sequential-updating-in-code"><span class="header-section-number">4.8</span> 4.8 Sequential updating in code</a></li>
-  <li><a href="#a-first-posterior-decision-statement" id="toc-a-first-posterior-decision-statement" class="nav-link" data-scroll-target="#a-first-posterior-decision-statement"><span class="header-section-number">4.9</span> 4.9 A first posterior decision statement</a></li>
   </ul></li>
-  <li><a href="#integrated-exercise-from-question-to-posterior" id="toc-integrated-exercise-from-question-to-posterior" class="nav-link" data-scroll-target="#integrated-exercise-from-question-to-posterior"><span class="header-section-number">5</span> Integrated exercise — From question to posterior</a></li>
-  <li><a href="#exit-exercise" id="toc-exit-exercise" class="nav-link" data-scroll-target="#exit-exercise"><span class="header-section-number">6</span> Exit exercise</a></li>
-  <li><a href="#what-you-should-retain-from-week-1" id="toc-what-you-should-retain-from-week-1" class="nav-link" data-scroll-target="#what-you-should-retain-from-week-1"><span class="header-section-number">7</span> What you should retain from Week 1</a></li>
-  <li><a href="#preparation-for-week-2" id="toc-preparation-for-week-2" class="nav-link" data-scroll-target="#preparation-for-week-2"><span class="header-section-number">8</span> Preparation for Week 2</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">9</span> References</a></li>
+  <li><a href="#block-4-bayesian-computation-begins" id="toc-block-4-bayesian-computation-begins" class="nav-link" data-scroll-target="#block-4-bayesian-computation-begins">Block 4 — Bayesian computation begins</a>
+  <ul class="collapse">
+  <li><a href="#why-simulate-when-the-posterior-is-known" id="toc-why-simulate-when-the-posterior-is-known" class="nav-link" data-scroll-target="#why-simulate-when-the-posterior-is-known">4.1 Why simulate when the posterior is known?</a></li>
+  <li><a href="#posterior-simulation-in-r-and-python" id="toc-posterior-simulation-in-r-and-python" class="nav-link" data-scroll-target="#posterior-simulation-in-r-and-python">4.2 Posterior simulation in R and Python</a></li>
+  <li><a href="#posterior-density-and-credible-interval" id="toc-posterior-density-and-credible-interval" class="nav-link" data-scroll-target="#posterior-density-and-credible-interval">4.3 Posterior density and credible interval</a></li>
+  <li><a href="#prior-likelihood-and-posterior-on-one-plot" id="toc-prior-likelihood-and-posterior-on-one-plot" class="nav-link" data-scroll-target="#prior-likelihood-and-posterior-on-one-plot">4.4 Prior, likelihood and posterior on one plot</a></li>
+  <li><a href="#prior-predictive-thinking" id="toc-prior-predictive-thinking" class="nav-link" data-scroll-target="#prior-predictive-thinking">4.5 Prior predictive thinking</a></li>
+  <li><a href="#prior-influence-and-sample-size" id="toc-prior-influence-and-sample-size" class="nav-link" data-scroll-target="#prior-influence-and-sample-size">4.6 Prior influence and sample size</a>
+  <ul class="collapse">
+  <li><a href="#exercise-6-prior-versus-data" id="toc-exercise-6-prior-versus-data" class="nav-link" data-scroll-target="#exercise-6-prior-versus-data">Exercise 6 — Prior versus data</a></li>
+  </ul></li>
+  <li><a href="#sequential-bayesian-updating" id="toc-sequential-bayesian-updating" class="nav-link" data-scroll-target="#sequential-bayesian-updating">4.7 Sequential Bayesian updating</a>
+  <ul class="collapse">
+  <li><a href="#batch-1" id="toc-batch-1" class="nav-link" data-scroll-target="#batch-1">Batch 1</a></li>
+  <li><a href="#batch-2" id="toc-batch-2" class="nav-link" data-scroll-target="#batch-2">Batch 2</a></li>
+  </ul></li>
+  <li><a href="#sequential-updating-in-code" id="toc-sequential-updating-in-code" class="nav-link" data-scroll-target="#sequential-updating-in-code">4.8 Sequential updating in code</a></li>
+  <li><a href="#a-first-posterior-decision-statement" id="toc-a-first-posterior-decision-statement" class="nav-link" data-scroll-target="#a-first-posterior-decision-statement">4.9 A first posterior decision statement</a></li>
+  </ul></li>
+  <li><a href="#integrated-exercise-from-question-to-posterior" id="toc-integrated-exercise-from-question-to-posterior" class="nav-link" data-scroll-target="#integrated-exercise-from-question-to-posterior">Integrated exercise — From question to posterior</a></li>
+  <li><a href="#exit-exercise" id="toc-exit-exercise" class="nav-link" data-scroll-target="#exit-exercise">Exit exercise</a></li>
+  <li><a href="#what-you-should-retain-from-week-1" id="toc-what-you-should-retain-from-week-1" class="nav-link" data-scroll-target="#what-you-should-retain-from-week-1">What you should retain from Week 1</a></li>
+  <li><a href="#technical-terms" id="toc-technical-terms" class="nav-link" data-scroll-target="#technical-terms">Technical terms explained</a></li>
+  <li><a href="#preparation-for-week-2" id="toc-preparation-for-week-2" class="nav-link" data-scroll-target="#preparation-for-week-2">Preparation for Week 2</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
 </div>
-<main class="content" id="quarto-document-content">
+<main class="content column-page-left" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">DSA 604 Bayesian Computation</h1>
-<p class="subtitle lead">Week 1 — Bayesian Thinking, Bayes’ Rule, Priors, Likelihoods and First Posterior Models</p>
+<h1 class="title">DSA 604 | Week 1 (Student)</h1>
+<p class="subtitle lead">Bayesian thinking, Bayes’ rule, priors, likelihoods and first posterior models</p>
 </div>
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page-left">
 
     <div>
     <div class="quarto-title-meta-heading">Author</div>
@@ -232,23 +229,42 @@ window.Quarto = {
 </header>
 
 
-<section id="week-1-4-hour-lecture" class="level2 week-banner" data-number="0.1">
-<h2 data-number="0.1" class="anchored" data-anchor-id="week-1-4-hour-lecture"><span class="header-section-number">0.1</span> Week 1 · 4-hour lecture</h2>
-<p><strong>MSc in Data Science &amp; Artificial Intelligence</strong><br>
-<strong>Course:</strong> DSA 604 Bayesian Computation<br>
-<strong>Main computational language:</strong> R<br>
-<strong>Parallel examples:</strong> Python<br>
-<strong>Main reference:</strong> <em>Bayes Rules! An Introduction to Applied Bayesian Modeling</em></p>
-<section id="todays-question" class="level3" data-number="0.1.1">
-<h3 data-number="0.1.1" class="anchored" data-anchor-id="todays-question"><span class="header-section-number">0.1.1</span> Today’s question</h3>
-<blockquote class="blockquote">
-<p>How does a Bayesian analysis combine what we knew before observing the data with what the data tell us now?</p>
-</blockquote>
-<p>By the end of the session, you should be able to move from a scientific or Data Science question to a prior, likelihood, posterior distribution, posterior summary, and simple posterior prediction.</p>
+<div class="hero">
+<div class="hero-inner">
+<p><span class="eyebrow">DSA 604 2.0 · Bayesian Computation · Week 01</span></p>
+<section id="bayesian-thinking-and-first-posterior-models" class="level1">
+<h1>Bayesian Thinking and First Posterior Models</h1>
+<p>Bayes’ rule, prior distributions, likelihoods, and the Beta-Binomial model. Build the reasoning first, then compute and interpret posterior distributions using <strong>R</strong> and <strong>Python</strong>.</p>
+<div class="hero-actions">
+<p><a href="../index.html" class="btn btn-secondary">Course homepage</a> <a href="#learning-outcomes" class="btn btn-primary">Start learning</a></p>
+</div>
 </section>
-</section>
-<section id="learning-outcomes" class="level2" data-number="0.2">
-<h2 data-number="0.2" class="anchored" data-anchor-id="learning-outcomes"><span class="header-section-number">0.2</span> Learning outcomes</h2>
+</div>
+</div>
+<div class="course-facts">
+<div class="fact-card">
+<p>Week <strong>01</strong></p>
+</div>
+<div class="fact-card">
+<p>Lecture <strong>4 hours</strong></p>
+</div>
+<div class="fact-card">
+<p>Teaching date <strong>14 Nov 2026</strong></p>
+</div>
+<div class="fact-card">
+<p>Notes <strong>Student edition</strong></p>
+</div>
+</div>
+<div class="version-note">
+<p><strong>Student edition.</strong> Exercises are provided without worked solutions. Use the R and Python examples to check your reasoning as you proceed.</p>
+</div>
+<p><strong>Today’s question:</strong> How does a Bayesian analysis combine what we knew before observing the data with what the data tell us now?</p>
+<p><strong>Primary reference:</strong> <em>Bayes Rules! An Introduction to Applied Bayesian Modeling</em> (Chapters 1–4). Main programming language: <strong>R</strong>, with parallel <strong>Python</strong> examples.</p>
+<div class="quicknav">
+<p><a href="#learning-outcomes">Learning outcomes</a> · <a href="#block-1-thinking-like-a-bayesian">Block 1</a> · <a href="#block-2-bayes-rule-as-learning-from-evidence">Block 2</a> · <a href="#block-3-the-beta-binomial-model">Block 3</a> · <a href="#block-4-bayesian-computation-begins">Block 4</a> · <a href="#technical-terms">Glossary</a></p>
+</div>
+<section id="learning-outcomes" class="level2">
+<h2 class="anchored" data-anchor-id="learning-outcomes">Learning outcomes</h2>
 <p>By the end of Week 1, you should be able to:</p>
 <ol type="1">
 <li>distinguish a parameter, statistic, probability model, prior distribution, likelihood, and posterior distribution;</li>
@@ -262,65 +278,6 @@ window.Quarto = {
 <li>explain how prior information and sample size jointly affect posterior inference;</li>
 <li>perform simple sequential Bayesian updating.</li>
 </ol>
-</section>
-<section id="session-map" class="level2" data-number="0.3">
-<h2 data-number="0.3" class="anchored" data-anchor-id="session-map"><span class="header-section-number">0.3</span> Session map</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 40%">
-<col style="width: 30%">
-<col style="width: 30%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: right;">Approx. time</th>
-<th>Topic</th>
-<th>Activity</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">00:00–00:50</td>
-<td>Bayesian thinking and probability refresher</td>
-<td>discussion + short exercises</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">00:50–01:00</td>
-<td>Break</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">01:00–01:50</td>
-<td>Bayes’ rule and diagnostic reasoning</td>
-<td>hand calculation + computation</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">01:50–02:00</td>
-<td>Break</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">02:00–02:50</td>
-<td>Prior, likelihood and posterior</td>
-<td>Beta-Binomial model</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">02:50–03:00</td>
-<td>Break</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">03:00–03:50</td>
-<td>Computation, prior influence and sequential updating</td>
-<td>R + Python lab</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">03:50–04:00</td>
-<td>Exit exercise</td>
-<td>synthesis</td>
-</tr>
-</tbody>
-</table>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -335,10 +292,26 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="block-1-thinking-like-a-bayesian" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Block 1 — Thinking like a Bayesian</h1>
-<section id="what-problem-is-bayesian-statistics-solving" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="what-problem-is-bayesian-statistics-solving"><span class="header-section-number">1.1</span> 1.1 What problem is Bayesian statistics solving?</h2>
+<section id="block-1-thinking-like-a-bayesian" class="level1">
+<h1>Block 1 — Thinking like a Bayesian</h1>
+<section id="what-problem-is-bayesian-statistics-solving" class="level2">
+<h2 class="anchored" data-anchor-id="what-problem-is-bayesian-statistics-solving">1.1 What problem is Bayesian statistics solving?</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>First vocabulary: the objects of inference
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>A <strong>parameter</strong> is an unknown quantity in a model, while a <strong>statistic</strong> is calculated from sample data. A <strong>probability distribution</strong> describes uncertainty across possible values. A <strong>prior</strong> describes parameter uncertainty before the current data, a <strong>likelihood</strong> describes how compatible observed data are with different parameter values, and a <strong>posterior</strong> describes updated uncertainty after observing data. These are different objects and shouldn’t be used interchangeably.</p>
+</div>
+</div>
+</div>
 <p>Suppose we want to learn an unknown population quantity:</p>
 <ul>
 <li>the probability that a customer churns,</li>
@@ -371,8 +344,8 @@ f(y\mid\theta).
 \]</span></p>
 <p>Later in the course we will add posterior computation, diagnostics, prediction, model checking, and model comparison.</p>
 </section>
-<section id="bayesian-probability" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="bayesian-probability"><span class="header-section-number">1.2</span> 1.2 Bayesian probability</h2>
+<section id="bayesian-probability" class="level2">
+<h2 class="anchored" data-anchor-id="bayesian-probability">1.2 Bayesian probability</h2>
 <p>At undergraduate level, probability is often introduced as a long-run relative frequency. That interpretation is useful, but Bayesian inference also uses probability to quantify <strong>uncertainty</strong>.</p>
 <p>Examples:</p>
 <p><span class="math display">\[
@@ -396,8 +369,21 @@ f(y\mid\theta).
 </div>
 </div>
 </section>
-<section id="refresher-conditional-probability" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="refresher-conditional-probability"><span class="header-section-number">1.3</span> 1.3 Refresher: conditional probability</h2>
+<section id="refresher-conditional-probability" class="level2">
+<h2 class="anchored" data-anchor-id="refresher-conditional-probability">1.3 Refresher: conditional probability</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Read the notation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(\Pr(A\mid B)\)</span> is the probability of <span class="math inline">\(A\)</span> <strong>given</strong> that <span class="math inline">\(B\)</span> occurred. The intersection <span class="math inline">\(A\cap B\)</span> means <strong>both</strong> events occur. A <strong>partition</strong> is a set of nonoverlapping cases that covers all possibilities. A <strong>marginal probability</strong> combines those cases, and the <strong>normalizing constant</strong> makes posterior probabilities sum or integrate to one.</p>
+</div>
+</div>
 <p>For events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>,</p>
 <p><span class="math display">\[
 \Pr(A\mid B)=\frac{\Pr(A\cap B)}{\Pr(B)},
@@ -425,8 +411,8 @@ f(y\mid\theta).
 \]</span></p>
 <p>This denominator is the <strong>marginal probability</strong> or <strong>normalizing constant</strong>.</p>
 </section>
-<section id="why-reversing-a-conditional-probability-is-dangerous" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="why-reversing-a-conditional-probability-is-dangerous"><span class="header-section-number">1.4</span> 1.4 Why reversing a conditional probability is dangerous</h2>
+<section id="why-reversing-a-conditional-probability-is-dangerous" class="level2">
+<h2 class="anchored" data-anchor-id="why-reversing-a-conditional-probability-is-dangerous">1.4 Why reversing a conditional probability is dangerous</h2>
 <p>A common error is to treat</p>
 <p><span class="math display">\[
 \Pr(A\mid B)
@@ -442,8 +428,8 @@ f(y\mid\theta).
 <li><span class="math inline">\(\Pr(\text{disease}\mid\text{positive test})\)</span> is the probability a person has the disease after a positive test.</li>
 </ul>
 <p>The second depends not only on sensitivity but also on disease prevalence and false-positive probability.</p>
-<section id="exercise-1-conditional-probability-warm-up" class="level3" data-number="1.4.1">
-<h3 data-number="1.4.1" class="anchored" data-anchor-id="exercise-1-conditional-probability-warm-up"><span class="header-section-number">1.4.1</span> Exercise 1 — Conditional probability warm-up</h3>
+<section id="exercise-1-conditional-probability-warm-up" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1-conditional-probability-warm-up">Exercise 1 — Conditional probability warm-up</h3>
 <p>A data quality system flags 8% of records. Among truly erroneous records, 90% are flagged. Suppose 5% of all records are truly erroneous.</p>
 <ol type="1">
 <li>Identify <span class="math inline">\(\Pr(F\mid E)\)</span>, where <span class="math inline">\(F\)</span> means “flagged” and <span class="math inline">\(E\)</span> means “error”.</li>
@@ -452,8 +438,8 @@ f(y\mid\theta).
 </ol>
 </section>
 </section>
-<section id="random-variables-distributions-and-parameters" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="random-variables-distributions-and-parameters"><span class="header-section-number">1.5</span> 1.5 Random variables, distributions and parameters</h2>
+<section id="random-variables-distributions-and-parameters" class="level2">
+<h2 class="anchored" data-anchor-id="random-variables-distributions-and-parameters">1.5 Random variables, distributions and parameters</h2>
 <p>A <strong>random variable</strong> maps outcomes to numerical values.</p>
 <p>A <strong>probability distribution</strong> describes the possible values of a random variable and their probabilities or densities.</p>
 <p>Examples:</p>
@@ -478,8 +464,8 @@ Y\sim N(\mu,\sigma^2)
 \]</span></p>
 <p>The parameter is still an unknown scientific quantity. The probability distribution expresses our uncertainty about it.</p>
 </section>
-<section id="prior-information-is-not-necessarily-personal-opinion" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="prior-information-is-not-necessarily-personal-opinion"><span class="header-section-number">1.6</span> 1.6 Prior information is not necessarily personal opinion</h2>
+<section id="prior-information-is-not-necessarily-personal-opinion" class="level2">
+<h2 class="anchored" data-anchor-id="prior-information-is-not-necessarily-personal-opinion">1.6 Prior information is not necessarily personal opinion</h2>
 <p>A prior can be informed by:</p>
 <ul>
 <li>previous studies,</li>
@@ -494,8 +480,8 @@ Y\sim N(\mu,\sigma^2)
 </ul>
 <p>A prior should be interpretable in the context of the model.</p>
 <p>A Bayesian analysis is not made better merely by choosing a vague prior. A poorly chosen vague prior can imply implausible values.</p>
-<section id="interactive-prompt" class="level3" data-number="1.6.1">
-<h3 data-number="1.6.1" class="anchored" data-anchor-id="interactive-prompt"><span class="header-section-number">1.6.1</span> Interactive prompt</h3>
+<section id="interactive-prompt" class="level3">
+<h3 class="anchored" data-anchor-id="interactive-prompt">Interactive prompt</h3>
 <p>Consider the unknown probability <span class="math inline">\(\pi\)</span> that a newly registered user becomes active within seven days.</p>
 <p>Which prior source would you trust most in each situation?</p>
 <ol type="1">
@@ -508,10 +494,10 @@ Y\sim N(\mu,\sigma^2)
 </section>
 </section>
 </section>
-<section id="block-2-bayes-rule-as-learning-from-evidence" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Block 2 — Bayes’ rule as learning from evidence</h1>
-<section id="the-discrete-bayes-formula" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="the-discrete-bayes-formula"><span class="header-section-number">2.1</span> 2.1 The discrete Bayes formula</h2>
+<section id="block-2-bayes-rule-as-learning-from-evidence" class="level1">
+<h1>Block 2 — Bayes’ rule as learning from evidence</h1>
+<section id="the-discrete-bayes-formula" class="level2">
+<h2 class="anchored" data-anchor-id="the-discrete-bayes-formula">2.1 The discrete Bayes formula</h2>
 <p>Suppose the unknown state is one of</p>
 <p><span class="math display">\[
 \theta_1,\theta_2,\ldots,\theta_k.
@@ -539,8 +525,21 @@ Y\sim N(\mu,\sigma^2)
 {\text{evidence}}.
 \]</span></p>
 </section>
-<section id="worked-example-fraud-screening" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="worked-example-fraud-screening"><span class="header-section-number">2.2</span> 2.2 Worked example: fraud screening</h2>
+<section id="worked-example-fraud-screening" class="level2">
+<h2 class="anchored" data-anchor-id="worked-example-fraud-screening">2.2 Worked example: fraud screening</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Screening terminology
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <strong>base rate</strong> is the chance of fraud before looking at the screening result. <strong>Sensitivity</strong> is the probability of flagging a truly fraudulent transaction. <strong>Specificity</strong> is the probability of not flagging a legitimate transaction. A <strong>false positive</strong> is a legitimate transaction that is incorrectly flagged. These quantities determine the probability of fraud <em>given</em> a flag, which is not the same as the probability of a flag <em>given</em> fraud.</p>
+</div>
+</div>
 <p>Suppose:</p>
 <p><span class="math display">\[
 \Pr(F)=0.01
@@ -577,8 +576,21 @@ Y\sim N(\mu,\sigma^2)
 <p>Why? Fraud is rare.</p>
 <p>The low prior prevalence matters.</p>
 </section>
-<section id="prior-odds-likelihood-ratio-posterior-odds" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="prior-odds-likelihood-ratio-posterior-odds"><span class="header-section-number">2.3</span> 2.3 Prior odds, likelihood ratio, posterior odds</h2>
+<section id="prior-odds-likelihood-ratio-posterior-odds" class="level2">
+<h2 class="anchored" data-anchor-id="prior-odds-likelihood-ratio-posterior-odds">2.3 Prior odds, likelihood ratio, posterior odds</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Odds are not probabilities
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For probability <span class="math inline">\(p\)</span>, <strong>odds</strong> are <span class="math inline">\(p/(1-p)\)</span>. A <strong>likelihood ratio</strong> compares how probable the observed evidence is under two hypotheses. <strong>Posterior odds</strong> are the updated odds after applying that evidence. Odds must be converted back to probabilities using <span class="math inline">\(p=o/(1+o)\)</span>, where <span class="math inline">\(o\)</span> denotes odds.</p>
+</div>
+</div>
 <p>Bayes’ rule can also be written in odds form:</p>
 <p><span class="math display">\[
 \boxed{
@@ -613,8 +625,8 @@ LR_+
 \]</span></p>
 <p>This representation is especially useful when evidence arrives sequentially.</p>
 </section>
-<section id="computing-the-discrete-example" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="computing-the-discrete-example"><span class="header-section-number">2.4</span> 2.4 Computing the discrete example</h2>
+<section id="computing-the-discrete-example" class="level2">
+<h2 class="anchored" data-anchor-id="computing-the-discrete-example">2.4 Computing the discrete example</h2>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Python</a></li></ul>
 <div class="tab-content">
@@ -644,8 +656,8 @@ LR_+
 </div>
 </div>
 </div>
-<section id="exercise-2-base-rate-sensitivity" class="level3" data-number="2.4.1">
-<h3 data-number="2.4.1" class="anchored" data-anchor-id="exercise-2-base-rate-sensitivity"><span class="header-section-number">2.4.1</span> Exercise 2 — Base-rate sensitivity</h3>
+<section id="exercise-2-base-rate-sensitivity" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-2-base-rate-sensitivity">Exercise 2 — Base-rate sensitivity</h3>
 <p>Keep the screening characteristics fixed:</p>
 <p><span class="math display">\[
 \Pr(+\mid F)=0.95,\qquad \Pr(+\mid F^c)=0.04.
@@ -660,8 +672,8 @@ LR_+
 <p>Before calculating, predict the direction of change.</p>
 </section>
 </section>
-<section id="from-events-to-parameters" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="from-events-to-parameters"><span class="header-section-number">2.5</span> 2.5 From events to parameters</h2>
+<section id="from-events-to-parameters" class="level2">
+<h2 class="anchored" data-anchor-id="from-events-to-parameters">2.5 From events to parameters</h2>
 <p>The same logic applies when the unknown object is a numerical parameter <span class="math inline">\(\theta\)</span>.</p>
 <p>For a continuous parameter,</p>
 <p><span class="math display">\[
@@ -689,8 +701,8 @@ f(y\mid\theta)f(\theta)
 <p>because <span class="math inline">\(f(y)\)</span> does not depend on <span class="math inline">\(\theta\)</span>.</p>
 <p>This is the key equation for the entire course.</p>
 </section>
-<section id="sampling-distribution-versus-likelihood" class="level2" data-number="2.6">
-<h2 data-number="2.6" class="anchored" data-anchor-id="sampling-distribution-versus-likelihood"><span class="header-section-number">2.6</span> 2.6 Sampling distribution versus likelihood</h2>
+<section id="sampling-distribution-versus-likelihood" class="level2">
+<h2 class="anchored" data-anchor-id="sampling-distribution-versus-likelihood">2.6 Sampling distribution versus likelihood</h2>
 <p>Suppose</p>
 <p><span class="math display">\[
 Y\mid\pi\sim\text{Binomial}(n,\pi).
@@ -715,8 +727,8 @@ L(\pi\mid y)
 \pi^y(1-\pi)^{n-y}.
 \]</span></p>
 <p>The likelihood is not a probability distribution for <span class="math inline">\(\pi\)</span>. It does not have to integrate to one over <span class="math inline">\(\pi\)</span>.</p>
-<section id="exercise-3-what-changes" class="level3" data-number="2.6.1">
-<h3 data-number="2.6.1" class="anchored" data-anchor-id="exercise-3-what-changes"><span class="header-section-number">2.6.1</span> Exercise 3 — What changes?</h3>
+<section id="exercise-3-what-changes" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-3-what-changes">Exercise 3 — What changes?</h3>
 <p>Suppose 17 of 25 users click a recommended item.</p>
 <ol type="1">
 <li>What is the observed data value <span class="math inline">\(y\)</span>?</li>
@@ -728,10 +740,23 @@ L(\pi\mid y)
 </section>
 </section>
 </section>
-<section id="block-3-the-beta-binomial-model" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Block 3 — The Beta-Binomial model</h1>
-<section id="why-use-a-beta-prior-for-a-probability" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="why-use-a-beta-prior-for-a-probability"><span class="header-section-number">3.1</span> 3.1 Why use a Beta prior for a probability?</h2>
+<section id="block-3-the-beta-binomial-model" class="level1">
+<h1>Block 3 — The Beta-Binomial model</h1>
+<section id="why-use-a-beta-prior-for-a-probability" class="level2">
+<h2 class="anchored" data-anchor-id="why-use-a-beta-prior-for-a-probability">3.1 Why use a Beta prior for a probability?</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>What the Beta parameters mean
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A <strong>Beta distribution</strong> is a flexible model for an unknown probability between 0 and 1, the distribution’s <strong>support</strong>. Its parameters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are <strong>shape parameters</strong> or, when used to specify a prior, <strong>hyperparameters</strong>. The <strong>Gamma function</strong> in its density is a generalization of the factorial and ensures the density integrates to one. Holding the mean fixed, larger <span class="math inline">\(\alpha+\beta\)</span> generally gives a more concentrated prior.</p>
+</div>
+</div>
 <p>For a probability parameter,</p>
 <p><span class="math display">\[
 0&lt;\pi&lt;1.
@@ -772,8 +797,8 @@ E(\pi)=\frac{\alpha}{\alpha+\beta}.
 \]</span></p>
 <p>is often interpreted informally as a measure of prior concentration or prior information strength.</p>
 </section>
-<section id="reading-beta-distributions" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="reading-beta-distributions"><span class="header-section-number">3.2</span> 3.2 Reading Beta distributions</h2>
+<section id="reading-beta-distributions" class="level2">
+<h2 class="anchored" data-anchor-id="reading-beta-distributions">3.2 Reading Beta distributions</h2>
 <p>Consider:</p>
 <p><span class="math display">\[
 \text{Beta}(1,1),\quad
@@ -787,8 +812,8 @@ E(\pi)=\frac{\alpha}{\alpha+\beta}.
 \]</span></p>
 <p>But they express very different uncertainty.</p>
 <p>A prior mean alone is not enough.</p>
-<section id="visualising-beta-priors" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="visualising-beta-priors"><span class="header-section-number">3.2.1</span> Visualising Beta priors</h3>
+<section id="visualising-beta-priors" class="level3">
+<h3 class="anchored" data-anchor-id="visualising-beta-priors">Visualising Beta priors</h3>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Python</a></li></ul>
 <div class="tab-content">
@@ -834,8 +859,8 @@ E(\pi)=\frac{\alpha}{\alpha+\beta}.
 </div>
 </div>
 </section>
-<section id="exercise-4-choose-a-prior" class="level3" data-number="3.2.2">
-<h3 data-number="3.2.2" class="anchored" data-anchor-id="exercise-4-choose-a-prior"><span class="header-section-number">3.2.2</span> Exercise 4 — Choose a prior</h3>
+<section id="exercise-4-choose-a-prior" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4-choose-a-prior">Exercise 4 — Choose a prior</h3>
 <p>For each statement about an unknown success probability <span class="math inline">\(\pi\)</span>, suggest a reasonable Beta prior. There is not always one unique answer.</p>
 <ol type="1">
 <li>“I have almost no useful information.”</li>
@@ -846,8 +871,21 @@ E(\pi)=\frac{\alpha}{\alpha+\beta}.
 <p>Explain both the prior center and prior concentration.</p>
 </section>
 </section>
-<section id="constructing-the-beta-binomial-model" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="constructing-the-beta-binomial-model"><span class="header-section-number">3.3</span> 3.3 Constructing the Beta-Binomial model</h2>
+<section id="constructing-the-beta-binomial-model" class="level2">
+<h2 class="anchored" data-anchor-id="constructing-the-beta-binomial-model">3.3 Constructing the Beta-Binomial model</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Conjugacy
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A <strong>conjugate prior</strong> produces a posterior from the same family of distributions. With Binomial observations and a Beta prior, the posterior is also Beta. This permits exact updating with a short formula, without requiring computational sampling.</p>
+</div>
+</div>
 <p>Let</p>
 <p><span class="math display">\[
 Y\mid\pi\sim\text{Binomial}(n,\pi)
@@ -896,8 +934,8 @@ f(\pi)L(\pi\mid y)
 <p>This is called <strong>conjugacy</strong>.</p>
 <p>The Beta prior is conjugate to the Binomial likelihood because the posterior is also Beta.</p>
 </section>
-<section id="interpreting-the-update" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="interpreting-the-update"><span class="header-section-number">3.4</span> 3.4 Interpreting the update</h2>
+<section id="interpreting-the-update" class="level2">
+<h2 class="anchored" data-anchor-id="interpreting-the-update">3.4 Interpreting the update</h2>
 <p>The update can be written:</p>
 <p><span class="math display">\[
 \alpha_{\text{post}}=\alpha+y,
@@ -908,8 +946,8 @@ f(\pi)L(\pi\mid y)
 <p>So successes add to <span class="math inline">\(\alpha\)</span>, and failures add to <span class="math inline">\(\beta\)</span>.</p>
 <p>This gives the Beta parameters a useful pseudo-count interpretation, although the interpretation must be used carefully when <span class="math inline">\(\alpha,\beta\)</span> are not integers or when the prior was not literally constructed from historical Binomial data.</p>
 </section>
-<section id="worked-example" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="worked-example"><span class="header-section-number">3.5</span> 3.5 Worked example</h2>
+<section id="worked-example" class="level2">
+<h2 class="anchored" data-anchor-id="worked-example">3.5 Worked example</h2>
 <p>Suppose we model a conversion probability <span class="math inline">\(\pi\)</span> using</p>
 <p><span class="math display">\[
 \pi\sim\text{Beta}(4,6).
@@ -945,8 +983,8 @@ E(\pi\mid y)
 <p>So the posterior mean lies between the prior mean 0.40 and the observed proportion 0.60.</p>
 <p>That is the Bayesian compromise.</p>
 </section>
-<section id="posterior-mean-as-a-weighted-average" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="posterior-mean-as-a-weighted-average"><span class="header-section-number">3.6</span> 3.6 Posterior mean as a weighted average</h2>
+<section id="posterior-mean-as-a-weighted-average" class="level2">
+<h2 class="anchored" data-anchor-id="posterior-mean-as-a-weighted-average">3.6 Posterior mean as a weighted average</h2>
 <p>For the Beta-Binomial model,</p>
 <p><span class="math display">\[
 E(\pi\mid y)
@@ -989,8 +1027,8 @@ w_{\text{data}}
 \]</span></p>
 <p>The weights add to one.</p>
 <p>This formula provides a direct mathematical explanation of the balance between prior information and data.</p>
-<section id="exercise-5-posterior-by-hand" class="level3" data-number="3.6.1">
-<h3 data-number="3.6.1" class="anchored" data-anchor-id="exercise-5-posterior-by-hand"><span class="header-section-number">3.6.1</span> Exercise 5 — Posterior by hand</h3>
+<section id="exercise-5-posterior-by-hand" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5-posterior-by-hand">Exercise 5 — Posterior by hand</h3>
 <p>Let</p>
 <p><span class="math display">\[
 \pi\sim\text{Beta}(3,7)
@@ -1007,10 +1045,23 @@ w_{\text{data}}
 </section>
 </section>
 </section>
-<section id="block-4-bayesian-computation-begins" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Block 4 — Bayesian computation begins</h1>
-<section id="why-simulate-when-the-posterior-is-known" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="why-simulate-when-the-posterior-is-known"><span class="header-section-number">4.1</span> 4.1 Why simulate when the posterior is known?</h2>
+<section id="block-4-bayesian-computation-begins" class="level1">
+<h1>Block 4 — Bayesian computation begins</h1>
+<section id="why-simulate-when-the-posterior-is-known" class="level2">
+<h2 class="anchored" data-anchor-id="why-simulate-when-the-posterior-is-known">4.1 Why simulate when the posterior is known?</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Simulation vocabulary
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A <strong>posterior draw</strong> is one simulated value of a parameter drawn from its posterior distribution. <strong>Monte Carlo simulation</strong> approximates quantities by averaging many such draws. An <strong>indicator function</strong> <span class="math inline">\(I(C)\)</span> equals 1 if condition <span class="math inline">\(C\)</span> holds and 0 otherwise. Therefore, the average of <span class="math inline">\(I(\pi&gt;0.5)\)</span> over posterior draws approximates <span class="math inline">\(\Pr(\pi&gt;0.5\mid y)\)</span>.</p>
+</div>
+</div>
 <p>For the Beta-Binomial model, the posterior can be written analytically.</p>
 <p>But simulation is still useful because it prepares us for models where analytic formulas are unavailable.</p>
 <p>If</p>
@@ -1041,8 +1092,8 @@ I(\pi^{(s)}&gt;0.5).
 \]</span></p>
 <p>This is the basic Monte Carlo idea.</p>
 </section>
-<section id="posterior-simulation-in-r-and-python" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="posterior-simulation-in-r-and-python"><span class="header-section-number">4.2</span> 4.2 Posterior simulation in R and Python</h2>
+<section id="posterior-simulation-in-r-and-python" class="level2">
+<h2 class="anchored" data-anchor-id="posterior-simulation-in-r-and-python">4.2 Posterior simulation in R and Python</h2>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">Python</a></li></ul>
 <div class="tab-content">
@@ -1083,8 +1134,21 @@ I(\pi^{(s)}&gt;0.5).
 </div>
 </div>
 </section>
-<section id="posterior-density-and-credible-interval" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="posterior-density-and-credible-interval"><span class="header-section-number">4.3</span> 4.3 Posterior density and credible interval</h2>
+<section id="posterior-density-and-credible-interval" class="level2">
+<h2 class="anchored" data-anchor-id="posterior-density-and-credible-interval">4.3 Posterior density and credible interval</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Reading uncertainty intervals
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A <strong>credible interval</strong> covers a specified proportion of the posterior probability, conditional on the model and data. An <strong>equal-tailed credible interval</strong> leaves the same posterior probability outside each endpoint. A <strong>quantile</strong> is a point below which a specified proportion of a distribution lies. A 95% credible interval is not defined by repeating the experiment 95% of the time.</p>
+</div>
+</div>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">Python</a></li></ul>
 <div class="tab-content">
@@ -1134,8 +1198,8 @@ I(\pi^{(s)}&gt;0.5).
 </blockquote>
 <p>This is a probability statement about the unknown parameter within the Bayesian model.</p>
 </section>
-<section id="prior-likelihood-and-posterior-on-one-plot" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="prior-likelihood-and-posterior-on-one-plot"><span class="header-section-number">4.4</span> 4.4 Prior, likelihood and posterior on one plot</h2>
+<section id="prior-likelihood-and-posterior-on-one-plot" class="level2">
+<h2 class="anchored" data-anchor-id="prior-likelihood-and-posterior-on-one-plot">4.4 Prior, likelihood and posterior on one plot</h2>
 <p>For the example</p>
 <p><span class="math display">\[
 \pi\sim\text{Beta}(4,6),
@@ -1199,8 +1263,21 @@ Y=18,\;n=30,
 </div>
 <p>The likelihood is scaled only for visual comparison. Its absolute vertical scale has no inferential meaning as a probability density for <span class="math inline">\(\pi\)</span>.</p>
 </section>
-<section id="prior-predictive-thinking" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="prior-predictive-thinking"><span class="header-section-number">4.5</span> 4.5 Prior predictive thinking</h2>
+<section id="prior-predictive-thinking" class="level2">
+<h2 class="anchored" data-anchor-id="prior-predictive-thinking">4.5 Prior predictive thinking</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Predictive distributions
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <strong>prior predictive distribution</strong> describes data we might observe <em>before</em> seeing the current sample, accounting for uncertainty in the prior. The <strong>posterior predictive distribution</strong> describes future data <em>after</em> updating the prior with the current sample. A predictive distribution concerns observations, while a posterior distribution concerns unknown model quantities.</p>
+</div>
+</div>
 <p>Before seeing the current data, ask:</p>
 <blockquote class="blockquote">
 <p>If my prior and sampling model were reasonable, what kinds of data would they generate?</p>
@@ -1264,8 +1341,8 @@ Y\mid\pi\sim\text{Binomial}(30,\pi).
 <p>Prior predictive simulation checks whether the <strong>whole model before seeing the data</strong> implies plausible observations.</p>
 <p>This idea will become central later.</p>
 </section>
-<section id="prior-influence-and-sample-size" class="level2" data-number="4.6">
-<h2 data-number="4.6" class="anchored" data-anchor-id="prior-influence-and-sample-size"><span class="header-section-number">4.6</span> 4.6 Prior influence and sample size</h2>
+<section id="prior-influence-and-sample-size" class="level2">
+<h2 class="anchored" data-anchor-id="prior-influence-and-sample-size">4.6 Prior influence and sample size</h2>
 <p>Consider the same observed rate <span class="math inline">\(y/n=0.70\)</span>, but with different sample sizes.</p>
 <p>A Beta(8,12) prior has mean 0.40.</p>
 <p>If:</p>
@@ -1292,8 +1369,8 @@ y=700,\;n=1000,
 \]</span></p>
 <p>the posterior mean is very close to 0.70.</p>
 <p>As the data accumulate, the original prior usually contributes a smaller proportion of total information.</p>
-<section id="exercise-6-prior-versus-data" class="level3" data-number="4.6.1">
-<h3 data-number="4.6.1" class="anchored" data-anchor-id="exercise-6-prior-versus-data"><span class="header-section-number">4.6.1</span> Exercise 6 — Prior versus data</h3>
+<section id="exercise-6-prior-versus-data" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-6-prior-versus-data">Exercise 6 — Prior versus data</h3>
 <p>Use the prior</p>
 <p><span class="math display">\[
 \pi\sim\text{Beta}(8,12).
@@ -1307,15 +1384,28 @@ y=700,\;n=1000,
 <p>Then explain why the posterior changes even though the observed proportion is 0.70 in every case.</p>
 </section>
 </section>
-<section id="sequential-bayesian-updating" class="level2" data-number="4.7">
-<h2 data-number="4.7" class="anchored" data-anchor-id="sequential-bayesian-updating"><span class="header-section-number">4.7</span> 4.7 Sequential Bayesian updating</h2>
+<section id="sequential-bayesian-updating" class="level2">
+<h2 class="anchored" data-anchor-id="sequential-bayesian-updating">4.7 Sequential Bayesian updating</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Updating in batches
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Sequential updating</strong> means processing observations in stages. After the first batch, the posterior becomes the prior for the next batch. When the model assumptions remain the same, this leads to the same posterior as analysing all observations together.</p>
+</div>
+</div>
 <p>Suppose</p>
 <p><span class="math display">\[
 \pi\sim\text{Beta}(2,3).
 \]</span></p>
 <p>You observe data in stages.</p>
-<section id="batch-1" class="level3" data-number="4.7.1">
-<h3 data-number="4.7.1" class="anchored" data-anchor-id="batch-1"><span class="header-section-number">4.7.1</span> Batch 1</h3>
+<section id="batch-1" class="level3">
+<h3 class="anchored" data-anchor-id="batch-1">Batch 1</h3>
 <p>3 successes and 2 failures:</p>
 <p><span class="math display">\[
 \pi\mid y_1
@@ -1325,8 +1415,8 @@ y=700,\;n=1000,
 \text{Beta}(5,5).
 \]</span></p>
 </section>
-<section id="batch-2" class="level3" data-number="4.7.2">
-<h3 data-number="4.7.2" class="anchored" data-anchor-id="batch-2"><span class="header-section-number">4.7.2</span> Batch 2</h3>
+<section id="batch-2" class="level3">
+<h3 class="anchored" data-anchor-id="batch-2">Batch 2</h3>
 <p>Then observe 4 successes and 1 failure.</p>
 <p>Use the first posterior as the next prior:</p>
 <p><span class="math display">\[
@@ -1351,8 +1441,8 @@ y=700,\;n=1000,
 <p>This illustrates sequential coherence.</p>
 </section>
 </section>
-<section id="sequential-updating-in-code" class="level2" data-number="4.8">
-<h2 data-number="4.8" class="anchored" data-anchor-id="sequential-updating-in-code"><span class="header-section-number">4.8</span> 4.8 Sequential updating in code</h2>
+<section id="sequential-updating-in-code" class="level2">
+<h2 class="anchored" data-anchor-id="sequential-updating-in-code">4.8 Sequential updating in code</h2>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false" href="">Python</a></li></ul>
 <div class="tab-content">
@@ -1391,8 +1481,8 @@ y=700,\;n=1000,
 </div>
 </div>
 </section>
-<section id="a-first-posterior-decision-statement" class="level2" data-number="4.9">
-<h2 data-number="4.9" class="anchored" data-anchor-id="a-first-posterior-decision-statement"><span class="header-section-number">4.9</span> 4.9 A first posterior decision statement</h2>
+<section id="a-first-posterior-decision-statement" class="level2">
+<h2 class="anchored" data-anchor-id="a-first-posterior-decision-statement">4.9 A first posterior decision statement</h2>
 <p>Suppose our decision threshold is:</p>
 <p><span class="math display">\[
 \pi&gt;0.50.
@@ -1420,8 +1510,8 @@ y=700,\;n=1000,
 <p>That distinction will matter later.</p>
 </section>
 </section>
-<section id="integrated-exercise-from-question-to-posterior" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Integrated exercise — From question to posterior</h1>
+<section id="integrated-exercise-from-question-to-posterior" class="level1">
+<h1>Integrated exercise — From question to posterior</h1>
 <p>A digital learning platform historically expects that around 60% of students complete a weekly activity. For a redesigned activity, suppose you represent prior uncertainty about the completion probability <span class="math inline">\(\pi\)</span> by</p>
 <p><span class="math display">\[
 \pi\sim\text{Beta}(12,8).
@@ -1441,8 +1531,8 @@ y=700,\;n=1000,
 <li>If another 20 students are observed and 10 complete the activity, update the posterior sequentially.</li>
 </ol>
 </section>
-<section id="exit-exercise" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Exit exercise</h1>
+<section id="exit-exercise" class="level1">
+<h1>Exit exercise</h1>
 <p>Without using software, complete the following in five minutes.</p>
 <p>Suppose</p>
 <p><span class="math display">\[
@@ -1460,8 +1550,8 @@ Y\mid\pi\sim\text{Binomial}(20,\pi).
 <li>Write one posterior probability that would be scientifically meaningful.</li>
 </ol>
 </section>
-<section id="what-you-should-retain-from-week-1" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> What you should retain from Week 1</h1>
+<section id="what-you-should-retain-from-week-1" class="level1">
+<h1>What you should retain from Week 1</h1>
 <p>The central identity is:</p>
 <p><span class="math display">\[
 \boxed{
@@ -1502,8 +1592,66 @@ Y\mid\pi\sim\text{Binomial}(n,\pi),
 \]</span></p>
 <p>and posterior simulation converts distributional questions into numerical summaries.</p>
 </section>
-<section id="preparation-for-week-2" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Preparation for Week 2</h1>
+<section id="technical-terms" class="level1">
+<h1>Technical terms explained</h1>
+<p>The definitions below are also used throughout the lecture. Read them when a term first appears, then return to the worked examples.</p>
+<p><strong>Parameter.</strong> An unknown numerical feature of a population or a model, such as the probability of success <span class="math inline">\(\pi\)</span>. It is not a computed summary of the sample.</p>
+<p><strong>Statistic.</strong> A number calculated from observed data, such as the sample proportion <span class="math inline">\(y/n\)</span>. A statistic changes from sample to sample.</p>
+<p><strong>Random variable.</strong> A numerical quantity whose value is uncertain before an observation. We write <span class="math inline">\(Y\)</span> for the random variable and <span class="math inline">\(y\)</span> for an observed value.</p>
+<p><strong>Probability distribution.</strong> A mathematical description of the probabilities of possible outcomes. For continuous variables, probabilities are obtained by integrating a density.</p>
+<p><strong>Probability mass function (PMF).</strong> A function giving the probability of each possible value of a discrete random variable. Its probabilities sum to one.</p>
+<p><strong>Probability density function (PDF).</strong> A function describing how probability is distributed over values of a continuous variable. Probabilities are areas under the density, not density heights at single points.</p>
+<p><strong>Conditional probability.</strong> The probability of an event after restricting attention to cases in which another event occurred, written <span class="math inline">\(\Pr(A\mid B)\)</span>.</p>
+<p><strong>Joint probability.</strong> The probability of two events occurring together, written <span class="math inline">\(\Pr(A\cap B)\)</span>.</p>
+<p><strong>Partition.</strong> A collection of mutually exclusive events that together cover all possible outcomes.</p>
+<p><strong>Marginal probability.</strong> The probability of an observed event after averaging or summing over possible values of an unobserved event or parameter.</p>
+<p><strong>Normalizing constant.</strong> The quantity used to scale a nonnegative expression so that its probabilities sum to one or its density integrates to one.</p>
+<p><strong>Prior distribution.</strong> A probability distribution for an unknown parameter before the current observations are used. It can reflect earlier evidence, substantive knowledge, or an explicitly chosen modelling assumption.</p>
+<p><strong>Sampling distribution.</strong> A probability model for the possible data when a parameter value is specified, such as <span class="math inline">\(Y\mid\pi\sim\mathrm{Binomial}(n,\pi)\)</span>.</p>
+<p><strong>Likelihood.</strong> The sampling model viewed as a function of the unknown parameter after the data are fixed. It compares parameter values but is not itself a probability distribution over them.</p>
+<p><strong>Posterior distribution.</strong> The updated probability distribution for a parameter after conditioning on the observed data, given the prior and sampling model.</p>
+<p><strong>Bayes factor.</strong> A ratio of marginal likelihoods of two competing models. It is different from a likelihood ratio evaluated at two fixed parameter values.</p>
+<p><strong>Base rate.</strong> The frequency or prior probability of the event of interest before considering the test or other evidence.</p>
+<p><strong>False positive.</strong> A positive classification or test result when the event or condition is actually absent.</p>
+<p><strong>Sensitivity.</strong> The probability of a positive test among cases that truly have the condition.</p>
+<p><strong>Specificity.</strong> The probability of a negative test among cases that truly do not have the condition.</p>
+<p><strong>Odds.</strong> A probability <span class="math inline">\(p\)</span> expressed as <span class="math inline">\(p/(1-p)\)</span>. Odds of 3 mean three occurrences are expected for each non-occurrence under the model.</p>
+<p><strong>Likelihood ratio.</strong> The ratio of how probable the same evidence is under two specified hypotheses or parameter values. It shows how that evidence changes their relative support.</p>
+<p><strong>Posterior odds.</strong> The ratio of posterior probabilities for two hypotheses, obtained by multiplying prior odds by the relevant likelihood ratio.</p>
+<p><strong>Hyperparameter.</strong> A fixed value specifying a prior distribution, such as <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> in <span class="math inline">\(\mathrm{Beta}(\alpha,\beta)\)</span>. In a hierarchical model a hyperparameter can itself have a prior.</p>
+<p><strong>Binomial distribution.</strong> A model for the number of successes in <span class="math inline">\(n\)</span> independent trials that share one success probability <span class="math inline">\(\pi\)</span>.</p>
+<p><strong>Beta distribution.</strong> A family of probability distributions on <span class="math inline">\((0,1)\)</span>, indexed by positive shape parameters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>. It is useful for modelling an unknown probability.</p>
+<p><strong>Support.</strong> The values a distribution allows. For a Beta distribution, the parameter is between zero and one.</p>
+<p><strong>Gamma function.</strong> A mathematical extension of the factorial, satisfying <span class="math inline">\(\Gamma(k)=(k-1)!\)</span> for positive integers <span class="math inline">\(k\)</span>. It appears in the Beta density normalization.</p>
+<p><strong>Conjugate prior.</strong> A prior distribution that produces a posterior in the same distribution family under a chosen sampling model. Beta is conjugate to Binomial.</p>
+<p><strong>Posterior predictive distribution.</strong> A distribution for future observations obtained by averaging the sampling model over uncertainty in the parameter under the posterior.</p>
+<p><strong>Prior predictive distribution.</strong> A distribution for hypothetical data before observing the current sample, obtained by averaging the sampling model over the prior.</p>
+<p><strong>Posterior mean.</strong> The average value of a parameter under its posterior distribution. It may be used as an estimate when squared-error loss is appropriate.</p>
+<p><strong>Posterior mode.</strong> The location where the posterior density is largest. It need not equal the posterior mean.</p>
+<p><strong>Posterior variance.</strong> A numerical measure of the spread of a posterior distribution about its mean.</p>
+<p><strong>Credible interval.</strong> An interval containing a stated posterior probability for a parameter, conditional on the prior, model, and observed data.</p>
+<p><strong>Quantile.</strong> A cutoff such that a specified proportion of a distribution lies below it. For example, the 0.025 quantile leaves 2.5% below.</p>
+<p><strong>Equal-tailed interval.</strong> A credible interval formed from lower and upper posterior quantiles with equal probability in the two excluded tails.</p>
+<p><strong>Monte Carlo simulation.</strong> A numerical method that uses random draws from a probability distribution to approximate probabilities, expectations, or other quantities.</p>
+<p><strong>Posterior draw.</strong> One simulated parameter value sampled from the posterior distribution.</p>
+<p><strong>Indicator function.</strong> A function <span class="math inline">\(I(C)\)</span> equal to 1 when condition <span class="math inline">\(C\)</span> is true and 0 otherwise. Averaging indicators estimates the probability of <span class="math inline">\(C\)</span>.</p>
+<p><strong>Sequential updating.</strong> Updating a posterior as new batches of observations arrive. Under a consistent model, using the first posterior as the next prior reproduces an all-at-once update.</p>
+<p><strong>Prior influence.</strong> The degree to which prior assumptions affect posterior results. It generally depends on prior concentration, sample size, and how strongly prior and data disagree.</p>
+<p><strong>Model checking.</strong> Assessing whether a model adequately describes relevant features of the observed data, often using simulated predictions.</p>
+<p><strong>Model comparison.</strong> Comparing alternative models using specified criteria, predictive performance, or posterior evidence.</p>
+<p><strong>Stan.</strong> Software for fitting Bayesian statistical models, commonly using Hamiltonian Monte Carlo for complex posterior distributions.</p>
+<p><strong>PyMC.</strong> A Python library for expressing and fitting probabilistic models, including Bayesian models.</p>
+<p><strong>Concentration.</strong> How tightly a probability distribution gathers its mass around certain values. For a Beta prior, larger <span class="math inline">\(\alpha+\beta\)</span> at a fixed mean generally implies greater concentration.</p>
+<p><strong>Regression coefficient.</strong> A model parameter that describes how a predictor is associated with a response, on the scale specified by the regression model.</p>
+<p><strong>Average treatment effect.</strong> The population average difference between the outcomes people would have under treatment and under control, under a stated causal framework.</p>
+<p><strong>Churn.</strong> A customer stopping use of a service over a defined time period.</p>
+<p><strong>Conversion rate.</strong> The proportion of visits or users who complete a specified action.</p>
+<p><strong>Posterior inference.</strong> Drawing conclusions about unknown quantities from their posterior distribution, for example probabilities, interval estimates, and decisions.</p>
+<p><strong>Analytic solution.</strong> A mathematical formula for a result, rather than an approximation based only on numerical simulation.</p>
+<p><strong>Proportionality.</strong> The symbol <span class="math inline">\(\propto\)</span> means two expressions differ only by a multiplicative factor that does not depend on the variable of interest.</p>
+</section>
+<section id="preparation-for-week-2" class="level1">
+<h1>Preparation for Week 2</h1>
 <p>Before Week 2, make sure you can:</p>
 <ul>
 <li>calculate a Beta-Binomial posterior by hand;</li>
@@ -1514,13 +1662,16 @@ Y\mid\pi\sim\text{Binomial}(n,\pi),
 </ul>
 <p>Week 2 will move from exact posterior models toward <strong>posterior approximation and computation</strong>, including grid-based approximation and the motivation for MCMC.</p>
 </section>
-<section id="references" class="level1" data-number="9">
-<h1 data-number="9"><span class="header-section-number">9</span> References</h1>
+<section id="references" class="level1">
+<h1>References</h1>
 <p>Johnson, A. A., Ott, M. Q., &amp; Dogucu, M. (2021). <em>Bayes Rules! An Introduction to Applied Bayesian Modeling</em>. CRC Press.<br>
 <a href="https://www.bayesrulesbook.com/" class="uri">https://www.bayesrulesbook.com/</a></p>
 <p>Martin, O. A., Kumar, R., &amp; Lao, J. <em>Bayesian Modeling and Computation in Python</em>. CRC Press.<br>
 <a href="https://bayesiancomputationbook.com/" class="uri">https://bayesiancomputationbook.com/</a></p>
 <p>The structure of this week is primarily informed by the Bayesian learning sequence developed in Chapters 1–4 of <em>Bayes Rules!</em>.</p>
+<div class="lecture-end">
+<p><a href="../index.html">Back to DSA 604 course homepage</a></p>
+</div>
 </section>
 
 </main>
@@ -1612,6 +1763,11 @@ Y\mid\pi\sim\text{Binomial}(n,\pi),
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
         }
       }
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
