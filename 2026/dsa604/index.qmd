@@ -1,149 +1,256 @@
 ---
-title: "DSA 604 — Bayesian Computation"
-subtitle: "MSc in Data Science & Artificial Intelligence | Intake 2026/2028"
+title: "Bayesian Computation"
+subtitle: "DSA 604 2.0 · MSc in Data Science & Artificial Intelligence · 2026/2028"
+author: "Dr. Rajitha M. Silva"
 format:
   html:
-    toc: false
-    smooth-scroll: true
-    code-copy: true
-    theme:
-      light: cosmo
-      dark: darkly
+    theme: cosmo
     css: styles.css
+    toc: false
+    page-layout: full
+    smooth-scroll: true
+    link-external-newwindow: true
+    code-copy: true
+title-block-banner: false
 ---
 
-::: {.course-hero}
-# DSA 604 — Bayesian Computation
+::::: hero
+:::: hero-inner
+[MSc in Data Science & Artificial Intelligence · Intake 2026/2028]{.eyebrow}
 
-**MSc in Data Science & Artificial Intelligence**  
-**Intake:** 2026/2028  
-**Course:** DSA 604 2.0 Bayesian Computation  
-**Lecturer:** Dr RM Silva
+# Bayesian Computation
 
-This page provides the course outline, teaching schedule, lecture materials, practical sessions, and related resources.
+Build, compute, and evaluate Bayesian models. Starting with prior information, likelihoods, and posterior inference, this course moves to simulation, Markov chain Monte Carlo, regression, hierarchical models, and predictive assessment using **R**, with selected **Python/PyMC** comparisons.
+
+::: hero-actions
+[Explore teaching sessions](#weekly-lessons){.btn .btn-primary} [View course overview](#course-overview){.btn .btn-secondary}
+:::
+::::
+:::::
+
+::::::: course-facts
+::: fact-card
+Course code **DSA 604 2.0**
 :::
 
-## Course outline
+::: fact-card
+Credit value **2 credits**
+:::
 
-The course develops Bayesian statistical modelling through computation, with primary emphasis on **R** and selected comparisons using **Python/PyMC**.
+::: fact-card
+Scheduled sessions **8 sessions**
+:::
 
-The main reference is **Bayes Rules! An Introduction to Applied Bayesian Modeling**, supported by selected material from **Bayesian Modeling and Computation in Python**.
+::: fact-card
+Scheduled teaching **32 hours**
+:::
+:::::::
 
-### Main topics
+## Course overview {#course-overview}
+
+::: section-kicker
+COURSE OVERVIEW
+:::
+
+### From Bayesian reasoning to computational modelling
+
+Bayesian inference combines information about unknown quantities with evidence from observed data. This course develops the statistical reasoning behind that process and the computational methods needed when posterior distributions cannot be evaluated analytically.
+
+Students first formulate a model and interpret its components. They then use R to simulate from posterior distributions, diagnose computation, and assess model predictions. Selected comparisons with Python/PyMC support the same modelling workflow.
+
+::::::: grid-two
+::: panel
+### What we will study
 
 - Bayesian probability and statistical reasoning
-- Prior distributions and likelihood construction
-- Posterior distributions and posterior summaries
-- Posterior simulation and Monte Carlo methods
-- Markov chain Monte Carlo
-- Bayesian regression
-- Generalized Bayesian models
-- Hierarchical models
-- MCMC diagnostics
-- Posterior predictive checking
-- Model comparison and predictive assessment
-- Bayesian workflow for Data Science
-
-## Teaching schedule
-
-::: {.callout-note}
-### Session format
-
-**Morning sessions:** Lectures and guided computational demonstrations  
-**Evening sessions:** Practical sessions
+- Prior distributions, likelihoods, and posterior inference
+- Posterior summaries, simulation, and Monte Carlo methods
+- Markov chain Monte Carlo and convergence diagnostics
+- Bayesian regression and generalized Bayesian models
+- Hierarchical models and partial pooling
+- Posterior predictive checking and model comparison
+- Predictive assessment and the Bayesian modelling workflow
 :::
 
-| Week | Date | Time | Duration | Session |
-|---:|:---:|:---|:---:|:---|
-| 1 | 14 Nov 2026 | 08:00 am – 12:00 pm | 4 hrs | Lecture |
-| 2 | 21 Nov 2026 | 08:00 am – 12:00 pm | 4 hrs | Lecture |
-| 3 | 21 Nov 2026 | 01:00 pm – 05:00 pm | 4 hrs | **Practical** |
-| 4 | 28 Nov 2026 | 08:00 am – 12:00 pm | 4 hrs | Lecture |
-| 5 | 05 Dec 2026 | 08:00 am – 12:00 pm | 4 hrs | Lecture |
-| 6 | 12 Dec 2026 | 08:00 am – 12:00 pm | 4 hrs | Lecture |
-| 7 | 02 Jan 2027 | 08:00 am – 12:00 pm | 4 hrs | Lecture |
-| 8 | 02 Jan 2027 | 01:00 pm – 05:00 pm | 4 hrs | **Practical** |
+::::: stack
+::: panel
+### Computing environment
 
-## Lecture and practical links
+**Primary language:** R
 
-::: {.resource-grid}
+**Selected comparisons:** Python/PyMC
 
-### Week 1  
-**14 Nov 2026 · Lecture**
+Core R tools include `tidyverse`, `bayesrules`, `rstanarm`, `cmdstanr`, `posterior`, `bayesplot`, `tidybayes`, and `loo`.
+:::
 
-Bayesian thinking, probability review, prior distributions, likelihood, and posterior distributions.
+::: note
+**Learning approach.** Lectures combine statistical explanations and guided computation. Practical sessions provide opportunities to implement models, examine posterior output, and interpret results.
+:::
+:::::
+:::::::
 
-[Lecture notes](week1/week1.html)
+## Learning objectives {#learning-outcomes}
 
+::: section-kicker
+LEARNING OBJECTIVES
+:::
 
-### Week 2  
-**21 Nov 2026 · Lecture**
+### What this course develops
 
-Posterior computation, simulation, grid approximation, Monte Carlo ideas, and introduction to MCMC.
+::::::::::: ilo-grid
+:::: ilo-card
+::: ilo-num
+1
+:::
 
-[Lecture notes](#)  
+Specify Bayesian models using prior distributions, likelihood functions, and posterior distributions.
+::::
 
+:::: ilo-card
+::: ilo-num
+2
+:::
 
-### Week 3  
-**21 Nov 2026 · Practical**
+Use numerical simulation and MCMC to obtain and summarize posterior distributions.
+::::
 
-Hands-on Bayesian computation in R.
+:::: ilo-card
+::: ilo-num
+3
+:::
 
-[Practical sheet](#)  
-[Data files](#)  
-[R script](#)
+Fit and interpret Bayesian regression, generalized, and hierarchical models using R.
+::::
 
-### Week 4  
-**28 Nov 2026 · Lecture**
+:::: ilo-card
+::: ilo-num
+4
+:::
 
-Markov chain Monte Carlo, convergence, diagnostics, effective sample size, and posterior summaries.
+Examine computational diagnostics and evaluate models through posterior predictive checks and predictive assessment.
+::::
+:::::::::::
 
-[Lecture notes](#)  
+## Teaching schedule {#teaching-schedule}
 
+::: section-kicker
+TEACHING SCHEDULE
+:::
 
-### Week 5  
-**05 Dec 2026 · Lecture**
+Morning sessions are lectures and guided computational demonstrations. Afternoon sessions are practicals.
 
-Bayesian regression and prior specification.
+| Session | Date | Time | Hours | Format |
+|:--:|:--|:--|:--:|:--|
+| 01 | 14 Nov 2026 | 08:00 am – 12:00 pm | 4 | Lecture |
+| 02 | 21 Nov 2026 | 08:00 am – 12:00 pm | 4 | Lecture |
+| 03 | 21 Nov 2026 | 01:00 pm – 05:00 pm | 4 | **Practical** |
+| 04 | 28 Nov 2026 | 08:00 am – 12:00 pm | 4 | Lecture |
+| 05 | 05 Dec 2026 | 08:00 am – 12:00 pm | 4 | Lecture |
+| 06 | 12 Dec 2026 | 08:00 am – 12:00 pm | 4 | Lecture |
+| 07 | 02 Jan 2027 | 08:00 am – 12:00 pm | 4 | Lecture |
+| 08 | 02 Jan 2027 | 01:00 pm – 05:00 pm | 4 | **Practical** |
 
-[Lecture notes](#)  
+## Weekly lessons {#weekly-lessons}
 
+::: section-kicker
+8-SESSION LEARNING PATH
+:::
 
-### Week 6  
-**12 Dec 2026 · Lecture**
+Six lecture sessions and two practical sessions, with lecture notes and supporting materials linked as they become available.
+
+:::::::::::::::::: week-grid
+::: {.week-card .week-active}
+[SESSION 01 · 14 NOV 2026 · LECTURE]{.week-no}
+
+### [Bayesian Thinking and Fundamentals](week1/week1.html)
+
+Probability review, prior distributions, likelihoods, and posterior distributions.
+
+[Open lecture notes](week1/week1.html){.lesson-link}
+:::
+
+::: week-card
+[SESSION 02 · 21 NOV 2026 · LECTURE]{.week-no}
+
+### Posterior Computation and Simulation
+
+Grid approximation, Monte Carlo ideas, posterior simulation, and an introduction to MCMC.
+
+[Materials forthcoming]{.lesson-pending}
+:::
+
+::: {.week-card .week-practical}
+[SESSION 03 · 21 NOV 2026 · PRACTICAL]{.week-no}
+
+### Bayesian Computation in R
+
+Hands-on computation using R, with practical exercises, datasets, and scripts.
+
+[Materials forthcoming]{.lesson-pending}
+:::
+
+::: week-card
+[SESSION 04 · 28 NOV 2026 · LECTURE]{.week-no}
+
+### Markov Chain Monte Carlo
+
+MCMC methods, convergence, diagnostics, effective sample size, and posterior summaries.
+
+[Materials forthcoming]{.lesson-pending}
+:::
+
+::: week-card
+[SESSION 05 · 05 DEC 2026 · LECTURE]{.week-no}
+
+### Bayesian Regression
+
+Regression models, prior specification, posterior interpretation, and computation.
+
+[Materials forthcoming]{.lesson-pending}
+:::
+
+::: week-card
+[SESSION 06 · 12 DEC 2026 · LECTURE]{.week-no}
+
+### Generalized and Hierarchical Models
 
 Generalized Bayesian models, hierarchical modelling, and partial pooling.
 
-[Lecture notes](#)  
+[Materials forthcoming]{.lesson-pending}
+:::
 
+::: week-card
+[SESSION 07 · 02 JAN 2027 · LECTURE]{.week-no}
 
-### Week 7  
-**02 Jan 2027 · Lecture**
+### Model Checking and Prediction
 
 Posterior predictive checking, model comparison, predictive assessment, and Bayesian workflow.
 
-[Lecture notes](#)  
-
-
-### Week 8  
-**02 Jan 2027 · Practical**
-
-Integrated Bayesian Data Science practical using R, with selected PyMC comparison.
-
-[Practical sheet](#)  
-[Data files](#)  
-[R script](#)  
-[Python/PyMC example](#)
-
+[Materials forthcoming]{.lesson-pending}
 :::
 
-## Software
+::: {.week-card .week-practical}
+[SESSION 08 · 02 JAN 2027 · PRACTICAL]{.week-no}
 
-The main computing environment is **R**.
+### Integrated Bayesian Data Science
 
-Recommended packages include:
+Applied Bayesian analysis using R, with selected comparisons in Python/PyMC.
 
-```r
+[Materials forthcoming]{.lesson-pending}
+:::
+::::::::::::::::::
+
+## Software {#software}
+
+::: section-kicker
+COMPUTATIONAL TOOLS
+:::
+
+::::::: grid-two
+::: panel
+### R (primary)
+
+```{.r}
 library(tidyverse)
 library(bayesrules)
 library(rstanarm)
@@ -153,35 +260,57 @@ library(bayesplot)
 library(tidybayes)
 library(loo)
 ```
+:::
 
-Selected practical comparisons may use:
+::: panel
+### Python (selected comparisons)
 
-```python
+```{.python}
 import pymc as pm
 import arviz as az
 ```
+:::
+:::::::
 
-## References
+## Primary references {#reference}
 
-### Primary reference
+::: section-kicker
+READING AND REFERENCES
+:::
 
-**Johnson, A. A., Ott, M. Q., & Dogucu, M.**  
+::::::: reference-grid
+::: reference-card
+### Bayes Rules!
+
+Johnson, A. A., Ott, M. Q., & Dogucu, M.
+
 *Bayes Rules! An Introduction to Applied Bayesian Modeling.*
 
-[Online book](https://www.bayesrulesbook.com/)
+[Read the online book](https://www.bayesrulesbook.com/)
+:::
 
-### Python companion
+::: reference-card
+### Bayesian Modeling and Computation in Python
 
-**Martin, O. A., Kumar, R., & Lao, J.**  
+Martin, O. A., Kumar, R., & Lao, J.
+
 *Bayesian Modeling and Computation in Python.*
 
-[Online book](https://bayesiancomputationbook.com/)
+[Read the online book](https://bayesiancomputationbook.com/)
+:::
+:::::::
 
-## Course resources
+## Course resources {#resources}
 
-- [Announcements](#)
-- [Assignments](#)
-- [Datasets](#)
-- [R scripts](#)
-- [Practical materials](#)
-- [Reference material](#)
+::: section-kicker
+COURSE RESOURCES
+:::
+
+Materials will be added throughout the course.
+## Instructor
+
+### Dr. Rajitha M. Silva
+
+Department of Statistics\
+Faculty of Applied Sciences\
+University of Sri Jayewardenepura

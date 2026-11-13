@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Dr.&nbsp;Rajitha M. Silva">
 
-<title>DSA 604 — Bayesian Computation</title>
+<title>Bayesian Computation</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -71,199 +72,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="index_files/libs/quarto-html/anchor.min.js"></script>
 <link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="index_files/libs/bootstrap/bootstrap-ca54cbca69027f2e727ddaba63ec68f0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="index_files/libs/bootstrap/bootstrap-dark-8c424cd560971ebff1260739a5f3bc86.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="index_files/libs/bootstrap/bootstrap-ca54cbca69027f2e727ddaba63ec68f0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="index_files/libs/bootstrap/bootstrap-ca54cbca69027f2e727ddaba63ec68f0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <style>html{ scroll-behavior: smooth; }</style>
 
 
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
-    const toggleBodyColorMode = (bsSheetEl) => {
-      const mode = bsSheetEl.getAttribute("data-mode");
-      const bodyEl = window.document.querySelector("body");
-      if (mode === "dark") {
-        bodyEl.classList.add("quarto-dark");
-        bodyEl.classList.remove("quarto-light");
-      } else {
-        bodyEl.classList.add("quarto-light");
-        bodyEl.classList.remove("quarto-dark");
-      }
-    }
-    const toggleBodyColorPrimary = () => {
-      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
-      if (bsSheetEl) {
-        toggleBodyColorMode(bsSheetEl);
-      }
-    }
-    const setColorSchemeToggle = (alternate) => {
-      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-      for (let i=0; i < toggles.length; i++) {
-        const toggle = toggles[i];
-        if (toggle) {
-          if (alternate) {
-            toggle.classList.add("alternate");
-          } else {
-            toggle.classList.remove("alternate");
-          }
-        }
-      }
-    };
-    const toggleColorMode = (alternate) => {
-      // Switch the stylesheets
-      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
-      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-      manageTransitions('#quarto-margin-sidebar .nav-link', false);
-      if (alternate) {
-        // note: dark is layered on light, we don't disable primary!
-        enableStylesheet(alternateStylesheets);
-        for (const sheetNode of alternateStylesheets) {
-          if (sheetNode.id === "quarto-bootstrap") {
-            toggleBodyColorMode(sheetNode);
-          }
-        }
-      } else {
-        disableStylesheet(alternateStylesheets);
-        enableStylesheet(primaryStylesheets)
-        toggleBodyColorPrimary();
-      }
-      manageTransitions('#quarto-margin-sidebar .nav-link', true);
-      // Switch the toggles
-      setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
-      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-        manageTransitions("body", false);
-        window.scrollTo(0, 1);
-        setTimeout(() => {
-          window.scrollTo(0, 0);
-          manageTransitions("body", true);
-        }, 40);
-      }
-    }
-    const disableStylesheet = (stylesheets) => {
-      for (let i=0; i < stylesheets.length; i++) {
-        const stylesheet = stylesheets[i];
-        stylesheet.rel = 'disabled-stylesheet';
-      }
-    }
-    const enableStylesheet = (stylesheets) => {
-      for (let i=0; i < stylesheets.length; i++) {
-        const stylesheet = stylesheets[i];
-        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
-          stylesheet.rel = 'stylesheet';
-        }
-      }
-    }
-    const manageTransitions = (selector, allowTransitions) => {
-      const els = window.document.querySelectorAll(selector);
-      for (let i=0; i < els.length; i++) {
-        const el = els[i];
-        if (allowTransitions) {
-          el.classList.remove('notransition');
-        } else {
-          el.classList.add('notransition');
-        }
-      }
-    }
-    const isFileUrl = () => {
-      return window.location.protocol === 'file:';
-    }
-    const hasAlternateSentinel = () => {
-      let styleSentinel = getColorSchemeSentinel();
-      if (styleSentinel !== null) {
-        return styleSentinel === "alternate";
-      } else {
-        return false;
-      }
-    }
-    const setStyleSentinel = (alternate) => {
-      const value = alternate ? "alternate" : "default";
-      if (!isFileUrl()) {
-        window.localStorage.setItem("quarto-color-scheme", value);
-      } else {
-        localAlternateSentinel = value;
-      }
-    }
-    const getColorSchemeSentinel = () => {
-      if (!isFileUrl()) {
-        const storageValue = window.localStorage.getItem("quarto-color-scheme");
-        return storageValue != null ? storageValue : localAlternateSentinel;
-      } else {
-        return localAlternateSentinel;
-      }
-    }
-    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-      let newTheme = '';
-      if(authorPrefersDark) {
-        newTheme = isAlternate ? baseTheme : alternateTheme;
-      } else {
-        newTheme = isAlternate ? alternateTheme : baseTheme;
-      }
-      const changeGiscusTheme = () => {
-        // From: https://github.com/giscus/giscus/issues/336
-        const sendMessage = (message) => {
-          const iframe = document.querySelector('iframe.giscus-frame');
-          if (!iframe) return;
-          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-        }
-        sendMessage({
-          setConfig: {
-            theme: newTheme
-          }
-        });
-      }
-      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-      if (isGiscussLoaded) {
-        changeGiscusTheme();
-      }
-    };
-    const authorPrefersDark = false;
-    const darkModeDefault = authorPrefersDark;
-      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
-      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
-    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-    // Dark / light mode switch
-    window.quartoToggleColorScheme = () => {
-      // Read the current dark / light value
-      let toAlternate = !hasAlternateSentinel();
-      toggleColorMode(toAlternate);
-      setStyleSentinel(toAlternate);
-      toggleGiscusIfUsed(toAlternate, darkModeDefault);
-      window.dispatchEvent(new Event('resize'));
-    };
-    // Switch to dark mode if need be
-    if (hasAlternateSentinel()) {
-      toggleColorMode(true);
-    } else {
-      toggleColorMode(false);
-    }
-  </script>
+<body class="quarto-light">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-full">
 
-<main class="content" id="quarto-document-content">
-
+<main class="content column-page" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">DSA 604 — Bayesian Computation</h1>
-<p class="subtitle lead">MSc in Data Science &amp; Artificial Intelligence | Intake 2026/2028</p>
+<h1 class="title">Bayesian Computation</h1>
+<p class="subtitle lead">DSA 604 2.0 · MSc in Data Science &amp; Artificial Intelligence · 2026/2028</p>
 </div>
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dr.&nbsp;Rajitha M. Silva </p>
+          </div>
+  </div>
     
   
     
@@ -274,184 +114,261 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="dsa-604-bayesian-computation" class="level1 course-hero">
-<h1>DSA 604 — Bayesian Computation</h1>
-<p><strong>MSc in Data Science &amp; Artificial Intelligence</strong><br>
-<strong>Intake:</strong> 2026/2028<br>
-<strong>Course:</strong> DSA 604 2.0 Bayesian Computation<br>
-<strong>Lecturer:</strong> Dr RM Silva</p>
-<p>This page provides the course outline, teaching schedule, lecture materials, practical sessions, and related resources.</p>
+<div class="hero">
+<div class="hero-inner">
+<p><span class="eyebrow">MSc in Data Science &amp; Artificial Intelligence · Intake 2026/2028</span></p>
+<section id="bayesian-computation" class="level1">
+<h1>Bayesian Computation</h1>
+<p>Build, compute, and evaluate Bayesian models. Starting with prior information, likelihoods, and posterior inference, this course moves to simulation, Markov chain Monte Carlo, regression, hierarchical models, and predictive assessment using <strong>R</strong>, with selected <strong>Python/PyMC</strong> comparisons.</p>
+<div class="hero-actions">
+<p><a href="#weekly-lessons" class="btn btn-primary">Explore teaching sessions</a> <a href="#course-overview" class="btn btn-secondary">View course overview</a></p>
+</div>
 </section>
-<section id="course-outline" class="level2">
-<h2 class="anchored" data-anchor-id="course-outline">Course outline</h2>
-<p>The course develops Bayesian statistical modelling through computation, with primary emphasis on <strong>R</strong> and selected comparisons using <strong>Python/PyMC</strong>.</p>
-<p>The main reference is <strong>Bayes Rules! An Introduction to Applied Bayesian Modeling</strong>, supported by selected material from <strong>Bayesian Modeling and Computation in Python</strong>.</p>
-<section id="main-topics" class="level3">
-<h3 class="anchored" data-anchor-id="main-topics">Main topics</h3>
+</div>
+</div>
+<div class="course-facts">
+<div class="fact-card">
+<p>Course code <strong>DSA 604 2.0</strong></p>
+</div>
+<div class="fact-card">
+<p>Credit value <strong>2 credits</strong></p>
+</div>
+<div class="fact-card">
+<p>Scheduled sessions <strong>8 sessions</strong></p>
+</div>
+<div class="fact-card">
+<p>Scheduled teaching <strong>32 hours</strong></p>
+</div>
+</div>
+<section id="course-overview" class="level2">
+<h2 class="anchored" data-anchor-id="course-overview">Course overview</h2>
+<div class="section-kicker">
+<p>COURSE OVERVIEW</p>
+</div>
+<section id="from-bayesian-reasoning-to-computational-modelling" class="level3">
+<h3 class="anchored" data-anchor-id="from-bayesian-reasoning-to-computational-modelling">From Bayesian reasoning to computational modelling</h3>
+<p>Bayesian inference combines information about unknown quantities with evidence from observed data. This course develops the statistical reasoning behind that process and the computational methods needed when posterior distributions cannot be evaluated analytically.</p>
+<p>Students first formulate a model and interpret its components. They then use R to simulate from posterior distributions, diagnose computation, and assess model predictions. Selected comparisons with Python/PyMC support the same modelling workflow.</p>
+</section>
+<div class="grid-two">
+<section id="what-we-will-study" class="level3 panel">
+<h3 class="anchored" data-anchor-id="what-we-will-study">What we will study</h3>
 <ul>
 <li>Bayesian probability and statistical reasoning</li>
-<li>Prior distributions and likelihood construction</li>
-<li>Posterior distributions and posterior summaries</li>
-<li>Posterior simulation and Monte Carlo methods</li>
-<li>Markov chain Monte Carlo</li>
-<li>Bayesian regression</li>
-<li>Generalized Bayesian models</li>
-<li>Hierarchical models</li>
-<li>MCMC diagnostics</li>
-<li>Posterior predictive checking</li>
-<li>Model comparison and predictive assessment</li>
-<li>Bayesian workflow for Data Science</li>
+<li>Prior distributions, likelihoods, and posterior inference</li>
+<li>Posterior summaries, simulation, and Monte Carlo methods</li>
+<li>Markov chain Monte Carlo and convergence diagnostics</li>
+<li>Bayesian regression and generalized Bayesian models</li>
+<li>Hierarchical models and partial pooling</li>
+<li>Posterior predictive checking and model comparison</li>
+<li>Predictive assessment and the Bayesian modelling workflow</li>
 </ul>
+</section>
+<div class="stack">
+<section id="computing-environment" class="level3 panel">
+<h3 class="anchored" data-anchor-id="computing-environment">Computing environment</h3>
+<p><strong>Primary language:</strong> R</p>
+<p><strong>Selected comparisons:</strong> Python/PyMC</p>
+<p>Core R tools include <code>tidyverse</code>, <code>bayesrules</code>, <code>rstanarm</code>, <code>cmdstanr</code>, <code>posterior</code>, <code>bayesplot</code>, <code>tidybayes</code>, and <code>loo</code>.</p>
+</section>
+<div class="note">
+<p><strong>Learning approach.</strong> Lectures combine statistical explanations and guided computation. Practical sessions provide opportunities to implement models, examine posterior output, and interpret results.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="learning-outcomes" class="level2">
+<h2 class="anchored" data-anchor-id="learning-outcomes">Learning objectives</h2>
+<div class="section-kicker">
+<p>LEARNING OBJECTIVES</p>
+</div>
+<section id="what-this-course-develops" class="level3">
+<h3 class="anchored" data-anchor-id="what-this-course-develops">What this course develops</h3>
+<div class="ilo-grid">
+<div class="ilo-card">
+<div class="ilo-num">
+<p>1</p>
+</div>
+<p>Specify Bayesian models using prior distributions, likelihood functions, and posterior distributions.</p>
+</div>
+<div class="ilo-card">
+<div class="ilo-num">
+<p>2</p>
+</div>
+<p>Use numerical simulation and MCMC to obtain and summarize posterior distributions.</p>
+</div>
+<div class="ilo-card">
+<div class="ilo-num">
+<p>3</p>
+</div>
+<p>Fit and interpret Bayesian regression, generalized, and hierarchical models using R.</p>
+</div>
+<div class="ilo-card">
+<div class="ilo-num">
+<p>4</p>
+</div>
+<p>Examine computational diagnostics and evaluate models through posterior predictive checks and predictive assessment.</p>
+</div>
+</div>
 </section>
 </section>
 <section id="teaching-schedule" class="level2">
 <h2 class="anchored" data-anchor-id="teaching-schedule">Teaching schedule</h2>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="section-kicker">
+<p>TEACHING SCHEDULE</p>
 </div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Session format
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>Morning sessions:</strong> Lectures and guided computational demonstrations<br>
-<strong>Evening sessions:</strong> Practical sessions</p>
-</div>
-</div>
+<p>Morning sessions are lectures and guided computational demonstrations. Afternoon sessions are practicals.</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th style="text-align: right;">Week</th>
-<th style="text-align: center;">Date</th>
+<th style="text-align: center;">Session</th>
+<th style="text-align: left;">Date</th>
 <th style="text-align: left;">Time</th>
-<th style="text-align: center;">Duration</th>
-<th style="text-align: left;">Session</th>
+<th style="text-align: center;">Hours</th>
+<th style="text-align: left;">Format</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">1</td>
-<td style="text-align: center;">14 Nov 2026</td>
+<td style="text-align: center;">01</td>
+<td style="text-align: left;">14 Nov 2026</td>
 <td style="text-align: left;">08:00 am – 12:00 pm</td>
-<td style="text-align: center;">4 hrs</td>
+<td style="text-align: center;">4</td>
 <td style="text-align: left;">Lecture</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">2</td>
-<td style="text-align: center;">21 Nov 2026</td>
+<td style="text-align: center;">02</td>
+<td style="text-align: left;">21 Nov 2026</td>
 <td style="text-align: left;">08:00 am – 12:00 pm</td>
-<td style="text-align: center;">4 hrs</td>
+<td style="text-align: center;">4</td>
 <td style="text-align: left;">Lecture</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">3</td>
-<td style="text-align: center;">21 Nov 2026</td>
+<td style="text-align: center;">03</td>
+<td style="text-align: left;">21 Nov 2026</td>
 <td style="text-align: left;">01:00 pm – 05:00 pm</td>
-<td style="text-align: center;">4 hrs</td>
+<td style="text-align: center;">4</td>
 <td style="text-align: left;"><strong>Practical</strong></td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">4</td>
-<td style="text-align: center;">28 Nov 2026</td>
+<td style="text-align: center;">04</td>
+<td style="text-align: left;">28 Nov 2026</td>
 <td style="text-align: left;">08:00 am – 12:00 pm</td>
-<td style="text-align: center;">4 hrs</td>
+<td style="text-align: center;">4</td>
 <td style="text-align: left;">Lecture</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">5</td>
-<td style="text-align: center;">05 Dec 2026</td>
+<td style="text-align: center;">05</td>
+<td style="text-align: left;">05 Dec 2026</td>
 <td style="text-align: left;">08:00 am – 12:00 pm</td>
-<td style="text-align: center;">4 hrs</td>
+<td style="text-align: center;">4</td>
 <td style="text-align: left;">Lecture</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">6</td>
-<td style="text-align: center;">12 Dec 2026</td>
+<td style="text-align: center;">06</td>
+<td style="text-align: left;">12 Dec 2026</td>
 <td style="text-align: left;">08:00 am – 12:00 pm</td>
-<td style="text-align: center;">4 hrs</td>
+<td style="text-align: center;">4</td>
 <td style="text-align: left;">Lecture</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">7</td>
-<td style="text-align: center;">02 Jan 2027</td>
+<td style="text-align: center;">07</td>
+<td style="text-align: left;">02 Jan 2027</td>
 <td style="text-align: left;">08:00 am – 12:00 pm</td>
-<td style="text-align: center;">4 hrs</td>
+<td style="text-align: center;">4</td>
 <td style="text-align: left;">Lecture</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">8</td>
-<td style="text-align: center;">02 Jan 2027</td>
+<td style="text-align: center;">08</td>
+<td style="text-align: left;">02 Jan 2027</td>
 <td style="text-align: left;">01:00 pm – 05:00 pm</td>
-<td style="text-align: center;">4 hrs</td>
+<td style="text-align: center;">4</td>
 <td style="text-align: left;"><strong>Practical</strong></td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="lecture-and-practical-links" class="level2">
-<h2 class="anchored" data-anchor-id="lecture-and-practical-links">Lecture and practical links</h2>
-<div class="resource-grid">
-<section id="week-1" class="level3">
-<h3 class="anchored" data-anchor-id="week-1">Week 1</h3>
-<p><strong>14 Nov 2026 · Lecture</strong></p>
-<p>Bayesian thinking, probability review, prior distributions, likelihood, and posterior distributions.</p>
-<p><a href="week1/week1.html">Lecture notes</a></p>
+<section id="weekly-lessons" class="level2">
+<h2 class="anchored" data-anchor-id="weekly-lessons">Weekly lessons</h2>
+<div class="section-kicker">
+<p>8-SESSION LEARNING PATH</p>
+</div>
+<p>Six lecture sessions and two practical sessions, with lecture notes and supporting materials linked as they become available.</p>
+<div class="week-grid">
+<div class="week-card week-active">
+<p><span class="week-no">SESSION 01 · 14 NOV 2026 · LECTURE</span></p>
+<section id="bayesian-thinking-and-fundamentals" class="level3">
+<h3 class="anchored" data-anchor-id="bayesian-thinking-and-fundamentals"><a href="week1/week1.html">Bayesian Thinking and Fundamentals</a></h3>
+<p>Probability review, prior distributions, likelihoods, and posterior distributions.</p>
+<p><a href="week1/week1.html" class="lesson-link">Open lecture notes</a></p>
 </section>
-<section id="week-2" class="level3">
-<h3 class="anchored" data-anchor-id="week-2">Week 2</h3>
-<p><strong>21 Nov 2026 · Lecture</strong></p>
-<p>Posterior computation, simulation, grid approximation, Monte Carlo ideas, and introduction to MCMC.</p>
-<p><a href="#">Lecture notes</a></p>
+</div>
+<div class="week-card">
+<p><span class="week-no">SESSION 02 · 21 NOV 2026 · LECTURE</span></p>
+<section id="posterior-computation-and-simulation" class="level3">
+<h3 class="anchored" data-anchor-id="posterior-computation-and-simulation">Posterior Computation and Simulation</h3>
+<p>Grid approximation, Monte Carlo ideas, posterior simulation, and an introduction to MCMC.</p>
+<p><span class="lesson-pending">Materials forthcoming</span></p>
 </section>
-<section id="week-3" class="level3">
-<h3 class="anchored" data-anchor-id="week-3">Week 3</h3>
-<p><strong>21 Nov 2026 · Practical</strong></p>
-<p>Hands-on Bayesian computation in R.</p>
-<p><a href="#">Practical sheet</a><br>
-<a href="#">Data files</a><br>
-<a href="#">R script</a></p>
+</div>
+<div class="week-card week-practical">
+<p><span class="week-no">SESSION 03 · 21 NOV 2026 · PRACTICAL</span></p>
+<section id="bayesian-computation-in-r" class="level3">
+<h3 class="anchored" data-anchor-id="bayesian-computation-in-r">Bayesian Computation in R</h3>
+<p>Hands-on computation using R, with practical exercises, datasets, and scripts.</p>
+<p><span class="lesson-pending">Materials forthcoming</span></p>
 </section>
-<section id="week-4" class="level3">
-<h3 class="anchored" data-anchor-id="week-4">Week 4</h3>
-<p><strong>28 Nov 2026 · Lecture</strong></p>
-<p>Markov chain Monte Carlo, convergence, diagnostics, effective sample size, and posterior summaries.</p>
-<p><a href="#">Lecture notes</a></p>
+</div>
+<div class="week-card">
+<p><span class="week-no">SESSION 04 · 28 NOV 2026 · LECTURE</span></p>
+<section id="markov-chain-monte-carlo" class="level3">
+<h3 class="anchored" data-anchor-id="markov-chain-monte-carlo">Markov Chain Monte Carlo</h3>
+<p>MCMC methods, convergence, diagnostics, effective sample size, and posterior summaries.</p>
+<p><span class="lesson-pending">Materials forthcoming</span></p>
 </section>
-<section id="week-5" class="level3">
-<h3 class="anchored" data-anchor-id="week-5">Week 5</h3>
-<p><strong>05 Dec 2026 · Lecture</strong></p>
-<p>Bayesian regression and prior specification.</p>
-<p><a href="#">Lecture notes</a></p>
+</div>
+<div class="week-card">
+<p><span class="week-no">SESSION 05 · 05 DEC 2026 · LECTURE</span></p>
+<section id="bayesian-regression" class="level3">
+<h3 class="anchored" data-anchor-id="bayesian-regression">Bayesian Regression</h3>
+<p>Regression models, prior specification, posterior interpretation, and computation.</p>
+<p><span class="lesson-pending">Materials forthcoming</span></p>
 </section>
-<section id="week-6" class="level3">
-<h3 class="anchored" data-anchor-id="week-6">Week 6</h3>
-<p><strong>12 Dec 2026 · Lecture</strong></p>
+</div>
+<div class="week-card">
+<p><span class="week-no">SESSION 06 · 12 DEC 2026 · LECTURE</span></p>
+<section id="generalized-and-hierarchical-models" class="level3">
+<h3 class="anchored" data-anchor-id="generalized-and-hierarchical-models">Generalized and Hierarchical Models</h3>
 <p>Generalized Bayesian models, hierarchical modelling, and partial pooling.</p>
-<p><a href="#">Lecture notes</a></p>
+<p><span class="lesson-pending">Materials forthcoming</span></p>
 </section>
-<section id="week-7" class="level3">
-<h3 class="anchored" data-anchor-id="week-7">Week 7</h3>
-<p><strong>02 Jan 2027 · Lecture</strong></p>
+</div>
+<div class="week-card">
+<p><span class="week-no">SESSION 07 · 02 JAN 2027 · LECTURE</span></p>
+<section id="model-checking-and-prediction" class="level3">
+<h3 class="anchored" data-anchor-id="model-checking-and-prediction">Model Checking and Prediction</h3>
 <p>Posterior predictive checking, model comparison, predictive assessment, and Bayesian workflow.</p>
-<p><a href="#">Lecture notes</a></p>
+<p><span class="lesson-pending">Materials forthcoming</span></p>
 </section>
-<section id="week-8" class="level3">
-<h3 class="anchored" data-anchor-id="week-8">Week 8</h3>
-<p><strong>02 Jan 2027 · Practical</strong></p>
-<p>Integrated Bayesian Data Science practical using R, with selected PyMC comparison.</p>
-<p><a href="#">Practical sheet</a><br>
-<a href="#">Data files</a><br>
-<a href="#">R script</a><br>
-<a href="#">Python/PyMC example</a></p>
+</div>
+<div class="week-card week-practical">
+<p><span class="week-no">SESSION 08 · 02 JAN 2027 · PRACTICAL</span></p>
+<section id="integrated-bayesian-data-science" class="level3">
+<h3 class="anchored" data-anchor-id="integrated-bayesian-data-science">Integrated Bayesian Data Science</h3>
+<p>Applied Bayesian analysis using R, with selected comparisons in Python/PyMC.</p>
+<p><span class="lesson-pending">Materials forthcoming</span></p>
 </section>
+</div>
 </div>
 </section>
 <section id="software" class="level2">
 <h2 class="anchored" data-anchor-id="software">Software</h2>
-<p>The main computing environment is <strong>R</strong>.</p>
-<p>Recommended packages include:</p>
+<div class="section-kicker">
+<p>COMPUTATIONAL TOOLS</p>
+</div>
+<div class="grid-two">
+<section id="r-primary" class="level3 panel">
+<h3 class="anchored" data-anchor-id="r-primary">R (primary)</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bayesrules)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rstanarm)</span>
@@ -460,54 +377,52 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bayesplot)</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidybayes)</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(loo)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Selected practical comparisons may use:</p>
+</section>
+<section id="python-selected-comparisons" class="level3 panel">
+<h3 class="anchored" data-anchor-id="python-selected-comparisons">Python (selected comparisons)</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pymc <span class="im">as</span> pm</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> arviz <span class="im">as</span> az</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
-<section id="primary-reference" class="level3">
-<h3 class="anchored" data-anchor-id="primary-reference">Primary reference</h3>
-<p><strong>Johnson, A. A., Ott, M. Q., &amp; Dogucu, M.</strong><br>
-<em>Bayes Rules! An Introduction to Applied Bayesian Modeling.</em></p>
-<p><a href="https://www.bayesrulesbook.com/">Online book</a></p>
+</div>
 </section>
-<section id="python-companion" class="level3">
-<h3 class="anchored" data-anchor-id="python-companion">Python companion</h3>
-<p><strong>Martin, O. A., Kumar, R., &amp; Lao, J.</strong><br>
-<em>Bayesian Modeling and Computation in Python.</em></p>
-<p><a href="https://bayesiancomputationbook.com/">Online book</a></p>
+<section id="reference" class="level2">
+<h2 class="anchored" data-anchor-id="reference">Primary references</h2>
+<div class="section-kicker">
+<p>READING AND REFERENCES</p>
+</div>
+<div class="reference-grid">
+<section id="bayes-rules" class="level3 reference-card">
+<h3 class="anchored" data-anchor-id="bayes-rules">Bayes Rules!</h3>
+<p>Johnson, A. A., Ott, M. Q., &amp; Dogucu, M.</p>
+<p><em>Bayes Rules! An Introduction to Applied Bayesian Modeling.</em></p>
+<p><a href="https://www.bayesrulesbook.com/">Read the online book</a></p>
 </section>
+<section id="bayesian-modeling-and-computation-in-python" class="level3 reference-card">
+<h3 class="anchored" data-anchor-id="bayesian-modeling-and-computation-in-python">Bayesian Modeling and Computation in Python</h3>
+<p>Martin, O. A., Kumar, R., &amp; Lao, J.</p>
+<p><em>Bayesian Modeling and Computation in Python.</em></p>
+<p><a href="https://bayesiancomputationbook.com/">Read the online book</a></p>
 </section>
-<section id="course-resources" class="level2">
-<h2 class="anchored" data-anchor-id="course-resources">Course resources</h2>
-<ul>
-<li><a href="#">Announcements</a></li>
-<li><a href="#">Assignments</a></li>
-<li><a href="#">Datasets</a></li>
-<li><a href="#">R scripts</a></li>
-<li><a href="#">Practical materials</a></li>
-<li><a href="#">Reference material</a></li>
-</ul>
+</div>
+</section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Course resources</h2>
+<div class="section-kicker">
+<p>COURSE RESOURCES</p>
+</div>
+<p>Materials will be added throughout the course. ## Instructor</p>
+<section id="dr.-rajitha-m.-silva" class="level3">
+<h3 class="anchored" data-anchor-id="dr.-rajitha-m.-silva">Dr.&nbsp;Rajitha M. Silva</h3>
+<p>Department of Statistics<br>
+Faculty of Applied Sciences<br>
+University of Sri Jayewardenepura</p>
+</section>
 </section>
 
 </main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
-    // Ensure there is a toggle, if there isn't float one in the top right
-    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-      const i = window.document.createElement("i");
-      i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
-    }
-    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
@@ -593,6 +508,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
         }
       }
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
