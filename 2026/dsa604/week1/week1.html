@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
-<head>
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
 
-<meta charset="utf-8" />
-<meta name="generator" content="quarto-1.10.18" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-
-<meta name="author" content="Dr RM Silva" />
-<meta name="dcterms.date" content="2026-11-14" />
+<meta name="author" content="Dr RM Silva">
+<meta name="dcterms.date" content="2026-11-14">
 
 <title>DSA 604 Bayesian Computation</title>
 <style>
@@ -67,7 +65,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-<!-- htmldependencies:E3FAD763 -->
+
+<script src="week1_files/libs/clipboard/clipboard.min.js"></script>
+<script src="week1_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="week1_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="week1_files/libs/quarto-html/popper.min.js"></script>
+<script src="week1_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="week1_files/libs/quarto-html/anchor.min.js"></script>
+<link href="week1_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="week1_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="week1_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="week1_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="week1_files/libs/bootstrap/bootstrap-7b5185e5ecc6ede1c7959190e1e6c378.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <style>html{ scroll-behavior: smooth; }</style>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
@@ -102,11 +111,92 @@ window.Quarto = {
 
 </head>
 
-<body>
+<body class="quarto-light">
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-  <div id="quarto-toc-target"></div>
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#week-1-4-hour-lecture" id="toc-week-1-4-hour-lecture" class="nav-link active" data-scroll-target="#week-1-4-hour-lecture"><span class="header-section-number">0.1</span> Week 1 · 4-hour lecture</a>
+  <ul class="collapse">
+  <li><a href="#todays-question" id="toc-todays-question" class="nav-link" data-scroll-target="#todays-question"><span class="header-section-number">0.1.1</span> Today’s question</a></li>
+  </ul></li>
+  <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link" data-scroll-target="#learning-outcomes"><span class="header-section-number">0.2</span> Learning outcomes</a></li>
+  <li><a href="#session-map" id="toc-session-map" class="nav-link" data-scroll-target="#session-map"><span class="header-section-number">0.3</span> Session map</a></li>
+  <li><a href="#block-1-thinking-like-a-bayesian" id="toc-block-1-thinking-like-a-bayesian" class="nav-link" data-scroll-target="#block-1-thinking-like-a-bayesian"><span class="header-section-number">1</span> Block 1 — Thinking like a Bayesian</a>
+  <ul class="collapse">
+  <li><a href="#what-problem-is-bayesian-statistics-solving" id="toc-what-problem-is-bayesian-statistics-solving" class="nav-link" data-scroll-target="#what-problem-is-bayesian-statistics-solving"><span class="header-section-number">1.1</span> 1.1 What problem is Bayesian statistics solving?</a></li>
+  <li><a href="#bayesian-probability" id="toc-bayesian-probability" class="nav-link" data-scroll-target="#bayesian-probability"><span class="header-section-number">1.2</span> 1.2 Bayesian probability</a></li>
+  <li><a href="#refresher-conditional-probability" id="toc-refresher-conditional-probability" class="nav-link" data-scroll-target="#refresher-conditional-probability"><span class="header-section-number">1.3</span> 1.3 Refresher: conditional probability</a></li>
+  <li><a href="#why-reversing-a-conditional-probability-is-dangerous" id="toc-why-reversing-a-conditional-probability-is-dangerous" class="nav-link" data-scroll-target="#why-reversing-a-conditional-probability-is-dangerous"><span class="header-section-number">1.4</span> 1.4 Why reversing a conditional probability is dangerous</a>
+  <ul class="collapse">
+  <li><a href="#exercise-1-conditional-probability-warm-up" id="toc-exercise-1-conditional-probability-warm-up" class="nav-link" data-scroll-target="#exercise-1-conditional-probability-warm-up"><span class="header-section-number">1.4.1</span> Exercise 1 — Conditional probability warm-up</a></li>
+  </ul></li>
+  <li><a href="#random-variables-distributions-and-parameters" id="toc-random-variables-distributions-and-parameters" class="nav-link" data-scroll-target="#random-variables-distributions-and-parameters"><span class="header-section-number">1.5</span> 1.5 Random variables, distributions and parameters</a></li>
+  <li><a href="#prior-information-is-not-necessarily-personal-opinion" id="toc-prior-information-is-not-necessarily-personal-opinion" class="nav-link" data-scroll-target="#prior-information-is-not-necessarily-personal-opinion"><span class="header-section-number">1.6</span> 1.6 Prior information is not necessarily personal opinion</a>
+  <ul class="collapse">
+  <li><a href="#interactive-prompt" id="toc-interactive-prompt" class="nav-link" data-scroll-target="#interactive-prompt"><span class="header-section-number">1.6.1</span> Interactive prompt</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#block-2-bayes-rule-as-learning-from-evidence" id="toc-block-2-bayes-rule-as-learning-from-evidence" class="nav-link" data-scroll-target="#block-2-bayes-rule-as-learning-from-evidence"><span class="header-section-number">2</span> Block 2 — Bayes’ rule as learning from evidence</a>
+  <ul class="collapse">
+  <li><a href="#the-discrete-bayes-formula" id="toc-the-discrete-bayes-formula" class="nav-link" data-scroll-target="#the-discrete-bayes-formula"><span class="header-section-number">2.1</span> 2.1 The discrete Bayes formula</a></li>
+  <li><a href="#worked-example-fraud-screening" id="toc-worked-example-fraud-screening" class="nav-link" data-scroll-target="#worked-example-fraud-screening"><span class="header-section-number">2.2</span> 2.2 Worked example: fraud screening</a></li>
+  <li><a href="#prior-odds-likelihood-ratio-posterior-odds" id="toc-prior-odds-likelihood-ratio-posterior-odds" class="nav-link" data-scroll-target="#prior-odds-likelihood-ratio-posterior-odds"><span class="header-section-number">2.3</span> 2.3 Prior odds, likelihood ratio, posterior odds</a></li>
+  <li><a href="#computing-the-discrete-example" id="toc-computing-the-discrete-example" class="nav-link" data-scroll-target="#computing-the-discrete-example"><span class="header-section-number">2.4</span> 2.4 Computing the discrete example</a>
+  <ul class="collapse">
+  <li><a href="#exercise-2-base-rate-sensitivity" id="toc-exercise-2-base-rate-sensitivity" class="nav-link" data-scroll-target="#exercise-2-base-rate-sensitivity"><span class="header-section-number">2.4.1</span> Exercise 2 — Base-rate sensitivity</a></li>
+  </ul></li>
+  <li><a href="#from-events-to-parameters" id="toc-from-events-to-parameters" class="nav-link" data-scroll-target="#from-events-to-parameters"><span class="header-section-number">2.5</span> 2.5 From events to parameters</a></li>
+  <li><a href="#sampling-distribution-versus-likelihood" id="toc-sampling-distribution-versus-likelihood" class="nav-link" data-scroll-target="#sampling-distribution-versus-likelihood"><span class="header-section-number">2.6</span> 2.6 Sampling distribution versus likelihood</a>
+  <ul class="collapse">
+  <li><a href="#exercise-3-what-changes" id="toc-exercise-3-what-changes" class="nav-link" data-scroll-target="#exercise-3-what-changes"><span class="header-section-number">2.6.1</span> Exercise 3 — What changes?</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#block-3-the-beta-binomial-model" id="toc-block-3-the-beta-binomial-model" class="nav-link" data-scroll-target="#block-3-the-beta-binomial-model"><span class="header-section-number">3</span> Block 3 — The Beta-Binomial model</a>
+  <ul class="collapse">
+  <li><a href="#why-use-a-beta-prior-for-a-probability" id="toc-why-use-a-beta-prior-for-a-probability" class="nav-link" data-scroll-target="#why-use-a-beta-prior-for-a-probability"><span class="header-section-number">3.1</span> 3.1 Why use a Beta prior for a probability?</a></li>
+  <li><a href="#reading-beta-distributions" id="toc-reading-beta-distributions" class="nav-link" data-scroll-target="#reading-beta-distributions"><span class="header-section-number">3.2</span> 3.2 Reading Beta distributions</a>
+  <ul class="collapse">
+  <li><a href="#visualising-beta-priors" id="toc-visualising-beta-priors" class="nav-link" data-scroll-target="#visualising-beta-priors"><span class="header-section-number">3.2.1</span> Visualising Beta priors</a></li>
+  <li><a href="#exercise-4-choose-a-prior" id="toc-exercise-4-choose-a-prior" class="nav-link" data-scroll-target="#exercise-4-choose-a-prior"><span class="header-section-number">3.2.2</span> Exercise 4 — Choose a prior</a></li>
+  </ul></li>
+  <li><a href="#constructing-the-beta-binomial-model" id="toc-constructing-the-beta-binomial-model" class="nav-link" data-scroll-target="#constructing-the-beta-binomial-model"><span class="header-section-number">3.3</span> 3.3 Constructing the Beta-Binomial model</a></li>
+  <li><a href="#interpreting-the-update" id="toc-interpreting-the-update" class="nav-link" data-scroll-target="#interpreting-the-update"><span class="header-section-number">3.4</span> 3.4 Interpreting the update</a></li>
+  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example"><span class="header-section-number">3.5</span> 3.5 Worked example</a></li>
+  <li><a href="#posterior-mean-as-a-weighted-average" id="toc-posterior-mean-as-a-weighted-average" class="nav-link" data-scroll-target="#posterior-mean-as-a-weighted-average"><span class="header-section-number">3.6</span> 3.6 Posterior mean as a weighted average</a>
+  <ul class="collapse">
+  <li><a href="#exercise-5-posterior-by-hand" id="toc-exercise-5-posterior-by-hand" class="nav-link" data-scroll-target="#exercise-5-posterior-by-hand"><span class="header-section-number">3.6.1</span> Exercise 5 — Posterior by hand</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#block-4-bayesian-computation-begins" id="toc-block-4-bayesian-computation-begins" class="nav-link" data-scroll-target="#block-4-bayesian-computation-begins"><span class="header-section-number">4</span> Block 4 — Bayesian computation begins</a>
+  <ul class="collapse">
+  <li><a href="#why-simulate-when-the-posterior-is-known" id="toc-why-simulate-when-the-posterior-is-known" class="nav-link" data-scroll-target="#why-simulate-when-the-posterior-is-known"><span class="header-section-number">4.1</span> 4.1 Why simulate when the posterior is known?</a></li>
+  <li><a href="#posterior-simulation-in-r-and-python" id="toc-posterior-simulation-in-r-and-python" class="nav-link" data-scroll-target="#posterior-simulation-in-r-and-python"><span class="header-section-number">4.2</span> 4.2 Posterior simulation in R and Python</a></li>
+  <li><a href="#posterior-density-and-credible-interval" id="toc-posterior-density-and-credible-interval" class="nav-link" data-scroll-target="#posterior-density-and-credible-interval"><span class="header-section-number">4.3</span> 4.3 Posterior density and credible interval</a></li>
+  <li><a href="#prior-likelihood-and-posterior-on-one-plot" id="toc-prior-likelihood-and-posterior-on-one-plot" class="nav-link" data-scroll-target="#prior-likelihood-and-posterior-on-one-plot"><span class="header-section-number">4.4</span> 4.4 Prior, likelihood and posterior on one plot</a></li>
+  <li><a href="#prior-predictive-thinking" id="toc-prior-predictive-thinking" class="nav-link" data-scroll-target="#prior-predictive-thinking"><span class="header-section-number">4.5</span> 4.5 Prior predictive thinking</a></li>
+  <li><a href="#prior-influence-and-sample-size" id="toc-prior-influence-and-sample-size" class="nav-link" data-scroll-target="#prior-influence-and-sample-size"><span class="header-section-number">4.6</span> 4.6 Prior influence and sample size</a>
+  <ul class="collapse">
+  <li><a href="#exercise-6-prior-versus-data" id="toc-exercise-6-prior-versus-data" class="nav-link" data-scroll-target="#exercise-6-prior-versus-data"><span class="header-section-number">4.6.1</span> Exercise 6 — Prior versus data</a></li>
+  </ul></li>
+  <li><a href="#sequential-bayesian-updating" id="toc-sequential-bayesian-updating" class="nav-link" data-scroll-target="#sequential-bayesian-updating"><span class="header-section-number">4.7</span> 4.7 Sequential Bayesian updating</a>
+  <ul class="collapse">
+  <li><a href="#batch-1" id="toc-batch-1" class="nav-link" data-scroll-target="#batch-1"><span class="header-section-number">4.7.1</span> Batch 1</a></li>
+  <li><a href="#batch-2" id="toc-batch-2" class="nav-link" data-scroll-target="#batch-2"><span class="header-section-number">4.7.2</span> Batch 2</a></li>
+  </ul></li>
+  <li><a href="#sequential-updating-in-code" id="toc-sequential-updating-in-code" class="nav-link" data-scroll-target="#sequential-updating-in-code"><span class="header-section-number">4.8</span> 4.8 Sequential updating in code</a></li>
+  <li><a href="#a-first-posterior-decision-statement" id="toc-a-first-posterior-decision-statement" class="nav-link" data-scroll-target="#a-first-posterior-decision-statement"><span class="header-section-number">4.9</span> 4.9 A first posterior decision statement</a></li>
+  </ul></li>
+  <li><a href="#integrated-exercise-from-question-to-posterior" id="toc-integrated-exercise-from-question-to-posterior" class="nav-link" data-scroll-target="#integrated-exercise-from-question-to-posterior"><span class="header-section-number">5</span> Integrated exercise — From question to posterior</a></li>
+  <li><a href="#exit-exercise" id="toc-exit-exercise" class="nav-link" data-scroll-target="#exit-exercise"><span class="header-section-number">6</span> Exit exercise</a></li>
+  <li><a href="#what-you-should-retain-from-week-1" id="toc-what-you-should-retain-from-week-1" class="nav-link" data-scroll-target="#what-you-should-retain-from-week-1"><span class="header-section-number">7</span> What you should retain from Week 1</a></li>
+  <li><a href="#preparation-for-week-2" id="toc-preparation-for-week-2" class="nav-link" data-scroll-target="#preparation-for-week-2"><span class="header-section-number">8</span> Preparation for Week 2</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">9</span> References</a></li>
+  </ul>
+</nav>
 </div>
 <main class="content" id="quarto-document-content">
 
@@ -141,105 +231,24 @@ window.Quarto = {
 
 </header>
 
-<nav id="TOC" role="doc-toc">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#week-1-4-hour-lecture" id="toc-week-1-4-hour-lecture"><span class="header-section-number">0.1</span> Week 1 · 4-hour lecture</a>
-  <ul>
-  <li><a href="#todays-question" id="toc-todays-question"><span class="header-section-number">0.1.1</span> Today’s question</a></li>
-  </ul></li>
-  <li><a href="#learning-outcomes" id="toc-learning-outcomes"><span class="header-section-number">0.2</span> Learning outcomes</a></li>
-  <li><a href="#session-map" id="toc-session-map"><span class="header-section-number">0.3</span> Session map</a></li>
-  <li><a href="#block-1-thinking-like-a-bayesian" id="toc-block-1-thinking-like-a-bayesian"><span class="header-section-number">1</span> Block 1 — Thinking like a Bayesian</a>
-  <ul>
-  <li><a href="#what-problem-is-bayesian-statistics-solving" id="toc-what-problem-is-bayesian-statistics-solving"><span class="header-section-number">1.1</span> 1.1 What problem is Bayesian statistics solving?</a></li>
-  <li><a href="#bayesian-probability" id="toc-bayesian-probability"><span class="header-section-number">1.2</span> 1.2 Bayesian probability</a></li>
-  <li><a href="#refresher-conditional-probability" id="toc-refresher-conditional-probability"><span class="header-section-number">1.3</span> 1.3 Refresher: conditional probability</a></li>
-  <li><a href="#why-reversing-a-conditional-probability-is-dangerous" id="toc-why-reversing-a-conditional-probability-is-dangerous"><span class="header-section-number">1.4</span> 1.4 Why reversing a conditional probability is dangerous</a>
-  <ul>
-  <li><a href="#exercise-1-conditional-probability-warm-up" id="toc-exercise-1-conditional-probability-warm-up"><span class="header-section-number">1.4.1</span> Exercise 1 — Conditional probability warm-up</a></li>
-  </ul></li>
-  <li><a href="#random-variables-distributions-and-parameters" id="toc-random-variables-distributions-and-parameters"><span class="header-section-number">1.5</span> 1.5 Random variables, distributions and parameters</a></li>
-  <li><a href="#prior-information-is-not-necessarily-personal-opinion" id="toc-prior-information-is-not-necessarily-personal-opinion"><span class="header-section-number">1.6</span> 1.6 Prior information is not necessarily personal opinion</a>
-  <ul>
-  <li><a href="#interactive-prompt" id="toc-interactive-prompt"><span class="header-section-number">1.6.1</span> Interactive prompt</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#block-2-bayes-rule-as-learning-from-evidence" id="toc-block-2-bayes-rule-as-learning-from-evidence"><span class="header-section-number">2</span> Block 2 — Bayes’ rule as learning from evidence</a>
-  <ul>
-  <li><a href="#the-discrete-bayes-formula" id="toc-the-discrete-bayes-formula"><span class="header-section-number">2.1</span> 2.1 The discrete Bayes formula</a></li>
-  <li><a href="#worked-example-fraud-screening" id="toc-worked-example-fraud-screening"><span class="header-section-number">2.2</span> 2.2 Worked example: fraud screening</a></li>
-  <li><a href="#prior-odds-likelihood-ratio-posterior-odds" id="toc-prior-odds-likelihood-ratio-posterior-odds"><span class="header-section-number">2.3</span> 2.3 Prior odds, likelihood ratio, posterior odds</a></li>
-  <li><a href="#computing-the-discrete-example" id="toc-computing-the-discrete-example"><span class="header-section-number">2.4</span> 2.4 Computing the discrete example</a>
-  <ul>
-  <li><a href="#exercise-2-base-rate-sensitivity" id="toc-exercise-2-base-rate-sensitivity"><span class="header-section-number">2.4.1</span> Exercise 2 — Base-rate sensitivity</a></li>
-  </ul></li>
-  <li><a href="#from-events-to-parameters" id="toc-from-events-to-parameters"><span class="header-section-number">2.5</span> 2.5 From events to parameters</a></li>
-  <li><a href="#sampling-distribution-versus-likelihood" id="toc-sampling-distribution-versus-likelihood"><span class="header-section-number">2.6</span> 2.6 Sampling distribution versus likelihood</a>
-  <ul>
-  <li><a href="#exercise-3-what-changes" id="toc-exercise-3-what-changes"><span class="header-section-number">2.6.1</span> Exercise 3 — What changes?</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#block-3-the-beta-binomial-model" id="toc-block-3-the-beta-binomial-model"><span class="header-section-number">3</span> Block 3 — The Beta-Binomial model</a>
-  <ul>
-  <li><a href="#why-use-a-beta-prior-for-a-probability" id="toc-why-use-a-beta-prior-for-a-probability"><span class="header-section-number">3.1</span> 3.1 Why use a Beta prior for a probability?</a></li>
-  <li><a href="#reading-beta-distributions" id="toc-reading-beta-distributions"><span class="header-section-number">3.2</span> 3.2 Reading Beta distributions</a>
-  <ul>
-  <li><a href="#visualising-beta-priors" id="toc-visualising-beta-priors"><span class="header-section-number">3.2.1</span> Visualising Beta priors</a></li>
-  <li><a href="#exercise-4-choose-a-prior" id="toc-exercise-4-choose-a-prior"><span class="header-section-number">3.2.2</span> Exercise 4 — Choose a prior</a></li>
-  </ul></li>
-  <li><a href="#constructing-the-beta-binomial-model" id="toc-constructing-the-beta-binomial-model"><span class="header-section-number">3.3</span> 3.3 Constructing the Beta-Binomial model</a></li>
-  <li><a href="#interpreting-the-update" id="toc-interpreting-the-update"><span class="header-section-number">3.4</span> 3.4 Interpreting the update</a></li>
-  <li><a href="#worked-example" id="toc-worked-example"><span class="header-section-number">3.5</span> 3.5 Worked example</a></li>
-  <li><a href="#posterior-mean-as-a-weighted-average" id="toc-posterior-mean-as-a-weighted-average"><span class="header-section-number">3.6</span> 3.6 Posterior mean as a weighted average</a>
-  <ul>
-  <li><a href="#exercise-5-posterior-by-hand" id="toc-exercise-5-posterior-by-hand"><span class="header-section-number">3.6.1</span> Exercise 5 — Posterior by hand</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#block-4-bayesian-computation-begins" id="toc-block-4-bayesian-computation-begins"><span class="header-section-number">4</span> Block 4 — Bayesian computation begins</a>
-  <ul>
-  <li><a href="#why-simulate-when-the-posterior-is-known" id="toc-why-simulate-when-the-posterior-is-known"><span class="header-section-number">4.1</span> 4.1 Why simulate when the posterior is known?</a></li>
-  <li><a href="#posterior-simulation-in-r-and-python" id="toc-posterior-simulation-in-r-and-python"><span class="header-section-number">4.2</span> 4.2 Posterior simulation in R and Python</a></li>
-  <li><a href="#posterior-density-and-credible-interval" id="toc-posterior-density-and-credible-interval"><span class="header-section-number">4.3</span> 4.3 Posterior density and credible interval</a></li>
-  <li><a href="#prior-likelihood-and-posterior-on-one-plot" id="toc-prior-likelihood-and-posterior-on-one-plot"><span class="header-section-number">4.4</span> 4.4 Prior, likelihood and posterior on one plot</a></li>
-  <li><a href="#prior-predictive-thinking" id="toc-prior-predictive-thinking"><span class="header-section-number">4.5</span> 4.5 Prior predictive thinking</a></li>
-  <li><a href="#prior-influence-and-sample-size" id="toc-prior-influence-and-sample-size"><span class="header-section-number">4.6</span> 4.6 Prior influence and sample size</a>
-  <ul>
-  <li><a href="#exercise-6-prior-versus-data" id="toc-exercise-6-prior-versus-data"><span class="header-section-number">4.6.1</span> Exercise 6 — Prior versus data</a></li>
-  </ul></li>
-  <li><a href="#sequential-bayesian-updating" id="toc-sequential-bayesian-updating"><span class="header-section-number">4.7</span> 4.7 Sequential Bayesian updating</a>
-  <ul>
-  <li><a href="#batch-1" id="toc-batch-1"><span class="header-section-number">4.7.1</span> Batch 1</a></li>
-  <li><a href="#batch-2" id="toc-batch-2"><span class="header-section-number">4.7.2</span> Batch 2</a></li>
-  </ul></li>
-  <li><a href="#sequential-updating-in-code" id="toc-sequential-updating-in-code"><span class="header-section-number">4.8</span> 4.8 Sequential updating in code</a></li>
-  <li><a href="#a-first-posterior-decision-statement" id="toc-a-first-posterior-decision-statement"><span class="header-section-number">4.9</span> 4.9 A first posterior decision statement</a></li>
-  </ul></li>
-  <li><a href="#integrated-exercise-from-question-to-posterior" id="toc-integrated-exercise-from-question-to-posterior"><span class="header-section-number">5</span> Integrated exercise — From question to posterior</a></li>
-  <li><a href="#exit-exercise" id="toc-exit-exercise"><span class="header-section-number">6</span> Exit exercise</a></li>
-  <li><a href="#what-you-should-retain-from-week-1" id="toc-what-you-should-retain-from-week-1"><span class="header-section-number">7</span> What you should retain from Week 1</a></li>
-  <li><a href="#preparation-for-week-2" id="toc-preparation-for-week-2"><span class="header-section-number">8</span> Preparation for Week 2</a></li>
-  <li><a href="#references" id="toc-references"><span class="header-section-number">9</span> References</a></li>
-  </ul>
-</nav>
+
 <section id="week-1-4-hour-lecture" class="level2 week-banner" data-number="0.1">
-<h2 data-number="0.1"><span class="header-section-number">0.1</span> Week 1 · 4-hour lecture</h2>
-<p><strong>MSc in Data Science &amp; Artificial Intelligence</strong><br />
-<strong>Course:</strong> DSA 604 Bayesian Computation<br />
-<strong>Main computational language:</strong> R<br />
-<strong>Parallel examples:</strong> Python<br />
+<h2 data-number="0.1" class="anchored" data-anchor-id="week-1-4-hour-lecture"><span class="header-section-number">0.1</span> Week 1 · 4-hour lecture</h2>
+<p><strong>MSc in Data Science &amp; Artificial Intelligence</strong><br>
+<strong>Course:</strong> DSA 604 Bayesian Computation<br>
+<strong>Main computational language:</strong> R<br>
+<strong>Parallel examples:</strong> Python<br>
 <strong>Main reference:</strong> <em>Bayes Rules! An Introduction to Applied Bayesian Modeling</em></p>
 <section id="todays-question" class="level3" data-number="0.1.1">
-<h3 data-number="0.1.1"><span class="header-section-number">0.1.1</span> Today’s question</h3>
-<blockquote>
+<h3 data-number="0.1.1" class="anchored" data-anchor-id="todays-question"><span class="header-section-number">0.1.1</span> Today’s question</h3>
+<blockquote class="blockquote">
 <p>How does a Bayesian analysis combine what we knew before observing the data with what the data tell us now?</p>
 </blockquote>
 <p>By the end of the session, you should be able to move from a scientific or Data Science question to a prior, likelihood, posterior distribution, posterior summary, and simple posterior prediction.</p>
 </section>
 </section>
 <section id="learning-outcomes" class="level2" data-number="0.2">
-<h2 data-number="0.2"><span class="header-section-number">0.2</span> Learning outcomes</h2>
+<h2 data-number="0.2" class="anchored" data-anchor-id="learning-outcomes"><span class="header-section-number">0.2</span> Learning outcomes</h2>
 <p>By the end of Week 1, you should be able to:</p>
 <ol type="1">
 <li>distinguish a parameter, statistic, probability model, prior distribution, likelihood, and posterior distribution;</li>
@@ -255,12 +264,12 @@ window.Quarto = {
 </ol>
 </section>
 <section id="session-map" class="level2" data-number="0.3">
-<h2 data-number="0.3"><span class="header-section-number">0.3</span> Session map</h2>
-<table class="caption-top">
+<h2 data-number="0.3" class="anchored" data-anchor-id="session-map"><span class="header-section-number">0.3</span> Session map</h2>
+<table class="caption-top table">
 <colgroup>
-<col style="width: 40%" />
-<col style="width: 30%" />
-<col style="width: 30%" />
+<col style="width: 40%">
+<col style="width: 30%">
+<col style="width: 30%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -315,7 +324,7 @@ window.Quarto = {
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class='callout-icon'></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <span class="screen-reader-only">Note</span>Reading guide
@@ -329,7 +338,7 @@ window.Quarto = {
 <section id="block-1-thinking-like-a-bayesian" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Block 1 — Thinking like a Bayesian</h1>
 <section id="what-problem-is-bayesian-statistics-solving" class="level2" data-number="1.1">
-<h2 data-number="1.1"><span class="header-section-number">1.1</span> 1.1 What problem is Bayesian statistics solving?</h2>
+<h2 data-number="1.1" class="anchored" data-anchor-id="what-problem-is-bayesian-statistics-solving"><span class="header-section-number">1.1</span> 1.1 What problem is Bayesian statistics solving?</h2>
 <p>Suppose we want to learn an unknown population quantity:</p>
 <ul>
 <li>the probability that a customer churns,</li>
@@ -363,7 +372,7 @@ f(y\mid\theta).
 <p>Later in the course we will add posterior computation, diagnostics, prediction, model checking, and model comparison.</p>
 </section>
 <section id="bayesian-probability" class="level2" data-number="1.2">
-<h2 data-number="1.2"><span class="header-section-number">1.2</span> 1.2 Bayesian probability</h2>
+<h2 data-number="1.2" class="anchored" data-anchor-id="bayesian-probability"><span class="header-section-number">1.2</span> 1.2 Bayesian probability</h2>
 <p>At undergraduate level, probability is often introduced as a long-run relative frequency. That interpretation is useful, but Bayesian inference also uses probability to quantify <strong>uncertainty</strong>.</p>
 <p>Examples:</p>
 <p><span class="math display">\[
@@ -375,7 +384,7 @@ f(y\mid\theta).
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class='callout-icon'></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <span class="screen-reader-only">Important</span>Parameter versus data
@@ -388,7 +397,7 @@ f(y\mid\theta).
 </div>
 </section>
 <section id="refresher-conditional-probability" class="level2" data-number="1.3">
-<h2 data-number="1.3"><span class="header-section-number">1.3</span> 1.3 Refresher: conditional probability</h2>
+<h2 data-number="1.3" class="anchored" data-anchor-id="refresher-conditional-probability"><span class="header-section-number">1.3</span> 1.3 Refresher: conditional probability</h2>
 <p>For events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>,</p>
 <p><span class="math display">\[
 \Pr(A\mid B)=\frac{\Pr(A\cap B)}{\Pr(B)},
@@ -417,7 +426,7 @@ f(y\mid\theta).
 <p>This denominator is the <strong>marginal probability</strong> or <strong>normalizing constant</strong>.</p>
 </section>
 <section id="why-reversing-a-conditional-probability-is-dangerous" class="level2" data-number="1.4">
-<h2 data-number="1.4"><span class="header-section-number">1.4</span> 1.4 Why reversing a conditional probability is dangerous</h2>
+<h2 data-number="1.4" class="anchored" data-anchor-id="why-reversing-a-conditional-probability-is-dangerous"><span class="header-section-number">1.4</span> 1.4 Why reversing a conditional probability is dangerous</h2>
 <p>A common error is to treat</p>
 <p><span class="math display">\[
 \Pr(A\mid B)
@@ -434,7 +443,7 @@ f(y\mid\theta).
 </ul>
 <p>The second depends not only on sensitivity but also on disease prevalence and false-positive probability.</p>
 <section id="exercise-1-conditional-probability-warm-up" class="level3" data-number="1.4.1">
-<h3 data-number="1.4.1"><span class="header-section-number">1.4.1</span> Exercise 1 — Conditional probability warm-up</h3>
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="exercise-1-conditional-probability-warm-up"><span class="header-section-number">1.4.1</span> Exercise 1 — Conditional probability warm-up</h3>
 <p>A data quality system flags 8% of records. Among truly erroneous records, 90% are flagged. Suppose 5% of all records are truly erroneous.</p>
 <ol type="1">
 <li>Identify <span class="math inline">\(\Pr(F\mid E)\)</span>, where <span class="math inline">\(F\)</span> means “flagged” and <span class="math inline">\(E\)</span> means “error”.</li>
@@ -444,7 +453,7 @@ f(y\mid\theta).
 </section>
 </section>
 <section id="random-variables-distributions-and-parameters" class="level2" data-number="1.5">
-<h2 data-number="1.5"><span class="header-section-number">1.5</span> 1.5 Random variables, distributions and parameters</h2>
+<h2 data-number="1.5" class="anchored" data-anchor-id="random-variables-distributions-and-parameters"><span class="header-section-number">1.5</span> 1.5 Random variables, distributions and parameters</h2>
 <p>A <strong>random variable</strong> maps outcomes to numerical values.</p>
 <p>A <strong>probability distribution</strong> describes the possible values of a random variable and their probabilities or densities.</p>
 <p>Examples:</p>
@@ -470,7 +479,7 @@ Y\sim N(\mu,\sigma^2)
 <p>The parameter is still an unknown scientific quantity. The probability distribution expresses our uncertainty about it.</p>
 </section>
 <section id="prior-information-is-not-necessarily-personal-opinion" class="level2" data-number="1.6">
-<h2 data-number="1.6"><span class="header-section-number">1.6</span> 1.6 Prior information is not necessarily personal opinion</h2>
+<h2 data-number="1.6" class="anchored" data-anchor-id="prior-information-is-not-necessarily-personal-opinion"><span class="header-section-number">1.6</span> 1.6 Prior information is not necessarily personal opinion</h2>
 <p>A prior can be informed by:</p>
 <ul>
 <li>previous studies,</li>
@@ -486,7 +495,7 @@ Y\sim N(\mu,\sigma^2)
 <p>A prior should be interpretable in the context of the model.</p>
 <p>A Bayesian analysis is not made better merely by choosing a vague prior. A poorly chosen vague prior can imply implausible values.</p>
 <section id="interactive-prompt" class="level3" data-number="1.6.1">
-<h3 data-number="1.6.1"><span class="header-section-number">1.6.1</span> Interactive prompt</h3>
+<h3 data-number="1.6.1" class="anchored" data-anchor-id="interactive-prompt"><span class="header-section-number">1.6.1</span> Interactive prompt</h3>
 <p>Consider the unknown probability <span class="math inline">\(\pi\)</span> that a newly registered user becomes active within seven days.</p>
 <p>Which prior source would you trust most in each situation?</p>
 <ol type="1">
@@ -502,7 +511,7 @@ Y\sim N(\mu,\sigma^2)
 <section id="block-2-bayes-rule-as-learning-from-evidence" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Block 2 — Bayes’ rule as learning from evidence</h1>
 <section id="the-discrete-bayes-formula" class="level2" data-number="2.1">
-<h2 data-number="2.1"><span class="header-section-number">2.1</span> 2.1 The discrete Bayes formula</h2>
+<h2 data-number="2.1" class="anchored" data-anchor-id="the-discrete-bayes-formula"><span class="header-section-number">2.1</span> 2.1 The discrete Bayes formula</h2>
 <p>Suppose the unknown state is one of</p>
 <p><span class="math display">\[
 \theta_1,\theta_2,\ldots,\theta_k.
@@ -531,7 +540,7 @@ Y\sim N(\mu,\sigma^2)
 \]</span></p>
 </section>
 <section id="worked-example-fraud-screening" class="level2" data-number="2.2">
-<h2 data-number="2.2"><span class="header-section-number">2.2</span> 2.2 Worked example: fraud screening</h2>
+<h2 data-number="2.2" class="anchored" data-anchor-id="worked-example-fraud-screening"><span class="header-section-number">2.2</span> 2.2 Worked example: fraud screening</h2>
 <p>Suppose:</p>
 <p><span class="math display">\[
 \Pr(F)=0.01
@@ -569,7 +578,7 @@ Y\sim N(\mu,\sigma^2)
 <p>The low prior prevalence matters.</p>
 </section>
 <section id="prior-odds-likelihood-ratio-posterior-odds" class="level2" data-number="2.3">
-<h2 data-number="2.3"><span class="header-section-number">2.3</span> 2.3 Prior odds, likelihood ratio, posterior odds</h2>
+<h2 data-number="2.3" class="anchored" data-anchor-id="prior-odds-likelihood-ratio-posterior-odds"><span class="header-section-number">2.3</span> 2.3 Prior odds, likelihood ratio, posterior odds</h2>
 <p>Bayes’ rule can also be written in odds form:</p>
 <p><span class="math display">\[
 \boxed{
@@ -605,12 +614,12 @@ LR_+
 <p>This representation is especially useful when evidence arrives sequentially.</p>
 </section>
 <section id="computing-the-discrete-example" class="level2" data-number="2.4">
-<h2 data-number="2.4"><span class="header-section-number">2.4</span> 2.4 Computing the discrete example</h2>
-<div class="panel-tabset">
+<h2 data-number="2.4" class="anchored" data-anchor-id="computing-the-discrete-example"><span class="header-section-number">2.4</span> 2.4 Computing the discrete example</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Python</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>p_fraud <span class="ot">&lt;-</span> <span class="fl">0.01</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>p_fraud <span class="ot">&lt;-</span> <span class="fl">0.01</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>sensitivity <span class="ot">&lt;-</span> <span class="fl">0.95</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>false_positive <span class="ot">&lt;-</span> <span class="fl">0.04</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -618,10 +627,10 @@ LR_+
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  false_positive <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> p_fraud)</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>posterior <span class="ot">&lt;-</span> sensitivity <span class="sc">*</span> p_fraud <span class="sc">/</span> p_positive</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>posterior</span></code></pre></div>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>posterior</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>p_fraud <span class="op">=</span> <span class="fl">0.01</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>p_fraud <span class="op">=</span> <span class="fl">0.01</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sensitivity <span class="op">=</span> <span class="fl">0.95</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>false_positive <span class="op">=</span> <span class="fl">0.04</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -631,12 +640,12 @@ LR_+
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>posterior <span class="op">=</span> sensitivity <span class="op">*</span> p_fraud <span class="op">/</span> p_positive</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>posterior</span></code></pre></div>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>posterior</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 <section id="exercise-2-base-rate-sensitivity" class="level3" data-number="2.4.1">
-<h3 data-number="2.4.1"><span class="header-section-number">2.4.1</span> Exercise 2 — Base-rate sensitivity</h3>
+<h3 data-number="2.4.1" class="anchored" data-anchor-id="exercise-2-base-rate-sensitivity"><span class="header-section-number">2.4.1</span> Exercise 2 — Base-rate sensitivity</h3>
 <p>Keep the screening characteristics fixed:</p>
 <p><span class="math display">\[
 \Pr(+\mid F)=0.95,\qquad \Pr(+\mid F^c)=0.04.
@@ -652,7 +661,7 @@ LR_+
 </section>
 </section>
 <section id="from-events-to-parameters" class="level2" data-number="2.5">
-<h2 data-number="2.5"><span class="header-section-number">2.5</span> 2.5 From events to parameters</h2>
+<h2 data-number="2.5" class="anchored" data-anchor-id="from-events-to-parameters"><span class="header-section-number">2.5</span> 2.5 From events to parameters</h2>
 <p>The same logic applies when the unknown object is a numerical parameter <span class="math inline">\(\theta\)</span>.</p>
 <p>For a continuous parameter,</p>
 <p><span class="math display">\[
@@ -681,7 +690,7 @@ f(y\mid\theta)f(\theta)
 <p>This is the key equation for the entire course.</p>
 </section>
 <section id="sampling-distribution-versus-likelihood" class="level2" data-number="2.6">
-<h2 data-number="2.6"><span class="header-section-number">2.6</span> 2.6 Sampling distribution versus likelihood</h2>
+<h2 data-number="2.6" class="anchored" data-anchor-id="sampling-distribution-versus-likelihood"><span class="header-section-number">2.6</span> 2.6 Sampling distribution versus likelihood</h2>
 <p>Suppose</p>
 <p><span class="math display">\[
 Y\mid\pi\sim\text{Binomial}(n,\pi).
@@ -707,7 +716,7 @@ L(\pi\mid y)
 \]</span></p>
 <p>The likelihood is not a probability distribution for <span class="math inline">\(\pi\)</span>. It does not have to integrate to one over <span class="math inline">\(\pi\)</span>.</p>
 <section id="exercise-3-what-changes" class="level3" data-number="2.6.1">
-<h3 data-number="2.6.1"><span class="header-section-number">2.6.1</span> Exercise 3 — What changes?</h3>
+<h3 data-number="2.6.1" class="anchored" data-anchor-id="exercise-3-what-changes"><span class="header-section-number">2.6.1</span> Exercise 3 — What changes?</h3>
 <p>Suppose 17 of 25 users click a recommended item.</p>
 <ol type="1">
 <li>What is the observed data value <span class="math inline">\(y\)</span>?</li>
@@ -722,7 +731,7 @@ L(\pi\mid y)
 <section id="block-3-the-beta-binomial-model" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Block 3 — The Beta-Binomial model</h1>
 <section id="why-use-a-beta-prior-for-a-probability" class="level2" data-number="3.1">
-<h2 data-number="3.1"><span class="header-section-number">3.1</span> 3.1 Why use a Beta prior for a probability?</h2>
+<h2 data-number="3.1" class="anchored" data-anchor-id="why-use-a-beta-prior-for-a-probability"><span class="header-section-number">3.1</span> 3.1 Why use a Beta prior for a probability?</h2>
 <p>For a probability parameter,</p>
 <p><span class="math display">\[
 0&lt;\pi&lt;1.
@@ -764,7 +773,7 @@ E(\pi)=\frac{\alpha}{\alpha+\beta}.
 <p>is often interpreted informally as a measure of prior concentration or prior information strength.</p>
 </section>
 <section id="reading-beta-distributions" class="level2" data-number="3.2">
-<h2 data-number="3.2"><span class="header-section-number">3.2</span> 3.2 Reading Beta distributions</h2>
+<h2 data-number="3.2" class="anchored" data-anchor-id="reading-beta-distributions"><span class="header-section-number">3.2</span> 3.2 Reading Beta distributions</h2>
 <p>Consider:</p>
 <p><span class="math display">\[
 \text{Beta}(1,1),\quad
@@ -779,18 +788,18 @@ E(\pi)=\frac{\alpha}{\alpha+\beta}.
 <p>But they express very different uncertainty.</p>
 <p>A prior mean alone is not enough.</p>
 <section id="visualising-beta-priors" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1"><span class="header-section-number">3.2.1</span> Visualising Beta priors</h3>
-<div class="panel-tabset">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="visualising-beta-priors"><span class="header-section-number">3.2.1</span> Visualising Beta priors</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Python</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pi_grid <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">500</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pi_grid <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">500</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  pi_grid, <span class="fu">dbeta</span>(pi_grid, <span class="dv">1</span>, <span class="dv">1</span>),</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="fu">expression</span>(pi),</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Density&quot;</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Density"</span>,</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">8</span>)</span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
@@ -799,34 +808,34 @@ E(\pi)=\frac{\alpha}{\alpha+\beta}.
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(pi_grid, <span class="fu">dbeta</span>(pi_grid, <span class="dv">20</span>, <span class="dv">20</span>), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">4</span>)</span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;top&quot;</span>,</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;Beta(1,1)&quot;</span>, <span class="st">&quot;Beta(2,2)&quot;</span>,</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Beta(8,2)&quot;</span>, <span class="st">&quot;Beta(20,20)&quot;</span>),</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"top"</span>,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Beta(1,1)"</span>, <span class="st">"Beta(2,2)"</span>,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Beta(8,2)"</span>, <span class="st">"Beta(20,20)"</span>),</span>
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">lty =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">lwd =</span> <span class="dv">2</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> beta</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>pi_grid <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">500</span>)</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>plt.plot(pi_grid, beta.pdf(pi_grid, <span class="dv">1</span>, <span class="dv">1</span>), label<span class="op">=</span><span class="st">&quot;Beta(1,1)&quot;</span>)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>plt.plot(pi_grid, beta.pdf(pi_grid, <span class="dv">2</span>, <span class="dv">2</span>), label<span class="op">=</span><span class="st">&quot;Beta(2,2)&quot;</span>)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>plt.plot(pi_grid, beta.pdf(pi_grid, <span class="dv">8</span>, <span class="dv">2</span>), label<span class="op">=</span><span class="st">&quot;Beta(8,2)&quot;</span>)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>plt.plot(pi_grid, beta.pdf(pi_grid, <span class="dv">20</span>, <span class="dv">20</span>), label<span class="op">=</span><span class="st">&quot;Beta(20,20)&quot;</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>plt.plot(pi_grid, beta.pdf(pi_grid, <span class="dv">1</span>, <span class="dv">1</span>), label<span class="op">=</span><span class="st">"Beta(1,1)"</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>plt.plot(pi_grid, beta.pdf(pi_grid, <span class="dv">2</span>, <span class="dv">2</span>), label<span class="op">=</span><span class="st">"Beta(2,2)"</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>plt.plot(pi_grid, beta.pdf(pi_grid, <span class="dv">8</span>, <span class="dv">2</span>), label<span class="op">=</span><span class="st">"Beta(8,2)"</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>plt.plot(pi_grid, beta.pdf(pi_grid, <span class="dv">20</span>, <span class="dv">20</span>), label<span class="op">=</span><span class="st">"Beta(20,20)"</span>)</span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r&quot;</span><span class="dv">$</span><span class="er">\</span><span class="vs">pi</span><span class="dv">$</span><span class="vs">&quot;</span>)</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&quot;Density&quot;</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"</span><span class="dv">$</span><span class="er">\</span><span class="vs">pi</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Density"</span>)</span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 </section>
 <section id="exercise-4-choose-a-prior" class="level3" data-number="3.2.2">
-<h3 data-number="3.2.2"><span class="header-section-number">3.2.2</span> Exercise 4 — Choose a prior</h3>
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="exercise-4-choose-a-prior"><span class="header-section-number">3.2.2</span> Exercise 4 — Choose a prior</h3>
 <p>For each statement about an unknown success probability <span class="math inline">\(\pi\)</span>, suggest a reasonable Beta prior. There is not always one unique answer.</p>
 <ol type="1">
 <li>“I have almost no useful information.”</li>
@@ -838,7 +847,7 @@ E(\pi)=\frac{\alpha}{\alpha+\beta}.
 </section>
 </section>
 <section id="constructing-the-beta-binomial-model" class="level2" data-number="3.3">
-<h2 data-number="3.3"><span class="header-section-number">3.3</span> 3.3 Constructing the Beta-Binomial model</h2>
+<h2 data-number="3.3" class="anchored" data-anchor-id="constructing-the-beta-binomial-model"><span class="header-section-number">3.3</span> 3.3 Constructing the Beta-Binomial model</h2>
 <p>Let</p>
 <p><span class="math display">\[
 Y\mid\pi\sim\text{Binomial}(n,\pi)
@@ -888,7 +897,7 @@ f(\pi)L(\pi\mid y)
 <p>The Beta prior is conjugate to the Binomial likelihood because the posterior is also Beta.</p>
 </section>
 <section id="interpreting-the-update" class="level2" data-number="3.4">
-<h2 data-number="3.4"><span class="header-section-number">3.4</span> 3.4 Interpreting the update</h2>
+<h2 data-number="3.4" class="anchored" data-anchor-id="interpreting-the-update"><span class="header-section-number">3.4</span> 3.4 Interpreting the update</h2>
 <p>The update can be written:</p>
 <p><span class="math display">\[
 \alpha_{\text{post}}=\alpha+y,
@@ -900,7 +909,7 @@ f(\pi)L(\pi\mid y)
 <p>This gives the Beta parameters a useful pseudo-count interpretation, although the interpretation must be used carefully when <span class="math inline">\(\alpha,\beta\)</span> are not integers or when the prior was not literally constructed from historical Binomial data.</p>
 </section>
 <section id="worked-example" class="level2" data-number="3.5">
-<h2 data-number="3.5"><span class="header-section-number">3.5</span> 3.5 Worked example</h2>
+<h2 data-number="3.5" class="anchored" data-anchor-id="worked-example"><span class="header-section-number">3.5</span> 3.5 Worked example</h2>
 <p>Suppose we model a conversion probability <span class="math inline">\(\pi\)</span> using</p>
 <p><span class="math display">\[
 \pi\sim\text{Beta}(4,6).
@@ -937,7 +946,7 @@ E(\pi\mid y)
 <p>That is the Bayesian compromise.</p>
 </section>
 <section id="posterior-mean-as-a-weighted-average" class="level2" data-number="3.6">
-<h2 data-number="3.6"><span class="header-section-number">3.6</span> 3.6 Posterior mean as a weighted average</h2>
+<h2 data-number="3.6" class="anchored" data-anchor-id="posterior-mean-as-a-weighted-average"><span class="header-section-number">3.6</span> 3.6 Posterior mean as a weighted average</h2>
 <p>For the Beta-Binomial model,</p>
 <p><span class="math display">\[
 E(\pi\mid y)
@@ -981,7 +990,7 @@ w_{\text{data}}
 <p>The weights add to one.</p>
 <p>This formula provides a direct mathematical explanation of the balance between prior information and data.</p>
 <section id="exercise-5-posterior-by-hand" class="level3" data-number="3.6.1">
-<h3 data-number="3.6.1"><span class="header-section-number">3.6.1</span> Exercise 5 — Posterior by hand</h3>
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="exercise-5-posterior-by-hand"><span class="header-section-number">3.6.1</span> Exercise 5 — Posterior by hand</h3>
 <p>Let</p>
 <p><span class="math display">\[
 \pi\sim\text{Beta}(3,7)
@@ -1001,7 +1010,7 @@ w_{\text{data}}
 <section id="block-4-bayesian-computation-begins" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Block 4 — Bayesian computation begins</h1>
 <section id="why-simulate-when-the-posterior-is-known" class="level2" data-number="4.1">
-<h2 data-number="4.1"><span class="header-section-number">4.1</span> 4.1 Why simulate when the posterior is known?</h2>
+<h2 data-number="4.1" class="anchored" data-anchor-id="why-simulate-when-the-posterior-is-known"><span class="header-section-number">4.1</span> 4.1 Why simulate when the posterior is known?</h2>
 <p>For the Beta-Binomial model, the posterior can be written analytically.</p>
 <p>But simulation is still useful because it prepares us for models where analytic formulas are unavailable.</p>
 <p>If</p>
@@ -1033,12 +1042,12 @@ I(\pi^{(s)}&gt;0.5).
 <p>This is the basic Monte Carlo idea.</p>
 </section>
 <section id="posterior-simulation-in-r-and-python" class="level2" data-number="4.2">
-<h2 data-number="4.2"><span class="header-section-number">4.2</span> 4.2 Posterior simulation in R and Python</h2>
-<div class="panel-tabset">
+<h2 data-number="4.2" class="anchored" data-anchor-id="posterior-simulation-in-r-and-python"><span class="header-section-number">4.2</span> 4.2 Posterior simulation in R and Python</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">Python</a></li></ul>
 <div class="tab-content">
 <div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">604</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">604</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>alpha_post <span class="ot">&lt;-</span> <span class="dv">22</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>beta_post <span class="ot">&lt;-</span> <span class="dv">18</span></span>
@@ -1051,10 +1060,10 @@ I(\pi^{(s)}&gt;0.5).
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(draws)</span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(draws, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>))</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(draws <span class="sc">&gt;</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(draws <span class="sc">&gt;</span> <span class="fl">0.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">604</span>)</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1069,22 +1078,22 @@ I(\pi^{(s)}&gt;0.5).
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>draws.mean()</span>
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>np.quantile(draws, [<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>])</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>np.mean(draws <span class="op">&gt;</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>np.mean(draws <span class="op">&gt;</span> <span class="fl">0.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 </section>
 <section id="posterior-density-and-credible-interval" class="level2" data-number="4.3">
-<h2 data-number="4.3"><span class="header-section-number">4.3</span> 4.3 Posterior density and credible interval</h2>
-<div class="panel-tabset">
+<h2 data-number="4.3" class="anchored" data-anchor-id="posterior-density-and-credible-interval"><span class="header-section-number">4.3</span> 4.3 Posterior density and credible interval</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">Python</a></li></ul>
 <div class="tab-content">
 <div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  draws,</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">probability =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">breaks =</span> <span class="dv">35</span>,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Posterior distribution of pi&quot;</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Posterior distribution of pi"</span>,</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="fu">expression</span>(pi)</span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
@@ -1094,10 +1103,10 @@ I(\pi^{(s)}&gt;0.5).
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="dv">2</span></span>
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="fu">qbeta</span>(<span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>), <span class="dv">22</span>, <span class="dv">18</span>)</span></code></pre></div>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="fu">qbeta</span>(<span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>), <span class="dv">22</span>, <span class="dv">18</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> beta</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>plt.hist(</span>
@@ -1110,23 +1119,23 @@ I(\pi^{(s)}&gt;0.5).
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">500</span>)</span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>plt.plot(x, beta.pdf(x, <span class="dv">22</span>, <span class="dv">18</span>))</span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r&quot;</span><span class="dv">$</span><span class="er">\</span><span class="vs">pi</span><span class="dv">$</span><span class="vs">&quot;</span>)</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&quot;Density&quot;</span>)</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Posterior distribution of pi&quot;</span>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"</span><span class="dv">$</span><span class="er">\</span><span class="vs">pi</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Density"</span>)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Posterior distribution of pi"</span>)</span>
 <span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
 <span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>beta.ppf([<span class="fl">0.025</span>, <span class="fl">0.975</span>], <span class="dv">22</span>, <span class="dv">18</span>)</span></code></pre></div>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>beta.ppf([<span class="fl">0.025</span>, <span class="fl">0.975</span>], <span class="dv">22</span>, <span class="dv">18</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 <p>A 95% posterior credible interval <span class="math inline">\([a,b]\)</span> can be interpreted as:</p>
-<blockquote>
+<blockquote class="blockquote">
 <p>Under the specified model and given the observed data, the posterior probability that <span class="math inline">\(\pi\)</span> lies between <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> is 0.95.</p>
 </blockquote>
 <p>This is a probability statement about the unknown parameter within the Bayesian model.</p>
 </section>
 <section id="prior-likelihood-and-posterior-on-one-plot" class="level2" data-number="4.4">
-<h2 data-number="4.4"><span class="header-section-number">4.4</span> 4.4 Prior, likelihood and posterior on one plot</h2>
+<h2 data-number="4.4" class="anchored" data-anchor-id="prior-likelihood-and-posterior-on-one-plot"><span class="header-section-number">4.4</span> 4.4 Prior, likelihood and posterior on one plot</h2>
 <p>For the example</p>
 <p><span class="math display">\[
 \pi\sim\text{Beta}(4,6),
@@ -1134,11 +1143,11 @@ I(\pi^{(s)}&gt;0.5).
 Y=18,\;n=30,
 \]</span></p>
 <p>we can compare all three components.</p>
-<div class="panel-tabset">
+<div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href="">Python</a></li></ul>
 <div class="tab-content">
 <div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pi_grid <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.001</span>, <span class="fl">0.999</span>, <span class="at">length.out =</span> <span class="dv">500</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pi_grid <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.001</span>, <span class="fl">0.999</span>, <span class="at">length.out =</span> <span class="dv">500</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>prior <span class="ot">&lt;-</span> <span class="fu">dbeta</span>(pi_grid, <span class="dv">4</span>, <span class="dv">6</span>)</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>likelihood <span class="ot">&lt;-</span> <span class="fu">dbinom</span>(<span class="dv">18</span>, <span class="at">size =</span> <span class="dv">30</span>, <span class="at">prob =</span> pi_grid)</span>
@@ -1148,9 +1157,9 @@ Y=18,\;n=30,
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  pi_grid, prior,</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="fu">expression</span>(pi),</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Relative scale&quot;</span>,</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Relative scale"</span>,</span>
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylim =</span> <span class="fu">range</span>(<span class="fu">c</span>(prior, likelihood_scaled, posterior))</span>
 <span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
@@ -1158,14 +1167,14 @@ Y=18,\;n=30,
 <span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(pi_grid, posterior, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span>
 <span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;topright&quot;</span>,</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;Prior&quot;</span>, <span class="st">&quot;Scaled likelihood&quot;</span>, <span class="st">&quot;Posterior&quot;</span>),</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">"topright"</span>,</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Prior"</span>, <span class="st">"Scaled likelihood"</span>, <span class="st">"Posterior"</span>),</span>
 <span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">lty =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
 <span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
-<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> beta, binom</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1177,23 +1186,23 @@ Y=18,\;n=30,
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>posterior <span class="op">=</span> beta.pdf(pi_grid, <span class="dv">22</span>, <span class="dv">18</span>)</span>
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>plt.plot(pi_grid, prior, label<span class="op">=</span><span class="st">&quot;Prior&quot;</span>)</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>plt.plot(pi_grid, likelihood_scaled, label<span class="op">=</span><span class="st">&quot;Scaled likelihood&quot;</span>)</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>plt.plot(pi_grid, posterior, label<span class="op">=</span><span class="st">&quot;Posterior&quot;</span>)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>plt.plot(pi_grid, prior, label<span class="op">=</span><span class="st">"Prior"</span>)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>plt.plot(pi_grid, likelihood_scaled, label<span class="op">=</span><span class="st">"Scaled likelihood"</span>)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>plt.plot(pi_grid, posterior, label<span class="op">=</span><span class="st">"Posterior"</span>)</span>
 <span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r&quot;</span><span class="dv">$</span><span class="er">\</span><span class="vs">pi</span><span class="dv">$</span><span class="vs">&quot;</span>)</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&quot;Relative scale&quot;</span>)</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"</span><span class="dv">$</span><span class="er">\</span><span class="vs">pi</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Relative scale"</span>)</span>
 <span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 <p>The likelihood is scaled only for visual comparison. Its absolute vertical scale has no inferential meaning as a probability density for <span class="math inline">\(\pi\)</span>.</p>
 </section>
 <section id="prior-predictive-thinking" class="level2" data-number="4.5">
-<h2 data-number="4.5"><span class="header-section-number">4.5</span> 4.5 Prior predictive thinking</h2>
+<h2 data-number="4.5" class="anchored" data-anchor-id="prior-predictive-thinking"><span class="header-section-number">4.5</span> 4.5 Prior predictive thinking</h2>
 <p>Before seeing the current data, ask:</p>
-<blockquote>
+<blockquote class="blockquote">
 <p>If my prior and sampling model were reasonable, what kinds of data would they generate?</p>
 </blockquote>
 <p>Suppose</p>
@@ -1210,11 +1219,11 @@ Y\mid\pi\sim\text{Binomial}(30,\pi).
 <li>draw <span class="math inline">\(Y^{(s)}\)</span> from the Binomial model conditional on <span class="math inline">\(\pi^{(s)}\)</span>;</li>
 <li>inspect the distribution of simulated <span class="math inline">\(Y\)</span>.</li>
 </ol>
-<div class="panel-tabset">
+<div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false" href="">Python</a></li></ul>
 <div class="tab-content">
 <div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">604</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">604</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>S <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>pi_prior <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(S, <span class="dv">4</span>, <span class="dv">6</span>)</span>
@@ -1226,12 +1235,12 @@ Y\mid\pi\sim\text{Binomial}(30,\pi).
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(</span>
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  y_prior,</span>
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="fl">30.5</span>, <span class="at">by =</span> <span class="dv">1</span>),</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Prior predictive distribution&quot;</span>,</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Number of successes out of 30&quot;</span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Prior predictive distribution"</span>,</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Number of successes out of 30"</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">604</span>)</span>
@@ -1246,9 +1255,9 @@ Y\mid\pi\sim\text{Binomial}(30,\pi).
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    y_prior,</span>
 <span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    bins<span class="op">=</span>np.arange(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">31.5</span>, <span class="dv">1</span>)</span>
 <span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&quot;Number of successes out of 30&quot;</span>)</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Prior predictive distribution&quot;</span>)</span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of successes out of 30"</span>)</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Prior predictive distribution"</span>)</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -1256,7 +1265,7 @@ Y\mid\pi\sim\text{Binomial}(30,\pi).
 <p>This idea will become central later.</p>
 </section>
 <section id="prior-influence-and-sample-size" class="level2" data-number="4.6">
-<h2 data-number="4.6"><span class="header-section-number">4.6</span> 4.6 Prior influence and sample size</h2>
+<h2 data-number="4.6" class="anchored" data-anchor-id="prior-influence-and-sample-size"><span class="header-section-number">4.6</span> 4.6 Prior influence and sample size</h2>
 <p>Consider the same observed rate <span class="math inline">\(y/n=0.70\)</span>, but with different sample sizes.</p>
 <p>A Beta(8,12) prior has mean 0.40.</p>
 <p>If:</p>
@@ -1284,7 +1293,7 @@ y=700,\;n=1000,
 <p>the posterior mean is very close to 0.70.</p>
 <p>As the data accumulate, the original prior usually contributes a smaller proportion of total information.</p>
 <section id="exercise-6-prior-versus-data" class="level3" data-number="4.6.1">
-<h3 data-number="4.6.1"><span class="header-section-number">4.6.1</span> Exercise 6 — Prior versus data</h3>
+<h3 data-number="4.6.1" class="anchored" data-anchor-id="exercise-6-prior-versus-data"><span class="header-section-number">4.6.1</span> Exercise 6 — Prior versus data</h3>
 <p>Use the prior</p>
 <p><span class="math display">\[
 \pi\sim\text{Beta}(8,12).
@@ -1299,14 +1308,14 @@ y=700,\;n=1000,
 </section>
 </section>
 <section id="sequential-bayesian-updating" class="level2" data-number="4.7">
-<h2 data-number="4.7"><span class="header-section-number">4.7</span> 4.7 Sequential Bayesian updating</h2>
+<h2 data-number="4.7" class="anchored" data-anchor-id="sequential-bayesian-updating"><span class="header-section-number">4.7</span> 4.7 Sequential Bayesian updating</h2>
 <p>Suppose</p>
 <p><span class="math display">\[
 \pi\sim\text{Beta}(2,3).
 \]</span></p>
 <p>You observe data in stages.</p>
 <section id="batch-1" class="level3" data-number="4.7.1">
-<h3 data-number="4.7.1"><span class="header-section-number">4.7.1</span> Batch 1</h3>
+<h3 data-number="4.7.1" class="anchored" data-anchor-id="batch-1"><span class="header-section-number">4.7.1</span> Batch 1</h3>
 <p>3 successes and 2 failures:</p>
 <p><span class="math display">\[
 \pi\mid y_1
@@ -1317,7 +1326,7 @@ y=700,\;n=1000,
 \]</span></p>
 </section>
 <section id="batch-2" class="level3" data-number="4.7.2">
-<h3 data-number="4.7.2"><span class="header-section-number">4.7.2</span> Batch 2</h3>
+<h3 data-number="4.7.2" class="anchored" data-anchor-id="batch-2"><span class="header-section-number">4.7.2</span> Batch 2</h3>
 <p>Then observe 4 successes and 1 failure.</p>
 <p>Use the first posterior as the next prior:</p>
 <p><span class="math display">\[
@@ -1343,12 +1352,12 @@ y=700,\;n=1000,
 </section>
 </section>
 <section id="sequential-updating-in-code" class="level2" data-number="4.8">
-<h2 data-number="4.8"><span class="header-section-number">4.8</span> 4.8 Sequential updating in code</h2>
-<div class="panel-tabset">
+<h2 data-number="4.8" class="anchored" data-anchor-id="sequential-updating-in-code"><span class="header-section-number">4.8</span> 4.8 Sequential updating in code</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false" href="">Python</a></li></ul>
 <div class="tab-content">
 <div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="dv">2</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="dv">3</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Batch 1: 3 successes, 2 failures</span></span>
@@ -1361,10 +1370,10 @@ y=700,\;n=1000,
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> alpha <span class="sc">+</span> <span class="dv">4</span></span>
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> beta <span class="sc">+</span> <span class="dv">1</span></span>
 <span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(alpha, beta)</span></code></pre></div>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(alpha, beta)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="dv">2</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="dv">2</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> <span class="dv">3</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Batch 1: 3 successes, 2 failures</span></span>
@@ -1377,13 +1386,13 @@ y=700,\;n=1000,
 <span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">+=</span> <span class="dv">4</span></span>
 <span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>beta <span class="op">+=</span> <span class="dv">1</span></span>
 <span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(alpha, beta)</span></code></pre></div>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(alpha, beta)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 </section>
 <section id="a-first-posterior-decision-statement" class="level2" data-number="4.9">
-<h2 data-number="4.9"><span class="header-section-number">4.9</span> 4.9 A first posterior decision statement</h2>
+<h2 data-number="4.9" class="anchored" data-anchor-id="a-first-posterior-decision-statement"><span class="header-section-number">4.9</span> 4.9 A first posterior decision statement</h2>
 <p>Suppose our decision threshold is:</p>
 <p><span class="math display">\[
 \pi&gt;0.50.
@@ -1393,16 +1402,16 @@ y=700,\;n=1000,
 \Pr(\pi&gt;0.50\mid y)
 \]</span></p>
 <p>may be directly relevant.</p>
-<div class="panel-tabset">
+<div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false" href="">Python</a></li></ul>
 <div class="tab-content">
 <div id="tabset-8-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-8-1-tab">
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pbeta</span>(<span class="fl">0.50</span>, <span class="dv">22</span>, <span class="dv">18</span>)</span></code></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pbeta</span>(<span class="fl">0.50</span>, <span class="dv">22</span>, <span class="dv">18</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-8-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-2-tab">
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> beta</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> beta</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="op">-</span> beta.cdf(<span class="fl">0.50</span>, <span class="dv">22</span>, <span class="dv">18</span>)</span></code></pre></div>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="op">-</span> beta.cdf(<span class="fl">0.50</span>, <span class="dv">22</span>, <span class="dv">18</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -1507,16 +1516,16 @@ Y\mid\pi\sim\text{Binomial}(n,\pi),
 </section>
 <section id="references" class="level1" data-number="9">
 <h1 data-number="9"><span class="header-section-number">9</span> References</h1>
-<p>Johnson, A. A., Ott, M. Q., &amp; Dogucu, M. (2021). <em>Bayes Rules! An Introduction to Applied Bayesian Modeling</em>. CRC Press.<br />
+<p>Johnson, A. A., Ott, M. Q., &amp; Dogucu, M. (2021). <em>Bayes Rules! An Introduction to Applied Bayesian Modeling</em>. CRC Press.<br>
 <a href="https://www.bayesrulesbook.com/" class="uri">https://www.bayesrulesbook.com/</a></p>
-<p>Martin, O. A., Kumar, R., &amp; Lao, J. <em>Bayesian Modeling and Computation in Python</em>. CRC Press.<br />
+<p>Martin, O. A., Kumar, R., &amp; Lao, J. <em>Bayesian Modeling and Computation in Python</em>. CRC Press.<br>
 <a href="https://bayesiancomputationbook.com/" class="uri">https://bayesiancomputationbook.com/</a></p>
 <p>The structure of this week is primarily informed by the Bayesian learning sequence developed in Chapters 1–4 of <em>Bayes Rules!</em>.</p>
 </section>
 
 </main>
 <!-- /main column -->
-<script id = "quarto-html-after-body" type="application/javascript">
+<script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -1918,6 +1927,8 @@ Y\mid\pi\sim\text{Binomial}(n,\pi),
   </script>
 </div> <!-- /content -->
 
-</body>
 
-</html>
+
+
+<script src="week1_files/libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
