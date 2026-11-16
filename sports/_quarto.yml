@@ -1,0 +1,8 @@
+project:
+  type: default
+  render:
+    - USJ_Sports_Dashboard.qmd
+  output-dir: rendered
+format:
+  html:
+    toc: false
